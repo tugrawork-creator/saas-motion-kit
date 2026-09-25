@@ -5,6 +5,7 @@
 <script>
 // Used only by tools/make_thumbs.py: frames a theme sheet so the screenshot shows just its 4-cell grid.
 const f = document.getElementById("f");
-f.src = "themes/" + new URLSearchParams(location.search).get("f");
-f.onload = () => { const g = f.contentDocument.querySelector(".grid"); f.style.top = -(g.getBoundingClientRect().top) + "px"; };
+const name = new URLSearchParams(location.search).get("f") || "";
+if (/^\d{3}-[a-z0-9-]+\.html$/.test(name)) f.src = "themes/" + name;   // only local theme sheets, nothing else
+f.onload = () => { const g = f.contentDocument && f.contentDocument.querySelector(".grid"); if (g) f.style.top = -(g.getBoundingClientRect().top) + "px"; };
 </script></body></html>
