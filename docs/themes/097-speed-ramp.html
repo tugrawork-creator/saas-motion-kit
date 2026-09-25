@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>097 · Speed Ramp — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t097- (theme 097) ===== */
+.t097-bg{position:absolute;inset:0;background:var(--paper)}
+.t097-graph{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);bottom:calc(var(--u)*60);height:calc(var(--u)*236);background:var(--ink);border-radius:calc(var(--u)*18);padding:calc(var(--u)*12) calc(var(--u)*10)}
+.t097-graph svg{width:100%;height:100%;display:block}
+.t097-ro{position:absolute;right:calc(var(--u)*60);top:calc(var(--u)*60);text-align:right}
+.t097-ro b{display:block;font:600 calc(var(--u)*132)/0.9 var(--mono);color:var(--alert);letter-spacing:-.04em}
+.t097-ro span{font:600 calc(var(--u)*20) var(--mono);letter-spacing:.1em;color:var(--muted)}
+.t097-k{position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*60);font:600 calc(var(--u)*20) var(--mono);letter-spacing:.1em;color:var(--muted)}
+.t097-h{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);font:400 calc(var(--u)*80)/1.0 var(--serif);color:var(--ink);letter-spacing:-.01em}
+.t097-h em{color:var(--brand-deep)}
+.t097-days{position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*120);display:flex;gap:calc(var(--u)*10)}
+.t097-days span{font:600 calc(var(--u)*22) var(--mono);padding:calc(var(--u)*8) calc(var(--u)*14);border-radius:calc(var(--u)*8);background:#E6E4DD;color:var(--muted)}
+.t097-days span.on{background:var(--ink);color:#fff}
+.t097-svg{position:absolute;inset:0;width:100%;height:100%}
+.t097-lock{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*200);display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*30)}
+.t097-mk{width:calc(var(--u)*200);height:calc(var(--u)*200);border-radius:calc(var(--u)*44)}
+.t097-word{font:800 calc(var(--u)*108)/1 var(--sans);letter-spacing:-.035em;color:var(--ink)}
+.t097-snap{font:600 calc(var(--u)*20) var(--mono);letter-spacing:.1em;color:var(--brand-deep);background:var(--brand-soft);padding:calc(var(--u)*6) calc(var(--u)*12);border-radius:calc(var(--u)*6)}
+.t097-card{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*275);background:#fff;border-radius:calc(var(--u)*22);padding:calc(var(--u)*28) calc(var(--u)*32);box-shadow:0 calc(var(--u)*20) calc(var(--u)*50) rgba(14,23,38,.12)}
+.t097-ct{font:600 calc(var(--u)*20) var(--mono);letter-spacing:.1em;color:var(--alert)}
+.t097-cm{font:400 calc(var(--u)*68)/1.02 var(--serif);color:var(--ink);margin:calc(var(--u)*10) 0 calc(var(--u)*6)}
+.t097-cm b{font-weight:400;color:var(--alert)}
+.t097-cs{font:500 calc(var(--u)*22) var(--mono);color:var(--muted)}
+.t097-btns{display:flex;gap:calc(var(--u)*16);margin-top:calc(var(--u)*22)}
+.t097-btn{font:700 calc(var(--u)*26) var(--sans);padding:calc(var(--u)*16) calc(var(--u)*30);border-radius:calc(var(--u)*14);background:var(--alert);color:#fff}
+.t097-btn.g{background:#EEF0F2;color:var(--ink)}
+.t097-cur{position:absolute;width:calc(var(--u)*40);height:calc(var(--u)*50)}
+.t097-fr{position:absolute;font:600 calc(var(--u)*20) var(--mono);color:var(--muted);letter-spacing:.06em}
+.t097-l4{position:absolute;left:0;right:0;top:calc(var(--u)*200);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*18);font:800 calc(var(--u)*60)/1 var(--sans);letter-spacing:-.03em;color:var(--ink)}
+.t097-l4 img{width:calc(var(--u)*84);height:calc(var(--u)*84);border-radius:calc(var(--u)*20)}
+.t097-tag{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*330);text-align:center;font:400 calc(var(--u)*88)/1.0 var(--serif);color:var(--ink);letter-spacing:-.015em}
+.t097-tag em{color:var(--brand-deep)}
+.t097-res{position:absolute;left:50%;top:calc(var(--u)*128);transform:translateX(-50%);font:600 calc(var(--u)*20) var(--mono);letter-spacing:.08em;color:var(--ok);background:#E3F4EA;padding:calc(var(--u)*6) calc(var(--u)*12);border-radius:calc(var(--u)*6);white-space:nowrap}
+.t097-cta{position:absolute;left:50%;top:calc(var(--u)*560);transform:translateX(-50%);font:700 calc(var(--u)*34) var(--sans);background:var(--alert);color:#fff;padding:calc(var(--u)*22) calc(var(--u)*54);border-radius:calc(var(--u)*18)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 097 · Camera &amp; edit grammar</div>
+    <h1>Speed Ramp</h1>
+    <p class="dek">Time itself is the edit. The hook fast-forwards a whole week of dashboards at 8×, the drop snaps to real time for the reveal, and the proof moment ramps down to ¼ speed so the viewer watches the human decide frame by frame. A speed graph like an editor’s time-remap curve runs under every frame, with a playhead showing where we are.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t097-f1">
+<div class="t097-bg"></div>
+<div class="t097-k">TIMELAPSE · ONE WEEK IN 6 s</div>
+<div class="t097-days"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span class="on">FRI</span></div>
+<svg class="t097-svg" viewBox="0 0 1080 1080"><g transform="translate(-230,0)" opacity="0.08"><polyline points="60,420 170,380 280,400 390,350 500,372 610,330 720,352 830,300 940,318 1020,290" fill="none" stroke="#5A6475" stroke-width="8" stroke-linejoin="round"/></g><g transform="translate(-184,0)" opacity="0.12"><polyline points="60,420 170,380 280,400 390,350 500,372 610,330 720,352 830,300 940,318 1020,290" fill="none" stroke="#5A6475" stroke-width="8" stroke-linejoin="round"/></g><g transform="translate(-138,0)" opacity="0.18"><polyline points="60,420 170,380 280,400 390,350 500,372 610,330 720,352 830,300 940,318 1020,290" fill="none" stroke="#5A6475" stroke-width="8" stroke-linejoin="round"/></g><g transform="translate(-92,0)" opacity="0.26"><polyline points="60,420 170,380 280,400 390,350 500,372 610,330 720,352 830,300 940,318 1020,290" fill="none" stroke="#5A6475" stroke-width="8" stroke-linejoin="round"/></g><g transform="translate(-46,0)" opacity="0.4"><polyline points="60,420 170,380 280,400 390,350 500,372 610,330 720,352 830,300 940,318 1020,290" fill="none" stroke="#5A6475" stroke-width="8" stroke-linejoin="round"/></g><g transform="translate(0,0)" opacity="1"><polyline points="60,420 170,380 280,400 390,350 500,372 610,330 720,352 830,300 940,318 1020,290" fill="none" stroke="#0FA3A3" stroke-width="8" stroke-linejoin="round"/></g>
+<text x="700" y="470" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#5A6475">echo frames = speed</text></svg>
+<div class="t097-ro"><b>8×</b><span>FAST-FORWARD</span></div>
+<div class="t097-h" style="top:calc(var(--u)*510)">And the drop still<br>shipped on <em>Friday.</em></div>
+<div class="t097-graph"><svg viewBox="0 0 960 210"><text x="12" y="30" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#CFF1EE">SPEED</text><line x1="150" x2="930" y1="34.0" y2="34.0" stroke="#2A364A" stroke-width="2"/><text x="136" y="41.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">8×</text><line x1="150" x2="930" y1="104.0" y2="104.0" stroke="#2A364A" stroke-width="2"/><text x="136" y="111.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">1×</text><line x1="150" x2="930" y1="150.7" y2="150.7" stroke="#2A364A" stroke-width="2"/><text x="136" y="157.7" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">¼×</text><text x="150" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:00</text><text x="289" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:08</text><text x="427" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:16</text><text x="566" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:24</text><text x="705" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:32</text><text x="930" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:45</text>
+<path d="M150.0 34.0 L267.8666666666667 34.0 C281.73333333333335 34.0 281.73333333333335 104.0 292.1333333333333 104.0 L358.0 104.0 C401.33333333333337 104.0 384.0 150.66666666666666 427.33333333333337 150.66666666666666 L635.3333333333333 150.66666666666666 C678.6666666666667 150.66666666666666 661.3333333333333 104.0 704.6666666666667 104.0 L930.0 104.0" fill="none" stroke="#0FA3A3" stroke-width="6" stroke-linecap="round"/>
+<line x1="236.7" x2="236.7" y1="10" y2="176" stroke="#FF5A4E" stroke-width="3"/><circle cx="236.7" cy="34.0" r="11" fill="#FF5A4E"/>
+<text x="252.7" y="18.0" text-anchor="start" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#FF5A4E">HOOK · 8×</text></svg></div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The week races left to right at 8×</b>: day chips tick one per beat, the chart leaves echo trails, and “Friday.” lands as the FRI chip lights on the last beat before the drop.</p></div>
+  <div class="cw"><div class="cell" id="t097-f2">
+<div class="t097-bg"></div>
+<div class="t097-k">RAMP 8× → 1× IN 6 FRAMES</div>
+<div class="t097-lock"><img class="t097-mk" src="../assets/brand/acme-mark.svg" alt="Acme"><div class="t097-word">Acme Pulse</div><div class="t097-snap">SNAPS TO REAL TIME ON THE DROP</div></div>
+<div class="t097-ro"><b>1×</b><span>REAL TIME</span></div>
+<div class="t097-graph"><svg viewBox="0 0 960 210"><text x="12" y="30" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#CFF1EE">SPEED</text><line x1="150" x2="930" y1="34.0" y2="34.0" stroke="#2A364A" stroke-width="2"/><text x="136" y="41.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">8×</text><line x1="150" x2="930" y1="104.0" y2="104.0" stroke="#2A364A" stroke-width="2"/><text x="136" y="111.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">1×</text><line x1="150" x2="930" y1="150.7" y2="150.7" stroke="#2A364A" stroke-width="2"/><text x="136" y="157.7" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">¼×</text><text x="150" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:00</text><text x="289" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:08</text><text x="427" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:16</text><text x="566" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:24</text><text x="705" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:32</text><text x="930" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:45</text>
+<path d="M150.0 34.0 L267.8666666666667 34.0 C281.73333333333335 34.0 281.73333333333335 104.0 292.1333333333333 104.0 L358.0 104.0 C401.33333333333337 104.0 384.0 150.66666666666666 427.33333333333337 150.66666666666666 L635.3333333333333 150.66666666666666 C678.6666666666667 150.66666666666666 661.3333333333333 104.0 704.6666666666667 104.0 L930.0 104.0" fill="none" stroke="#0FA3A3" stroke-width="6" stroke-linecap="round"/>
+<line x1="292.1" x2="292.1" y1="10" y2="176" stroke="#FF5A4E" stroke-width="3"/><circle cx="292.1" cy="104.0" r="11" fill="#FF5A4E"/>
+<text x="308.1" y="88.0" text-anchor="start" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#FF5A4E">0:08 · DROP</text></svg></div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The ramp slams from 8× to 1× in 6 frames</b> exactly on the drop; the echoes collapse into the mark, which lands sharp with no trail, and the wordmark follows half a beat later.</p></div>
+  <div class="cw"><div class="cell" id="t097-f3">
+<div class="t097-bg" style="background:#EDEAE2"></div>
+<div class="t097-k">SLOW-MO · EVERY FRAME COUNTS</div>
+<div class="t097-ro"><b>¼×</b><span>SLOW MOTION</span></div>
+<div class="t097-card"><div class="t097-ct">● PULSE · 14 METRICS WATCHED · 1 ANOMALY</div><div class="t097-cm">Checkout conversion <b>−18%</b></div>
+<div class="t097-cs">since 09:42 · after deploy #2231</div><div class="t097-btns"><span class="t097-btn">Roll back</span><span class="t097-btn g">Acknowledge</span></div></div>
+<svg class="t097-cur" viewBox="0 0 40 50" style="left:calc(var(--u)*620);top:calc(var(--u)*620);opacity:0.12"><path d="M4 4 L4 40 L13 31 L20 46 L27 43 L20 28 L34 28 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg><svg class="t097-cur" viewBox="0 0 40 50" style="left:calc(var(--u)*490);top:calc(var(--u)*580);opacity:0.22"><path d="M4 4 L4 40 L13 31 L20 46 L27 43 L20 28 L34 28 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg><svg class="t097-cur" viewBox="0 0 40 50" style="left:calc(var(--u)*360);top:calc(var(--u)*540);opacity:0.4"><path d="M4 4 L4 40 L13 31 L20 46 L27 43 L20 28 L34 28 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg><svg class="t097-cur" viewBox="0 0 40 50" style="left:calc(var(--u)*236);top:calc(var(--u)*508);opacity:1"><path d="M4 4 L4 40 L13 31 L20 46 L27 43 L20 28 L34 28 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>
+<div class="t097-fr" style="left:calc(var(--u)*420);top:calc(var(--u)*680)">f 0412 → f 0415 · cursor onion trail</div>
+<div class="t097-fr" style="left:calc(var(--u)*60);top:calc(var(--u)*730);color:var(--alert)">the human decides at ¼ speed</div>
+<div class="t097-graph"><svg viewBox="0 0 960 210"><text x="12" y="30" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#CFF1EE">SPEED</text><line x1="150" x2="930" y1="34.0" y2="34.0" stroke="#2A364A" stroke-width="2"/><text x="136" y="41.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">8×</text><line x1="150" x2="930" y1="104.0" y2="104.0" stroke="#2A364A" stroke-width="2"/><text x="136" y="111.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">1×</text><line x1="150" x2="930" y1="150.7" y2="150.7" stroke="#2A364A" stroke-width="2"/><text x="136" y="157.7" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">¼×</text><text x="150" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:00</text><text x="289" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:08</text><text x="427" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:16</text><text x="566" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:24</text><text x="705" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:32</text><text x="930" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:45</text>
+<path d="M150.0 34.0 L267.8666666666667 34.0 C281.73333333333335 34.0 281.73333333333335 104.0 292.1333333333333 104.0 L358.0 104.0 C401.33333333333337 104.0 384.0 150.66666666666666 427.33333333333337 150.66666666666666 L635.3333333333333 150.66666666666666 C678.6666666666667 150.66666666666666 661.3333333333333 104.0 704.6666666666667 104.0 L930.0 104.0" fill="none" stroke="#0FA3A3" stroke-width="6" stroke-linecap="round"/>
+<line x1="531.3" x2="531.3" y1="10" y2="176" stroke="#FF5A4E" stroke-width="3"/><circle cx="531.3" cy="150.7" r="11" fill="#FF5A4E"/>
+<text x="547.3" y="134.7" text-anchor="start" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#FF5A4E">PROOF · ¼×</text></svg></div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Time slows to ¼×:</b> the coral row settles, the card eases up and the cursor crawls right to left toward Roll back with an onion trail; the click lands on the downbeat of bar 12.</p></div>
+  <div class="cw"><div class="cell" id="t097-f4">
+<div class="t097-bg"></div>
+<div class="t097-res">✓ RESOLVED IN 6 MIN</div>
+<div class="t097-l4"><img class="" src="../assets/brand/acme-mark.svg" alt="Acme">Acme Pulse</div>
+<div class="t097-tag">Every metric.<br><em>Every minute.</em></div>
+<div class="t097-cta">Start free</div>
+<div class="t097-fr" style="left:0;right:0;text-align:center;top:calc(var(--u)*680)">back to 1× · the rest of the day plays normally</div>
+<div class="t097-graph"><svg viewBox="0 0 960 210"><text x="12" y="30" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#CFF1EE">SPEED</text><line x1="150" x2="930" y1="34.0" y2="34.0" stroke="#2A364A" stroke-width="2"/><text x="136" y="41.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">8×</text><line x1="150" x2="930" y1="104.0" y2="104.0" stroke="#2A364A" stroke-width="2"/><text x="136" y="111.0" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">1×</text><line x1="150" x2="930" y1="150.7" y2="150.7" stroke="#2A364A" stroke-width="2"/><text x="136" y="157.7" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9AA6B8">¼×</text><text x="150" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:00</text><text x="289" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:08</text><text x="427" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:16</text><text x="566" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:24</text><text x="705" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:32</text><text x="930" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="20" fill="#5A6475">0:45</text>
+<path d="M150.0 34.0 L267.8666666666667 34.0 C281.73333333333335 34.0 281.73333333333335 104.0 292.1333333333333 104.0 L358.0 104.0 C401.33333333333337 104.0 384.0 150.66666666666666 427.33333333333337 150.66666666666666 L635.3333333333333 150.66666666666666 C678.6666666666667 150.66666666666666 661.3333333333333 104.0 704.6666666666667 104.0 L930.0 104.0" fill="none" stroke="#0FA3A3" stroke-width="6" stroke-linecap="round"/>
+<line x1="843.3" x2="843.3" y1="10" y2="176" stroke="#FF5A4E" stroke-width="3"/><circle cx="843.3" cy="104.0" r="11" fill="#FF5A4E"/>
+<text x="827.3" y="88.0" text-anchor="end" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#FF5A4E">CTA · 1×</text></svg></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Speed eases back to 1×</b> and “Resolved in 6 min” drops in from the top; tagline lines land on beats 1 and 3, Start free on the next bar. The playhead finishes the curve.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Speed graph</b> — dark time-remap strip (8× / 1× / ¼×) with a coral playhead; the film’s spine</li><li><b>Speed readout</b> — huge mono 8× / 1× / ¼× numeral in the corner, instantly readable</li><li><b>Echo frames</b> — ghosted copies of moving UI showing fast-forward</li><li><b>Day chips</b> — MON–FRI ticker that proves time is passing</li><li><b>Cursor onion trail</b> — 4 fading cursors showing slow-motion movement toward the decision</li><li><b>Resolution chip</b> — “Resolved in 6 min” green chip that closes the time story</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Fast-forward</b> — 8× section: every UI update lands on eighth notes (0.25 s at 120 BPM), linear ease, echo trails 5 frames deep</li><li><b>Ramp knee</b> — 8× → 1× in 6 frames with a custom bezier (0.9, 0, 0.1, 1) so the change lands exactly on the drop; kick drum = snap</li><li><b>Slow-mo hold</b> — 1× → ¼× over one bar (2 s, sine.inOut) into the proof, hold ¼× for 12 s, ramp back over one bar; graduated steps (1–2–4–2–1) feel natural</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>A speed ramp tells the product story without words: humans live in fast-forward (too many dashboards), Pulse brings real time, and the critical decision deserves slow motion. It works with plain screen recordings and adds drama cheaply. Risk: in a still, speed needs visual proof (echoes, a readout), and a long slow section drags.</p><p><b>Adapt to your product:</b> Record your product doing real work, then fast-forward the busywork your users do today and ramp down to slow motion on the one moment your product changes (the click, the approval, the result). The speed graph works with any product.</p><p><b>References:</b> <a href="https://morphic.com/ai-glossary/speed-ramping">https://morphic.com/ai-glossary/speed-ramping</a> (speed ramping: smooth speed changes within one shot) · <a href="https://www.kapwing.com/resources/how-to-use-the-speed-ramp-effect/">https://www.kapwing.com/resources/how-to-use-the-speed-ramp-effect/</a> (graduated 1×–2×–4×–2×–1× ramps for smooth acceleration)</p></div>
+</div>
+</body>
+</html>

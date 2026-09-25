@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>033 · ASCII / Dither Resolve — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t033-f{background:#F4F4EF;color:#0E1726}
+.t033-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t033-pre{position:absolute;margin:0;font-family:var(--mono);white-space:pre;color:#0E1726;letter-spacing:0}
+.t033-hot{color:#FF5A4E;font-weight:600}
+.t033-hud{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase;color:#5A6475}
+.t033-hud b{color:#0B6E6E;font-weight:600}
+.t033-h{font-family:var(--serif);line-height:1;letter-spacing:-.015em;color:#0E1726}
+.t033-h em{font-style:italic;color:#0B6E6E}
+.t033-word{font-family:var(--sans);font-weight:800;letter-spacing:-.035em;line-height:.9;color:#0E1726}
+.t033-panel{background:#F4F4EF;box-shadow:0 0 0 calc(var(--u)*2) #0E1726}
+.t033-seam{position:absolute;top:0;bottom:0;width:calc(var(--u)*6);background:#0FA3A3;box-shadow:0 0 calc(var(--u)*30) rgba(15,163,163,.6)}
+.t033-pill{display:flex;justify-content:space-between;align-items:center;border:calc(var(--u)*2) solid rgba(14,23,38,.14);background:#fff;border-radius:calc(var(--u)*14);padding:calc(var(--u)*16) calc(var(--u)*22);font:600 calc(var(--u)*28) var(--sans)}
+.t033-pill i{font-style:normal;font:600 calc(var(--u)*26) var(--mono);color:#1F9D55}
+.t033-card{background:#fff;border-radius:calc(var(--u)*22);box-shadow:0 calc(var(--u)*18) calc(var(--u)*50) rgba(14,23,38,.14),0 0 0 calc(var(--u)*3) #FF5A4E;padding:calc(var(--u)*28) calc(var(--u)*34)}
+.t033-btn{display:inline-block;font:800 calc(var(--u)*32) var(--sans);border-radius:calc(var(--u)*14);padding:calc(var(--u)*18) calc(var(--u)*36);white-space:nowrap}
+.t033-btn.c{background:#FF5A4E;color:#fff}
+.t033-btn.o{box-shadow:inset 0 0 0 calc(var(--u)*3) #0E1726;color:#0E1726}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 033 · Light, optics &amp; texture</div>
+    <h1>ASCII / Dither Resolve</h1>
+    <p class="dek">Every image starts life as a coarse field of characters (<code>. : - = + * # @</code>) in ink on near-white. Resolution is the metaphor: the more Acme Pulse understands your metrics, the finer the grid gets, until it snaps into crisp vector UI. Except for one glyph cluster that refuses to resolve and stays coral.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t033-f" id="t033-f1">
+    <pre class="t033-pre" style="left:calc(var(--u)*63);top:calc(var(--u)*60);font-size:calc(var(--u)*30);line-height:calc(var(--u)*30);opacity:.8">#*%*#%*#*+#% +%*#**#*+%#+ ****#+*++*%+ +#**%+#+#*## %
+#.%%%%  .. %.#:. :.::   # #.@@@:+++++* *    . :%%%+ *
+%%%%%%%  : %.#  #.# :#.#% #:@@@::.  .* *%..  %%%%%% #
+%%. ..%%%%%% %:##:#.## #* #.@@@ ++++++ *%%%%%%%.. + %
++#***+#%#+*# +*#***+##*##.%**%%*#*#*+# *##*+**%*##+ *
+      .      .      .        .  . ..  .   .   . .    
+**%++#%*##** +#%%**+*+***.%+*+*%#%%#*# #%*%*##*+#** #
+*.:  .. : .# # @@@.+++++* +%% : . .%%* *.:.: : .:.# #
+*.#:#. #:#:# * @@@    .:# #%%%..: %%%# %:#  #:# :#* #
+*##:#.##.#.#.+:@@@:+++++% #: %%%%%%. + *.# ##:#.##% *
+%+*#+#%%***% #%###*+*+*#* +***#*##%%** +#+*##*+#%*% #
+    .         .   .  ..  . ..         ..             
+%**##%#**%%* %***###**%## %*%+%*###+** #*+#*%**%%#* +
+# @@@.+++++* +%%%. .  :.* %. . .   . % # @@@ +++++# *
+# @@@ . : :+ +%%%%%.:..%% ##  # #.:#:#.# @@@.   . * +
+%.@@@ ++++++ %   %%%%%%%* *#.## #.## %.#.@@@:+++++*.*
+*+%*#*%*%##* *#%%**#*++*# *#*##*+##**# +*%***#%##+* #</pre>
+    <div class="t033-p t033-panel" style="--x:60;--y:600;--w:960;height:calc(var(--u)*360);padding:calc(var(--u)*34) calc(var(--u)*40)">
+      <div class="t033-hud" style="display:flex;justify-content:space-between"><span>RES <b>32 px</b></span><span>38 dashboards · 0 understood</span></div>
+      <div class="t033-h" style="font-size:calc(var(--u)*92);margin-top:calc(var(--u)*26)">How many dashboards did you check <em>today?</em></div>
+    </div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The character field scrambles in place</b> (each glyph cycles the ramp at 60 ms) while the question panel wipes up from below; "today?" lands on the bar-2 downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t033-f" id="t033-f2">
+    <pre class="t033-pre" style="left:0;top:calc(var(--u)*-6);font-size:calc(var(--u)*30);line-height:calc(var(--u)*37);opacity:.85">*+%=+@==-+#+###@%=
++==++.:=-+-=::=---
+:::-.:=:+:--:-**.+
+--..:.++* .*=:+=+*
+==#%***-%*==*%%%@#
+..--.+ ..-=..+*-*=
++==+%##%%+=-#=%%=%
+.-+ ..++-.+:=*+===
+-:=+ .=+--.= :+==.
+ + --::--.:==:--..
+##=+=-=++=%*-#=#*#
+:+. -=.-=.+:-:+=-:
+#==-%%%@*%#++++++@
+ :== +:=-+*+.::.::
++-+++=:::+:-+.= :=
+=+=+=.* =:.:+*-*:*
+%#+==%%==%%*-%+*+@
+- =.=.-=:.: +: --=
++--@*+=#%#=+%*#-#@
+++::-:=:+*-=**-: .
+: :+:-*-+*::+-::=-
+=..:+.. =+:*=--+=+
+=*#====+=-**#+@=*=
+:::.:=::.:.=-:=*--
+**@*-#*+#%*+-*#-@#
+.-=-:+=*:=.:+*+.:=
++...:. .+++=--:..=
+::+  =-==+++==.==+
+-%%-%%-+*%%=%%=@+=
+==+...++*+*+-+-+.:</pre>
+    <div style="position:absolute;left:calc(var(--u)*330);top:0;bottom:0;right:0;background:#F4F4EF"></div>
+    <div class="t033-seam" style="left:calc(var(--u)*327)"></div>
+    <div class="t033-p t033-hud" style="--x:370;--y:72;--w:640;text-align:right">RES <b>32 → 4 px</b></div>
+    <img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*400);top:calc(var(--u)*250);width:calc(var(--u)*180);height:calc(var(--u)*180)">
+    <div class="t033-p t033-word" style="--x:398;--y:486;--w:620;font-size:calc(var(--u)*176)">Acme<br>Pulse</div>
+    <div class="t033-p t033-hud" style="--x:400;--y:870;--w:620">Noise in · <b>signal out</b></div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop a teal seam wipes left→right</b> (expo.inOut, 0.6 s): ASCII noise behind it, clean paper ahead; the mark and wordmark are what's left standing when the seam stops, locked to beat 1.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t033-f" id="t033-f3">
+    <div class="t033-p t033-hud" style="--x:60;--y:66;display:flex;justify-content:space-between"><span>Checkout conversion · RES <b>8 px</b></span><span>13 of 14 resolved</span></div>
+    <pre class="t033-pre" style="left:calc(var(--u)*60);top:calc(var(--u)*112);font-size:calc(var(--u)*24);line-height:calc(var(--u)*24)">        .                                               <b class="t033-hot">.</b>         
+            .                           <b class="t033-hot">.</b>                       <b class="t033-hot">.</b> 
+  .   ######      #####      ######  .    <b class="t033-hot">.</b>                     <b class="t033-hot">..</b>
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@<b class="t033-hot">@</b>                           
+:#####  ::  ######:::  ######:   ::###<b class="t033-hot">:.</b>                         <b class="t033-hot">.</b>
+::: ::  ::  :::: :   : :: :::    ::  :<b class="t033-hot">:@</b>                          
+. :::  .   .:: :::  ..   :: :.   . : :<b class="t033-hot">.#</b>                 <b class="t033-hot">.</b> <b class="t033-hot">.</b>      
+    .   .    .... ...   ... . .   . ..<b class="t033-hot">.:@</b>    <b class="t033-hot">.</b>    <b class="t033-hot">.</b>               
+     .         ... .      .     . ... <b class="t033-hot">.</b> <b class="t033-hot">#</b>              <b class="t033-hot">.</b>          
+ .  .       . .  .       ..   .   .  .   <b class="t033-hot">@##@@@#####@@@#####@@@###</b>
+        .                 .     .       <b class="t033-hot">:#@@###@@@@@###@@@@@###@@@</b>
+                            .              <b class="t033-hot">::</b>  <b class="t033-hot">::::</b>    <b class="t033-hot">::::</b>     <b class="t033-hot">::</b>
+.          .     .           .       .   <b class="t033-hot">:</b>  <b class="t033-hot">::</b> <b class="t033-hot">:</b> <b class="t033-hot">::</b> <b class="t033-hot">:</b> <b class="t033-hot">::::</b>  <b class="t033-hot">:::</b> <b class="t033-hot">::</b>
+.          .     .          .      .   <b class="t033-hot">...</b> <b class="t033-hot">.</b>  <b class="t033-hot">..</b>  <b class="t033-hot">.</b> <b class="t033-hot">...</b>    <b class="t033-hot">..</b>   <b class="t033-hot">..</b></pre>
+    <div class="t033-p" style="--x:60;--y:462;display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*14)">
+      <div class="t033-pill">Signups<i>✓ 1,204</i></div><div class="t033-pill">Active users<i>✓ 18,930</i></div>
+      <div class="t033-pill">p95 latency<i>✓ 212 ms</i></div><div class="t033-pill">Error rate<i>✓ 0.4 %</i></div>
+    </div>
+    <div class="t033-p t033-card" style="--x:60;--y:690">
+      <div style="display:flex;align-items:baseline;gap:calc(var(--u)*24)"><span style="font:800 calc(var(--u)*84)/1 var(--sans);color:#FF5A4E;letter-spacing:-.03em">−18%</span><span style="font:700 calc(var(--u)*34) var(--sans)">Checkout conversion</span></div>
+      <div class="t033-hud" style="margin-top:calc(var(--u)*6);color:#0E1726">since 09:42 · after deploy #2231</div>
+      <div style="display:flex;gap:calc(var(--u)*16);margin-top:calc(var(--u)*20)"><span class="t033-btn c">Roll back</span><span class="t033-btn o">Acknowledge</span></div>
+    </div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The grid refines 32→8 px in beat-quantised steps (steps(6))</b>; healthy metrics resolve into clean pills top→down, but the drop stays a coral <code>#@#</code> cluster until the card rises from it on the snare, handing the call to a human.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t033-f" id="t033-f4">
+    <pre class="t033-pre" style="left:calc(var(--u)*60);top:calc(var(--u)*40);font-size:calc(var(--u)*20);line-height:calc(var(--u)*20);color:#0B6E6E">=%%=*:-#=%-:-- +*#%=#%+-*.*- .+-.+%.... +=+=:.#: ==:%%-#=+.-=#=:+ #+%:+:*%-*%  %
+=*:+-:=::-- =.+* .:=.: + +*.-+ .+=:+*+  +:.-=*:-=* ..+=  ::---=.-:. +:. .:-= ::=
+ ==-.--.:=:- --  -:.=:-=  ::-.-.::.= -:: .= ---= . .:.--..-. : :..-.=-. .=-.  -:
+:..    .  . :.   ....::.... . .:.: :  . .  ... .. . .  . :.   ..  ..: . .. :.   </pre>
+    <pre class="t033-pre" style="left:calc(var(--u)*60);top:calc(var(--u)*960);font-size:calc(var(--u)*20);line-height:calc(var(--u)*20);color:#0B6E6E">.:..  ..... .  .  .    . . ... .: ....  . ::.: .  ..  .. .....  ... .. . .   .  
+ :: :== =:.- .-::  --. ==-..-:- .: :::-  --. -:::::-:=-. .: .=:  = ::-=--..- -.:
+-==:: :+.-  += + * *+:-+=.-. .*=-:=**.:...=:-++=:*::+-.=:-..+***:=*  :.-*.-:+.*-
+%+-*#* .-:.--%#=** *+-:*=*%+%%.==%:.-:=-%--.%-+  --=%*#=*%=:=.%#+-%+% -+:::+=.#*</pre>
+    <div class="t033-p" style="--x:60;--y:190;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*24)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*104);height:calc(var(--u)*104)"><span class="t033-word" style="font-size:calc(var(--u)*84);line-height:1">Acme Pulse</span></div>
+    <div class="t033-p t033-h" style="--x:60;--y:370;text-align:center;font-size:calc(var(--u)*126)">Every metric.<br><em>Every minute.</em></div>
+    <div class="t033-p" style="--x:60;--y:700;text-align:center"><span class="t033-btn c" style="font-size:calc(var(--u)*42);padding:calc(var(--u)*26) calc(var(--u)*64)">Start free</span></div>
+    <div class="t033-p t033-hud" style="--x:60;--y:846;text-align:center">RES <b>1 px</b> · fully resolved</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The last glyphs retreat to the top and bottom edges</b> as a fading band; the tagline resolves line by line (scramble → settle, 8 ms stagger) and Start free snaps crisp on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Character-ramp field</b> — a mono glyph grid (<code> .:-=+*#%@</code>) that renders any image as brightness; the "not yet understood" state.</li>
+    <li><b>Resolution HUD</b> — "RES 32 → 4 px" readout that makes progress legible without a progress bar.</li>
+    <li><b>Resolve seam</b> — teal vertical wipe with a soft glow; ASCII on one side, clean UI on the other.</li>
+    <li><b>Hot glyph cluster</b> — coral <code>#@#</code> characters that refuse to resolve; the anomaly.</li>
+    <li><b>Resolved pills</b> — crisp white metric rows with green ticks; what healthy looks like.</li>
+    <li><b>Decision card</b> — coral-ringed card rising out of the hot cluster, with Roll back / Acknowledge.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Resolution pull</b> — cell size 32→4 px in steps(6), one step per beat at 120 BPM (0.5 s), so the image sharpens on the grid of the music.</li>
+    <li><b>Glyph scramble</b> — each character cycles through the ramp before landing (60 ms/char, 8 ms stagger, seeded order).</li>
+    <li><b>Seam wipe</b> — vertical mask sweeps left→right, expo.inOut 0.6 s, triggered exactly on the 0:08 drop.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>"Noise becomes clarity" is exactly what an anomaly agent does, and leaving one cluster unresolved points the eye at the problem for free. Risk: dense glyph fields turn to moiré under compression; keep hero cells ≥ 8 px.</p><p><b>Adapt to your product:</b> Render a screenshot of your own UI through the character ramp, resolve it section by section, and leave your product's key finding as the last hot cluster.</p><p><b>References:</b> <a href="https://tympanus.net/codrops/2026/01/04/efecto-building-real-time-ascii-and-dithering-effects-with-webgl-shaders/">Codrops: real-time ASCII &amp; dithering shaders</a> · <a href="https://tympanus.net/codrops/2025/06/04/building-a-real-time-dithering-shader/">Codrops: real-time dithering shader</a></p></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+ "id": "054",
+ "slug": "agent-chat",
+ "name": "Agent Chat",
+ "category": "signature",
+ "summary": "One chat window for the whole film: the agent messages first and the anomaly arrives as a tool card with a Roll back chip.",
+ "look": "Warm paper, one white chat window with ink user bubbles and white agent bubbles, a teal Acme-mark avatar, a coral-headed tool card and serif film titles above the thread.",
+ "components": [
+  {
+   "name": "User bubble",
+   "role": "right-aligned, ink fill, white text, sharp bottom-right corner"
+  },
+  {
+   "name": "Agent bubble",
+   "role": "left, white card with hairline + Acme mark avatar and a mono “ACME PULSE” label"
+  },
+  {
+   "name": "Typing indicator",
+   "role": "three dots pulsing on the beat; in the hook it dies unanswered"
+  },
+  {
+   "name": "Tool card",
+   "role": "coral header strip, giant mono number, sparkline with deploy rule, context line, action chips"
+  },
+  {
+   "name": "System note",
+   "role": "centred mono line (“you didn’t ask · Pulse started this”) that gives time and agency"
+  },
+  {
+   "name": "Composer",
+   "role": "pill input with teal send button; the CTA is styled as the final outgoing message"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Bubble pop",
+   "how": "scale .9 → 1 + 30 px rise from its sender side, back.out(1.6) 0.3 s, one per beat (0.5 s at 120 BPM)"
+  },
+  {
+   "name": "Thread scroll",
+   "how": "older bubbles translate up by bubble height, power2.out 0.25 s, synced to each new pop"
+  },
+  {
+   "name": "Tool-card unfold",
+   "how": "height 0 → auto via clip-path over 0.5 s (power3.out) landing on a bar downbeat; chips stagger in 0.1 s apart"
+  }
+ ],
+ "story": "Hook: a team group chat fills with unanswered questions about 38 dashboards. Reveal: the thread clears on the drop and Acme Pulse comes online with rings and a first message. Proof: Pulse writes first — a tool card shows Checkout conversion −18% since 09:42 after deploy #2231 — and the user replies “Roll back.” CTA: the chat folds into the lockup and Start free pops up as the last bubble.",
+ "adapt": "Replace the tool card with the richest result your product returns (a diff, a chart, a booking, a draft) and keep the pattern: the agent speaks first, the human answers with one decisive action.",
+ "references": [
+  {
+   "url": "https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces",
+   "note": "tool results rendered as components inside chat",
+   "verified": true
+  },
+  {
+   "url": "https://vercel.com/blog/ai-sdk-3-generative-ui",
+   "note": "generative UI announcement with streaming components",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Easily reads as a generic chatbot demo; keep the tool card and human decision as the hero."
+ },
+ "best_for": [
+  "AI agents",
+  "support tools",
+  "copilots"
+ ],
+ "file": "themes/054-agent-chat.html"
+}

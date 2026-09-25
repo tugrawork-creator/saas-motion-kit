@@ -1,0 +1,75 @@
+{
+ "id": "005",
+ "slug": "light-mode-data-hud",
+ "name": "Light-Mode Data HUD",
+ "category": "product-ui",
+ "summary": "A near-white cockpit of sixteen hairline micro-panels; a teal scanline sweeps it and corner brackets snap onto the one wrong number.",
+ "look": "Terminal density in Swiss calm: hairline-ruled micro-panels with mono counters and sparklines on warm white, top and bottom ticker rails, focus brackets. Only teal (watching) and coral (anomaly) carry colour.",
+ "components": [
+  {
+   "name": "Tabular micro-panels",
+   "role": "the dense cockpit"
+  },
+  {
+   "name": "Status ticker",
+   "role": "live counts and anomaly count"
+  },
+  {
+   "name": "Scanline sweep",
+   "role": "Pulse passing over every panel"
+  },
+  {
+   "name": "Corner brackets",
+   "role": "focus device"
+  },
+  {
+   "name": "Hero panel",
+   "role": "the anomalous metric blown up"
+  },
+  {
+   "name": "Calm decision card",
+   "role": "human's Roll back / Acknowledge"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Odometer digits",
+   "how": "per-digit steps(10) roll 0.6 s, final value power4.out on the downbeat"
+  },
+  {
+   "name": "Scanline sweep",
+   "how": "960 px in 1.2 s linear, panels brighten as it passes, one sweep per 2 bars"
+  },
+  {
+   "name": "Rack focus",
+   "how": "others blur 0 to 6 px while the camera eases in 1.1x over 0.8 s, brackets snap on the snare"
+  }
+ ],
+ "story": "Hook: a blurred cockpit of 16 green panels with a bracketed plate: '38 dashboards. All green. Almost.' Reveal: a teal scanline sweeps across, panels tick green behind it, and the Acme Pulse plate appears at the centre. Proof: rack focus onto the checkout conversion panel, 2.80% and −18% with the 09:42 deploy marker, coral brackets, then a card offering Roll back or Acknowledge. CTA: the grid ghosts out behind a plate with the lockup, 'Every metric. Every minute.' and Start free.",
+ "adapt": "Fill the panels with your own KPIs, make the hero panel the number your product protects, and keep scanline plus brackets as the 'product is watching' device.",
+ "references": [
+  {
+   "url": "https://www.edwardtufte.com/notebook/sparkline-theory-and-practice-edward-tufte/",
+   "note": "sparklines as word-sized data",
+   "verified": false
+  },
+  {
+   "url": "https://stripe.com/sessions/2025/developer-keynote",
+   "note": "light, data-dense keynote UI",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 1,
+  "trust": 3,
+  "effort": "med",
+  "risk": "density is unreadable at feed size; hold one panel hero-sized per beat"
+ },
+ "best_for": [
+  "observability",
+  "analytics",
+  "fintech",
+  "ops tools"
+ ],
+ "file": "themes/005-light-mode-data-hud.html"
+}

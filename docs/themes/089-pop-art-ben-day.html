@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>089 · Pop-Art Ben-Day — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t089- (089 = theme number) ===== */
+.t089-svg{position:absolute;inset:0;width:100%;height:100%}
+.t089-a{position:absolute}
+#t089-f1,#t089-f2,#t089-f3,#t089-f4{background:#FFFDF6}
+.t089-k{position:absolute;font-family:var(--sans);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1.02;color:var(--ink);transform:skewX(-6deg);text-align:center}
+.t089-k i{font-family:var(--serif);font-weight:400;text-transform:none;letter-spacing:0;color:var(--alert)}
+.t089-cap{position:absolute;background:var(--amber);border:calc(var(--u)*7) solid var(--ink);padding:calc(var(--u)*10) calc(var(--u)*18);font-family:var(--sans);font-weight:800;font-size:calc(var(--u)*24);text-transform:uppercase;color:var(--ink);letter-spacing:.02em}
+.t089-fx{position:absolute;font-family:var(--sans);font-weight:800;text-transform:uppercase;color:var(--amber);-webkit-text-stroke:calc(var(--u)*6) var(--ink);paint-order:stroke fill;letter-spacing:-.02em;text-shadow:calc(var(--u)*8) calc(var(--u)*8) 0 var(--ink)}
+.t089-btn{position:absolute;display:flex;align-items:center;justify-content:center;background:var(--alert);border:calc(var(--u)*8) solid var(--ink);border-radius:calc(var(--u)*22);box-shadow:calc(var(--u)*10) calc(var(--u)*10) 0 var(--ink);font-family:var(--sans);font-weight:800;text-transform:uppercase;color:#fff;transform:skewX(-6deg)}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 089 · Art movements &amp; eras</div>
+    <h1>Pop-Art Ben-Day</h1>
+    <p class="dek">1960s Pop Art in the Lichtenstein manner: comic panels, thick ink outlines, hand-screened Ben-Day dots, caption boxes and speech balloons. The anomaly becomes an onomatopoeia — ZAP! — and the hero of the story is the Acme mark, which gets its own splash-panel entrance.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●○○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t089-f1">
+<svg class="t089-svg" viewBox="0 0 1080 1080">
+<defs><pattern id="t089-d1" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="#FFFDF6"/><circle cx="6.0" cy="6.0" r="6" fill="#9FDCD9"/><circle cx="18.0" cy="18.0" r="6" fill="#9FDCD9"/></pattern></defs>
+<rect x="60" y="60" width="960" height="960" fill="url(#t089-d1)" stroke="#0E1726" stroke-width="10"/>
+<rect x="110" y="560" width="250" height="160" rx="10" fill="#FFFDF6" stroke="#0E1726" stroke-width="7"/><polyline points="130,690 180,650 230,670 280,620 340,630" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linejoin="round"/><rect x="217.0" y="720" width="36" height="22" fill="#0E1726"/>
+<rect x="410" y="540" width="250" height="160" rx="10" fill="#FFFDF6" stroke="#0E1726" stroke-width="7"/><polyline points="430,670 480,640 530,660 580,600 640,610" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linejoin="round"/><rect x="517.0" y="700" width="36" height="22" fill="#0E1726"/>
+<rect x="710" y="560" width="250" height="160" rx="10" fill="#FFFDF6" stroke="#0E1726" stroke-width="7"/><polyline points="730,650 780,670 830,630 880,640 940,620" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linejoin="round"/><rect x="817.0" y="720" width="36" height="22" fill="#0E1726"/>
+<rect x="160" y="790" width="250" height="160" rx="10" fill="#FFFDF6" stroke="#0E1726" stroke-width="7"/><polyline points="180,900 230,880 280,890 330,860 390,870" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linejoin="round"/><rect x="267.0" y="950" width="36" height="22" fill="#0E1726"/>
+<rect x="660" y="790" width="250" height="160" rx="10" fill="#FFFDF6" stroke="#0E1726" stroke-width="7"/><polyline points="680,820 730,830 780,850 830,900 890,930" fill="none" stroke="#FF5A4E" stroke-width="7" stroke-linejoin="round"/><rect x="767.0" y="950" width="36" height="22" fill="#0E1726"/>
+<rect x="420" y="820" width="220" height="140" rx="10" fill="#FFFDF6" stroke="#0E1726" stroke-width="7"/><polyline points="440,920 480,900 520,910 560,880 620,890" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linejoin="round"/><rect x="512.0" y="960" width="36" height="22" fill="#0E1726"/>
+<path d="M531 440 L560 540 L664 444Z" fill="#FFFDF6" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/><ellipse cx="620.0" cy="285.0" rx="370.0" ry="165.0" fill="#FFFDF6" stroke="#0E1726" stroke-width="8"/><path d="M509 436 L687 440" stroke="#FFFDF6" stroke-width="12"/>
+</svg>
+<div class="t089-cap" style="left:calc(var(--u)*60);top:calc(var(--u)*60)">Friday, 5:58 PM…</div>
+<div class="t089-k" style="left:calc(var(--u)*300);top:calc(var(--u)*180);width:calc(var(--u)*640);font-size:calc(var(--u)*64)">How many dashboards did I check <i>today?!</i></div>
+<div class="t089-cap" style="left:calc(var(--u)*720);top:calc(var(--u)*970);font-size:calc(var(--u)*20);padding:calc(var(--u)*6) calc(var(--u)*14);background:#fff">38 of them.</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The panel slams in with a camera push</b>, monitors pop in one by one (scale 1.15→1) on 8th notes, then the speech balloon inflates on the downbeat; the coral chart in the last monitor dips as the caption "38 of them." lands.</p></div>
+  <div class="cw"><div class="cell" id="t089-f2">
+<svg class="t089-svg" viewBox="0 0 1080 1080">
+<defs><pattern id="t089-d2" width="26" height="26" patternUnits="userSpaceOnUse"><rect width="26" height="26" fill="#FFFDF6"/><circle cx="6.5" cy="6.5" r="7" fill="#FFD98A"/><circle cx="19.5" cy="19.5" r="7" fill="#FFD98A"/></pattern></defs>
+<rect x="60" y="60" width="960" height="960" fill="url(#t089-d2)" stroke="#0E1726" stroke-width="10"/>
+<polygon points="975.7,601.2 856.9,660.7 876.9,764.8 770.2,783.1 767.8,925.6 630.5,823.5 580.1,1011.5 496.8,847.2 388.8,936.9 348.7,826.6 242.1,822.0 260.8,704.9 99.9,680.6 246.6,564.9 79.7,475.3 239.6,425.5 196.9,311.1 302.7,289.3 325.7,177.2 444.8,242.0 500.1,70.0 581.2,246.5 700.8,118.0 724.5,263.5 834.6,261.1 833.5,366.6 955.5,407.3 841.8,514.4" fill="#FF5A4E" stroke="#0E1726" stroke-width="10" stroke-linejoin="round"/>
+<polygon points="840.0,540.0 775.4,603.1 779.2,678.1 710.2,710.2 692.7,804.4 595.4,746.6 540.0,862.6 482.3,755.4 395.2,790.8 364.9,715.1 297.8,679.8 314.9,600.3 225.0,540.0 335.6,485.2 265.5,381.5 376.6,376.6 399.4,296.5 475.8,300.3 540.0,252.7 598.2,322.8 700.8,261.4 690.6,389.4 806.6,386.1 770.8,478.2" fill="#F4B740" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/>
+</svg>
+<img class="t089-a" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*460);top:calc(var(--u)*330);width:calc(var(--u)*160);height:calc(var(--u)*160);border-radius:calc(var(--u)*40);box-shadow:0 0 0 calc(var(--u)*8) var(--ink)" alt="">
+<div class="t089-fx" style="left:calc(var(--u)*150);top:calc(var(--u)*520);width:calc(var(--u)*780);text-align:center;font-size:calc(var(--u)*200);color:#fff;transform:rotate(-6deg)">Pulse!</div>
+<div class="t089-cap" style="left:calc(var(--u)*60);top:calc(var(--u)*60)">Enter… Acme Pulse</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop a coral burst explodes from the centre</b> (scale 0→1.1→1), the yellow inner burst follows a beat later and PULSE! punches out of it with a 2-frame shake; the Ben-Day dots pulse in size on each beat.</p></div>
+  <div class="cw"><div class="cell" id="t089-f3">
+<svg class="t089-svg" viewBox="0 0 1080 1080">
+<defs><pattern id="t089-d3" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#FFFDF6"/><circle cx="5.0" cy="5.0" r="5" fill="#9FDCD9"/><circle cx="15.0" cy="15.0" r="5" fill="#9FDCD9"/></pattern><pattern id="t089-d4" width="22" height="22" patternUnits="userSpaceOnUse"><rect width="22" height="22" fill="#FFFDF6"/><circle cx="5.5" cy="5.5" r="6" fill="#FFC2BC"/><circle cx="16.5" cy="16.5" r="6" fill="#FFC2BC"/></pattern></defs>
+<rect x="60" y="60" width="960" height="470" fill="url(#t089-d3)" stroke="#0E1726" stroke-width="10"/>
+<rect x="60" y="550" width="470" height="470" fill="url(#t089-d4)" stroke="#0E1726" stroke-width="10"/>
+<rect x="550" y="550" width="470" height="470" fill="#FFFDF6" stroke="#0E1726" stroke-width="10"/>
+<rect x="110" y="150" width="860" height="330" rx="16" fill="#FFFDF6" stroke="#0E1726" stroke-width="8"/>
+<polyline points="140,300 260,280 380,300 500,270 600,285 660,290 720,400 840,420 940,410" fill="none" stroke="#0FA3A3" stroke-width="10" stroke-linejoin="round"/>
+<line x1="660" y1="170" x2="660" y2="460" stroke="#0E1726" stroke-width="4" stroke-dasharray="12 10"/>
+<polygon points="848.0,360.0 810.4,376.4 825.5,407.6 790.7,402.3 787.7,445.2 760.0,406.5 730.8,450.0 731.5,399.2 691.3,409.9 708.8,376.6 678.0,360.0 711.8,344.3 685.3,305.7 733.0,322.8 731.3,271.6 760.0,309.8 785.5,281.5 791.7,316.4 828.2,310.5 806.5,344.9" fill="#F4B740" stroke="#0E1726" stroke-width="6" stroke-linejoin="round"/>
+<path d="M243 852 L300 900 L322 856Z" fill="#FFFDF6" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/><ellipse cx="296.0" cy="717.0" rx="220.0" ry="145.0" fill="#FFFDF6" stroke="#0E1726" stroke-width="8"/><path d="M230 848 L336 852" stroke="#FFFDF6" stroke-width="12"/>
+</svg>
+<div class="t089-cap" style="left:calc(var(--u)*60);top:calc(var(--u)*60);font-size:calc(var(--u)*22)">09:42 — deploy #2231 goes out…</div>
+<div class="t089-fx" style="left:calc(var(--u)*700);top:calc(var(--u)*322);font-size:calc(var(--u)*64);color:#fff;transform:rotate(-8deg)">Zap!</div>
+<div class="t089-k" style="left:calc(var(--u)*116);top:calc(var(--u)*626);width:calc(var(--u)*360);font-size:calc(var(--u)*22);line-height:1.1">Checkout conversion</div>
+<div class="t089-k" style="left:calc(var(--u)*116);top:calc(var(--u)*656);width:calc(var(--u)*360);font-size:calc(var(--u)*110);color:var(--alert);-webkit-text-stroke:calc(var(--u)*3) var(--ink)">−18%</div>
+<div class="t089-k" style="left:calc(var(--u)*116);top:calc(var(--u)*782);width:calc(var(--u)*360);font-size:calc(var(--u)*20)">since 09:42!</div>
+<img class="t089-a" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*250);top:calc(var(--u)*890);width:calc(var(--u)*110);height:calc(var(--u)*110);border-radius:calc(var(--u)*28);box-shadow:0 0 0 calc(var(--u)*7) var(--ink)" alt="">
+<div class="t089-cap" style="left:calc(var(--u)*550);top:calc(var(--u)*550);font-size:calc(var(--u)*22);background:#fff">Your call!</div>
+<div class="t089-btn" style="left:calc(var(--u)*610);top:calc(var(--u)*680);width:calc(var(--u)*340);height:calc(var(--u)*150);font-size:calc(var(--u)*54)">Roll back!</div>
+<div class="t089-k" style="left:calc(var(--u)*600);top:calc(var(--u)*880);width:calc(var(--u)*360);font-size:calc(var(--u)*24);color:var(--muted)">…or acknowledge</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Top panel first: the line drops at the dashed deploy marker and ZAP! bursts</b> on a downbeat; then the lower panels pop in left→right — the Acme mark's balloon shouts −18%, and the ROLL BACK! button gets pressed (shadow offset 10→0 px) on the bar line.</p></div>
+  <div class="cw"><div class="cell" id="t089-f4">
+<svg class="t089-svg" viewBox="0 0 1080 1080">
+<defs><pattern id="t089-d5" width="26" height="26" patternUnits="userSpaceOnUse"><rect width="26" height="26" fill="#FFFDF6"/><circle cx="6.5" cy="6.5" r="7" fill="#FFD98A"/><circle cx="19.5" cy="19.5" r="7" fill="#FFD98A"/></pattern></defs>
+<rect x="60" y="60" width="960" height="960" fill="url(#t089-d5)" stroke="#0E1726" stroke-width="10"/>
+<path d="M439 560 L360 690 L590 564Z" fill="#FFFDF6" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/><ellipse cx="540.0" cy="360.0" rx="420.0" ry="210.0" fill="#FFFDF6" stroke="#0E1726" stroke-width="8"/><path d="M414 556 L616 560" stroke="#FFFDF6" stroke-width="12"/>
+<polygon points="997.4,829.5 935.6,849.3 949.9,900.6 896.0,894.3 889.2,962.6 838.9,901.9 798.3,980.1 784.9,896.6 724.5,925.7 733.0,867.9 681.1,854.2 719.0,809.7 654.2,769.0 738.3,757.2 692.4,684.6 766.6,709.5 775.5,650.3 819.7,681.8 858.3,639.7 875.5,702.5 947.2,660.4 913.5,741.6 993.9,740.3 943.8,790.0" fill="#0FA3A3" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/>
+</svg>
+<div class="t089-cap" style="left:calc(var(--u)*60);top:calc(var(--u)*60)">Next Friday…</div>
+<div class="t089-k" style="left:calc(var(--u)*200);top:calc(var(--u)*250);width:calc(var(--u)*680);font-size:calc(var(--u)*100)">You ship.<br>Pulse <i>watches.</i></div>
+<div class="t089-btn" style="left:calc(var(--u)*110);top:calc(var(--u)*760);width:calc(var(--u)*420);height:calc(var(--u)*130);font-size:calc(var(--u)*56)">Start free</div>
+<img class="t089-a" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*770);top:calc(var(--u)*710);width:calc(var(--u)*120);height:calc(var(--u)*120);border-radius:calc(var(--u)*30);box-shadow:0 0 0 calc(var(--u)*7) var(--ink)" alt="">
+<div class="t089-k" style="left:calc(var(--u)*110);top:calc(var(--u)*924);width:calc(var(--u)*420);font-size:calc(var(--u)*34);text-align:left;width:calc(var(--u)*600)">Acme Pulse · acme.example</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The balloon inflates with the tagline</b>, the teal burst spins in behind the mark, and START FREE drops from above with a bouncy landing on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Comic panel</b> — thick 10 px ink border around a Ben-Day dot field</li><li><b>Ben-Day dots</b> — SVG pattern of offset circles in tinted teal, amber or coral</li><li><b>Speech balloon</b> — ellipse + tail; the Acme mark 'speaks' the alert</li><li><b>Caption box</b> — amber rectangle with narration ("Friday, 5:58 PM…")</li><li><b>Onomatopoeia burst</b> — spiky star with stroked lettering — PULSE!, ZAP!</li><li><b>Comic button</b> — coral pill with hard 10 px ink drop shadow, skewed −6°</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Panel pop</b> — scale 1.15→1 and rotate 2°→0, back.out(2) 0.25 s, one panel per beat</li><li><b>Burst bang</b> — scale 0→1.1→1 over 0.3 s + ±8 px shake for 4 frames, exactly on the drop and on the anomaly</li><li><b>Dot breathe</b> — Ben-Day radius 5→6.5→5 px, sine.inOut 0.5 s per beat — the page throbs with the kick</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Comics are the fastest narrative format there is: panels, balloons and captions tell a before/after story with no voice-over, and ZAP! makes the anomaly fun rather than scary. Risk: it can feel juvenile or cheap; keep the data accurate, the outlines consistent and the jokes minimal.</p><p><b>Adapt to your product:</b> Script your product's key moment as three panels — problem, product speaks, human acts — and let your logo be the character with the speech balloon. Your UI can appear on in-panel monitors.</p><p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Ben-Day_dots">https://en.wikipedia.org/wiki/Ben-Day_dots</a> — the printing dot technique and its use in Pop Art · <a href="https://en.wikipedia.org/wiki/Roy_Lichtenstein">https://en.wikipedia.org/wiki/Roy_Lichtenstein</a> — Lichtenstein: Whaam!, bold outlines, flat colour, Ben-Day dots</p></div>
+</div>
+</body>
+</html>

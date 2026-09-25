@@ -1,0 +1,22 @@
+{"id":"050","slug":"tailors-fitting","name":"The Tailor's Fitting","category":"metaphor",
+ "summary":"'Measure twice, cut once' on a cutting table: a tape measures every metric, chalk marks the one that doesn't fit, and only after the human's call do the shears make one clean cut.",
+ "look":"A warm linen cutting table seen top-down, with a length of teal twill wool, an amber tape measure with ink ticks, coral tailor's chalk and pins, and cream paper swing tags. Precise and tailored rather than rustic.",
+ "components":[
+  {"name":"Tape measure","role":"ticks labelled with metrics; the Acme mark is its metal end"},
+  {"name":"Wool length","role":"teal twill fabric; the release before it ships"},
+  {"name":"Tailor's chalk","role":"coral dotted line and X where a metric doesn't fit"},
+  {"name":"Pins","role":"hold the fix until the human decides"},
+  {"name":"Swing tag","role":"carries the anomaly, later the proverb"},
+  {"name":"Shears + woven label","role":"one clean cut as the ship; the stitched label carries the wordmark"}],
+ "motion":[
+  {"name":"Tape unroll","how":"scaleX from the pinned metal end with a slight curl, power3.out 0.6 s, landing on the drop"},
+  {"name":"Chalk stroke","how":"dotted dash-draw over 0.4 s with seeded, deterministic chalk dust"},
+  {"name":"One cut","how":"shears travel the chalk line and the fabric splits by clip-path on a single expo.inOut beat (0.5 s)"}],
+ "story":"Hook: a length of wool already cut jagged, the tape still tangled, and a swing tag reading 'cut 16:00 · measured 17:40'. Reveal: on the drop the tape unrolls from its metal end (the Acme mark) and a woven 'Acme Pulse' label drops in. Proof: the tape measures each metric with teal ticks; at Checkout chalk marks an X, pins go in, and the tag reads 'Checkout conv. −18% · since 09:42 · after deploy #2231'; the human taps Roll back because nothing is cut until they say so. CTA: one clean cut, 'Caught before customers noticed.', tag 'Measure twice. Ship once.', Start free.",
+ "adapt":"Put your own checks on the tape's ticks (tests, budgets, limits, policies) and let the one cut be your product's irreversible action: a deploy, a payment, a send.",
+ "references":[
+  {"url":"https://en.wikipedia.org/wiki/Tape_measure","note":"tape measure anatomy","verified":false},
+  {"url":"https://blog.waveplm.com/guide-how-to-read-a-tape-measure-for-fashion-designers/","note":"how fashion designers read a tape measure","verified":false}],
+ "fit":{"readability":3,"trust":3,"effort":"med","risk":"Craft textures can feel off-category for software; keep it precise and tailored, never rustic."},
+ "best_for":["dev tools","CI/CD","fintech","any SaaS with an irreversible action"],
+ "file":"themes/050-tailors-fitting.html"}

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>039 · Long-Exposure Light Trails — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t039-f{background:radial-gradient(ellipse at 50% 38%,#12203A 0%,#0A1328 40%,#040813 100%);color:#EAF6F6}
+.t039-svg{position:absolute;inset:0;width:100%;height:100%}
+.t039-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t039-mono{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase;color:#8FB2C0}
+.t039-mono b{color:#EAF6F6;font-weight:600}
+.t039-h{font-family:var(--serif);line-height:1.02;letter-spacing:-.015em;color:#F2FAFA}
+.t039-h em{font-style:italic;color:#7FF0E3}
+.t039-word{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;line-height:1;color:#F2FAFA}
+.t039-card{background:rgba(6,12,26,.88);border:calc(var(--u)*2) solid rgba(255,90,78,.75);border-radius:calc(var(--u)*20);padding:calc(var(--u)*24) calc(var(--u)*30);backdrop-filter:blur(2px)}
+.t039-btn{display:inline-block;font:800 calc(var(--u)*32) var(--sans);border-radius:calc(var(--u)*12);padding:calc(var(--u)*18) calc(var(--u)*34);white-space:nowrap}
+.t039-btn.c{background:#FF5A4E;color:#fff}
+.t039-btn.o{box-shadow:inset 0 0 0 calc(var(--u)*2) #7FD9CF;color:#DDF6F2}
+.t039-polaroid{position:absolute;background:#F7F5F0;padding:calc(var(--u)*22) calc(var(--u)*22) calc(var(--u)*70);box-shadow:0 calc(var(--u)*24) calc(var(--u)*60) rgba(0,0,0,.55)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 039 · Light, optics &amp; texture</div>
+    <h1>Long-Exposure Light Trails</h1>
+    <p class="dek">Night photography with the shutter held open: every metric is a glowing tube of light racing along a dark highway toward the vanishing point. Teal trails flow smoothly in their lanes; one coral trail swerves and stutters, and because Acme Pulse is the camera that never closes its shutter, the photo keeps it forever.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t039-f" id="t039-f1">
+    <svg class="t039-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <path d="M540 470 L-200 1080 M540 470 L220 1080 M540 470 L540 1080 M540 470 L860 1080 M540 470 L1280 1080" stroke="#22324F" stroke-width="3" stroke-dasharray="30 26"/>
+      <path d="M540 470 L-480 1080 M540 470 L1560 1080" stroke="#2C3E5E" stroke-width="4"/>
+      <g stroke="#3A4E72" fill="none"><path d="M70 720H1010M110 720V1000M970 720V1000" stroke-width="12"/><path d="M300 560H780M330 560V700M750 560V700" stroke-width="7"/><path d="M430 505H650" stroke-width="4"/></g>
+      <g fill="#0B2A33" stroke="#2F6D6D" stroke-width="3">
+        <rect x="120" y="734" width="190" height="74" rx="8"/><rect x="330" y="734" width="190" height="74" rx="8"/><rect x="540" y="734" width="190" height="74" rx="8"/><rect x="750" y="734" width="190" height="74" rx="8"/>
+        <rect x="320" y="568" width="140" height="46" rx="6"/><rect x="470" y="568" width="140" height="46" rx="6"/><rect x="620" y="568" width="140" height="46" rx="6"/>
+        <rect x="440" y="510" width="62" height="22"/><rect x="510" y="510" width="62" height="22"/><rect x="580" y="510" width="62" height="22"/>
+      </g>
+      <g font-family="JetBrains Mono" font-size="24" font-weight="600" fill="#9FD6CF" text-anchor="middle"><text x="215" y="780">DASH 35</text><text x="425" y="780">DASH 36</text><text x="635" y="780">DASH 37</text><text x="845" y="780">DASH 38</text></g>
+      <g font-family="JetBrains Mono" font-size="20" fill="#6FA6A0" text-anchor="middle"><text x="390" y="598">DASH 32</text><text x="540" y="598">DASH 33</text><text x="690" y="598">DASH 34</text></g>
+      <g stroke="#F4B740" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"><path d="M260 930l-18 16"/><path d="M820 910l18 16"/><path d="M600 820l5 10"/><path d="M470 860l-5 10"/></g>
+    </svg>
+    <div class="t039-p t039-h" style="--x:70;--y:80;--w:940;font-size:calc(var(--u)*96)">How many dashboards did you check <em>today?</em></div>
+    <div class="t039-p t039-mono" style="--x:70;--y:960;display:flex;justify-content:space-between;--w:940"><span>Shutter <b style="color:#F4B740">closed</b></span><span>nothing recorded</span></div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Dashboard gantries rush toward camera</b>, one per beat, and vanish past the edges; with the shutter closed nothing leaves a trace. The question lands on the bar-2 downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t039-f" id="t039-f2">
+    <svg class="t039-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs><filter id="t039-b2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+      <path d="M540 520 L-420 1080 M540 520 L1500 1080" stroke="#2C3E5E" stroke-width="4"/>
+      <g fill="none" stroke-linecap="round">
+        <g stroke="#0FA3A3" stroke-width="22" filter="url(#t039-b2)" opacity=".8">
+          <path d="M540 520 C430 640,250 820,60 1080"/><path d="M540 520 C470 660,380 860,300 1080"/><path d="M540 520 C520 700,520 900,520 1080"/><path d="M540 520 C600 680,700 880,780 1080"/><path d="M540 520 C650 640,850 840,1040 1080"/>
+        </g>
+        <g stroke="#CFFFF8" stroke-width="4">
+          <path d="M540 520 C430 640,250 820,60 1080"/><path d="M540 520 C470 660,380 860,300 1080"/><path d="M540 520 C520 700,520 900,520 1080"/><path d="M540 520 C600 680,700 880,780 1080"/><path d="M540 520 C650 640,850 840,1040 1080"/>
+        </g>
+        <g stroke="#5FE3D6" stroke-width="2" opacity=".7">
+          <path d="M540 520 C445 650,290 830,130 1080"/><path d="M540 520 C500 680,450 880,410 1080"/><path d="M540 520 C565 690,610 890,650 1080"/><path d="M540 520 C630 660,780 860,920 1080"/>
+        </g>
+      </g>
+      <circle cx="540" cy="520" r="120" fill="#5FE3D6" opacity=".12" filter="url(#t039-b2)"/>
+      <defs><linearGradient id="t039-fd2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#040813" stop-opacity="0"/><stop offset="1" stop-color="#040813" stop-opacity=".95"/></linearGradient></defs><rect x="0" y="860" width="1080" height="220" fill="url(#t039-fd2)"/><path d="M140 110 H940" stroke="#3A4E72" stroke-width="10"/><path d="M180 110V330M900 110V330" stroke="#3A4E72" stroke-width="8"/>
+    </svg>
+    <div class="t039-p" style="--x:200;--y:130;--w:680;height:calc(var(--u)*190);background:#0B6E6E;border:calc(var(--u)*5) solid #EAF6F6;border-radius:calc(var(--u)*16);display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*22)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*110);height:calc(var(--u)*110)"><span class="t039-word" style="font-size:calc(var(--u)*92)">Acme Pulse</span></div>
+    <div class="t039-p t039-mono" style="--x:70;--y:960;display:flex;justify-content:space-between;--w:940"><span>f/8 · 30 s · ISO 100</span><span><b style="color:#FF5A4E">●</b> <b>shutter open</b></span></div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the shutter opens</b>: five teal trails shoot out of the vanishing point toward camera (stroke-dashoffset, expo.out), the gantry sign swings down with the Acme lockup on beat 3, and the frame warps wider (scale 1→1.4, expo.in) into the next beat.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t039-f" id="t039-f3">
+    <svg class="t039-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs><filter id="t039-b3" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8"/></filter></defs>
+      <path d="M540 300 L-300 1080 M540 300 L1380 1080" stroke="#2C3E5E" stroke-width="4"/>
+      <path d="M540 300 L150 1080 M540 300 L540 1080 M540 300 L930 1080" stroke="#22324F" stroke-width="3" stroke-dasharray="26 22"/>
+      <g fill="none" stroke-linecap="round">
+        <g stroke="#0FA3A3" stroke-width="18" filter="url(#t039-b3)" opacity=".75">
+          <path d="M540 300 C470 470,300 760,20 1080"/><path d="M540 300 C510 500,420 800,330 1080"/><path d="M540 300 C560 500,650 800,740 1080"/>
+        </g>
+        <g stroke="#CFFFF8" stroke-width="4">
+          <path d="M540 300 C470 470,300 760,20 1080"/><path d="M540 300 C510 500,420 800,330 1080"/><path d="M540 300 C560 500,650 800,740 1080"/>
+        </g>
+        <g stroke="#5FE3D6" stroke-width="2" opacity=".7"><path d="M540 300 C480 480,330 770,80 1080"/><path d="M540 300 C525 500,470 800,420 1080"/><path d="M540 300 C550 500,610 800,660 1080"/></g>
+        <path d="M540 300 C600 420,700 470,800 520 S760 640,900 700 S1000 800,1060 900" stroke="#FF5A4E" stroke-width="20" filter="url(#t039-b3)" opacity=".75" stroke-dasharray="120 40 60 30 180 60"/>
+        <path d="M540 300 C600 420,700 470,800 520 S760 640,900 700 S1000 800,1060 900" stroke="#FFD2CE" stroke-width="4" stroke-dasharray="120 40 60 30 180 60"/>
+      </g>
+      <path d="M80 150 H1000" stroke="#3A4E72" stroke-width="8"/>
+      <g stroke-width="3">
+        <rect x="80" y="160" width="205" height="62" rx="8" fill="#0B3A40" stroke="#2F8C86"/>
+        <rect x="312" y="160" width="220" height="62" rx="8" fill="#0B3A40" stroke="#2F8C86"/>
+        <rect x="560" y="160" width="205" height="62" rx="8" fill="#0B3A40" stroke="#2F8C86"/>
+        <rect x="790" y="160" width="210" height="62" rx="8" fill="#3A0E10" stroke="#FF5A4E"/>
+      </g>
+      <g font-family="JetBrains Mono" font-size="21" font-weight="600" text-anchor="middle" fill="#DDF6F2">
+        <text x="182" y="199">SIGNUPS</text><text x="422" y="199">ACTIVE USERS</text><text x="662" y="199">P95 212MS</text><text x="895" y="199" fill="#FFD2CE">CHECKOUT</text>
+      </g>
+      <circle cx="800" cy="520" r="10" fill="#fff"/>
+      <text x="820" y="506" font-family="JetBrains Mono" font-size="22" fill="#FFD2CE">09:42</text>
+    </svg>
+    <div class="t039-p t039-mono" style="--x:70;--y:74;display:flex;justify-content:space-between;--w:940"><span>f/8 · 30 s · ISO 100</span><span><b>2,418</b> events/sec</span></div>
+    <div class="t039-p t039-card" style="--x:70;--y:752;--w:940;display:flex;justify-content:space-between;align-items:center">
+      <div><div style="display:flex;align-items:baseline;gap:calc(var(--u)*16)"><span style="font:800 calc(var(--u)*70)/1 var(--sans);color:#FF7A70">−18%</span><span style="font:700 calc(var(--u)*30) var(--sans)">Checkout conversion</span></div>
+      <div class="t039-mono" style="margin-top:calc(var(--u)*8);text-transform:none;letter-spacing:.04em">since 09:42 · after deploy #2231</div></div>
+      <div style="display:flex;flex-direction:column;gap:calc(var(--u)*12)"><span class="t039-btn c">Roll back</span><span class="t039-btn o">Acknowledge</span></div>
+    </div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Trails draw continuously out of the vanishing point</b>, one new streak per beat; at 09:42 the checkout trail leaves its lane, stutters into broken dashes on the snare, and the card slides up as the exposure keeps it on record.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t039-f" id="t039-f4">
+    <div class="t039-polaroid" style="left:calc(var(--u)*250);top:calc(var(--u)*70);width:calc(var(--u)*580);transform:rotate(-3deg)">
+      <svg viewBox="0 0 536 300" style="display:block;width:100%;background:#081024">
+        <defs><filter id="t039-b4"><feGaussianBlur stdDeviation="5"/></filter></defs>
+        <g fill="none" stroke-linecap="round">
+          <g stroke="#0FA3A3" stroke-width="12" filter="url(#t039-b4)" opacity=".8"><path d="M268 90 C220 160,120 240,0 300"/><path d="M268 90 C255 170,220 240,190 300"/><path d="M268 90 C290 170,340 240,380 300"/><path d="M268 90 C320 150,440 240,536 300"/></g>
+          <g stroke="#CFFFF8" stroke-width="2.5"><path d="M268 90 C220 160,120 240,0 300"/><path d="M268 90 C255 170,220 240,190 300"/><path d="M268 90 C290 170,340 240,380 300"/><path d="M268 90 C320 150,440 240,536 300"/></g>
+          <path d="M268 90 C300 140,360 150,400 170 S380 210,440 230" stroke="#FF5A4E" stroke-width="3" stroke-dasharray="40 14 20 10"/>
+        </g>
+      </svg>
+      <div style="position:absolute;left:calc(var(--u)*24);bottom:calc(var(--u)*18);font:600 calc(var(--u)*22) var(--mono);color:#5A6475;letter-spacing:.08em">09:44 · CAUGHT ON RECORD</div>
+    </div>
+    <div class="t039-p" style="--x:60;--y:520;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*20)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*80);height:calc(var(--u)*80)"><span class="t039-word" style="font-size:calc(var(--u)*64)">Acme Pulse</span></div>
+    <div class="t039-p t039-h" style="--x:60;--y:630;text-align:center;font-size:calc(var(--u)*100)">Every metric. <em>Every minute.</em></div>
+    <div class="t039-p" style="--x:60;--y:880;text-align:center"><span class="t039-btn c" style="font-size:calc(var(--u)*40);padding:calc(var(--u)*22) calc(var(--u)*60)">Start free</span></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>A black iris closes on a downbeat</b> and the accumulated trails freeze into a white-bordered print that drops in, tilting -3°; the lockup and tagline rise beneath and Start free lands on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Perspective road</b> — lane lines converging on a vanishing point on deep navy; the "stream" of your product.</li>
+    <li><b>Light tubes</b> — SVG paths with a blurred wide stroke plus a sharp core in screen blend; healthy metrics.</li>
+    <li><b>Gantry signs</b> — overhead lane signs labelled with metric names; also the reveal lockup.</li>
+    <li><b>Aberrant trail</b> — coral streak that leaves its lane with dashed stutters; the anomaly.</li>
+    <li><b>Shutter HUD</b> — "f/8 · 30 s · ISO 100 · ● shutter open"; always-on recording made visible.</li>
+    <li><b>Frozen print</b> — white-bordered photo of the whole exposure; the end card's proof.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Trail draw</b> — stroke-dashoffset with a gradient-masked head and a fading tail; one new streak per beat at 120 BPM.</li>
+    <li><b>Warp speed-up</b> — perspective widens (scale 1 → 1.4, expo.in) across the pre-drop build, then slams back on the drop.</li>
+    <li><b>Shutter close</b> — a black iris wipes in on a downbeat (0.25 s) and the trails freeze as a still for the CTA.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>A long exposure literally records everything that happened while nobody was looking, which is the promise of background monitoring, and the one swerving trail is unmissable. Risk: the synthwave "neon highway" cliché; stay restrained with navy, teal and coral only, no pink or purple.</p><p><b>Adapt to your product:</b> Name the lanes after your own streams (orders, builds, API routes, regions) and let the aberrant trail be the thing your product catches.</p><p><b>References:</b> <a href="https://tympanus.net/codrops/2019/11/13/high-speed-light-trails-in-three-js/">Codrops: high-speed light trails</a> · <a href="https://github.com/Anemolo/Infinite-Lights">Infinite Lights (GitHub)</a></p></div>
+</div>
+</body>
+</html>

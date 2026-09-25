@@ -1,0 +1,75 @@
+{
+ "id": "007",
+ "slug": "inbox-choreography",
+ "name": "Inbox Choreography",
+ "category": "product-ui",
+ "summary": "A flooded inbox triages itself in rhythm until one calm email from Pulse asks for a single decision, then inbox zero.",
+ "look": "Warm, desktop-scale mail client with generous rows, a coral unread badge, teal auto-label chips and swipe-to-archive colour. The proof is one editorial reading pane with an Instrument Serif subject line; the payoff is an inbox-zero illustration built from the pulse mark.",
+ "components": [
+  {
+   "name": "Mail row",
+   "role": "unit of overload"
+  },
+  {
+   "name": "Unread badge",
+   "role": "odometer from 147 to 0"
+  },
+  {
+   "name": "Auto-label chips",
+   "role": "Pulse triaging"
+  },
+  {
+   "name": "Swipe-reveal action",
+   "role": "archive in rhythm"
+  },
+  {
+   "name": "Digest email from Pulse",
+   "role": "the single decision"
+  },
+  {
+   "name": "Empty-state illustration",
+   "role": "inbox-zero reward"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Row collapse",
+   "how": "height to 0, rows below slide up, 0.22 s power2.in, staggered on 1/16 notes"
+  },
+  {
+   "name": "Swipe triage",
+   "how": "x 0 to -100% with teal bleeding in, 0.25 s power3.in, one per beat"
+  },
+  {
+   "name": "Counter countdown",
+   "how": "147 to 0 decelerating with expo.out over 2 bars"
+  }
+ ],
+ "story": "Hook: alerts, tickets and dashboard digests flood in while the badge climbs to 147: 'The email you needed was #147.' Reveal: the Acme Pulse row slams in at hero size and the rows beneath label, swipe and collapse. Proof: one email from Pulse, 'One anomaly, caught at 09:44', shows checkout conversion −18% since 09:42 after deploy #2231 and the human clicks Roll back #2231. CTA: inbox zero illustration, 'Caught before customers noticed.', lockup and Start free.",
+ "adapt": "Turn the flood into the noise your customers drown in and make your product's one summary email carry the single decision it needs.",
+ "references": [
+  {
+   "url": "https://blog.superhuman.com/how-superhuman-chooses-inbox-zero-images/",
+   "note": "inbox-zero reward imagery",
+   "verified": false
+  },
+  {
+   "url": "https://dribbble.com/tags/swipe_motion",
+   "note": "swipe triage motion studies",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "low",
+  "risk": "close to notification tropes; keep it desktop, typographic and slow in the proof beat"
+ },
+ "best_for": [
+  "support tools",
+  "alerting",
+  "communication apps",
+  "productivity"
+ ],
+ "file": "themes/007-inbox-choreography.html"
+}

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>055 · Bento Grid — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t055 ===== */
+
+.t055-f{position:absolute;inset:0;overflow:hidden;color:var(--ink);font-family:var(--sans);background:#F7F8F8}
+.t055-cl{position:absolute;border-radius:50%;filter:blur(calc(var(--u)*80));opacity:.8}
+.t055-g{position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*60);width:calc(var(--u)*960);height:calc(var(--u)*960);display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);gap:calc(var(--u)*16)}
+.t055-t{background:#fff;border-radius:calc(var(--u)*16);padding:calc(var(--u)*26) calc(var(--u)*28);box-shadow:0 calc(var(--u)*1) calc(var(--u)*2) rgba(14,23,38,.05),0 calc(var(--u)*10) calc(var(--u)*30) rgba(14,23,38,.05);position:relative;overflow:hidden}
+.t055-lb{font:600 calc(var(--u)*20) var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#8A93A3}
+.t055-big{font:600 calc(var(--u)*120)/1 var(--mono);letter-spacing:-.05em}
+.t055-h{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+.t055-h i{color:var(--brand-deep)}
+.t055-badge{display:inline-block;font:700 calc(var(--u)*20) var(--mono);padding:calc(var(--u)*6) calc(var(--u)*12);border-radius:calc(var(--u)*8)}
+.t055-tab{font:600 calc(var(--u)*22) var(--sans);background:#F1F3F5;border-radius:calc(var(--u)*10);padding:calc(var(--u)*10) calc(var(--u)*14);margin-top:calc(var(--u)*10);white-space:nowrap;overflow:hidden}
+.t055-ink{background:var(--ink);color:#fff}
+.t055-ink .t055-lb{color:#8FA3B8}
+.t055-row{display:flex;justify-content:space-between;font:400 calc(var(--u)*22) var(--mono);padding:calc(var(--u)*13) 0;border-bottom:calc(var(--u)*1.5) solid rgba(255,255,255,.1)}
+.t055-row.bad{color:#FF8A80}
+.t055-scan{position:absolute;top:0;bottom:0;width:calc(var(--u)*120);background:linear-gradient(90deg,transparent,rgba(15,163,163,.55),transparent);mix-blend-mode:screen}
+.t055-btn{display:inline-block;font:700 calc(var(--u)*26) var(--sans);border-radius:calc(var(--u)*12);padding:calc(var(--u)*16) calc(var(--u)*26);white-space:nowrap}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 055 · Signature directions</div>
+    <h1>Bento Grid</h1>
+    <p class="dek">Every frame is a 6×6 bento of white tiles — the feature-summary language of keynote slides and modern SaaS landing pages. One fixed shell (r16 · gap 16 · pad 28), one message and one micro-motion per tile; the seams between scenes are either diving into a tile or collapsing the whole grid into one.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t055-f1"><div class="t055-f"><div class="t055-cl" style="left:calc(var(--u)*560);top:calc(var(--u)*-200);width:calc(var(--u)*640);height:calc(var(--u)*520);background:#CFF1EE"></div><div class="t055-cl" style="left:calc(var(--u)*-200);top:calc(var(--u)*700);width:calc(var(--u)*640);height:calc(var(--u)*520);background:#FFE3DE"></div><div class="t055-g">
+<div class="t055-t " style="grid-area:1/1/4/5;"><div class="t055-lb">01 · the question</div><div class="t055-h" style="font-size:calc(var(--u)*66);margin-top:calc(var(--u)*30)">How many dashboards did you <i style="color:var(--alert)">check</i> today?</div></div>
+<div class="t055-t " style="grid-area:1/5/3/7;"><div class="t055-lb">open tabs</div><div class="t055-big" style="margin-top:calc(var(--u)*18)">38</div></div>
+<div class="t055-t " style="grid-area:3/5/5/7;"><div class="t055-lb">dashboards</div><div class="t055-tab">Checkout · v4</div><div class="t055-tab">Revenue (old)</div><div class="t055-tab" style="opacity:.5">Signups copy</div></div>
+<div class="t055-t " style="grid-area:4/1/6/3;"><div class="t055-lb">error rate</div><div style="font:600 calc(var(--u)*76) var(--mono);margin-top:calc(var(--u)*20)">0.4%</div><span class="t055-badge" style="background:#FFE7E4;color:var(--alert);margin-top:calc(var(--u)*14)">unowned</span></div>
+<div class="t055-t " style="grid-area:4/3/6/5;"><div class="t055-lb">p95 latency</div><div style="font:600 calc(var(--u)*76) var(--mono);margin-top:calc(var(--u)*20)">212<span style="font-size:calc(var(--u)*32)"> ms</span></div><svg viewBox="0 0 200 40" style="width:100%;height:calc(var(--u)*50);margin-top:calc(var(--u)*10)"><polyline points="0,30 30,28 60,31 90,22 120,26 150,18 200,20" fill="none" stroke="#F4B740" stroke-width="3"/></svg></div>
+<div class="t055-t t055-ink" style="grid-area:5/5/7/7;"><div class="t055-lb">friday · 17:40</div><div class="t055-h" style="font-size:calc(var(--u)*42);margin-top:calc(var(--u)*16)">And the drop still <i style="color:#FF8A80">shipped.</i></div></div>
+<div class="t055-t " style="grid-area:6/1/7/5;padding-top:0;padding-bottom:0"><div style="display:flex;justify-content:space-between;align-items:center;height:100%"><span class="t055-lb">alerts muted today</span><span style="font:600 calc(var(--u)*56) var(--mono)">12</span></div></div>
+</div></div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The question tile settles first</b> (.92 → 1 + fade), then one pain tile per beat from largest to smallest, each sliding 24 px in from its nearest edge; on bar 3’s downbeat all coral badges light together and the grid shakes 4 px.</p></div>
+  <div class="cw"><div class="cell" id="t055-f2"><div class="t055-f"><div class="t055-g">
+<div class="t055-t" style="grid-area:1/1/7/7;background:radial-gradient(60% 50% at 70% 20%,#CFF1EE,transparent 70%),radial-gradient(50% 45% at 20% 90%,#FFE3DE,transparent 70%),#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--u)*34)">
+<div class="t055-h" style="font-size:calc(var(--u)*104);text-align:center">You ship.<br><i>Pulse</i> watches.</div>
+<div style="display:flex;align-items:center;gap:calc(var(--u)*24);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*104);height:calc(var(--u)*104)"><span style="font:800 calc(var(--u)*84) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+</div></div><div style="position:absolute;left:calc(var(--u)*223);top:calc(var(--u)*60);width:0;height:calc(var(--u)*960);border-left:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;left:calc(var(--u)*386);top:calc(var(--u)*60);width:0;height:calc(var(--u)*960);border-left:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;left:calc(var(--u)*549);top:calc(var(--u)*60);width:0;height:calc(var(--u)*960);border-left:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;left:calc(var(--u)*712);top:calc(var(--u)*60);width:0;height:calc(var(--u)*960);border-left:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;left:calc(var(--u)*875);top:calc(var(--u)*60);width:0;height:calc(var(--u)*960);border-left:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;top:calc(var(--u)*223);left:calc(var(--u)*60);height:0;width:calc(var(--u)*960);border-top:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;top:calc(var(--u)*386);left:calc(var(--u)*60);height:0;width:calc(var(--u)*960);border-top:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;top:calc(var(--u)*549);left:calc(var(--u)*60);height:0;width:calc(var(--u)*960);border-top:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;top:calc(var(--u)*712);left:calc(var(--u)*60);height:0;width:calc(var(--u)*960);border-top:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div><div style="position:absolute;top:calc(var(--u)*875);left:calc(var(--u)*60);height:0;width:calc(var(--u)*960);border-top:calc(var(--u)*2) dashed rgba(15,163,163,.18)"></div></div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop every tile is sucked to the centre</b> and fuses into one hero tile; the seams remain as dashed ghost lines, the headline types in per word and the wordmark unmasks left→right one bar later.</p></div>
+  <div class="cw"><div class="cell" id="t055-f3"><div class="t055-f"><div class="t055-cl" style="left:calc(var(--u)*560);top:calc(var(--u)*-200);width:calc(var(--u)*640);height:calc(var(--u)*520);background:#CFF1EE"></div><div class="t055-cl" style="left:calc(var(--u)*-200);top:calc(var(--u)*700);width:calc(var(--u)*640);height:calc(var(--u)*520);background:#FFE3DE"></div><div class="t055-g">
+<div class="t055-t " style="grid-area:1/1/2/7;display:flex;align-items:center;padding-top:0;padding-bottom:0"><div class="t055-h" style="font-size:calc(var(--u)*60)">You ship. <i>Pulse</i> watches.</div></div>
+<div class="t055-t t055-ink" style="grid-area:2/1/5/4;"><div class="t055-lb">your dashboard</div><div class="t055-row"><span>signups</span><span>+4%</span></div><div class="t055-row"><span>active</span><span>+1%</span></div><div class="t055-row bad"><span>checkout</span><span>−18%</span></div><div class="t055-row"><span>p95</span><span>212ms</span></div><div class="t055-row" style="border:0"><span>errors</span><span>0.4%</span></div><div class="t055-scan" style="left:calc(var(--u)*210)"></div></div>
+<div class="t055-t " style="grid-area:2/4/4/7;box-shadow:inset 0 0 0 calc(var(--u)*3) var(--alert),0 calc(var(--u)*16) calc(var(--u)*40) rgba(255,90,78,.2)"><div class="t055-lb" style="color:var(--alert)">⚠ anomaly · checkout conversion</div><div class="t055-big" style="color:var(--alert);margin-top:calc(var(--u)*20);font-size:calc(var(--u)*130)">−18%</div></div>
+<div class="t055-t " style="grid-area:4/4/5/7;"><div class="t055-lb">context</div><div style="font:600 calc(var(--u)*25) var(--mono);margin-top:calc(var(--u)*10)">since 09:42 · after deploy #2231</div></div>
+<div class="t055-t " style="grid-area:5/1/7/3;"><div class="t055-lb">watched</div><svg viewBox="0 0 100 100" style="width:calc(var(--u)*170);height:calc(var(--u)*170);margin-top:calc(var(--u)*10)"><circle cx="50" cy="50" r="40" fill="none" stroke="#E7ECEC" stroke-width="10"/><circle cx="50" cy="50" r="40" fill="none" stroke="#0FA3A3" stroke-width="10" stroke-dasharray="251" stroke-dashoffset="18" transform="rotate(-90 50 50)" stroke-linecap="round"/><text x="50" y="57" text-anchor="middle" font-family="JetBrains Mono" font-weight="600" font-size="20" fill="#0E1726">14/14</text></svg></div>
+<div class="t055-t " style="grid-area:5/3/7/4;padding:calc(var(--u)*26) calc(var(--u)*18)"><div class="t055-lb">ev/s</div><div style="font:600 calc(var(--u)*36) var(--mono);margin-top:calc(var(--u)*24);letter-spacing:-.04em">2,418</div></div>
+<div class="t055-t " style="grid-area:5/4/7/7;"><div class="t055-lb">your call</div><div style="display:flex;gap:calc(var(--u)*12);margin-top:calc(var(--u)*30)"><span class="t055-btn" style="background:var(--alert);color:#fff;box-shadow:0 calc(var(--u)*10) calc(var(--u)*24) rgba(255,90,78,.35)">Roll back</span><span class="t055-btn" style="border:calc(var(--u)*2) solid #DDE2E6">Acknowledge</span></div></div>
+</div></div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The hero tile shrinks into the ink table</b> and a teal scan band sweeps across it; side tiles tick green one per beat until the coral anomaly tile slams in (1.15 → 1) on the bar-9 downbeat, pushing its neighbours 8 px.</p></div>
+  <div class="cw"><div class="cell" id="t055-f4"><div class="t055-f"><div class="t055-cl" style="left:calc(var(--u)*560);top:calc(var(--u)*-200);width:calc(var(--u)*640);height:calc(var(--u)*520);background:#CFF1EE"></div><div class="t055-cl" style="left:calc(var(--u)*-200);top:calc(var(--u)*700);width:calc(var(--u)*640);height:calc(var(--u)*520);background:#FFE3DE"></div><div class="t055-g">
+<div class="t055-t " style="grid-area:1/1/3/7;"><div style="display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*26);height:100%;white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*120);height:calc(var(--u)*120)"><span style="font:800 calc(var(--u)*96) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div></div>
+<div class="t055-t " style="grid-area:3/1/5/5;"><div class="t055-h" style="font-size:calc(var(--u)*70);margin-top:calc(var(--u)*10)">Caught <i>before</i> customers noticed.</div></div>
+<div class="t055-t " style="grid-area:3/5/5/7;background:var(--alert);color:#fff;box-shadow:0 calc(var(--u)*18) calc(var(--u)*40) rgba(255,90,78,.3)"><div style="display:flex;flex-direction:column;justify-content:space-between;height:100%"><span style="font:600 calc(var(--u)*20) var(--mono);letter-spacing:.08em;color:rgba(255,255,255,.8)">GET STARTED</span><span style="font:800 calc(var(--u)*44)/1.05 var(--sans)">Start free →</span></div></div>
+<div class="t055-t " style="grid-area:5/1/7/3;"><div class="t055-lb">metrics</div><div style="font:600 calc(var(--u)*80) var(--mono);margin-top:calc(var(--u)*18)">14</div></div>
+<div class="t055-t " style="grid-area:5/3/7/5;"><div class="t055-lb">resolved in</div><div style="font:600 calc(var(--u)*80) var(--mono);margin-top:calc(var(--u)*18)">6<span style="font-size:calc(var(--u)*34)"> min</span></div></div>
+<div class="t055-t " style="grid-area:5/5/7/7;"><div class="t055-lb">events/sec</div><div style="font:600 calc(var(--u)*60) var(--mono);margin-top:calc(var(--u)*28);letter-spacing:-.04em">2,418</div></div>
+</div></div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Tiles rebuild large→small 70 ms apart</b> (lockup → CTA shell → stats); the numbers count up over one bar and the CTA tile floods coral on the sting downbeat, then everything holds.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Shell</b> — 6×6 grid, radius 16, gutter 16, inner padding 28 — never changes between scenes</li><li><b>Anchor tile</b> — the frame’s single message, 2–4× the area of its neighbours</li><li><b>Giant number tile</b> — one mono numeral 80–130 px that counts in</li><li><b>Ink table tile</b> — the only dark tile: your data, crossed by a teal scan band</li><li><b>Anomaly tile</b> — coral inset border + coral −18%; slams in and nudges its neighbours</li><li><b>Tile-zoom seam</b> — dive into a tile to start the next scene, or collapse the grid into one hero tile</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Tile cascade</b> — scale .92 → 1 + opacity, power2.out 0.4 s, 70 ms stagger large→small; big tiles on beats, small on off-beats</li><li><b>Micro-motion per tile</b> — each tile owns one loop (count, sparkline draw, badge blink) lasting exactly 1 bar = 2 s at 120 BPM</li><li><b>Grid collapse</b> — all tiles translate to centre + merge radii over 0.5 s expo.in, landing precisely on the drop</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Bento is the most scannable way to show many capabilities at once, and a muted feed can read each tile as a separate caption. Risk: equal-weight tiles become a busy dashboard — insist on one anchor per frame and let empty tiles breathe.</p><p><b>Adapt to your product:</b> Map each tile to one fact about your product (a metric, an integration, a screenshot crop) and keep a single “hero” tile per frame; the collapse/zoom seams work for any feature list.</p><p><b>References:</b> <a href="https://www.saasframe.io/blog/the-bento-layout-trend">https://www.saasframe.io/blog/the-bento-layout-trend</a> (why the bento layout took over SaaS pages) · <a href="https://saaspo.com/style/bento">https://saaspo.com/style/bento</a> (gallery of bento SaaS landing pages)</p></div>
+</div>
+</body>
+</html>

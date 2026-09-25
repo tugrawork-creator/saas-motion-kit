@@ -1,0 +1,20 @@
+{"id":"015","slug":"rubber-stamp-riso-ink","name":"Rubber Stamp & Riso Ink","category":"type",
+ "summary":"Two riso inks and two rubber stamps: teal '✓ WATCHED' on every healthy slip, one coral 'HOLD — YOUR CALL' on the anomaly.",
+ "look":"Warm grainy paper printed in teal and fluorescent coral with 3–6 px misregistration, halftone dot disks and translucent multiply overprints. Distressed rubber stamps with double-ruled frames slam onto printed slips and cards.",
+ "components":[
+  {"name":"Plate pair","role":"hero words printed twice in teal + coral, multiply-blended, slightly off register"},
+  {"name":"Halftone disk","role":"one-ink dot screen fading out behind the mark and CTA"},
+  {"name":"Rubber stamp","role":"double-ruled uppercase stamp with noise-mask distress and edge wobble"},
+  {"name":"Round seal","role":"circular stamp with text on a path"},
+  {"name":"Inspection slip","role":"small printed form per metric; the anomaly gets the big coral slip"},
+  {"name":"Paper stock","role":"warm grain background with soft, low shadows"}],
+ "motion":[
+  {"name":"Stamp slam","how":"scale 1.4 → 1 in 120 ms power4.in plus a two-frame 3 px shake, always on a kick or snare at 120 BPM"},
+  {"name":"Plate drift","how":"coral plate wanders 1–3 px on a 2 s sine loop (one bar) between hits"},
+  {"name":"Ghost lift","how":"stamp lifts 20 px and fades, leaving a 40% impression that inks in over 300 ms"}],
+ "story":"Hook: 'And the drop still shipped on Friday.' over a pile of riso-printed dashboard cards, stamped 'FOUND TOO LATE · by a customer'. Reveal: teal then coral plates print 'Acme Pulse' over a coral halftone disk behind the mark, a round 'NOW WATCHING · 14 METRICS' seal thuds in. Proof: metric slips each get a teal '✓ WATCHED'; the checkout slip shows −18% since 09:42 after deploy #2231, gets a coral HOLD stamp, and the human stamps a solid ROLL BACK. CTA: 'You ship. Pulse watches.' in overprint, lockup, and a solid coral START FREE stamp.",
+ "adapt":"Turn each item your product checks (orders, PRs, invoices, leads) into a slip; stamp routine ones in your brand color and give the exception its own loud stamp plus a human-action stamp.",
+ "references":[{"url":"https://studio2am.co/blogs/news/the-risograph-effect-ink-misregistration-for-zines-gig-posters-and-editorial-work","note":"risograph look and ink misregistration explained","verified":true}],
+ "fit":{"readability":3,"trust":2,"effort":"low","risk":"zine feel may undercut precision; keep layouts rigid and numbers crisp"},
+ "best_for":["workflow / approvals","e-commerce ops","creative tools","compliance-lite checks"],
+ "file":"themes/015-rubber-stamp-riso-ink.html"}

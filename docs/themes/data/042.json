@@ -1,0 +1,22 @@
+{"id":"042","slug":"security-belt-scan","name":"Security Belt Scan","category":"metaphor",
+ "summary":"Every release rides a conveyor through an X-ray arch; the one package with a coral glow is diverted to a human while the belt keeps rolling.",
+ "look":"Top-down charcoal scanner hall with a slatted belt, lead-flap curtains and a lit arch roof. Inside the arch everything turns false-colour X-ray: teal outlines for healthy structure, a coral organic glow with a dashed bounding box for the anomaly.",
+ "components":[
+  {"name":"Belt & rollers","role":"scrolling slat pattern; the film's metronome"},
+  {"name":"Scanner arch","role":"roof panel with curtain, status LEDs and the lit Acme lockup"},
+  {"name":"X-ray window","role":"false-colour view of what is inside each release"},
+  {"name":"Detection box","role":"dashed coral bounding box around the suspect layer"},
+  {"name":"Divert arm & tray","role":"pushes one package off the belt to a human"},
+  {"name":"Inspection monitor","role":"enlarged X-ray, anomaly readout and Roll back / Acknowledge"}],
+ "motion":[
+  {"name":"Belt scroll","how":"constant linear translateX, one slat per 8th note at 120 BPM; the only linear ease in the film"},
+  {"name":"Scan wipe","how":"clip-path inset reveals the X-ray view as each package crosses the arch, 0.4 s per item on the beat"},
+  {"name":"Divert push","how":"pusher arm rotates 26° with back.out(1.6) in 0.3 s on a snare hit; monitor punches in on the next beat"}],
+ "story":"Hook: 38 dashboard tiles pile up on a belt with no scanner, '0 scanned'. Reveal: the camera cranes onto the arch roof and the Acme mark and 'Acme Pulse' light on the drop. Proof: releases flip to X-ray as they pass; deploy #2231 glows coral, is pushed to the inspection tray and the monitor reads 'Checkout conversion −18% · since 09:42 · after deploy #2231'; the human taps Roll back while the belt keeps moving. CTA: 'Caught before customers noticed.' over a belt of teal-ticked packages, Start free.",
+ "adapt":"Swap the packages for whatever your product processes (pull requests, invoices, orders, uploads) and show your own check result inside the X-ray window.",
+ "references":[
+  {"url":"https://en.wikipedia.org/wiki/Hugh_Turvey","note":"X-ray art that shows the inside and outside of objects at once","verified":true},
+  {"url":"https://elements.envato.com/instruction-animation-of-how-airport-security-lugg-4367W7B","note":"baggage-scanner false-colour logic","verified":false}],
+ "fit":{"readability":3,"trust":2,"effort":"med","risk":"Security and suspicion overtones; scan objects only, never people, and keep the palette calm."},
+ "best_for":["dev tools","CI/CD","monitoring","security"],
+ "file":"themes/042-security-belt-scan.html"}

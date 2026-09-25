@@ -1,0 +1,74 @@
+{
+ "id": "085",
+ "slug": "constructivist-agitprop",
+ "name": "Constructivist Agitprop",
+ "category": "era",
+ "summary": "1920s agitprop poster grammar: a teal wedge pierces the circle of blind spots and a megaphone shouts the anomaly.",
+ "look": "Cream paper, ink and coral with teal as the heroic colour; everything on hard diagonals. Uppercase Manrope 800 slogans, mono captions riding on ink bands, geometric shards on impact.",
+ "components": [
+  {
+   "name": "Wedge",
+   "role": "teal triangle that pierces the circle — Pulse cutting through blind spots"
+  },
+  {
+   "name": "Diagonal bands",
+   "role": "ink/coral/teal bars at −27°…+4° that carry mono captions"
+  },
+  {
+   "name": "Megaphone cone",
+   "role": "coral trapezoid emanating from the Acme mark; the anomaly is shouted in it"
+  },
+  {
+   "name": "Slogan type",
+   "role": "Manrope 800 uppercase, −0.04em tracking, rotated −4…−8°"
+  },
+  {
+   "name": "Shards",
+   "role": "small rectangles scattered on impact frames"
+  },
+  {
+   "name": "Slogan button",
+   "role": "rotated block CTA with a ▶ glyph"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Slash-in",
+   "how": "bands translate along their own angle from off-frame, expo.out 0.35 s, landing on 8th-note offbeats"
+  },
+  {
+   "name": "Wedge strike",
+   "how": "wedge x from +700 px to 0, power4.in 0.25 s, impact exactly on the drop; 2-frame camera shake ±6 px"
+  },
+  {
+   "name": "Megaphone unfold",
+   "how": "cone scaleX 0→1 from its narrow end, back.out(1.4) 0.5 s = one beat, text scales 1.15→1 on the next downbeat"
+  }
+ ],
+ "story": "Hook: diagonal slogan \"HOW MANY DASHBOARDS DID YOU CHECK TODAY?\" with 38 in an ink circle and a coral band. Reveal: the teal wedge pierces the cream circle, ACME PULSE slams in. Proof: a megaphone from the Acme mark shouts \"−18% checkout conversion\", ink bands carry \"since 09:42 · after deploy #2231\", a human hits the ROLL BACK slogan block. CTA: \"You ship. Pulse watches.\" with a START FREE band.",
+ "adapt": "Make the wedge your product and the circle the problem it breaks; put your key alert or feature result inside the megaphone. Your CTA becomes the slogan on the final band.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Beat_the_Whites_with_the_Red_Wedge",
+   "note": "El Lissitzky, 1919: the wedge piercing the circle",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Rodchenko",
+   "note": "Rodchenko: diagonals, photomontage, the 1924 Lengiz 'Books' megaphone poster",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Political connotations and aggressive tone; rotated type reduces readability if held too briefly."
+ },
+ "best_for": [
+  "dev tools",
+  "security",
+  "launch campaigns"
+ ],
+ "file": "themes/085-constructivist-agitprop.html"
+}

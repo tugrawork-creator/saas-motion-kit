@@ -1,0 +1,74 @@
+{
+ "id": "089",
+ "slug": "pop-art-ben-day",
+ "name": "Pop-Art Ben-Day",
+ "category": "era",
+ "summary": "Lichtenstein-style comic panels: Ben-Day dots, speech balloons and a ZAP! that marks the anomaly.",
+ "look": "Warm white paper, thick ink outlines, tinted teal/amber/coral Ben-Day dot fields, amber caption boxes and stroked uppercase onomatopoeia. Buttons have hard offset comic shadows.",
+ "components": [
+  {
+   "name": "Comic panel",
+   "role": "thick 10 px ink border around a Ben-Day dot field"
+  },
+  {
+   "name": "Ben-Day dots",
+   "role": "SVG pattern of offset circles in tinted teal, amber or coral"
+  },
+  {
+   "name": "Speech balloon",
+   "role": "ellipse + tail; the Acme mark 'speaks' the alert"
+  },
+  {
+   "name": "Caption box",
+   "role": "amber rectangle with narration (\"Friday, 5:58 PM…\")"
+  },
+  {
+   "name": "Onomatopoeia burst",
+   "role": "spiky star with stroked lettering — PULSE!, ZAP!"
+  },
+  {
+   "name": "Comic button",
+   "role": "coral pill with hard 10 px ink drop shadow, skewed −6°"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Panel pop",
+   "how": "scale 1.15→1 and rotate 2°→0, back.out(2) 0.25 s, one panel per beat"
+  },
+  {
+   "name": "Burst bang",
+   "how": "scale 0→1.1→1 over 0.3 s + ±8 px shake for 4 frames, exactly on the drop and on the anomaly"
+  },
+  {
+   "name": "Dot breathe",
+   "how": "Ben-Day radius 5→6.5→5 px, sine.inOut 0.5 s per beat — the page throbs with the kick"
+  }
+ ],
+ "story": "Hook: a comic panel full of monitors, balloon: \"How many dashboards did I check today?!\", caption \"Friday, 5:58 PM…\". Reveal: a coral/amber burst with the Acme mark and PULSE!. Proof: a chart drops at deploy #2231 with a ZAP!, the Acme mark's balloon shouts checkout conversion −18% since 09:42, and a hand-pressed ROLL BACK! button. CTA: balloon \"You ship. Pulse watches.\" with a Start free comic button.",
+ "adapt": "Script your product's key moment as three panels — problem, product speaks, human acts — and let your logo be the character with the speech balloon. Your UI can appear on in-panel monitors.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Ben-Day_dots",
+   "note": "the printing dot technique and its use in Pop Art",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Roy_Lichtenstein",
+   "note": "Lichtenstein: Whaam!, bold outlines, flat colour, Ben-Day dots",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 1,
+  "effort": "med",
+  "risk": "Juvenile tone can undercut trust for enterprise buyers; dot patterns can moiré after compression."
+ },
+ "best_for": [
+  "consumer apps",
+  "social campaigns",
+  "dev tools with a playful voice"
+ ],
+ "file": "themes/089-pop-art-ben-day.html"
+}

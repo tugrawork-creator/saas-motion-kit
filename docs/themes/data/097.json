@@ -1,0 +1,75 @@
+{
+ "id": "097",
+ "slug": "speed-ramp",
+ "name": "Speed Ramp",
+ "category": "camera",
+ "summary": "Time is the edit: 8× fast-forward through a week of dashboards, a snap to 1× on the drop, ¼× slow motion for the human decision, with a speed graph under every frame.",
+ "look": "Warm paper frames with echo-frame trails, a giant coral speed readout and a dark editor-style time-remap strip whose playhead moves along a teal curve.",
+ "components": [
+  {
+   "name": "Speed graph",
+   "role": "dark time-remap strip (8× / 1× / ¼×) with a coral playhead; the film’s spine"
+  },
+  {
+   "name": "Speed readout",
+   "role": "huge mono 8× / 1× / ¼× numeral in the corner, instantly readable"
+  },
+  {
+   "name": "Echo frames",
+   "role": "ghosted copies of moving UI showing fast-forward"
+  },
+  {
+   "name": "Day chips",
+   "role": "MON–FRI ticker that proves time is passing"
+  },
+  {
+   "name": "Cursor onion trail",
+   "role": "4 fading cursors showing slow-motion movement toward the decision"
+  },
+  {
+   "name": "Resolution chip",
+   "role": "“Resolved in 6 min” green chip that closes the time story"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Fast-forward",
+   "how": "8× section: every UI update lands on eighth notes (0.25 s at 120 BPM), linear ease, echo trails 5 frames deep"
+  },
+  {
+   "name": "Ramp knee",
+   "how": "8× → 1× in 6 frames with a custom bezier (0.9, 0, 0.1, 1) so the change lands exactly on the drop; kick drum = snap"
+  },
+  {
+   "name": "Slow-mo hold",
+   "how": "1× → ¼× over one bar (2 s, sine.inOut) into the proof, hold ¼× for 12 s, ramp back over one bar; graduated steps (1–2–4–2–1) feel natural"
+  }
+ ],
+ "story": "Hook: a week of dashboards races by at 8×, “And the drop still shipped on Friday.” Reveal: speed snaps to 1× on the drop and Acme Pulse lands sharp. Proof: ¼× slow motion as “Checkout conversion −18%” rises and the cursor crawls to Roll back. CTA: back to 1×, “Resolved in 6 min”, “Every metric. Every minute.”, Start free.",
+ "adapt": "Record your product doing real work, then fast-forward the busywork your users do today and ramp down to slow motion on the one moment your product changes (the click, the approval, the result). The speed graph works with any product.",
+ "references": [
+  {
+   "url": "https://morphic.com/ai-glossary/speed-ramping",
+   "note": "speed ramping: smooth speed changes within one shot",
+   "verified": true
+  },
+  {
+   "url": "https://www.kapwing.com/resources/how-to-use-the-speed-ramp-effect/",
+   "note": "graduated 1×–2×–4×–2×–1× ramps for smooth acceleration",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "low",
+  "risk": "Speed ramps only read if the viewer can feel the change; without motion (echo frames, ticking clocks) the 8× and ¼× look the same in a still, and a slow section longer than about 8 s drags."
+ },
+ "best_for": [
+  "automation",
+  "monitoring",
+  "workflow tools",
+  "demo recordings"
+ ],
+ "file": "themes/097-speed-ramp.html"
+}

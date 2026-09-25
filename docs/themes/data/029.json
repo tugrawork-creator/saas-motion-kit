@@ -1,0 +1,74 @@
+{
+ "id": "029",
+ "slug": "paper-collage",
+ "name": "Stop-Motion Paper Collage",
+ "category": "material",
+ "summary": "Photocopied dashboards and ransom-note words on kraft; the anomaly value is snipped out and replaced by a coral-circled clipping.",
+ "look": "Kraft board, torn photocopies with halftone dots, cut-out words, masking tape and hard paper shadows. Teal and coral as misregistered riso ink; everything boils on twos.",
+ "components": [
+  {
+   "name": "Torn-edge mask",
+   "role": "jagged clip-path per scrap with a hard offset paper shadow"
+  },
+  {
+   "name": "Halftone photocopy",
+   "role": "dot-screen background + high-contrast grain in multiply"
+  },
+  {
+   "name": "Ransom-note words",
+   "role": "each headline word on its own scrap, mixed serif / sans / ink"
+  },
+  {
+   "name": "Riso block",
+   "role": "flat teal + coral ink passes with a 6–8 px misregister"
+  },
+  {
+   "name": "Snipped hole",
+   "role": "the cut-out value, dashed outline showing kraft behind — the anomaly"
+  },
+  {
+   "name": "Label-tape + pin",
+   "role": "embossed black tape for the timestamp; a brass pin marks the human choice"
+  }
+ ],
+ "motion": [
+  {
+   "name": "On-twos jitter",
+   "how": "steps(12) with a seeded ±1 px / ±0.5° boil on every scrap — reads as hand-animated at 24 fps"
+  },
+  {
+   "name": "Cut-in slap",
+   "how": "3-frame entry, no easing, overshoot 2 % then hold; every slap is a kick or snare hit at 120 BPM"
+  },
+  {
+   "name": "Replacement swap",
+   "how": "hard-cut swap (no tween) of the cut-out scrap for the corrected clipping, landing on a downbeat"
+  }
+ ],
+ "story": "Hook: ransom-note words ask how many dashboards you checked over photocopied charts, then a teal “38” scrap slaps down. Reveal: the Acme mark is taped on on the drop and “Acme Pulse” prints in misregistered teal/coral riso. Proof: on a photocopied metrics sheet the checkout value is cut out, a coral-circled “−18%” clipping swaps in with label tape “since 09:42 · after deploy #2231”, and a pin lands on “Roll back”. CTA: “Caught before customers noticed.” in cut-out words and a pinned coral “Start free” scrap.",
+ "adapt": "Photocopy (or screenshot and halftone) your own product screens as the scraps, and cut out the exact value your product flags; the human action becomes the pinned scrap.",
+ "references": [
+  {
+   "url": "https://prolificstudio.co/blog/collage-animation/",
+   "note": "overview of collage animation",
+   "verified": true
+  },
+  {
+   "url": "https://motiongraphics.london/category/collage/",
+   "note": "collage motion references",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "low",
+  "risk": "Rawness can undercut precision; keep numbers typeset and the anomaly scrap clean."
+ },
+ "best_for": [
+  "creator & content tools",
+  "startups with a playful voice",
+  "social ads"
+ ],
+ "file": "themes/029-paper-collage.html"
+}

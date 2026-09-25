@@ -1,0 +1,75 @@
+{
+ "id": "073",
+ "slug": "living-widgets",
+ "name": "Living Widgets",
+ "category": "character",
+ "summary": "Dashboard widgets become googly-eyed characters that doze until Pulse makes them look — the checkout card literally slumps.",
+ "look": "Real light-mode UI cards on warm paper, each with a pair of googly eyes. Pupil direction is the storytelling device; emotion comes from tilt, squash and brows, never mouths.",
+ "components": [
+  {
+   "name": "Eyed widget",
+   "role": "any chart card + two googly eyes; pupil direction = attention"
+  },
+  {
+   "name": "Sleep eyes",
+   "role": "closed arcs = an unwatched dashboard (the pain)"
+  },
+  {
+   "name": "Hero card",
+   "role": "the one anomalous metric, scaled up, with brows and a sweat drop"
+  },
+  {
+   "name": "Anomaly readout",
+   "role": "−18% in coral + mono meta line (since 09:42 · deploy #2231)"
+  },
+  {
+   "name": "Decision pill",
+   "role": "coral Roll back + ghost Acknowledge, pressed by a real cursor"
+  },
+  {
+   "name": "Happy row",
+   "role": "the widget cast lined up with smiling eyes under the CTA"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Pupil snap",
+   "how": "pupils tween to a look-at target in 0.12 s power4.out, 20 ms stagger; always on a downbeat (every 0.5 s at 120 BPM)"
+  },
+  {
+   "name": "Slump & squash",
+   "how": "hero card rotates to −3° with a 6 % vertical squash, 0.4 s back.out(2); the break in the line is drawn over one beat"
+  },
+  {
+   "name": "Idle blink",
+   "how": "each widget blinks (scaleY 1→0.1→1, 0.14 s) at random 2–4 bar intervals; blinks are quantised to 8ths so the wall pulses with the hi-hat"
+  }
+ ],
+ "story": "Hook: a wall of 38 widgets staring everywhere or asleep. Reveal: all pupils snap to the Acme mark on the drop. Proof: the checkout card slumps with wide eyes at its −18% break after deploy #2231 while you press Roll back. CTA: the cast lines up smiling under 'You ship. Pulse watches.'",
+ "adapt": "Use your own dashboard cards, charts or table rows as the cast; keep the eyes the only addition. Your key metric becomes the hero card and your primary action becomes the button it looks at.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Luxo_Jr.",
+   "note": "objects carry emotion through posture and timing",
+   "verified": true
+  },
+  {
+   "url": "https://www.creativereview.co.uk/mailchimp-rebrand-by-collins/",
+   "note": "SaaS brand character used with restraint (Freddie's wink)",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Cute can read as childish for enterprise buyers — keep the UI itself real and restrained, put personality only in eyes and posture, and never give the widgets mouths or voices."
+ },
+ "best_for": [
+  "analytics",
+  "monitoring",
+  "B2B dashboards",
+  "developer tools"
+ ],
+ "file": "themes/073-living-widgets.html"
+}

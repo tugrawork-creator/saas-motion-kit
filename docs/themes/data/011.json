@@ -1,0 +1,20 @@
+{"id":"011","slug":"split-flap-board","name":"Split-Flap Board","category":"type",
+ "summary":"Every metric is a row on a clattering departures board; one row flips to coral and holds until a human calls it.",
+ "look":"A dark station board of mechanical flap tiles with a split hinge, off-white mono capitals and green ON TIME status flaps. Teal tiles carry the brand, coral tiles carry the anomaly and the CTA.",
+ "components":[
+  {"name":"Flap cell","role":"the single letterform: split top/bottom tile with a dark hinge"},
+  {"name":"Board row","role":"metric · value · status, laid out like a timetable"},
+  {"name":"Status flaps","role":"ON TIME in green, HELD in coral"},
+  {"name":"Hero row","role":"the anomaly promoted to large coral flaps with a glow"},
+  {"name":"Ghost row","role":"half-flipped blank tiles for depth and ambient motion"},
+  {"name":"Action flaps","role":"ROLL BACK and START FREE built from the same tiles in a lit frame"}],
+ "motion":[
+  {"name":"Cascade flip","how":"top half rotateX 0→−90° power2.in 60 ms, bottom 90→0° power2.out 60 ms, 4–10 interim glyphs; one settle ≈ one beat at 120 BPM"},
+  {"name":"Row wave","how":"30 ms stagger per cell, 120 ms between rows so a 3-row block lands in one bar"},
+  {"name":"Settle wobble","how":"final flap overshoots 4° with back.out(3) over 120 ms; the anomaly row wobbles twice and locks on the downbeat"}],
+ "story":"Hook: a board of dashboards nobody looked at, '38 OPEN / 3 READ'. Reveal: the board cascades on the drop into the Acme mark tile, 'ACME' and a teal 'PULSE'. Proof: metric rows settle ON TIME while CHECKOUT keeps flipping, locks at −18% in coral with 'since 09:42 · after deploy #2231', and the cursor presses ROLL BACK. CTA: 'YOU SHIP. / PULSE / WATCHES.' row by row, then a coral START FREE flap button.",
+ "adapt":"List your own objects (deploys, invoices, jobs, tickets) as rows of 9–10 characters and map your states to status words; let exactly one row switch to your alert color.",
+ "references":[{"url":"https://github.com/conartist6/splitflap","note":"open-source split-flap display and flip mechanics","verified":true}],
+ "fit":{"readability":3,"trust":3,"effort":"med","risk":"must feel mechanical even with the sound off; flip timing matters more than detail"},
+ "best_for":["monitoring","logistics","dev tools","status pages"],
+ "file":"themes/011-split-flap-board.html"}

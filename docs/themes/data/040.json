@@ -1,0 +1,25 @@
+{"id":"040","slug":"under-the-microscope","name":"Under the Microscope","category":"light",
+ "summary":"Metrics become specimens under a circular eyepiece: Acme Pulse zooms from 4× to 40×, and in darkfield only the anomaly fluoresces coral.",
+ "look":"A black surround with a circular eyepiece, soft vignette and faint RGB fringe. Brightfield is near-white with teal-stained blurry cells; darkfield turns the field black where metric cells glow teal and one specimen fluoresces coral. Magnification readouts and a slide label frame every scene.",
+ "components":[
+  {"name":"Eyepiece mask","role":"circular vignette with RGB-offset fringe; instantly says 'looking closer'"},
+  {"name":"Magnification readout","role":"4× → 10× → 40× → 1× in the corner; chapters without a progress bar"},
+  {"name":"Specimen cells","role":"rounded irregular blobs that each hold one metric in mono"},
+  {"name":"Fluorescence channel","role":"darkfield switch: healthy cells glow teal, the anomaly glows coral"},
+  {"name":"Slide label","role":"paper label for the hook question and the 'Specimen #2231' decision tag"},
+  {"name":"Scale bar","role":"white bar labelled '1 dashboard'; a playful unit that keeps it about software"}
+ ],
+ "motion":[
+  {"name":"Focus pull","how":"filter blur 8 → 0 px, power2.out over 0.5 s (one beat at 120 BPM) with a scale breath 1.02 → 1"},
+  {"name":"Objective switch","how":"turret rotates, then a hard cut to the next magnification with a 3-frame white bloom on a downbeat"},
+  {"name":"Brownian drift","how":"specimens jitter a few px on seeded low-frequency noise; the anomaly pulses brighter on each snare"}
+ ],
+ "story":"Hook: at 4× a field of blurry dashboard cells never comes into focus; a slide label asks 'How many dashboards did you check today?'. Reveal: on the drop the turret clicks to 10× and a focus pull lands the Acme mark and 'Acme Pulse' sharp. Proof: at 40× darkfield, Signups, Active users, p95 212 ms and Errors 0.4 % glow teal while 'Checkout conversion −18% since 09:42' fluoresces coral; a 'Specimen #2231 · after deploy #2231' tag offers Roll back / Acknowledge. CTA: back to 1× brightfield for 'Caught before customers noticed.', Start free and 'Resolved · 6 min'.",
+ "adapt":"Put your own objects on the slide (tickets, builds, transactions, accounts) and use the magnification steps as your drill-down path from overview to the single item your product flags.",
+ "references":[
+  {"url":"https://www.nikonsmallworld.com/","note":"Nikon Small World photomicrography gallery","verified":false},
+  {"url":"https://en.wikipedia.org/wiki/Fluorescence_microscope","note":"how fluorescence microscopy isolates one signal","verified":false}
+ ],
+ "fit":{"readability":3,"trust":3,"effort":"low","risk":"Biology imagery can blur the product meaning; keep every specimen obviously numeric."},
+ "best_for":["analytics","data quality tools","health & science software","QA / testing"],
+ "file":"themes/040-under-the-microscope.html"}

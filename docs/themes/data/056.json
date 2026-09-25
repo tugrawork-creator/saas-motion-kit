@@ -1,0 +1,75 @@
+{
+ "id": "056",
+ "slug": "workflow-canvas",
+ "name": "Workflow Canvas",
+ "category": "signature",
+ "summary": "A dark node canvas where packets hop on the beat and one coral branch hands the anomaly to a human.",
+ "look": "Deep navy canvas with a dot grid, rounded-square nodes with status rings, glowing teal bezier cables and packets, a white hub node carrying the Acme mark and a single coral exception branch.",
+ "components": [
+  {
+   "name": "Dot-grid canvas",
+   "role": "deep navy with a 36 px dot grid; the camera only pans and zooms, never cuts inside a scene"
+  },
+  {
+   "name": "Node + ports",
+   "role": "r28 square, glyph, label below, in/out ports; max 7 nodes per frame"
+  },
+  {
+   "name": "Status ring",
+   "role": "grey idle · teal running · green done · coral exception — the whole story in four colours"
+  },
+  {
+   "name": "Bezier cable + packet",
+   "role": "glowing dot with a soft halo that hops one node per beat"
+  },
+  {
+   "name": "Audit link",
+   "role": "dashed teal cable: Pulse observes the pipeline without sitting in it"
+  },
+  {
+   "name": "Exception branch",
+   "role": "the only coral cable in the film, ending in a human decision node"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Packet hop",
+   "how": "packet travels one cable per beat (0.5 s at 120 BPM), power1.inOut, with a 0.15 s ring pulse on arrival"
+  },
+  {
+   "name": "Cable snap",
+   "how": "dashed red → solid teal in a single frame on the drop, then path-morph to straight over 0.3 s expo.out"
+  },
+  {
+   "name": "Canvas camera",
+   "how": "pan/zoom only: 1 bar zoom-in (expo.inOut 2 s) into the node that matters; pull-back to minimap for the CTA"
+  }
+ ],
+ "story": "Hook: five tool nodes (dashboards, alerts, logs, chat, on-call) tangled by broken red cables around the question. Reveal: on the drop the cables snap teal into one hub — Acme Pulse — with a coral “You decide” node attached. Proof: packets flow Deploy #2231 → Checkout → Metrics (2,418 ev/s); Pulse’s dashed audit link catches Checkout conversion −18% since 09:42 and routes it down the coral branch to a Roll back node. CTA: the flow shrinks to a minimap and a cable feeds the coral Start free node.",
+ "adapt": "Draw your customer’s real process as 4–6 nodes, place your product as a node or an audit link, and give the single exception path its own colour ending in a human action.",
+ "references": [
+  {
+   "url": "https://docs.n8n.io/courses/level-one/chapter-1/",
+   "note": "node-canvas editor conventions (ports, nodes, execution state)",
+   "verified": true
+  },
+  {
+   "url": "https://docs.n8n.io/build/understand-workflows/workflow-components/canvas-groups",
+   "note": "grouping nodes on a canvas",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Too many nodes turns into spaghetti; cap at 7 nodes and one exception branch."
+ },
+ "best_for": [
+  "automation",
+  "dev tools",
+  "data pipelines",
+  "AI agents"
+ ],
+ "file": "themes/056-workflow-canvas.html"
+}

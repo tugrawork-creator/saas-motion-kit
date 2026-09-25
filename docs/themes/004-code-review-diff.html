@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>004 · Code Review Diff — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t004-s{position:absolute;inset:0;background:#FBFAF6;font-family:var(--sans);color:var(--ink);overflow:hidden}
+.t004-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t004-hd{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*60)}
+.t004-ti{font:400 calc(var(--u)*64)/1.05 var(--serif);letter-spacing:-.01em}
+.t004-ti span{color:#8A8F99}
+.t004-meta{display:flex;align-items:center;gap:calc(var(--u)*14);margin-top:calc(var(--u)*14);font:500 calc(var(--u)*22) var(--sans);color:var(--muted);white-space:nowrap}
+.t004-badge{display:inline-flex;align-items:center;gap:calc(var(--u)*8);border-radius:calc(var(--u)*30);padding:calc(var(--u)*6) calc(var(--u)*18);font:700 calc(var(--u)*22) var(--sans);color:#fff;background:var(--ink)}
+.t004-box{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);background:#fff;border:calc(var(--u)*2) solid #E3E0D6;border-radius:calc(var(--u)*14);overflow:hidden}
+.t004-bh{height:calc(var(--u)*56);display:flex;align-items:center;gap:calc(var(--u)*12);padding:0 calc(var(--u)*22);background:#F3F1EA;border-bottom:calc(var(--u)*2) solid #E3E0D6;font:600 calc(var(--u)*22) var(--mono);color:var(--muted);white-space:nowrap}
+.t004-ck{height:calc(var(--u)*64);display:flex;align-items:center;gap:calc(var(--u)*16);padding:0 calc(var(--u)*22);font:600 calc(var(--u)*25) var(--sans);white-space:nowrap}
+.t004-ck+.t004-ck{border-top:calc(var(--u)*1.5) solid #EFECE4}
+.t004-ck .d{margin-left:auto;font:400 calc(var(--u)*21) var(--mono);color:#8A8F99}
+.t004-ck svg{width:calc(var(--u)*32);height:calc(var(--u)*32);flex:none}
+.t004-ck img{width:calc(var(--u)*32);height:calc(var(--u)*32);flex:none}
+.t004-ck.bad{background:#FFF0EE}.t004-ck.bad .d{color:var(--alert)}
+.t004-ck.run{background:#EEF9F8}
+.t004-ln{display:flex;align-items:center;min-height:calc(var(--u)*60);font:400 calc(var(--u)*26) var(--mono);white-space:nowrap}
+.t004-ln .g{width:calc(var(--u)*72);flex:none;text-align:right;padding-right:calc(var(--u)*14);color:#A4A8AF;font-size:calc(var(--u)*21);align-self:stretch;display:flex;align-items:center;justify-content:flex-end;background:rgba(14,23,38,.03)}
+.t004-ln .sg{width:calc(var(--u)*44);flex:none;text-align:center;font-weight:600}
+.t004-ln.del{background:#FFECE9;color:#B8342B}.t004-ln.del .g{background:#FFDCD7}
+.t004-ln.del .c{text-decoration:line-through;text-decoration-thickness:calc(var(--u)*3)}
+.t004-ln.add{background:#E2F5F3;color:var(--brand-deep)}.t004-ln.add .g{background:#C9ECE8}
+.t004-ln.hunk{background:#EEF1F4;color:#6A7383;font-size:calc(var(--u)*22);min-height:calc(var(--u)*48)}
+.t004-cm{margin:calc(var(--u)*16) calc(var(--u)*22) calc(var(--u)*18) calc(var(--u)*94);border:calc(var(--u)*2) solid #E3E0D6;border-radius:calc(var(--u)*12);background:#fff;overflow:hidden}
+.t004-cmh{display:flex;align-items:center;gap:calc(var(--u)*12);padding:calc(var(--u)*14) calc(var(--u)*20);background:#F7F6F1;border-bottom:calc(var(--u)*1.5) solid #E3E0D6;font:700 calc(var(--u)*22) var(--sans);white-space:nowrap}
+.t004-cmh img{width:calc(var(--u)*34);height:calc(var(--u)*34)}
+.t004-cmh span{font:400 calc(var(--u)*20) var(--mono);color:#8A8F99}
+.t004-bot{font:600 calc(var(--u)*18) var(--mono);border:calc(var(--u)*1.5) solid #CFCBBA;border-radius:calc(var(--u)*20);padding:calc(var(--u)*2) calc(var(--u)*10);color:var(--muted)}
+.t004-cmb{padding:calc(var(--u)*22) calc(var(--u)*24) calc(var(--u)*26)}
+.t004-cmb .t{font:800 calc(var(--u)*46)/1.1 var(--sans)} .t004-cmb .t b{color:var(--alert)}
+.t004-cmb .m{font:400 calc(var(--u)*25) var(--mono);color:var(--muted);margin-top:calc(var(--u)*6)}
+.t004-sug{margin-top:calc(var(--u)*14);border:calc(var(--u)*1.5) solid #E3E0D6;border-radius:calc(var(--u)*8);overflow:hidden}
+.t004-sug .h{font:600 calc(var(--u)*20) var(--mono);color:var(--muted);padding:calc(var(--u)*8) calc(var(--u)*14);background:#F7F6F1}
+.t004-sug .t004-ln{min-height:calc(var(--u)*54);font-size:calc(var(--u)*25)}
+.t004-acts{display:flex;align-items:center;gap:calc(var(--u)*12);margin-top:calc(var(--u)*16)}
+.t004-btn{height:calc(var(--u)*68);padding:0 calc(var(--u)*30);border-radius:calc(var(--u)*10);display:flex;align-items:center;gap:calc(var(--u)*10);font:700 calc(var(--u)*28) var(--sans);white-space:nowrap}
+.t004-btn.pri{background:var(--alert);color:#fff}.t004-btn.sec{box-shadow:inset 0 0 0 calc(var(--u)*2) #D6D3C8}
+.t004-hl{position:absolute;left:calc(var(--u)*60);width:calc(var(--u)*960);font:400 calc(var(--u)*92)/1.0 var(--serif);letter-spacing:-.015em}
+.t004-hl em{color:var(--alert)}
+.t004-av{width:calc(var(--u)*44);height:calc(var(--u)*44);border-radius:50%;background:#6B7A90;color:#fff;font:700 calc(var(--u)*20) var(--sans);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.t004-word{font:800 calc(var(--u)*92)/1 var(--sans);letter-spacing:-.035em;color:var(--ink)}
+.t004-cur{position:absolute;width:calc(var(--u)*42);height:calc(var(--u)*42);z-index:9}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 004 · Product UI as the stage</div>
+    <h1>Code Review Diff</h1>
+    <p class="dek">The film is told as a pull request: a gutter of line numbers, red and teal diff lines, status checks and review threads. Acme Pulse is the check that keeps running after merge — it posts a review comment on production with a suggested change, and nothing happens until a human approves it.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t004-f1">
+<div class="t004-s">
+ <div class="t004-hd"><div class="t004-ti">Friday release <span>#2231</span></div>
+  <div class="t004-meta"><span class="t004-badge"><svg viewBox="0 0 20 20" style="width:calc(var(--u)*22);height:calc(var(--u)*22)"><circle cx="5" cy="4" r="2.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="5" cy="16" r="2.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="15" cy="10" r="2.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M5 6.5 V13.5 M5 8 Q5 10 12.5 10" fill="none" stroke="#fff" stroke-width="2"/></svg>Merged</span>checkout-v3 → main · Fri 16:58</div></div>
+ <div class="t004-box" style="top:calc(var(--u)*268)">
+  <div class="t004-bh">All checks have passed · 4 of 4</div>
+  <div class="t004-ck"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#1F9D55"/><path d="M9 16 L14 21 L23 11" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>unit tests<span class="d">1,204 passed</span></div>
+  <div class="t004-ck"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#1F9D55"/><path d="M9 16 L14 21 L23 11" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>lint · build<span class="d">41 s</span></div>
+  <div class="t004-ck"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#1F9D55"/><path d="M9 16 L14 21 L23 11" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>e2e · checkout flow<span class="d">staging</span></div>
+  <div class="t004-ck" style="color:#A4A8AF"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#C8C5BA" stroke-width="3" stroke-dasharray="4 4"/></svg>production<span class="d">nobody watching</span></div>
+ </div>
+ <div class="t004-hl" style="top:calc(var(--u)*690);font-size:calc(var(--u)*112)">And the drop still shipped on <em>Friday.</em></div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Checks resolve top→bottom, one per beat</b> (spinner → green tick, stagger 0.5 s), the Merged badge stamps in on beat 4; then the last row greys out — “production · nobody watching” — and the headline types up from the bottom on the next bar.</p></div>
+  <div class="cw"><div class="cell" id="t004-f2">
+<div class="t004-s">
+ <div class="t004-box" style="top:calc(var(--u)*140)">
+  <div class="t004-bh">how-we-watch-production.md</div>
+  <div class="t004-ln hunk"><span class="g"></span><span class="sg"></span>@@ -12,3 +12,3 @@ monitoring</div>
+  <div class="t004-ln"><span class="g">12</span><span class="sg"></span>## Who checks production?</div>
+  <div class="t004-ln del"><span class="g">13</span><span class="sg">−</span><span class="c">38 dashboards, checked by hand</span></div>
+  <div class="t004-ln del"><span class="g">14</span><span class="sg">−</span><span class="c">whoever is awake</span></div>
+  <div class="t004-ln add" style="min-height:calc(var(--u)*230)"><span class="g">13</span><span class="sg" style="font-size:calc(var(--u)*40)">+</span><span style="display:flex;align-items:center;gap:calc(var(--u)*24)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*110);height:calc(var(--u)*110)"><span class="t004-word">Acme Pulse</span></span></div>
+  <div class="t004-ln add"><span class="g">14</span><span class="sg">+</span>every metric, every minute</div>
+ </div>
+ <div class="t004-box" style="top:calc(var(--u)*860)">
+  <div class="t004-ck run" style="height:calc(var(--u)*80)"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse · production watch<span class="d" style="color:var(--brand-deep)">● running</span></div>
+ </div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the two red lines strike through left→right</b> (0.3 s power2.in) and the teal “+” line slides in beneath them (y 8→0, 0.3 s) at hero size; on the next downbeat a new always-running check appears below — Acme Pulse is now part of the pipeline.</p></div>
+  <div class="cw"><div class="cell" id="t004-f3">
+<div class="t004-s">
+ <div class="t004-box" style="top:calc(var(--u)*60)">
+  <div class="t004-ck bad" style="height:calc(var(--u)*76)"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#FF5A4E"/><path d="M11 11 L21 21 M21 11 L11 21" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>Acme Pulse · production watch<span class="d">1 anomaly</span></div>
+  <div class="t004-ln hunk"><span class="g"></span><span class="sg"></span>@@ metrics/checkout.conversion @@ 09:30 → 09:48</div>
+  <div class="t004-ln del"><span class="g">41</span><span class="sg">−</span>09:36  3.42%  baseline</div>
+  <div class="t004-ln add" style="background:#FFE1DD;color:#B8342B"><span class="g" style="background:#FFD2CC">42</span><span class="sg">+</span>09:42  2.80%  after #2231</div>
+  <div class="t004-cm">
+   <div class="t004-cmh"><img src="../assets/brand/acme-mark.svg" alt="">acme-pulse <span class="t004-bot">agent</span><span>commented · 09:44</span></div>
+   <div class="t004-cmb">
+    <div class="t">Checkout conversion <b>−18%</b></div>
+    <div class="m">since 09:42 · after deploy #2231</div>
+    <div class="t004-sug"><div class="h">Suggested change</div>
+     <div class="t004-ln del"><span class="g">L1</span><span class="sg">−</span>live: deploy #2231</div>
+     <div class="t004-ln add"><span class="g">L1</span><span class="sg">+</span>live: deploy #2230 (last good)</div>
+    </div>
+    <div class="t004-acts"><span class="t004-btn pri">Roll back</span><span class="t004-btn sec">Acknowledge</span><span style="margin-left:auto;display:flex;align-items:center;gap:calc(var(--u)*10);font:500 calc(var(--u)*21) var(--sans);color:var(--muted)"><span class="t004-av">S</span>needs your review</span></div>
+   </div>
+  </div>
+ </div>
+ <div class="t004-p" style="--x:60;--y:872;--w:960;display:flex;align-items:center;gap:calc(var(--u)*16);font:600 calc(var(--u)*25) var(--sans);color:var(--ink);white-space:nowrap"><span style="width:calc(var(--u)*4);height:calc(var(--u)*50);background:#E3E0D6;margin-left:calc(var(--u)*56)"></span><span class="t004-av">S</span>Sam approved the suggestion<span style="font:400 calc(var(--u)*22) var(--mono);color:var(--muted)">09:48 · rolling back #2231</span></div>
+ <div class="t004-p" style="--x:60;--y:944;--w:960;display:flex;align-items:center;gap:calc(var(--u)*16);font:600 calc(var(--u)*25) var(--sans);color:var(--ok);white-space:nowrap"><span style="width:calc(var(--u)*4);height:calc(var(--u)*50);background:#E3E0D6;margin-left:calc(var(--u)*56)"></span><svg viewBox="0 0 32 32" style="width:calc(var(--u)*44);height:calc(var(--u)*44)"><circle cx="16" cy="16" r="14" fill="#1F9D55"/><path d="M9 16 L14 21 L23 11" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>Resolved in 6 min<span style="font:400 calc(var(--u)*22) var(--mono);color:var(--muted)">conversion back to 3.41%</span></div>
+ <svg class="t004-cur" style="left:calc(var(--u)*250);top:calc(var(--u)*702)" viewBox="0 0 42 42"><path d="M6 4 L6 34 L14 27 L20 39 L26 36 L20 24 L32 24 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The production check flips from teal spinner to coral ✗ on the snare</b>, the collapsed <code>@@</code> hunk unfolds downward (height tween 0.4 s), and Pulse's review comment slides up with a suggested change; the cursor lands on <b>Roll back</b> on the next downbeat — the agent proposes, the human merges.</p></div>
+  <div class="cw"><div class="cell" id="t004-f4">
+<div class="t004-s">
+ <div class="t004-hl" style="top:calc(var(--u)*90);font-size:calc(var(--u)*100)">Caught <em>before</em> customers noticed.</div>
+ <div class="t004-box" style="top:calc(var(--u)*470);border-color:#BFE6E1">
+  <div class="t004-ck run" style="height:calc(var(--u)*72)"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="#1F9D55"/><path d="M9 16 L14 21 L23 11" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>14 metrics watched · resolved in 6 min</div>
+  <div style="padding:calc(var(--u)*34) calc(var(--u)*30) calc(var(--u)*36);display:flex;flex-direction:column;gap:calc(var(--u)*30)">
+   <div style="display:flex;align-items:center;gap:calc(var(--u)*24)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*100);height:calc(var(--u)*100)"><span class="t004-word">Acme Pulse</span></div>
+   <div style="display:flex;align-items:center;gap:calc(var(--u)*20)"><span class="t004-btn pri" style="height:calc(var(--u)*96);font-size:calc(var(--u)*38);padding:0 calc(var(--u)*44);border-radius:calc(var(--u)*14)">Start free<span style="border-left:calc(var(--u)*2) solid rgba(255,255,255,.5);padding-left:calc(var(--u)*18);margin-left:calc(var(--u)*10);font-size:calc(var(--u)*26)">▾</span></span><span style="font:400 calc(var(--u)*22) var(--mono);color:var(--muted)">merge into your stack</span></div>
+  </div>
+ </div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The page scrolls up to the merge box</b> (0.6 s power3.inOut); the check row turns green on the downbeat, the lockup fades in, and the coral “Start free” merge button settles last with a 1-frame press on the final kick.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>PR header + Merged badge</b> — the release that shipped on Friday.</li><li><b>Status checks list</b> — green ticks for CI, then Pulse as the check that never stops running.</li><li><b>Diff hunk (− / + lines)</b> — before / after, with line strike-through.</li><li><b>Review comment by the agent</b> — the anomaly, with a bot badge.</li><li><b>Suggested-change block</b> — Pulse proposes the rollback; nothing applies itself.</li><li><b>Merge button</b> — becomes the coral “Start free” CTA with a split caret.</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Hunk unfold</b> — collapsed <code>@@</code> expands with a height tween, 0.4 s power2.out, content fades in 0.1 s behind it; starts on a downbeat, ends before the next (0.5 s at 120 BPM).</li><li><b>Line strike-and-replace</b> — red line gets a strike-through drawn left→right in 0.3 s, then the + line slides in (y 8→0, 0.3 s) on the following 1/8.</li><li><b>Checks pipeline</b> — spinners resolve one by one, stagger 0.5 s so every tick lands on a beat; the failing one lands on the snare.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> code review is the cleanest existing metaphor for “the machine proposes, a human approves” — checks, a suggested change and an approve button already mean exactly that. <b>Risk:</b> non-developers may not read diffs; keep hunks to 2–3 lines and write them in plain language.</p><p><b>Adapt to your product:</b> turn your product's before/after into a diff (old workflow − / new workflow +) and your core alert into a review comment with a suggested change; your CTA is the merge button.</p><p><b>References:</b> <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/incorporating-feedback-in-your-pull-request">GitHub Docs — suggested changes in review</a> · <a href="https://cursor.com/docs/tab/overview">Cursor — inline suggestions</a></p></div>
+</div>
+</body>
+</html>

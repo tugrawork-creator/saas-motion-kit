@@ -1,0 +1,74 @@
+{
+ "id": "092",
+ "slug": "y2k-liquid-chrome",
+ "name": "Y2K Liquid Chrome",
+ "category": "era",
+ "summary": "Turn-of-the-millennium tech optimism: liquid-chrome lettering, candy-teal jelly windows and a coral gel capsule for the anomaly.",
+ "look": "Icy pinstriped background, liquid-chrome gradient type, translucent teal jelly panels, glossy Aqua-style gel pills in teal, coral and white, chrome blobs and white sparkles.",
+ "components": [
+  {
+   "name": "Liquid-chrome type",
+   "role": "gradient-clipped Manrope 800 with a dark horizon band and drop shadow"
+  },
+  {
+   "name": "Jelly window",
+   "role": "translucent candy-teal panel with white rim and soft teal shadow"
+  },
+  {
+   "name": "Gel capsule",
+   "role": "Aqua-style pill with a glossy top highlight — teal ok, coral alert, white secondary"
+  },
+  {
+   "name": "Chrome blob",
+   "role": "radial metallic blob that holds the Acme mark in a gel bubble"
+  },
+  {
+   "name": "Pinstripes",
+   "role": "3 px white horizontal lines over an icy gradient background"
+  },
+  {
+   "name": "Sparkles",
+   "role": "4-point stars that twinkle on the hi-hats"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Gel inflate",
+   "how": "scale 0.6→1.08→1 with elastic.out(1, .6) 0.5 s — one beat at 120 BPM"
+  },
+  {
+   "name": "Chrome glint",
+   "how": "a white 30° highlight band sweeps across the lettering, sine.inOut 0.6 s, on beat 1 of each bar"
+  },
+  {
+   "name": "Jelly wobble",
+   "how": "scaleX/scaleY counter-oscillate ±4 %, 0.25 s per cycle on 8th notes, decaying over 2 beats"
+  }
+ ],
+ "story": "Hook: jelly dashboard windows stack under a chrome headline \"How many dashboards did you check today?\". Reveal: a chrome blob with a teal gel bubble holding the Acme mark, chrome \"Acme Pulse\". Proof: a chrome-rimmed panel of teal status capsules; the line turns coral and a coral capsule inflates with checkout conversion −18% since 09:42 after deploy #2231; a teal gel Roll back button is pressed. CTA: chrome \"Caught before customers noticed.\" with a coral gel Start free pill.",
+ "adapt": "Rebuild your key UI states as gel capsules and jelly windows (status pills are perfect), and render your product name in liquid chrome for the reveal. Keep your real data flat and legible inside them.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Y2K_aesthetic",
+   "note": "Y2K aesthetic: chrome, translucent plastics, blobjects, late 1990s–2000s",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Aqua_(user_interface)",
+   "note": "Aqua (2000): gel buttons, translucency, 'lickable' UI",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Gradients and glows band or smear after compression; can feel kitschy if overused."
+ },
+ "best_for": [
+  "consumer apps",
+  "creator tools",
+  "Gen-Z-facing launches"
+ ],
+ "file": "themes/092-y2k-liquid-chrome.html"
+}

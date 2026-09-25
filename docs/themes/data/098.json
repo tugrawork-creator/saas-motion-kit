@@ -1,0 +1,75 @@
+{
+ "id": "098",
+ "slug": "dolly-zoom",
+ "name": "Dolly Zoom",
+ "category": "camera",
+ "summary": "Hitchcock’s vertigo shot on the proof beat: the anomaly card stays locked in size while the dashboard wall behind it stretches into a tunnel.",
+ "look": "Night-navy frames of dashboard tiles, a CSS-3D tunnel for the zolly, amber subject brackets and FOV guides, and a lens/dolly HUD with two opposing sliders.",
+ "components": [
+  {
+   "name": "Dashboard wall / tunnel",
+   "role": "the background that stretches; built as a 4-wall CSS 3D box"
+  },
+  {
+   "name": "Locked subject",
+   "role": "the anomaly card, which never changes size or position during the move"
+  },
+  {
+   "name": "Subject bracket",
+   "role": "amber bracket that picks the one tile that matters out of the wall"
+  },
+  {
+   "name": "Lens + dolly HUD",
+   "role": "two sliders moving in opposite directions, explaining the effect in a still"
+  },
+  {
+   "name": "FOV guides",
+   "role": "nested dashed rectangles showing the background field of view shrinking"
+  },
+  {
+   "name": "Opposing arrows",
+   "role": "DOLLY IN → / ← ZOOM OUT marks under the subject"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Zolly",
+   "how": "perspective 1400 → 420 px while the tunnel translates z −800 px, over 2 bars (4 s at 120 BPM) with sine.inOut; subject scale compensates to stay constant"
+  },
+  {
+   "name": "Drop push",
+   "how": "straight scale 1 → 1.12 in 0.3 s (expo.out) exactly on the drop; frame guides scale 1.4 → 1 staggered 0.08 s"
+  },
+  {
+   "name": "Release",
+   "how": "zolly reverses in 1 bar with power2.out; background desaturates back to navy; tagline lines on beats 1 and 3"
+  }
+ ],
+ "story": "Hook: a flat wide shot of a wall of dashboards, “How many dashboards did you check today?”. Reveal: a push on the drop into the glowing Acme Pulse mark. Proof: the zolly: “Checkout conversion −18% since 09:42 after deploy #2231” stays locked while the world stretches away; Roll back. CTA: the move releases to a calm 50 mm, “Caught before customers noticed.”, Start free.",
+ "adapt": "Choose the single object your product surfaces (an alert, a failing test, a fraud flag, a lead score) as the locked subject, and use the screens your users stare at today as the stretching background. Everything else in the film should be calm so the zolly lands.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Dolly_zoom",
+   "note": "how the dolly zoom works: dolly and zoom in opposite directions",
+   "verified": true
+  },
+  {
+   "url": "https://www.studiobinder.com/blog/best-dolly-zoom-vertigo-effect/",
+   "note": "dolly zoom scene examples (Vertigo, Fellowship of the Ring)",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "high",
+  "risk": "The zolly is a strong, slightly queasy effect; used more than once it becomes a gimmick, and a real one needs true 3D (or a careful 2.5D fake) so the background parallax matches."
+ },
+ "best_for": [
+  "security",
+  "monitoring",
+  "risk and fraud",
+  "incident tools"
+ ],
+ "file": "themes/098-dolly-zoom.html"
+}

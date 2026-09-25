@@ -1,0 +1,22 @@
+{"id":"048","slug":"gps-reroute","name":"GPS Reroute","category":"metaphor",
+ "summary":"Your release is a route on a tilted map; Pulse spots the hazard ahead, shows 'Recalculating…', and you confirm the safe road and still arrive on time.",
+ "look":"A clean light vector city in true perspective (white streets, pale blocks, mint parks) with a thick teal route ribbon and a white-and-teal nav puck. Dark nav banners, a coral hazard pin and white bottom sheets borrow the grammar of every map app.",
+ "components":[
+  {"name":"Tilted vector map","role":"light streets, parks and blocks at ~48° perspective"},
+  {"name":"Route line","role":"thick teal ribbon with a progress head; the release"},
+  {"name":"Nav banner","role":"'Recalculating…' plus the anomaly as the hazard reason"},
+  {"name":"Hazard pin","role":"coral pin with a '−18%' tag just ahead of the puck"},
+  {"name":"ETA chip","role":"'customers: on time'; the reassurance"},
+  {"name":"Bottom sheet","role":"the human confirm; becomes the arrival CTA sheet"}],
+ "motion":[
+  {"name":"Route draw","how":"stroke-dashoffset progress over two bars (4 s at 120 BPM), linear, with a lerp-smoothed camera (0.12) following the head"},
+  {"name":"Bearing drift","how":"slow map rotation of about 6° across the scene, sine.inOut"},
+  {"name":"Reroute snap","how":"old path fades to dashed grey in 0.2 s; new path draws in 0.35 s expo.out on the downbeat after the tap; banner flips with a 0.25 s rotateX"}],
+ "story":"Hook: 38 grey pins rain onto a flat map, 'Arrived: Friday 17:40 · too late'. Reveal: the map tilts back, the dark banner drops with the Acme mark and 'Acme Pulse', and the teal route draws on the drop. Proof: a coral hazard pin drops ahead; the banner reads 'Recalculating… Checkout conversion −18% · since 09:42 · after deploy #2231'; the human taps Roll back and the safe route snaps in with customers still on time. CTA: arrival flag, a white arrival sheet with the lockup, 'You ship. Pulse watches.', Start free.",
+ "adapt":"Make the route whatever your users move through (a checkout, a migration, onboarding, a month-end close) and let the hazard be the issue your product detects.",
+ "references":[
+  {"url":"https://www.mapbox.com/blog/building-cinematic-route-animations-with-mapboxgl","note":"line-gradient route progress with a lerped camera","verified":true},
+  {"url":"https://animatemyroute.com/","note":"route animation look","verified":false}],
+ "fit":{"readability":3,"trust":3,"effort":"med","risk":"Can suggest the AI changes things by itself; always show the human's confirm tap before the route changes."},
+ "best_for":["dev tools","CI/CD","logistics","any SaaS"],
+ "file":"themes/048-gps-reroute.html"}

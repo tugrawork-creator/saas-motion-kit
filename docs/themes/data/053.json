@@ -1,0 +1,79 @@
+{
+ "id": "053",
+ "slug": "editorial-data",
+ "name": "Editorial Data",
+ "category": "signature",
+ "summary": "A Swiss financial report come alive: hairline grid, giant mono numerals, one accent per frame and a circled −18%.",
+ "look": "Warm paper with a visible 12-column hairline grid, 3 px ink rules, giant JetBrains Mono numerals, Instrument Serif headlines and letter-spaced mono labels; coral or teal as the single accent per frame.",
+ "components": [
+  {
+   "name": "Hairline grid",
+   "role": "12 columns of 80 px, 1.5 px lines at 7 % ink — always visible, never decorative"
+  },
+  {
+   "name": "Masthead",
+   "role": "mark + “ACME · PULSE REPORT” + issue number on a 3 px rule; the film reads as a publication"
+  },
+  {
+   "name": "Hero numeral",
+   "role": "JetBrains Mono 230–300 px, tight tracking; the number is the headline"
+  },
+  {
+   "name": "Task strip",
+   "role": "perforated vertical tape of chores scrolling in a loop; the active row takes the accent"
+  },
+  {
+   "name": "Annotated chart",
+   "role": "single ink line, dashed event rule, coral point with a leader line and margin note"
+  },
+  {
+   "name": "Colophon close",
+   "role": "double rule, centred lockup, three mono stats, one coral pill"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Mask rise",
+   "how": "headline blocks rise 100 % through a rule-aligned mask, power4.out 0.5 s, landing on the downbeat"
+  },
+  {
+   "name": "Counter tick",
+   "how": "numerals step once per beat (0.5 s at 120 BPM) with steps(1) — no tweening, like a split-second ledger"
+  },
+  {
+   "name": "Line draw + pin",
+   "how": "chart stroke-dashoffset 100 → 0 over one bar (2 s, linear); the anomaly numeral scales 1.08 → 1 in 0.2 s on the next downbeat"
+  }
+ ],
+ "story": "Hook: a looping strip of dashboard chores beside a counter that ticks to ×38 under the question. Reveal: “Acme / Pulse” sets as a typographic masthead between rules with Speed and Control columns. Proof: an annotated chart shows checkout conversion falling after deploy #2231 at 09:42, the −18% numeral lands in coral and the decision row offers Roll back. CTA: a colophon with the lockup, three stats and a coral Start free pill.",
+ "adapt": "Choose the one number your product changes (time saved, errors caught, cost avoided) and make it the hero numeral; the chart simply shows the before/after around the moment your product intervenes.",
+ "references": [
+  {
+   "url": "https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary",
+   "note": "FT Visual Vocabulary: newsroom chart grammar",
+   "verified": true
+  },
+  {
+   "url": "https://www.printmag.com/featured/swiss-style-principles-typefaces-designers/",
+   "note": "Swiss Style grid and typographic principles",
+   "verified": true
+  },
+  {
+   "url": "https://posterhouse.org/exhibition/the-swiss-grid/",
+   "note": "The Swiss Grid exhibition",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "low",
+  "risk": "Can read as a static report; needs strict rhythm and one accent colour per frame."
+ },
+ "best_for": [
+  "analytics",
+  "fintech",
+  "reporting tools"
+ ],
+ "file": "themes/053-editorial-data.html"
+}

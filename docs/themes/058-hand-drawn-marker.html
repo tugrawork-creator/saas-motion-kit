@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>058 · Hand-Drawn Marker — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t058 ===== */
+
+.t058-f{position:absolute;inset:0;overflow:hidden;color:var(--ink);font-family:var(--sans);background-color:#FBF7EE;
+ background-image:radial-gradient(rgba(14,23,38,.16) calc(var(--u)*1.8),transparent calc(var(--u)*2.2));background-size:calc(var(--u)*30) calc(var(--u)*30);background-position:calc(var(--u)*15) calc(var(--u)*15)}
+.t058-ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.t058-h{position:absolute;font-family:var(--serif);font-weight:400;line-height:1.04;letter-spacing:-.01em}
+.t058-hand{position:absolute;font-family:var(--serif);font-style:italic;white-space:nowrap}
+.t058-li{position:absolute;left:calc(var(--u)*120);font:500 calc(var(--u)*38) var(--sans);color:#3B4659;white-space:nowrap}
+.t058-li b{font:600 calc(var(--u)*26) var(--mono);color:var(--muted);margin-right:calc(var(--u)*18)}
+.t058-card{position:absolute;background:#fff;border-radius:calc(var(--u)*24);box-shadow:0 calc(var(--u)*18) calc(var(--u)*40) rgba(14,23,38,.1),0 0 0 calc(var(--u)*1.5) rgba(14,23,38,.08);overflow:hidden}
+.t058-row{display:grid;grid-template-columns:1fr calc(var(--u)*150) calc(var(--u)*60);align-items:center;height:calc(var(--u)*78);padding:0 calc(var(--u)*30);border-bottom:calc(var(--u)*1.5) solid #EFEDE6;font:600 calc(var(--u)*27) var(--sans)}
+.t058-row span:nth-child(2){font:600 calc(var(--u)*25) var(--mono);text-align:right}
+.t058-sticky{position:absolute;background:#FFE3C8;box-shadow:0 calc(var(--u)*14) calc(var(--u)*26) rgba(14,23,38,.14);padding:calc(var(--u)*26) calc(var(--u)*28);transform:rotate(5deg)}
+.t058-tape{position:absolute;left:50%;top:calc(var(--u)*-18);width:calc(var(--u)*120);height:calc(var(--u)*36);margin-left:calc(var(--u)*-60);background:rgba(207,241,238,.8);transform:rotate(-4deg)}
+.t058-btn{display:inline-block;font:700 calc(var(--u)*28) var(--sans);border-radius:calc(var(--u)*14);padding:calc(var(--u)*14) calc(var(--u)*28);white-space:nowrap}
+.t058-eraser{position:absolute;left:0;right:0;top:calc(var(--u)*470);height:calc(var(--u)*250);background:#FBF7EE;box-shadow:0 0 0 calc(var(--u)*1) rgba(0,0,0,0)}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 058 · Signature directions</div>
+    <h1>Hand-Drawn Marker</h1>
+    <p class="dek">Marker and pencil on warm dotted paper. The rule is strict: scribbles belong to the problem — red rings, crossed-out chores, a looping arrow, a highlighter smear — and an eraser wipes them all away on the drop. From then on the UI stays clean; only neat single-stroke teal ticks and one coral ring around the anomaly survive.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t058-f1"><div class="t058-f">
+<div class="t058-h" style="left:calc(var(--u)*80);top:calc(var(--u)*80);width:calc(var(--u)*920);font-size:calc(var(--u)*76)">How many dashboards did you <i style="color:#E8453A">check</i> today?</div>
+<div class="t058-li" style="top:calc(var(--u)*330)"><b>01</b>Open the dashboard</div><div class="t058-li" style="top:calc(var(--u)*426)"><b>02</b>Refresh · compare</div><div class="t058-li" style="top:calc(var(--u)*522)"><b>03</b>Export to sheet</div><div class="t058-li" style="top:calc(var(--u)*618)"><b>04</b>Ask in chat</div><div class="t058-li" style="top:calc(var(--u)*714)"><b>05</b>Check again</div>
+<svg class="t058-ov" viewBox="0 0 1080 1080"><path d="M84 246 C 130 258, 190 240, 252 252" stroke="#E8453A" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M170 360 Q 350.0 352, 530 363" stroke="#E8453A" stroke-width="6" fill="none" stroke-linecap="round" opacity=".9"/><path d="M170 456 Q 340.0 448, 510 459" stroke="#E8453A" stroke-width="6" fill="none" stroke-linecap="round" opacity=".9"/><path d="M170 552 Q 320.0 544, 470 555" stroke="#E8453A" stroke-width="6" fill="none" stroke-linecap="round" opacity=".9"/><path d="M170 648 Q 280.0 640, 390 651" stroke="#E8453A" stroke-width="6" fill="none" stroke-linecap="round" opacity=".9"/><rect x="112" y="706" width="400" height="50" fill="#F4B740" opacity=".4" transform="rotate(-1 300 730)"/><path d="M600 740 C 800 740, 860 520, 700 360" stroke="#E8453A" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M690 386 L 700 356 L 728 372" stroke="#E8453A" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="820" cy="880" rx="150" ry="70" stroke="#E8453A" stroke-width="5" fill="none" transform="rotate(-6 820 880)"/><text x="700" y="900" font-family="Instrument Serif" font-style="italic" font-size="58" fill="#E8453A">38 tabs!!</text><text x="770" y="560" font-family="Instrument Serif" font-style="italic" font-size="40" fill="#E8453A">again…</text></svg>
+</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The question writes in left→right</b>, then each chore is written and struck through half a beat later; the looping arrow swings from “Check again” back to the top and its head stabs in on the bar-3 downbeat, with “38 tabs!!” circled on the next.</p></div>
+  <div class="cw"><div class="cell" id="t058-f2"><div class="t058-f">
+<div class="t058-eraser"></div>
+<svg class="t058-ov" viewBox="0 0 1080 1080"><line x1="80" y1="330" x2="1000" y2="330" stroke="#9AA3AE" stroke-width="1.5" stroke-dasharray="4 8"/><line x1="80" y1="440" x2="1000" y2="440" stroke="#9AA3AE" stroke-width="1.5" stroke-dasharray="4 8"/><line x1="80" y1="640" x2="1000" y2="640" stroke="#9AA3AE" stroke-width="1.5" stroke-dasharray="4 8"/><circle cx="980" cy="470" r="5" fill="#C9C2B4"/><circle cx="1000" cy="500" r="4" fill="#C9C2B4"/><circle cx="960" cy="720" r="6" fill="#C9C2B4"/><circle cx="1010" cy="700" r="3" fill="#C9C2B4"/><circle cx="940" cy="486" r="3" fill="#C9C2B4"/><rect x="1000" y="462" width="60" height="266" rx="12" fill="#F2A7A0" transform="rotate(8 1030 595)"/><rect x="1000" y="462" width="60" height="70" rx="10" fill="#0FA3A3" transform="rotate(8 1030 595)"/></svg>
+<div class="t058-h" style="left:0;right:0;top:calc(var(--u)*230);text-align:center;font-size:calc(var(--u)*104)">You ship. <i style="color:#0B8C8C">Pulse</i> watches.</div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*535);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*26);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*118);height:calc(var(--u)*118)"><span style="font:800 calc(var(--u)*92) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+<div class="t058-hand" style="left:0;right:0;top:calc(var(--u)*790);text-align:center;font-size:calc(var(--u)*40);color:var(--muted)">the scribbles are gone. the checking isn’t your job anymore.</div>
+</div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop an eraser sweeps left→right in one beat</b>, leaving a clean dot-free band and crumbs; line 1 appears in the cleared strip exactly on 0:08, pencil guides draw, and the lockup is inked over them before the guides fade.</p></div>
+  <div class="cw"><div class="cell" id="t058-f3"><div class="t058-f">
+<div class="t058-h" style="left:calc(var(--u)*80);top:calc(var(--u)*70);width:calc(var(--u)*920);font-size:calc(var(--u)*72)">Caught <i style="color:#0B8C8C">before</i> customers noticed.</div>
+<svg class="t058-ov" viewBox="0 0 1080 1080"><rect x="54" y="244" width="640" height="560" rx="24" fill="none" stroke="#9AA3AE" stroke-width="2.5" stroke-dasharray="3 7"/><line x1="54" y1="330" x2="120" y2="330" stroke="#9AA3AE" stroke-width="2.5"/></svg>
+<div class="t058-card" style="left:calc(var(--u)*80);top:calc(var(--u)*270);width:calc(var(--u)*640)"><div style="height:calc(var(--u)*86);display:flex;align-items:center;gap:calc(var(--u)*14);padding:0 calc(var(--u)*30);border-bottom:calc(var(--u)*1.5) solid #EFEDE6;font:800 calc(var(--u)*26) var(--sans);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*42);height:calc(var(--u)*42)">Acme Pulse <span style="font:400 calc(var(--u)*20) var(--mono);color:var(--muted)">· 14 metrics</span></div>
+<div class="t058-row"><span>Signups</span><span>+4%</span><span></span></div>
+<div class="t058-row"><span>Active users</span><span>+1%</span><span></span></div>
+<div class="t058-row"><span>Checkout conversion</span><span style="color:var(--alert)">−18%</span><span></span></div>
+<div class="t058-row"><span>p95 latency</span><span>212 ms</span><span></span></div>
+<div class="t058-row" style="border:0"><span>Error rate</span><span>0.4 %</span><span></span></div>
+<div style="padding:calc(var(--u)*20) calc(var(--u)*30) calc(var(--u)*26);display:flex;gap:calc(var(--u)*12)"><span class="t058-btn" style="background:var(--alert);color:#fff">Roll back</span><span class="t058-btn" style="border:calc(var(--u)*2) solid #E1DED5">Acknowledge</span></div></div>
+<svg class="t058-ov" viewBox="0 0 1080 1080"><path d="M662 397 l 12 14 l 26 -30" stroke="#0B8C8C" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M662 475 l 12 14 l 26 -30" stroke="#0B8C8C" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M662 631 l 12 14 l 26 -30" stroke="#0B8C8C" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M662 709 l 12 14 l 26 -30" stroke="#0B8C8C" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="592" cy="551" rx="90" ry="42" stroke="#E8453A" stroke-width="6" fill="none" transform="rotate(-4 592 551)"/><ellipse cx="596" cy="553" rx="98" ry="48" stroke="#E8453A" stroke-width="3" fill="none" opacity=".6" transform="rotate(3 596 553)"/><path d="M690 548 C 780 530, 800 470, 800 420" stroke="#E8453A" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M786 440 L 800 414 L 818 440" stroke="#E8453A" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="744" y="352" font-family="Instrument Serif" font-style="italic" font-size="40" fill="#E8453A">since 09:42,</text><text x="744" y="396" font-family="Instrument Serif" font-style="italic" font-size="40" fill="#E8453A">deploy #2231!</text></svg>
+<div class="t058-sticky" style="left:calc(var(--u)*760);top:calc(var(--u)*640);width:calc(var(--u)*250)"><div class="t058-tape"></div><div style="font:italic 400 calc(var(--u)*44)/1.05 var(--serif)">Roll back? your call.</div><div style="font:400 calc(var(--u)*20) var(--mono);color:#7A5A3A;margin-top:calc(var(--u)*10)">— Pulse</div></div>
+<div class="t058-hand" style="left:calc(var(--u)*80);top:calc(var(--u)*900);font-size:calc(var(--u)*38);color:var(--muted)">pencil → real: the seam walks left to right</div>
+</div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>A pencil wireframe draws first</b>, then a sketch→real seam walks left→right turning it into crisp UI; teal ticks land one per beat, the coral ring closes around −18% on the bar-9 downbeat and the sticky note slaps onto the corner on the next.</p></div>
+  <div class="cw"><div class="cell" id="t058-f4"><div class="t058-f">
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*240);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*26);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*124);height:calc(var(--u)*124)"><span style="font:800 calc(var(--u)*96) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+<div class="t058-h" style="left:0;right:0;top:calc(var(--u)*450);text-align:center;font-size:calc(var(--u)*92)">You ship. <i style="color:#0B8C8C">Pulse watches.</i></div>
+<svg class="t058-ov" viewBox="0 0 1080 1080"><path d="M560 572 C 680 586, 800 566, 930 578" stroke="#0B8C8C" stroke-width="8" fill="none" stroke-linecap="round"/></svg>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*700);display:flex;justify-content:center"><span style="font:700 calc(var(--u)*36) var(--sans);color:#fff;background:var(--alert);border-radius:calc(var(--u)*100);padding:calc(var(--u)*24) calc(var(--u)*60);box-shadow:0 calc(var(--u)*16) calc(var(--u)*36) rgba(255,90,78,.3)">Start free</span></div>
+</div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Clean lockup, then one last hand gesture</b>: the teal underline draws under “Pulse watches.” in a single stroke on a downbeat, and the coral “Start free” drops on the sting.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Dotted paper</b> — warm off-white with a 30 px dot grid; the eraser leaves a dot-free band</li><li><b>Red marker ring</b> — double overshooting ellipse around the one number that matters</li><li><b>Strike-through + loop arrow</b> — marker lines over chores and an arrow that loops back to the start</li><li><b>Highlighter smear</b> — amber at 40 %, ragged ends, under the active item</li><li><b>Sketch → real seam</b> — pencil dashed wireframe that becomes crisp UI as a vertical seam passes</li><li><b>Sticky note + tape</b> — peach note, 5° tilt, teal tape; carries the agent’s one-line suggestion</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Stroke draw</b> — SVG stroke-dashoffset 100 → 0 over 0.3–0.5 s, power1.inOut, with a 1–2 px jitter pass for hand feel</li><li><b>Eraser wipe</b> — mask rect scaleX 0 → 1 in exactly one beat (0.5 s at 120 BPM), linear, landing on the drop</li><li><b>Sticky slap</b> — rotate 12° → 5°, scale 1.1 → 1, back.out(2) 0.25 s on a downbeat, plus a 2-frame shadow squash</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Hand marks feel human and honest, and the rule “mess = problem, clean = product” makes the before/after legible without words. Risk: too much scribble reads as childish or chaotic — cap the marks per frame and keep all numbers in clean type.</p><p><b>Adapt to your product:</b> Scribble over your users’ current manual process in the hook, erase it on the drop, and let your real UI appear through a sketch→real seam; keep exactly one marker ring for the moment your product catches something.</p><p><b>References:</b> <a href="https://roughjs.com/">https://roughjs.com/</a> (Rough.js: sketchy hand-drawn SVG primitives) · <a href="https://en.wikipedia.org/wiki/Excalidraw">https://en.wikipedia.org/wiki/Excalidraw</a> (Excalidraw’s hand-drawn diagram look (built on Rough.js))</p></div>
+</div>
+</body>
+</html>

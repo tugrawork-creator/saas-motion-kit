@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>045 · The Lighthouse — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t045-bg{background:linear-gradient(180deg,#081A24 0%,#06131B 55%,#0A2230 100%)}
+.t045-s{position:absolute;inset:0;width:100%;height:100%}
+.t045-m{font-family:var(--mono)}
+.t045-se{font-family:var(--serif)}
+.t045-sa{font-family:var(--sans)}
+.t045-mark{position:absolute;display:block;border-radius:22%;box-shadow:0 0 calc(var(--u)*60) calc(var(--u)*14) rgba(127,231,222,.55)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 045 · Metaphor concepts</div>
+    <h1>The Lighthouse</h1>
+    <p class="dek">A minimal night sea whose waves are rows of your live numbers. A lighthouse, lit by the Acme mark, sweeps a soft beam across them; wherever it passes, hidden rocks show. The release boat turns back in time, and the keeper in the harbour, a human, makes the call.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort high</span></div>
+</div>
+
+<div class="grid">
+  <!-- F1 · HOOK -->
+  <div class="cw"><div class="cell t045-bg" id="t045-f1">
+    <svg class="t045-s" viewBox="0 0 1080 1080">
+      <defs>
+        <path id="t045-w1" d="M-40 560 q 70 -22 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-w2" d="M-80 640 q 70 -22 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-w3" d="M-20 720 q 70 -22 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-w4" d="M-60 800 q 70 -22 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-w5" d="M-40 880 q 70 -22 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-w6" d="M-80 960 q 70 -22 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+      </defs>
+      <g class="t045-m" font-size="22" fill="#2E5A68">
+        <text opacity=".55"><textPath href="#t045-w1">1204 18930 212 0.4 2418 1198 18877 214 0.4 2402 1211 18950 209 0.3 2431 1207</textPath></text>
+        <text opacity=".7"><textPath href="#t045-w2">2.94 2418 18930 1204 211 0.4 2.93 2425 18911 1199 213 0.4 2.95 2409 18940 1206 212</textPath></text>
+        <text opacity=".8"><textPath href="#t045-w3">0.4 212 1204 2.94 18930 2418 0.4 210 1210 2.96 18902 2433 0.3 212 1201 2.94 18925</textPath></text>
+        <text opacity=".9"><textPath href="#t045-w4">18930 2418 2.94 0.4 212 1204 18944 2410 2.93 0.4 215 1199 18921 2429 2.95 0.4 211</textPath></text>
+        <text><textPath href="#t045-w5">1204 212 0.4 18930 2.94 2418 1208 213 0.4 18917 2.94 2421 1203 212 0.3 18936 2.95</textPath></text>
+        <text><textPath href="#t045-w6">2418 1204 2.94 212 18930 0.4 2415 1206 2.93 214 18928 0.4 2420 1202 2.94 211 18933</textPath></text>
+      </g>
+      <!-- dark lighthouse -->
+      <path d="M900 520 L930 280 L970 280 L1000 520 z" fill="#0F2733"/>
+      <rect x="918" y="244" width="64" height="40" fill="#0F2733"/><path d="M910 244 L950 214 L990 244 z" fill="#0F2733"/>
+      <!-- wrecked release -->
+      <path d="M560 700 l40 -34 l30 14 l36 -24 l28 44 z" fill="#3A1E22" stroke="#FF5A4E" stroke-width="3" opacity=".8"/>
+      <path d="M470 690 L560 690 L540 712 L488 712 z" fill="#C9D6E2" transform="rotate(14 515 700)"/>
+      <line x1="515" y1="690" x2="520" y2="640" stroke="#C9D6E2" stroke-width="3" transform="rotate(14 515 700)"/>
+      <text class="t045-m" x="470" y="620" font-size="20" fill="#FF8A80">found Fri 17:40</text>
+      <g class="t045-se" font-size="84" fill="#F2F6F8" letter-spacing="-1">
+        <text x="70" y="200">And the drop still</text>
+        <text x="70" y="290">shipped on <tspan font-style="italic" fill="#FF8A80">Friday</tspan>.</text>
+      </g>
+      <text class="t045-m" x="70" y="380" font-size="22" fill="#5E8594" letter-spacing="3">NO LIGHT ON THE WATER</text>
+    </svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The camera drifts slowly right over rows of numbers rolling on offset sines; the lighthouse stands dark.</b> On the last downbeat a small release boat grinds onto a coral-edged rock and "found Fri 17:40" fades up.</p></div>
+
+  <!-- F2 · REVEAL -->
+  <div class="cw"><div class="cell t045-bg" id="t045-f2">
+    <svg class="t045-s" viewBox="0 0 1080 1080">
+      <defs>
+        <linearGradient id="t045-beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#CFF1EE" stop-opacity=".85"/><stop offset=".55" stop-color="#7FE7DE" stop-opacity=".28"/><stop offset="1" stop-color="#7FE7DE" stop-opacity="0"/></linearGradient>
+      </defs>
+      <g class="t045-m" font-size="22" fill="#2E5A68">
+        <text opacity=".6"><textPath href="#t045-w3">0.4 212 1204 2.94 18930 2418 0.4 210 1210 2.96 18902 2433 0.3 212 1201 2.94 18925</textPath></text>
+        <text opacity=".8"><textPath href="#t045-w4">18930 2418 2.94 0.4 212 1204 18944 2410 2.93 0.4 215 1199 18921 2429 2.95 0.4 211</textPath></text>
+        <text><textPath href="#t045-w5">1204 212 0.4 18930 2.94 2418 1208 213 0.4 18917 2.94 2421 1203 212 0.3 18936 2.95</textPath></text>
+        <text><textPath href="#t045-w6">2418 1204 2.94 212 18930 0.4 2415 1206 2.93 214 18928 0.4 2420 1202 2.94 211 18933</textPath></text>
+      </g>
+      <polygon points="250,260 1080,110 1080,560 250,300" fill="url(#t045-beam)"/>
+      <!-- lighthouse -->
+      <path d="M170 780 L200 330 L300 330 L330 780 z" fill="#E9EEF1"/>
+      <path d="M186 560 L314 560 L318 620 L182 620 z" fill="#0FA3A3"/><path d="M194 420 L306 420 L309 470 L191 470 z" fill="#0FA3A3"/>
+      <rect x="180" y="316" width="140" height="18" fill="#C9D6E2"/>
+      <path d="M190 206 L250 166 L310 206 z" fill="#E9EEF1"/>
+      <path d="M120 780 L380 780 L400 820 L100 820 z" fill="#132F3C"/>
+      <text class="t045-sa" x="400" y="440" font-size="112" font-weight="800" fill="#F2F6F8" letter-spacing="-3">Acme Pulse</text>
+      <text class="t045-m" x="406" y="500" font-size="22" fill="#7FE7DE" letter-spacing="3">THE LIGHT IS ON</text>
+    </svg>
+    <img class="t045-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*196);top:calc(var(--u)*208);width:calc(var(--u)*108);height:calc(var(--u)*108)">
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the lamp room ignites (the Acme mark with a soft bloom) and the beam swings out left to right.</b> "Acme Pulse" is revealed inside the beam's mask as it passes, then stays.</p></div>
+
+  <!-- F3 · PROOF MOMENT -->
+  <div class="cw"><div class="cell t045-bg" id="t045-f3">
+    <svg class="t045-s" viewBox="0 0 1080 1080">
+      <defs>
+        <linearGradient id="t045-beam2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#CFF1EE" stop-opacity=".7"/><stop offset=".7" stop-color="#7FE7DE" stop-opacity=".22"/><stop offset="1" stop-color="#7FE7DE" stop-opacity=".06"/></linearGradient>
+        <clipPath id="t045-clip"><polygon points="160,180 1080,330 1080,720 160,210"/></clipPath>
+        <path id="t045-v1" d="M-40 400 q 70 -20 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-v2" d="M-80 470 q 70 -20 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-v3" d="M-20 540 q 70 -20 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-v4" d="M-60 610 q 70 -20 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-v5" d="M-40 680 q 70 -20 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <path id="t045-v6" d="M-80 750 q 70 -20 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0"/>
+        <g id="t045-sea" class="t045-m" font-size="21">
+          <text><textPath href="#t045-v1">1204 18930 212 0.4 2418 1198 18877 214 0.4 2402 1211 18950 209 0.3 2431 1207</textPath></text>
+          <text><textPath href="#t045-v2">2.94 2418 18930 1204 211 0.4 2.93 2425 18911 1199 213 0.4 2.95 2409 18940 1206 212</textPath></text>
+          <text><textPath href="#t045-v3">0.4 212 1204 2.94 18930 2418 0.4 210 1210 2.96 18902 2433 0.3 212 1201 2.94 18925</textPath></text>
+          <text><textPath href="#t045-v4">18930 2418 2.94 0.4 212 1204 18944 2410 2.93 0.4 215 1199 18921 2429 2.95 0.4 211</textPath></text>
+          <text><textPath href="#t045-v5">1204 212 0.4 18930 2.94 2418 1208 213 0.4 18917 2.94 2421 1203 212 0.3 18936 2.95</textPath></text>
+          <text><textPath href="#t045-v6">2418 1204 2.94 212 18930 0.4 2415 1206 2.93 214 18928 0.4 2420 1202 2.94 211 18933</textPath></text>
+        </g>
+      </defs>
+      <use href="#t045-sea" fill="#244B58"/>
+      <polygon points="160,180 1080,330 1080,720 160,210" fill="url(#t045-beam2)"/>
+      <g clip-path="url(#t045-clip)"><use href="#t045-sea" fill="#DDF7F4"/></g>
+      <!-- scanned rocks (fine) -->
+      <path d="M330 500 l22 -20 l18 8 l20 -12 l16 24 z" fill="none" stroke="#0FA3A3" stroke-width="2.5" opacity=".7"/>
+      <!-- the rock -->
+      <path d="M640 600 l46 -60 l34 18 l40 -40 l48 82 z" fill="#1A1216" stroke="#FF5A4E" stroke-width="4"/>
+      <circle cx="720" cy="560" r="96" fill="none" stroke="#FF5A4E" stroke-width="2" stroke-dasharray="6 8"/>
+      <!-- label -->
+      <rect x="600" y="100" width="420" height="200" rx="14" fill="#0B1E28" stroke="#FF5A4E" stroke-width="3"/>
+      <g class="t045-m"><text x="626" y="146" font-size="20" fill="#FF8A80" letter-spacing="3">ROCK AHEAD</text>
+        <text x="626" y="192" font-size="28" font-weight="600" fill="#F2F6F8">Checkout conv. <tspan fill="#FF5A4E">−18%</tspan></text>
+        <text x="626" y="236" font-size="22" fill="#C9D6E2">since 09:42</text><text x="626" y="270" font-size="22" fill="#C9D6E2">after deploy #2231</text></g>
+      <line x1="740" y1="300" x2="728" y2="468" stroke="#FF5A4E" stroke-width="2"/>
+      <!-- boat turning back -->
+      <path d="M430 560 L520 560 L500 584 L448 584 z" fill="#E9EEF1"/>
+      <line x1="475" y1="560" x2="475" y2="506" stroke="#E9EEF1" stroke-width="3"/><path d="M477 510 L510 548 L477 548 z" fill="#E9EEF1"/>
+      <rect x="420" y="596" width="170" height="32" rx="6" fill="#0B1E28" opacity=".9"/><text class="t045-m" x="430" y="619" font-size="20" fill="#F2F6F8">release #2231</text>
+      <path d="M526 566 C 590 566, 610 590, 620 596" fill="none" stroke="#FF5A4E" stroke-width="3" stroke-dasharray="6 7"/>
+      <path d="M430 580 C 360 600, 330 660, 380 700" fill="none" stroke="#7FE7DE" stroke-width="4" stroke-dasharray="10 8"/>
+      <path d="M366 688 L382 704 L396 682" fill="none" stroke="#7FE7DE" stroke-width="4" stroke-linecap="round"/>
+      <!-- lighthouse -->
+      <path d="M90 640 L110 230 L170 230 L190 640 z" fill="#E9EEF1"/>
+      <path d="M100 450 L180 450 L183 490 L97 490 z" fill="#0FA3A3"/>
+      <path d="M96 640 L200 640 L214 670 L82 670 z" fill="#132F3C"/>
+      <!-- keeper card -->
+      <rect x="60" y="820" width="960" height="200" rx="20" fill="#0B1E28" stroke="#23465A" stroke-width="2"/>
+      <rect x="96" y="862" width="48" height="60" rx="4" fill="#F4B740"/><line x1="120" y1="862" x2="120" y2="922" stroke="#0B1E28" stroke-width="4"/><line x1="96" y1="892" x2="144" y2="892" stroke="#0B1E28" stroke-width="4"/>
+      <text class="t045-se" x="170" y="900" font-size="46" fill="#F2F6F8">Keeper's <tspan font-style="italic" fill="#7FE7DE">call</tspan></text>
+      <text class="t045-m" x="170" y="950" font-size="20" fill="#7B98A5">harbour · you</text>
+      <rect x="480" y="862" width="260" height="100" rx="16" fill="#FF5A4E"/>
+      <text class="t045-sa" x="610" y="924" font-size="34" font-weight="700" fill="#fff" text-anchor="middle">Roll back</text>
+      <rect x="760" y="862" width="230" height="100" rx="16" fill="none" stroke="#C9D6E2" stroke-width="3"/>
+      <text class="t045-sa" x="875" y="924" font-size="30" font-weight="600" fill="#F2F6F8" text-anchor="middle">Acknowledge</text>
+    </svg>
+    <img class="t045-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*105);top:calc(var(--u)*158);width:calc(var(--u)*70);height:calc(var(--u)*70)">
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The beam sweeps ±40° (4 s, sine.inOut); numbers brighten only inside its mask and rocks stay as outlines once lit.</b> On bar 3 the coral rock surfaces ahead of release #2231, the label drops in, and on the downbeat the keeper taps "Roll back" and the boat's teal path curls away.</p></div>
+
+  <!-- F4 · CTA -->
+  <div class="cw"><div class="cell t045-bg" id="t045-f4">
+    <svg class="t045-s" viewBox="0 0 1080 1080">
+      <defs><linearGradient id="t045-beam3" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#CFF1EE" stop-opacity=".55"/><stop offset="1" stop-color="#7FE7DE" stop-opacity="0"/></linearGradient></defs>
+      <polygon points="880,300 0,120 0,520 880,330" fill="url(#t045-beam3)"/>
+      <g class="t045-m" font-size="22" fill="#2E5A68">
+        <text opacity=".7"><textPath href="#t045-w4">18930 2418 2.94 0.4 212 1204 18944 2410 2.93 0.4 215 1199 18921 2429 2.95 0.4 211</textPath></text>
+        <text><textPath href="#t045-w5">1204 212 0.4 18930 2.94 2418 1208 213 0.4 18917 2.94 2421 1203 212 0.3 18936 2.95</textPath></text>
+        <text><textPath href="#t045-w6">2418 1204 2.94 212 18930 0.4 2415 1206 2.93 214 18928 0.4 2420 1202 2.94 211 18933</textPath></text>
+      </g>
+      <path d="M830 740 L850 330 L910 330 L930 740 z" fill="#E9EEF1"/><rect x="846" y="290" width="68" height="44" rx="8" fill="#0FA3A3"/><circle cx="880" cy="312" r="14" fill="#CFF1EE"/><path d="M842 290 L880 262 L918 290 z" fill="#E9EEF1"/>
+      <path d="M840 540 L920 540 L923 580 L837 580 z" fill="#0FA3A3"/>
+      <path d="M836 740 L940 740 L954 770 L822 770 z" fill="#132F3C"/>
+      <text class="t045-sa" x="230" y="200" font-size="78" font-weight="800" fill="#F2F6F8" letter-spacing="-2">Acme Pulse</text>
+      <g class="t045-se" font-size="96" fill="#F2F6F8" letter-spacing="-1">
+        <text x="80" y="420">Caught <tspan font-style="italic" fill="#7FE7DE">before</tspan></text>
+        <text x="80" y="515">customers noticed.</text>
+      </g>
+      <rect x="80" y="590" width="330" height="106" rx="18" fill="#FF5A4E"/>
+      <text class="t045-sa" x="245" y="657" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Start free</text>
+      <g fill="#F4B740"><circle cx="120" cy="1010" r="6"/><circle cx="170" cy="1010" r="6"/><circle cx="220" cy="1010" r="6"/><circle cx="270" cy="1010" r="6"/></g>
+      <text class="t045-m" x="300" y="1017" font-size="20" fill="#C9D6E2" letter-spacing="2">HARBOUR · ALL 14 METRICS CALM</text>
+    </svg>
+    <img class="t045-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*80);top:calc(var(--u)*120);width:calc(var(--u)*120);height:calc(var(--u)*120)">
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The beam settles into a slow right-to-left pass behind the type; the sea calms to a gentle drift.</b> The tagline lands on the downbeat; harbour lights blink on one per beat and the coral button fades up on the final bar.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Lighthouse</b> — white tower with teal bands; the Acme mark is the lamp.</li>
+    <li><b>Volumetric beam</b> — gradient polygon (plus blur and screen blend in build) that doubles as a reveal mask.</li>
+    <li><b>Number waves</b> — rows of live metrics on phase-shifted sine paths (SVG textPath).</li>
+    <li><b>Rocks</b> — hidden anomalies; coral outline and label once lit, teal once cleared.</li>
+    <li><b>Release boat</b> — the deploy heading for trouble; a teal dashed path shows it turning back.</li>
+    <li><b>Keeper's card &amp; harbour lights</b> — the human decision and the calm ending.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Beam sweep</b> — rotation yoyo ±40° over 4 s (two bars at 120 BPM), sine.inOut; the far edge crosses centre on each bar line.</li>
+    <li><b>Mask reveal</b> — numbers and rocks exist only inside the beam's clip; rocks keep a 40% outline after it passes.</li>
+    <li><b>Wave drift</b> — per-row startOffset drift, 8 s loop, rows offset by a quarter phase; the only motion in the quiet hook.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>A lighthouse is the oldest symbol of quiet, always-on watching, and the beam-as-mask makes "we see what you can't" literal. Risk: lonely night imagery can suggest a machine running unattended; always show the keeper in the harbour.</p>
+    <p><b>Adapt to your product:</b> Fill the sea with your own numbers (orders, jobs, balances) and name the rock after the risk your product catches; the boat is whatever you ship.</p>
+    <p><b>References:</b> <a href="https://tympanus.net/codrops/2022/06/27/volumetric-light-rays-with-three-js/">Codrops, volumetric light rays</a> · <a href="https://freefrontend.com/code/svg-flashlight-reveal-effect-2026-05-07/">SVG flashlight reveal</a></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>050 · The Tailor's Fitting — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t050-bg{background:#E9E2D3;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.05) 0 calc(var(--u)*1),transparent calc(var(--u)*1) calc(var(--u)*4)),repeating-linear-gradient(90deg,rgba(120,100,70,.05) 0 calc(var(--u)*1),transparent calc(var(--u)*1) calc(var(--u)*4))}
+.t050-s{position:absolute;inset:0;width:100%;height:100%}
+.t050-m{font-family:var(--mono)}
+.t050-se{font-family:var(--serif)}
+.t050-sa{font-family:var(--sans)}
+.t050-mark{position:absolute;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 050 · Metaphor concepts</div>
+    <h1>The Tailor's Fitting</h1>
+    <p class="dek">"Measure twice, cut once" becomes the whole world. On a linen cutting table the release is a length of teal wool; a tape measure runs along every metric, tailor's chalk marks the one that doesn't fit, pins hold the fix, and only after the human's fitting do the shears make one clean cut: the ship.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- F1 · HOOK -->
+  <div class="cw"><div class="cell t050-bg" id="t050-f1">
+    <svg class="t050-s" viewBox="0 0 1080 1080">
+      <defs>
+        <pattern id="t050-twill" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="14" height="14" fill="#1F4448"/><rect width="5" height="14" fill="#23494E"/></pattern>
+      </defs>
+      <g class="t050-se" font-size="84" fill="#0E1726" letter-spacing="-1">
+        <text x="80" y="170">And the drop still</text>
+        <text x="80" y="260">shipped on <tspan font-style="italic" fill="#C8322A">Friday</tspan>.</text>
+      </g>
+      <!-- miscut fabric -->
+      <path d="M80 380 L620 380 L600 460 L650 540 L590 620 L640 700 L600 800 L80 800 z" fill="url(#t050-twill)" filter="drop-shadow(0 10px 14px rgba(60,40,20,.25))"/>
+      <path d="M690 400 L980 400 L980 820 L700 820 L660 720 L700 640 L650 560 L700 470 z" fill="url(#t050-twill)" opacity=".85" transform="rotate(4 820 600)"/>
+      <!-- tangled tape -->
+      <path d="M120 900 C 260 840, 300 980, 440 920 S 620 860, 700 950" fill="none" stroke="#F4B740" stroke-width="30" stroke-linecap="round"/>
+      <path d="M120 900 C 260 840, 300 980, 440 920 S 620 860, 700 950" fill="none" stroke="#0E1726" stroke-width="30" stroke-dasharray="2 18" opacity=".55"/>
+      <!-- swing tag -->
+      <line x1="560" y1="440" x2="760" y2="600" stroke="#8A7F6A" stroke-width="2"/>
+      <g transform="rotate(8 850 690)">
+        <path d="M740 600 L960 600 L960 800 L740 800 L720 700 z" fill="#FBF6EA" stroke="#CFC4AC" stroke-width="2"/>
+        <circle cx="746" cy="700" r="8" fill="#E9E2D3" stroke="#CFC4AC" stroke-width="2"/>
+        <g class="t050-m" font-size="21" fill="#0E1726"><text x="772" y="642">FRIDAY RELEASE</text><text x="772" y="690" fill="#5A6475">cut: 16:00</text><text x="772" y="726" fill="#C8322A">measured:</text><text x="772" y="756" fill="#C8322A">17:40</text></g>
+      </g>
+      <text class="t050-m" x="80" y="1010" font-size="20" fill="#8A7F6A" letter-spacing="3">CUT FIRST · MEASURED LATER</text>
+    </svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Top-down on the cutting table: a length of wool lies already cut, jagged, and the tape measure is still tangled below it.</b> The swing tag swings in from the right; "measured: 17:40" chalks in on the downbeat before the drop.</p></div>
+
+  <!-- F2 · REVEAL -->
+  <div class="cw"><div class="cell t050-bg" id="t050-f2">
+    <svg class="t050-s" viewBox="0 0 1080 1080">
+      <rect x="150" y="300" width="780" height="300" rx="10" fill="#FBF6EA" filter="drop-shadow(0 8px 12px rgba(60,40,20,.2))"/>
+      <rect x="168" y="318" width="744" height="264" rx="6" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-dasharray="12 8"/>
+      <text class="t050-sa" x="540" y="484" font-size="118" font-weight="800" fill="#0B6E6E" text-anchor="middle" letter-spacing="-3">Acme Pulse</text>
+      <text class="t050-m" x="540" y="548" font-size="22" fill="#8A7F6A" text-anchor="middle" letter-spacing="4">MEASURED EVERY MINUTE</text>
+      <!-- tape -->
+      <rect x="170" y="740" width="850" height="84" fill="#F4B740"/>
+      <g stroke="#0E1726" stroke-width="3">
+        <line x1="200" y1="740" x2="200" y2="780"/><line x1="240" y1="740" x2="240" y2="760"/><line x1="280" y1="740" x2="280" y2="760"/><line x1="320" y1="740" x2="320" y2="780"/><line x1="360" y1="740" x2="360" y2="760"/><line x1="400" y1="740" x2="400" y2="760"/><line x1="440" y1="740" x2="440" y2="780"/><line x1="480" y1="740" x2="480" y2="760"/><line x1="520" y1="740" x2="520" y2="760"/><line x1="560" y1="740" x2="560" y2="780"/><line x1="600" y1="740" x2="600" y2="760"/><line x1="640" y1="740" x2="640" y2="760"/><line x1="680" y1="740" x2="680" y2="780"/><line x1="720" y1="740" x2="720" y2="760"/><line x1="760" y1="740" x2="760" y2="760"/><line x1="800" y1="740" x2="800" y2="780"/><line x1="840" y1="740" x2="840" y2="760"/><line x1="880" y1="740" x2="880" y2="760"/><line x1="920" y1="740" x2="920" y2="780"/><line x1="960" y1="740" x2="960" y2="760"/><line x1="1000" y1="740" x2="1000" y2="760"/>
+      </g>
+      <g class="t050-m" font-size="22" fill="#0E1726" text-anchor="middle"><text x="320" y="810">1</text><text x="440" y="810">2</text><text x="560" y="810">3</text><text x="680" y="810">4</text><text x="800" y="810">5</text><text x="920" y="810">6</text></g>
+      <rect x="60" y="722" width="120" height="120" rx="14" fill="#C9CED2" stroke="#9AA3AE" stroke-width="3"/>
+      <text class="t050-m" x="540" y="940" font-size="22" fill="#8A7F6A" text-anchor="middle" letter-spacing="3">14 METRICS · 1 TAPE · 0 GUESSING</text>
+    </svg>
+    <img class="t050-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*74);top:calc(var(--u)*736);width:calc(var(--u)*92);height:calc(var(--u)*92)">
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the tape measure unrolls left to right from its metal end (the Acme mark) with a slight curl (scaleX, power3.out 0.6 s).</b> The woven label drops onto the table and its stitch line draws around "Acme Pulse" in one bar.</p></div>
+
+  <!-- F3 · PROOF MOMENT -->
+  <div class="cw"><div class="cell t050-bg" id="t050-f3">
+    <svg class="t050-s" viewBox="0 0 1080 1080">
+      <g class="t050-m" font-size="20" fill="#8A7F6A" letter-spacing="2"><text x="60" y="84">FITTING · RELEASE #2231</text><text x="1020" y="84" text-anchor="end">14 METRICS · EVERY MINUTE</text></g>
+      <rect x="60" y="120" width="960" height="440" fill="url(#t050-twill)" filter="drop-shadow(0 8px 12px rgba(60,40,20,.25))"/>
+      <path d="M120 140 L760 140 L820 540 L100 540 z" fill="#FFFFFF" opacity=".08"/>
+      <!-- tape along -->
+      <rect x="60" y="310" width="960" height="70" fill="#F4B740"/>
+      <g stroke="#0E1726" stroke-width="3">
+        <line x1="100" y1="310" x2="100" y2="340"/><line x1="140" y1="310" x2="140" y2="326"/><line x1="180" y1="310" x2="180" y2="326"/><line x1="220" y1="310" x2="220" y2="340"/><line x1="260" y1="310" x2="260" y2="326"/><line x1="300" y1="310" x2="300" y2="326"/><line x1="340" y1="310" x2="340" y2="340"/><line x1="380" y1="310" x2="380" y2="326"/><line x1="420" y1="310" x2="420" y2="326"/><line x1="460" y1="310" x2="460" y2="340"/><line x1="500" y1="310" x2="500" y2="326"/><line x1="540" y1="310" x2="540" y2="326"/><line x1="580" y1="310" x2="580" y2="340"/><line x1="620" y1="310" x2="620" y2="326"/><line x1="660" y1="310" x2="660" y2="326"/><line x1="700" y1="310" x2="700" y2="340"/><line x1="740" y1="310" x2="740" y2="326"/><line x1="780" y1="310" x2="780" y2="326"/><line x1="820" y1="310" x2="820" y2="340"/><line x1="860" y1="310" x2="860" y2="326"/><line x1="900" y1="310" x2="900" y2="326"/><line x1="940" y1="310" x2="940" y2="340"/><line x1="980" y1="310" x2="980" y2="326"/>
+      </g>
+      <g class="t050-m" font-size="20" fill="#0E1726" text-anchor="middle"><text x="160" y="368">signups</text><text x="330" y="368">active</text><text x="500" y="368">p95</text><text x="670" y="368">errors</text><text x="850" y="368" fill="#C8322A" font-weight="600">checkout</text></g>
+      <g class="t050-m" font-size="22" fill="#CFF1EE" text-anchor="middle"><text x="160" y="230">1,204 ✓</text><text x="330" y="230">18,930 ✓</text><text x="500" y="230">212 ms ✓</text><text x="670" y="230">0.4 % ✓</text></g>
+      <!-- chalk -->
+      <line x1="850" y1="150" x2="850" y2="300" stroke="#FF5A4E" stroke-width="6" stroke-dasharray="3 10" stroke-linecap="round"/>
+      <line x1="850" y1="392" x2="850" y2="540" stroke="#FF5A4E" stroke-width="6" stroke-dasharray="3 10" stroke-linecap="round"/>
+      <g stroke="#FF5A4E" stroke-width="7" stroke-linecap="round"><line x1="820" y1="196" x2="880" y2="256"/><line x1="880" y1="196" x2="820" y2="256"/></g>
+      <text class="t050-m" x="896" y="236" font-size="24" font-weight="600" fill="#FF8A80">2.41</text>
+      <path d="M930 470 L990 440 L975 505 z" fill="#FF5A4E"/>
+      <!-- pins -->
+      <g stroke="#C9CED2" stroke-width="3"><line x1="790" y1="470" x2="830" y2="420"/><line x1="870" y1="470" x2="910" y2="420"/></g>
+      <circle cx="790" cy="470" r="11" fill="#FF5A4E"/><circle cx="870" cy="470" r="11" fill="#FF5A4E"/>
+      <!-- proverb -->
+      <g class="t050-se" font-size="60" fill="#0E1726" font-style="italic"><text x="70" y="660">Measure twice,</text><text x="70" y="730" fill="#0B6E6E">ship once.</text></g>
+      <!-- swing tag -->
+      <line x1="850" y1="540" x2="760" y2="600" stroke="#8A7F6A" stroke-width="2"/>
+      <path d="M560 600 L1010 600 L1010 790 L560 790 L540 695 z" fill="#FBF6EA" stroke="#CFC4AC" stroke-width="2"/>
+      <circle cx="568" cy="695" r="8" fill="#E9E2D3" stroke="#CFC4AC" stroke-width="2"/>
+      <g class="t050-m"><text x="596" y="644" font-size="20" fill="#8A7F6A" letter-spacing="2">DOESN'T FIT</text>
+        <text x="596" y="690" font-size="28" font-weight="600" fill="#0E1726">Checkout conv. <tspan fill="#C8322A">−18%</tspan></text>
+        <text x="596" y="730" font-size="22" fill="#0E1726">since 09:42</text><text x="596" y="764" font-size="22" fill="#0E1726">after deploy #2231</text></g>
+      <!-- tailor's call -->
+      <rect x="60" y="830" width="960" height="190" rx="18" fill="#FBF6EA" stroke="#CFC4AC" stroke-width="2"/>
+      <text class="t050-se" x="96" y="910" font-size="46" fill="#0E1726">Tailor's <tspan font-style="italic" fill="#0B6E6E">call</tspan></text>
+      <text class="t050-m" x="96" y="960" font-size="20" fill="#5A6475">nothing is cut until you say so</text>
+      <rect x="520" y="866" width="240" height="100" rx="18" fill="#FF5A4E"/>
+      <text class="t050-sa" x="640" y="928" font-size="34" font-weight="700" fill="#fff" text-anchor="middle">Roll back</text>
+      <rect x="776" y="866" width="220" height="100" rx="18" fill="none" stroke="#0E1726" stroke-width="3"/>
+      <text class="t050-sa" x="886" y="926" font-size="28" font-weight="600" fill="#0E1726" text-anchor="middle">Acknowledge</text>
+    </svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The tape slides along the wool left to right; each metric gets a teal tick on the beat as it is measured.</b> At Checkout the coral chalk drags a dotted line top to bottom and an X on the downbeat, two pins stab in on the next two 8ths, the swing tag flips over, and the human taps "Roll back".</p></div>
+
+  <!-- F4 · CTA -->
+  <div class="cw"><div class="cell t050-bg" id="t050-f4">
+    <svg class="t050-s" viewBox="0 0 1080 1080">
+      <g class="t050-se" font-size="84" fill="#0E1726" letter-spacing="-1">
+        <text x="80" y="170">Caught <tspan font-style="italic" fill="#0B6E6E">before</tspan></text>
+        <text x="80" y="260">customers noticed.</text>
+      </g>
+      <rect x="60" y="380" width="470" height="260" fill="url(#t050-twill)" filter="drop-shadow(0 8px 12px rgba(60,40,20,.25))"/>
+      <rect x="552" y="380" width="468" height="260" fill="url(#t050-twill)" filter="drop-shadow(0 8px 12px rgba(60,40,20,.25))"/>
+      <!-- shears -->
+      <g transform="translate(541 370) rotate(90)">
+        <path d="M0 0 L120 -10 L124 0 L120 10 z" fill="#9AA3AE"/>
+        <circle cx="-40" cy="-22" r="24" fill="none" stroke="#0E1726" stroke-width="10"/><circle cx="-40" cy="22" r="24" fill="none" stroke="#0E1726" stroke-width="10"/>
+        <circle cx="0" cy="0" r="6" fill="#0E1726"/>
+      </g>
+      <text class="t050-sa" x="210" y="760" font-size="72" font-weight="800" fill="#0E1726" letter-spacing="-2">Acme Pulse</text>
+      <rect x="80" y="830" width="330" height="106" rx="18" fill="#FF5A4E"/>
+      <text class="t050-sa" x="245" y="897" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Start free</text>
+      <line x1="880" y1="640" x2="850" y2="700" stroke="#8A7F6A" stroke-width="2"/>
+      <g transform="rotate(-6 860 800)">
+        <path d="M720 700 L1000 700 L1000 900 L720 900 L700 800 z" fill="#FBF6EA" stroke="#CFC4AC" stroke-width="2"/>
+        <circle cx="726" cy="800" r="8" fill="#E9E2D3" stroke="#CFC4AC" stroke-width="2"/>
+        <g class="t050-se" font-size="38" font-style="italic" fill="#0E1726"><text x="752" y="780">Measure twice.</text><text x="752" y="826" fill="#0B6E6E">Ship once.</text></g>
+        <text class="t050-m" x="752" y="872" font-size="20" fill="#5A6475">resolved in 6 min</text>
+      </g>
+    </svg>
+    <img class="t050-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*80);top:calc(var(--u)*688);width:calc(var(--u)*104);height:calc(var(--u)*104)">
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The shears travel down the chalk line in one stroke and the wool splits by clip-path on a single expo.inOut beat: the ship.</b> The tagline sits above; the swing tag swings in from the right and the button lands on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Tape measure</b> — amber tape with ink ticks; each tick is labelled with a metric; the Acme mark is its metal end.</li>
+    <li><b>Wool length</b> — teal twill fabric; the release before it ships.</li>
+    <li><b>Tailor's chalk</b> — coral triangle leaving a dotted line and an X where the metric doesn't fit.</li>
+    <li><b>Pins</b> — coral heads that hold the fix in place until the human decides.</li>
+    <li><b>Swing tag</b> — paper tag carrying the anomaly, later the proverb "Measure twice. Ship once."</li>
+    <li><b>Shears + woven label</b> — one clean cut as the ship; the stitched label carries the wordmark.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Tape unroll</b> — scaleX from the pinned metal end with a slight curl, power3.out 0.6 s, landing on the drop at 0:08.</li>
+    <li><b>Chalk stroke</b> — dotted dash-draw over 0.4 s (one 8th + one 16th at 120 BPM) with seeded, deterministic chalk dust particles.</li>
+    <li><b>One cut</b> — the shears travel the chalk line and the fabric splits by clip-path on a single expo.inOut beat (0.5 s), the only cut in the film.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>"Measure twice, cut once" is a proverb nearly everyone knows, and it maps one-to-one onto "check continuously, ship once, with care". The craft world signals precision and a human hand. Risk: craft textures can feel off-category for software; keep it precise and tailored, never rustic.</p>
+    <p><b>Adapt to your product:</b> Put your own checks on the tape's ticks (tests, budgets, limits, policies) and let the one cut be your product's irreversible action: a deploy, a payment, a send.</p>
+    <p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Tape_measure">Tape measure</a> · <a href="https://blog.waveplm.com/guide-how-to-read-a-tape-measure-for-fashion-designers/">How fashion designers read a tape measure</a></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{
+ "id": "093",
+ "slug": "one-take-oner",
+ "name": "One-Take Oner",
+ "category": "camera",
+ "summary": "The whole film as one unbroken camera move through a UI set: dashboard corridor, reveal room, crane down to the anomaly, pull out the window.",
+ "look": "A light architectural CSS-3D set whose walls are tiled with dashboards, lit by a teal doorway at the vanishing point. Frame guides, a take slate and a floor-plan mini-map with a coral camera path sit on top of every frame.",
+ "components": [
+  {
+   "name": "UI corridor set",
+   "role": "CSS 3D box tunnel whose walls are tiled with product dashboards; the “world” the camera travels through"
+  },
+  {
+   "name": "Doorway / light portal",
+   "role": "teal glow at the vanishing point that pulls the eye and becomes the reveal room"
+  },
+  {
+   "name": "Foreground wipe pillar",
+   "role": "dark blurred edge that crosses the lens to hide a stitch between two long takes"
+  },
+  {
+   "name": "Tilted watch panel",
+   "role": "live metric rows on a table surface the camera cranes down onto"
+  },
+  {
+   "name": "Anomaly card",
+   "role": "the one flat, frontal object in a 3D world — the proof moment and the human’s decision"
+  },
+  {
+   "name": "Plan mini-map + slate",
+   "role": "floor plan with a coral camera path, take number and timecode; makes the move legible in stills"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Continuous dolly",
+   "how": "camera z moves at constant speed (linear ease) through the hook, one tile row passes per beat at 120 BPM (0.5 s); never stops, only changes direction on bar lines"
+  },
+  {
+   "name": "Hidden stitch wipe",
+   "how": "foreground pillar crosses the frame in 0.25 s (power2.in), cut happens at 50% opacity black, lands exactly on the drop at 0:08"
+  },
+  {
+   "name": "Crane + settle",
+   "how": "vertical move 1.2 s power3.inOut over 2 bars, panel rotateX 38° → 0° in the last 0.5 s; card lifts z +80 px on the downbeat with back.out(1.4)"
+  }
+ ],
+ "story": "Hook: dolly down a corridor of 38 dashboards. Reveal: a foreground pillar wipes and we are in the teal Acme Pulse room on the drop. Proof: crane down onto the watch panel, the coral row lifts into “Checkout conversion −18%” and the cursor hits Roll back. CTA: pull back out the window to the lockup, “You ship. Pulse watches.” and Start free.",
+ "adapt": "Replace the dashboard tiles on the corridor walls with screenshots of the tools your customers juggle today, and make the reveal room your product’s main screen. The crane-down target is whatever single object carries your value (a PR check, an invoice, a ticket).",
+ "references": [
+  {
+   "url": "https://www.studiobinder.com/blog/1917-one-shot-cinematography/",
+   "note": "how 1917 hid stitches behind foreground elements and darkness",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Long_take",
+   "note": "long take definition; Rope (1948) as the classic example",
+   "verified": true
+  },
+  {
+   "url": "https://www.fastcompany.com/90475331/apples-new-iphone-ad-is-a-five-hour-one-take-tour-of-russias-hermitage-museum",
+   "note": "Apple’s one-take Hermitage film as a brand-scale oner",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "high",
+  "risk": "A oner lives or dies on pacing; if the camera drifts between beats the viewer loses the story, and 3D sets are the most expensive thing in this kit."
+ },
+ "best_for": [
+  "platforms",
+  "analytics",
+  "developer tools",
+  "premium launches"
+ ],
+ "file": "themes/093-one-take-oner.html"
+}

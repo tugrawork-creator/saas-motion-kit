@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>034 · Darkroom Development — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t034-red{background:radial-gradient(ellipse at 50% 30%,#4A0D0A 0%,#2A0605 45%,#120202 100%);color:#F6CFC6}
+.t034-red::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,0,0,.55) 100%)}
+.t034-lit{background:radial-gradient(ellipse at 50% 45%,#FFFFFF 0%,#FBF8F2 45%,#F1DCD5 100%);color:#0E1726}
+.t034-day{background:radial-gradient(ellipse at 50% 40%,#FBF9F4 0%,#F4EFE6 70%,#EBDDD3 100%);color:#0E1726}
+.t034-svg{position:absolute;inset:0;width:100%;height:100%}
+.t034-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t034-mono{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase}
+.t034-h{font-family:var(--serif);line-height:1;letter-spacing:-.015em}
+.t034-h em{font-style:italic}
+.t034-word{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;line-height:1}
+.t034-print{position:absolute;background:#FBFAF6;box-shadow:0 calc(var(--u)*20) calc(var(--u)*50) rgba(40,10,5,.25),0 0 0 calc(var(--u)*1) rgba(0,0,0,.06)}
+.t034-pin{position:absolute;width:calc(var(--u)*22);height:calc(var(--u)*52);background:linear-gradient(90deg,#B98E5E,#DDBB8E 50%,#B98E5E);border-radius:calc(var(--u)*4);box-shadow:0 calc(var(--u)*4) calc(var(--u)*6) rgba(0,0,0,.3)}
+.t034-btn{display:inline-block;font:800 calc(var(--u)*32) var(--sans);border-radius:calc(var(--u)*12);padding:calc(var(--u)*18) calc(var(--u)*34);white-space:nowrap}
+.t034-btn.c{background:#FF5A4E;color:#fff;box-shadow:0 0 calc(var(--u)*30) rgba(255,90,78,.55)}
+.t034-btn.o{box-shadow:inset 0 0 0 calc(var(--u)*3) #F6CFC6;color:#F6CFC6}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 034 · Light, optics &amp; texture</div>
+    <h1>Darkroom Development</h1>
+    <p class="dek">A red safelight room, quiet and tactile. Blank prints slide into the developer tray and the image slowly rises through rippling liquid, but the coral mark on the problem develops first, because Acme Pulse had already found it. The drop is a hard lights-on cut into daylight and brand colour.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t034-red" id="t034-f1">
+    <svg class="t034-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <path d="M40 112 Q540 150 1040 112" fill="none" stroke="#8C3A30" stroke-width="3"/>
+      <g fill="#5E1712" stroke="#7A2A22" stroke-width="2">
+        <rect x="84" y="140" width="170" height="210" transform="rotate(-2 169 140)"/>
+        <rect x="290" y="148" width="170" height="210" transform="rotate(1.5 375 148)"/>
+        <rect x="496" y="150" width="170" height="210"/>
+        <rect x="702" y="148" width="170" height="210" transform="rotate(-1.5 787 148)"/>
+        <rect x="908" y="140" width="112" height="210" transform="rotate(2 964 140)"/>
+      </g>
+      <g fill="none" stroke="#7E2B23" stroke-width="5" stroke-linejoin="round" opacity=".9">
+        <polyline points="104,300 140,270 170,285 200,240 234,255"/>
+        <path d="M312 320V280M342 320V250M372 320V290M402 320V240M432 320V270"/>
+        <circle cx="581" cy="265" r="48"/>
+        <polyline points="722,300 760,290 790,250 820,265 852,225"/>
+        <polyline points="924,300 950,260 980,280 1004,250"/>
+      </g>
+      <g fill="#C9A57A"><rect x="158" y="118" width="20" height="46" rx="4"/><rect x="364" y="124" width="20" height="46" rx="4"/><rect x="571" y="126" width="20" height="46" rx="4"/><rect x="776" y="124" width="20" height="46" rx="4"/><rect x="954" y="118" width="20" height="46" rx="4"/></g>
+      <g transform="translate(930 930)">
+        <circle r="62" fill="#1E0403" stroke="#8C3A30" stroke-width="4"/>
+        <path d="M0 -62A62 62 0 1 1 -58.9 19.2L0 0Z" fill="#8C3A30" opacity=".55"/>
+        <text y="10" text-anchor="middle" font-family="JetBrains Mono" font-size="28" font-weight="600" fill="#F6CFC6">90s</text>
+      </g>
+    </svg>
+    <div class="t034-p t034-h" style="--x:84;--y:440;--w:900;font-size:calc(var(--u)*104);color:#F6CFC6">And the drop still shipped on <em style="color:#FF8E84">Friday.</em></div>
+    <div class="t034-p t034-mono" style="--x:84;--y:916;--w:720;color:#C98A80">Safelight on · 38 prints<br>hung up, none read</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>A slow push-in along the drying line, left→right</b>; underexposed dashboard prints sway on their pins. The timer dial ticks each beat and "Friday." brightens on the bar-2 downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t034-lit" id="t034-f2">
+    <svg class="t034-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <path d="M40 104 Q540 130 1040 104" fill="none" stroke="#B9A89F" stroke-width="3"/>
+      <g fill="#0FA3A3" opacity=".75"><path d="M318 866q8 22 0 30q-8-8 0-30z"/><path d="M520 872q10 30 0 40q-10-10 0-40z"/><path d="M736 862q7 18 0 26q-7-8 0-26z"/></g>
+    </svg>
+    <div class="t034-print" style="left:calc(var(--u)*180);top:calc(var(--u)*150);width:calc(var(--u)*720);height:calc(var(--u)*710);transform:rotate(-2deg)">
+      <img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*250);top:calc(var(--u)*120);width:calc(var(--u)*220);height:calc(var(--u)*220)">
+      <div class="t034-word" style="position:absolute;left:0;right:0;top:calc(var(--u)*400);text-align:center;font-size:calc(var(--u)*120)">Acme Pulse</div>
+      <div class="t034-mono" style="position:absolute;left:0;right:0;top:calc(var(--u)*570);text-align:center;color:#5A6475">developed · fixed · dry</div>
+    </div>
+    <div class="t034-pin" style="left:calc(var(--u)*520);top:calc(var(--u)*110)"></div>
+    <div class="t034-p t034-mono" style="--x:84;--y:950;color:#8A6C64">Lights on · 0:08</div>
+    <div class="t034-p t034-mono" style="--x:600;--y:950;--w:420;text-align:right;color:#8A6C64">f/8 · 90 s · fixed</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>Hard cut from red to white on the drop</b> with a 2-frame overexposure flash; the finished print swings in from the top on its pin (back.out) and teal drips fall off its bottom edge on the next two beats.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t034-red" id="t034-f3">
+    <svg class="t034-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <rect x="60" y="120" width="960" height="740" rx="40" fill="#0E0101" stroke="#5E1712" stroke-width="6"/>
+      <rect x="84" y="144" width="912" height="692" rx="26" fill="#2A0605"/>
+      <g transform="rotate(1.5 540 490)">
+        <rect x="136" y="190" width="808" height="600" fill="#B98A82"/>
+        <g opacity=".5" fill="none" stroke="#3A0A08" stroke-width="7" stroke-linejoin="round">
+          <polyline points="190,380 260,370 330,386 400,366 470,380 540,368 600,376"/>
+          <polyline points="600,376 620,560 690,552 760,566 830,556 890,562"/>
+          <path d="M190 620H890" stroke-width="3"/>
+        </g>
+        <text x="190" y="260" font-family="JetBrains Mono" font-size="30" font-weight="600" fill="#3A0A08" opacity=".55">CHECKOUT CONVERSION</text>
+        <text x="190" y="300" font-family="JetBrains Mono" font-size="22" fill="#3A0A08" opacity=".45">14 METRICS · 1 PRINT</text>
+        <ellipse cx="640" cy="470" rx="120" ry="130" fill="none" stroke="#FF5A4E" stroke-width="9" transform="rotate(-8 640 470)"/>
+        <text x="190" y="730" font-family="Manrope" font-weight="800" font-size="110" fill="#FF5A4E">−18%</text>
+        <text x="480" y="690" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#2A0605">since 09:42</text>
+        <text x="480" y="730" font-family="JetBrains Mono" font-size="26" font-weight="600" fill="#2A0605">after deploy #2231</text>
+      </g>
+      <g fill="none" stroke="#FF9F90" stroke-opacity=".14" stroke-width="3">
+        <ellipse cx="320" cy="560" rx="90" ry="40"/><ellipse cx="320" cy="560" rx="170" ry="80"/><ellipse cx="320" cy="560" rx="260" ry="125"/><ellipse cx="320" cy="560" rx="360" ry="175"/>
+      </g>
+      <text x="84" y="92" font-family="JetBrains Mono" font-size="22" letter-spacing="2.6" fill="#C98A80">DEVELOPER · 20 °C · PULSE MARKED IT FIRST</text>
+      <g transform="translate(936 942)">
+        <circle r="52" fill="#1E0403" stroke="#8C3A30" stroke-width="4"/>
+        <path d="M0 -52A52 52 0 0 1 49.4 16L0 0Z" fill="#FF5A4E" opacity=".75"/>
+        <text y="9" text-anchor="middle" font-family="JetBrains Mono" font-size="22" font-weight="600" fill="#F6CFC6">0:42</text>
+      </g>
+    </svg>
+    <div class="t034-p" style="--x:84;--y:904;--w:780;display:flex;gap:calc(var(--u)*18)"><span class="t034-btn c">Roll back</span><span class="t034-btn o">Acknowledge</span></div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The tray rocks and ripples settle outward</b> while the print climbs from grey (contrast 0.1→1, sine.inOut, 4 s); the coral ring and "−18%" are fully dense from frame one, and the Roll back tag lights on the downbeat when the timer passes 0:42.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t034-day" id="t034-f4">
+    <svg class="t034-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <path d="M40 92 Q540 118 1040 92" fill="none" stroke="#B9A89F" stroke-width="3"/>
+    </svg>
+    <div class="t034-print" style="left:calc(var(--u)*120);top:calc(var(--u)*110);width:calc(var(--u)*230);height:calc(var(--u)*170);transform:rotate(-2deg)"><svg viewBox="0 0 230 170" style="width:100%;height:100%"><polyline points="24,120 70,100 110,108 150,70 206,58" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linejoin="round"/><text x="24" y="44" font-family="JetBrains Mono" font-size="20" fill="#5A6475">SIGNUPS ✓</text></svg></div>
+    <div class="t034-print" style="left:calc(var(--u)*425);top:calc(var(--u)*116);width:calc(var(--u)*230);height:calc(var(--u)*170)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*30);width:calc(var(--u)*110);height:calc(var(--u)*110)"></div>
+    <div class="t034-print" style="left:calc(var(--u)*730);top:calc(var(--u)*110);width:calc(var(--u)*230);height:calc(var(--u)*170);transform:rotate(2deg)"><svg viewBox="0 0 230 170" style="width:100%;height:100%"><text x="24" y="44" font-family="JetBrains Mono" font-size="20" fill="#5A6475">RESOLVED IN</text><text x="24" y="120" font-family="Manrope" font-weight="800" font-size="62" fill="#1F9D55">6 min</text></svg></div>
+    <div class="t034-pin" style="left:calc(var(--u)*226);top:calc(var(--u)*78)"></div><div class="t034-pin" style="left:calc(var(--u)*530);top:calc(var(--u)*84)"></div><div class="t034-pin" style="left:calc(var(--u)*836);top:calc(var(--u)*80)"></div>
+    <div class="t034-p t034-word" style="--x:60;--y:350;text-align:center;font-size:calc(var(--u)*64);color:#0B6E6E">Acme Pulse</div>
+    <div class="t034-p t034-h" style="--x:60;--y:450;text-align:center;font-size:calc(var(--u)*116)">Caught <em style="color:#FF5A4E">before</em><br>customers noticed.</div>
+    <div class="t034-p" style="--x:60;--y:760;text-align:center"><span class="t034-btn c" style="font-size:calc(var(--u)*42);padding:calc(var(--u)*26) calc(var(--u)*64);box-shadow:none">Start free</span></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Three dry prints drop onto the line one per beat</b>, left→right; the tagline fades up like a print reaching full contrast and Start free lands on the final downbeat. The red vignette in the corners is all that is left of the night.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Safelight vignette</b> — radial red glow on near-black; the "before" world where nothing is readable yet.</li>
+    <li><b>Developer tray</b> — top-down tray with concentric ripple rings (SVG feDisplacementMap in motion).</li>
+    <li><b>Latent print</b> — any UI or chart whose contrast climbs from 0.1 to 1 as it develops.</li>
+    <li><b>Pre-developed mark</b> — the coral ring and number that appear at full density first; the agent's finding.</li>
+    <li><b>Timer dial</b> — pie-wedge darkroom timer; time passing without a progress bar.</li>
+    <li><b>Drying line</b> — wire, wooden pins and hanging prints; dashboards before, results after.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Chemical emergence</b> — filter contrast/brightness 0.1→1, sine.inOut over 4 s (2 bars at 120 BPM); darks arrive first, the coral mark is already there.</li>
+    <li><b>Liquid rock</b> — displacement scale 6→0 on a slow sine (1 s period) as the tray settles; ripple rings expand on each kick.</li>
+    <li><b>Lights-on cut</b> — hard cut red → white exactly on the 0:08 drop, with a 2-frame overexposure flash.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Development is patient and physical: the idea that the finding is already on the paper before you can see the rest is exactly how a background agent feels. Risk: the all-red palette hides the brand until the lights-on payoff, so that cut has to land hard.</p><p><b>Adapt to your product:</b> Put your own report, chart or screen on the print, pre-develop the one thing your product catches, and use the lights-on cut as your product reveal.</p><p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Darkroom">Darkroom (Wikipedia)</a> · <a href="https://www.kodak.com/content/products-brochures/Film/KODAK-A-Guide-to-Darkroom-Illumination-K-4.pdf">Kodak guide to darkroom illumination</a></p></div>
+</div>
+</body>
+</html>

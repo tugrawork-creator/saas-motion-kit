@@ -1,0 +1,75 @@
+{
+ "id": "068",
+ "slug": "rosling-bubble-trails",
+ "name": "Rosling Bubble Trails",
+ "category": "data",
+ "summary": "Gapminder-style bubbles and trails under a giant watermark clock; the checkout bubble sinks at 09:42.",
+ "look": "White stage, pale L-axes and faint grid, translucent bubbles with thin ink outlines and dotted ghost trails. A huge pale watermark clock behind everything; Pulse is a big teal bubble, the anomaly a coral one.",
+ "components": [
+  {
+   "name": "Metric bubble",
+   "role": "translucent circle, size = volume, one per metric"
+  },
+  {
+   "name": "Ghost trail",
+   "role": "fading echoes + dotted path of where a bubble has been"
+  },
+  {
+   "name": "Watermark clock",
+   "role": "giant pale timestamp behind the chart that tells the time"
+  },
+  {
+   "name": "Pulse bubble",
+   "role": "the big teal bubble that everything else orbits"
+  },
+  {
+   "name": "Axis frame",
+   "role": "L-shaped axis with mono labels, faint grid"
+  },
+  {
+   "name": "Decision strip",
+   "role": "rule + −18% + context + Roll back, below the chart"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Bubble drift",
+   "how": "positions interpolate linearly between keyframes every beat (0.5 s at 120 BPM) for the Gapminder 'play' feel"
+  },
+  {
+   "name": "Trail echo",
+   "how": "each 0.25 s a ghost copy is left behind at 30 % opacity and fades over 1 bar"
+  },
+  {
+   "name": "Clock roll",
+   "how": "watermark digits change on every downbeat, 2-frame crossfade; freeze + 1.03 scale bump on the anomaly"
+  }
+ ],
+ "story": "Hook: grey bubbles drift under a FRI watermark while a coral one is only found Monday. Drop: every bubble is pulled into the big teal Pulse bubble. Proof: the Checkout bubble sinks with a trail at 09:42 after deploy #2231, −18%, Roll back. CTA: the bubble climbs back to the trend by 09:48, Caught before customers noticed., Start free.",
+ "adapt": "Plot your product's entities (accounts, services, campaigns) on two axes that matter to your users, size by volume, and let your anomaly be one bubble that breaks away with a trail.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Trendalyzer",
+   "note": "Gapminder's animated bubble chart: x, y, size, colour and time",
+   "verified": true
+  },
+  {
+   "url": "https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen",
+   "note": "Rosling's TED talk that made animated bubbles famous",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Scatter axes need a second of reading; label the one bubble that matters and keep the rest unlabelled or dim."
+ },
+ "best_for": [
+  "analytics",
+  "BI tools",
+  "marketplaces",
+  "public-data products"
+ ],
+ "file": "themes/068-rosling-bubble-trails.html"
+}

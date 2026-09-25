@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>061 · Dark Keynote — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t061 ===== */
+
+.t061-f{position:absolute;inset:0;overflow:hidden;color:#EAF1F6;font-family:var(--sans);background:radial-gradient(70% 60% at 50% 45%,#17294A 0%,#0C1830 60%,#081122 100%)}
+.t061-grain{position:absolute;inset:0;width:100%;height:100%;opacity:.16;mix-blend-mode:overlay;pointer-events:none}
+.t061-vig{position:absolute;inset:0;background:radial-gradient(80% 80% at 50% 50%,transparent 55%,rgba(4,9,20,.7) 100%);pointer-events:none}
+.t061-cone{position:absolute;left:50%;top:calc(var(--u)*-40);width:calc(var(--u)*760);height:calc(var(--u)*900);margin-left:calc(var(--u)*-380);clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);
+ background:linear-gradient(rgba(220,245,242,.30),rgba(220,245,242,.06) 70%,transparent);filter:blur(calc(var(--u)*10))}
+.t061-pool{position:absolute;left:50%;width:calc(var(--u)*820);height:calc(var(--u)*180);margin-left:calc(var(--u)*-410);border-radius:50%;background:radial-gradient(closest-side,rgba(207,241,238,.28),transparent)}
+.t061-h{position:absolute;font-family:var(--serif);font-weight:400;line-height:1.04;letter-spacing:-.01em;color:#F2F6F8}
+.t061-h i{color:#6FE3DA}
+.t061-bc{position:absolute;border-radius:calc(var(--u)*24);background:rgba(40,60,92,.7);border:calc(var(--u)*1.5) solid rgba(160,200,220,.25);padding:calc(var(--u)*22) calc(var(--u)*26);font:700 calc(var(--u)*28) var(--sans);color:#D8E4EE;white-space:nowrap}
+.t061-bc small{display:block;font:400 calc(var(--u)*20) var(--mono);color:#8FA3B8;margin-top:calc(var(--u)*6)}
+.t061-glow{position:absolute;isolation:isolate;border-radius:calc(var(--u)*34);padding:calc(var(--u)*3);background:conic-gradient(from 200deg,#0FA3A3,#6FE3DA,#CFF1EE,#0FA3A3,#0B6E6E,#0FA3A3)}
+.t061-glow:before{content:"";position:absolute;inset:calc(var(--u)*-10);border-radius:calc(var(--u)*44);background:inherit;filter:blur(calc(var(--u)*26));opacity:.8;z-index:-1}
+.t061-pan{position:relative;border-radius:calc(var(--u)*31);background:linear-gradient(160deg,#172A48,#0E1B33);padding:calc(var(--u)*30) calc(var(--u)*34);height:100%}
+.t061-row{display:flex;justify-content:space-between;align-items:center;font:600 calc(var(--u)*27) var(--sans);padding:calc(var(--u)*16) 0;border-bottom:calc(var(--u)*1.5) solid rgba(255,255,255,.08)}
+.t061-row em{font-style:normal;font:600 calc(var(--u)*24) var(--mono);color:#5FD08A}
+.t061-btn{display:inline-block;font:700 calc(var(--u)*26) var(--sans);border-radius:calc(var(--u)*14);padding:calc(var(--u)*16) calc(var(--u)*30);white-space:nowrap}
+.t061-sweep{position:absolute;top:calc(var(--u)*-100);width:calc(var(--u)*160);height:calc(var(--u)*1300);background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:rotate(18deg);mix-blend-mode:screen}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 061 · Signature directions</div>
+    <h1>Dark Keynote</h1>
+    <p class="dek">A cinematic launch stage — deep navy rather than black, with vignette and fine grain. One spotlight cone directs the eye per frame, panels float with a slight 3D tilt and depth-of-field blur, and the agent is wrapped in a layered teal edge glow that shifts to coral for exactly one beat when it finds something.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t061-f1"><div class="t061-f">
+<div class="t061-cone"></div><div class="t061-pool" style="top:calc(var(--u)*640)"></div>
+<div class="t061-bc" style="left:calc(var(--u)*110);top:calc(var(--u)*120);transform:scale(.8);filter:blur(calc(var(--u)*3));opacity:.6">p95 latency 212 ms<small>alert · muted</small></div>
+<div class="t061-bc" style="left:calc(var(--u)*700);top:calc(var(--u)*150);transform:scale(.8);filter:blur(calc(var(--u)*3));opacity:.6">Signups · no data<small>since last night</small></div>
+<div class="t061-h" style="left:calc(var(--u)*180);top:calc(var(--u)*360);width:calc(var(--u)*720);text-align:center;font-size:calc(var(--u)*80)">How many dashboards did you <i style="color:#FF8A80">check</i> today?</div>
+<div class="t061-bc" style="left:calc(var(--u)*-40);top:calc(var(--u)*760);transform:scale(1.3) rotate(-6deg);filter:blur(calc(var(--u)*9));opacity:.8">Checkout dashboard<small>tab 12 of 38</small></div>
+<div class="t061-bc" style="left:calc(var(--u)*700);top:calc(var(--u)*800);transform:scale(1.3) rotate(5deg);filter:blur(calc(var(--u)*9));opacity:.8">Error rate 0.4 %<small>no owner</small></div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*960);text-align:center;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.2em;color:#6E819A">38 DASHBOARDS · ONE SPOTLIGHT</div>
+<svg class="t061-grain" viewBox="0 0 1080 1080"><filter id="t061-n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/></filter><rect width="1080" height="1080" filter="url(#t061-n)"/></svg><div class="t061-vig"></div></div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The spot clicks on from above</b> and the question fades up line by line in the light pool; out-of-focus cards drift in from the dark one per beat with slow parallax, and on the bar-3 downbeat “check” turns coral as every card slides one step closer.</p></div>
+  <div class="cw"><div class="cell" id="t061-f2"><div class="t061-f">
+<div class="t061-glow" style="left:calc(var(--u)*40);top:calc(var(--u)*40);right:calc(var(--u)*40);bottom:calc(var(--u)*40);padding:calc(var(--u)*6);background:conic-gradient(from 120deg,#0FA3A3,#6FE3DA,#FF5A4E 22%,#0FA3A3 30%,#CFF1EE 55%,#0B6E6E 75%,#0FA3A3)"><div class="t061-pan" style="background:radial-gradient(70% 60% at 50% 45%,#17294A 0%,#0C1830 70%);border-radius:calc(var(--u)*30);box-shadow:inset 0 0 calc(var(--u)*60) rgba(15,163,163,.45),inset 0 0 calc(var(--u)*14) rgba(111,227,218,.6)"></div></div>
+<div class="t061-h" style="left:0;right:0;top:calc(var(--u)*250);text-align:center;font-size:calc(var(--u)*104)">You ship.<br><i>Pulse</i> watches.</div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*600);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*26);white-space:nowrap;overflow:hidden"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*116);height:calc(var(--u)*116);box-shadow:0 0 calc(var(--u)*50) rgba(111,227,218,.6);border-radius:calc(var(--u)*29)"><span style="font:800 calc(var(--u)*90) var(--sans);letter-spacing:-.03em;color:#fff">Acme Pulse</span></div>
+<div class="t061-sweep" style="left:calc(var(--u)*600)"></div>
+<svg class="t061-grain" viewBox="0 0 1080 1080"><filter id="t061-n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/></filter><rect width="1080" height="1080" filter="url(#t061-n)"/></svg><div class="t061-vig"></div></div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The drop ignites the edge glow around the whole frame</b> — four layers open inside→out in one beat and the conic ring starts a slow rotation; the headline lands, then a diagonal light sweep passes left→right and reveals the lockup.</p></div>
+  <div class="cw"><div class="cell" id="t061-f3"><div class="t061-f">
+<div class="t061-h" style="left:calc(var(--u)*70);top:calc(var(--u)*66);width:calc(var(--u)*940);font-size:calc(var(--u)*68)">You ship. <i>Pulse</i> watches.</div>
+<div style="position:absolute;left:calc(var(--u)*40);top:calc(var(--u)*300);width:calc(var(--u)*520);height:calc(var(--u)*560);border-radius:calc(var(--u)*24);background:#1B2E4F;filter:blur(calc(var(--u)*3.5));opacity:.75;transform:perspective(calc(var(--u)*1200)) rotateY(18deg);padding:calc(var(--u)*30);font:400 calc(var(--u)*24)/2.6 var(--mono);color:#9FB2C7">
+Signups ······ +4%<br>Active ······· +1%<br><span style="color:#FF8A80;background:rgba(255,90,78,.2)">Checkout ····· −18%</span><br>p95 ········· 212ms<br>Errors ······ 0.4%<br>Events/s ····· 2,418</div>
+<svg viewBox="0 0 1080 1080" style="position:absolute;inset:0;width:100%;height:100%"><path d="M470 516 C 420 520, 360 520, 330 512" stroke="#FF8A80" stroke-width="3" fill="none"/><circle cx="330" cy="512" r="9" fill="#FF5A4E"/><circle cx="330" cy="512" r="22" fill="#FF5A4E" opacity=".3"/></svg>
+<div class="t061-glow" style="left:calc(var(--u)*450);top:calc(var(--u)*220);width:calc(var(--u)*580);height:calc(var(--u)*680);transform:perspective(calc(var(--u)*1400)) rotateY(-10deg);background:conic-gradient(from 150deg,#0FA3A3,#6FE3DA,#FF5A4E 18%,#FF8A80 24%,#0FA3A3 34%,#CFF1EE 60%,#0B6E6E 80%,#0FA3A3)"><div class="t061-pan">
+<div style="display:flex;align-items:center;gap:calc(var(--u)*14);font:800 calc(var(--u)*28) var(--sans);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*46);height:calc(var(--u)*46)">Acme Pulse<span style="margin-left:auto;font:600 calc(var(--u)*20) var(--mono);color:#6FE3DA">● watching 14</span></div>
+<div style="margin-top:calc(var(--u)*14)">
+<div class="t061-row"><span>Signups</span><em>✓</em></div>
+<div class="t061-row"><span>Active users</span><em>✓</em></div>
+<div class="t061-row" style="color:#FFB3AC;border:0;padding-bottom:calc(var(--u)*6)"><span>⚠ Checkout conversion</span><em style="color:#FF7A70;font-size:calc(var(--u)*34)">−18%</em></div>
+<div style="font:400 calc(var(--u)*21) var(--mono);color:#C9A7A4;padding-bottom:calc(var(--u)*16);border-bottom:calc(var(--u)*1.5) solid rgba(255,255,255,.08)">since 09:42 · after deploy #2231</div>
+<div class="t061-row"><span>p95 latency</span><em>✓</em></div>
+<div class="t061-row" style="border:0"><span>Error rate</span><em>✓</em></div></div>
+<div style="margin-top:calc(var(--u)*22);display:flex;gap:calc(var(--u)*12)"><span class="t061-btn" style="background:var(--alert);color:#fff;box-shadow:0 0 calc(var(--u)*30) rgba(255,90,78,.55)">Roll back</span><span class="t061-btn" style="border:calc(var(--u)*2) solid rgba(255,255,255,.2)">Acknowledge</span></div>
+</div></div>
+<svg class="t061-grain" viewBox="0 0 1080 1080"><filter id="t061-n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/></filter><rect width="1080" height="1080" filter="url(#t061-n)"/></svg><div class="t061-vig"></div></div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The frame glow narrows into the agent panel</b>, which floats forward from the right while the team table stays soft behind; checks light up one per half-bar, and on the bar-9 downbeat the glow slides to coral, a light thread reaches the blurred Checkout cell and focus pulls to the panel.</p></div>
+  <div class="cw"><div class="cell" id="t061-f4"><div class="t061-f">
+<div class="t061-cone"></div><div class="t061-pool" style="top:calc(var(--u)*840);background:radial-gradient(closest-side,rgba(255,90,78,.35),transparent)"></div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*250);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*26);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*120);height:calc(var(--u)*120);box-shadow:0 0 calc(var(--u)*50) rgba(111,227,218,.45);border-radius:calc(var(--u)*30)"><span style="font:800 calc(var(--u)*94) var(--sans);letter-spacing:-.03em;color:#fff">Acme Pulse</span></div>
+<div class="t061-h" style="left:0;right:0;top:calc(var(--u)*440);text-align:center;font-size:calc(var(--u)*80)">Caught <i>before</i><br>customers noticed.</div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*720);display:flex;justify-content:center"><span style="font:700 calc(var(--u)*36) var(--sans);color:#fff;background:var(--alert);border-radius:calc(var(--u)*100);padding:calc(var(--u)*24) calc(var(--u)*60);box-shadow:0 0 calc(var(--u)*60) rgba(255,90,78,.6)">Start free</span></div>
+<svg class="t061-grain" viewBox="0 0 1080 1080"><filter id="t061-n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/></filter><rect width="1080" height="1080" filter="url(#t061-n)"/></svg><div class="t061-vig"></div></div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The light converges into one spotlight cone</b>; the lockup appears beneath it, the tagline rises, and the coral CTA lands on the sting downbeat with a warm glow spreading across the floor; the spot dims to navy, never to black.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Navy stage + vignette</b> — #0C1830 base, lighter centre, edges fall to navy shadow — never pure black (keeps compression clean)</li><li><b>Spotlight cone</b> — soft trapezoid from above plus an elliptical pool on the floor; one focal point per frame</li><li><b>AI edge glow</b> — conic teal ring with a blurred bloom copy; slow rotation = agent is working</li><li><b>Floating panel</b> — dark glass card with gradient edge light and 6–16° tilt</li><li><b>Depth of field</b> — foreground cards 9 px blur, background 2–3 px; only the hero element is sharp</li><li><b>Film grain</b> — fixed-seed noise at ~16 % overlay so the dark gradients never band</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Spot click-on</b> — cone opacity 0 → 1 in 2 frames with a 0.4 s flicker-settle, synced to the first downbeat</li><li><b>Glow ignition</b> — four stroke layers scale 0.96 → 1 and fade in inside→out over one beat (0.5 s at 120 BPM); conic rotation 360° per 8 bars (16 s), linear</li><li><b>Focus pull</b> — background blur 0 → 3 px while the panel sharpens 3 → 0 px, power2.inOut 0.6 s, triggered on the anomaly downbeat</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Dark, lit stages borrow the gravity of a keynote and make an AI agent feel like a premium, deliberate product — the glow is a visual shorthand for “thinking”. Risk: dark films crush on social compression and can feel generic-AI; keep midtones, grain, and a single coral moment so the glow means something.</p><p><b>Adapt to your product:</b> Wrap whatever surface your AI acts on (editor, inbox, dashboard) in the edge glow, keep your real UI soft in the background, and let the glow change colour only when the AI surfaces a result that needs a human.</p><p><b>References:</b> <a href="https://github.com/kyh/uicapsule/pull/34">https://github.com/kyh/uicapsule/pull/34</a> (edge-glow border effect recreated in code (conic gradient + blur layers)) · <a href="https://stripe.com/sessions/2025">https://stripe.com/sessions/2025</a> (dark, lit keynote-stage presentation of a product launch)</p></div>
+</div>
+</body>
+</html>

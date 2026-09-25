@@ -1,0 +1,70 @@
+{
+ "id": "008",
+ "slug": "calendar-timeline-scrub",
+ "name": "Calendar Timeline Scrub",
+ "category": "product-ui",
+ "summary": "The work week as an editing timeline: Pulse is a lane of per-minute ticks, and a Friday incident fades out once the Tuesday catch lands.",
+ "look": "Dark editing-timeline look: day ruler, lanes for team, Pulse and customers, clip-like event blocks and an amber playhead with a time pill. Teal ticks mark the agent's work; a striped coral ghost block is the counterfactual incident.",
+ "components": [
+  {
+   "name": "Day / minute ruler",
+   "role": "timeline header"
+  },
+  {
+   "name": "Playhead + time pill",
+   "role": "scrubs with the music"
+  },
+  {
+   "name": "Event blocks",
+   "role": "team work as clips"
+  },
+  {
+   "name": "Pulse lane",
+   "role": "background work made visible"
+  },
+  {
+   "name": "Ghost event",
+   "role": "the Friday counterfactual"
+  },
+  {
+   "name": "Duration bracket",
+   "role": "3 days late vs 6 minutes"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Speed-ramped scrub",
+   "how": "playhead eases fast and slow with a blur ramp, stops on downbeats"
+  },
+  {
+   "name": "Block growth",
+   "how": "scaleX from the left edge, 0.3 s back.out(1.4), on kicks"
+  },
+  {
+   "name": "Ghost dissolve",
+   "how": "Friday event desaturates and fades to 35% over 1 s as the catch lands"
+  }
+ ],
+ "story": "Hook: the playhead scrubs to Friday where striped customer tickets appear, 'found 3 days late' after Tuesday's deploy #2231. Reveal: the playhead rewinds to Tuesday and a new Acme Pulse lane fills with ticks. Proof: zoomed to minutes, the 09:42 tick turns into a coral flag, the card shows checkout conversion −18% since 09:42 after deploy #2231, the human's Roll back block lands at 09:48, resolved in 6 min, and the Friday tickets are struck out. CTA: a quiet week, 'Every metric. Every minute.', and a coral Start free clip on the playhead.",
+ "adapt": "Put your users' week on the ruler, give your product its own lane, and show the bad event it prevents as a fading ghost.",
+ "references": [
+  {
+   "url": "https://dribbble.com/tags/calendar_animation",
+   "note": "calendar motion studies",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "the counterfactual must read instantly; label the ghost and brackets boldly, max three lanes"
+ },
+ "best_for": [
+  "observability",
+  "scheduling",
+  "project tools",
+  "analytics"
+ ],
+ "file": "themes/008-calendar-timeline-scrub.html"
+}

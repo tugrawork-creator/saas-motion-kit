@@ -1,0 +1,70 @@
+{
+ "id": "063",
+ "slug": "isotype-unit-chart",
+ "name": "Isotype Unit Chart",
+ "category": "data",
+ "summary": "Neurath-style picture statistics: countable pictogram rows where the anomaly is two carts that simply go missing.",
+ "look": "Warm printed paper, ink rules and flat Gerd-Arntz-style pictograms in rows of ten. Teal and ink tokens; coral dashed ghosts mark the missing quantity. Mono FIG. captions like a 1930s atlas.",
+ "components": [
+  {
+   "name": "Pictogram token",
+   "role": "one flat symbol = one fixed quantity, never scaled"
+  },
+  {
+   "name": "Fractional cut",
+   "role": "a sliced pictogram for partial values (8.2 carts)"
+  },
+  {
+   "name": "Ghost token",
+   "role": "dashed coral outline = what is missing, the anomaly itself"
+  },
+  {
+   "name": "Figure rule + caption",
+   "role": "ink rules and mono FIG. labels that make it feel printed"
+  },
+  {
+   "name": "Legend key",
+   "role": "icon = value line, always on screen so the count is honest"
+  },
+  {
+   "name": "Isotype arrow",
+   "role": "chunky flat arrow for the collapse into the Acme mark"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Token stamp",
+   "how": "each pictogram scales 1.15 → 1 with a 2-frame opacity pop, stagger 0.0625 s (1/16 at 120 BPM), back.out(2)"
+  },
+  {
+   "name": "Collapse-to-symbol",
+   "how": "rows translate to the arrow with power3.in 0.5 s (one beat), mark appears on the drop with a 3-frame white flash"
+  },
+  {
+   "name": "Ghost reveal",
+   "how": "missing carts fade 0 → 1 over 0.25 s on snare hits (beats 2 and 4), stroke-dashoffset crawls 6 px per beat"
+  }
+ ],
+ "story": "Hook stamps 38 dashboard tokens and one coral one nobody noticed. On the drop they collapse through an Isotype arrow into the Acme mark. Proof: a row of 10 checkout carts before 09:42 and 8.2 after deploy #2231, the missing ones dashed in coral, then Roll back. CTA: seven builder figures ship, one mark watches — Start free.",
+ "adapt": "Pick one countable unit your users care about (orders, builds, tickets, seats) and draw it as a flat 2-colour pictogram; let the anomaly be tokens that go missing or turn coral.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Isotype_(picture_language)",
+   "note": "Neurath/Arntz principle: more quantity = more identical symbols, not bigger ones",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "low",
+  "risk": "Pictograms can read as childish if the grid, rules and mono captions are not kept strict and printed-looking."
+ },
+ "best_for": [
+  "e-commerce",
+  "analytics",
+  "fintech",
+  "non-technical buyers"
+ ],
+ "file": "themes/063-isotype-unit-chart.html"
+}

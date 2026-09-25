@@ -1,0 +1,20 @@
+{"id":"018","slug":"typographic-window-reveal","name":"Typographic Window Reveal","category":"type",
+ "summary":"Giant numerals fill the frame and act as windows onto the product; scene changes dive through a glyph's counter.",
+ "look":"Deep ink background with edge-to-edge Manrope 800 numerals and words used as clip masks; light dashboard tiles and the live metric chart play inside the letterforms while counters stay dark. A thin offset outline echoes each glyph, and all facts sit in small mono captions.",
+ "components":[
+  {"name":"Mask glyph","role":"340–900 px black-weight type as an SVG clipPath window"},
+  {"name":"Inner scene","role":"product UI (dashboard tiles, the metric chart) playing inside the glyph"},
+  {"name":"Counter portal","role":"the hole of a 0 / 8 / % used as the tunnel between scenes"},
+  {"name":"Stroke echo","role":"offset 3 px outline of the glyph, teal normally, coral for the anomaly"},
+  {"name":"Corner caption","role":"small mono lines carrying the facts the glyph can't"},
+  {"name":"Numeral lockup","role":"the closing '0' holding the product beside tagline and CTA"}],
+ "motion":[
+  {"name":"Zoom-through","how":"mask scale 1 → 40 into a counter, power4.in 700 ms, cutting on the drop or a downbeat at 120 BPM"},
+  {"name":"Parallax interior","how":"inner scene drifts at 0.3× opposite to the glyph, linear"},
+  {"name":"Glyph swap","how":"one numeral clip-wipes to the next (38 → 0) in 250 ms on the downbeat"}],
+ "story":"Hook: a giant '38' filled with a mosaic of dashboard tiles — 'DASHBOARDS OPEN RIGHT NOW · 3 CHECKED' — and 'How many did you check today?'. Reveal: we dive through a counter and land on the drop inside a giant 'Pulse' with a white pulse line and coral dot running through the letters, the Acme mark and name above. Proof: the checkout chart scrolls inside a giant '−18%' and turns coral at the drop; captions carry 'since 09:42 · after deploy #2231', 'Pulse caught it. Your call.' with Roll back / Acknowledge. CTA: the product sits inside a giant '0' (customers who noticed) beside 'Caught before customers noticed.', lockup and Start free.",
+ "adapt":"Pick the three numbers that tell your story (a pain count, your key metric, a zero) and put screen recordings or UI mock-ups inside them; keep the real data in captions.",
+ "references":[{"url":"https://tympanus.net/codrops/2020/06/17/making-stagger-reveal-animations-for-text/","note":"text reveal and mask animation techniques","verified":false}],
+ "fit":{"readability":3,"trust":2,"effort":"low","risk":"UI inside the letters is not readable as UI; every fact must also appear in a caption"},
+ "best_for":["analytics","growth tools","any product with one hero number","social cut-downs"],
+ "file":"themes/018-typographic-window-reveal.html"}

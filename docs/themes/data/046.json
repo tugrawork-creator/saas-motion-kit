@@ -1,0 +1,23 @@
+{"id":"046","slug":"conservators-uv-lamp","name":"Conservator's UV Lamp","category":"metaphor",
+ "summary":"Dashboards hang like paintings that look flawless in normal light; a UV lamp reveals the overpainted figure and a human conservator decides.",
+ "look":"A warm museum wall with gilt frames and label cards, then a dim studio where a violet UV pool makes hidden data fluoresce teal and the anomaly glow coral. A brass loupe and a paper condition report keep it restrained and credible.",
+ "components":[
+  {"name":"Framed dashboard","role":"gilt frame, mat and chart as the artwork, with a museum label"},
+  {"name":"UV pool","role":"radial violet mask carried by a wand; the agent itself"},
+  {"name":"Fluorescent layer","role":"the real data under the painted surface; coral where it disagrees"},
+  {"name":"Brass loupe","role":"2.5× circle clip isolating the anomaly figure"},
+  {"name":"Condition report","role":"mono checklist; the failing line carries anomaly and deploy"},
+  {"name":"Conservator's decision","role":"Roll back / Acknowledge; the human signs"}],
+ "motion":[
+  {"name":"Lamp pass","how":"mask follows a bezier over 2.5 s (five beats at 120 BPM), power1.inOut, arriving on the anomaly on a downbeat"},
+  {"name":"Fluoresce","how":"revealed layer 0→1 behind a glow filter in 0.3 s; 0.8 s afterglow once the lamp moves on"},
+  {"name":"Loupe punch-in","how":"circle scales 0→1 with back.out(1.7) in 0.35 s on the snare; report line types in with steps() over the next bar"}],
+ "story":"Hook: '38 dashboards. All looked fine.' A gallery of framed charts, 'last inspected: never'. Reveal: lights off, the UV wand clicks on and 'Acme Pulse' fluoresces on the drop. Proof: the pool drifts over the Checkout chart; the smooth painted line fluoresces into the real one dropping after 09:42, the loupe reads '−18% since 09:42', the condition report logs 'overpainted by deploy #2231', and the conservator taps Roll back. CTA: warm lights return on one framed Acme lockup, 'Caught before customers noticed.', museum label, Start free.",
+ "adapt":"Hang your own report, invoice or config as the artwork and let the UV layer show what your product checks underneath; the condition report becomes your finding list.",
+ "references":[
+  {"url":"https://www.cyanilux.com/tutorials/ultraviolet-lights-invisible-ink/","note":"UV-light invisible-ink shader technique","verified":true},
+  {"url":"https://www.dandad.org/awards/professional/2023/237277/privacy-on-iphone-data-auction/","note":"making the invisible physical","verified":true},
+  {"url":"https://www.nextavenue.org/museums-now-reveal-the-science-of-conservation/","note":"conservation science in museums","verified":false}],
+ "fit":{"readability":2,"trust":3,"effort":"med","risk":"Glow can tip into sci-fi; keep the paper warm and the museum restrained."},
+ "best_for":["analytics","fintech","data quality","compliance"],
+ "file":"themes/046-conservators-uv-lamp.html"}

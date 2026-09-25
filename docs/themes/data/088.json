@@ -1,0 +1,74 @@
+{
+ "id": "088",
+ "slug": "op-art-illusion",
+ "name": "Op Art Illusion",
+ "category": "era",
+ "summary": "Riley and Vasarely optical art: healthy data is a perfect pattern, the anomaly is a coral warp your eye catches first.",
+ "look": "Ink stripes and checkerboards on warm paper, teal concentric rings, one coral compression zone. Type always sits on thick ink-bordered paper cards to stay readable.",
+ "components": [
+  {
+   "name": "Riley wave field",
+   "role": "52 sine-modulated ink stripes, 11 px, as visual overload"
+  },
+  {
+   "name": "Vasarely tunnel",
+   "role": "offset concentric teal/paper rings that pull toward the mark"
+  },
+  {
+   "name": "Checker field",
+   "role": "regular squares standing for healthy metrics"
+  },
+  {
+   "name": "Warp zone",
+   "role": "column compression where squares turn coral — the anomaly"
+  },
+  {
+   "name": "Ink-bordered card",
+   "role": "8 px ink frame holding type calmly on top of the pattern"
+  },
+  {
+   "name": "Calm stripes",
+   "role": "evenly spaced teal bars for the resolved end state"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Phase shimmer",
+   "how": "wave phase += 0.35 rad per 8th note, stepped (no easing) so the vibration locks to 120 BPM"
+  },
+  {
+   "name": "Warp squeeze",
+   "how": "column widths animate to the Gaussian compression, sine.inOut 1 s (2 beats); relax with elastic.out after the human clicks"
+  },
+  {
+   "name": "Tunnel pull",
+   "how": "ring scale 1→1.25 with expo.in 0.5 s into the drop, then hard cut to the settled frame"
+  }
+ ],
+ "story": "Hook: an overwhelming field of Riley-style wavy stripes behind \"How many dashboards did you check today?\". Reveal: stripes collapse into a teal Vasarely tunnel with the Acme mark at its centre. Proof: a calm checkerboard squeezes into a coral warp; the card shows checkout conversion −18% since 09:42, deploy #2231, Roll back / Acknowledge. CTA: stripes straighten, \"Every metric. Every minute.\" with Start free.",
+ "adapt": "Use the regular pattern for 'normal' in your domain (requests, transactions, builds) and warp it where your product catches something. Replace the evidence card with your own alert UI.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Op_art",
+   "note": "optical-art techniques: line vibration, figure-ground, colour contrast",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Bridget_Riley",
+   "note": "Current (1964), Movement in Squares (1961)",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Moiré and flicker after compression; possible visual discomfort — keep patterns coarse and slow."
+ },
+ "best_for": [
+  "observability",
+  "security",
+  "data platforms"
+ ],
+ "file": "themes/088-op-art-illusion.html"
+}

@@ -1,0 +1,23 @@
+{"id":"045","slug":"lighthouse","name":"The Lighthouse","category":"metaphor",
+ "summary":"A lighthouse lit by the Acme mark sweeps a sea of live numbers; the beam reveals one hidden rock and the keeper turns the release back.",
+ "look":"A minimal deep-teal night sea where each wave is a row of mono numbers on a sine path. A white, teal-banded lighthouse casts a soft volumetric beam that brightens the numbers it touches and reveals coral-edged rocks.",
+ "components":[
+  {"name":"Lighthouse","role":"tower with teal bands; the Acme mark is the lamp"},
+  {"name":"Volumetric beam","role":"gradient cone that doubles as a reveal mask"},
+  {"name":"Number waves","role":"rows of live metrics on phase-shifted sines"},
+  {"name":"Rocks","role":"hidden anomalies, coral once lit, teal outline once cleared"},
+  {"name":"Release boat","role":"the deploy heading for trouble, then turning back"},
+  {"name":"Keeper's card & harbour lights","role":"the human decision and the calm ending"}],
+ "motion":[
+  {"name":"Beam sweep","how":"rotation yoyo ±40° over 4 s (two bars at 120 BPM), sine.inOut, crossing centre on each bar line"},
+  {"name":"Mask reveal","how":"numbers and rocks exist only inside the beam's clip; rocks keep a 40% outline after it passes"},
+  {"name":"Wave drift","how":"per-row textPath startOffset drift, 8 s loop, rows a quarter phase apart"}],
+ "story":"Hook: a dark sea of numbers, an unlit lighthouse, and a release boat that hit a rock found Friday 17:40. Reveal: the lamp room (the Acme mark) ignites on the drop and the beam reveals 'Acme Pulse'. Proof: the beam sweeps the numbers and surfaces a coral rock ahead of release #2231, labelled 'Checkout conv. −18% · since 09:42 · after deploy #2231'; the keeper in the harbour taps Roll back and the boat curls away. CTA: calm sea, 'Caught before customers noticed.', harbour lights, Start free.",
+ "adapt":"Fill the sea with your own numbers (orders, jobs, balances), name the rock after the risk your product catches, and make the boat whatever you ship.",
+ "references":[
+  {"url":"https://tympanus.net/codrops/2022/06/27/volumetric-light-rays-with-three-js/","note":"volumetric light rays","verified":true},
+  {"url":"https://freefrontend.com/code/svg-flashlight-reveal-effect-2026-05-07/","note":"SVG beam that reveals hidden text through a mask","verified":true},
+  {"url":"https://www.behance.net/gallery/129604197/Lighthouse-Animations","note":"lighthouse animation studies","verified":false}],
+ "fit":{"readability":2,"trust":3,"effort":"high","risk":"Lonely night imagery can suggest AI running unattended; always put the human keeper in the harbour."},
+ "best_for":["monitoring","security","fintech","infrastructure"],
+ "file":"themes/045-lighthouse.html"}

@@ -1,0 +1,70 @@
+{
+ "id": "080",
+ "slug": "pocket-pet",
+ "name": "Pocket Pet",
+ "category": "character",
+ "summary": "Pulse as a virtual pet in a teal egg keychain: its LCD critter flashes a ‘!’ when checkout gets sick and you press A to roll back.",
+ "look": "Glossy teal egg device on warm paper, greenish 1-bit LCD with pixel grid, pixel sprites and segment-style mono readouts; a real thumb on the coral A button.",
+ "components": [
+  {
+   "name": "Egg device",
+   "role": "teal glossy shell with keychain loop; the product as an object"
+  },
+  {
+   "name": "LCD pet",
+   "role": "Pulse: 1-bit pixel critter with sleep, alert and happy sprites"
+  },
+  {
+   "name": "Status icons",
+   "role": "‘!’, Z’s and hearts borrowed from virtual-pet UI"
+  },
+  {
+   "name": "LCD readout",
+   "role": "segment-style mono numbers (CHECKOUT −18%, since 09:42)"
+  },
+  {
+   "name": "A · B · C buttons",
+   "role": "physical choice: A = Roll back, B = Acknowledge"
+  },
+  {
+   "name": "Grey herd",
+   "role": "a row of grey devices = the dashboards you had to babysit"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Stepped sprite swap",
+   "how": "pet frames switch at 4 fps (every 0.25 s = 8th note at 120 BPM), exactly like the handheld; no tweening on the LCD"
+  },
+  {
+   "name": "Hop & land",
+   "how": "devices drop 60 px with a 0.1 s squash (scaleY 0.9) on each downbeat"
+  },
+  {
+   "name": "Button press",
+   "how": "A depresses 6 px in 0.06 s, LCD inverts for 1 frame, release on the next 8th"
+  }
+ ],
+ "story": "Hook: five grey pet devices sleep, beep and show charts under 'How many dashboards did you check today?'. Reveal: a teal egg drops in, the LCD egg hatches, 'Acme Pulse' lands. Proof: the LCD shows the alert pet with '!', CHECKOUT −18%, since 09:42, deploy #2231, and a thumb presses A · ROLL BACK. CTA: happy pet with a heart, 'FIXED IN 6 MIN', 'You ship. Pulse watches.' and Start free.",
+ "adapt": "Put your product’s key state on a tiny LCD with one pixel character, map your primary and secondary actions to buttons A and B, and use the grey device row for the tools you replace.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Tamagotchi",
+   "note": "egg-shaped handheld, 3 buttons, LCD icons that signal the pet’s needs",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Nostalgia can read as a toy and LCD text is low-contrast; keep the LCD big in the proof shot and use real numbers."
+ },
+ "best_for": [
+  "consumer apps",
+  "mobile products",
+  "monitoring",
+  "social ads"
+ ],
+ "file": "themes/080-pocket-pet.html"
+}

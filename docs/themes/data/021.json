@@ -1,0 +1,74 @@
+{
+ "id": "021",
+ "slug": "clay-studio",
+ "name": "Clay Studio",
+ "category": "material",
+ "summary": "Metrics as matte plasticine slabs on a felt table; Pulse's sculpting stick pokes the one lumpy coral tile.",
+ "look": "Everything is matte clay: chunky slabs with fingerprint grain, clay-coil line charts and fat numerals under warm studio light. Teal, ink and coral clay on an off-white felt table.",
+ "components": [
+  {
+   "name": "Clay slab",
+   "role": "the base card: 42 px radius, inner highlight + inner shade + warm drop shadow"
+  },
+  {
+   "name": "Fingerprint grain",
+   "role": "feTurbulence overlay in multiply so every surface looks hand-pressed"
+  },
+  {
+   "name": "Clay numerals",
+   "role": "Manrope 800 with stacked highlight / ledge shadows; the hero metric"
+  },
+  {
+   "name": "Clay coil",
+   "role": "a line chart drawn as a rolled worm of teal clay (thick round-cap stroke)"
+  },
+  {
+   "name": "Sculpting stick",
+   "role": "Pulse's pointer: a wooden tool that pokes the anomaly and leaves a dent"
+  },
+  {
+   "name": "Press-in button",
+   "role": "the human action; shadows flip inward and it sinks 6 px when chosen"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Squash & stretch landing",
+   "how": "scaleY 0.82 → 1.06 → 1, elastic.out(1, .5), 0.5 s; contact frame sits on the downbeat (0.5 s = one beat at 120 BPM)"
+  },
+  {
+   "name": "Stop-motion stutter",
+   "how": "idle wobble of ±1 px / ±0.6° on steps(12) = animated on twos at 24 fps; keeps every slab alive between beats"
+  },
+  {
+   "name": "Press-in",
+   "how": "shadow inset flip + translateY 6 px, power2.out 0.12 s, landing on a snare so the human choice feels physical"
+  }
+ ],
+ "story": "Hook: a pile of clay dashboard tiles drops onto the table until a coral “38 dashboards open” slab lands. Reveal: the Acme mark squashes onto a plinth on the drop and “Acme Pulse” presses up. Proof: calm metric slabs wobble while the stick pokes the lumpy coral “Checkout conversion −18% · since 09:42 · after deploy #2231” slab; the human presses “Roll back”. CTA: “You ship. Pulse watches.” with a coral clay “Start free” pill.",
+ "adapt": "Replace each slab with one of your product's cards (orders, builds, tickets); keep the numbers as real typeset text on the clay so they stay legible, and let only the problem card be lumpy and coral.",
+ "references": [
+  {
+   "url": "https://hype4.academy/articles/design/claymorphism-in-user-interfaces",
+   "note": "claymorphism shadow recipe",
+   "verified": false
+  },
+  {
+   "url": "https://tympanus.net/codrops/2025/06/09/how-to-create-interactive-droplet-like-metaballs-with-three-js-and-glsl/",
+   "note": "soft, gooey 3D material in the browser",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "low",
+  "risk": "Turns childish if the palette drifts pastel; keep saturated ink/teal/coral and typeset numbers."
+ },
+ "best_for": [
+  "consumer apps",
+  "SMB SaaS",
+  "friendly analytics"
+ ],
+ "file": "themes/021-clay-studio.html"
+}

@@ -1,0 +1,74 @@
+{
+ "id": "028",
+ "slug": "marble-run",
+ "name": "Marble-Run Machine",
+ "category": "material",
+ "summary": "A kraft-cardboard marble run where metrics roll through stencilled gates and the failing marble is diverted to a coral review cup.",
+ "look": "Corrugated kraft cardboard, taped tracks, spray-stencil labels and glossy teal glass marbles. One coral marble, one coral review cup, a brass finish bell.",
+ "components": [
+  {
+   "name": "Track",
+   "role": "a stroked SVG path with cardboard edge, face and groove layers"
+  },
+  {
+   "name": "Marble",
+   "role": "teal glass sphere with specular dot and contact shadow; one per event"
+  },
+  {
+   "name": "Gate flap",
+   "role": "a stencilled arch whose flap ticks teal when a marble passes"
+  },
+  {
+   "name": "Diverter flipper",
+   "role": "swings to route a failing marble out of the main run"
+  },
+  {
+   "name": "Review cup",
+   "role": "the coral checkpoint where the human decides"
+  },
+  {
+   "name": "Finish bell",
+   "role": "brass bell that rings for “all clear” — the CTA beat"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Path roll",
+   "how": "MotionPath with power1.in on descents, rotation tied to distance travelled; gate crossings are timed to beats"
+  },
+  {
+   "name": "Domino chain",
+   "how": "each gate's flap tick triggers the next marble release — one gate per beat at 120 BPM"
+  },
+  {
+   "name": "Flipper snap",
+   "how": "0 → 40° in 0.12 s, back.out(3), exactly on the snare; the marble's drop into the cup lands on the following downbeat"
+  }
+ ],
+ "story": "Hook: marbles tumble off a broken track into a box stencilled “Found on Friday”. Reveal: on the drop a hopper under the Acme mark plate pours marbles into a new track and the “Acme Pulse” sign swings in. Proof: marbles tick through SIGNUPS, LATENCY, ERRORS and CHECKOUT gates; the flipper diverts the coral marble to REVIEW, a taped card reads “Checkout conversion −18% · since 09:42 · after deploy #2231”, and the human presses “Roll back”. CTA: cleared marbles ring the bell — “You ship. Pulse watches.” and “Start free”.",
+ "adapt": "Name the gates after the checks your product runs (tests, fraud rules, SLAs) and make the review cup your product's approval step; everything that passes rings the bell.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Cog_(advertisement)",
+   "note": "Honda “Cog” — the chain-reaction machine ad",
+   "verified": true
+  },
+  {
+   "url": "https://dribbble.com/shots/23019536-Rube-Goldberg-Machine",
+   "note": "illustrated Rube Goldberg machine",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Clutter; cap it at 4 gates and 1 diverter so the coral marble stays the hero."
+ },
+ "best_for": [
+  "CI/CD & QA",
+  "fraud / risk",
+  "workflow automation"
+ ],
+ "file": "themes/028-marble-run.html"
+}

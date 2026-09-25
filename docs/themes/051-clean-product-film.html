@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>051 · Clean Product Film — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t051 ===== */
+
+.t051-f{position:absolute;inset:0;background:#FBFBF8;overflow:hidden;color:var(--ink);font-family:var(--sans)}
+.t051-cl{position:absolute;border-radius:50%;filter:blur(calc(var(--u)*70));opacity:.75}
+.t051-h{position:absolute;font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.02}
+.t051-h i{color:var(--brand-deep)}
+.t051-card{position:absolute;background:rgba(255,255,255,.92);border:calc(var(--u)*1) solid rgba(14,23,38,.08);border-radius:calc(var(--u)*24);box-shadow:0 calc(var(--u)*18) calc(var(--u)*40) rgba(14,23,38,.08),0 calc(var(--u)*2) calc(var(--u)*6) rgba(14,23,38,.05);display:flex;gap:calc(var(--u)*18);align-items:center;padding:calc(var(--u)*22) calc(var(--u)*26)}
+.t051-ic{width:calc(var(--u)*62);height:calc(var(--u)*62);border-radius:calc(var(--u)*16);display:grid;place-items:center;font:600 calc(var(--u)*24) var(--mono);flex:none}
+.t051-t{font:700 calc(var(--u)*30) var(--sans);line-height:1.2;white-space:nowrap}
+.t051-m{font:400 calc(var(--u)*22) var(--mono);white-space:nowrap;color:var(--muted);margin-top:calc(var(--u)*4)}
+.t051-k{position:absolute;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.t051-lock{position:absolute;display:flex;align-items:center;gap:calc(var(--u)*26);white-space:nowrap}
+.t051-lock img{display:block}
+.t051-wm{font:800 calc(var(--u)*92) var(--sans);letter-spacing:-.03em}
+.t051-win{position:absolute;left:calc(var(--u)*80);top:calc(var(--u)*268);width:calc(var(--u)*920);background:#fff;border-radius:calc(var(--u)*30);border:calc(var(--u)*1) solid rgba(14,23,38,.08);box-shadow:0 calc(var(--u)*40) calc(var(--u)*80) rgba(14,23,38,.12),0 calc(var(--u)*4) calc(var(--u)*10) rgba(14,23,38,.05);overflow:hidden}
+.t051-bar{height:calc(var(--u)*82);display:flex;align-items:center;gap:calc(var(--u)*16);padding:0 calc(var(--u)*30);border-bottom:calc(var(--u)*1) solid rgba(14,23,38,.08)}
+.t051-bar img{width:calc(var(--u)*40);height:calc(var(--u)*40)}
+.t051-bar b{font:800 calc(var(--u)*26) var(--sans)}
+.t051-live{margin-left:auto;font:600 calc(var(--u)*20) var(--mono);color:var(--brand-deep);display:flex;align-items:center;gap:calc(var(--u)*10)}
+.t051-live:before{content:"";width:calc(var(--u)*14);height:calc(var(--u)*14);border-radius:50%;background:var(--brand);box-shadow:0 0 0 calc(var(--u)*6) rgba(15,163,163,.18)}
+.t051-row{display:grid;grid-template-columns:calc(var(--u)*330) 1fr calc(var(--u)*150);align-items:center;gap:calc(var(--u)*20);height:calc(var(--u)*74);padding:0 calc(var(--u)*30);border-bottom:calc(var(--u)*1) solid rgba(14,23,38,.06)}
+.t051-row .n{font:600 calc(var(--u)*24) var(--sans)}
+.t051-row .v{font:600 calc(var(--u)*22) var(--mono);text-align:right;color:var(--ok)}
+.t051-row svg{width:100%;height:calc(var(--u)*36)}
+.t051-hot{background:#FFF4F2;height:auto;padding:calc(var(--u)*22) calc(var(--u)*30) calc(var(--u)*26);grid-template-columns:calc(var(--u)*330) 1fr calc(var(--u)*150);border-left:calc(var(--u)*6) solid var(--alert)}
+.t051-hot .n{color:var(--ink);font-weight:800}
+.t051-hot .v{color:var(--alert);font-size:calc(var(--u)*30)}
+.t051-why{grid-column:1/-1;font:400 calc(var(--u)*21) var(--mono);color:#6B4A45;margin-top:calc(var(--u)*-6)}
+.t051-acts{grid-column:1/-1;display:flex;gap:calc(var(--u)*14);margin-top:calc(var(--u)*6)}
+.t051-btn{font:700 calc(var(--u)*23) var(--sans);border-radius:calc(var(--u)*100);padding:calc(var(--u)*14) calc(var(--u)*28);border:calc(var(--u)*2) solid rgba(14,23,38,.15);background:#fff}
+.t051-btn.p{background:var(--alert);border-color:var(--alert);color:#fff;box-shadow:0 calc(var(--u)*10) calc(var(--u)*24) rgba(255,90,78,.35)}
+.t051-cur{position:absolute;width:calc(var(--u)*34);height:calc(var(--u)*34)}
+.t051-cta{position:absolute;left:50%;transform:translateX(-50%);font:700 calc(var(--u)*34) var(--sans);color:#fff;background:var(--alert);border-radius:calc(var(--u)*100);padding:calc(var(--u)*24) calc(var(--u)*56);box-shadow:0 calc(var(--u)*18) calc(var(--u)*40) rgba(255,90,78,.35);white-space:nowrap}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 051 · Signature directions</div>
+    <h1>Clean Product Film</h1>
+    <p class="dek">The airy baseline: warm near-white paper, two soft colour clouds (teal for the fix, coral for the pain) and real product UI as the only “illustration”. Notification cards swarm the hook, the drop clears the frame to a calm lockup, and the proof is one honest window where a single row turns coral and a human presses Roll back.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t051-f1"><div class="t051-f">
+<div class="t051-cl" style="left:calc(var(--u)*620);top:calc(var(--u)*-120);width:calc(var(--u)*520);height:calc(var(--u)*420);background:#CFF1EE"></div>
+<div class="t051-cl" style="left:calc(var(--u)*-160);top:calc(var(--u)*700);width:calc(var(--u)*520);height:calc(var(--u)*420);background:#FFE1DC"></div>
+<div class="t051-h" style="left:calc(var(--u)*80);top:calc(var(--u)*86);width:calc(var(--u)*900);font-size:calc(var(--u)*84)">How many dashboards did you <i>check</i> today?</div>
+<div class="t051-card" style="left:calc(var(--u)*96);top:calc(var(--u)*400);width:calc(var(--u)*500);transform:rotate(-3deg)"><div class="t051-ic" style="background:#EEF1F5">▦</div><div><div class="t051-t">Checkout dashboard</div><div class="t051-m">tab 12 of 38 · 3 min ago</div></div></div>
+<div class="t051-card" style="left:calc(var(--u)*560);top:calc(var(--u)*470);width:calc(var(--u)*420);transform:rotate(2.5deg)"><div class="t051-ic" style="background:#FFF1D6;color:#9A6A00">!</div><div><div class="t051-t">p95 latency 212 ms</div><div class="t051-m">alert · muted</div></div></div>
+<div class="t051-card" style="left:calc(var(--u)*110);top:calc(var(--u)*590);width:calc(var(--u)*450);transform:rotate(1.5deg)"><div class="t051-ic" style="background:#FFE7E4;color:var(--alert)">×</div><div><div class="t051-t">Error rate 0.4 %</div><div class="t051-m">anyone looking at this?</div></div></div>
+<div class="t051-card" style="left:calc(var(--u)*560);top:calc(var(--u)*670);width:calc(var(--u)*420);transform:rotate(-2deg)"><div class="t051-ic" style="background:#EEF1F5">?</div><div><div class="t051-t">Signups · no data</div><div class="t051-m">since last night</div></div></div>
+<div class="t051-card" style="left:calc(var(--u)*220);top:calc(var(--u)*830);width:calc(var(--u)*600);transform:rotate(-1deg)"><div class="t051-ic" style="background:var(--ink);color:#fff">38</div><div><div class="t051-t">38 dashboards open</div><div class="t051-m">none of them are watching</div></div></div>
+</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Cards swarm in from four edges</b>, one per beat, each settling with a 2–3° tilt while the question types in word by word; on the last downbeat of bar 4 the stack tightens by 20 px so the frame feels crowded.</p></div>
+  <div class="cw"><div class="cell" id="t051-f2"><div class="t051-f">
+<div class="t051-cl" style="left:calc(var(--u)*420);top:calc(var(--u)*40);width:calc(var(--u)*760);height:calc(var(--u)*620);background:#BDEBE6;opacity:.9"></div>
+<div class="t051-cl" style="left:calc(var(--u)*-180);top:calc(var(--u)*480);width:calc(var(--u)*720);height:calc(var(--u)*620);background:#FFD9D2;opacity:.85"></div>
+<div class="t051-h" style="left:0;right:0;top:calc(var(--u)*210);text-align:center;font-size:calc(var(--u)*108)">You ship.<br><i>Pulse</i> watches.</div>
+<div class="t051-lock" style="left:50%;top:calc(var(--u)*560);transform:translateX(-50%)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*120);height:calc(var(--u)*120)"><span class="t051-wm">Acme Pulse</span></div>
+<div class="t051-k" style="left:0;right:0;top:calc(var(--u)*760);text-align:center">AI agent · every metric · in the background</div>
+</div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>Everything clears upward on the drop</b>; the clouds bloom outward, “You ship.” lands on beat 1, “<i>Pulse</i> watches.” on the next bar, then the Acme mark draws and the wordmark unmasks left→right.</p></div>
+  <div class="cw"><div class="cell" id="t051-f3"><div class="t051-f">
+<div class="t051-cl" style="left:calc(var(--u)*600);top:calc(var(--u)*-160);width:calc(var(--u)*560);height:calc(var(--u)*420);background:#CFF1EE"></div>
+<div class="t051-cl" style="left:calc(var(--u)*-120);top:calc(var(--u)*820);width:calc(var(--u)*520);height:calc(var(--u)*360);background:#FFE1DC"></div>
+<div class="t051-h" style="left:calc(var(--u)*80);top:calc(var(--u)*80);width:calc(var(--u)*920);font-size:calc(var(--u)*76)">Caught <i>before</i><br>customers noticed.</div>
+<div class="t051-win"><div class="t051-bar"><img src="../assets/brand/acme-mark.svg" alt="Acme"><b>Acme Pulse</b><span style="font:400 calc(var(--u)*21) var(--mono);color:var(--muted)">· watching 14 metrics</span><span class="t051-live">live</span></div>
+<div class="t051-row"><span class="n">Signups</span><svg viewBox="0 0 200 40" preserveAspectRatio="none"><polyline points="12,40 22,32 45,34 70,26 95,28 120,20 150,22 175,16 198,18" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg><span class="v">✓</span></div><div class="t051-row"><span class="n">Active users</span><svg viewBox="0 0 200 40" preserveAspectRatio="none"><polyline points="2,24 30,22 55,26 80,20 110,22 140,18 170,20 198,16" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg><span class="v">✓</span></div><div class="t051-row"><span class="n">p95 latency</span><svg viewBox="0 0 200 40" preserveAspectRatio="none"><polyline points="2,26 28,24 60,28 85,22 115,25 145,21 175,24 198,22" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg><span class="v">212 ms</span></div><div class="t051-row"><span class="n">Error rate</span><svg viewBox="0 0 200 40" preserveAspectRatio="none"><polyline points="2,30 30,30 60,28 90,31 120,29 150,30 180,28 198,29" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg><span class="v">0.4 %</span></div>
+<div class="t051-row t051-hot"><span class="n">Checkout conversion</span><svg viewBox="0 0 200 40" preserveAspectRatio="none"><polyline points="2,10 30,11 60,9 90,10 115,12 135,30 160,32 198,33" fill="none" stroke="#FF5A4E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg><span class="v">−18%</span>
+<div class="t051-why">since 09:42 · after deploy #2231</div>
+<div class="t051-acts"><span class="t051-btn p">Roll back</span><span class="t051-btn">Acknowledge</span></div></div>
+</div>
+<div class="t051-k" style="left:calc(var(--u)*80);right:calc(var(--u)*80);top:calc(var(--u)*930);text-align:right">Pulse flags · <span style="color:var(--ink)">you decide</span></div>
+<svg class="t051-cur" style="left:calc(var(--u)*205);top:calc(var(--u)*828)" viewBox="0 0 24 24"><path d="M3 2l7 19 2.6-7.4L20 11z" fill="#0E1726" stroke="#fff" stroke-width="1.5"/></svg>
+</div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The window pushes in from far away</b> (zoom-through), rows fill top→bottom one per beat with green values; the coral row lands on the downbeat of bar 9 and the cursor glides to <i>Roll back</i> and clicks on the next downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t051-f4"><div class="t051-f">
+<div class="t051-cl" style="left:calc(var(--u)*540);top:calc(var(--u)*-140);width:calc(var(--u)*640);height:calc(var(--u)*520);background:#CFF1EE"></div>
+<div class="t051-cl" style="left:calc(var(--u)*-160);top:calc(var(--u)*640);width:calc(var(--u)*620);height:calc(var(--u)*520);background:#FFE1DC"></div>
+<div class="t051-lock" style="left:50%;top:calc(var(--u)*250);transform:translateX(-50%)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*132);height:calc(var(--u)*132)"><span class="t051-wm" style="font-size:calc(var(--u)*100)">Acme Pulse</span></div>
+<div class="t051-h" style="left:0;right:0;top:calc(var(--u)*450);text-align:center;font-size:calc(var(--u)*86)">Every metric.<br><i>Every minute.</i></div>
+<div class="t051-cta" style="top:calc(var(--u)*700)">Start free</div>
+<div class="t051-k" style="left:0;right:0;top:calc(var(--u)*880);text-align:center">14 metrics watched · resolved in 6 min</div>
+</div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Blur-crossfade to a still lockup</b>; mark + wordmark first, tagline one bar later, and the coral “Start free” pill drops in on the downbeat with the sting — then nothing moves while the music tails off.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Colour clouds</b> — two blurred radial blobs (teal-soft + peach) that grow on the drop; never flat colour backgrounds</li><li><b>Notification card</b> — white, r24, soft two-layer shadow, icon tile + bold title + mono meta; the hook’s crowd</li><li><b>Product window</b> — one real-looking UI panel with a live dot; rows with sparklines = the proof surface</li><li><b>Anomaly row</b> — coral left rule + tinted fill, mono “since · after” context line, primary + secondary action</li><li><b>Serif headline</b> — Instrument Serif 76–108 px, exactly one italic teal word per frame</li><li><b>Coral pill CTA</b> — the only solid coral object in the film besides the anomaly — pain and action share a colour</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Per-word headline</b> — each word rises 24 px + fades, power3.out 0.35 s, one word per eighth-note (0.25 s at 120 BPM)</li><li><b>Beat-stagger cards</b> — cards slide 60 px from alternating edges with 2–3° rotation, back.out(1.2) 0.5 s, one per beat (0.5 s)</li><li><b>Zoom-through seam</b> — camera scales 0.6→1 into the window over one bar (2 s), expo.inOut; rows then fill one per beat and the anomaly lands on a bar downbeat</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>It is the version a buyer trusts first: no gimmick stands between the viewer and the product, so every beat reads on a phone in a muted feed. The risk is blandness — it lives or dies on typography, the shadow quality and cutting precisely on the beat; without the colour clouds it looks like a screenshot slideshow.</p><p><b>Adapt to your product:</b> Swap the metric rows for your own product’s core list (tickets, invoices, builds, deals) and keep one row as the “problem” row with a context line and a single primary action. The cards in the hook are simply your users’ current tools and alerts.</p><p><b>References:</b> <a href="https://m3.material.io/styles/motion/easing-and-duration">https://m3.material.io/styles/motion/easing-and-duration</a> (emphasized easing and duration scaled to distance) · <a href="https://linear.app/now/how-we-redesigned-the-linear-ui">https://linear.app/now/how-we-redesigned-the-linear-ui</a> (calm, low-noise product UI as the hero) · <a href="https://developer.apple.com/videos/play/wwdc2018/803/">https://developer.apple.com/videos/play/wwdc2018/803/</a> (fluid, physically plausible interface motion)</p></div>
+</div>
+</body>
+</html>

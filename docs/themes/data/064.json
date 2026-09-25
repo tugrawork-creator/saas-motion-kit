@@ -1,0 +1,80 @@
+{
+ "id": "064",
+ "slug": "bar-chart-race",
+ "name": "Bar Chart Race",
+ "category": "data",
+ "summary": "A broadcast-style ranking race where Acme Pulse enters at #1 and Checkout conversion plunges down the board.",
+ "look": "Off-white broadcast board with rounded grey bars, one teal hero bar and a coral faller. A giant ghosted clock or count sits bottom-right; mono values ride the bar tips.",
+ "components": [
+  {
+   "name": "Race bar",
+   "role": "rounded rank bar with label inside and mono value at the tip"
+  },
+  {
+   "name": "Ghost clock",
+   "role": "huge faint timestamp or count that anchors time"
+  },
+  {
+   "name": "Rank-change chip",
+   "role": "▲/▼ mono tag showing places gained or lost"
+  },
+  {
+   "name": "Speed lines",
+   "role": "three trailing strokes that sell velocity on entry"
+  },
+  {
+   "name": "Drop trail",
+   "role": "dashed curve showing where a bar fell from"
+  },
+  {
+   "name": "Callout card",
+   "role": "white card with coral rule for the anomaly numbers"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Rank swap",
+   "how": "bars trade y-positions with power2.inOut 0.5 s, exactly one beat at 120 BPM, width tweens linearly"
+  },
+  {
+   "name": "New-entry slam",
+   "how": "entry bar x from −100 % to 0 with expo.out 0.4 s on the drop, others ease down 0.25 s later"
+  },
+  {
+   "name": "Clock tick",
+   "how": "ghost clock digits step every 0.25 s (8th notes), freeze with a 2-frame scale 1.04 on the anomaly"
+  }
+ ],
+ "story": "Hook: 38 dashboards race for attention while the count ticks up. Drop: a teal Acme Pulse bar slams in at #1. Proof: metric-health race, Checkout conversion falls #1 → #5 in coral at 09:42 after deploy #2231, a callout and Roll back. CTA: one teal bar, Resolved in 6 min, Start free.",
+ "adapt": "Race whatever your product ranks: top endpoints, busiest queues, most-used features. Let your product enter as the bar that sees everything, and show the anomaly as a rank collapse.",
+ "references": [
+  {
+   "url": "https://flourish.studio/visualisations/bar-chart-race/",
+   "note": "bar chart race template: rank swaps, timed captions, counter",
+   "verified": true
+  },
+  {
+   "url": "https://flourish.studio/blog/animated-charts/",
+   "note": "why races and time sliders work for data stories",
+   "verified": true
+  },
+  {
+   "url": "https://observablehq.com/@d3/bar-chart-race",
+   "note": "D3 reference implementation of keyframed rank interpolation",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Races are addictive but noisy; if more than ~6 bars move at once nobody can follow the one that matters."
+ },
+ "best_for": [
+  "analytics",
+  "growth tools",
+  "marketplaces",
+  "social launches"
+ ],
+ "file": "themes/064-bar-chart-race.html"
+}

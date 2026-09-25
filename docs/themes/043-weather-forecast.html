@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>043 · The Weather Forecast — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t043-night{background:radial-gradient(ellipse at 50% 0%,#1E3A55 0%,#0A1726 70%)}
+.t043-scope{background:#08131F}
+.t043-day{background:linear-gradient(180deg,#BFEBE6 0%,#E9F6F2 55%,#F6F5F1 100%)}
+.t043-s{position:absolute;inset:0;width:100%;height:100%}
+.t043-m{font-family:var(--mono)}
+.t043-se{font-family:var(--serif)}
+.t043-sa{font-family:var(--sans)}
+.t043-mark{position:absolute;display:block}
+.t043-sweep{position:absolute;border-radius:50%;background:conic-gradient(from 0deg,rgba(15,163,163,0) 0deg,rgba(15,163,163,0) 280deg,rgba(15,163,163,.18) 330deg,rgba(127,231,222,.55) 359deg,rgba(127,231,222,0) 360deg)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 043 · Metaphor concepts</div>
+    <h1>The Weather Forecast</h1>
+    <p class="dek">Your product's health becomes a weather map. A Doppler scope sweeps over sectors named after your metrics, range rings count the minutes until customers would feel it, and one storm cell blooms over Checkout. A human forecaster makes the call, and the film ends in clear skies.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- F1 · HOOK -->
+  <div class="cw"><div class="cell t043-night" id="t043-f1">
+    <svg class="t043-s" viewBox="0 0 1080 1080">
+      <defs>
+        <filter id="t043-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+        <symbol id="t043-cloud" viewBox="0 0 120 80"><path d="M28 70 a24 24 0 0 1 2 -48 a30 30 0 0 1 56 -4 a22 22 0 0 1 8 52 z" fill="#8FA3B8"/></symbol>
+      </defs>
+      <!-- fog bands -->
+      <g opacity=".22" filter="url(#t043-soft)"><ellipse cx="300" cy="420" rx="420" ry="60" fill="#C9D6E2"/><ellipse cx="820" cy="460" rx="380" ry="50" fill="#C9D6E2"/></g>
+      <g class="t043-m" font-size="20" fill="#8FA3B8" letter-spacing="3"><text x="70" y="96">5-DAY OUTLOOK · YOUR PRODUCT</text></g>
+      <g class="t043-se" font-size="84" fill="#F4F7FA" letter-spacing="-1">
+        <text x="70" y="220">And the drop still</text>
+        <text x="70" y="310">shipped on <tspan font-style="italic" fill="#FF8A80">Friday</tspan>.</text>
+      </g>
+      <!-- forecast cards -->
+      <g class="t043-m" font-size="22" fill="#C9D6E2" text-anchor="middle" letter-spacing="2">
+        <rect x="70" y="480" width="170" height="330" rx="16" fill="#13263A" stroke="#23405C" stroke-width="2"/>
+        <rect x="257" y="480" width="170" height="330" rx="16" fill="#13263A" stroke="#23405C" stroke-width="2"/>
+        <rect x="444" y="480" width="170" height="330" rx="16" fill="#13263A" stroke="#23405C" stroke-width="2"/>
+        <rect x="631" y="480" width="170" height="330" rx="16" fill="#13263A" stroke="#23405C" stroke-width="2"/>
+        <rect x="818" y="480" width="190" height="330" rx="16" fill="#2A1A22" stroke="#FF5A4E" stroke-width="3"/>
+        <text x="155" y="528">MON</text><text x="342" y="528">TUE</text><text x="529" y="528">WED</text><text x="716" y="528">THU</text><text x="913" y="528" fill="#FF8A80">FRI</text>
+        <text x="155" y="760" font-size="20" fill="#8FA3B8">fog</text><text x="342" y="760" font-size="20" fill="#8FA3B8">fog</text><text x="529" y="760" font-size="20" fill="#8FA3B8">drizzle</text><text x="716" y="760" font-size="20" fill="#8FA3B8">fog</text><text x="913" y="760" font-size="20" fill="#FF8A80">storm</text>
+        <text x="155" y="700" font-size="36" fill="#F4F7FA">12</text><text x="342" y="700" font-size="36" fill="#F4F7FA">9</text><text x="529" y="700" font-size="36" fill="#F4F7FA">7</text><text x="716" y="700" font-size="36" fill="#F4F7FA">10</text><text x="913" y="700" font-size="36" fill="#FF8A80">−18%</text>
+      </g>
+      <use href="#t043-cloud" x="105" y="560" width="100" height="68"/>
+      <use href="#t043-cloud" x="292" y="560" width="100" height="68"/>
+      <use href="#t043-cloud" x="479" y="556" width="100" height="68"/>
+      <g stroke="#8FA3B8" stroke-width="4" stroke-linecap="round"><line x1="510" y1="632" x2="504" y2="648"/><line x1="530" y1="632" x2="524" y2="648"/><line x1="550" y1="632" x2="544" y2="648"/></g>
+      <use href="#t043-cloud" x="666" y="560" width="100" height="68"/>
+      <use href="#t043-cloud" x="863" y="552" width="100" height="68"/>
+      <path d="M918 612 L898 648 L914 648 L902 680 L934 636 L918 636 L928 612 z" fill="#FF5A4E"/>
+      <text class="t043-m" x="539" y="850" font-size="20" fill="#8FA3B8" text-anchor="middle" letter-spacing="2">DASHBOARDS CHECKED BY HAND, PER DAY</text>
+      <!-- tv ticker -->
+      <rect x="0" y="910" width="1080" height="80" fill="#FF5A4E"/>
+      <rect x="0" y="910" width="220" height="80" fill="#0E1726"/>
+      <text class="t043-m" x="110" y="958" font-size="22" fill="#fff" text-anchor="middle" letter-spacing="3">ALERT</text>
+      <text class="t043-m" x="250" y="958" font-size="24" fill="#fff" letter-spacing="1">Storm found Friday 17:40 · warning issued too late</text>
+    </svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Fog drifts right across a TV five-day card while the days flip in left to right, one per beat.</b> Friday's card turns coral with a lightning bolt on the last downbeat and the red ticker slides in from the left: the warning came too late.</p></div>
+
+  <!-- F2 · REVEAL -->
+  <div class="cw"><div class="cell t043-scope" id="t043-f2">
+    <div class="t043-sweep" style="left:calc(var(--u)*160);top:calc(var(--u)*180);width:calc(var(--u)*760);height:calc(var(--u)*760);transform:rotate(40deg)"></div>
+    <svg class="t043-s" viewBox="0 0 1080 1080">
+      <g fill="none" stroke="#1D4A52" stroke-width="2">
+        <circle cx="540" cy="560" r="380" stroke="#2C6B72" stroke-width="3"/><circle cx="540" cy="560" r="285"/><circle cx="540" cy="560" r="190"/><circle cx="540" cy="560" r="95"/>
+        <line x1="160" y1="560" x2="920" y2="560"/><line x1="540" y1="180" x2="540" y2="940"/>
+      </g>
+      <g class="t043-m" font-size="20" fill="#5FA8A8" letter-spacing="2">
+        <text x="70" y="96">DOPPLER · ALL METRICS</text>
+        <text x="1010" y="96" text-anchor="end">SWEEP 1 / ∞</text>
+      </g>
+      <text class="t043-sa" x="540" y="720" font-size="110" font-weight="800" fill="#F4F7FA" text-anchor="middle" letter-spacing="-3">Acme Pulse</text>
+      <text class="t043-m" x="540" y="1010" font-size="22" fill="#7FE7DE" text-anchor="middle" letter-spacing="3">NOW WATCHING · 14 METRICS</text>
+    </svg>
+    <img class="t043-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*470);top:calc(var(--u)*430);width:calc(var(--u)*140);height:calc(var(--u)*140)">
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The TV card collapses into a dot that becomes the scope centre; range rings ripple outward.</b> On the drop the beam makes its first clockwise pass and "Acme Pulse" lights in its wake.</p></div>
+
+  <!-- F3 · PROOF MOMENT -->
+  <div class="cw"><div class="cell t043-scope" id="t043-f3">
+    <div class="t043-sweep" style="left:calc(var(--u)*80);top:calc(var(--u)*120);width:calc(var(--u)*640);height:calc(var(--u)*640);transform:rotate(130deg)"></div>
+    <svg class="t043-s" viewBox="0 0 1080 1080">
+      <defs><filter id="t043-bl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+      <g fill="none" stroke="#1D4A52" stroke-width="2">
+        <circle cx="400" cy="440" r="320" stroke="#2C6B72" stroke-width="3"/><circle cx="400" cy="440" r="213"/><circle cx="400" cy="440" r="106"/>
+        <line x1="400" y1="440" x2="400" y2="120"/><line x1="400" y1="440" x2="704" y2="341"/><line x1="400" y1="440" x2="588" y2="699"/><line x1="400" y1="440" x2="212" y2="699"/><line x1="400" y1="440" x2="96" y2="341"/>
+      </g>
+      <!-- storm cell over Checkout sector -->
+      <g filter="url(#t043-bl)">
+        <ellipse cx="560" cy="500" rx="92" ry="70" fill="#F4B740" opacity=".75"/>
+        <ellipse cx="572" cy="506" rx="60" ry="46" fill="#FF5A4E" opacity=".95"/>
+        <ellipse cx="200" cy="300" rx="40" ry="26" fill="#0FA3A3" opacity=".6"/>
+        <ellipse cx="300" cy="610" rx="34" ry="24" fill="#0FA3A3" opacity=".5"/>
+      </g>
+      <circle cx="572" cy="506" r="96" fill="none" stroke="#FF5A4E" stroke-width="3" stroke-dasharray="8 7"/>
+      <g class="t043-m" font-size="20" fill="#5FA8A8" letter-spacing="1">
+        <text x="505" y="230">SIGNUPS</text><text x="620" y="660">CHECKOUT</text><text x="170" y="740">LATENCY</text><text x="70" y="480">ERRORS</text><text x="190" y="180">ACTIVE</text>
+        <text x="408" y="340" fill="#3F8A8F">now</text><text x="408" y="233" fill="#3F8A8F">+15 m</text><text x="408" y="136" fill="#3F8A8F">customers</text>
+      </g>
+      <line x1="668" y1="470" x2="760" y2="400" stroke="#FF5A4E" stroke-width="3"/>
+      <!-- storm datablock -->
+      <g class="t043-m">
+        <text x="770" y="176" font-size="20" fill="#FF8A80" letter-spacing="3">STORM CELL</text>
+        <text x="770" y="236" font-size="34" font-weight="600" fill="#F4F7FA">Checkout</text>
+        <text x="770" y="278" font-size="34" font-weight="600" fill="#F4F7FA">conversion</text>
+        <text x="770" y="364" font-size="72" font-weight="600" fill="#FF5A4E">−18%</text>
+        <text x="770" y="420" font-size="24" fill="#C9D6E2">since 09:42</text>
+        <text x="770" y="454" font-size="24" fill="#C9D6E2">after deploy</text>
+        <text x="770" y="488" font-size="24" fill="#C9D6E2">#2231</text>
+      </g>
+      <!-- forecaster call -->
+      <rect x="60" y="820" width="960" height="200" rx="20" fill="#0F2233" stroke="#23405C" stroke-width="2"/>
+      <text class="t043-se" x="96" y="892" font-size="44" fill="#F4F7FA">Forecaster's <tspan font-style="italic" fill="#7FE7DE">call</tspan></text>
+      <text class="t043-m" x="96" y="940" font-size="20" fill="#8FA3B8" letter-spacing="1">customers not affected yet</text>
+      <rect x="480" y="858" width="250" height="96" rx="16" fill="#FF5A4E"/>
+      <text class="t043-sa" x="605" y="918" font-size="34" font-weight="700" fill="#fff" text-anchor="middle">Roll back</text>
+      <rect x="750" y="858" width="240" height="96" rx="16" fill="none" stroke="#C9D6E2" stroke-width="3"/>
+      <text class="t043-sa" x="870" y="918" font-size="30" font-weight="600" fill="#F4F7FA" text-anchor="middle">Acknowledge</text>
+    </svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The beam sweeps clockwise (3.2 s per turn); cells ignite as it passes and fade behind it.</b> In the Checkout sector a cell turns amber, then coral, on the downbeat of bar 2; the dashed ring locks on, the datablock types in and the forecaster taps "Roll back".</p></div>
+
+  <!-- F4 · CTA -->
+  <div class="cw"><div class="cell t043-day" id="t043-f4">
+    <svg class="t043-s" viewBox="0 0 1080 1080">
+      <g fill="#F4B740"><circle cx="880" cy="230" r="92"/></g>
+      <g stroke="#F4B740" stroke-width="10" stroke-linecap="round"><line x1="880" y1="96" x2="880" y2="70"/><line x1="880" y1="364" x2="880" y2="390"/><line x1="746" y1="230" x2="720" y2="230"/><line x1="1014" y1="230" x2="1030" y2="230"/><line x1="785" y1="135" x2="767" y2="117"/><line x1="975" y1="325" x2="993" y2="343"/><line x1="975" y1="135" x2="993" y2="117"/><line x1="785" y1="325" x2="767" y2="343"/></g>
+      <text class="t043-sa" x="224" y="208" font-size="76" font-weight="800" fill="#0E1726" letter-spacing="-2">Acme Pulse</text>
+      <g class="t043-se" font-size="104" fill="#0E1726" letter-spacing="-1">
+        <text x="80" y="480">Caught <tspan font-style="italic" fill="#0B6E6E">before</tspan></text>
+        <text x="80" y="580">customers noticed.</text>
+      </g>
+      <rect x="80" y="660" width="330" height="106" rx="18" fill="#FF5A4E"/>
+      <text class="t043-sa" x="245" y="727" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Start free</text>
+      <rect x="80" y="860" width="920" height="100" rx="18" fill="#FFFFFF" stroke="#CFE3DF" stroke-width="2"/>
+      <g class="t043-m" font-size="24" fill="#0E1726" letter-spacing="1">
+        <text x="116" y="920">FRI · CLEAR</text>
+        <text x="340" y="920" fill="#1F9D55">● all 14 metrics calm</text>
+        <text x="964" y="920" text-anchor="end" fill="#5A6475">resolved in 6 min</text>
+      </g>
+    </svg>
+    <img class="t043-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*80);top:calc(var(--u)*134);width:calc(var(--u)*120);height:calc(var(--u)*120)">
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The storm shrinks and desaturates, the scope brightens into a morning sky and the sun rises from the lower right.</b> The tagline lands on the downbeat; the "FRI · CLEAR" strip slides up from the bottom on the final bar.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Five-day card</b> — TV-weather strip that stages the hook (fog all week, storm on Friday).</li>
+    <li><b>Radar scope</b> — range rings as minutes until customers would feel it; sectors named after metrics.</li>
+    <li><b>Conic sweep</b> — single gradient beam with a fading trailing edge; the agent's heartbeat.</li>
+    <li><b>Storm cell</b> — teal→amber→coral blurred blobs; only one ever reaches coral.</li>
+    <li><b>Datablock</b> — mono readout tethered to the cell with the anomaly text.</li>
+    <li><b>Forecaster bar + outlook strip</b> — the human decision, then "FRI · CLEAR" in the CTA.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Sweep</b> — @property angle 0→360° over 3.2 s, linear; that is 6.4 beats at 120 BPM, so start each turn on a bar line and let it phase across the loop.</li>
+    <li><b>Cell ignition</b> — each cell's delay = its angle ÷ 360 × 3.2 s so it lights exactly as the beam hits; fades 95%→12% over 1.5 s.</li>
+    <li><b>Storm clears</b> — resolved cells shrink and desaturate in a 0.08 s stagger, power2.in, starting on the downbeat after "Roll back".</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>Everyone reads weather maps instantly, and "forecast" frames the product as early warning rather than post-mortem. Risk: storms read as bad news, and a busy scope is hard at 1:1; resolve fast, cap it at five sectors and end in sunshine.</p>
+    <p><b>Adapt to your product:</b> Name the sectors after your own signals (queues, regions, customers, cost) and let the rings mean whatever "time until it hurts" is for you.</p>
+    <p><b>References:</b> <a href="https://codefronts.com/motion/css-loading-animations/weather-radar-sweep-loading-animation/">CSS radar sweep with cells timed to the beam</a> · <a href="https://www.windy.com/articles/8207">Windy, radar layer</a></p>
+  </div>
+</div>
+</body>
+</html>

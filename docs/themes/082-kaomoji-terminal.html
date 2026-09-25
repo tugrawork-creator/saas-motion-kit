@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>082 · Kaomoji Terminal — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t082-cell{background:#0B1220;font-family:var(--mono);color:#D6DEE8}
+.t082-cell::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 calc(var(--u)*2),transparent calc(var(--u)*2) calc(var(--u)*6));pointer-events:none}
+.t082-bar{position:absolute;left:0;right:0;top:0;height:calc(var(--u)*72);background:#141D2E;display:flex;align-items:center;gap:calc(var(--u)*14);padding-left:calc(var(--u)*60);font:400 calc(var(--u)*22) var(--mono);color:#6B7890}
+.t082-bar i{width:calc(var(--u)*20);height:calc(var(--u)*20);border-radius:50%;background:#2A3548}
+.t082-bar span{margin-left:auto;margin-right:calc(var(--u)*60)}
+.t082-log{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*120);font:400 calc(var(--u)*26)/1.7 var(--mono);color:#8A96AB}
+.t082-log b{color:#0FA3A3;font-weight:600;margin-right:calc(var(--u)*10)} .t082-log em{font-style:normal;color:#1F9D55;margin-left:calc(var(--u)*12)}
+.t082-dim,.t082-log .t082-dim{color:#4E5A70}
+.t082-h1{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*560);font:600 calc(var(--u)*64)/1.2 var(--mono);color:#F6F5F1;letter-spacing:-.03em}
+.t082-h1 u,.t082-h4 u{text-decoration:none;color:#0FA3A3}
+.t082-pr{color:#FF5A4E}
+.t082-cur{display:inline-block;width:.55em;height:1em;background:#0FA3A3;vertical-align:-.12em;margin-left:.15em}
+.t082-face1{position:absolute;right:calc(var(--u)*66);top:calc(var(--u)*830);font:600 calc(var(--u)*92) var(--mono);color:#4E5A70}
+.t082-face2{position:absolute;left:0;right:0;top:calc(var(--u)*170);text-align:center;font:600 calc(var(--u)*230)/1 var(--mono);color:#0FA3A3;letter-spacing:-.04em;text-shadow:0 0 calc(var(--u)*40) rgba(15,163,163,.45)}
+.t082-cmd{position:absolute;left:0;right:0;top:calc(var(--u)*480);text-align:center;font:400 calc(var(--u)*34) var(--mono);color:#8A96AB} .t082-cmd b{color:#0FA3A3}
+.t082-lock{position:absolute;left:0;right:0;top:calc(var(--u)*620);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*26);font:800 calc(var(--u)*100) var(--sans);letter-spacing:-.04em;color:#F6F5F1}
+.t082-lock img{width:calc(var(--u)*112);height:calc(var(--u)*112)}
+.t082-sub{position:absolute;left:0;right:0;top:calc(var(--u)*810);text-align:center;font:400 calc(var(--u)*26) var(--mono);color:#6B7890}
+.t082-face3{position:absolute;right:calc(var(--u)*66);top:calc(var(--u)*110);font:600 calc(var(--u)*150)/1 var(--mono);color:#FF5A4E;letter-spacing:-.05em;text-shadow:0 0 calc(var(--u)*40) rgba(255,90,78,.4)}
+.t082-stream{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*384);font:400 calc(var(--u)*24)/1.65 var(--mono);color:#8A96AB}
+.t082-stream span{color:#4E5A70;margin-right:calc(var(--u)*16)} .t082-stream em{font-style:normal;color:#1F9D55;margin-left:calc(var(--u)*10)}
+.t082-hot{background:rgba(255,90,78,.14);color:#FF8A80;margin-left:calc(var(--u)*-12);padding:0 calc(var(--u)*12);border-left:calc(var(--u)*6) solid #FF5A4E}
+.t082-hot b{color:#FF5A4E}
+.t082-big{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*112);font:600 calc(var(--u)*76)/1 var(--mono);color:#F6F5F1;letter-spacing:-.04em} .t082-big b{color:#FF5A4E;display:block;font-size:calc(var(--u)*92);margin-top:calc(var(--u)*10)}
+.t082-meta{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*318);font:400 calc(var(--u)*26) var(--mono);color:#FF8A80}
+.t082-ask{position:absolute;left:calc(var(--u)*66);right:calc(var(--u)*66);top:calc(var(--u)*640);border:calc(var(--u)*3) solid #2A3548;border-radius:calc(var(--u)*16);padding:calc(var(--u)*30) calc(var(--u)*34);font:400 calc(var(--u)*30) var(--mono);color:#F6F5F1;background:#101A2B}
+.t082-keys{display:flex;gap:calc(var(--u)*26);margin-top:calc(var(--u)*20);font-size:calc(var(--u)*34)}
+.t082-keys span{padding:calc(var(--u)*10) calc(var(--u)*18);border-radius:calc(var(--u)*10);color:#8A96AB;border:calc(var(--u)*2) solid #2A3548}
+.t082-keys .t082-on{background:#FF5A4E;color:#fff;border-color:#FF5A4E;font-weight:600}
+.t082-you{margin-top:calc(var(--u)*22);font-size:calc(var(--u)*32);color:#F6F5F1} .t082-you b{color:#F4B740}
+.t082-face4{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*130);font:600 calc(var(--u)*140)/1 var(--mono);color:#0FA3A3;letter-spacing:-.05em}
+.t082-ok{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*310);font:400 calc(var(--u)*26) var(--mono);color:#1F9D55}
+.t082-h4{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*400);font:600 calc(var(--u)*96)/1.08 var(--mono);color:#F6F5F1;letter-spacing:-.05em}
+.t082-cta{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*680);font:600 calc(var(--u)*46) var(--mono);background:#FF5A4E;color:#fff;padding:calc(var(--u)*22) calc(var(--u)*34);border-radius:calc(var(--u)*8)}
+.t082-lock4{position:absolute;left:calc(var(--u)*66);top:calc(var(--u)*900);display:flex;align-items:center;gap:calc(var(--u)*16);font:800 calc(var(--u)*40) var(--sans);color:#F6F5F1}
+.t082-lock4 img{width:calc(var(--u)*60);height:calc(var(--u)*60)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 082 · Characters & mascots</div>
+    <h1>Kaomoji Terminal</h1>
+    <p class="dek">The whole film lives in a terminal, and Pulse’s only body is a kaomoji — a face made of type. It dozes (-_-), watches (•_•), gasps (°o°;) and relaxes (^_^)b while the log stream scrolls; the human answers the prompt with one keystroke.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <!-- 4 cells, drawn in real 1080×1080-frame px via calc(var(--u)*X) or a 1080 viewBox. -->
+  <div class="cw"><div class="cell t082-cell" id="t082-f1">
+<div class="t082-bar"><i></i><i></i><i></i><span>~/dashboards — zsh</span></div>
+<div class="t082-log">
+<p><b>$</b> open dash/signups <em>ok</em></p>
+<p><b>$</b> open dash/latency-p95 <em>ok</em></p>
+<p><b>$</b> open dash/errors <em>ok</em></p>
+<p><b>$</b> open dash/checkout <em class="t082-dim">skipped</em></p>
+<p><b>$</b> open dash/active-users <em>ok</em></p>
+<p class="t082-dim">… 38 tabs open · 17:58 fri</p>
+</div>
+<div class="t082-h1"><span class="t082-pr">&gt;</span> how many dashboards<br>&nbsp;&nbsp;did you <u>check</u> today?<span class="t082-cur"></span></div>
+<div class="t082-face1">(-_-) zzZ</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Log lines scroll up one per 8th note</b> as dashboards open; the prompt types the hook at 20 chars/s and the cursor blinks on the beat; the sleeping face fades in on the 0:06 snare.</p></div>
+  <div class="cw"><div class="cell t082-cell" id="t082-f2">
+<div class="t082-bar"><i></i><i></i><i></i><span>pulse — watching</span></div>
+<div class="t082-face2">(•_•)</div>
+<div class="t082-cmd"><b>$</b> acme pulse --watch all</div>
+<div class="t082-lock"><img src="../assets/brand/acme-mark.svg" alt="Acme"><span>Acme Pulse</span></div>
+<div class="t082-sub">14 metrics · 2,418 events/sec · 0 humans paged</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>Screen clears on the drop</b> (one frame of black) and the face slams in at 230 px; the command types on beat 2 and the lockup appears on beat 3 with a 1-frame glow flash.</p></div>
+  <div class="cw"><div class="cell t082-cell" id="t082-f3">
+<div class="t082-bar"><i></i><i></i><i></i><span>pulse — anomaly</span></div>
+<div class="t082-face3">(°o°;)</div>
+<div class="t082-stream">
+<p><span>09:40</span> signups <em>ok</em></p>
+<p><span>09:41</span> p95 latency 212 ms <em>ok</em></p>
+<p><span>09:41</span> error rate 0.4 % <em>ok</em></p>
+<p><span>09:42</span> deploy #2231 shipped</p>
+<p class="t082-hot"><span>09:42</span> checkout conversion <b>−18%</b></p>
+</div>
+<div class="t082-big">checkout <b>−18%</b></div>
+<div class="t082-meta">since 09:42 · after deploy #2231</div>
+<div class="t082-ask"><div>roll back deploy #2231?</div>
+<div class="t082-keys"><span class="t082-on">[R] roll back</span><span>[A] acknowledge</span></div>
+<div class="t082-you"><b>you&gt;</b> R<span class="t082-cur"></span></div></div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The stream freezes on beat 1</b> and the anomaly line flashes coral; the face swaps (•_•) → (°o°;) on the next beat. The prompt box draws in and the human types R on the bar downbeat — [R] fills coral.</p></div>
+  <div class="cw"><div class="cell t082-cell" id="t082-f4">
+<div class="t082-bar"><i></i><i></i><i></i><span>pulse — resolved</span></div>
+<div class="t082-face4">(^_^)b</div>
+<div class="t082-ok">[ok] resolved in 6 min · caught before customers noticed</div>
+<div class="t082-h4">Every metric.<br><u>Every minute.</u></div>
+<div class="t082-cta">[ Start free ]</div>
+<div class="t082-lock4"><img src="../assets/brand/acme-mark.svg" alt="Acme"><span>Acme Pulse</span></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The face swaps to (^_^)b on beat 1</b>, the [ok] line prints, the tagline types line by line and [ Start free ] inverts on the final hit.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Kaomoji face</b> — Pulse’s entire body: 4 expressions built from ASCII</li><li><b>Log stream</b> — timestamped metric lines in mono; ok in green</li><li><b>Hot line</b> — the anomaly row: coral bar, tinted background</li><li><b>Prompt box</b> — the question + [R] roll back / [A] acknowledge keys</li><li><b>Human input</b> — ‘you> R’ with a blinking block cursor</li><li><b>Terminal chrome</b> — minimal window bar + faint scanlines</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Type-on</b> — characters at 20 chars/s, 1 line per 8th note in logs; punctuation pauses snap to the next beat (120 BPM grid)</li><li><b>Face swap</b> — hard cut between kaomoji on quarter notes, with a 1-frame scale 1.08 pop — never tweened</li><li><b>Cursor blink</b> — block cursor 0.25 s on / 0.25 s off (8ths), holding solid while the human types</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> Nothing is cheaper to produce and nothing is more native for developer tools: type is the character, emotion reads instantly from a kaomoji, and the prompt makes the human decision explicit. <b>Risk:</b> Terminal aesthetics exclude non-technical buyers and dense logs are hard to read at feed size; keep only 5 log lines and one giant face per frame.</p><p><b>Adapt to your product:</b> Replace the log lines with your own CLI or event stream, pick 4 kaomoji for your idle/watching/alert/done states, and turn your primary action into a single-key prompt.</p><p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Kaomoji">https://en.wikipedia.org/wiki/Kaomoji</a> (Japanese text faces read upright, emphasising the eyes) · <a href="https://en.wikipedia.org/wiki/Emoticon">https://en.wikipedia.org/wiki/Emoticon</a> (the 1982 origin of text faces in plain-text messaging)</p></div>
+</div>
+</body>
+</html>

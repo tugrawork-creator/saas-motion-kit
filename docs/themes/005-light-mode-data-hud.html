@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>005 · Light-Mode Data HUD — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t005-s{position:absolute;inset:0;background:#FCFCFA;font-family:var(--sans);color:var(--ink);overflow:hidden}
+.t005-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t005-pn{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h));border-right:calc(var(--u)*1.5) solid #DCDDD8;border-bottom:calc(var(--u)*1.5) solid #DCDDD8;padding:calc(var(--u)*18) calc(var(--u)*18)}
+.t005-pn .l{display:block;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.06em;color:#8A8F99;white-space:nowrap}
+.t005-pn .v{display:block;font:400 calc(var(--u)*50)/1 var(--mono);letter-spacing:-.03em;margin-top:calc(var(--u)*14);color:var(--ink)}
+.t005-pn svg{position:absolute;left:calc(var(--u)*6);bottom:calc(var(--u)*14);width:calc(var(--u)*230);height:calc(var(--u)*80)}
+.t005-pn path{fill:none;stroke:#9AA1AC;stroke-width:2.5}
+.t005-pn.on .v{color:var(--brand-deep)} .t005-pn.on path{stroke:var(--brand)}
+.t005-pn.on::after{content:"✓";position:absolute;right:calc(var(--u)*18);top:calc(var(--u)*14);font:600 calc(var(--u)*22) var(--mono);color:var(--ok)}
+.t005-pn.off{opacity:.5}
+.t005-pn.ghost{opacity:.22}
+.t005-blur{filter:blur(calc(var(--u)*4))}
+.t005-grid{position:absolute;inset:0}
+.t005-grid::before{content:"";position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*120);width:calc(var(--u)*960);height:calc(var(--u)*800);border-top:calc(var(--u)*1.5) solid #DCDDD8;border-left:calc(var(--u)*1.5) solid #DCDDD8}
+.t005-tick{position:absolute;left:calc(var(--u)*60);width:calc(var(--u)*960);height:calc(var(--u)*44);display:flex;align-items:center;gap:calc(var(--u)*26);font:600 calc(var(--u)*20) var(--mono);letter-spacing:.06em;color:var(--muted);white-space:nowrap;overflow:hidden}
+.t005-tick b{color:var(--ink);font-weight:600} .t005-tick .ok{color:var(--ok)} .t005-tick .al{color:var(--alert)}
+.t005-live{width:calc(var(--u)*12);height:calc(var(--u)*12);border-radius:50%;background:var(--alert);box-shadow:0 0 0 calc(var(--u)*5) rgba(255,90,78,.18)}
+.t005-plate{position:absolute;background:#FCFCFA;box-shadow:0 0 0 calc(var(--u)*1.5) #CFD1CB,0 calc(var(--u)*30) calc(var(--u)*80) rgba(14,23,38,.12)}
+.t005-br{position:absolute;width:calc(var(--u)*44);height:calc(var(--u)*44);border-color:var(--c,var(--ink));border-style:solid;border-width:0}
+.t005-br.tl{left:calc(var(--u)*-14);top:calc(var(--u)*-14);border-left-width:calc(var(--u)*5);border-top-width:calc(var(--u)*5)}
+.t005-br.tr{right:calc(var(--u)*-14);top:calc(var(--u)*-14);border-right-width:calc(var(--u)*5);border-top-width:calc(var(--u)*5)}
+.t005-br.bl{left:calc(var(--u)*-14);bottom:calc(var(--u)*-14);border-left-width:calc(var(--u)*5);border-bottom-width:calc(var(--u)*5)}
+.t005-br.bporch{right:calc(var(--u)*-14);bottom:calc(var(--u)*-14);border-right-width:calc(var(--u)*5);border-bottom-width:calc(var(--u)*5)}
+.t005-hl{font:400 calc(var(--u)*88)/1.0 var(--serif);letter-spacing:-.015em;color:var(--ink)}
+.t005-hl em{color:var(--alert)}
+.t005-scan{position:absolute;top:0;bottom:0;width:calc(var(--u)*4);background:var(--brand);box-shadow:0 0 calc(var(--u)*24) var(--brand)}
+.t005-trail{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,rgba(15,163,163,0),rgba(15,163,163,.14))}
+.t005-word{font:800 calc(var(--u)*100)/1 var(--sans);letter-spacing:-.035em;color:var(--ink);white-space:nowrap}
+.t005-lab{font:600 calc(var(--u)*20) var(--mono);letter-spacing:.08em;color:#8A8F99}
+.t005-big{font:400 calc(var(--u)*120)/1 var(--mono);letter-spacing:-.05em}
+.t005-card{position:absolute;background:#fff;box-shadow:0 0 0 calc(var(--u)*1.5) #CFD1CB,0 calc(var(--u)*24) calc(var(--u)*60) rgba(14,23,38,.14);border-left:calc(var(--u)*8) solid var(--alert);padding:calc(var(--u)*26) calc(var(--u)*30)}
+.t005-card .t{font:800 calc(var(--u)*40)/1.1 var(--sans)} .t005-card .t b{color:var(--alert)}
+.t005-card .m{font:400 calc(var(--u)*24) var(--mono);color:var(--muted);margin-top:calc(var(--u)*8)}
+.t005-btn{height:calc(var(--u)*68);padding:0 calc(var(--u)*32);display:inline-flex;align-items:center;font:700 calc(var(--u)*28) var(--sans);border-radius:calc(var(--u)*4)}
+.t005-btn.pri{background:var(--alert);color:#fff}.t005-btn.sec{box-shadow:inset 0 0 0 calc(var(--u)*2) #CFD1CB}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 005 · Product UI as the stage</div>
+    <h1>Light-Mode Data HUD</h1>
+    <p class="dek">A near-white cockpit of sixteen hairline-ruled micro-panels — counters, sparklines, tickers — with terminal density and Swiss calm. A thin teal scanline sweeps the whole grid, the camera rack-focuses from panel to panel, and corner brackets snap onto the one number that is wrong.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●○○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t005-f1">
+<div class="t005-s">
+ <div class="t005-tick" style="top:calc(var(--u)*60)"><span class="t005-live"></span><b>LIVE</b><span>38 DASHBOARDS</span><span>14 METRICS</span><span class="ok">ALL GREEN</span><span>09:43:58</span></div>
+ <div class="t005-grid t005-blur"><div class="t005-pn " style="--x:60;--y:120;--w:240;--h:200;"><span class="l">SIGNUPS</span><span class="v">412</span><svg viewBox="0 0 230 80"><path d="M10 60 L50 52 L90 56 L130 44 L170 48 L220 36"/></svg></div>
+<div class="t005-pn " style="--x:300;--y:120;--w:240;--h:200;"><span class="l">ACTIVE USERS</span><span class="v">8,190</span><svg viewBox="0 0 230 80"><path d="M10 58 L60 50 L110 46 L160 40 L220 38"/></svg></div>
+<div class="t005-pn " style="--x:540;--y:120;--w:240;--h:200;"><span class="l">CHECKOUT CONV.</span><span class="v">3.42%</span><svg viewBox="0 0 230 80"><path d="M10 40 L60 42 L110 38 L160 41 L220 40"/></svg></div>
+<div class="t005-pn " style="--x:780;--y:120;--w:240;--h:200;"><span class="l">P95 LATENCY</span><span class="v">212ms</span><svg viewBox="0 0 230 80"><path d="M10 50 Q60 30 110 48 T220 44"/></svg></div>
+<div class="t005-pn " style="--x:60;--y:320;--w:240;--h:200;"><span class="l">ERROR RATE</span><span class="v">0.4%</span><svg viewBox="0 0 230 80"><path d="M10 56 L220 56"/></svg></div>
+<div class="t005-pn " style="--x:300;--y:320;--w:240;--h:200;"><span class="l">EVENTS/SEC</span><span class="v">2,418</span><svg viewBox="0 0 230 80"><path d="M10 60 L30 40 L50 56 L70 36 L90 52 L110 30 L130 50 L150 34 L170 48 L220 38"/></svg></div>
+<div class="t005-pn " style="--x:540;--y:320;--w:240;--h:200;"><span class="l">REVENUE / H</span><span class="v">+2.1%</span><svg viewBox="0 0 230 80"><path d="M10 62 L220 30"/></svg></div>
+<div class="t005-pn " style="--x:780;--y:320;--w:240;--h:200;"><span class="l">DEPLOYS</span><span class="v">#2231</span><svg viewBox="0 0 230 80"><path d="M10 60 H80 V30 H140 V60 H220"/></svg></div>
+<div class="t005-pn " style="--x:60;--y:520;--w:240;--h:200;"><span class="l">RETENTION D7</span><span class="v">41%</span><svg viewBox="0 0 230 80"><path d="M10 30 Q100 40 140 56 T220 62"/></svg></div>
+<div class="t005-pn " style="--x:300;--y:520;--w:240;--h:200;"><span class="l">QUEUE DEPTH</span><span class="v">17</span><svg viewBox="0 0 230 80"><path d="M10 56 L60 50 L110 58 L160 52 L220 54"/></svg></div>
+<div class="t005-pn " style="--x:540;--y:520;--w:240;--h:200;"><span class="l">CPU</span><span class="v">38%</span><svg viewBox="0 0 230 80"><path d="M10 50 L50 44 L90 52 L130 40 L170 46 L220 42"/></svg></div>
+<div class="t005-pn " style="--x:780;--y:520;--w:240;--h:200;"><span class="l">UPTIME</span><span class="v">99.98</span><svg viewBox="0 0 230 80"><path d="M10 36 H220"/></svg></div>
+<div class="t005-pn " style="--x:60;--y:720;--w:240;--h:200;"><span class="l">REFUNDS</span><span class="v">0.2%</span><svg viewBox="0 0 230 80"><path d="M10 58 L220 54"/></svg></div>
+<div class="t005-pn " style="--x:300;--y:720;--w:240;--h:200;"><span class="l">CART SIZE</span><span class="v">2.4</span><svg viewBox="0 0 230 80"><path d="M10 50 L60 46 L110 52 L160 44 L220 48"/></svg></div>
+<div class="t005-pn " style="--x:540;--y:720;--w:240;--h:200;"><span class="l">SESSIONS</span><span class="v">31k</span><svg viewBox="0 0 230 80"><path d="M10 60 L60 50 L110 44 L160 40 L220 30"/></svg></div>
+<div class="t005-pn " style="--x:780;--y:720;--w:240;--h:200;"><span class="l">ALERTS</span><span class="v">0</span><svg viewBox="0 0 230 80"><path d="M10 60 H220"/></svg></div></div>
+ <div class="t005-plate" style="left:calc(var(--u)*120);top:calc(var(--u)*380);width:calc(var(--u)*840);height:calc(var(--u)*300);padding:calc(var(--u)*40) calc(var(--u)*48)">
+  <span class="t005-br tl"></span><span class="t005-br tr"></span><span class="t005-br bl"></span><span class="t005-br bporch"></span>
+  <div class="t005-lab">STATUS · 16 / 16 PANELS OK</div>
+  <div class="t005-hl" style="margin-top:calc(var(--u)*14)">38 dashboards. All green. <em>Almost.</em></div>
+ </div>
+ <div class="t005-tick" style="top:calc(var(--u)*950)"><span>SIGNUPS 412</span><span>ACTIVE 8,190</span><span>P95 212MS</span><span>ERR 0.4%</span><span>EV/S 2,418</span></div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Odometer digits roll in every panel at once</b> (steps(10), 0.6 s) while the grid is racked out of focus; on the bar-2 downbeat the corner brackets slam onto the centre plate and “Almost.” lands coral on the snare.</p></div>
+  <div class="cw"><div class="cell" id="t005-f2">
+<div class="t005-s">
+ <div class="t005-tick" style="top:calc(var(--u)*60)"><span class="t005-live" style="background:var(--brand);box-shadow:0 0 0 calc(var(--u)*5) rgba(15,163,163,.2)"></span><b>PULSE</b><span>SWEEP 1 / ∞</span><span>2,418 EV/S</span><span>14 METRICS</span></div>
+ <div class="t005-grid"><div class="t005-pn on" style="--x:60;--y:120;--w:240;--h:200;"><span class="l">SIGNUPS</span><span class="v">412</span><svg viewBox="0 0 230 80"><path d="M10 60 L50 52 L90 56 L130 44 L170 48 L220 36"/></svg></div>
+<div class="t005-pn on" style="--x:300;--y:120;--w:240;--h:200;"><span class="l">ACTIVE USERS</span><span class="v">8,190</span><svg viewBox="0 0 230 80"><path d="M10 58 L60 50 L110 46 L160 40 L220 38"/></svg></div>
+<div class="t005-pn off" style="--x:540;--y:120;--w:240;--h:200;"><span class="l">CHECKOUT CONV.</span><span class="v">3.42%</span><svg viewBox="0 0 230 80"><path d="M10 40 L60 42 L110 38 L160 41 L220 40"/></svg></div>
+<div class="t005-pn off" style="--x:780;--y:120;--w:240;--h:200;"><span class="l">P95 LATENCY</span><span class="v">212ms</span><svg viewBox="0 0 230 80"><path d="M10 50 Q60 30 110 48 T220 44"/></svg></div>
+<div class="t005-pn on" style="--x:60;--y:320;--w:240;--h:200;"><span class="l">ERROR RATE</span><span class="v">0.4%</span><svg viewBox="0 0 230 80"><path d="M10 56 L220 56"/></svg></div>
+<div class="t005-pn on" style="--x:300;--y:320;--w:240;--h:200;"><span class="l">EVENTS/SEC</span><span class="v">2,418</span><svg viewBox="0 0 230 80"><path d="M10 60 L30 40 L50 56 L70 36 L90 52 L110 30 L130 50 L150 34 L170 48 L220 38"/></svg></div>
+<div class="t005-pn off" style="--x:540;--y:320;--w:240;--h:200;"><span class="l">REVENUE / H</span><span class="v">+2.1%</span><svg viewBox="0 0 230 80"><path d="M10 62 L220 30"/></svg></div>
+<div class="t005-pn off" style="--x:780;--y:320;--w:240;--h:200;"><span class="l">DEPLOYS</span><span class="v">#2231</span><svg viewBox="0 0 230 80"><path d="M10 60 H80 V30 H140 V60 H220"/></svg></div>
+<div class="t005-pn on" style="--x:60;--y:520;--w:240;--h:200;"><span class="l">RETENTION D7</span><span class="v">41%</span><svg viewBox="0 0 230 80"><path d="M10 30 Q100 40 140 56 T220 62"/></svg></div>
+<div class="t005-pn on" style="--x:300;--y:520;--w:240;--h:200;"><span class="l">QUEUE DEPTH</span><span class="v">17</span><svg viewBox="0 0 230 80"><path d="M10 56 L60 50 L110 58 L160 52 L220 54"/></svg></div>
+<div class="t005-pn off" style="--x:540;--y:520;--w:240;--h:200;"><span class="l">CPU</span><span class="v">38%</span><svg viewBox="0 0 230 80"><path d="M10 50 L50 44 L90 52 L130 40 L170 46 L220 42"/></svg></div>
+<div class="t005-pn off" style="--x:780;--y:520;--w:240;--h:200;"><span class="l">UPTIME</span><span class="v">99.98</span><svg viewBox="0 0 230 80"><path d="M10 36 H220"/></svg></div>
+<div class="t005-pn on" style="--x:60;--y:720;--w:240;--h:200;"><span class="l">REFUNDS</span><span class="v">0.2%</span><svg viewBox="0 0 230 80"><path d="M10 58 L220 54"/></svg></div>
+<div class="t005-pn on" style="--x:300;--y:720;--w:240;--h:200;"><span class="l">CART SIZE</span><span class="v">2.4</span><svg viewBox="0 0 230 80"><path d="M10 50 L60 46 L110 52 L160 44 L220 48"/></svg></div>
+<div class="t005-pn off" style="--x:540;--y:720;--w:240;--h:200;"><span class="l">SESSIONS</span><span class="v">31k</span><svg viewBox="0 0 230 80"><path d="M10 60 L60 50 L110 44 L160 40 L220 30"/></svg></div>
+<div class="t005-pn off" style="--x:780;--y:720;--w:240;--h:200;"><span class="l">ALERTS</span><span class="v">0</span><svg viewBox="0 0 230 80"><path d="M10 60 H220"/></svg></div></div>
+ <div class="t005-trail" style="left:calc(var(--u)*300);width:calc(var(--u)*320)"></div>
+ <div class="t005-scan" style="left:calc(var(--u)*618)"></div>
+ <div class="t005-plate" style="left:calc(var(--u)*140);top:calc(var(--u)*392);width:calc(var(--u)*800);height:calc(var(--u)*300);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:calc(var(--u)*22);--c:var(--brand)">
+  <span class="t005-br tl"></span><span class="t005-br tr"></span><span class="t005-br bl"></span><span class="t005-br bporch"></span>
+  <div style="display:flex;align-items:center;gap:calc(var(--u)*26)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*108);height:calc(var(--u)*108)"><span class="t005-word">Acme Pulse</span></div>
+  <div class="t005-lab" style="color:var(--brand-deep)">WATCHING · 2,418 EVENTS/SEC</div>
+ </div>
+ <div class="t005-tick" style="top:calc(var(--u)*950)"><span class="ok">✓ 8 / 16 SCANNED</span><span>NEXT SWEEP 00:59</span></div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop a 4 px teal scanline enters from the left</b> and crosses the grid in 1.2 s (linear, 2 bars would be too slow — it lands on the next downbeat); every panel it passes brightens to teal with a tick, and the Acme Pulse plate fades up centre with teal brackets.</p></div>
+  <div class="cw"><div class="cell" id="t005-f3">
+<div class="t005-s">
+ <div class="t005-tick" style="top:calc(var(--u)*60)"><span class="t005-live"></span><b>PULSE</b><span class="al">ANOMALIES 1</span><span>SIGNUPS ✓</span><span>P95 ✓</span><span>ERR ✓</span></div>
+ <div class="t005-p t005-blur" style="--x:60;--y:120;--w:960;--h:84;display:flex;opacity:.6;filter:blur(calc(var(--u)*3))"><div style="flex:1;border:calc(var(--u)*1.5) solid #DCDDD8;padding:calc(var(--u)*12) calc(var(--u)*16);display:flex;justify-content:space-between;align-items:center;font:600 calc(var(--u)*20) var(--mono);color:#8A8F99">SIGNUPS<span style="font-size:calc(var(--u)*30);color:var(--ink);font-weight:400">412</span></div><div style="flex:1;border:calc(var(--u)*1.5) solid #DCDDD8;padding:calc(var(--u)*12) calc(var(--u)*16);display:flex;justify-content:space-between;align-items:center;font:600 calc(var(--u)*20) var(--mono);color:#8A8F99">ACTIVE<span style="font-size:calc(var(--u)*30);color:var(--ink);font-weight:400">8,190</span></div><div style="flex:1;border:calc(var(--u)*1.5) solid #DCDDD8;padding:calc(var(--u)*12) calc(var(--u)*16);display:flex;justify-content:space-between;align-items:center;font:600 calc(var(--u)*20) var(--mono);color:#8A8F99">P95<span style="font-size:calc(var(--u)*30);color:var(--ink);font-weight:400">212ms</span></div><div style="flex:1;border:calc(var(--u)*1.5) solid #DCDDD8;padding:calc(var(--u)*12) calc(var(--u)*16);display:flex;justify-content:space-between;align-items:center;font:600 calc(var(--u)*20) var(--mono);color:#8A8F99">ERR<span style="font-size:calc(var(--u)*30);color:var(--ink);font-weight:400">0.4%</span></div></div>
+ <div class="t005-p" style="--x:80;--y:250;--w:920;--h:440;background:#fff;box-shadow:0 0 0 calc(var(--u)*1.5) #CFD1CB;--c:var(--alert)">
+  <span class="t005-br tl"></span><span class="t005-br tr"></span><span class="t005-br bl"></span><span class="t005-br bporch"></span>
+  <div class="t005-p" style="--x:36;--y:30"><div class="t005-lab">CHECKOUT CONVERSION · 09:30–09:48</div><div style="display:flex;align-items:baseline;gap:calc(var(--u)*24);margin-top:calc(var(--u)*10)"><span class="t005-big">2.80%</span><span style="font:600 calc(var(--u)*52) var(--mono);color:var(--alert)">−18%</span></div></div>
+  <svg class="t005-p" style="--x:30;--y:200;--w:860;--h:220" viewBox="0 0 860 220"><g stroke="#ECEDE9" stroke-width="2"><path d="M0 40 H860 M0 110 H860 M0 180 H860"/></g><path d="M0 60 L60 56 L120 62 L180 54 L240 58 L300 55 L360 60 L420 57 L450 58" fill="none" stroke="#0FA3A3" stroke-width="5"/><path d="M450 58 L480 150 L540 156 L600 150 L660 158 L720 154 L780 157 L860 155" fill="none" stroke="#FF5A4E" stroke-width="5"/><path d="M450 0 V220" stroke="#FF5A4E" stroke-width="2" stroke-dasharray="6 6"/><circle cx="480" cy="150" r="10" fill="#FF5A4E"/><text x="464" y="212" font-family="JetBrains Mono,monospace" font-size="20" fill="#FF5A4E">09:42 · deploy #2231</text></svg>
+ </div>
+ <div class="t005-card" style="left:calc(var(--u)*80);top:calc(var(--u)*736);width:calc(var(--u)*920)">
+  <div style="display:flex;align-items:center;gap:calc(var(--u)*30)"><div style="flex:1"><div class="t">Checkout conversion <b>−18%</b></div><div class="m">since 09:42 · after deploy #2231</div></div>
+  <div style="display:flex;flex-direction:column;gap:calc(var(--u)*12)"><span class="t005-btn pri">Roll back</span><span class="t005-btn sec">Acknowledge</span></div></div>
+ </div>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera racks focus</b> — every other panel blurs to 6 px as the checkout panel scales up 1.1× (0.8 s power2.inOut); the scanline freezes on 09:42, coral brackets snap in on the snare and the ANOMALIES counter ticks 0→1, then one calm card slides up from below with the human's two options.</p></div>
+  <div class="cw"><div class="cell" id="t005-f4">
+<div class="t005-s">
+ <div class="t005-grid"><div class="t005-pn ghost" style="--x:60;--y:120;--w:240;--h:200;"><span class="l">SIGNUPS</span><span class="v">412</span><svg viewBox="0 0 230 80"><path d="M10 60 L50 52 L90 56 L130 44 L170 48 L220 36"/></svg></div>
+<div class="t005-pn ghost" style="--x:300;--y:120;--w:240;--h:200;"><span class="l">ACTIVE USERS</span><span class="v">8,190</span><svg viewBox="0 0 230 80"><path d="M10 58 L60 50 L110 46 L160 40 L220 38"/></svg></div>
+<div class="t005-pn ghost" style="--x:540;--y:120;--w:240;--h:200;"><span class="l">CHECKOUT CONV.</span><span class="v">3.42%</span><svg viewBox="0 0 230 80"><path d="M10 40 L60 42 L110 38 L160 41 L220 40"/></svg></div>
+<div class="t005-pn ghost" style="--x:780;--y:120;--w:240;--h:200;"><span class="l">P95 LATENCY</span><span class="v">212ms</span><svg viewBox="0 0 230 80"><path d="M10 50 Q60 30 110 48 T220 44"/></svg></div>
+<div class="t005-pn ghost" style="--x:60;--y:320;--w:240;--h:200;"><span class="l">ERROR RATE</span><span class="v">0.4%</span><svg viewBox="0 0 230 80"><path d="M10 56 L220 56"/></svg></div>
+<div class="t005-pn ghost" style="--x:300;--y:320;--w:240;--h:200;"><span class="l">EVENTS/SEC</span><span class="v">2,418</span><svg viewBox="0 0 230 80"><path d="M10 60 L30 40 L50 56 L70 36 L90 52 L110 30 L130 50 L150 34 L170 48 L220 38"/></svg></div>
+<div class="t005-pn ghost" style="--x:540;--y:320;--w:240;--h:200;"><span class="l">REVENUE / H</span><span class="v">+2.1%</span><svg viewBox="0 0 230 80"><path d="M10 62 L220 30"/></svg></div>
+<div class="t005-pn ghost" style="--x:780;--y:320;--w:240;--h:200;"><span class="l">DEPLOYS</span><span class="v">#2231</span><svg viewBox="0 0 230 80"><path d="M10 60 H80 V30 H140 V60 H220"/></svg></div>
+<div class="t005-pn ghost" style="--x:60;--y:520;--w:240;--h:200;"><span class="l">RETENTION D7</span><span class="v">41%</span><svg viewBox="0 0 230 80"><path d="M10 30 Q100 40 140 56 T220 62"/></svg></div>
+<div class="t005-pn ghost" style="--x:300;--y:520;--w:240;--h:200;"><span class="l">QUEUE DEPTH</span><span class="v">17</span><svg viewBox="0 0 230 80"><path d="M10 56 L60 50 L110 58 L160 52 L220 54"/></svg></div>
+<div class="t005-pn ghost" style="--x:540;--y:520;--w:240;--h:200;"><span class="l">CPU</span><span class="v">38%</span><svg viewBox="0 0 230 80"><path d="M10 50 L50 44 L90 52 L130 40 L170 46 L220 42"/></svg></div>
+<div class="t005-pn ghost" style="--x:780;--y:520;--w:240;--h:200;"><span class="l">UPTIME</span><span class="v">99.98</span><svg viewBox="0 0 230 80"><path d="M10 36 H220"/></svg></div>
+<div class="t005-pn ghost" style="--x:60;--y:720;--w:240;--h:200;"><span class="l">REFUNDS</span><span class="v">0.2%</span><svg viewBox="0 0 230 80"><path d="M10 58 L220 54"/></svg></div>
+<div class="t005-pn ghost" style="--x:300;--y:720;--w:240;--h:200;"><span class="l">CART SIZE</span><span class="v">2.4</span><svg viewBox="0 0 230 80"><path d="M10 50 L60 46 L110 52 L160 44 L220 48"/></svg></div>
+<div class="t005-pn ghost" style="--x:540;--y:720;--w:240;--h:200;"><span class="l">SESSIONS</span><span class="v">31k</span><svg viewBox="0 0 230 80"><path d="M10 60 L60 50 L110 44 L160 40 L220 30"/></svg></div>
+<div class="t005-pn ghost" style="--x:780;--y:720;--w:240;--h:200;"><span class="l">ALERTS</span><span class="v">0</span><svg viewBox="0 0 230 80"><path d="M10 60 H220"/></svg></div></div>
+ <div class="t005-plate" style="left:calc(var(--u)*100);top:calc(var(--u)*250);width:calc(var(--u)*880);height:calc(var(--u)*540);padding:0 calc(var(--u)*60);display:flex;flex-direction:column;justify-content:center;gap:calc(var(--u)*38);--c:var(--brand)">
+  <span class="t005-br tl"></span><span class="t005-br tr"></span><span class="t005-br bl"></span><span class="t005-br bporch"></span>
+  <div style="display:flex;align-items:center;gap:calc(var(--u)*26)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*100);height:calc(var(--u)*100)"><span class="t005-word" style="font-size:calc(var(--u)*92)">Acme Pulse</span></div>
+  <div class="t005-hl" style="font-size:calc(var(--u)*72)">Every metric. <em style="color:var(--brand-deep)">Every minute.</em></div>
+  <div><span class="t005-btn pri" style="height:calc(var(--u)*92);font-size:calc(var(--u)*36);padding:0 calc(var(--u)*48)">Start free</span></div>
+ </div>
+ <div class="t005-tick" style="top:calc(var(--u)*950)"><span class="ok">● 14 / 14 METRICS NOMINAL</span><span>RESOLVED IN 6 MIN</span><span>ACME.EXAMPLE/PULSE</span></div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>All sixteen panels dim to ghost hairlines</b> in a diagonal stagger (0.03 s each, top-left→bottom-right) as the plate grows from the checkout panel's position; the status ticker at the bottom scrolls left continuously and the Start free button lands on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Tabular micro-panels</b> — label + odometer number + sparkline, hairline-ruled.</li><li><b>Status ticker</b> — top and bottom rails: LIVE, counts, anomalies.</li><li><b>Scanline sweep</b> — 4 px teal line; panels brighten as it passes.</li><li><b>Corner brackets</b> — focus device; ink for the hook, teal for Pulse, coral for the anomaly.</li><li><b>Hero panel</b> — the one metric blown up with the deploy marker on the chart.</li><li><b>Calm decision card</b> — a single white card with Roll back / Acknowledge.</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Odometer digits</b> — per-digit roll with steps(10) for 0.6 s, final value eases power4.out onto a downbeat.</li><li><b>Scanline sweep</b> — crosses 960 px in 1.2 s linear, panels brighten +8 % with a 0.15 s delay as it passes; one sweep per 2 bars at 120 BPM.</li><li><b>Rack focus</b> — non-hero panels blur 0→6 px while the camera eases in 1.1× over 0.8 s (power2.inOut); brackets snap in 0.12 s on the snare.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> density itself is the argument — this is what “watching everything” looks like — and the light, Swiss treatment keeps it trustworthy rather than sci-fi. <b>Risk:</b> at feed size dense panels are unreadable, so every beat must hold one panel hero-sized and blur the rest.</p><p><b>Adapt to your product:</b> fill the sixteen panels with your own KPIs and let the hero panel be the one number your product protects; keep the brackets and scanline as the “our product is looking” device.</p><p><b>References:</b> <a href="https://www.edwardtufte.com/notebook/sparkline-theory-and-practice-edward-tufte/">Edward Tufte — sparklines</a> · <a href="https://stripe.com/sessions/2025/developer-keynote">Stripe Sessions 2025 — developer keynote</a></p></div>
+</div>
+</body>
+</html>

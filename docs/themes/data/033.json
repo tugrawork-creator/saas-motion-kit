@@ -1,0 +1,25 @@
+{"id":"033","slug":"ascii-dither-resolve","name":"ASCII / Dither Resolve","category":"light",
+ "summary":"Everything starts as a coarse field of characters and sharpens into crisp UI as Acme Pulse understands it, except the one coral cluster that refuses to resolve.",
+ "look":"Ink glyphs (. : - = + * # @) on near-white paper render every image as brightness. A resolution HUD and a teal seam turn the noisy field into clean white cards; the anomaly stays as hot coral characters until a decision card rises out of it.",
+ "components":[
+  {"name":"Character-ramp field","role":"mono glyph grid that renders any image as brightness; the not-yet-understood state"},
+  {"name":"Resolution HUD","role":"'RES 32 → 4 px' readout that shows progress without a progress bar"},
+  {"name":"Resolve seam","role":"teal vertical wipe with glow; ASCII on one side, clean UI on the other"},
+  {"name":"Hot glyph cluster","role":"coral #@# characters that refuse to resolve; the anomaly"},
+  {"name":"Resolved pills","role":"crisp white metric rows with green ticks; what healthy looks like"},
+  {"name":"Decision card","role":"coral-ringed card rising from the hot cluster with Roll back / Acknowledge"}
+ ],
+ "motion":[
+  {"name":"Resolution pull","how":"cell size 32→4 px in steps(6), one step per beat at 120 BPM (0.5 s)"},
+  {"name":"Glyph scramble","how":"each character cycles the ramp before landing, 60 ms/char, 8 ms seeded stagger"},
+  {"name":"Seam wipe","how":"vertical mask left→right, expo.inOut 0.6 s, triggered on the 0:08 drop"}
+ ],
+ "story":"Hook: a wall of dashboards exists only as scrambling ASCII while the panel asks 'How many dashboards did you check today?'. Reveal: on the drop a teal seam wipes the noise away, leaving the Acme mark and 'Acme Pulse' on clean paper. Proof: the checkout-conversion chart is still glyphs; four healthy metrics resolve into pills, the drop stays coral and a card rises: 'Checkout conversion −18% · since 09:42 · after deploy #2231' with Roll back. CTA: glyphs retreat to the edges; 'Every metric. Every minute.' and Start free resolve crisp.",
+ "adapt":"Render a screenshot of your own UI through the character ramp, resolve it section by section, and leave your product's key finding as the last hot cluster.",
+ "references":[
+  {"url":"https://tympanus.net/codrops/2026/01/04/efecto-building-real-time-ascii-and-dithering-effects-with-webgl-shaders/","note":"real-time ASCII and dithering shaders","verified":true},
+  {"url":"https://tympanus.net/codrops/2025/06/04/building-a-real-time-dithering-shader/","note":"building a dithering shader","verified":false}
+ ],
+ "fit":{"readability":2,"trust":2,"effort":"med","risk":"Dense glyph fields turn to moiré under video compression; keep hero cells at 8 px or more."},
+ "best_for":["dev tools","AI products","data platforms","security"],
+ "file":"themes/033-ascii-dither-resolve.html"}

@@ -1,0 +1,70 @@
+{
+ "id": "066",
+ "slug": "small-multiples",
+ "name": "Small Multiples",
+ "category": "data",
+ "summary": "A Tufte-style grid of same-scale sparklines where one tile, Checkout conversion, breaks the pattern.",
+ "look": "Near-white paper, hairline tile frames and thin teal sparklines on a shared dashed baseline; mono labels at 20 px. The single coral-framed tile is the only loud element.",
+ "components": [
+  {
+   "name": "Multiple tile",
+   "role": "hairline frame, identical size and scale — the unit of the whole film"
+  },
+  {
+   "name": "Shared baseline",
+   "role": "dashed line at 100 % that every tile uses"
+  },
+  {
+   "name": "Outlier frame",
+   "role": "coral 4 px border + tint for the one tile that breaks"
+  },
+  {
+   "name": "Event marker",
+   "role": "vertical dashed line at 09:42 inside the tile"
+  },
+  {
+   "name": "Mono tile label",
+   "role": "20 px metric name, top-left of every tile"
+  },
+  {
+   "name": "Hairline rule",
+   "role": "separates the grid from the decision strip"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Grid cascade",
+   "how": "tiles fade/scale 0.96 → 1 with a 0.03 s diagonal stagger, power2.out 0.35 s, total one bar at 120 BPM"
+  },
+  {
+   "name": "Rescale snap",
+   "how": "y-scales tween to the shared domain with expo.inOut 0.5 s landing on the drop"
+  },
+  {
+   "name": "Synchronized draw",
+   "how": "all sparklines stroke-dashoffset draw together over 4 beats (2 s), outlier breaks on beat 3 with a 0.1 s coral flash"
+  }
+ ],
+ "story": "Hook: 38 mismatched mini-charts, all different scales. Drop: they collapse into 14 same-scale tiles around a teal Acme tile. Proof: 12 labelled multiples, only Checkout conv. breaks −18% at 09:42 after deploy #2231, then Roll back. CTA: a calm strip of 14 tiles, Every metric. Every minute., Start free.",
+ "adapt": "Put your product's real metrics or entities (services, regions, customers, jobs) into a same-scale grid; your anomaly is the one tile that breaks the pattern.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Small_multiple",
+   "note": "Tufte's small multiples: identical scales answer 'compared to what?'",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "low",
+  "risk": "Very calm; without strong timing the grid can feel like a static slide. Let the outlier tile do all the moving."
+ },
+ "best_for": [
+  "analytics",
+  "observability",
+  "B2B dashboards",
+  "data teams"
+ ],
+ "file": "themes/066-small-multiples.html"
+}

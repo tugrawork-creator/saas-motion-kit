@@ -1,0 +1,23 @@
+{"id":"041","slug":"editors-pass","name":"The Editor's Pass","category":"metaphor",
+ "summary":"Your metrics digest as a galley proof: an unseen copy editor marks the one wrong figure and a human initials the page.",
+ "look":"Warm near-white galley paper with numbered lines, wide margins and Instrument Serif rows. Exact coral proof marks (caret, squiggle, circled figure, leader line to a mono margin query) and teal ticks; a double-ruled OK TO SHIP stamp closes it.",
+ "components":[
+  {"name":"Galley slip","role":"line-numbered metrics digest; the stage for every beat"},
+  {"name":"Squiggle underline","role":"spell-check wave under the suspect figure"},
+  {"name":"Circled figure + leader line","role":"ties the anomaly value to the margin"},
+  {"name":"Margin query","role":"mono annotation carrying the anomaly text"},
+  {"name":"Proof glyphs","role":"insert caret, delete pigtail and teal tick as exact vectors"},
+  {"name":"Initials box + OK TO SHIP stamp","role":"the human sign-off"}],
+ "motion":[
+  {"name":"Stroke draw-on","how":"stroke-dashoffset 0.5–0.7 s power2.inOut, each mark starting on a downbeat (0.5 s grid at 120 BPM)"},
+  {"name":"Squiggle crawl","how":"wave path translateX loop, 1 s per cycle (two beats), linear"},
+  {"name":"Leader-line callout","how":"line draws 0.35 s power3.out, then the margin note types in with steps(18) across one bar"}],
+ "story":"Hook: a galley of 38 dashboards nobody has read, a grey '?' in the margin. Reveal: '38 dashboards, read by hand' is struck out and a coral insert caret drops 'Acme Pulse' into the line on the drop. Proof: teal ticks run down the rows, Checkout conversion gets a squiggle and a circle, the margin query reads '−18% · since 09:42 · after deploy #2231', and the human taps Roll back and initials the box. CTA: clean page, 'You ship. Pulse watches.', OK TO SHIP stamp, Start free.",
+ "adapt":"Set your own report, invoice, config file or changelog as the galley and turn your product's finding into the margin query; the human action becomes the initials box.",
+ "references":[
+  {"url":"https://en.wikipedia.org/wiki/List_of_proofreader%27s_marks","note":"the standard proof-mark vocabulary","verified":false},
+  {"url":"https://www.ogilvy.com/work/misspelling-scramble","note":"an ad that makes spotting errors the whole idea","verified":true},
+  {"url":"https://weareroyale.com/case-studies/grammarly-explainer-campaign/","note":"simplified correction UI made readable for commercials","verified":true}],
+ "fit":{"readability":3,"trust":3,"effort":"low","risk":"Can drift toward the hand-drawn marker look; keep every mark typographic and exact."},
+ "best_for":["analytics","monitoring","docs & content tools","fintech"],
+ "file":"themes/041-editors-pass.html"}

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>092 · Y2K Liquid Chrome — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t092- (092 = theme number) ===== */
+.t092-svg{position:absolute;inset:0;width:100%;height:100%}
+.t092-a{position:absolute}
+#t092-f1,#t092-f2,#t092-f3,#t092-f4{background:repeating-linear-gradient(0deg,rgba(255,255,255,.55) 0 calc(var(--u)*3),rgba(255,255,255,0) calc(var(--u)*3) calc(var(--u)*6)),linear-gradient(160deg,#EAF6F7 0%,#CFE3E8 55%,#E9EEF3 100%)}
+.t092-chrome{position:absolute;font-family:var(--sans);font-weight:800;letter-spacing:-.04em;line-height:.98;background:linear-gradient(180deg,#F4F8FB 0%,#8D9CA9 40%,#1E2A36 52%,#6E8090 60%,#D9E2E8 100%);background-size:100% .98em;background-repeat:repeat-y;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:calc(var(--u)*1.5) #3F4E5C;filter:drop-shadow(0 calc(var(--u)*6) calc(var(--u)*8) rgba(14,23,38,.28))}
+.t092-chrome i{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;background:linear-gradient(180deg,#9FF0EC 0%,#0FA3A3 48%,#0B6E6E 52%,#4FD3CF 100%);background-size:100% .98em;background-repeat:repeat-y;-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:calc(var(--u)*1) #0B6E6E}
+.t092-jelly{position:absolute;border-radius:calc(var(--u)*28);background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(207,241,238,.45));border:calc(var(--u)*3) solid rgba(255,255,255,.9);box-shadow:0 calc(var(--u)*16) calc(var(--u)*40) rgba(11,110,110,.25),inset 0 calc(var(--u)*2) 0 #fff}
+.t092-gel{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:calc(var(--u)*200);font-family:var(--sans);font-weight:800;color:#fff;text-shadow:0 calc(var(--u)*2) calc(var(--u)*3) rgba(0,0,0,.3);background:linear-gradient(180deg,#8FE9E5 0%,#19B3B0 48%,#0B8585 52%,#3CCBC7 100%);box-shadow:0 calc(var(--u)*10) calc(var(--u)*22) rgba(11,110,110,.45),inset 0 calc(var(--u)*-6) calc(var(--u)*10) rgba(255,255,255,.35);overflow:hidden}
+.t092-gel::before{content:"";position:absolute;left:8%;right:8%;top:5%;height:44%;border-radius:calc(var(--u)*200);background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.1))}
+.t092-gel span{position:relative}
+.t092-gel.t092-co{background:linear-gradient(180deg,#FFC1BB 0%,#FF6A5F 48%,#E0443A 52%,#FF8A80 100%);box-shadow:0 calc(var(--u)*10) calc(var(--u)*22) rgba(224,68,58,.45),inset 0 calc(var(--u)*-6) calc(var(--u)*10) rgba(255,255,255,.35)}
+.t092-gel.t092-wh{background:linear-gradient(180deg,#FFFFFF 0%,#E6ECF0 48%,#CBD5DC 52%,#F2F5F7 100%);color:#2F3D4A;text-shadow:none;box-shadow:0 calc(var(--u)*8) calc(var(--u)*18) rgba(14,23,38,.2)}
+.t092-m{position:absolute;font-family:var(--mono);font-size:calc(var(--u)*22);color:#2F3D4A;letter-spacing:.04em}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 092 · Art movements &amp; eras</div>
+    <h1>Y2K Liquid Chrome</h1>
+    <p class="dek">Turn-of-the-millennium tech optimism: liquid-chrome lettering, translucent candy-teal plastic, lickable gel buttons, pinstripes and sparkles. Acme teal becomes see-through jelly, the Acme mark floats in a chrome blob, and the anomaly glows as a coral gel capsule.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t092-f1">
+<svg class="t092-svg" viewBox="0 0 1080 1080"><defs>
+<linearGradient id="t092-chr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".42" stop-color="#A9B6C2"/><stop offset=".5" stop-color="#3B4A58"/><stop offset=".58" stop-color="#C7D2DB"/><stop offset="1" stop-color="#F4F8FA"/></linearGradient>
+<radialGradient id="t092-blob" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".25" stop-color="#D5DEE5"/><stop offset=".55" stop-color="#7D8C99"/><stop offset=".7" stop-color="#E9EEF2"/><stop offset=".85" stop-color="#6F7F8D"/><stop offset="1" stop-color="#C4CED6"/></radialGradient>
+<radialGradient id="t092-gelT" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#BFF4F1" stop-opacity=".95"/><stop offset=".6" stop-color="#0FA3A3" stop-opacity=".75"/><stop offset="1" stop-color="#0B6E6E" stop-opacity=".9"/></radialGradient>
+</defs>
+<ellipse cx="840" cy="760" rx="260" ry="200" fill="url(#t092-gelT)" opacity=".35"/>
+<path d="M960 86 C964.08 115.92 964.08 115.92 994 120 C964.08 124.08 964.08 124.08 960 154 C955.92 124.08 955.92 124.08 926 120 C955.92 115.92 955.92 115.92 960 86Z" fill="#fff" fill-opacity="1"/><path d="M120 538 C122.64 557.36 122.64 557.36 142 560 C122.64 562.64 122.64 562.64 120 582 C117.36 562.64 117.36 562.64 98 560 C117.36 557.36 117.36 557.36 120 538Z" fill="#fff" fill-opacity="1"/><path d="M1000 452 C1002.16 467.84 1002.16 467.84 1018 470 C1002.16 472.16 1002.16 472.16 1000 488 C997.84 472.16 997.84 472.16 982 470 C997.84 467.84 997.84 467.84 1000 452Z" fill="#0FA3A3" fill-opacity="0.7"/>
+</svg>
+<div class="t092-jelly" style="left:calc(var(--u)*560);top:calc(var(--u)*560);width:calc(var(--u)*400);height:calc(var(--u)*260);transform:rotate(8deg)"></div>
+<div class="t092-jelly" style="left:calc(var(--u)*470);top:calc(var(--u)*600);width:calc(var(--u)*400);height:calc(var(--u)*260);transform:rotate(-4deg)"></div>
+<div class="t092-jelly" style="left:calc(var(--u)*380);top:calc(var(--u)*650);width:calc(var(--u)*420);height:calc(var(--u)*280);transform:rotate(3deg)">
+  <svg class="t092-svg" viewBox="0 0 420 280"><polyline points="30,200 110,170 190,185 270,130 390,150" fill="none" stroke="#0FA3A3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+<div class="t092-gel t092-wh" style="left:calc(var(--u)*100);top:calc(var(--u)*720);width:calc(var(--u)*250);height:calc(var(--u)*80);font-size:calc(var(--u)*28)"><span>38 open</span></div>
+<div class="t092-chrome" style="left:calc(var(--u)*60);top:calc(var(--u)*110);width:calc(var(--u)*880);font-size:calc(var(--u)*100)">How many dashboards did you check <i>today?</i></div>
+<div class="t092-m" style="left:calc(var(--u)*64);top:calc(var(--u)*430);font-size:calc(var(--u)*26)">…and the drop still shipped on Friday.</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Jelly windows float up and wobble</b> (squash & stretch) on 8th notes, stacking behind the chrome headline; a sparkle twinkles on each snare and the "38 open" gel pill lands on the downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t092-f2">
+<svg class="t092-svg" viewBox="0 0 1080 1080">
+<ellipse cx="540" cy="420" rx="420" ry="120" fill="none" stroke="url(#t092-chr)" stroke-width="10" transform="rotate(-14 540 420)"/>
+<path d="M540 140 C700 130 800 250 790 400 C780 560 680 660 530 650 C380 640 280 560 290 400 C300 250 390 150 540 140Z" fill="url(#t092-blob)"/>
+<circle cx="540" cy="400" r="150" fill="url(#t092-gelT)" stroke="#fff" stroke-width="5"/>
+<ellipse cx="500" cy="320" rx="80" ry="36" fill="#fff" opacity=".55"/>
+<path d="M820 140 C824.8 175.2 824.8 175.2 860 180 C824.8 184.8 824.8 184.8 820 220 C815.2 184.8 815.2 184.8 780 180 C815.2 175.2 815.2 175.2 820 140Z" fill="#fff" fill-opacity="1"/><path d="M230 594 C233.12 616.88 233.12 616.88 256 620 C233.12 623.12 233.12 623.12 230 646 C226.88 623.12 226.88 623.12 204 620 C226.88 616.88 226.88 616.88 230 594Z" fill="#fff" fill-opacity="1"/><path d="M900 580 C902.4 597.6 902.4 597.6 920 600 C902.4 602.4 902.4 602.4 900 620 C897.6 602.4 897.6 602.4 880 600 C897.6 597.6 897.6 597.6 900 580Z" fill="#0FA3A3" fill-opacity="0.8"/>
+</svg>
+<img class="t092-a" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*470);top:calc(var(--u)*330);width:calc(var(--u)*140);height:calc(var(--u)*140);filter:drop-shadow(0 calc(var(--u)*6) calc(var(--u)*10) rgba(11,110,110,.4))" alt="">
+<div class="t092-chrome" style="left:calc(var(--u)*60);top:calc(var(--u)*720);width:calc(var(--u)*960);text-align:center;font-size:calc(var(--u)*150)">Acme Pulse</div>
+<div class="t092-m" style="left:calc(var(--u)*60);top:calc(var(--u)*900);width:calc(var(--u)*960);text-align:center">watching every metric · since 2K</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the chrome blob morphs in from a droplet</b>, the teal gel bubble inflates around the Acme mark and the chrome orbit ring spins once; "Acme Pulse" sweeps in with a light glint passing left→right.</p></div>
+  <div class="cw"><div class="cell" id="t092-f3">
+<svg class="t092-svg" viewBox="0 0 1080 1080">
+<rect x="60" y="60" width="960" height="960" rx="48" fill="url(#t092-chr)" opacity=".9"/>
+<rect x="80" y="80" width="920" height="920" rx="36" fill="#F4F8FA"/>
+<rect x="110" y="250" width="860" height="300" rx="22" fill="#E7F3F4" stroke="#C9D6DD" stroke-width="3"/>
+<polyline points="140,420 260,400 380,410 500,380 560,390" fill="none" stroke="#0FA3A3" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="560,390 620,500 760,510 940,515" fill="none" stroke="#FF5A4E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="620" cy="500" r="30" fill="#FF5A4E" opacity=".25"/>
+<path d="M640 258 C642.64 277.36 642.64 277.36 662 280 C642.64 282.64 642.64 282.64 640 302 C637.36 282.64 637.36 282.64 618 280 C637.36 277.36 637.36 277.36 640 258Z" fill="#FF5A4E" fill-opacity="0.8"/>
+</svg>
+<div class="t092-m" style="left:calc(var(--u)*120);top:calc(var(--u)*110);font-weight:600">PULSE · background watch · 14 metrics</div>
+<div class="t092-gel" style="left:calc(var(--u)*110);top:calc(var(--u)*160);width:calc(var(--u)*210);height:calc(var(--u)*62);font-size:calc(var(--u)*22)"><span>Signups ✓</span></div>
+<div class="t092-gel" style="left:calc(var(--u)*336);top:calc(var(--u)*160);width:calc(var(--u)*240);height:calc(var(--u)*62);font-size:calc(var(--u)*22)"><span>p95 212 ms ✓</span></div>
+<div class="t092-gel" style="left:calc(var(--u)*592);top:calc(var(--u)*160);width:calc(var(--u)*250);height:calc(var(--u)*62);font-size:calc(var(--u)*22)"><span>Error 0.4% ✓</span></div>
+<div class="t092-gel t092-co" style="left:calc(var(--u)*110);top:calc(var(--u)*580);width:calc(var(--u)*860);height:calc(var(--u)*150);font-size:calc(var(--u)*40);justify-content:space-between;padding:0 calc(var(--u)*44)"><span>Checkout conversion</span><span style="font-size:calc(var(--u)*96);letter-spacing:-.04em">−18%</span></div>
+<div class="t092-m" style="left:calc(var(--u)*120);top:calc(var(--u)*756);font-size:calc(var(--u)*26)">since 09:42 · after deploy #2231</div>
+<div class="t092-gel" style="left:calc(var(--u)*110);top:calc(var(--u)*830);width:calc(var(--u)*420);height:calc(var(--u)*120);font-size:calc(var(--u)*48)"><span>Roll back</span></div>
+<div class="t092-gel t092-wh" style="left:calc(var(--u)*560);top:calc(var(--u)*846);width:calc(var(--u)*330);height:calc(var(--u)*90);font-size:calc(var(--u)*30)"><span>Acknowledge</span></div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Gel capsules pop in one by one with a bounce</b>; the teal line flows until the deploy moment, then turns coral and the big coral capsule inflates on a downbeat with −18%. The Roll back gel button depresses (highlight dims) on the bar line.</p></div>
+  <div class="cw"><div class="cell" id="t092-f4">
+<svg class="t092-svg" viewBox="0 0 1080 1080">
+<path d="M900 760 C1000 740 1060 840 1030 930 C1000 1010 880 1030 820 960 C770 900 800 780 900 760Z" fill="url(#t092-blob)"/>
+<circle cx="170" cy="880" r="90" fill="url(#t092-gelT)" stroke="#fff" stroke-width="4"/>
+<ellipse cx="150" cy="850" rx="36" ry="18" fill="#fff" opacity=".6"/>
+<path d="M960 74 C964.32 105.68 964.32 105.68 996 110 C964.32 114.32 964.32 114.32 960 146 C955.68 114.32 955.68 114.32 924 110 C955.68 105.68 955.68 105.68 960 74Z" fill="#fff" fill-opacity="1"/><path d="M80 460 C82.4 477.6 82.4 477.6 100 480 C82.4 482.4 82.4 482.4 80 500 C77.6 482.4 77.6 482.4 60 480 C77.6 477.6 77.6 477.6 80 460Z" fill="#fff" fill-opacity="1"/><path d="M700 618 C702.64 637.36 702.64 637.36 722 640 C702.64 642.64 702.64 642.64 700 662 C697.36 642.64 697.36 642.64 678 640 C697.36 637.36 697.36 637.36 700 618Z" fill="#0FA3A3" fill-opacity="0.7"/>
+</svg>
+<div class="t092-chrome" style="left:calc(var(--u)*60);top:calc(var(--u)*90);width:calc(var(--u)*960);font-size:calc(var(--u)*118)">Caught <i>before</i> customers noticed.</div>
+<div class="t092-gel t092-co" style="left:calc(var(--u)*300);top:calc(var(--u)*560);width:calc(var(--u)*480);height:calc(var(--u)*140);font-size:calc(var(--u)*56)"><span>Start free</span></div>
+<img class="t092-a" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*290);top:calc(var(--u)*790);width:calc(var(--u)*96);height:calc(var(--u)*96);filter:drop-shadow(0 calc(var(--u)*6) calc(var(--u)*10) rgba(11,110,110,.4))" alt="">
+<div class="t092-a" style="left:calc(var(--u)*404);top:calc(var(--u)*806);font:800 calc(var(--u)*64)/1 var(--sans);letter-spacing:-.03em;color:#1E2A36">Acme Pulse</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>A specular glint sweeps across the chrome headline</b> on beat 1, the coral Start free gel pill inflates with an overshoot on beat 3, and sparkles burst from the button on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Liquid-chrome type</b> — gradient-clipped Manrope 800 with a dark horizon band and drop shadow</li><li><b>Jelly window</b> — translucent candy-teal panel with white rim and soft teal shadow</li><li><b>Gel capsule</b> — Aqua-style pill with a glossy top highlight — teal ok, coral alert, white secondary</li><li><b>Chrome blob</b> — radial metallic blob that holds the Acme mark in a gel bubble</li><li><b>Pinstripes</b> — 3 px white horizontal lines over an icy gradient background</li><li><b>Sparkles</b> — 4-point stars that twinkle on the hi-hats</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Gel inflate</b> — scale 0.6→1.08→1 with elastic.out(1, .6) 0.5 s — one beat at 120 BPM</li><li><b>Chrome glint</b> — a white 30° highlight band sweeps across the lettering, sine.inOut 0.6 s, on beat 1 of each bar</li><li><b>Jelly wobble</b> — scaleX/scaleY counter-oscillate ±4 %, 0.25 s per cycle on 8th notes, decaying over 2 beats</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Y2K chrome and gel are having a strong revival, so the look feels both nostalgic and current, and the translucent materials make a background agent feel light and friendly. Risk: gradients and glows can look cheap or muddy after compression; keep the palette tight (teal, coral, chrome) and the data on opaque capsules.</p><p><b>Adapt to your product:</b> Rebuild your key UI states as gel capsules and jelly windows (status pills are perfect), and render your product name in liquid chrome for the reveal. Keep your real data flat and legible inside them.</p><p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Y2K_aesthetic">https://en.wikipedia.org/wiki/Y2K_aesthetic</a> — Y2K aesthetic: chrome, translucent plastics, blobjects, late 1990s–2000s · <a href="https://en.wikipedia.org/wiki/Aqua_(user_interface)">https://en.wikipedia.org/wiki/Aqua_(user_interface)</a> — Aqua (2000): gel buttons, translucency, 'lickable' UI</p></div>
+</div>
+</body>
+</html>

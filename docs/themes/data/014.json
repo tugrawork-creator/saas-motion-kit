@@ -1,0 +1,20 @@
+{"id":"014","slug":"blueprint-drawing","name":"Blueprint Drawing","category":"type",
+ "summary":"The product is drafted like a machine part; the metric that falls outside its tolerance band gets a coral revision cloud.",
+ "look":"A teal blueprint sheet with minor/major grid, white 2.5 px hairlines, isometric exploded plates, dimension arrows and numbered balloons. Mono notes, serif titles and a title block on every frame; coral is reserved for out-of-tolerance.",
+ "components":[
+  {"name":"Drafting grid","role":"teal sheet with 30 px minor and 150 px major lines"},
+  {"name":"Exploded view","role":"dashboards or UI panels as isometric plates pulled apart"},
+  {"name":"Dimension line","role":"double-arrow measure for counts, ranges and the −18% drop"},
+  {"name":"Callout balloon","role":"numbered circle on a leader line linking part to note"},
+  {"name":"Tolerance band + revision cloud","role":"dashed normal range; coral scalloped cloud around the anomaly"},
+  {"name":"Title block","role":"checked by Pulse, approved by you, plus the action cell"}],
+ "motion":[
+  {"name":"Line draw","how":"stroke-dashoffset 400–700 ms power1.inOut, layers staggered by an 8th note (250 ms at 120 BPM)"},
+  {"name":"Explode / assemble","how":"plates slide apart along the vertical axis, expo.out 900 ms, one per downbeat"},
+  {"name":"Dimension snap","how":"arrows grow from centre outward in 200 ms power3.out on the downbeat while the value counts up"}],
+ "story":"Hook: an exploded stack of dashboards, each balloon noted UNREAD, dimensioned × 38, title block 'INSPECTED 3 / 38'. Reveal: construction lines and a width dimension draw around the Acme mark, balloon A points at the signal dot, 'Acme Pulse' writes on in serif. Proof: 'Out of tolerance.' — the checkout conversion line runs inside its band, dives below LOWER TOL after the 09:42 deploy #2231 marker, a −18% dimension and a revision cloud land, and the title block's ROLL BACK cell fills when the human approves. CTA: 'Every metric. Every minute.' over a release title block with a coral START FREE cell.",
+ "adapt":"Draw your UI panels or architecture as exploded plates and your key metric as a measured line inside its normal range; put the human approval in the title block.",
+ "references":[{"url":"https://tympanus.net/codrops/2023/01/31/bringing-letters-to-life-coding-a-kinetic-svg-typography-animation/","note":"SVG stroke-drawing technique for line-draw motion","verified":true}],
+ "fit":{"readability":2,"trust":3,"effort":"med","risk":"hairlines shimmer after compression; keep strokes ≥ 2 px and limit notes per sheet"},
+ "best_for":["infrastructure","dev tools","hardware / IoT","analytics"],
+ "file":"themes/014-blueprint-drawing.html"}

@@ -1,0 +1,20 @@
+{"id":"020","slug":"museum-specimen-labels","name":"Museum Specimen Labels","category":"type",
+ "summary":"Every caught anomaly becomes a curated museum exhibit: a pinned specimen under glass with a crisp wall label.",
+ "look":"A calm, spotlit gallery wall in pale teal-grey with salon-hung framed dashboards, a glass vitrine on a plinth, and white wall labels set in italic serif titles, mono catalogue codes and short sans context. A single coral pin marks the moment of the drop.",
+ "components":[
+  {"name":"Specimen","role":"the anomalous chart fragment presented under glass"},
+  {"name":"Wall label","role":"catalogue number, italic title, meta line, three lines of context and the action buttons"},
+  {"name":"Catalogue code","role":"mono IDs like PL-2231 tying the exhibit to the deploy"},
+  {"name":"Coral pin","role":"one coral pin with a real shadow marking the drop"},
+  {"name":"Vitrine & plinth","role":"thin glass case with reflection gradient on a pale plinth"},
+  {"name":"Wall vinyl & wayfinding","role":"serif headlines on the wall and mono gallery signs"}],
+ "motion":[
+  {"name":"Rail slide","how":"labels enter sideways 40 px, power3.out 500 ms, landing on a downbeat at 120 BPM"},
+  {"name":"Spotlight","how":"radial light brightens the specimen over 800 ms sine.inOut from beat 1 of each exhibit"},
+  {"name":"Wall pan","how":"slow dolly between exhibits, one exhibit per bar (2 s), power1.inOut"}],
+ "story":"Hook: a salon wall of framed dashboards with the vinyl 'How many dashboards did you check today?' and a label 'Untitled (38 Dashboards), 2026 — opened daily, read rarely. Checked: 3.' Reveal: the spotlight snaps on for the drop over dimensional 'Acme Pulse' lettering with the mark: 'A permanent exhibition of every metric, every minute.' Proof: Exhibit 1 — the checkout chart under glass with a coral pin on the drop; label 'No. PL-2231 · Checkout conversion, −18% · since 09:42 · after deploy #2231 · Discovered by Acme Pulse, decided by the on-call team' with Roll back / Acknowledge. CTA: the exit wall 'Caught before customers noticed.' and an admission desk card with the lockup and Start free.",
+ "adapt":"Treat each thing your product catches or creates (a bug, a lead, a saved hour) as an exhibit: a screenshot as the specimen, your own data in the label's three lines.",
+ "references":[{"url":"https://segd.org/projects/dynamic-visibility-signage-wayfinding-system-for-museum-of-moving-image/","note":"museum signage and wayfinding system","verified":true}],
+ "fit":{"readability":3,"trust":3,"effort":"low","risk":"gallery pace can feel slow; every move must still land on the beat"},
+ "best_for":["analytics","observability","customer success tools","premium B2B brands"],
+ "file":"themes/020-museum-specimen-labels.html"}

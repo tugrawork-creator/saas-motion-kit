@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>059 · Mobile Notifications — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t059 ===== */
+
+.t059-f{position:absolute;inset:0;overflow:hidden;color:var(--ink);font-family:var(--sans);background:radial-gradient(90% 80% at 80% 10%,#D8F3EF 0%,#F2F3F0 55%,#F7EEE9 100%)}
+.t059-h{position:absolute;font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+.t059-h i{color:var(--brand-deep)}
+.t059-ph{position:absolute;border-radius:calc(var(--u)*112);background:#0B0F16;padding:calc(var(--u)*14);box-shadow:0 calc(var(--u)*60) calc(var(--u)*120) rgba(14,23,38,.28),inset 0 0 0 calc(var(--u)*3) #2A313C}
+.t059-scr{position:relative;width:100%;height:100%;border-radius:calc(var(--u)*98);overflow:hidden}
+.t059-isl{position:absolute;left:50%;transform:translateX(-50%);top:calc(var(--u)*24);height:calc(var(--u)*62);border-radius:calc(var(--u)*40);background:#000;display:flex;align-items:center;justify-content:space-between;padding:0 calc(var(--u)*22);color:#fff}
+.t059-time{position:absolute;left:0;right:0;text-align:center;color:#fff;font:300 calc(var(--u)*150)/1 var(--sans);letter-spacing:-.03em}
+.t059-ban{position:absolute;left:calc(var(--u)*26);right:calc(var(--u)*26);background:rgba(255,255,255,.82);backdrop-filter:blur(calc(var(--u)*20));border-radius:calc(var(--u)*32);padding:calc(var(--u)*20) calc(var(--u)*24);display:flex;gap:calc(var(--u)*18);align-items:flex-start;box-shadow:0 calc(var(--u)*10) calc(var(--u)*26) rgba(0,0,0,.12)}
+.t059-ban .ic{width:calc(var(--u)*58);height:calc(var(--u)*58);border-radius:calc(var(--u)*15);flex:none;display:grid;place-items:center;font:700 calc(var(--u)*26) var(--mono);color:#fff}
+.t059-ban .ap{font:600 calc(var(--u)*19) var(--mono);letter-spacing:.08em;color:#6B7280;text-transform:uppercase}
+.t059-ban .tt{font:700 calc(var(--u)*26)/1.2 var(--sans);margin-top:calc(var(--u)*4);white-space:nowrap}
+.t059-ban .bd{font:400 calc(var(--u)*22) var(--sans);color:#4B5563;margin-top:calc(var(--u)*2);white-space:nowrap}
+.t059-la{position:absolute;left:calc(var(--u)*24);right:calc(var(--u)*24);top:calc(var(--u)*18);background:#000;border-radius:calc(var(--u)*58);padding:calc(var(--u)*30) calc(var(--u)*34) calc(var(--u)*32);color:#fff}
+.t059-seg{display:flex;gap:calc(var(--u)*10);margin:calc(var(--u)*18) 0 calc(var(--u)*20)}
+.t059-seg i{flex:1;height:calc(var(--u)*12);border-radius:calc(var(--u)*6);background:#0FA3A3}
+.t059-btn{flex:1;text-align:center;font:700 calc(var(--u)*28) var(--sans);border-radius:calc(var(--u)*100);padding:calc(var(--u)*18) 0}
+.t059-cta{position:absolute;font:700 calc(var(--u)*36) var(--sans);color:#fff;background:var(--alert);border-radius:calc(var(--u)*100);padding:calc(var(--u)*24) calc(var(--u)*60);box-shadow:0 calc(var(--u)*18) calc(var(--u)*40) rgba(255,90,78,.35);white-space:nowrap}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 059 · Signature directions</div>
+    <h1>Mobile Notifications</h1>
+    <p class="dek">The phone is the stage: a lock screen drowning in banners, an app icon that pops open on the drop, and a Dynamic-Island-style Live Activity that expands into the proof. In a square frame the phone is cropped oversized or tilted 3/4, and big serif headlines fill the negative space.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t059-f1"><div class="t059-f">
+<div class="t059-h" style="left:calc(var(--u)*60);top:calc(var(--u)*90);width:calc(var(--u)*380);font-size:calc(var(--u)*72)">How many dashboards did you <i style="color:var(--alert)">check</i> today?</div>
+<div class="t059-ph" style="left:calc(var(--u)*440);top:calc(var(--u)*90);width:calc(var(--u)*620);height:calc(var(--u)*1180);transform:rotate(4deg)"><div class="t059-scr" style="background:linear-gradient(170deg,#0B6E6E 0%,#123049 55%,#0E1726 100%)">
+<div class="t059-isl" style="width:calc(var(--u)*200)"></div>
+<div class="t059-time" style="top:calc(var(--u)*120)">17:40</div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*280);text-align:center;color:rgba(255,255,255,.8);font:500 calc(var(--u)*24) var(--sans)">Friday · release day</div>
+<div class="t059-ban" style="top:calc(var(--u)*350);transform:scale(.9);opacity:.55;top:calc(var(--u)*330)"><div class="ic" style="background:#3A4A60">▦</div><div><div class="ap">Dashboards · now</div><div class="tt">Checkout looks off?</div><div class="bd">tab 12 of 38</div></div></div>
+<div class="t059-ban" style="top:calc(var(--u)*440);"><div class="ic" style="background:#F4B740">!</div><div><div class="ap">Alerts · 2m</div><div class="tt">p95 latency 212 ms</div><div class="bd">muted by someone</div></div></div>
+<div class="t059-ban" style="top:calc(var(--u)*580);"><div class="ic" style="background:#FF5A4E">×</div><div><div class="ap">Alerts · 4m</div><div class="tt">Error rate 0.4 %</div><div class="bd">no owner</div></div></div>
+<div class="t059-ban" style="top:calc(var(--u)*720);"><div class="ic" style="background:#5A6475">@</div><div><div class="ap">Team chat · 6m</div><div class="tt">who’s on call??</div><div class="bd">14 unread</div></div></div>
+<div class="t059-ban" style="top:calc(var(--u)*860);"><div class="ic" style="background:#0E1726">38</div><div><div class="ap">Dashboards</div><div class="tt">38 open. 0 watching.</div><div class="bd"></div></div></div>
+</div></div>
+<div style="position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*700);font:600 calc(var(--u)*20) var(--mono);letter-spacing:.14em;color:var(--muted)">+ 23 MORE NOTIFICATIONS</div>
+</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>One banner per beat slides down from under the island</b>; older ones shrink to .95 and fade as they are pushed down, the last two spill out of the frame; on bar 3’s downbeat two banners fling off-screen at once.</p></div>
+  <div class="cw"><div class="cell" id="t059-f2"><div class="t059-f">
+<div class="t059-h" style="left:0;right:0;top:calc(var(--u)*70);text-align:center;font-size:calc(var(--u)*84)">You ship. <i>Pulse</i> watches.</div>
+<div class="t059-ph" style="left:calc(var(--u)*220);top:calc(var(--u)*220);width:calc(var(--u)*640);height:calc(var(--u)*1200)"><div class="t059-scr" style="background:#fff">
+<div class="t059-isl" style="width:calc(var(--u)*200)"></div>
+<div style="position:absolute;left:50%;top:calc(var(--u)*290);width:calc(var(--u)*280);height:calc(var(--u)*280);margin-left:calc(var(--u)*-140);border-radius:calc(var(--u)*70);border:calc(var(--u)*2) solid rgba(15,163,163,0.33)"></div><div style="position:absolute;left:50%;top:calc(var(--u)*250);width:calc(var(--u)*360);height:calc(var(--u)*360);margin-left:calc(var(--u)*-180);border-radius:calc(var(--u)*88);border:calc(var(--u)*2) solid rgba(15,163,163,0.21000000000000002)"></div><div style="position:absolute;left:50%;top:calc(var(--u)*210);width:calc(var(--u)*440);height:calc(var(--u)*440);margin-left:calc(var(--u)*-220);border-radius:calc(var(--u)*106);border:calc(var(--u)*2) solid rgba(15,163,163,0.09000000000000002)"></div>
+<img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:50%;top:calc(var(--u)*330);width:calc(var(--u)*200);height:calc(var(--u)*200);margin-left:calc(var(--u)*-100);border-radius:calc(var(--u)*52);box-shadow:0 calc(var(--u)*20) calc(var(--u)*50) rgba(15,163,163,.4)">
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*600);text-align:center;font:800 calc(var(--u)*72) var(--sans);letter-spacing:-.03em;white-space:nowrap">Acme Pulse</div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*700);text-align:center;font:600 calc(var(--u)*21) var(--mono);color:var(--muted);letter-spacing:.12em">WATCHING IN THE BACKGROUND</div>
+</div></div>
+</div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop every banner swipes up and out</b> and the screen flashes white; in the same frame the icon pops from the centre with concentric corner echoes, then scales like an app launch into the lockup.</p></div>
+  <div class="cw"><div class="cell" id="t059-f3"><div class="t059-f">
+<div class="t059-h" style="left:calc(var(--u)*60);top:calc(var(--u)*60);width:calc(var(--u)*960);font-size:calc(var(--u)*70)">Caught <i>before</i> customers noticed.</div>
+<div class="t059-ph" style="left:calc(var(--u)*90);top:calc(var(--u)*230);width:calc(var(--u)*900);height:calc(var(--u)*1300)"><div class="t059-scr" style="background:linear-gradient(#EEF1F4,#E3E8EE)">
+<div class="t059-la">
+<div style="display:flex;align-items:center;gap:calc(var(--u)*16);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*54);height:calc(var(--u)*54)"><span style="font:800 calc(var(--u)*30) var(--sans)">Pulse</span><span style="font:400 calc(var(--u)*21) var(--mono);color:#9FB0C2">· watching 14 metrics</span><span style="margin-left:auto;font:600 calc(var(--u)*24) var(--mono);color:#9FF3EC">4/5 ✓</span></div>
+<div class="t059-seg"><i></i><i></i><i style="background:var(--alert)"></i><i></i><i style="background:#39424F"></i></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;white-space:nowrap"><span style="font:700 calc(var(--u)*32) var(--sans)">⚠ Checkout conversion</span><span style="font:600 calc(var(--u)*50) var(--mono);color:#FF7A70">−18%</span></div>
+<div style="font:400 calc(var(--u)*22) var(--mono);color:#B8C4D0;margin-top:calc(var(--u)*6)">since 09:42 · after deploy #2231</div>
+<div style="display:flex;gap:calc(var(--u)*14);margin-top:calc(var(--u)*24)"><span class="t059-btn" style="background:var(--alert)">Roll back</span><span class="t059-btn" style="background:#2A313C">Acknowledge</span></div>
+</div>
+<div style="position:absolute;left:calc(var(--u)*40);right:calc(var(--u)*40);top:calc(var(--u)*470);height:calc(var(--u)*120);border-radius:calc(var(--u)*26);background:#fff;opacity:.9"></div>
+<div style="position:absolute;left:calc(var(--u)*40);right:calc(var(--u)*40);top:calc(var(--u)*610);height:calc(var(--u)*120);border-radius:calc(var(--u)*26);background:#fff;opacity:.6"></div>
+</div></div>
+</div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera punches into the island</b>, which stretches open into a Live Activity (overshoot 1.04 → 1); segments fill one per two beats, the coral segment lands on the bar-9 downbeat and the Roll back press hits the next downbeat with a haptic tick.</p></div>
+  <div class="cw"><div class="cell" id="t059-f4"><div class="t059-f">
+<div class="t059-ph" style="left:calc(var(--u)*760);top:calc(var(--u)*740);width:calc(var(--u)*420);height:calc(var(--u)*800);transform:rotate(-12deg);filter:blur(calc(var(--u)*4));opacity:.8"><div class="t059-scr" style="background:linear-gradient(170deg,#0B6E6E 0%,#123049 55%,#0E1726 100%)"></div></div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*200);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*24);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*120);height:calc(var(--u)*120)"><span style="font:800 calc(var(--u)*96) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+<div class="t059-h" style="left:0;right:0;top:calc(var(--u)*390);text-align:center;font-size:calc(var(--u)*84)">Caught <i>before</i><br>customers noticed.</div>
+<svg viewBox="0 0 1080 1080" style="position:absolute;inset:0;width:100%;height:100%"><path d="M880 800 C 820 700, 740 660, 660 690" fill="none" stroke="#FF5A4E" stroke-width="4" stroke-dasharray="2 14" stroke-linecap="round"/><rect x="330" y="630" width="420" height="120" rx="60" fill="none" stroke="#FF5A4E" stroke-width="2" opacity=".35"/><rect x="310" y="612" width="460" height="156" rx="78" fill="none" stroke="#FF5A4E" stroke-width="2" opacity=".18"/></svg>
+<div class="t059-cta" style="left:50%;transform:translateX(-50%);top:calc(var(--u)*650)">Start free</div>
+</div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The phone blurs and slides out bottom-right</b>; the lockup settles centre, and on the sting the island detaches along a dotted orbit, turns coral and stretches into the Start free pill.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Oversized device</b> — concentric corners (outer 112 − bezel 14 = inner 98), cropped larger than the frame</li><li><b>Island · compact</b> — black pill with a leading icon and trailing count; teal = watching, coral = alert</li><li><b>Live Activity</b> — the expanded island: segment bar, one anomaly line, mono context, two action buttons</li><li><b>Banner stack</b> — frosted white r32 banners; newest on top, older ones scale .95 → .90 and fade</li><li><b>Icon launch</b> — the Acme mark inside a white screen with concentric echoes, zooming like an app opening</li><li><b>Island → CTA morph</b> — the black pill detaches, turns coral and stretches into “Start free”</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Banner drop</b> — y −80 → 0 with slight overshoot, back.out(1.3) 0.35 s, one per beat (0.5 s at 120 BPM)</li><li><b>Island stretch</b> — width/height spring (stiffness 300, damping 22) ≈ 0.45 s, overshoot 1.04, triggered on a bar downbeat</li><li><b>Rolling digits</b> — counters roll vertically per digit, 0.3 s power2.out — digits never hard-cut</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Everyone knows what a notification feels like, so the pain and the fix need no explanation, and the Live Activity shows “background agent that surfaces only what matters” natively. Risk: a small phone in a square frame is unreadable — crop tight and let one element fill the frame at a time.</p><p><b>Adapt to your product:</b> Show your product’s real push or widget surface; the Live Activity pattern suits anything with a status that changes over minutes (deploys, deliveries, jobs, incidents).</p><p><b>References:</b> <a href="https://developer.apple.com/videos/play/wwdc2023/10194/">https://developer.apple.com/videos/play/wwdc2023/10194/</a> (Design dynamic Live Activities (WWDC23)) · <a href="https://developer.apple.com/news/?id=bkm73839">https://developer.apple.com/news/?id=bkm73839</a> (Explore Live Activities and the Dynamic Island)</p></div>
+</div>
+</body>
+</html>

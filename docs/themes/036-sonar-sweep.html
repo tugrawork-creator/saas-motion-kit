@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>036 · Sonar Sweep — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t036-f{background:radial-gradient(ellipse at 50% 45%,#0A2A30 0%,#061C21 50%,#020B0D 100%);color:#E4FAF7}
+.t036-f::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.02) 0 calc(var(--u)*2),transparent calc(var(--u)*2) calc(var(--u)*5))}
+.t036-svg{position:absolute;inset:0;width:100%;height:100%}
+.t036-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t036-sweep{position:absolute;border-radius:50%;left:calc(var(--u)*(var(--cx) - var(--r)));top:calc(var(--u)*(var(--cy) - var(--r)));width:calc(var(--u)*var(--r)*2);height:calc(var(--u)*var(--r)*2);
+  background:conic-gradient(from var(--a),rgba(15,163,163,0) 0deg,rgba(15,163,163,.06) 20deg,rgba(46,230,201,.22) 50deg,rgba(157,255,238,.75) 59.3deg,rgba(15,163,163,0) 60deg);opacity:var(--o,1)}
+.t036-mono{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase;color:#6FC9BE}
+.t036-mono b{color:#E4FAF7;font-weight:600}
+.t036-h{font-family:var(--serif);line-height:1.02;letter-spacing:-.015em;color:#F0FFFC}
+.t036-h em{font-style:italic;color:#7FF0E3}
+.t036-word{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;line-height:1;color:#F0FFFC}
+.t036-rl{font-family:var(--mono);font-size:20px;letter-spacing:1.5px;fill:#6FC9BE}
+.t036-card{background:rgba(4,20,24,.9);border:calc(var(--u)*2) solid #FF5A4E;border-radius:calc(var(--u)*20);padding:calc(var(--u)*24) calc(var(--u)*30);box-shadow:0 0 calc(var(--u)*50) rgba(255,90,78,.2)}
+.t036-btn{display:inline-block;font:800 calc(var(--u)*32) var(--sans);border-radius:calc(var(--u)*12);padding:calc(var(--u)*18) calc(var(--u)*34);white-space:nowrap}
+.t036-btn.c{background:#FF5A4E;color:#fff}
+.t036-btn.o{box-shadow:inset 0 0 0 calc(var(--u)*2) #6FC9BE;color:#BFF7EF}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 036 · Light, optics &amp; texture</div>
+    <h1>Sonar Sweep</h1>
+    <p class="dek">A calm circular scope with range rings and bearing ticks, and a conic beam that never stops turning: "monitoring in the background" made literal and loopable. Metrics are blips that brighten as the beam passes and fade after; one blip pings back coral, the scope locks on, and a contact card slides out for a human to decide.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t036-f" id="t036-f1">
+    <svg class="t036-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <g fill="none" stroke="#1D5A5A" stroke-width="2" opacity=".6">
+        <circle cx="540" cy="660" r="330"/><circle cx="540" cy="660" r="247"/><circle cx="540" cy="660" r="165"/><circle cx="540" cy="660" r="82"/>
+        <path d="M210 660H870M540 330V990" stroke-dasharray="4 10"/>
+      </g>
+      <circle cx="540" cy="660" r="330" fill="none" stroke="#1D5A5A" stroke-width="12" stroke-dasharray="1.5 15.8" opacity=".6"/>
+      <g fill="#3E8C86" opacity=".35"><circle cx="430" cy="560" r="7"/><circle cx="690" cy="590" r="7"/><circle cx="610" cy="780" r="7"/><circle cx="360" cy="740" r="7"/><circle cx="760" cy="720" r="7"/><circle cx="520" cy="480" r="7"/><circle cx="300" cy="620" r="7"/></g>
+      <circle cx="540" cy="660" r="8" fill="#3E8C86"/>
+    </svg>
+    <div class="t036-p t036-h" style="--x:80;--y:74;--w:920;font-size:calc(var(--u)*100)">38 dashboards.<br><em>Nobody</em> watching.</div>
+    <div class="t036-p t036-mono" style="--x:80;--y:930;--w:300">03:14 · sweep <b style="color:#F4B740">off</b></div>
+    <div class="t036-p t036-mono" style="--x:700;--y:930;--w:300;text-align:right">contacts: <b>?</b></div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>A dead scope at 03:14</b>: grey blips flicker in and out of existence with no beam to catch them; the headline types in word by word and "Nobody" drops on the bar-2 downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t036-f" id="t036-f2">
+    <div class="t036-sweep" style="--cx:540;--cy:450;--r:330;--a:20deg"></div>
+    <svg class="t036-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <g fill="none" stroke="#2A8A84" stroke-width="2" opacity=".75">
+        <circle cx="540" cy="450" r="330"/><circle cx="540" cy="450" r="247"/><circle cx="540" cy="450" r="165"/>
+        <path d="M210 450H870M540 120V780" stroke-dasharray="4 10"/>
+      </g>
+      <circle cx="540" cy="450" r="330" fill="none" stroke="#2A8A84" stroke-width="12" stroke-dasharray="1.5 15.8"/>
+      <g fill="none" stroke="#2EE6C9" stroke-width="3"><circle cx="540" cy="450" r="120" opacity=".5"/><circle cx="540" cy="450" r="190" opacity=".25"/></g>
+      <g fill="#9DFFEE"><circle cx="760" cy="300" r="8"/><circle cx="700" cy="220" r="7" opacity=".7"/><circle cx="820" cy="420" r="7" opacity=".45"/></g>
+    </svg>
+    <img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*470);top:calc(var(--u)*380);width:calc(var(--u)*140);height:calc(var(--u)*140);filter:drop-shadow(0 0 calc(var(--u)*30) rgba(46,230,201,.7))">
+    <div class="t036-p t036-word" style="--x:60;--y:830;text-align:center;font-size:calc(var(--u)*120)">Acme Pulse</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the beam ignites from the hub and starts turning clockwise</b>; a first ping ring expands from the Acme mark on the kick and the wordmark rises from below on beat 3.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t036-f" id="t036-f3">
+    <div class="t036-sweep" style="--cx:540;--cy:430;--r:330;--a:290deg"></div>
+    <svg class="t036-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <g fill="none" stroke="#2A8A84" stroke-width="2" opacity=".75">
+        <circle cx="540" cy="430" r="330"/><circle cx="540" cy="430" r="260"/><circle cx="540" cy="430" r="190"/><circle cx="540" cy="430" r="120"/>
+        <path d="M210 430H870M540 100V760" stroke-dasharray="4 10"/>
+      </g>
+      <circle cx="540" cy="430" r="330" fill="none" stroke="#2A8A84" stroke-width="12" stroke-dasharray="1.5 15.8"/>
+      <text class="t036-rl" x="548" y="316">SIGNUPS</text>
+      <text class="t036-rl" x="548" y="246">ACTIVE USERS</text>
+      <text class="t036-rl" x="548" y="176">P95 LATENCY</text>
+      <text class="t036-rl" x="548" y="126" style="fill:#FF8A80">CHECKOUT</text>
+      <g fill="#9DFFEE"><circle cx="440" cy="340" r="8" opacity=".9"/><circle cx="360" cy="290" r="8" opacity=".75"/><circle cx="640" cy="560" r="8" opacity=".3"/><circle cx="410" cy="580" r="8" opacity=".35"/><circle cx="330" cy="470" r="8" opacity=".6"/><circle cx="700" cy="380" r="8" opacity=".25"/></g>
+      <g fill="none" stroke="#FF5A4E"><circle cx="340" cy="165" r="30" stroke-width="4"/><circle cx="340" cy="165" r="62" stroke-width="3" opacity=".55"/><circle cx="340" cy="165" r="98" stroke-width="2" opacity=".25"/></g>
+      <circle cx="340" cy="165" r="12" fill="#FF5A4E"/>
+      <path d="M340 177 L340 250 L150 250 L150 800" fill="none" stroke="#FF5A4E" stroke-width="2" stroke-dasharray="6 6" opacity=".7"/>
+    </svg>
+    <div class="t036-p t036-mono" style="--x:60;--y:66;--w:960;display:flex;justify-content:space-between"><span>Bearing <b>323°</b></span><span>09:44 · <b>14</b> metrics</span></div>
+    <div class="t036-p t036-card" style="--x:60;--y:790;--w:960;display:flex;align-items:center;justify-content:space-between;gap:calc(var(--u)*20)">
+      <div><div class="t036-mono" style="color:#FF8A80">Contact 07 · locked</div>
+        <div style="display:flex;align-items:baseline;gap:calc(var(--u)*16);margin-top:calc(var(--u)*6)"><span style="font:800 calc(var(--u)*64)/1 var(--sans);color:#FF7A70">−18%</span><span style="font:700 calc(var(--u)*28) var(--sans)">Checkout conversion</span></div>
+        <div class="t036-mono" style="margin-top:calc(var(--u)*6);text-transform:none;letter-spacing:.04em">since 09:42 · after deploy #2231</div></div>
+      <div style="display:flex;flex-direction:column;gap:calc(var(--u)*12)"><span class="t036-btn c">Roll back</span><span class="t036-btn o">Acknowledge</span></div>
+    </div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The beam turns clockwise, one rotation per 2 bars</b>, lighting blips that fade behind it; as it crosses the checkout ring one blip pings coral (3 rings on 3 kicks), the scope locks and the contact card slides up from the bottom on the snare.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t036-f" id="t036-f4">
+    <div class="t036-sweep" style="--cx:540;--cy:540;--r:470;--a:150deg;--o:.55"></div>
+    <svg class="t036-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <g fill="none" stroke="#1D5A5A" stroke-width="2" opacity=".6"><circle cx="540" cy="540" r="470"/><circle cx="540" cy="540" r="350"/><circle cx="540" cy="540" r="230"/></g>
+      <circle cx="540" cy="540" r="470" fill="none" stroke="#1D5A5A" stroke-width="12" stroke-dasharray="1.5 20.1" opacity=".6"/>
+    </svg>
+    <div class="t036-p" style="--x:60;--y:230;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*22)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*96);height:calc(var(--u)*96)"><span class="t036-word" style="font-size:calc(var(--u)*72)">Acme Pulse</span></div>
+    <div class="t036-p t036-h" style="--x:60;--y:380;text-align:center;font-size:calc(var(--u)*116)">You ship.<br><em>Pulse watches.</em></div>
+    <div class="t036-p" style="--x:60;--y:690;text-align:center"><span class="t036-btn c" style="font-size:calc(var(--u)*42);padding:calc(var(--u)*26) calc(var(--u)*64)">Start free</span></div>
+    <div class="t036-p t036-mono" style="--x:60;--y:850;text-align:center">sweep · <b>always on</b></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The scope pulls back to fill the frame</b> and keeps turning behind the lockup; "Pulse watches." lights as the beam passes it, and Start free pings on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Scope + range rings</b> — concentric rings labelled by metric instead of distance; the whole product surface in one circle.</li>
+    <li><b>Conic sweep</b> — a CSS conic-gradient beam with a phosphor tail; the always-on background watcher.</li>
+    <li><b>Blips</b> — metric dots whose alpha decays after each pass; healthy signals.</li>
+    <li><b>Ping rings</b> — three coral expanding circles; the anomaly announcing itself.</li>
+    <li><b>Contact card</b> — "Contact 07 · locked" card with the metric, context and Roll back / Acknowledge.</li>
+    <li><b>Bearing strip</b> — mono readouts (bearing, clock, metric count) around the scope edge.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Sweep</b> — linear rotation 360° per 2 bars (4 s at 120 BPM), never eased; it is the metronome of the film.</li>
+    <li><b>Blip decay</b> — each blip goes 1 → 0.15 opacity over one rotation, triggered by its angle, so blips light up exactly as the beam crosses.</li>
+    <li><b>Ping</b> — ring scale 0 → 3 and opacity 1 → 0, power2.out, three staggered rings synced to three kick drums.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>A turning beam is the clearest possible picture of "watching in the background", it loops forever and it locks to the beat. Risk: military connotations; keep it calm and scientific, with no crosshairs or targeting language.</p><p><b>Adapt to your product:</b> Label the rings with your own objects (services, regions, customers, pipelines) and let the contact card show your product's real alert and action.</p><p><b>References:</b> <a href="https://csswolf.com/radar-scanner-animation-effect-in-css-no-js/">CSS radar scanner (no JS)</a> · <a href="https://codepen.io/robdimarzo/embed/vYreyxM">Radar sweep CodePen</a> · <a href="https://en.wikipedia.org/wiki/Territory_Studio">Territory Studio (FUI lineage)</a></p></div>
+</div>
+</body>
+</html>

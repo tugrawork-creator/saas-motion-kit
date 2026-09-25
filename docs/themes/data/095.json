@@ -1,0 +1,75 @@
+{
+ "id": "095",
+ "slug": "split-screen",
+ "name": "Split Screen",
+ "category": "camera",
+ "summary": "Hard ink gutters split the frame into simultaneous views: six dashboards, a slammed gutter for the reveal, three synced cameras on one anomaly, then the gutters close.",
+ "look": "Flat, graphic panels divided by 12 px ink gutters, in the tradition of late-60s multi-panel cinema. Mono CAM labels, amber timecode chips and coral annotations explain what each split is doing.",
+ "components": [
+  {
+   "name": "Ink gutters",
+   "role": "12 px hard dividers; their position is the edit (moving the gutter = cutting)"
+  },
+  {
+   "name": "Dashboard panel",
+   "role": "one metric per panel with a TAB nn/38 badge; the currency of the hook"
+  },
+  {
+   "name": "Camera labels",
+   "role": "CAM A / B / C mono tags naming what each panel is watching"
+  },
+  {
+   "name": "Synced timecode",
+   "role": "amber 09:42:07 chip repeated in every panel to prove simultaneity"
+  },
+  {
+   "name": "Decision panel",
+   "role": "full-width bottom panel with the anomaly line and Roll back / Acknowledge"
+  },
+  {
+   "name": "Split tagline",
+   "role": "tagline broken across two panels, then merged into one lockup band"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Panel pop-in",
+   "how": "each panel wipes in from its gutter edge (clip-path inset 100% → 0, 0.2 s power3.out), one per eighth note (0.25 s at 120 BPM)"
+  },
+  {
+   "name": "Gutter slam",
+   "how": "gutter x moves 50% → 33% in 0.18 s with expo.in and a 2-frame overshoot, landing exactly on the drop; the losing panel desaturates to 30%"
+  },
+  {
+   "name": "Gutter close",
+   "how": "all gutters slide to 0 width over one bar (2 s, power2.inOut) while the panels’ content scales 1 → 0.96; the merged band settles on the downbeat"
+  }
+ ],
+ "story": "Hook: six dashboard panels fill the frame, “How many dashboards did you check today?” Reveal: the gutter slams left on the drop and a teal panel carries Acme Pulse. Proof: three synchronised panels at 09:42:07: Pulse flags checkout conversion −18%, the chart dips after deploy #2231, the on-call engineer hits Roll back. CTA: “You ship.” | “Pulse watches.”, then the gutters close into one lockup with Start free.",
+ "adapt": "Put the before-state (your users’ current juggling) in many small panels and your product in one big one. For the proof, split the frame into the three roles your product connects, for example the signal, the system and the person, and keep the same timecode in each.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Split_screen_(film)",
+   "note": "split screen history and definition",
+   "verified": true
+  },
+  {
+   "url": "https://www.premiumbeat.com/blog/split-screen-editing-and-composing/",
+   "note": "composing split screens to guide attention",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Too many panels at 1:1 on a phone becomes noise; every split needs one clear “look here” panel, and on-screen text has to stay inside a single panel, not across gutters."
+ },
+ "best_for": [
+  "monitoring",
+  "collaboration tools",
+  "multi-role products",
+  "before/after stories"
+ ],
+ "file": "themes/095-split-screen.html"
+}

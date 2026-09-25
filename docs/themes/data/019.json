@@ -1,0 +1,20 @@
+{"id":"019","slug":"guilloche-banknote-engraving","name":"Guilloche Banknote Engraving","category":"type",
+ "summary":"Every frame is printed like a banknote; Pulse's UV sweep breaks one rosette ring in coral and reveals the hidden context.",
+ "look":"Cream security paper with wavy line fields, guilloche rosettes in a teal rainbow ink, microtext borders, hatch-engraved Instrument Serif numerals, a watermark window and coral serial numbers. A dark diagonal UV band exposes fluorescent text on the anomaly.",
+ "components":[
+  {"name":"Guilloche rosette","role":"generated concentric wavy rings and a spirograph core in teal rainbow ink"},
+  {"name":"Microtext border","role":"repeating product words along the frame"},
+  {"name":"Engraved numeral","role":"serif figures filled with a diagonal hatch plus a fine outline"},
+  {"name":"Watermark window","role":"clear oval where the Acme mark appears as if held to light"},
+  {"name":"Serial number","role":"coral mono numbering that counts per scene"},
+  {"name":"UV band","role":"diagonal dark strip revealing hidden fluorescent context text"}],
+ "motion":[
+  {"name":"Rosette draw","how":"dash reveal while ring phase advances, linear, 4 s loop = two bars at 120 BPM"},
+  {"name":"UV sweep","how":"band crosses the certificate in 600 ms power2.inOut via clip-path, beat to beat"},
+  {"name":"Serial roll","how":"digits step per 16th note (125 ms) and lock on the downbeat"}],
+ "story":"Hook: a note with an engraved denomination '38 — DASHBOARDS · SERIES FRIDAY', serial Nº 000038, and 'How many dashboards did you check today?'. Reveal: rosette rings phase outward on the drop, the watermark window clears to show the Acme mark, 'ACME PULSE' engraves in hatch caps. Proof: a checkout certificate — a rosette ring breaks in coral, '−18%' hatches in coral, the UV band freezes over 'since 09:42 · after deploy #2231', and the human presses the Roll back plate. CTA: 'Every metric. Every minute.' engraved, lockup, and a guilloche START FREE plate with serial.",
+ "adapt":"Treat each object your product verifies (a payout, a certificate, a build, an identity check) as a note; generate rosettes in your brand colors and put the evidence in the UV-revealed text.",
+ "references":[{"url":"https://github.com/prabinpebam/guilloche","note":"guilloche pattern generator","verified":false}],
+ "fit":{"readability":2,"trust":3,"effort":"med","risk":"fine lines alias after compression; keep strokes ~2 px and use fewer, larger loops"},
+ "best_for":["fintech","security / identity","compliance","billing"],
+ "file":"themes/019-guilloche-banknote-engraving.html"}

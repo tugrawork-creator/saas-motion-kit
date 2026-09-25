@@ -1,0 +1,74 @@
+{
+ "id": "091",
+ "slug": "beveled-95-desktop",
+ "name": "Beveled '95 Desktop",
+ "category": "era",
+ "summary": "Mid-90s desktop nostalgia: cascading spreadsheet windows, a Pulse alert dialog and a Start button that says Start free.",
+ "look": "Acme-teal desktop, grey 4-tone bevelled windows with teal gradient title bars, white wells, pixel-crisp dialogs and a taskbar with tray clock. Chunky Manrope UI type, one serif italic word in text files.",
+ "components": [
+  {
+   "name": "Bevelled window",
+   "role": "grey #C6C6C6 frame with 4-tone inset bevel and teal gradient title bar"
+  },
+  {
+   "name": "Cascade stack",
+   "role": "dashboard_33…38.xls windows offset 34 px — the dashboard pile"
+  },
+  {
+   "name": "Modal dialog",
+   "role": "warning / alert box with icon, message and a focused default button"
+  },
+  {
+   "name": "Splash screen",
+   "role": "bevelled panel with the Acme mark and version line"
+  },
+  {
+   "name": "Taskbar & tray",
+   "role": "clock and tray icon; the tray hosts Pulse in the background"
+  },
+  {
+   "name": "Start menu",
+   "role": "vertical brand band + coloured items; the Start button reads Start free"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Cascade spawn",
+   "how": "each window appears instantly (no easing) with a 2-frame outline zoom, one per 8th note — authentic and rhythmic"
+  },
+  {
+   "name": "Minimise-all",
+   "how": "windows scale 1→0 toward their taskbar slots, power2.in 0.25 s, all on the drop"
+  },
+  {
+   "name": "Cursor glide & click",
+   "how": "cursor moves along a slight arc, power1.inOut 0.75 s, button bevel inverts for 2 frames exactly on the beat"
+  }
+ ],
+ "story": "Hook: six cascading dashboard_XX.xls windows, notes.txt asking \"How many dashboards did you check today?\" and a warning dialog \"The drop still shipped on Friday.\" Reveal: everything minimises; an Acme Pulse splash screen appears. Proof: a live metrics window drops coral after the deploy line and the Pulse dialog reports checkout conversion −18% since 09:42 after deploy #2231 with Roll back (default) / Acknowledge; the cursor clicks Roll back. CTA: readme.txt \"You ship. Pulse watches.\", a start menu of benefits and a Start free button.",
+ "adapt": "Rebuild your real UI screenshots inside bevelled windows, cast your product's key notification as the modal dialog, and relabel the Start button with your CTA.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Windows_95",
+   "note": "mid-90s desktop UI conventions: taskbar, Start button, bevelled 3D widgets",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Susan_Kare",
+   "note": "Susan Kare: pixel icons and early GUI visual language",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Dated or parody feel; must avoid real OS logos, sounds and trademarks."
+ },
+ "best_for": [
+  "dev tools",
+  "IT & ops software",
+  "B2B with a sense of humour"
+ ],
+ "file": "themes/091-beveled-95-desktop.html"
+}

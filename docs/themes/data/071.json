@@ -1,0 +1,70 @@
+{
+ "id": "071",
+ "slug": "nightingale-rose",
+ "name": "Nightingale Rose",
+ "category": "data",
+ "summary": "An engraved, Victorian polar-area rose where three wedges after 09:42 fall short of the dotted norm.",
+ "look": "Aged sepia paper, dashed scale rings and hairline ink, teal rose petals separated by paper gutters; the anomaly wedges are coral inside dashed norm outlines. Letter-spaced serif titles like an 1850s statistical atlas.",
+ "components": [
+  {
+   "name": "Rose wedge",
+   "role": "polar-area slice, radius = value, paper gutters between petals"
+  },
+  {
+   "name": "Scale rings",
+   "role": "dashed concentric circles so length is readable"
+  },
+  {
+   "name": "Norm ghost",
+   "role": "dashed wedge outline showing the expected value"
+  },
+  {
+   "name": "Clock labels",
+   "role": "mono :00 / :15 / :30 or hour ticks around the rim"
+  },
+  {
+   "name": "Engraved title",
+   "role": "letter-spaced serif caps with a hairline rule, 1850s atlas style"
+  },
+  {
+   "name": "Leader + note",
+   "role": "ink elbow line to a serif marginal note"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Clockwise bloom",
+   "how": "wedge radius 0 → value with power2.out 0.3 s, staggered 0.125 s (16ths at 120 BPM) around the dial"
+  },
+  {
+   "name": "Petal equalise",
+   "how": "all radii tween to one length with expo.inOut 0.5 s landing on the drop; hue sweeps clockwise over 1 beat"
+  },
+  {
+   "name": "Short wedge",
+   "how": "anomaly wedges stop 20 % short with back.in(1.2) 0.25 s on the snare; dashed norm draws around them"
+  }
+ ],
+ "story": "Hook: a messy sepia rose of dashboard checks by the hour. Drop: petals equalise into a teal flower around the Acme mark. Proof: an hour of checkout conversion, the wedges since 09:42 fall short in coral after deploy #2231, −18%, Roll back. CTA: a small even teal rose, Every metric. Every minute., Start free.",
+ "adapt": "Any cyclical metric (hours of a day, days of a week, minutes of an hour) works as a rose; swap in your own cycle and show the anomaly as wedges that fall short of their dashed expected shape.",
+ "references": [
+  {
+   "url": "https://datavizcatalogue.com/methods/nightingale_rose_chart.html",
+   "note": "polar area / coxcomb chart definition and Nightingale's 1858 diagram",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Polar areas exaggerate outer changes and the Victorian styling can feel academic; keep the ring scale visible and the headline modern."
+ },
+ "best_for": [
+  "analytics",
+  "health / ops",
+  "scheduling products",
+  "editorial brands"
+ ],
+ "file": "themes/071-nightingale-rose.html"
+}

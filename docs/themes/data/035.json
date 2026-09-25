@@ -1,0 +1,26 @@
+{"id":"035","slug":"point-cloud","name":"Point Cloud","category":"light",
+ "summary":"Thousands of event particles morph from a swarm of dashboards into the pulse line and a dot-stacked chart, where three coral embers refuse to settle.",
+ "look":"Soft teal particles on a deep blue-black void, additive and slightly glowing. Every morph lands on a readable shape (dashboard outlines, the pulse waveform, a per-minute dot chart, a calm ring), and the anomaly is a handful of coral embers with trails.",
+ "components":[
+  {"name":"Particle field","role":"10–20k soft points (WebGL or canvas 2D, additive); one point = one event"},
+  {"name":"Target shapes","role":"position buffers sampled from SVG/text: dashboards, pulse line, dot chart, ring"},
+  {"name":"Coral embers","role":"outlier points with glow and trail that refuse to settle; the anomaly"},
+  {"name":"Expected-level ghosts","role":"dashed coral rings where points should be; the drop shown as absence"},
+  {"name":"Pinned labels","role":"mono HUD text and a dashed leader from ember to decision card"},
+  {"name":"Event counter","role":"'2,418 events/sec' readout that sells the scale being watched"}
+ ],
+ "motion":[
+  {"name":"Shape morph","how":"uProgress 0→1 between position buffers, per-particle delay by index, power3.inOut 1.6 s from the 0:08 drop"},
+  {"name":"Curl drift","how":"seeded noise keeps the idle cloud breathing; amplitude pumps +20 % on each kick at 120 BPM"},
+  {"name":"Ember isolation","how":"flagged points detach upward and the camera pushes in, expo.out 0.8 s, landing on the snare"}
+ ],
+ "story":"Hook: dashboard outlines shed particles into a vortex under '2,418 events/sec' and 'How many dashboards did you check today?'. Reveal: on the drop the swarm snaps into one pulse waveform with a coral head, and the Acme Pulse lockup fades up. Proof: particles stack into a per-minute checkout chart; after 09:42 the stacks fall short, three coral embers lift off and a card reads 'Checkout conversion −18% · since 09:42 · after deploy #2231' with Roll back. CTA: the cloud relaxes into an orbiting ring around 'Every metric. Every minute.' and Start free.",
+ "adapt":"Map one particle to one unit of your product (a request, an order, a session) and morph the cloud into your own chart; the embers become whatever your product flags.",
+ "references":[
+  {"url":"https://tympanus.net/codrops/2019/01/17/interactive-particles-with-three-js/","note":"interactive particles with Three.js","verified":false},
+  {"url":"https://tympanus.net/codrops/2024/12/19/crafting-a-dreamy-particle-effect-with-three-js-and-gpgpu/","note":"GPGPU particle effect","verified":false},
+  {"url":"https://threejs-journey.com/lessons/particles-morphing-shader","note":"particle morphing between shapes","verified":false}
+ ],
+ "fit":{"readability":3,"trust":2,"effort":"high","risk":"Particle 'AI dust' is a cliché; every morph must land on a real, readable data shape."},
+ "best_for":["analytics","event pipelines","observability","AI products"],
+ "file":"themes/035-point-cloud.html"}

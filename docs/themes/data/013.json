@@ -1,0 +1,20 @@
+{"id":"013","slug":"led-dot-matrix-ticker","name":"LED Dot-Matrix Ticker","category":"type",
+ "summary":"A physical LED sign scrolls your metrics like a stock ticker until one freezes and inverts into a coral alert block.",
+ "look":"A screwed dark bezel full of round diodes with the unlit dots faintly visible, 5×7 bitmap letters with a soft bloom in amber, teal, white and coral. The anomaly becomes a solid coral block with the number punched out in dark dots.",
+ "components":[
+  {"name":"Dot grid","role":"80 columns at 12 px pitch, unlit diodes at ~8%"},
+  {"name":"Bitmap font","role":"5×7 glyphs scaled 1×/2×/4× by lighting diode blocks"},
+  {"name":"Ticker line","role":"clipped marquee of metric tokens along the top row"},
+  {"name":"Alert block","role":"coral cluster with inverted, punched-out anomaly text"},
+  {"name":"Pixel sparkline","role":"one diode column per sample, last bars coral"},
+  {"name":"Bezel & hardware","role":"housing, fine-pitch caption strip and arcade buttons for the human action"}],
+ "motion":[
+  {"name":"Marquee","how":"whole-dot 12 px steps at constant linear speed, 8 steps per beat at 120 BPM"},
+  {"name":"Diagonal reveal","how":"dots light along (x + y) index with 8 ms stagger; the front crosses the panel in one bar"},
+  {"name":"Alert blink","how":"block toggles 3× on/off at 150 ms, then holds on the next downbeat; bloom is a 5 px blur merged over the dots"}],
+ "story":"Hook: an amber ticker scrolls while '38 OPEN TABS TODAY' and a coral '3 READ' light up, the lower strip asks 'How many did you check today?'. Reveal: a diagonal scan front lights ACME / PULSE in teal under a backlit mark plate. Proof: the teal ticker freezes on CHECKOUT, the matrix inverts into a coral block with −18% punched out, amber lines add 'since 09:42' and 'deploy #2231', the sparkline drops and a real ROLL BACK button lights for the human press. CTA: YOU SHIP. / PULSE / WATCHES. with a crawling ticker and a START FREE box that traces its border.",
+ "adapt":"Put your own live counters in the ticker and your single most important alert in the inverted block; keep lines under 13 characters at 1× scale and let hardware buttons carry the user's action.",
+ "references":[{"url":"https://gameidea.org/2024/02/15/dot-matrix-shader-led-screen-effect/","note":"dot-matrix LED screen effect breakdown","verified":true}],
+ "fit":{"readability":3,"trust":2,"effort":"med","risk":"can read as a retro gadget rather than a serious tool; keep copy terse and palette strict"},
+ "best_for":["monitoring","fintech dashboards","sports / live data","dev tools"],
+ "file":"themes/013-led-dot-matrix-ticker.html"}

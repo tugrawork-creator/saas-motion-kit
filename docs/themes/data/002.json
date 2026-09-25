@@ -1,0 +1,74 @@
+{
+ "id": "002",
+ "slug": "cmd-k-keyboard-symphony",
+ "name": "⌘K Keyboard Symphony",
+ "category": "product-ui",
+ "summary": "One oversized command palette over a blurred app; the query is the headline and 3D keycaps are struck on the kick drum.",
+ "look": "Dark, blurred product behind a single bright centred palette with generous rows and shortcut hints. Oversized glossy keycaps sit at the bottom of the frame and press on the beat; coral marks fuzzy matches and the decision key.",
+ "components": [
+  {
+   "name": "Palette modal",
+   "role": "the stage"
+  },
+  {
+   "name": "3D keycap HUD",
+   "role": "keys pressed on the beat"
+  },
+  {
+   "name": "Fuzzy-match highlight",
+   "role": "typed query as headline"
+  },
+  {
+   "name": "Scope chip",
+   "role": "shows we are inside Pulse"
+  },
+  {
+   "name": "Result row with shortcut hint",
+   "role": "actions the human can take"
+  },
+  {
+   "name": "Half-visible last row",
+   "role": "hints at overload"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Beat-typed query",
+   "how": "one character per 1/8 note, caret blink 530 ms"
+  },
+  {
+   "name": "Result re-rank",
+   "how": "FLIP swap 0.25 s power3.out, new top row on the beat"
+  },
+  {
+   "name": "Keycap press",
+   "how": "translateY 10 px + shadow collapse in 80 ms on the kick, elastic release"
+  }
+ ],
+ "story": "Hook: ⌘K opens a palette listing 38 dashboards, most unchecked. Reveal: typing 'pulse' and striking ↵ expands the top row into the Acme Pulse lockup. Proof: inside the Pulse scope the anomaly row (checkout conversion −18% since 09:42 after deploy #2231) sits above 'Roll back deploy #2231', and the human strikes ⌥R. CTA: 'Every metric. Every minute.' above a palette whose selected row is Start free, with a coral ↵ key.",
+ "adapt": "Fill the result list with your own objects and actions and use your product name as the scope chip; the last ↵ always triggers your CTA.",
+ "references": [
+  {
+   "url": "https://blog.superhuman.com/how-to-build-a-remarkable-command-palette/",
+   "note": "command palette design principles",
+   "verified": true
+  },
+  {
+   "url": "https://linear.app/now/behind-the-latest-design-refresh",
+   "note": "keyboard-first product aesthetic",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "low",
+  "risk": "can read developer-only; keep queries short and result rows in plain language"
+ },
+ "best_for": [
+  "dev tools",
+  "productivity apps",
+  "B2B SaaS"
+ ],
+ "file": "themes/002-cmd-k-keyboard-symphony.html"
+}

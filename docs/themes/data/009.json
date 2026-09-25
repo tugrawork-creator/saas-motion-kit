@@ -1,0 +1,75 @@
+{
+ "id": "009",
+ "slug": "form-field-macro",
+ "name": "Form-Field Macro",
+ "category": "product-ui",
+ "summary": "Form controls shot like macro product photography: a giant field shakes red with the fix suggested, and Pulse is a switch you flip on.",
+ "look": "Soft studio-lit off-white with one enormous input, toggle or button in crisp focus and neighbouring fields blurred out of focus. Teal focus halos for attention, coral halo and shake for the anomaly, a caret as tall as a column.",
+ "components": [
+  {
+   "name": "Floating-label input",
+   "role": "the metric as a giant field"
+  },
+  {
+   "name": "Focus ring",
+   "role": "teal attention, coral anomaly"
+  },
+  {
+   "name": "Dropdown with depth of field",
+   "role": "38 options falling out of focus"
+  },
+  {
+   "name": "Macro toggle switch",
+   "role": "turning Pulse on"
+  },
+  {
+   "name": "Inline validation",
+   "role": "shake plus helper text"
+  },
+  {
+   "name": "Segmented control / giant button",
+   "role": "the human's choice and the CTA"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Focus-ring morph",
+   "how": "box-shadow spread 0 to 14 px plus radius spring, 0.25 s on the kick"
+  },
+  {
+   "name": "Error shake",
+   "how": "5 px, 3 cycles, 0.3 s, then helper text types in"
+  },
+  {
+   "name": "Macro dolly + rack focus",
+   "how": "camera glides between fields 1.2 s sine.inOut, neighbours blur 0 to 5 px, arrive on downbeats"
+  }
+ ],
+ "story": "Hook: a giant dashboard dropdown opens on '1 / 38' under '38 dashboards to check. Before lunch.' Reveal: a macro toggle slides on and the Acme Pulse lockup rises beneath it. Proof: the Checkout conversion field shows 2.80% −18%, shakes with a coral ring and the helper 'since 09:42 · after deploy #2231', and the human picks Roll back on a segmented control. CTA: lockup, 'You ship. Pulse watches.', and a giant coral Start free button with a spring focus ring.",
+ "adapt": "Shoot the single most important field or setting of your product huge and show your agent as a switch being turned on.",
+ "references": [
+  {
+   "url": "https://www.nngroup.com/articles/errors-forms-design-guidelines/",
+   "note": "inline error message guidelines",
+   "verified": false
+  },
+  {
+   "url": "https://m3.material.io/components/text-fields/overview",
+   "note": "floating-label text field anatomy",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "low",
+  "risk": "can look like a UI-kit demo; the macro camera, shallow focus and lighting must carry it"
+ },
+ "best_for": [
+  "forms and onboarding",
+  "settings-heavy SaaS",
+  "fintech",
+  "no-code tools"
+ ],
+ "file": "themes/009-form-field-macro.html"
+}

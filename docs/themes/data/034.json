@@ -1,0 +1,25 @@
+{"id":"034","slug":"darkroom-development","name":"Darkroom Development","category":"light",
+ "summary":"In a red safelight room the metrics print slowly develops in the tray, but the coral mark on the problem is there first, because Acme Pulse already found it.",
+ "look":"A deep red safelight world of trays, drying lines and wooden pins, quiet and tactile. Prints climb from grey to full contrast through rippling liquid; the drop is a hard lights-on cut to white paper, teal and coral.",
+ "components":[
+  {"name":"Safelight vignette","role":"radial red glow on near-black; the before-world where nothing is readable"},
+  {"name":"Developer tray","role":"top-down tray with concentric ripple rings (feDisplacementMap in motion)"},
+  {"name":"Latent print","role":"any UI or chart whose contrast climbs from 0.1 to 1"},
+  {"name":"Pre-developed mark","role":"coral ring and number at full density from frame one; the agent's finding"},
+  {"name":"Timer dial","role":"pie-wedge darkroom timer; time passing without a progress bar"},
+  {"name":"Drying line","role":"wire, wooden pins and hanging prints; dashboards before, results after"}
+ ],
+ "motion":[
+  {"name":"Chemical emergence","how":"filter contrast/brightness 0.1→1, sine.inOut over 4 s (2 bars at 120 BPM); the coral mark is already there"},
+  {"name":"Liquid rock","how":"displacement scale 6→0 on a slow 1 s sine as the tray settles; ripple rings expand on each kick"},
+  {"name":"Lights-on cut","how":"hard cut red → white on the 0:08 drop with a 2-frame overexposure flash"}
+ ],
+ "story":"Hook: under safelight, underexposed dashboard prints sway on a drying line: 'And the drop still shipped on Friday.' Reveal: hard lights-on cut; a finished print swings in on its pin showing the Acme mark and 'Acme Pulse', teal drips falling. Proof: back in the red room a checkout-conversion print develops in the tray, but the coral ring and '−18% · since 09:42 · after deploy #2231' are already dense; the Roll back tag lights up as the timer passes 0:42. CTA: in daylight three dry prints hang (Signups ✓, the mark, 'Resolved in 6 min') above 'Caught before customers noticed.' and Start free.",
+ "adapt":"Put your own report, chart or screen on the print, pre-develop the one thing your product catches, and use the lights-on cut as your product reveal.",
+ "references":[
+  {"url":"https://en.wikipedia.org/wiki/Darkroom","note":"darkroom process and safelight basics","verified":false},
+  {"url":"https://www.kodak.com/content/products-brochures/Film/KODAK-A-Guide-to-Darkroom-Illumination-K-4.pdf","note":"Kodak guide to darkroom illumination","verified":false}
+ ],
+ "fit":{"readability":2,"trust":3,"effort":"med","risk":"The all-red palette hides brand colour until the lights-on payoff, so that cut has to land hard."},
+ "best_for":["analytics","reporting tools","QA / testing","photo & media products"],
+ "file":"themes/034-darkroom-development.html"}

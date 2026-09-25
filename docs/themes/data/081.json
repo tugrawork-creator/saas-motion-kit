@@ -1,0 +1,75 @@
+{
+ "id": "081",
+ "slug": "night-owl",
+ "name": "Night Owl",
+ "category": "character",
+ "summary": "A geometric night-owl mascot perched on the metric line: when the branch sags it swivels and hoots, and a human in the lit window rolls back.",
+ "look": "Deep teal night, flat bold shapes, a teal owl with enormous eyes, amber beak and detached feet; warm lit windows for dashboards and humans; dawn gradient for the resolution.",
+ "components": [
+  {
+   "name": "Geometric owl",
+   "role": "Pulse: teal body, huge eyes, amber beak and detached feet"
+  },
+  {
+   "name": "Branch = metric",
+   "role": "the chart line the owl perches on; the anomaly is a sag"
+  },
+  {
+   "name": "Lit windows",
+   "role": "dashboards as a glowing building nobody is watching"
+  },
+  {
+   "name": "Eye states",
+   "role": "open, wide, wink — the whole acting range"
+  },
+  {
+   "name": "Anomaly card",
+   "role": "rounded cream card with −18% and deploy meta"
+  },
+  {
+   "name": "The lit window",
+   "role": "the human at the laptop with the coral Roll back"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Land & settle",
+   "how": "squash-and-stretch on landing, 0.3 s back.out(2); contact frame on the downbeat"
+  },
+  {
+   "name": "Head swivel",
+   "how": "rotate 0→16° in 0.15 s power3.out with a 5 % body puff, on the beat after the anomaly"
+  },
+  {
+   "name": "Blink rhythm",
+   "how": "eyelid blink (0.12 s) every 2 bars on beat 4, wink on the final downbeat — the mascot keeps time with the track"
+  }
+ ],
+ "story": "Hook: a building of glowing dashboard windows, two eyes in the dark, 'And the drop still shipped on Friday.'. Reveal: the owl lands on the branch, eyes snap wide, 'Acme Pulse' rises. Proof: the branch (the metric) sags after deploy #2231, the owl swivels and hoots at a card with checkout −18% since 09:42, and a human in a lit window presses Roll back. CTA: dawn, the owl winks, 'Every metric. Every minute.' and Start free.",
+ "adapt": "Choose an animal that matches your agent’s job (owl = watching, dog = guarding, bee = sorting), build it from simple shapes with big eyes, and seat it on your product’s key chart or timeline.",
+ "references": [
+  {
+   "url": "https://blog.duolingo.com/building-character/",
+   "note": "geometric characters with big eyes and detached feet, animated per moment",
+   "verified": true
+  },
+  {
+   "url": "https://rive.app/docs/editor/state-machine/state-machine",
+   "note": "state machines to switch mascot poses from product events",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "med",
+  "risk": "A cute animal mascot can feel off-brand for serious infra buyers; keep the owl’s acting minimal (eyes and head only) and the proof card precise."
+ },
+ "best_for": [
+  "monitoring",
+  "security",
+  "consumer SaaS",
+  "on-call / DevOps"
+ ],
+ "file": "themes/081-night-owl.html"
+}

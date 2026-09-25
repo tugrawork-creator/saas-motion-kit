@@ -1,0 +1,75 @@
+{
+ "id": "074",
+ "slug": "felt-puppet-show",
+ "name": "Felt Puppet Show",
+ "category": "character",
+ "summary": "A felt hand-puppet Pulse pops up on a tabletop stage to point at the anomaly — only a real human hand can press Roll back.",
+ "look": "Fuzzy felt puppets with ping-pong eyes on a teal velvet stage with a wooden board and amber bulbs. Data lives on cream placards and a hand-drawn easel.",
+ "components": [
+  {
+   "name": "Felt hand puppet",
+   "role": "Pulse: teal felt, ping-pong eyes, coral nose (the mark’s dot)"
+  },
+  {
+   "name": "Grumpy co-star",
+   "role": "grey-lilac puppet with heavy lids = the overwhelmed team"
+  },
+  {
+   "name": "Stage booth",
+   "role": "velvet curtain, fringed valance, wooden board that hides the hands"
+  },
+  {
+   "name": "Placard on a stick",
+   "role": "cream card for hook lines and the tagline"
+  },
+  {
+   "name": "Marker easel",
+   "role": "hand-drawn chart with −18% and the deploy line"
+  },
+  {
+   "name": "Real hand + felt button",
+   "role": "the human decision, deliberately not a puppet"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Pop-up",
+   "how": "puppets rise from behind the board, 0.25 s back.out(1.8) with a 2-frame overshoot hold; always entering on a downbeat"
+  },
+  {
+   "name": "Mouth flap",
+   "how": "jaw opens on each spoken syllable, locked to 8th notes (0.25 s at 120 BPM); stepped at 12 fps for a hand-performed feel"
+  },
+  {
+   "name": "Rod swing",
+   "how": "arm rods swing with sine.inOut 0.5 s pendulum overshoot; the button squash is 0.1 s scaleY 1→0.8→1 on the bar downbeat"
+  }
+ ],
+ "story": "Hook: a grumpy puppet buried in paper dashboards holds up 'How many dashboards did you check today?'. Reveal: curtains part, Pulse pops up under an 'Acme Pulse' marquee. Proof: Pulse flaps its mouth at an easel showing checkout −18% since 09:42 after deploy #2231 while a real hand presses the felt Roll back button. CTA: both puppets bow under 'Caught before customers noticed.' and a Start free ticket.",
+ "adapt": "Swap the easel for your own screen or chart printed on a card, give your puppet your brand’s accent colour as its nose or tuft, and let a real hand perform your product’s main action.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Wilkins_Coffee",
+   "note": "Jim Henson’s 10-second two-puppet ads (1957–61)",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Muppet",
+   "note": "felt-over-foam construction, wide mouths, protruding eyes",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "high",
+  "risk": "High production cost if shot practically, and silliness can undercut a serious incident story — keep the easel data crisp and the puppet’s gag to one beat."
+ },
+ "best_for": [
+  "consumer apps",
+  "SMB tools",
+  "social ads",
+  "brand campaigns"
+ ],
+ "file": "themes/074-felt-puppet-show.html"
+}

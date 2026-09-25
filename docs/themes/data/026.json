@@ -1,0 +1,74 @@
+{
+ "id": "026",
+ "slug": "pixel-to-voxel",
+ "name": "Pixel-to-Voxel",
+ "category": "material",
+ "summary": "Flat pixel dashboards extrude into a voxel skyline; the anomalous tower ejects a coral voxel and leaves dashed ghost cubes.",
+ "look": "Isometric voxels on a pale floor lattice with soft ambient shading. Teal towers, cream/grey filler cubes, one coral rogue voxel with dashed ghost outlines.",
+ "components": [
+  {
+   "name": "Pixel grid",
+   "role": "the UI rasterised into square pixels — the flat “before” state"
+  },
+  {
+   "name": "Extrude ripple",
+   "role": "per-cell depth 0→1 radiating from the centre"
+  },
+  {
+   "name": "Metric tower",
+   "role": "a voxel column per metric; height encodes value"
+  },
+  {
+   "name": "Rogue voxel",
+   "role": "the coral cube that ejects from the anomalous tower"
+  },
+  {
+   "name": "Ghost cubes",
+   "role": "dashed coral outlines of the missing height (−18 %)"
+  },
+  {
+   "name": "Voxel button",
+   "role": "flat face + 12 px solid ledge, reads as a physical block"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Ripple extrude",
+   "how": "delay = distance × 0.015 s, back.out(2) 0.4 s; the wave front crosses the centre on the downbeat"
+  },
+  {
+   "name": "Gravity drop",
+   "how": "cubes fall power2.in 0.25 s + one small bounce, one cube per eighth note at 120 BPM"
+  },
+  {
+   "name": "Camera orbit",
+   "how": "linear 20° yaw across 8 bars; never eased, so the beat-locked cube hits carry the rhythm"
+  }
+ ],
+ "story": "Hook: a flat pixel mosaic of dashboards rasterises in, one dipping on Friday. Reveal: the floor ripples up into 3D on the drop, the teal centre tower rises and the Acme mark lands on it. Proof: metric towers grow; the checkout tower ejects a coral voxel leaving ghost cubes, and a card reads “Checkout conversion −18% · since 09:42 · after deploy #2231” with “Roll back”. CTA: “Every metric. Every minute.” beside a small voxel stack and “Start free”.",
+ "adapt": "Rasterise your own dashboard into the opening mosaic, then extrude the 4–5 numbers your product cares about as towers; the thing your product catches is the tower that loses its top voxel.",
+ "references": [
+  {
+   "url": "https://tympanus.net/codrops/2026/01/05/how-to-create-a-pixel-to-voxel-video-drop-effect-with-three-js-and-rapier/",
+   "note": "pixel-to-voxel drop effect with Three.js + Rapier",
+   "verified": true
+  },
+  {
+   "url": "https://tympanus.net/codrops/2023/03/28/turning-3d-models-to-voxel-art-with-three-js/",
+   "note": "voxelising 3D models",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "high",
+  "risk": "Needs Three.js with baked, deterministic physics; keep to ≤ 5 towers so labels stay legible."
+ },
+ "best_for": [
+  "dev tools",
+  "gaming / creator platforms",
+  "infrastructure monitoring"
+ ],
+ "file": "themes/026-pixel-to-voxel.html"
+}

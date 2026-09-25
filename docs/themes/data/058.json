@@ -1,0 +1,74 @@
+{
+ "id": "058",
+ "slug": "hand-drawn-marker",
+ "name": "Hand-Drawn Marker",
+ "category": "signature",
+ "summary": "Marker scribbles on dotted paper for the problem, an eraser on the drop, and clean UI with one coral ring for the proof.",
+ "look": "Warm dotted notebook paper, red marker rings and strike-throughs, an amber highlighter smear, Instrument Serif italic as handwriting, then crisp white UI with teal single-stroke ticks and a peach sticky note.",
+ "components": [
+  {
+   "name": "Dotted paper",
+   "role": "warm off-white with a 30 px dot grid; the eraser leaves a dot-free band"
+  },
+  {
+   "name": "Red marker ring",
+   "role": "double overshooting ellipse around the one number that matters"
+  },
+  {
+   "name": "Strike-through + loop arrow",
+   "role": "marker lines over chores and an arrow that loops back to the start"
+  },
+  {
+   "name": "Highlighter smear",
+   "role": "amber at 40 %, ragged ends, under the active item"
+  },
+  {
+   "name": "Sketch → real seam",
+   "role": "pencil dashed wireframe that becomes crisp UI as a vertical seam passes"
+  },
+  {
+   "name": "Sticky note + tape",
+   "role": "peach note, 5° tilt, teal tape; carries the agent’s one-line suggestion"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Stroke draw",
+   "how": "SVG stroke-dashoffset 100 → 0 over 0.3–0.5 s, power1.inOut, with a 1–2 px jitter pass for hand feel"
+  },
+  {
+   "name": "Eraser wipe",
+   "how": "mask rect scaleX 0 → 1 in exactly one beat (0.5 s at 120 BPM), linear, landing on the drop"
+  },
+  {
+   "name": "Sticky slap",
+   "how": "rotate 12° → 5°, scale 1.1 → 1, back.out(2) 0.25 s on a downbeat, plus a 2-frame shadow squash"
+  }
+ ],
+ "story": "Hook: a handwritten chore list (open dashboard, refresh, export, ask in chat, check again) is struck out and looped under the question, with “38 tabs!!” circled. Reveal: an eraser wipes the page on the drop and “You ship. Pulse watches.” plus the Acme Pulse lockup is inked over pencil guides. Proof: a pencil wireframe becomes the Pulse panel; teal ticks for healthy metrics, a coral ring around Checkout conversion −18% with a note “since 09:42, deploy #2231!” and a sticky note “Roll back? your call.” CTA: clean lockup, one hand-drawn underline and Start free.",
+ "adapt": "Scribble over your users’ current manual process in the hook, erase it on the drop, and let your real UI appear through a sketch→real seam; keep exactly one marker ring for the moment your product catches something.",
+ "references": [
+  {
+   "url": "https://roughjs.com/",
+   "note": "Rough.js: sketchy hand-drawn SVG primitives",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Excalidraw",
+   "note": "Excalidraw’s hand-drawn diagram look (built on Rough.js)",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Too many scribbles look childish; keep marks to the problem frames and numbers in clean type."
+ },
+ "best_for": [
+  "collaboration tools",
+  "early-stage startups",
+  "explainers"
+ ],
+ "file": "themes/058-hand-drawn-marker.html"
+}

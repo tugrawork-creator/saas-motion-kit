@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>032 · Risograph Two-Drum Print — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t032-f{background:#F2EDE0;color:#0F3931;isolation:isolate}
+.t032-svg{position:absolute;inset:0;width:100%;height:100%}
+.t032-grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.55;pointer-events:none;z-index:5}
+.t032-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t032-mis{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t032-mis>span{display:block;mix-blend-mode:multiply}
+.t032-mis>span+span{position:absolute;inset:0;transform:translate(calc(var(--u)*var(--dx,5)),calc(var(--u)*var(--dy,3)))}
+.t032-teal{color:#0FA3A3}
+.t032-coral{color:#FF5A4E}
+.t032-h{font-family:var(--serif);line-height:.98;letter-spacing:-.015em}
+.t032-h em{font-style:italic}
+.t032-word{font-family:var(--sans);font-weight:800;letter-spacing:-.04em;line-height:.86}
+.t032-mono{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase;color:#0B6E6E}
+.t032-row{display:flex;justify-content:space-between;align-items:baseline;border-bottom:calc(var(--u)*3) solid #0FA3A3;padding:calc(var(--u)*20) calc(var(--u)*8);
+  font:600 calc(var(--u)*32) var(--sans);color:#0FA3A3;mix-blend-mode:multiply}
+.t032-row b{font:600 calc(var(--u)*32) var(--mono)}
+.t032-btn{display:inline-block;position:relative;font:800 calc(var(--u)*38) var(--sans);padding:calc(var(--u)*22) calc(var(--u)*48);white-space:nowrap}
+.t032-btn.c{background:#FF5A4E;color:#F2EDE0}
+.t032-btn.c::before{content:"";position:absolute;inset:0;border:calc(var(--u)*4) solid #0FA3A3;transform:translate(calc(var(--u)*-7),calc(var(--u)*5));mix-blend-mode:multiply}
+.t032-btn.t{border:calc(var(--u)*4) solid #0FA3A3;color:#0FA3A3}
+.t032-mark{position:absolute;mix-blend-mode:multiply}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 032 · Light, optics &amp; texture</div>
+    <h1>Risograph Two-Drum Print</h1>
+    <p class="dek">Uncoated paper, two semi-transparent riso inks (teal and fluorescent coral), coarse halftone dots and a few pixels of misregistration, moving like a flip-book at 12 fps. The first drum prints your dashboards; Acme Pulse is the second drum, a coral pass that lands only where something is wrong.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t032-f" id="t032-f1">
+    <svg class="t032-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs>
+        <pattern id="t032-dt1" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="6" cy="6" r="3.1" fill="#0FA3A3"/></pattern>
+        <symbol id="t032-c1" viewBox="0 0 210 120"><polygon points="12,98 44,70 74,80 104,48 134,62 164,36 198,44 198,108 12,108" fill="url(#t032-dt1)"/><polyline points="12,98 44,70 74,80 104,48 134,62 164,36 198,44" fill="none" stroke="#0FA3A3" stroke-width="5" stroke-linejoin="round"/></symbol>
+        <symbol id="t032-c2" viewBox="0 0 210 120"><g fill="url(#t032-dt1)"><rect x="20" y="60" width="26" height="48"/><rect x="58" y="36" width="26" height="72"/><rect x="96" y="70" width="26" height="38"/><rect x="134" y="26" width="26" height="82"/><rect x="172" y="50" width="22" height="58"/></g><path d="M14 108H200" stroke="#0FA3A3" stroke-width="4"/></symbol>
+        <symbol id="t032-c3" viewBox="0 0 210 120"><circle cx="62" cy="62" r="38" fill="none" stroke="url(#t032-dt1)" stroke-width="22"/><circle cx="62" cy="62" r="38" fill="none" stroke="#0FA3A3" stroke-width="22" stroke-dasharray="150 239" transform="rotate(-90 62 62)"/><path d="M120 44H196M120 66H180M120 88H190" stroke="#0FA3A3" stroke-width="7" stroke-linecap="round"/></symbol>
+      </defs>
+      <path d="M60 60H104M60 60V104M1020 60H976M1020 60V104M60 1020H104M60 1020V976M1020 1020H976M1020 1020V976" stroke="#0F3931" stroke-width="2"/>
+      <rect x="836" y="72" width="40" height="22" fill="#0FA3A3"/><rect x="882" y="72" width="40" height="22" fill="#FF5A4E"/><rect x="928" y="72" width="40" height="22" fill="#0FA3A3"/><rect x="928" y="72" width="40" height="22" fill="#FF5A4E" style="mix-blend-mode:multiply"/>
+      <g stroke="#0FA3A3" stroke-width="3" fill="none">
+        <rect x="90" y="120" width="210" height="120"/><rect x="320" y="120" width="210" height="120"/><rect x="550" y="120" width="210" height="120"/><rect x="780" y="120" width="210" height="120"/>
+        <rect x="90" y="258" width="210" height="120"/><rect x="320" y="258" width="210" height="120"/><rect x="550" y="258" width="210" height="120"/><rect x="780" y="258" width="210" height="120"/>
+        <rect x="90" y="396" width="210" height="120"/><rect x="320" y="396" width="210" height="120"/><rect x="550" y="396" width="210" height="120"/><rect x="780" y="396" width="210" height="120"/>
+      </g>
+      <use href="#t032-c1" x="90" y="120" width="210" height="120"/><use href="#t032-c2" x="320" y="120" width="210" height="120"/><use href="#t032-c3" x="550" y="120" width="210" height="120"/><use href="#t032-c2" x="780" y="120" width="210" height="120"/>
+      <use href="#t032-c3" x="90" y="258" width="210" height="120"/><use href="#t032-c1" x="320" y="258" width="210" height="120"/><use href="#t032-c2" x="550" y="258" width="210" height="120"/><use href="#t032-c1" x="780" y="258" width="210" height="120"/>
+      <use href="#t032-c2" x="90" y="396" width="210" height="120"/><use href="#t032-c3" x="320" y="396" width="210" height="120"/><use href="#t032-c1" x="550" y="396" width="210" height="120"/><use href="#t032-c2" x="780" y="396" width="210" height="120"/>
+    </svg>
+    <div class="t032-mis t032-h" style="--x:84;--y:590;--w:930;font-size:calc(var(--u)*112)"><span class="t032-teal">And the drop still shipped on <em>Friday.</em></span><span class="t032-coral" aria-hidden="true">And the drop still shipped on <em>Friday.</em></span></div>
+    <div class="t032-p t032-mono" style="--x:84;--y:960">Plate 1 · teal · 38 dashboards, none read</div>
+    <svg class="t032-grain" viewBox="0 0 1080 1080" aria-hidden="true"><filter id="t032-n1"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  1.3 0 0 0 -.55"/></filter><rect width="1080" height="1080" filter="url(#t032-n1)"/></svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Twelve halftone dashboards stamp in, row by row, top→down</b> at 12 fps. The headline is printed teal first; the coral plate lands 4 frames later, a few px off, and "Friday." hits on the bar-2 downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t032-f" id="t032-f2">
+    <svg class="t032-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs>
+        <pattern id="t032-dt2" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="8" cy="8" r="5.2" fill="#FF5A4E"/></pattern>
+        <radialGradient id="t032-rg2"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+        <mask id="t032-mk2"><circle cx="720" cy="560" r="360" fill="url(#t032-rg2)"/></mask>
+      </defs>
+      <circle cx="720" cy="560" r="360" fill="url(#t032-dt2)" mask="url(#t032-mk2)" style="mix-blend-mode:multiply"/>
+      <path d="M60 60H104M60 60V104M1020 60H976M1020 60V104M60 1020H104M60 1020V976M1020 1020H976M1020 1020V976" stroke="#0F3931" stroke-width="2"/>
+    </svg>
+    <div class="t032-p t032-mono" style="--x:84;--y:84">Drum 2 · fluorescent coral · 0:08</div>
+    <img class="t032-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*96);top:calc(var(--u)*170);width:calc(var(--u)*190);height:calc(var(--u)*190)">
+    <div class="t032-mis t032-word" style="--x:84;--y:420;--w:930;font-size:calc(var(--u)*250);--dx:8;--dy:5"><span class="t032-teal">Acme<br>Pulse</span><span class="t032-coral" aria-hidden="true">Acme<br>Pulse</span></div>
+    <div class="t032-p t032-mono" style="--x:84;--y:960;color:#FF5A4E">Plate 2 prints only what matters</div>
+    <svg class="t032-grain" viewBox="0 0 1080 1080" aria-hidden="true"><filter id="t032-n2"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="9"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  1.3 0 0 0 -.55"/></filter><rect width="1080" height="1080" filter="url(#t032-n2)"/></svg>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the second drum slams through</b>: the coral halftone disc dot-grows from its centre outward (power2.out) as the mark stamps in, and "Acme Pulse" prints teal, then coral, 5 px off-register.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t032-f" id="t032-f3">
+    <svg class="t032-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs>
+        <pattern id="t032-dt3" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="6" cy="6" r="4" fill="#FF5A4E"/></pattern>
+        <path id="t032-ring" d="M920 170 m-78 0 a78 78 0 1 1 156 0 a78 78 0 1 1 -156 0"/>
+      </defs>
+      <path d="M86 660 L1000 648 L1004 806 L80 814 Z" fill="url(#t032-dt3)" style="mix-blend-mode:multiply"/>
+      <g transform="rotate(-12 920 170)" style="mix-blend-mode:multiply">
+        <circle cx="920" cy="170" r="102" fill="none" stroke="#FF5A4E" stroke-width="7"/>
+        <circle cx="920" cy="170" r="58" fill="none" stroke="#FF5A4E" stroke-width="4"/>
+        <text font-family="JetBrains Mono" font-weight="600" font-size="22" letter-spacing="3" fill="#FF5A4E"><textPath href="#t032-ring" textLength="480" lengthAdjust="spacing">PULSE · FLAGGED · 09:44 · DEPLOY 2231 ·</textPath></text>
+        <text x="920" y="182" text-anchor="middle" font-family="Manrope" font-weight="800" font-size="34" fill="#FF5A4E">−18%</text>
+      </g>
+      <path d="M60 60H104M60 60V104M1020 60H976M1020 60V104M60 1020H104M60 1020V976M1020 1020H976M1020 1020V976" stroke="#0F3931" stroke-width="2"/>
+    </svg>
+    <div class="t032-mis t032-h" style="--x:84;--y:84;--w:700;font-size:calc(var(--u)*76);--dx:4;--dy:2"><span class="t032-teal">Drum 2 prints only <em>what’s wrong.</em></span><span class="t032-coral" aria-hidden="true">Drum 2 prints only <em>what’s wrong.</em></span></div>
+    <div class="t032-p" style="--x:84;--y:300;--w:912">
+      <div class="t032-row"><span>Signups</span><b>1,204 ✓</b></div>
+      <div class="t032-row"><span>Active users</span><b>18,930 ✓</b></div>
+      <div class="t032-row"><span>p95 latency</span><b>212 ms ✓</b></div>
+      <div class="t032-row"><span>Error rate</span><b>0.4 % ✓</b></div>
+      <div class="t032-row" style="mix-blend-mode:normal;border:0;display:block;color:#0F3931;padding-top:calc(var(--u)*24)"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:calc(var(--u)*40);font-weight:800">Checkout conversion</span><b style="font:800 calc(var(--u)*64) var(--sans);color:#0F3931">−18%</b></div><div class="t032-mono" style="color:#0F3931;margin-top:calc(var(--u)*8);display:inline-block;background:#F2EDE0;padding:calc(var(--u)*4) calc(var(--u)*10);font-weight:600">since 09:42 · after deploy #2231</div></div>
+    </div>
+    <div class="t032-p" style="--x:84;--y:872;--w:912;display:flex;align-items:center;gap:calc(var(--u)*28)"><span class="t032-mono" style="color:#0F3931">Your call →</span><span class="t032-btn c">Roll back</span><span class="t032-btn t">Acknowledge</span></div>
+    <svg class="t032-grain" viewBox="0 0 1080 1080" aria-hidden="true"><filter id="t032-n3"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="13"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  1.3 0 0 0 -.55"/></filter><rect width="1080" height="1080" filter="url(#t032-n3)"/></svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The teal sheet of healthy metrics prints first, top→down</b>; then the coral drum passes and only one row catches ink: a halftone swath, a rotating "FLAGGED" stamp that thumps on the snare, and a coral Roll back button for the human.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t032-f" id="t032-f4">
+    <svg class="t032-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs><pattern id="t032-dt4" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="7" cy="7" r="3.4" fill="#0FA3A3"/></pattern></defs>
+      <rect x="60" y="640" width="960" height="230" fill="url(#t032-dt4)" opacity=".55"/>
+      <path d="M60 60H104M60 60V104M1020 60H976M1020 60V104M60 1020H104M60 1020V976M1020 1020H976M1020 1020V976" stroke="#0F3931" stroke-width="2"/>
+      <rect x="836" y="72" width="40" height="22" fill="#0FA3A3"/><rect x="882" y="72" width="40" height="22" fill="#FF5A4E"/><rect x="928" y="72" width="40" height="22" fill="#0FA3A3"/><rect x="928" y="72" width="40" height="22" fill="#FF5A4E" style="mix-blend-mode:multiply"/>
+    </svg>
+    <div class="t032-p" style="--x:84;--y:120;display:flex;align-items:center;gap:calc(var(--u)*22)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*96);height:calc(var(--u)*96);mix-blend-mode:multiply"><span class="t032-word t032-teal" style="font-size:calc(var(--u)*72);line-height:1">Acme Pulse</span></div>
+    <div class="t032-mis t032-h" style="--x:84;--y:250;--w:950;font-size:calc(var(--u)*150)"><span class="t032-teal">Caught <em>before</em> customers noticed.</span><span class="t032-coral" aria-hidden="true">Caught <em>before</em> customers noticed.</span></div>
+    <div class="t032-p" style="--x:84;--y:700"><span class="t032-btn c" style="font-size:calc(var(--u)*48);padding:calc(var(--u)*26) calc(var(--u)*64)">Start free</span></div>
+    <div class="t032-p t032-mono" style="--x:84;--y:960">2 inks · 1 decision · printed at 12 fps</div>
+    <svg class="t032-grain" viewBox="0 0 1080 1080" aria-hidden="true"><filter id="t032-n4"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="21"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  1.3 0 0 0 -.55"/></filter><rect width="1080" height="1080" filter="url(#t032-n4)"/></svg>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The tagline prints plate by plate, stepping in from the left</b> (steps(3) per word); the coral Start free block lands last with its teal outline visibly off-register, a thud on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Paper + grain</b> — warm uncoated stock with an SVG feTurbulence speckle multiplied over everything.</li>
+    <li><b>Halftone field</b> — SVG dot patterns: teal at 45°, coral at 15°, dot size carries the value.</li>
+    <li><b>Misregistered headline</b> — two stacked copies (teal, coral) in multiply, 3–8 px apart.</li>
+    <li><b>Crop marks + colour bar</b> — printer furniture that says "this is a physical proof".</li>
+    <li><b>Flag stamp</b> — circular coral stamp with ring text; the agent's signature on the anomaly.</li>
+    <li><b>Overprint button</b> — coral block with an off-register teal outline; the human action.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Plate-by-plate build</b> — teal drum prints, coral lands 4 frames later; everything stepped at 12 fps (steps(n)), so each plate hit sits on an 8th note at 120 BPM.</li>
+    <li><b>Registration wobble</b> — the coral layer drifts 1–2 px per frame from a seeded offset table; subtle, constant, never random.</li>
+    <li><b>Dot-grow reveal</b> — halftone radius 0→full, power2.out over 0.5 s (one beat), like ink soaking into paper.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>"The second pass only prints what's wrong" is a crisp, physical metaphor for an agent that audits quietly on top of your data. Risk: the zine texture can read as playful; keep type strict and numbers in mono.</p><p><b>Adapt to your product:</b> Print your own table or dashboard as plate 1 and let plate 2 hit only the rows your product flags; the stamp text becomes your status label.</p><p><b>References:</b> <a href="https://www.itsnicethat.com/articles/hiromu-oka-hodo-station-process-animation-051222">Hiromu Oka riso process animation</a> · <a href="https://stencil.wiki/wiki/Category:Riso_inks">Riso ink library</a> · <a href="https://spectrolite.app/how-to/overview/riso-ify">Spectrolite: riso-ify</a></p></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{
+ "id": "096",
+ "slug": "whip-pan",
+ "name": "Whip Pan",
+ "category": "camera",
+ "summary": "Rooms of a 360° panorama joined by 0.25 s whips that smear the world into streaks and land sharp on each downbeat.",
+ "look": "Deep navy frames with x-only motion blur and brand-coloured horizontal streaks; sharp locked-off typography on top; a panorama strip and coral pan arrows as HUD.",
+ "components": [
+  {
+   "name": "Panorama rooms",
+   "role": "four scenes laid out on one 360° strip so every transition is a real pan"
+  },
+  {
+   "name": "Directional blur",
+   "role": "SVG feGaussianBlur with x-only deviation, the signature of the whip"
+  },
+  {
+   "name": "Streak layer",
+   "role": "coloured horizontal bars in brand hues that sell speed and hide the cut"
+  },
+  {
+   "name": "Locked-off text layer",
+   "role": "headlines never blur; only the world moves"
+  },
+  {
+   "name": "Panorama strip",
+   "role": "top HUD showing which room is on screen, the map of the edit"
+  },
+  {
+   "name": "Pan arrows",
+   "role": "coral arrows with angle and duration, making direction readable in a still"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Whip",
+   "how": "x offset −1080 px in 0.25 s (one beat at 120 BPM) with power4.inOut; blur 0 → 46 → 0 peaking mid-move; the cut hides at peak blur"
+  },
+  {
+   "name": "Land on the beat",
+   "how": "the settle frame falls exactly on the downbeat; 2-frame overshoot (+14 px) then back, expo.out 0.2 s"
+  },
+  {
+   "name": "Streak-to-rule",
+   "how": "on the final landing, streaks shrink height 20 → 3 px over 0.5 s and snap to fixed y positions to become the tagline rules"
+  }
+ ],
+ "story": "Hook: whip through blurred dashboards, “How many dashboards did you check today?” Reveal: the whip lands on the drop in the Acme Pulse room. Proof: whip back from the metrics wall to a sharp card, “Checkout conversion −18% since 09:42 after deploy #2231”, Roll back. CTA: the last streaks become rules around “Every metric. Every minute.” and Start free.",
+ "adapt": "Lay your product screens out left-to-right as rooms of one panorama (inbox, editor, report, lockup) and whip between them on the beat. Keep whip direction consistent (always right, one whip back for the “aha”) so the viewer’s mental map holds.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Whip_pan",
+   "note": "whip pan definition and use as a transition",
+   "verified": true
+  },
+  {
+   "url": "https://www.studiobinder.com/blog/swish-pan-whip-pan-definition-film/",
+   "note": "matching speed and direction on both sides to hide the cut",
+   "verified": true
+  },
+  {
+   "url": "https://www.studiobinder.com/camera-shots/camera-movements/whip-pan-shot/",
+   "note": "whip pan uses: urgency, transitions, combining with other moves",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Whips are energetic but tiring; more than five in 45 s feels like a travel reel, and heavy blur can trigger motion discomfort. Keep the text on a locked-off layer so it never blurs."
+ },
+ "best_for": [
+  "feature tours",
+  "social teasers",
+  "consumer-facing SaaS",
+  "event promos"
+ ],
+ "file": "themes/096-whip-pan.html"
+}

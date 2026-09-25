@@ -1,0 +1,75 @@
+{
+ "id": "079",
+ "slug": "shadow-puppet-theatre",
+ "name": "Shadow Puppet Theatre",
+ "category": "character",
+ "summary": "Cut-paper silhouettes on a tinted screen: a heron stands in the river of a metric and sees the waterfall first; a human lifts the Roll back lantern.",
+ "look": "Pure black cut-paper silhouettes with filigree frames against glowing tinted backlights (amber, teal, dawn); one coral light source for the anomaly and the decision.",
+ "components": [
+  {
+   "name": "Heron silhouette",
+   "role": "Pulse: a still, patient watcher that moves only when it matters"
+  },
+  {
+   "name": "Tinted backlight",
+   "role": "amber = before, teal = Pulse is watching, dawn = resolved"
+  },
+  {
+   "name": "Cut-paper towers",
+   "role": "dashboards as a silhouette city with lit window-bars"
+  },
+  {
+   "name": "River metric",
+   "role": "the metric line as water; the anomaly is a waterfall"
+  },
+  {
+   "name": "Cartouche",
+   "role": "ornate black label for the anomaly readout"
+  },
+  {
+   "name": "Coral lantern",
+   "role": "the human’s action (Roll back) glowing in the dark"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Stepped cut-out poses",
+   "how": "joints swap between 3 drawn poses at 12 fps, never tweened; pose changes land on quarter notes (0.5 s at 120 BPM)"
+  },
+  {
+   "name": "Multiplane drift",
+   "how": "3 silhouette layers parallax at 0.3/0.6/1.0 speed, 8-bar loop, linear — the calm under the beat"
+  },
+  {
+   "name": "Tint cross-fade",
+   "how": "background gradient shifts hue over exactly 1 bar (2 s), starting on the drop and on the resolution"
+  }
+ ],
+ "story": "Hook: a silhouette city of dashboard towers dwarfs a tiny figure — 'How many dashboards did you check today?'. Reveal: the tint turns teal, a moon rises with the Acme mark and a heron opens its wings above 'Acme Pulse'. Proof: the river of the metric falls (checkout −18% since 09:42 after deploy #2231), the heron's neck shoots forward and a human reaches for the glowing Roll back lantern. CTA: dawn, the heron flies, 'Caught before customers noticed.' and Start free.",
+ "adapt": "Cut your product’s key screens into silhouettes (towers, rivers, paths), pick a watchful animal for your agent, and colour the backlight with your palette to mark each story beat.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Lotte_Reiniger",
+   "note": "the pioneer of silhouette animation; gesture instead of faces",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/The_Adventures_of_Prince_Achmed",
+   "note": "1926 feature: cut-outs under a camera, multiplane, colour tinting",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Silhouette-only frames hide UI detail and can feel slow or melancholy; keep the data in the cartouche large and crisp, and keep the tempo up with stepped poses."
+ },
+ "best_for": [
+  "premium brand films",
+  "security / monitoring",
+  "fintech",
+  "keynote openers"
+ ],
+ "file": "themes/079-shadow-puppet-theatre.html"
+}

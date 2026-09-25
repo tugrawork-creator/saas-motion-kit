@@ -1,0 +1,79 @@
+{
+ "id": "051",
+ "slug": "clean-product-film",
+ "name": "Clean Product Film",
+ "category": "signature",
+ "summary": "The airy baseline: real product UI on warm white with soft colour clouds, one coral anomaly row and one human click.",
+ "look": "Near-white paper, two blurred colour clouds, white cards with soft layered shadows, Instrument Serif headlines with a single teal italic word, and coral reserved for the anomaly and the CTA.",
+ "components": [
+  {
+   "name": "Colour clouds",
+   "role": "two blurred radial blobs (teal-soft + peach) that grow on the drop; never flat colour backgrounds"
+  },
+  {
+   "name": "Notification card",
+   "role": "white, r24, soft two-layer shadow, icon tile + bold title + mono meta; the hook’s crowd"
+  },
+  {
+   "name": "Product window",
+   "role": "one real-looking UI panel with a live dot; rows with sparklines = the proof surface"
+  },
+  {
+   "name": "Anomaly row",
+   "role": "coral left rule + tinted fill, mono “since · after” context line, primary + secondary action"
+  },
+  {
+   "name": "Serif headline",
+   "role": "Instrument Serif 76–108 px, exactly one italic teal word per frame"
+  },
+  {
+   "name": "Coral pill CTA",
+   "role": "the only solid coral object in the film besides the anomaly — pain and action share a colour"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Per-word headline",
+   "how": "each word rises 24 px + fades, power3.out 0.35 s, one word per eighth-note (0.25 s at 120 BPM)"
+  },
+  {
+   "name": "Beat-stagger cards",
+   "how": "cards slide 60 px from alternating edges with 2–3° rotation, back.out(1.2) 0.5 s, one per beat (0.5 s)"
+  },
+  {
+   "name": "Zoom-through seam",
+   "how": "camera scales 0.6→1 into the window over one bar (2 s), expo.inOut; rows then fill one per beat and the anomaly lands on a bar downbeat"
+  }
+ ],
+ "story": "Hook: notification cards about 38 open dashboards swarm around the question. Reveal: the frame clears on the drop and “You ship. Pulse watches.” resolves into the Acme Pulse lockup. Proof: the Pulse window fills with healthy metrics until Checkout conversion −18% (since 09:42, after deploy #2231) turns coral and a cursor clicks Roll back. CTA: calm lockup, “Every metric. Every minute.” and a coral Start free pill.",
+ "adapt": "Swap the metric rows for your own product’s core list (tickets, invoices, builds, deals) and keep one row as the “problem” row with a context line and a single primary action. The cards in the hook are simply your users’ current tools and alerts.",
+ "references": [
+  {
+   "url": "https://m3.material.io/styles/motion/easing-and-duration",
+   "note": "emphasized easing and duration scaled to distance",
+   "verified": true
+  },
+  {
+   "url": "https://linear.app/now/how-we-redesigned-the-linear-ui",
+   "note": "calm, low-noise product UI as the hero",
+   "verified": true
+  },
+  {
+   "url": "https://developer.apple.com/videos/play/wwdc2018/803/",
+   "note": "fluid, physically plausible interface motion",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "low",
+  "risk": "Can feel generic; needs precise beat cuts and quality shadows/type to feel premium."
+ },
+ "best_for": [
+  "analytics",
+  "B2B SaaS",
+  "first launch film"
+ ],
+ "file": "themes/051-clean-product-film.html"
+}

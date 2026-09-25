@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>020 · Museum Specimen Labels — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t020- ===== */
+@property --x{syntax:'<number>';inherits:false;initial-value:0}
+@property --y{syntax:'<number>';inherits:false;initial-value:0}
+@property --w{syntax:'*';inherits:false}
+@property --h{syntax:'*';inherits:false}
+.t020-bg{position:absolute;inset:0;background:radial-gradient(42% 38% at var(--sx,50%) var(--sy,40%),rgba(255,255,255,.75),transparent 70%),linear-gradient(180deg,#DDE8E5 0%,#D3E0DC 82%,#BCCBC7 82.2%,#C7D4D0 100%)}
+.t020-a{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t020-vinyl{font:400 calc(var(--u)*70)/1.05 var(--serif);color:#1B2A36;letter-spacing:-.01em}
+.t020-vinyl em{color:var(--brand-deep)}
+.t020-way{font:600 calc(var(--u)*22)/1.2 var(--mono);letter-spacing:.18em;color:#51636B}
+.t020-frame{background:#fff;border:calc(var(--u)*7) solid #1B2A36;box-shadow:0 calc(var(--u)*10) calc(var(--u)*18) rgba(27,42,54,.22);padding:calc(var(--u)*10)}
+.t020-frame.lt{border-color:#B9A27A}
+.t020-frame svg{display:block;width:100%;height:100%}
+.t020-label{background:#FCFCFA;box-shadow:0 calc(var(--u)*3) calc(var(--u)*8) rgba(27,42,54,.16);padding:calc(var(--u)*26) calc(var(--u)*28);color:#1B2A36}
+.t020-no{font:600 calc(var(--u)*20)/1 var(--mono);letter-spacing:.16em;color:#6A7A82}
+.t020-ttl{font:400 calc(var(--u)*44)/1.08 var(--serif);font-style:italic;margin-top:calc(var(--u)*14)}
+.t020-ttl b{font-style:normal;font-weight:400;color:var(--alert)}
+.t020-meta{font:600 calc(var(--u)*22)/1.35 var(--sans);color:#3E4F58;margin-top:calc(var(--u)*10)}
+.t020-body{font:400 calc(var(--u)*24)/1.45 var(--sans);color:#33434C;margin-top:calc(var(--u)*16)}
+.t020-body b{font-weight:700;color:#1B2A36}
+.t020-case{background:linear-gradient(125deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.12) 30%,rgba(255,255,255,0) 31%,rgba(255,255,255,.08) 70%,rgba(255,255,255,.3) 100%),#EEF3F1;border:calc(var(--u)*3) solid rgba(27,42,54,.35);box-shadow:inset 0 0 0 calc(var(--u)*10) rgba(255,255,255,.5),0 calc(var(--u)*20) calc(var(--u)*40) rgba(27,42,54,.18)}
+.t020-plinth{background:linear-gradient(180deg,#F7F8F6,#DDE3E0);box-shadow:0 calc(var(--u)*14) calc(var(--u)*24) rgba(27,42,54,.18)}
+.t020-pin{width:calc(var(--u)*26);height:calc(var(--u)*26);border-radius:50%;background:radial-gradient(circle at 35% 35%,#FF8F86,#FF5A4E 55%,#B8342B);box-shadow:calc(var(--u)*6) calc(var(--u)*8) calc(var(--u)*6) rgba(0,0,0,.25)}
+.t020-btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;height:calc(var(--u)*72);padding:0 calc(var(--u)*30);border-radius:calc(var(--u)*36);background:var(--alert);color:#fff;font:800 calc(var(--u)*28)/1 var(--sans)}
+.t020-btn2{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;height:calc(var(--u)*72);padding:0 calc(var(--u)*26);border-radius:calc(var(--u)*36);box-shadow:inset 0 0 0 calc(var(--u)*2.5) rgba(27,42,54,.35);color:#1B2A36;font:700 calc(var(--u)*26)/1 var(--sans)}
+.t020-sign{display:flex;align-items:center;gap:calc(var(--u)*30);font:800 calc(var(--u)*124)/1 var(--sans);color:#1B2A36;letter-spacing:-.03em}
+.t020-sign img{width:calc(var(--u)*150);height:calc(var(--u)*150)}
+.t020-lock{display:flex;align-items:center;gap:calc(var(--u)*18);font:800 calc(var(--u)*48)/1 var(--sans);color:#1B2A36}
+.t020-lock img{width:calc(var(--u)*74);height:calc(var(--u)*74)}
+.t020-desk{display:flex;flex-direction:column;gap:calc(var(--u)*14);align-items:flex-start;padding:calc(var(--u)*30) calc(var(--u)*34);background:#FCFCFA;box-shadow:0 calc(var(--u)*6) calc(var(--u)*16) rgba(27,42,54,.18)}
+.t020-bench{border-radius:calc(var(--u)*6);background:#1B2A36;opacity:.85}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 020 · Typography &amp; graphic systems</div>
+    <h1>Museum Specimen Labels</h1>
+    <p class="dek">A quiet gallery where every caught anomaly becomes a curated exhibit: a specimen under glass, pinned in coral, with a crisp wall label — catalogue number, italic title, three lines of context and "Discovered by Acme Pulse". Calm, airy and exact; the camera dollies from exhibit to exhibit, one per bar.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t020-f1"><div class="t020-bg" style="--sx:50%;--sy:45%"></div>
+    <div class="t020-a t020-vinyl" style="--x:60;--y:70;--w:900">How many dashboards did you <em>check</em> today?</div>
+    <div class="t020-a t020-frame" style="--x:60;--y:300;--w:190;--h:140"><svg viewBox="0 0 100 70"><polyline points="6,52 22,40 38,46 54,28 70,34 94,16" fill="none" stroke="#0FA3A3" stroke-width="4"/></svg></div>
+    <div class="t020-a t020-frame lt" style="--x:280;--y:280;--w:150;--h:190"><svg viewBox="0 0 70 100"><rect x="8" y="50" width="10" height="40" fill="#F4B740"/><rect x="24" y="36" width="10" height="54" fill="#F4B740"/><rect x="40" y="58" width="10" height="32" fill="#F4B740"/><rect x="56" y="30" width="10" height="60" fill="#F4B740"/></svg></div>
+    <div class="t020-a t020-frame" style="--x:460;--y:300;--w:210;--h:150"><svg viewBox="0 0 100 70"><circle cx="50" cy="35" r="24" fill="none" stroke="#0B6E6E" stroke-width="9" stroke-dasharray="100 60"/></svg></div>
+    <div class="t020-a t020-frame lt" style="--x:700;--y:280;--w:150;--h:120"><svg viewBox="0 0 100 70"><polyline points="6,20 30,30 54,26 94,50" fill="none" stroke="#0FA3A3" stroke-width="4"/></svg></div>
+    <div class="t020-a t020-frame" style="--x:880;--y:300;--w:140;--h:170"><svg viewBox="0 0 70 100"><rect x="8" y="14" width="54" height="8" fill="#C9D3DA"/><rect x="8" y="32" width="54" height="8" fill="#C9D3DA"/><rect x="8" y="50" width="40" height="8" fill="#C9D3DA"/><rect x="8" y="68" width="48" height="8" fill="#C9D3DA"/></svg></div>
+    <div class="t020-a t020-frame" style="--x:120;--y:500;--w:170;--h:130"><svg viewBox="0 0 100 70"><rect x="8" y="30" width="16" height="32" fill="#0FA3A3"/><rect x="30" y="20" width="16" height="42" fill="#0FA3A3"/><rect x="52" y="36" width="16" height="26" fill="#0FA3A3"/><rect x="74" y="12" width="16" height="50" fill="#0FA3A3"/></svg></div>
+    <div class="t020-a t020-frame lt" style="--x:330;--y:510;--w:230;--h:150"><svg viewBox="0 0 100 70"><polyline points="6,40 26,34 46,42 66,30 94,36" fill="none" stroke="#0B6E6E" stroke-width="4"/></svg></div>
+    <div class="t020-a t020-label" style="--x:620;--y:500;--w:400">
+      <div class="t020-no">NO. 38 · ROOM OF TABS</div>
+      <div class="t020-ttl">Untitled (38 Dashboards), 2026</div>
+      <div class="t020-meta">Browser tabs on monitor</div>
+      <div class="t020-body">Opened daily, read rarely. <b>Checked: 3.</b> The drop shipped on Friday anyway.</div></div>
+    <div class="t020-a t020-bench" style="--x:220;--y:930;--w:640;--h:30"></div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>A slow dolly left → right along a salon-hung wall of dashboards.</b> The spotlight warms up on beat 1, the vinyl question fades in on bar 2, and the wall label slides in sideways on the last downbeat before the drop.</p></div>
+
+  <div class="cw"><div class="cell" id="t020-f2"><div class="t020-bg" style="--sx:50%;--sy:42%"></div>
+    <div class="t020-a t020-way" style="--x:60;--y:70">PERMANENT COLLECTION · GALLERY 1 →</div>
+    <div class="t020-a t020-sign" style="--x:60;--y:330"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse</div>
+    <div class="t020-a t020-vinyl" style="--x:60;--y:540;--w:900;font-size:calc(var(--u)*52);font-style:italic;color:#3E4F58">A permanent exhibition of every metric, every minute.</div>
+    <div class="t020-a t020-way" style="--x:60;--y:760">OPEN 24/7 · 14 METRICS ON VIEW</div>
+    <div class="t020-a t020-bench" style="--x:300;--y:940;--w:480;--h:30"></div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The spotlight snaps on for the drop and the dimensional letters cast their shadows.</b> The mark lands first, "Acme Pulse" letters rise 12 px one by one on 16th notes, and the italic line fades in on the next downbeat.</p></div>
+
+  <div class="cw"><div class="cell" id="t020-f3"><div class="t020-bg" style="--sx:30%;--sy:40%"></div>
+    <div class="t020-a t020-way" style="--x:60;--y:70">EXHIBIT 1 · CAUGHT IN TIME</div>
+    <div class="t020-a t020-case" style="--x:60;--y:140;--w:520;--h:560"></div>
+    <div class="t020-a" style="--x:110;--y:220;--w:420;--h:300;background:#FCFCFA;box-shadow:0 calc(var(--u)*8) calc(var(--u)*16) rgba(27,42,54,.18)">
+      <svg viewBox="0 0 420 300" style="display:block;width:100%;height:100%"><path d="M20 250 H400" stroke="#C9D3DA" stroke-width="2"/><path d="M20 180 H400 M20 110 H400" stroke="#E4EAED" stroke-width="2"/><polyline points="20,120 70,112 120,122 170,108 220,116 250,114 290,196 330,210 370,204 400,208" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linejoin="round"/><polyline points="250,114 290,196 330,210 370,204 400,208" fill="none" stroke="#FF5A4E" stroke-width="8" stroke-linejoin="round"/><path d="M250 60 V250" stroke="#1B2A36" stroke-width="2" stroke-dasharray="8 6"/></svg></div>
+    <div class="t020-a t020-pin" style="--x:387;--y:396"></div>
+    <div class="t020-a t020-no" style="--x:110;--y:560;--w:420">SPECIMEN · CHECKOUT FUNNEL, 09:30–10:00</div>
+    <div class="t020-a t020-plinth" style="--x:40;--y:700;--w:560;--h:90"></div>
+    <div class="t020-a t020-label" style="--x:620;--y:150;--w:410">
+      <div class="t020-no">NO. PL-2231</div>
+      <div class="t020-ttl">Checkout conversion, <b>−18%</b></div>
+      <div class="t020-meta">Since 09:42 · after deploy #2231</div>
+      <div class="t020-body">Found quietly in the background among 14 metrics. <b>Discovered by:</b> Acme Pulse. <b>Decided by:</b> the on-call team.</div>
+      <div style="display:flex;gap:calc(var(--u)*12);margin-top:calc(var(--u)*24)"><span class="t020-btn" style="padding:0 calc(var(--u)*24)">Roll back</span><span class="t020-btn2" style="padding:0 calc(var(--u)*20);font-size:calc(var(--u)*24)">Acknowledge</span></div>
+    </div>
+    <div class="t020-a t020-way" style="--x:630;--y:840">RESOLVED IN 6 MIN</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera dollies right into Exhibit 1 on a downbeat; the spotlight slowly brightens the specimen (sine.inOut, 800 ms).</b> The coral pin drops onto the drop in the chart on the next beat, the wall label rails in from the right, and "Roll back" lights up for the decision.</p></div>
+
+  <div class="cw"><div class="cell" id="t020-f4"><div class="t020-bg" style="--sx:50%;--sy:35%"></div>
+    <div class="t020-a t020-way" style="--x:60;--y:70">EXIT · THANK YOU FOR VISITING</div>
+    <div class="t020-a t020-vinyl" style="--x:60;--y:150;--w:900;font-size:calc(var(--u)*96)">Caught <em>before</em> customers noticed.</div>
+    <div class="t020-a t020-desk" style="--x:60;--y:530;--w:560">
+      <div class="t020-no">ADMISSION</div>
+      <div class="t020-lock"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse</div>
+      <span class="t020-btn" style="height:calc(var(--u)*88);font-size:calc(var(--u)*34);padding:0 calc(var(--u)*44)">Start free</span>
+    </div>
+    <div class="t020-a t020-way" style="--x:660;--y:620;--w:360">YOU SHIP.<br>PULSE WATCHES.</div>
+    <div class="t020-a t020-bench" style="--x:520;--y:940;--w:440;--h:30"></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>A final dolly back reveals the exit wall.</b> The vinyl headline fades in word by word on beats, "before" lands in teal on the downbeat, and the admission desk card with "Start free" slides up on the last hit.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Specimen</b> — the anomalous chart fragment presented under glass, the way a museum shows one object.</li>
+    <li><b>Wall label</b> — catalogue number, italic serif title, a meta line and three lines of context, plus the action buttons.</li>
+    <li><b>Catalogue code</b> — mono IDs ("PL-2231") that tie the exhibit to the deploy or event.</li>
+    <li><b>Coral pin</b> — a single coral pin with a real shadow marking the exact moment of the drop.</li>
+    <li><b>Vitrine &amp; plinth</b> — thin glass case with reflection gradient on a pale plinth.</li>
+    <li><b>Wall vinyl &amp; wayfinding</b> — serif headlines applied to the wall, mono gallery signs ("Exhibit 1 · Caught in time").</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Rail slide</b> — labels enter sideways 40 px, power3.out 500 ms, landing on a downbeat at 120 BPM.</li>
+    <li><b>Spotlight</b> — a radial light brightens the specimen over 800 ms, sine.inOut, starting on beat 1 of each exhibit.</li>
+    <li><b>Wall pan</b> — slow dolly between exhibits, exactly one exhibit per bar (2 s), eased with power1.inOut so cuts stay on the grid.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>Curating a caught error as an exhibit reframes monitoring as care and craft: calm, confident and extremely readable. The label format forces you to say what, when, why and who decided in three lines. Risk: gallery pace can feel slow — every move must still land on the beat.</p>
+    <p><b>Adapt to your product:</b> treat each thing your product catches or creates (a bug, a lead, a saved hour) as an exhibit, with a screenshot as the specimen and your own data in the label's three lines.</p>
+    <p><b>References:</b> <a href="https://segd.org/projects/dynamic-visibility-signage-wayfinding-system-for-museum-of-moving-image/">SEGD — Museum of the Moving Image signage &amp; wayfinding</a></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>095 · Split Screen — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t095- (theme 095) ===== */
+.t095-bg{position:absolute;inset:0;background:var(--ink)}
+.t095-p{position:absolute;overflow:hidden;background:var(--paper)}
+.t095-dash{position:absolute;inset:0;padding:calc(var(--u)*26) calc(var(--u)*26) calc(var(--u)*20);display:flex;flex-direction:column;background:#fff}
+.t095-dt{font:600 calc(var(--u)*20) var(--mono);color:var(--muted);letter-spacing:.04em}
+.t095-dv{font:700 calc(var(--u)*44) var(--sans);color:var(--ink);letter-spacing:-.02em;margin-top:calc(var(--u)*6)}
+.t095-dc{flex:1;margin-top:calc(var(--u)*10)}
+.t095-tag{position:absolute;right:calc(var(--u)*16);top:calc(var(--u)*16);font:600 calc(var(--u)*20) var(--mono);color:#fff;background:var(--ink);padding:calc(var(--u)*3) calc(var(--u)*8);border-radius:calc(var(--u)*4)}
+.t095-lab{position:absolute;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.1em;color:#fff;background:var(--alert);padding:calc(var(--u)*5) calc(var(--u)*10);border-radius:calc(var(--u)*4)}
+.t095-h{font:400 calc(var(--u)*84)/1.0 var(--serif);color:var(--ink);letter-spacing:-.01em}
+.t095-h em{color:var(--brand-deep)}
+.t095-k{font:600 calc(var(--u)*20) var(--mono);letter-spacing:.1em;color:var(--muted);margin-bottom:calc(var(--u)*12)}
+.t095-ann{position:absolute;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.06em;color:var(--alert)}
+.t095-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.t095-mini{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(8,1fr);gap:calc(var(--u)*8);padding:calc(var(--u)*100) calc(var(--u)*40) calc(var(--u)*80);background:#1A2436}
+.t095-mini i{background:#2A364A;border-radius:calc(var(--u)*6)}
+.t095-mini i:nth-child(5n+2){background:#3A475C}
+.t095-teal{background:radial-gradient(100% 90% at 60% 40%,#15B8B6,#0B6E6E)}
+.t095-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--u)*28)}
+.t095-mk{width:calc(var(--u)*180);height:calc(var(--u)*180);border-radius:calc(var(--u)*40);box-shadow:0 calc(var(--u)*20) calc(var(--u)*50) rgba(0,0,0,.25);outline:calc(var(--u)*6) solid rgba(255,255,255,.9)}
+.t095-word{font:800 calc(var(--u)*92)/1 var(--sans);letter-spacing:-.035em;color:#fff}
+.t095-row{display:flex;justify-content:space-between;align-items:center;padding:calc(var(--u)*13) 0;border-bottom:calc(var(--u)*2) solid #EEF0F2;font:600 calc(var(--u)*24) var(--sans);color:var(--ink)}
+.t095-row em{font:600 calc(var(--u)*22) var(--mono);font-style:normal;color:var(--ok)}
+.t095-row.bad{color:var(--alert)} .t095-row.bad em{color:var(--alert)}
+.t095-tc{position:absolute;font:600 calc(var(--u)*20) var(--mono);color:var(--ink);background:var(--amber);padding:calc(var(--u)*4) calc(var(--u)*10);border-radius:calc(var(--u)*4);letter-spacing:.04em}
+.t095-cm{font:400 calc(var(--u)*68)/1.02 var(--serif);color:var(--ink);margin:calc(var(--u)*10) 0 calc(var(--u)*6)}
+.t095-cm b{font-weight:400;color:var(--alert)}
+.t095-cs{font:500 calc(var(--u)*22) var(--mono);color:var(--muted)}
+.t095-btns{display:flex;gap:calc(var(--u)*16);margin-top:calc(var(--u)*22);align-items:center}
+.t095-btn{font:700 calc(var(--u)*26) var(--sans);padding:calc(var(--u)*16) calc(var(--u)*30);border-radius:calc(var(--u)*14);background:var(--alert);color:#fff}
+.t095-btn.g{background:#EEF0F2;color:var(--ink)}
+.t095-who{display:flex;align-items:center;gap:calc(var(--u)*14);font:600 calc(var(--u)*22) var(--sans);color:var(--muted)}
+.t095-who i{width:calc(var(--u)*52);height:calc(var(--u)*52);border-radius:50%;background:linear-gradient(135deg,#F4B740,#FF5A4E)}
+.t095-tagl{font:400 calc(var(--u)*104)/1 var(--serif);color:#fff;letter-spacing:-.015em}
+.t095-tagl em{color:var(--ink)}
+.t095-cta{font:700 calc(var(--u)*32) var(--sans);background:var(--alert);color:#fff;padding:calc(var(--u)*22) calc(var(--u)*46);border-radius:calc(var(--u)*18)}
+.t095-lw{display:flex;align-items:center;gap:calc(var(--u)*18);font:800 calc(var(--u)*54)/1 var(--sans);letter-spacing:-.03em;color:var(--ink)}
+.t095-lw img{width:calc(var(--u)*80);height:calc(var(--u)*80);border-radius:calc(var(--u)*18)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 095 · Camera &amp; edit grammar</div>
+    <h1>Split Screen</h1>
+    <p class="dek">A 1970s split-screen grammar rebuilt for software: hard ink gutters divide the frame into simultaneous views. The hook drowns in six dashboards at once, the drop slams one gutter aside for Acme Pulse, the proof runs three synchronised cameras (Pulse, the chart, the on-call human) on the same timecode, and the gutters close for the lockup.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t095-f1">
+<div class="t095-bg"></div><div class="t095-p" style="left:calc(var(--u)*0.0);top:calc(var(--u)*0);width:calc(var(--u)*352.0);height:calc(var(--u)*300)"><div class="t095-dash"><div class="t095-dt">SIGNUPS</div><div class="t095-dv">1,204</div><div class="t095-dc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,24.3 10.0,30.8 20.0,31.9 30.0,28.4 40.0,32.0 50.0,30.3 60.0,34.6 70.0,32.3 80.0,33.3 90.0,36.0 100.0,29.1" fill="none" stroke="#8A94A6" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div><span class="t095-tag">TAB 03/38</span></div></div><div class="t095-p" style="left:calc(var(--u)*364.0);top:calc(var(--u)*0);width:calc(var(--u)*352.0);height:calc(var(--u)*300)"><div class="t095-dash"><div class="t095-dt">ACTIVE USERS</div><div class="t095-dv">38.2k</div><div class="t095-dc"><svg viewBox="0 0 70 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><rect x="1" y="26.2" width="7" height="13.8" rx="1.5" fill="#9AA6B8"/><rect x="11" y="15.0" width="7" height="25.0" rx="1.5" fill="#9AA6B8"/><rect x="21" y="10.0" width="7" height="30.0" rx="1.5" fill="#9AA6B8"/><rect x="31" y="28.7" width="7" height="11.3" rx="1.5" fill="#9AA6B8"/><rect x="41" y="10.1" width="7" height="29.9" rx="1.5" fill="#9AA6B8"/><rect x="51" y="17.1" width="7" height="22.9" rx="1.5" fill="#9AA6B8"/><rect x="61" y="6.0" width="7" height="34.0" rx="1.5" fill="#9AA6B8"/></svg></div><span class="t095-tag">TAB 07/38</span></div></div><div class="t095-p" style="left:calc(var(--u)*728.0);top:calc(var(--u)*0);width:calc(var(--u)*352.0);height:calc(var(--u)*300)"><div class="t095-dash"><div class="t095-dt">P95 LATENCY</div><div class="t095-dv">212 ms</div><div class="t095-dc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,20.1 10.0,15.3 20.0,13.2 30.0,17.6 40.0,20.4 50.0,15.7 60.0,21.3 70.0,26.5 80.0,19.8 90.0,21.9 100.0,20.2" fill="none" stroke="#8A94A6" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div><span class="t095-tag">TAB 11/38</span></div></div><div class="t095-p" style="left:calc(var(--u)*0.0);top:calc(var(--u)*312);width:calc(var(--u)*352.0);height:calc(var(--u)*300)"><div class="t095-dash"><div class="t095-dt">ERROR RATE</div><div class="t095-dv">0.4%</div><div class="t095-dc"><svg viewBox="0 0 70 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><rect x="1" y="27.1" width="7" height="12.9" rx="1.5" fill="#9AA6B8"/><rect x="11" y="14.9" width="7" height="25.1" rx="1.5" fill="#9AA6B8"/><rect x="21" y="18.6" width="7" height="21.4" rx="1.5" fill="#9AA6B8"/><rect x="31" y="14.7" width="7" height="25.3" rx="1.5" fill="#9AA6B8"/><rect x="41" y="16.4" width="7" height="23.6" rx="1.5" fill="#9AA6B8"/><rect x="51" y="30.6" width="7" height="9.4" rx="1.5" fill="#9AA6B8"/><rect x="61" y="29.7" width="7" height="10.3" rx="1.5" fill="#9AA6B8"/></svg></div><span class="t095-tag">TAB 15/38</span></div></div><div class="t095-p" style="left:calc(var(--u)*364.0);top:calc(var(--u)*312);width:calc(var(--u)*352.0);height:calc(var(--u)*300)"><div class="t095-dash"><div class="t095-dt">EVENTS / SEC</div><div class="t095-dv">2,418/s</div><div class="t095-dc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,19.5 10.0,20.5 20.0,24.9 30.0,28.5 40.0,24.1 50.0,19.1 60.0,22.6 70.0,25.3 80.0,27.0 90.0,33.9 100.0,34.6" fill="none" stroke="#8A94A6" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div><span class="t095-tag">TAB 19/38</span></div></div><div class="t095-p" style="left:calc(var(--u)*728.0);top:calc(var(--u)*312);width:calc(var(--u)*352.0);height:calc(var(--u)*300)"><div class="t095-dash"><div class="t095-dt">METRICS</div><div class="t095-dv">14</div><div class="t095-dc"><svg viewBox="0 0 70 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><rect x="1" y="26.8" width="7" height="13.2" rx="1.5" fill="#9AA6B8"/><rect x="11" y="14.8" width="7" height="25.2" rx="1.5" fill="#9AA6B8"/><rect x="21" y="19.0" width="7" height="21.0" rx="1.5" fill="#9AA6B8"/><rect x="31" y="17.2" width="7" height="22.8" rx="1.5" fill="#9AA6B8"/><rect x="41" y="30.2" width="7" height="9.8" rx="1.5" fill="#9AA6B8"/><rect x="51" y="24.8" width="7" height="15.2" rx="1.5" fill="#9AA6B8"/><rect x="61" y="13.6" width="7" height="26.4" rx="1.5" fill="#9AA6B8"/></svg></div><span class="t095-tag">TAB 23/38</span></div></div>
+<div class="t095-p" style="left:0;top:calc(var(--u)*624);width:calc(var(--u)*1080);height:calc(var(--u)*456);padding:calc(var(--u)*80) calc(var(--u)*60) 0">
+<div class="t095-k">6 OF 38 DASHBOARDS · ALL AT ONCE</div><div class="t095-h">How many dashboards did you check <em>today?</em></div></div>
+<div class="t095-lab" style="left:calc(var(--u)*60);top:calc(var(--u)*950)">6-WAY SPLIT · ONE PANEL PER TAB</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Panels pop in one by one, left to right, top to bottom</b>, one per eighth note, until six dashboards fill the frame; the headline panel slides up from the bottom and “today?” lands on beat 1 of bar 4.</p></div>
+  <div class="cw"><div class="cell" id="t095-f2">
+<div class="t095-bg"></div>
+<div class="t095-p" style="left:0;top:0;width:calc(var(--u)*350);height:calc(var(--u)*1080)"><div class="t095-mini"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="t095-ann" style="left:calc(var(--u)*60);top:calc(var(--u)*60);color:#9AA6B8">CAM A · YOUR TEAM</div><div class="t095-ann" style="left:calc(var(--u)*60);bottom:calc(var(--u)*60);color:#9AA6B8">38 TABS</div></div>
+<div class="t095-p t095-teal" style="left:calc(var(--u)*362);top:0;width:calc(var(--u)*718);height:calc(var(--u)*1080)"><div class="t095-lock"><img class="t095-mk" src="../assets/brand/acme-mark.svg" alt="Acme"><div class="t095-word">Acme Pulse</div></div>
+<div class="t095-ann" style="right:calc(var(--u)*60);top:calc(var(--u)*60);color:#fff">CAM B · PULSE</div></div>
+<svg class="t095-svg" viewBox="0 0 1080 1080"><path d="M540 170 H390" stroke="#FF5A4E" stroke-width="5" stroke-dasharray="10 8"/><path d="M405 152 L380 170 L405 188" fill="none" stroke="#FF5A4E" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="540" y1="120" x2="540" y2="220" stroke="#FF5A4E" stroke-width="3"/></svg>
+<div class="t095-lab" style="left:calc(var(--u)*420);top:calc(var(--u)*220)">GUTTER SLAMS 50% → 33% ON THE DROP</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>All six panels collapse into the left strip and the centre gutter slams left</b> (50% → 33%) exactly on the drop; the teal panel wins the frame and the mark scales up from 0.8 inside it.</p></div>
+  <div class="cw"><div class="cell" id="t095-f3">
+<div class="t095-bg"></div>
+<div class="t095-p" style="left:0;top:0;width:calc(var(--u)*534);height:calc(var(--u)*520);background:#fff;padding:calc(var(--u)*110) calc(var(--u)*60) 0 calc(var(--u)*60)"><div class="t095-row "><span>Signups</span><em>+3.1%</em></div><div class="t095-row "><span>Active users</span><em>+0.8%</em></div><div class="t095-row "><span>p95 latency</span><em>212 ms</em></div><div class="t095-row "><span>Error rate</span><em>0.4%</em></div><div class="t095-row bad"><span>Checkout conv.</span><em>−18%</em></div>
+<div class="t095-ann" style="left:calc(var(--u)*60);top:calc(var(--u)*60);color:var(--brand-deep)">CAM A · PULSE WATCHES 14</div><div class="t095-tc" style="right:calc(var(--u)*20);top:calc(var(--u)*56)">09:42:07</div></div>
+<div class="t095-p" style="left:calc(var(--u)*546);top:0;width:calc(var(--u)*534);height:calc(var(--u)*520);background:#F1EFE9">
+<svg viewBox="0 0 534 340" style="position:absolute;left:0;top:calc(var(--u)*90);width:calc(var(--u)*534);height:calc(var(--u)*340)"><polyline points="30,120 90,110 150,118 210,104 270,112 330,100 360,108 390,210 450,224 510,218" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><circle cx="390" cy="210" r="14" fill="#FF5A4E"/><circle cx="390" cy="210" r="30" fill="none" stroke="#FF5A4E" stroke-width="3"/><line x1="390" y1="40" x2="390" y2="300" stroke="#FF5A4E" stroke-width="2" stroke-dasharray="4 6"/></svg>
+<div class="t095-ann" style="left:calc(var(--u)*24);top:calc(var(--u)*60);color:var(--muted)">CAM B · CHECKOUT</div><div class="t095-tc" style="right:calc(var(--u)*60);top:calc(var(--u)*56)">09:42:07</div>
+<div class="t095-ann" style="left:calc(var(--u)*24);top:calc(var(--u)*440)">deploy #2231 ▸</div></div>
+<div class="t095-p" style="left:0;top:calc(var(--u)*532);width:calc(var(--u)*1080);height:calc(var(--u)*548);padding:calc(var(--u)*60) calc(var(--u)*60) 0">
+<div class="t095-who"><i></i>CAM C · ON-CALL ENGINEER</div>
+<div class="t095-cm">Checkout conversion <b>−18%</b></div><div class="t095-cs">since 09:42 · after deploy #2231</div>
+<div class="t095-btns"><span class="t095-btn">Roll back</span><span class="t095-btn g">Acknowledge</span></div>
+<div class="t095-tc" style="right:calc(var(--u)*60);top:calc(var(--u)*66)">09:42:07</div></div>
+<div class="t095-lab" style="left:calc(var(--u)*560);top:calc(var(--u)*950)">SAME TIMECODE = SAME MOMENT</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The three panels open in sequence (A top-left, B top-right, C bottom)</b> with matching amber timecodes: Pulse’s coral row flags, the chart dips at the same 09:42:07, and the human’s cursor hits Roll back on the next downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t095-f4">
+<div class="t095-bg"></div>
+<div class="t095-p" style="left:0;top:0;width:calc(var(--u)*534);height:calc(var(--u)*620);background:var(--ink)"><div style="position:absolute;left:calc(var(--u)*60);bottom:calc(var(--u)*60)" class="t095-tagl">You<br>ship.</div>
+<div class="t095-ann" style="left:calc(var(--u)*60);top:calc(var(--u)*60);color:#9AA6B8">CAM A · YOU</div></div>
+<div class="t095-p t095-teal" style="left:calc(var(--u)*546);top:0;width:calc(var(--u)*534);height:calc(var(--u)*620)"><div style="position:absolute;left:calc(var(--u)*48);bottom:calc(var(--u)*60)" class="t095-tagl"><em>Pulse<br>watches.</em></div>
+<div class="t095-ann" style="right:calc(var(--u)*60);top:calc(var(--u)*60);color:#fff">CAM B · PULSE</div></div>
+<div class="t095-p" style="left:0;top:calc(var(--u)*632);width:calc(var(--u)*1080);height:calc(var(--u)*448);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--u)*40);padding-bottom:calc(var(--u)*30)">
+<div class="t095-lw"><img class="" src="../assets/brand/acme-mark.svg" alt="Acme">Acme Pulse</div><span class="t095-cta">Start free</span></div>
+<svg class="t095-svg" viewBox="0 0 1080 1080"><path d="M470 700 H520 M610 700 H560" stroke="#FF5A4E" stroke-width="4"/><path d="M505 688 L522 700 L505 712 M575 688 L558 700 L575 712" fill="none" stroke="#FF5A4E" stroke-width="4" stroke-linejoin="round"/></svg>
+<div class="t095-ann" style="left:0;right:0;text-align:center;top:calc(var(--u)*960)">GUTTERS CLOSE · 3 PANELS → 1</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>“You ship.” lands on the left panel, “Pulse watches.” on the right a beat later</b>; then the gutters slide shut toward the centre and the lockup band rises with Start free on beat 3.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Ink gutters</b> — 12 px hard dividers; their position is the edit (moving the gutter = cutting)</li><li><b>Dashboard panel</b> — one metric per panel with a TAB nn/38 badge; the currency of the hook</li><li><b>Camera labels</b> — CAM A / B / C mono tags naming what each panel is watching</li><li><b>Synced timecode</b> — amber 09:42:07 chip repeated in every panel to prove simultaneity</li><li><b>Decision panel</b> — full-width bottom panel with the anomaly line and Roll back / Acknowledge</li><li><b>Split tagline</b> — tagline broken across two panels, then merged into one lockup band</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Panel pop-in</b> — each panel wipes in from its gutter edge (clip-path inset 100% → 0, 0.2 s power3.out), one per eighth note (0.25 s at 120 BPM)</li><li><b>Gutter slam</b> — gutter x moves 50% → 33% in 0.18 s with expo.in and a 2-frame overshoot, landing exactly on the drop; the losing panel desaturates to 30%</li><li><b>Gutter close</b> — all gutters slide to 0 width over one bar (2 s, power2.inOut) while the panels’ content scales 1 → 0.96; the merged band settles on the downbeat</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Split screen shows cause and effect at the same instant, which is exactly what a monitoring product promises: the metric, the alert and the human decision are all visible together. It’s also cheap to build from real UI captures. Risk: on a phone at 1:1 more than three panels becomes noise, and a split that doesn’t say where to look loses the viewer.</p><p><b>Adapt to your product:</b> Put the before-state (your users’ current juggling) in many small panels and your product in one big one. For the proof, split the frame into the three roles your product connects, for example the signal, the system and the person, and keep the same timecode in each.</p><p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Split_screen_(film)">https://en.wikipedia.org/wiki/Split_screen_(film)</a> (split screen history and definition) · <a href="https://www.premiumbeat.com/blog/split-screen-editing-and-composing/">https://www.premiumbeat.com/blog/split-screen-editing-and-composing/</a> (composing split screens to guide attention)</p></div>
+</div>
+</body>
+</html>

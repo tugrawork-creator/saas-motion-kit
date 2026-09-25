@@ -1,0 +1,75 @@
+{
+ "id": "077",
+ "slug": "mood-blob",
+ "name": "Mood Blob",
+ "category": "character",
+ "summary": "A single teal blob whose outline is the system’s mood: bouncy when fine, stretched and bristling at the anomaly, a cushion once you decide.",
+ "look": "Flat wellness-app illustration: warm paper, big pale discs, one organic teal blob with a two-dot face and coral cheeks; greys for the ‘before’ world.",
+ "components": [
+  {
+   "name": "Mood blob",
+   "role": "Pulse: teal organic shape whose outline encodes system health"
+  },
+  {
+   "name": "Two-dot face",
+   "role": "minimal eyes + mouth; 4 states: up, wide, content, (grey) tired"
+  },
+  {
+   "name": "Grey puddles",
+   "role": "melted, colourless blobs = the overwhelmed team before Pulse"
+  },
+  {
+   "name": "Floating card",
+   "role": "one rounded white card with the anomaly readout"
+  },
+  {
+   "name": "Flat person",
+   "role": "simple geometric human who makes the decision"
+  },
+  {
+   "name": "Soft discs",
+   "role": "big pale circles behind each scene set the mood colour"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Squash & stretch bounce",
+   "how": "entry and exit on the drop: 0.5 s with elastic.out(1, 0.5); contact frames sit exactly on the downbeat"
+  },
+  {
+   "name": "Breathing idle",
+   "how": "scale 1↔1.03 on a 2-beat loop (1 s at 120 BPM) so the blob literally breathes with the tempo"
+  },
+  {
+   "name": "Outline noise",
+   "how": "a spike/wobble parameter on the outline animates 0→0.22 in 0.3 s for tension and back to 0 over one bar for relief"
+  }
+ ],
+ "story": "Hook: grey blobs melting beside a broken chart under 'And the drop still shipped on Friday.'. Reveal: a round teal blob bounces up beneath the Acme mark and 'Acme Pulse'. Proof: the blob stretches and bristles, reaching for a card with checkout −18% since 09:42 after deploy #2231, while a person reaches for Roll back. CTA: the blob relaxes into a cushion under 'You ship. Pulse watches.' and Start free.",
+ "adapt": "Give your product one blob in your brand colour and drive its outline from a real metric (health score, queue length, error rate); keep the face to two dots and a line.",
+ "references": [
+  {
+   "url": "https://www.kimp.io/headspace-brand/",
+   "note": "Headspace’s shape language: a circle that morphs into expressive faces",
+   "verified": true
+  },
+  {
+   "url": "https://rive.app/docs/editor/state-machine/state-machine",
+   "note": "state machines that switch a character between mood states from inputs",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "low",
+  "risk": "Soft and gentle can undersell urgency; make the tense state genuinely sharp (spikes, coral backdrop) and keep the data card precise."
+ },
+ "best_for": [
+  "wellness-adjacent SaaS",
+  "consumer apps",
+  "SMB analytics",
+  "onboarding videos"
+ ],
+ "file": "themes/077-mood-blob.html"
+}

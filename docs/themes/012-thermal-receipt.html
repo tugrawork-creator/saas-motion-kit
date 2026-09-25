@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>012 · Thermal Receipt — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t012- ===== */
+@property --x{syntax:'<number>';inherits:false;initial-value:0}
+@property --y{syntax:'<number>';inherits:false;initial-value:0}
+@property --w{syntax:'*';inherits:false}
+.t012-bg{position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 0%,#12908E 0%,#0B6E6E 45%,#073F40 100%)}
+.t012-bg::after{content:"";position:absolute;inset:0;background:repeating-radial-gradient(circle at 30% 20%,rgba(255,255,255,.025) 0 calc(var(--u)*1),transparent calc(var(--u)*1) calc(var(--u)*3))}
+.t012-a{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w))}
+.t012-printer{height:calc(var(--u)*96);border-radius:calc(var(--u)*22) calc(var(--u)*22) calc(var(--u)*10) calc(var(--u)*10);background:linear-gradient(180deg,#26313F,#141B25 70%,#0B1018);box-shadow:0 calc(var(--u)*14) calc(var(--u)*30) rgba(0,0,0,.45),inset 0 calc(var(--u)*2) 0 rgba(255,255,255,.08);z-index:3}
+.t012-printer::before{content:"";position:absolute;left:calc(var(--u)*50);right:calc(var(--u)*50);bottom:calc(var(--u)*14);height:calc(var(--u)*8);border-radius:calc(var(--u)*4);background:#05080C;box-shadow:inset 0 calc(var(--u)*2) calc(var(--u)*3) rgba(0,0,0,.9)}
+.t012-printer span{position:absolute;left:calc(var(--u)*36);top:calc(var(--u)*24);font:600 calc(var(--u)*20)/1 var(--mono);letter-spacing:.2em;color:#7F8A9B}
+.t012-printer b{position:absolute;right:calc(var(--u)*40);top:calc(var(--u)*24);width:calc(var(--u)*14);height:calc(var(--u)*14);border-radius:50%;background:#35E0A0;box-shadow:0 0 calc(var(--u)*14) #35E0A0}
+.t012-printer b.t012-busy{background:var(--alert);box-shadow:0 0 calc(var(--u)*16) var(--alert)}
+.t012-wrap{filter:drop-shadow(0 calc(var(--u)*18) calc(var(--u)*22) rgba(0,0,0,.35));z-index:2}
+.t012-paper{position:relative;padding:calc(var(--u)*44) calc(var(--u)*34) calc(var(--u)*58);
+  background:linear-gradient(90deg,rgba(0,0,0,.07),transparent 7%,transparent 93%,rgba(0,0,0,.07)),repeating-linear-gradient(180deg,transparent 0 calc(var(--u)*37),rgba(0,0,0,.018) calc(var(--u)*37) calc(var(--u)*38)),#FBF8F0;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/calc(var(--u)*28) 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/calc(var(--u)*28) 100%}
+.t012-pr{font:400 calc(var(--u)*26)/1.5 var(--mono);color:rgba(22,22,24,.88);white-space:nowrap}
+.t012-pr b{font-weight:600}
+.t012-c{text-align:center}
+.t012-li{display:flex;align-items:baseline}
+.t012-li i{flex:1;margin:0 calc(var(--u)*8);border-bottom:calc(var(--u)*3) dotted rgba(22,22,24,.45);transform:translateY(calc(var(--u)*-6))}
+.t012-hr{border-top:calc(var(--u)*3) dashed rgba(22,22,24,.55);margin:calc(var(--u)*12) 0}
+.t012-hr2{border-top:calc(var(--u)*6) double rgba(22,22,24,.7);margin:calc(var(--u)*12) 0}
+.t012-red{color:#E8473C}
+.t012-fade{opacity:.55}
+.t012-big{font:600 calc(var(--u)*96)/1 var(--mono);letter-spacing:.04em;color:rgba(22,22,24,.92);text-align:center}
+.t012-mark{display:block;margin:0 auto calc(var(--u)*14);width:calc(var(--u)*130);height:calc(var(--u)*130);filter:grayscale(1) brightness(.45) contrast(2.2)}
+.t012-dither{position:relative;width:calc(var(--u)*130);height:calc(var(--u)*130);margin:0 auto calc(var(--u)*18)}
+.t012-dither::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,transparent calc(var(--u)*1.3),#FBF8F0 calc(var(--u)*1.8)) 0 0/calc(var(--u)*5) calc(var(--u)*5);opacity:.55;mix-blend-mode:lighten}
+.t012-bar{height:calc(var(--u)*70);background:repeating-linear-gradient(90deg,#1b1b1d 0 calc(var(--u)*3),transparent calc(var(--u)*3) calc(var(--u)*7),#1b1b1d calc(var(--u)*7) calc(var(--u)*13),transparent calc(var(--u)*13) calc(var(--u)*15),#1b1b1d calc(var(--u)*15) calc(var(--u)*16),transparent calc(var(--u)*16) calc(var(--u)*22));opacity:.85;margin-top:calc(var(--u)*10)}
+.t012-h{font:400 calc(var(--u)*72)/1.05 var(--serif);color:#F6F5F1;letter-spacing:-.01em}
+.t012-h em{color:#FFD7D3}
+.t012-k{font:600 calc(var(--u)*20)/1 var(--mono);letter-spacing:.18em;color:#BFEDEA}
+.t012-btn{display:inline-flex;align-items:center;justify-content:center;height:calc(var(--u)*84);padding:0 calc(var(--u)*40);border-radius:calc(var(--u)*42);background:var(--alert);color:#fff;font:800 calc(var(--u)*32)/1 var(--sans);box-shadow:0 calc(var(--u)*10) calc(var(--u)*24) rgba(0,0,0,.25)}
+.t012-btn2{display:inline-flex;align-items:center;justify-content:center;height:calc(var(--u)*72);padding:0 calc(var(--u)*32);border-radius:calc(var(--u)*36);box-shadow:inset 0 0 0 calc(var(--u)*2) rgba(246,245,241,.6);color:#F6F5F1;font:700 calc(var(--u)*26)/1 var(--sans)}
+.t012-lock{display:flex;align-items:center;gap:calc(var(--u)*16);font:800 calc(var(--u)*44)/1 var(--sans);color:#F6F5F1}
+.t012-lock img{width:calc(var(--u)*60);height:calc(var(--u)*60)}
+.t012-tick{display:inline-block;width:calc(var(--u)*22);height:calc(var(--u)*22);border:calc(var(--u)*3) solid rgba(22,22,24,.8);margin-right:calc(var(--u)*10);vertical-align:calc(var(--u)*-2)}
+.t012-tick.on{background:repeating-linear-gradient(45deg,rgba(22,22,24,.85) 0 calc(var(--u)*3),transparent calc(var(--u)*3) calc(var(--u)*5))}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 012 · Typography &amp; graphic systems</div>
+    <h1>Thermal Receipt</h1>
+    <p class="dek">Pulse prints a running receipt of your product: a warm thermal strip feeds out of a little printer, line by line, with dotted leaders and a black-and-coral two-color print head. The feed stalls on the one line that is wrong, a coral circle lands around it, and a human ticks the box.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t012-f1"><div class="t012-bg"></div>
+    <div class="t012-a t012-wrap" style="--x:200;--y:110;--w:680"><div class="t012-paper t012-pr" style="font-size:calc(var(--u)*31)">
+      <div class="t012-c"><b>DASHBOARD CHECK</b></div>
+      <div class="t012-c t012-fade">FRI 16:58 · TERMINAL 38</div>
+      <div class="t012-hr"></div>
+      <div class="t012-li">GROWTH<i></i>SKIPPED</div>
+      <div class="t012-li">REVENUE<i></i>SKIPPED</div>
+      <div class="t012-li">FUNNEL<i></i>SKIPPED</div>
+      <div class="t012-li">RETENTION<i></i>SKIPPED</div>
+      <div class="t012-li t012-fade">+ 31 MORE<i></i>SKIPPED</div>
+      <div class="t012-hr"></div>
+      <div class="t012-li"><b>OPEN</b><i></i><b>38</b></div>
+      <div class="t012-li"><b>CHECKED</b><i></i><b class="t012-red">3</b></div>
+    </div></div>
+    <div class="t012-a t012-printer" style="--x:150;--y:60;--w:780"><span>ACME · TP-58</span><b></b></div>
+    <div class="t012-a t012-h" style="--x:60;--y:800;--w:960">How many dashboards did you <em>check</em> today?</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The strip feeds downward one line per 16th note.</b> "SKIPPED" repeats like a drum roll, the totals print on beat 1 of bar 3, and the serif question fades up under the tear on the last bar.</p></div>
+
+  <div class="cw"><div class="cell" id="t012-f2"><div class="t012-bg"></div>
+    <div class="t012-a t012-wrap" style="--x:210;--y:120;--w:660"><div class="t012-paper t012-pr">
+      <div class="t012-dither"><img class="t012-mark" src="../assets/brand/acme-mark.svg" alt=""></div>
+      <div class="t012-big">ACME</div>
+      <div class="t012-big">PULSE</div>
+      <div class="t012-hr2"></div>
+      <div class="t012-c"><b>*** NOW WATCHING ***</b></div>
+      <div class="t012-li">METRICS<i></i>14</div>
+      <div class="t012-li">EVENTS/SEC<i></i>2,418</div>
+      <div class="t012-li">EVERY MINUTE<i></i><span class="t012-red"><b>ON</b></span></div>
+      <div class="t012-bar"></div>
+    </div></div>
+    <div class="t012-a t012-printer" style="--x:150;--y:70;--w:780"><span>ACME · TP-58</span><b></b></div>
+    <div class="t012-a t012-k" style="--x:60;--y:960">PRINTING EVERY MINUTE · SINCE 0:08</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the printer spits a fresh header upward-fast (one burst, 180 ms).</b> The dithered mark and double-height "ACME / PULSE" print in one pass that ends exactly on the downbeat; the stats roll out after it.</p></div>
+
+  <div class="cw"><div class="cell" id="t012-f3"><div class="t012-bg"></div>
+    <div class="t012-a t012-wrap" style="--x:50;--y:110;--w:600"><div class="t012-paper t012-pr">
+      <div class="t012-li"><b>PULSE AUDIT</b><i style="border:0"></i>09:44</div>
+      <div class="t012-hr"></div>
+      <div class="t012-li">SIGNUPS<i></i>OK</div>
+      <div class="t012-li">ACTIVE USERS<i></i>OK</div>
+      <div class="t012-li">P95 212MS<i></i>OK</div>
+      <div class="t012-li">ERRORS 0.4%<i></i>OK</div>
+      <div class="t012-li t012-red" style="margin-top:calc(var(--u)*26)"><b>CHECKOUT</b><i style="border-color:rgba(232,71,60,.6)"></i><b>−18%</b></div>
+      <div class="t012-red">&nbsp;&nbsp;SINCE 09:42</div>
+      <div class="t012-red" style="margin-bottom:calc(var(--u)*26)">&nbsp;&nbsp;AFTER DEPLOY #2231</div>
+      <div class="t012-hr"></div>
+      <div><span class="t012-tick on"></span><b>ROLL BACK</b></div>
+      <div><span class="t012-tick"></span>ACKNOWLEDGE</div>
+    </div></div>
+    <svg class="t012-a" style="--x:20;--y:378;--w:680;z-index:4" viewBox="0 0 680 176" fill="none"><path d="M130 10 C 300 -2, 540 0, 640 18 C 692 28, 686 136, 606 154 C 440 176, 150 170, 50 148 C 2 132, 6 40, 80 18 C 110 10, 150 6, 210 8" stroke="#FF5A4E" stroke-width="6" stroke-linecap="round"/></svg>
+    <div class="t012-a t012-printer" style="--x:-20;--y:60;--w:740"><span>ACME · TP-58</span><b class="t012-busy"></b></div>
+    <div class="t012-a t012-k" style="--x:720;--y:200">FEED PAUSED</div>
+    <div class="t012-a t012-h" style="--x:720;--y:250;--w:300">Your <em>call.</em></div>
+    <div class="t012-a t012-btn" style="--x:720;--y:430">Roll back</div>
+    <div class="t012-a t012-btn2" style="--x:720;--y:540">Acknowledge</div>
+    <div class="t012-a t012-k" style="--x:720;--y:960">RESOLVED IN 6 MIN</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Healthy lines feed down steadily; the CHECKOUT line prints in coral and the feed stops dead.</b> The hand-drawn circle strokes around it in one beat, the printer LED turns coral, and "Roll back" pops in on the next downbeat as the box ticks.</p></div>
+
+  <div class="cw"><div class="cell" id="t012-f4"><div class="t012-bg"></div>
+    <div class="t012-a t012-h" style="--x:60;--y:70;--w:960">Caught <em>before</em> customers noticed.</div>
+    <div class="t012-a t012-wrap" style="--x:120;--y:290;--w:520;transform:rotate(-4deg)"><div class="t012-paper t012-pr">
+      <div class="t012-li">ANOMALIES<i></i>1</div>
+      <div class="t012-li">CUSTOMERS HIT<i></i>0</div>
+      <div class="t012-li">TIME TO FIX<i></i>6 MIN</div>
+      <div class="t012-hr2"></div>
+      <div class="t012-c"><b>THANK YOU FOR SHIPPING</b></div>
+      <div class="t012-bar"></div>
+    </div></div>
+    <div class="t012-a t012-lock" style="--x:690;--y:440"><img src="../assets/brand/acme-mark.svg" alt=""></div>
+    <div class="t012-a t012-lock" style="--x:690;--y:520;font-size:calc(var(--u)*50)">Acme<br>Pulse</div>
+    <div class="t012-a t012-btn" style="--x:690;--y:680">Start free</div>
+    <div class="t012-a t012-k" style="--x:60;--y:960">EVERY METRIC · EVERY MINUTE</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The strip tears off and swings left 4° (power3.out, 400 ms) on a downbeat.</b> The headline prints in above, the lockup settles to the right, and "Start free" lands on the final hit.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Paper strip</b> — warm white, feed lines, edge shading for curl and a zig-zag tear at the bottom.</li>
+    <li><b>Line item</b> — label · dotted leader · value in JetBrains Mono, 32–34 characters per line like a 58 mm roll.</li>
+    <li><b>Two-color head</b> — black for normal lines, coral for the anomaly, the way two-color thermal paper prints.</li>
+    <li><b>Dithered header</b> — the Acme mark pushed to one-bit with a halftone screen, plus double-height "ACME / PULSE".</li>
+    <li><b>Marker circle</b> — one hand-drawn coral loop around the line that matters; never more than one per shot.</li>
+    <li><b>Printer body</b> — dark device with a slot and a status LED that turns coral when the feed pauses.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Stepped feed</b> — translateY one line per step (steps(1), 70 ms hold), one line per 16th note at 120 BPM (125 ms).</li>
+    <li><b>Print-head scan</b> — each new line reveals with clip-path left → right in 90 ms, linear, so the feed sounds like the hi-hat.</li>
+    <li><b>Pause &amp; tear</b> — feed freezes for exactly one bar on the anomaly; the final tear slides up 20 px and rotates −4° (power3.out, 400 ms) on a downbeat.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>A receipt is a universal proof object: itemised, timestamped, final. It turns background monitoring into something you can literally hold. Risk: a tall strip fights a square frame; crop tight and never show more than about 12 lines.</p>
+    <p><b>Adapt to your product:</b> print your own checks as line items (tests, invoices, sync jobs, API calls) and let only the failing one print in your accent color. The totals block is a natural place for your key number.</p>
+    <p><b>References:</b> <a href="https://www.itsnicethat.com/articles/co-op-owned-by-you-right-by-you-vccp-blinkink-sam-gainsborough-advertising-animation-230724">itsnicethat.com — receipt-led animated campaign</a></p>
+  </div>
+</div>
+</body>
+</html>

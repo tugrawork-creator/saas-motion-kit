@@ -1,0 +1,20 @@
+{"id":"016","slug":"proofreaders-redline","name":"Proofreader's Redline","category":"type",
+ "summary":"Metrics set like a galley proof; Pulse strikes the wrong figure with a coral pen, writes the right one and a human initials it.",
+ "look":"A warm white galley page with slug line, line numbers and a ruled margin; Instrument Serif body with mono figures. Coral pen marks (strike, circle, underline, margin notes) sit on top, and a teal boxed sign-off closes each decision.",
+ "components":[
+  {"name":"Galley page","role":"slug line, line numbers, ruled left margin, serif type"},
+  {"name":"Strike & replace","role":"jittered coral line through the wrong figure, correction written above"},
+  {"name":"Circle","role":"loose hand-drawn loop around one word or action; max three marks per shot"},
+  {"name":"Margin note","role":"italic coral annotation with a thin leader line"},
+  {"name":"Metric table","role":"typeset rows with mono figures"},
+  {"name":"Human initials","role":"teal boxed sign-off that closes the decision"}],
+ "motion":[
+  {"name":"Pen stroke","how":"stroke-dashoffset with slight speed variance, power2.out, 250–500 ms per mark, each starting on a beat at 120 BPM"},
+  {"name":"Value swap","how":"wrong figure dims to 30% while the correction masks up from below in 200 ms, landing on the downbeat"},
+  {"name":"Margin pull","how":"leader draws in 180 ms, note fades in with a 1° rotation settle (back.out, 300 ms)"}],
+ "story":"Hook: 'How many dashboards did you check today?' — the pen strikes 'check', writes 'open', notes '38 open, 3 read', and circles 'Friday.' with 'found by a customer'. Reveal: 'Acme Pulse' sets in one hit under the mark, the pen double-underlines 'Pulse', 'stet — keep it big', teal 'approved'. Proof: a morning-metrics table sets row by row; the pen strikes checkout '3.1 %', writes '2.5 %', margin note '−18% since 09:42, after deploy #2231'; the human circles 'Roll back' and initials 'OK — on-call, 09:48'. CTA: 'Caught before customers noticed.' with 'before' circled, lockup, an arrow to the coral Start free button.",
+ "adapt":"Typeset your own table (orders, test results, KPIs, contract terms) and let the pen correct exactly one figure; the initials box is where your approve / reject action lives.",
+ "references":[{"url":"https://reedsy.com/blog/proofreading-marks/","note":"standard proofreading marks","verified":false}],
+ "fit":{"readability":3,"trust":3,"effort":"med","risk":"too many marks become chaos; cap at three per shot and keep the page mostly clean"},
+ "best_for":["analytics","finance-adjacent tools","content / docs tools","QA & review workflows"],
+ "file":"themes/016-proofreaders-redline.html"}

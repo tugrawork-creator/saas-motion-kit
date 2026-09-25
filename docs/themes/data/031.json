@@ -1,0 +1,26 @@
+{"id":"031","slug":"vector-phosphor-oscilloscope","name":"Vector-Phosphor Oscilloscope","category":"light",
+ "summary":"A single glowing electron beam draws the whole film on a black scope face, and the anomaly is the moment the trace turns coral.",
+ "look":"Black glass with a faint 10×8 graticule, tick-marked centre axes and a bezel of knobs and lit keys. Every word, number and wave is one bright teal stroke with a white-hot head and a decaying phosphor afterglow; coral is reserved for the faulty signal and the action keys.",
+ "components":[
+  {"name":"Graticule","role":"10×8 grid with tick-marked centre axes; the constant instrument frame"},
+  {"name":"Beam head","role":"white-hot dot with two-layer teal bloom; the single pen that draws everything"},
+  {"name":"Persistence trail","role":"3–5 stacked path clones at decaying opacity; phosphor afterglow"},
+  {"name":"Measurement cursors","role":"amber dashed ΔY / Δt lines that turn the anomaly into a number"},
+  {"name":"Bezel strip","role":"knobs plus lit hardware keys (Roll back, Acknowledge, Start free) as the UI layer"},
+  {"name":"Lissajous idle","role":"XY-mode loop that fills waiting moments and the end card"}
+ ],
+ "motion":[
+  {"name":"Beam draw","how":"stroke-dashoffset at constant linear speed, never eased; one full-width sweep = 1 bar (2 s at 120 BPM)"},
+  {"name":"Phosphor decay","how":"trailing clones at 0.6 / 0.35 / 0.15 opacity offset 40–80 ms keep strokes alive between hits"},
+  {"name":"Trigger lock","how":"6 frames of seeded horizontal jitter, then steps(1) snap to stable exactly on the 0:08 drop and each proof hit"}
+ ],
+ "story":"Hook: six ghosted copies of one sine slide across an untriggered scope while the beam writes 'How many dashboards did you check today?'. Reveal: on the drop the trace locks, a pulse spike runs into the glowing Acme mark and 'Acme Pulse' burns in. Proof: a calm checkout-conversion trace falls and turns coral, amber cursors measure 'ΔY −18% · 09:42 · deploy #2231' and a lit Roll back key waits for the human. CTA: a Lissajous heartbeat idles behind the lockup, 'You ship. Pulse watches.' and a coral Start free key.",
+ "adapt":"Swap the conversion trace for your own key time series (latency, sync lag, queue depth) and put your primary action on the lit bezel key; the cursor readout becomes your alert copy.",
+ "references":[
+  {"url":"https://gingerbeardman.github.io/webgl-crt-shader/","note":"WebGL CRT pass for scanline and bloom","verified":true},
+  {"url":"https://en.wikipedia.org/wiki/Oscilloscope_Music","note":"vector drawing with an oscilloscope beam","verified":false},
+  {"url":"https://www.perfectcircuit.com/signal/lzx-vectrex-rescanning","note":"vector-display rescanning aesthetics","verified":false}
+ ],
+ "fit":{"readability":2,"trust":2,"effort":"med","risk":"Thin glowing strokes can smear under social-video compression; keep beams at 3 px or more and text large."},
+ "best_for":["observability","dev tools","hardware & IoT","audio / signal products"],
+ "file":"themes/031-vector-phosphor-oscilloscope.html"}

@@ -1,0 +1,74 @@
+{
+ "id": "055",
+ "slug": "bento-grid",
+ "name": "Bento Grid",
+ "category": "signature",
+ "summary": "A 6×6 bento of white tiles — one message per tile, collapsing into one hero tile on the drop.",
+ "look": "Airy off-white canvas with soft teal/peach clouds, white r16 tiles with 16 px gutters, mono labels, one ink table tile and one coral anomaly tile.",
+ "components": [
+  {
+   "name": "Shell",
+   "role": "6×6 grid, radius 16, gutter 16, inner padding 28 — never changes between scenes"
+  },
+  {
+   "name": "Anchor tile",
+   "role": "the frame’s single message, 2–4× the area of its neighbours"
+  },
+  {
+   "name": "Giant number tile",
+   "role": "one mono numeral 80–130 px that counts in"
+  },
+  {
+   "name": "Ink table tile",
+   "role": "the only dark tile: your data, crossed by a teal scan band"
+  },
+  {
+   "name": "Anomaly tile",
+   "role": "coral inset border + coral −18%; slams in and nudges its neighbours"
+  },
+  {
+   "name": "Tile-zoom seam",
+   "role": "dive into a tile to start the next scene, or collapse the grid into one hero tile"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Tile cascade",
+   "how": "scale .92 → 1 + opacity, power2.out 0.4 s, 70 ms stagger large→small; big tiles on beats, small on off-beats"
+  },
+  {
+   "name": "Micro-motion per tile",
+   "how": "each tile owns one loop (count, sparkline draw, badge blink) lasting exactly 1 bar = 2 s at 120 BPM"
+  },
+  {
+   "name": "Grid collapse",
+   "how": "all tiles translate to centre + merge radii over 0.5 s expo.in, landing precisely on the drop"
+  }
+ ],
+ "story": "Hook: the question anchors a grid of pain tiles — 38 open tabs, 0.4% error rate, p95 212 ms and “the drop still shipped”. Reveal: the grid collapses into one hero tile with the Acme Pulse lockup. Proof: a teal scan crosses the ink metrics tile, the coral −18% Checkout conversion tile slams in with its context (since 09:42 · after deploy #2231) and a Roll back tile. CTA: a keynote-style summary bento with lockup, tagline, stats and a coral Start free tile.",
+ "adapt": "Map each tile to one fact about your product (a metric, an integration, a screenshot crop) and keep a single “hero” tile per frame; the collapse/zoom seams work for any feature list.",
+ "references": [
+  {
+   "url": "https://www.saasframe.io/blog/the-bento-layout-trend",
+   "note": "why the bento layout took over SaaS pages",
+   "verified": true
+  },
+  {
+   "url": "https://saaspo.com/style/bento",
+   "note": "gallery of bento SaaS landing pages",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Tiles of equal weight turn into a noisy dashboard; one anchor tile per frame."
+ },
+ "best_for": [
+  "feature launches",
+  "analytics",
+  "platforms with many capabilities"
+ ],
+ "file": "themes/055-bento-grid.html"
+}

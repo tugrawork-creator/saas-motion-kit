@@ -1,0 +1,26 @@
+{"id":"037","slug":"x-ray-thermal-scanner","name":"X-Ray / Thermal Scanner","category":"light",
+ "summary":"Every card on the surface says OK, but inside a scanner band the product turns to X-ray and one bone of the checkout flow is fractured.",
+ "look":"Clean light-mode dashboard cards on paper, crossed by a bright-edged scanner band. Inside it everything becomes near-black X-ray with bone-white glowing wireframes; a thermal pass (navy → teal → amber → coral → white) shows heat blooming around the break and cooling at the end.",
+ "components":[
+  {"name":"Surface cards","role":"ordinary healthy-looking UI with green '✓ OK' chips; the lie on the surface"},
+  {"name":"Scanner band","role":"bright-edged vertical band with soft bleed; everything inside is X-ray"},
+  {"name":"Skeleton layer","role":"the hidden flow (Visit → Cart → Checkout → Paid) as glowing bones and joints"},
+  {"name":"Fracture","role":"coral zigzag break between two bones; the anomaly, precisely located"},
+  {"name":"Thermal LUT","role":"navy → teal → amber → coral → white legend; heat means risk"},
+  {"name":"Hot-spot readout","role":"'RISK 0.87 · DEPLOY #2231' callout over the heat bloom"}
+ ],
+ "motion":[
+  {"name":"Band mask","how":"clip-path inset() window at constant speed, one frame-width per bar (2 s at 120 BPM)"},
+  {"name":"Palette switch","how":"X-ray → thermal via filter / feComponentTransfer cross-fade over 400 ms on a downbeat"},
+  {"name":"Heat bloom","how":"hot spot scales 0.9 → 1.1, sine.inOut on a 1.2 s loop; cools right→left for the CTA"}
+ ],
+ "story":"Hook: six healthy cards pop in with green OK chips under 'And the drop still shipped on Friday.' Reveal: on the drop a scanner band slams in; inside it the cards become wireframes and the Acme mark and 'Acme Pulse' glow. Proof: in X-ray the checkout flow's bones are drawn node by node, the Cart→Checkout bone is fractured, heat blooms ('RISK 0.87 · DEPLOY #2231') and a card reads 'Checkout conversion −18% · since 09:42 · after deploy #2231' with Roll back. CTA: the thermal image cools to teal and navy behind 'Caught before customers noticed.' and Start free.",
+ "adapt":"Put your own dashboard on the surface and draw your real pipeline or architecture as the skeleton; the fracture sits wherever your product finds problems.",
+ "references":[
+  {"url":"https://tympanus.net/codrops/2026/03/23/building-a-dual-scene-fluid-x-ray-reveal-effect-in-three-js/","note":"dual-scene X-ray reveal effect","verified":true},
+  {"url":"https://www.shadertoy.com/view/4dfczf","note":"thermal-vision shader","verified":false},
+  {"url":"https://codepen.io/erikrahm/pen/qBwMMR","note":"X-ray hover reveal","verified":false}
+ ],
+ "fit":{"readability":3,"trust":3,"effort":"med","risk":"Medical imagery can feel clinical or alarming; keep fractures small and always resolve them with a human decision."},
+ "best_for":["observability","QA / testing","security","fintech & risk"],
+ "file":"themes/037-x-ray-thermal-scanner.html"}

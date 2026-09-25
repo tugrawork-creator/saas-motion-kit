@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>006 · OS Window Choreography — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t006-s{position:absolute;inset:0;background:radial-gradient(circle at 80% 15%,rgba(255,90,78,.35),transparent 40%),radial-gradient(circle at 10% 90%,#CFF1EE,transparent 45%),linear-gradient(150deg,#0B6E6E 0%,#0FA3A3 55%,#7FD6CF 100%);font-family:var(--sans);color:var(--ink);overflow:hidden}
+.t006-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t006-w{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h));background:#FBFBF9;border-radius:calc(var(--u)*16);box-shadow:0 calc(var(--u)*30) calc(var(--u)*70) rgba(4,30,30,.4),0 0 0 calc(var(--u)*1.5) rgba(14,23,38,.12);overflow:hidden}
+.t006-tb{height:calc(var(--u)*50);display:flex;align-items:center;gap:calc(var(--u)*9);padding:0 calc(var(--u)*18);background:#EFEEE8;border-bottom:calc(var(--u)*1.5) solid #DFDDD4;font:600 calc(var(--u)*20) var(--sans);color:var(--muted);white-space:nowrap}
+.t006-tb i{width:calc(var(--u)*14);height:calc(var(--u)*14);border-radius:50%;background:#C9C7BD;flex:none}
+.t006-tb i:first-child{background:var(--alert)}
+.t006-tb span{margin-left:calc(var(--u)*12)}
+.t006-w svg.c{position:absolute;left:0;top:calc(var(--u)*50);width:100%;height:calc(100% - var(--u)*50)}
+.t006-dock{position:absolute;left:50%;transform:translateX(-50%);top:calc(var(--u)*940);height:calc(var(--u)*80);display:flex;align-items:center;gap:calc(var(--u)*14);padding:0 calc(var(--u)*18);background:rgba(255,255,255,.35);border-radius:calc(var(--u)*24);box-shadow:inset 0 0 0 calc(var(--u)*1.5) rgba(255,255,255,.5)}
+.t006-dock b{width:calc(var(--u)*56);height:calc(var(--u)*56);border-radius:calc(var(--u)*14);background:rgba(255,255,255,.75);display:block;position:relative}
+.t006-dock img{width:calc(var(--u)*56);height:calc(var(--u)*56);display:block}
+.t006-dock .on{position:relative}.t006-dock .on::after{content:"";position:absolute;left:50%;bottom:calc(var(--u)*-11);width:calc(var(--u)*8);height:calc(var(--u)*8);margin-left:calc(var(--u)*-4);border-radius:50%;background:#fff}
+.t006-hl{font:400 calc(var(--u)*80)/1.02 var(--serif);letter-spacing:-.01em;color:var(--ink)}
+.t006-hl em{color:var(--brand-deep)}
+.t006-util{position:absolute;background:rgba(251,251,249,.97);border-radius:calc(var(--u)*20);box-shadow:0 calc(var(--u)*30) calc(var(--u)*80) rgba(4,30,30,.5),0 0 0 calc(var(--u)*3) var(--brand);overflow:hidden}
+.t006-util .tb{height:calc(var(--u)*50);display:flex;align-items:center;gap:calc(var(--u)*10);padding:0 calc(var(--u)*18);font:700 calc(var(--u)*20) var(--mono);letter-spacing:.06em;color:var(--brand-deep);background:#E7F7F5;white-space:nowrap}
+.t006-util .tb img{width:calc(var(--u)*28);height:calc(var(--u)*28)}
+.t006-util .tb em{margin-left:auto;font-style:normal;color:var(--muted);font-weight:600}
+.t006-lbl{position:absolute;font:600 calc(var(--u)*20) var(--sans);color:#fff;white-space:nowrap;text-shadow:0 calc(var(--u)*2) calc(var(--u)*6) rgba(0,0,0,.3)}
+.t006-log{padding:calc(var(--u)*18) calc(var(--u)*22);font:400 calc(var(--u)*23)/1.9 var(--mono);color:#C8D2DC;background:#0E1726;position:absolute;left:0;right:0;top:calc(var(--u)*50);bottom:0;white-space:nowrap}
+.t006-log b{color:#fff;font-weight:600} .t006-log .ok{color:#6ED3A0} .t006-log .hi{background:rgba(255,90,78,.25);color:#FFB3AD;padding:0 calc(var(--u)*6);border-radius:calc(var(--u)*4);box-shadow:0 0 0 calc(var(--u)*2) var(--alert)}
+.t006-at{font:800 calc(var(--u)*40)/1.1 var(--sans)} .t006-at b{color:var(--alert)}
+.t006-am{font:400 calc(var(--u)*23) var(--mono);color:var(--muted);margin-top:calc(var(--u)*6)}
+.t006-btn{height:calc(var(--u)*64);padding:0 calc(var(--u)*28);border-radius:calc(var(--u)*12);display:inline-flex;align-items:center;font:700 calc(var(--u)*27) var(--sans)}
+.t006-btn.pri{background:var(--alert);color:#fff}.t006-btn.sec{box-shadow:inset 0 0 0 calc(var(--u)*2) #D6D3C8}
+.t006-ptr{position:absolute;width:calc(var(--u)*48);height:calc(var(--u)*48);z-index:9}
+.t006-ring{position:absolute;border-radius:50%;border:calc(var(--u)*4) solid rgba(255,90,78,.8)}
+.t006-word{font:800 calc(var(--u)*96)/1 var(--sans);letter-spacing:-.035em;color:var(--ink);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 006 · Product UI as the stage</div>
+    <h1>OS Window Choreography</h1>
+    <p class="dek">A branded desktop where windows are the cast: dashboards, a deploy log, a chart. They pile up, spread out Exposé-style and genie into the dock, while the camera auto-zooms after the pointer. Acme Pulse is the small utility window that is always on top — and a coral thread ties the deploy to the drop across windows.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t006-f1">
+<div class="t006-s">
+ <div class="t006-w" style="--x:60;--y:60;--w:560;--h:360"><div class="t006-tb"><i></i><i></i><i></i><span>Checkout funnel</span></div><svg class="c" viewBox="0 0 560 310"><path d="M30 250 L130 230 L230 238 L330 210 L430 222 L530 200" fill="none" stroke="#0FA3A3" stroke-width="5"/></svg></div>
+ <div class="t006-w" style="--x:420;--y:110;--w:600;--h:340"><div class="t006-tb"><i></i><i></i><i></i><span>Signups · daily</span></div><svg class="c" viewBox="0 0 600 290"><g fill="#CFF1EE"><rect x="40" y="150" width="50" height="110"/><rect x="120" y="120" width="50" height="140"/><rect x="200" y="160" width="50" height="100"/><rect x="280" y="100" width="50" height="160"/><rect x="360" y="130" width="50" height="130"/><rect x="440" y="90" width="50" height="170"/></g></svg></div>
+ <div class="t006-w" style="--x:100;--y:300;--w:520;--h:320"><div class="t006-tb"><i></i><i></i><i></i><span>p95 latency</span></div><svg class="c" viewBox="0 0 520 270"><path d="M30 200 Q140 120 230 190 T490 170" fill="none" stroke="#5A6475" stroke-width="5"/></svg></div>
+ <div class="t006-w" style="--x:520;--y:360;--w:500;--h:300"><div class="t006-tb"><i></i><i></i><i></i><span>Error rate</span></div></div>
+ <div class="t006-w" style="--x:60;--y:470;--w:900;--h:420;box-shadow:0 calc(var(--u)*40) calc(var(--u)*90) rgba(4,30,30,.5),0 0 0 calc(var(--u)*1.5) rgba(14,23,38,.12)"><div class="t006-tb"><i></i><i></i><i></i><span>Tab 38 of 38 — untitled note</span></div><div class="t006-hl" style="padding:calc(var(--u)*50) calc(var(--u)*50)">How many dashboards did you check <em>today?</em></div></div>
+ <div class="t006-dock"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Windows cascade in from the top-left one per beat</b> (y −40→0, scale .96→1, power3.out 0.3 s), each landing on the kick; the fifth, front-most note window arrives on bar 2 with the question typed into it.</p></div>
+  <div class="cw"><div class="cell" id="t006-f2">
+<div class="t006-s">
+ <div class="t006-w" style="--x:60;--y:80;--w:290;--h:190;opacity:.7"><div class="t006-tb"><i></i><i></i><i></i></div></div><div class="t006-lbl" style="left:calc(var(--u)*60);top:calc(var(--u)*280)">Checkout funnel</div>
+ <div class="t006-w" style="--x:395;--y:80;--w:290;--h:190;opacity:.7"><div class="t006-tb"><i></i><i></i><i></i></div></div><div class="t006-lbl" style="left:calc(var(--u)*395);top:calc(var(--u)*280)">Signups</div>
+ <div class="t006-w" style="--x:730;--y:80;--w:290;--h:190;opacity:.7"><div class="t006-tb"><i></i><i></i><i></i></div></div><div class="t006-lbl" style="left:calc(var(--u)*730);top:calc(var(--u)*280)">p95 latency</div>
+ <div class="t006-w" style="--x:60;--y:680;--w:290;--h:190;opacity:.7"><div class="t006-tb"><i></i><i></i><i></i></div></div><div class="t006-lbl" style="left:calc(var(--u)*60);top:calc(var(--u)*880)">Error rate</div>
+ <div class="t006-w" style="--x:395;--y:680;--w:290;--h:190;opacity:.7"><div class="t006-tb"><i></i><i></i><i></i></div></div><div class="t006-lbl" style="left:calc(var(--u)*395);top:calc(var(--u)*880)">Deploy log</div>
+ <div class="t006-w" style="--x:730;--y:680;--w:290;--h:190;opacity:.7"><div class="t006-tb"><i></i><i></i><i></i></div></div><div class="t006-lbl" style="left:calc(var(--u)*730);top:calc(var(--u)*880)">+32 more</div>
+ <div class="t006-util" style="left:calc(var(--u)*110);top:calc(var(--u)*350);width:calc(var(--u)*860);height:calc(var(--u)*270)">
+  <div class="tb"><img src="../assets/brand/acme-mark.svg" alt="">UTILITY<em>ALWAYS ON TOP</em></div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*28);height:calc(var(--u)*220)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*120);height:calc(var(--u)*120)"><span class="t006-word">Acme Pulse</span></div>
+ </div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop every window FLIPs from the pile into an Exposé grid</b> (0.6 s expo.out, 0.04 s stagger, centre-out) and dims to 70 %; the teal-rimmed Pulse utility window drops into the gap from above and lands on the downbeat, the only window at full brightness.</p></div>
+  <div class="cw"><div class="cell" id="t006-f3">
+<div class="t006-s">
+ <div class="t006-w" style="--x:60;--y:60;--w:470;--h:420"><div class="t006-tb"><i></i><i></i><i></i><span>Deploy log</span></div>
+  <div class="t006-log">09:38 <b>#2230</b> <span class="ok">✓ live</span><br>09:41 <span class="hi">#2231</span> checkout-v3<br>09:41 <b>#2231</b> <span class="ok">✓ shipped</span><br>09:42 health <span class="ok">200 OK</span><br>09:44 …</div></div>
+ <div class="t006-w" style="--x:560;--y:100;--w:460;--h:380"><div class="t006-tb"><i></i><i></i><i></i><span>Checkout conversion</span></div><svg class="c" viewBox="0 0 460 330"><path d="M20 100 L90 96 L160 102 L230 98 L260 100" fill="none" stroke="#0FA3A3" stroke-width="5"/><path d="M260 100 L290 230 L350 236 L440 232" fill="none" stroke="#FF5A4E" stroke-width="5"/><path d="M260 30 V300" stroke="#FF5A4E" stroke-width="2" stroke-dasharray="6 6"/><text x="270" y="300" font-family="JetBrains Mono,monospace" font-size="20" fill="#FF5A4E">09:42</text></svg></div>
+ <svg class="t006-p" style="--x:0;--y:0;--w:1080;--h:1080;z-index:3" viewBox="0 0 1080 1080"><path d="M258 190 C 440 90, 700 150, 820 330" fill="none" stroke="#FF5A4E" stroke-width="5" stroke-linecap="round"/><circle cx="258" cy="190" r="8" fill="#FF5A4E"/><circle cx="820" cy="330" r="10" fill="#FF5A4E" stroke="#fff" stroke-width="4"/></svg>
+ <div class="t006-util" style="left:calc(var(--u)*110);top:calc(var(--u)*560);width:calc(var(--u)*860);z-index:4">
+  <div class="tb"><img src="../assets/brand/acme-mark.svg" alt="">ACME PULSE<em>09:44</em></div>
+  <div style="padding:calc(var(--u)*26) calc(var(--u)*30) calc(var(--u)*30)"><div class="t006-at">Checkout conversion <b>−18%</b></div><div class="t006-am">since 09:42 · after deploy #2231</div>
+  <div style="display:flex;gap:calc(var(--u)*14);margin-top:calc(var(--u)*22)"><span class="t006-btn pri">Roll back</span><span class="t006-btn sec">Acknowledge</span></div></div>
+ </div>
+ <div class="t006-ring" style="left:calc(var(--u)*171);top:calc(var(--u)*710);width:calc(var(--u)*110);height:calc(var(--u)*110);z-index:8"></div>
+ <svg class="t006-ptr" style="left:calc(var(--u)*218);top:calc(var(--u)*756)" viewBox="0 0 48 48"><path d="M8 4 L8 38 L17 30 L23 44 L30 41 L24 27 L37 27 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera auto-zooms 1.8× onto the deploy log</b> as #2231 highlights, then a coral thread draws left→right across windows to the drop (stroke-dashoffset 0.5 s, one beat); the Pulse utility window slides up from the bottom on the snare and the pointer's click ring pops on <b>Roll back</b> on the downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t006-f4">
+<div class="t006-s">
+ <svg class="t006-p" style="--x:0;--y:0;--w:1080;--h:1080" viewBox="0 0 1080 1080"><path d="M80 120 L400 120 C 420 500, 480 700, 470 940 L430 940 C 340 700, 160 500, 80 120 Z" fill="#FBFBF9" opacity=".28"/><path d="M700 110 L1000 110 C 950 500, 640 700, 620 940 L580 940 C 610 700, 720 500, 700 110 Z" fill="#FBFBF9" opacity=".22"/></svg>
+ <div class="t006-w" style="--x:110;--y:170;--w:860;--h:640">
+  <div class="t006-tb"><i></i><i></i><i></i><span>Acme Pulse</span></div>
+  <div style="padding:calc(var(--u)*60) calc(var(--u)*60);display:flex;flex-direction:column;gap:calc(var(--u)*36)">
+   <div style="display:flex;align-items:center;gap:calc(var(--u)*24)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*100);height:calc(var(--u)*100)"><span class="t006-word" style="font-size:calc(var(--u)*88)">Acme Pulse</span></div>
+   <div class="t006-hl" style="font-size:calc(var(--u)*86)">You ship. <em>Pulse watches.</em></div>
+   <div style="display:flex;align-items:center;gap:calc(var(--u)*22)"><span class="t006-btn pri" style="height:calc(var(--u)*92);font-size:calc(var(--u)*36);padding:0 calc(var(--u)*46);border-radius:calc(var(--u)*16)">Start free</span><span style="font:400 calc(var(--u)*22) var(--mono);color:var(--muted)">acme.example/pulse</span></div>
+  </div>
+ </div>
+ <div class="t006-dock"><b></b><b></b><b></b><span class="on"><img src="../assets/brand/acme-mark.svg" alt=""></span><b></b><b></b></div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The dashboard windows genie into the dock</b> — each sliced into 12 strips that scaleX/skew toward it with a delay gradient (0.5 s, one per beat) — leaving one window; the Pulse icon lands in the dock with a bounce on the last downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Branded window chrome</b> — warm title bars with a coral close dot; each window is an actor.</li><li><b>Pulse utility window</b> — small, teal-rimmed, always on top: the agent.</li><li><b>Exposé spread</b> — the overview beat: “you have 38 of these”.</li><li><b>Cross-window thread</b> — coral bezier tying deploy #2231 to the drop.</li><li><b>Pointer + click ring</b> — the human's decision, with auto-zoom following it.</li><li><b>Genie minimize + dock</b> — closing the noise; Pulse is the one icon left running.</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Exposé spread</b> — FLIP from stacked to grid, 0.6 s expo.out, 0.04 s stagger from the centre out, landing on the drop.</li><li><b>Auto-zoom follow</b> — camera scales to 1.8× on each click and eases back, 0.7 s power2.inOut with light motion blur; clicks are on beats, zoom-outs on the “and”.</li><li><b>Genie</b> — each window sliced into 12 strips, scaleX + skew toward the dock with a 0.02 s delay gradient; one window per beat.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> “too many windows” is the pain everyone recognises, and a single always-on-top utility is an instant picture of a quiet background agent. The cross-window thread shows the agent connecting sources a human would have to alt-tab between. <b>Risk:</b> copying a real OS too literally feels generic — keep the chrome branded and the wallpaper in your palette.</p><p><b>Adapt to your product:</b> the windows become the tools your customers juggle today; your product is the one utility window that stays on top and the only icon left in the dock.</p><p><b>References:</b> <a href="https://screen.studio/">Screen Studio — auto-zoom screen recordings</a> · <a href="https://support.apple.com/guide/mac-help/use-mission-control-mh35798/mac">Apple — Mission Control</a></p></div>
+</div>
+</body>
+</html>

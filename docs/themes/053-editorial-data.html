@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>053 · Editorial Data — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t053 ===== */
+
+.t053-f{position:absolute;inset:0;overflow:hidden;color:var(--ink);font-family:var(--sans);background:#F7F6F2}
+.t053-grid{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:0;bottom:0;background-image:linear-gradient(90deg,rgba(14,23,38,.07) calc(var(--u)*1.5),transparent calc(var(--u)*1.5));background-size:calc(var(--u)*80) 100%;border-right:calc(var(--u)*1.5) solid rgba(14,23,38,.07)}
+.t053-mast{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*60);display:flex;justify-content:space-between;align-items:center;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.14em;padding-bottom:calc(var(--u)*16);border-bottom:calc(var(--u)*3) solid var(--ink)}
+.t053-mast span{display:flex;align-items:center;gap:calc(var(--u)*12)}
+.t053-mast img{width:calc(var(--u)*34);height:calc(var(--u)*34)}
+.t053-lab{position:absolute;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.t053-num{position:absolute;font:600 calc(var(--u)*300)/0.9 var(--mono);letter-spacing:-.06em}
+.t053-h{position:absolute;font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+.t053-rule{position:absolute;height:calc(var(--u)*3);background:var(--ink)}
+.t053-strip{position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*150);width:calc(var(--u)*320);bottom:calc(var(--u)*330);border-left:calc(var(--u)*3) dashed rgba(14,23,38,.25);border-right:calc(var(--u)*3) dashed rgba(14,23,38,.25);background:#fff;padding:calc(var(--u)*18) 0;overflow:hidden}
+.t053-strip div{font:400 calc(var(--u)*26) var(--mono);padding:calc(var(--u)*16) calc(var(--u)*26);border-bottom:calc(var(--u)*1.5) solid #ECEAE3;white-space:nowrap}
+.t053-strip .on{background:var(--alert);color:#fff;font-weight:600}
+.t053-col{position:absolute;font:500 calc(var(--u)*32)/1.3 var(--sans);color:#33415C}
+.t053-col b{display:block;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.14em;color:var(--brand-deep);margin-bottom:calc(var(--u)*8)}
+.t053-pill{position:absolute;font:700 calc(var(--u)*30) var(--sans);border-radius:calc(var(--u)*100);padding:calc(var(--u)*18) calc(var(--u)*40);white-space:nowrap}
+.t053-stat{position:absolute;font:600 calc(var(--u)*44) var(--mono);letter-spacing:-.02em}
+.t053-stat small{display:block;font:600 calc(var(--u)*18) var(--mono);letter-spacing:.14em;color:var(--muted);margin-top:calc(var(--u)*6)}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 053 · Signature directions</div>
+    <h1>Editorial Data</h1>
+    <p class="dek">A Swiss-style annual report come alive: warm paper, a visible 12-column hairline grid, giant monospaced numerals as the heroes, serif headlines and small-caps mono labels. Each frame is allowed exactly one accent colour, so the anomaly reads like a number circled in a financial newspaper.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t053-f1"><div class="t053-f"><div class="t053-grid"></div><div class="t053-mast"><span><img src="../assets/brand/acme-mark.svg" alt="Acme">ACME · PULSE REPORT</span><span>Nº 01 · THE QUESTION</span></div>
+<div class="t053-strip"><div>Open tab</div><div>Refresh</div><div>Compare</div><div>Export CSV</div><div class="on">Check again ▸</div><div>Open tab</div><div>Refresh</div><div>Compare</div></div>
+<div class="t053-num" style="left:calc(var(--u)*440);top:calc(var(--u)*170);color:var(--alert)">×38</div>
+<div class="t053-rule" style="left:calc(var(--u)*460);top:calc(var(--u)*470);width:calc(var(--u)*60);background:var(--alert)"></div>
+<div class="t053-lab" style="left:calc(var(--u)*460);top:calc(var(--u)*496)">Dashboards opened · today</div>
+<div class="t053-lab" style="left:calc(var(--u)*460);top:calc(var(--u)*536);color:var(--ink)">Anomalies caught · 0</div>
+<div class="t053-rule" style="left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*780);height:calc(var(--u)*1.5)"></div>
+<div class="t053-h" style="left:calc(var(--u)*60);top:calc(var(--u)*800);width:calc(var(--u)*960);font-size:calc(var(--u)*88)">How many dashboards did you <i style="color:var(--alert)">check</i> today?</div>
+</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Grid hairlines draw left→right first</b>, then the task strip scrolls upward one row per beat while the counter ticks ×1 → ×38; the headline masks up from the bottom rule and the coral “check” lands on the last downbeat of bar 4.</p></div>
+  <div class="cw"><div class="cell" id="t053-f2"><div class="t053-f"><div class="t053-grid"></div><div class="t053-mast"><span><img src="../assets/brand/acme-mark.svg" alt="Acme">ACME · PULSE REPORT</span><span>Nº 02 · INTRODUCING</span></div>
+<div class="t053-rule" style="left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*190);height:calc(var(--u)*1.5)"></div>
+<div class="t053-lab" style="left:calc(var(--u)*60);top:calc(var(--u)*212)">An AI agent for product metrics</div>
+<div class="t053-h" style="left:calc(var(--u)*52);top:calc(var(--u)*250);font-size:calc(var(--u)*250);line-height:.9">Acme</div>
+<div class="t053-h" style="left:calc(var(--u)*300);top:calc(var(--u)*465);font-size:calc(var(--u)*250);line-height:.9;color:var(--brand)"><i>Pulse</i></div>
+<div class="t053-rule" style="left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*720)"></div>
+<div class="t053-rule" style="left:calc(var(--u)*540);top:calc(var(--u)*740);width:calc(var(--u)*1.5);height:calc(var(--u)*220)"></div>
+<div class="t053-col" style="left:calc(var(--u)*60);top:calc(var(--u)*750);width:calc(var(--u)*440)"><b>SPEED</b>Watches every metric, every minute, in the background.</div>
+<div class="t053-col" style="left:calc(var(--u)*580);top:calc(var(--u)*750);width:calc(var(--u)*440)"><b>CONTROL</b>Flags the anomaly. Your team makes the call.</div>
+</div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the horizontal rules sweep left→right</b> and “Acme” rises as one block through a mask; one beat later “Pulse” opens from the right in teal italic, then the two columns set in one line per beat.</p></div>
+  <div class="cw"><div class="cell" id="t053-f3"><div class="t053-f"><div class="t053-grid"></div><div class="t053-mast"><span><img src="../assets/brand/acme-mark.svg" alt="Acme">ACME · PULSE REPORT</span><span>Nº 03 · CHECKOUT</span></div>
+<div class="t053-h" style="left:calc(var(--u)*60);top:calc(var(--u)*120);width:calc(var(--u)*960);font-size:calc(var(--u)*66)">Caught <i style="color:var(--alert)">before</i> customers noticed.</div>
+<div class="t053-num" style="left:calc(var(--u)*48);top:calc(var(--u)*250);font-size:calc(var(--u)*230);color:var(--alert)">−18%</div>
+<div class="t053-lab" style="left:calc(var(--u)*60);top:calc(var(--u)*470);color:var(--ink)">Checkout conversion · since 09:42</div>
+<svg viewBox="0 0 960 300" style="position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*520);width:calc(var(--u)*960);height:calc(var(--u)*300);overflow:visible">
+<g stroke="rgba(14,23,38,.12)" stroke-width="1.5"><line x1="0" y1="60" x2="960" y2="60"/><line x1="0" y1="140" x2="960" y2="140"/><line x1="0" y1="220" x2="960" y2="220"/></g>
+<line x1="420" y1="10" x2="420" y2="290" stroke="#0E1726" stroke-width="2" stroke-dasharray="6 6"/>
+<polyline points="0,120 60,118 120,124 180,116 240,122 300,119 360,121 400,122 430,190 470,205 520,210 580,208 640,212 700,209" fill="none" stroke="#0E1726" stroke-width="5" stroke-linejoin="round"/>
+<circle cx="700" cy="209" r="10" fill="#FF5A4E"/>
+<path d="M700 209 C 760 180, 800 130, 820 90" fill="none" stroke="#FF5A4E" stroke-width="3"/>
+<text x="436" y="36" font-family="JetBrains Mono" font-size="22" fill="#0E1726">deploy #2231 · 09:42</text>
+<text x="728" y="72" font-family="JetBrains Mono" font-size="22" fill="#FF5A4E">Pulse flag</text>
+<text x="0" y="290" font-family="JetBrains Mono" font-size="20" fill="#5A6475">08:00</text><text x="880" y="290" font-family="JetBrains Mono" font-size="20" fill="#5A6475">now</text>
+</svg>
+<div class="t053-rule" style="left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*860);height:calc(var(--u)*1.5)"></div>
+<div class="t053-lab" style="left:calc(var(--u)*60);top:calc(var(--u)*900);color:var(--ink)">Decision ▸</div>
+<div class="t053-pill" style="left:calc(var(--u)*250);top:calc(var(--u)*878);background:var(--alert);color:#fff">Roll back</div>
+<div class="t053-pill" style="left:calc(var(--u)*490);top:calc(var(--u)*878);border:calc(var(--u)*2) solid var(--ink)">Acknowledge</div>
+</div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The chart line draws left→right on the beat</b>, the dashed deploy rule drops at 09:42, and on the bar-9 downbeat the giant “−18%” slams in coral; the leader line and “Roll back” pill set on the next two beats.</p></div>
+  <div class="cw"><div class="cell" id="t053-f4"><div class="t053-f"><div class="t053-grid"></div>
+<div class="t053-rule" style="left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*150)"></div><div class="t053-rule" style="left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*162);height:calc(var(--u)*1.5)"></div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*230);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*26);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*120);height:calc(var(--u)*120)"><span style="font:800 calc(var(--u)*96) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+<div class="t053-h" style="left:0;right:0;top:calc(var(--u)*420);text-align:center;font-size:calc(var(--u)*92)">Every metric. <i style="color:var(--brand-deep)">Every minute.</i></div>
+<div class="t053-stat" style="left:calc(var(--u)*100);top:calc(var(--u)*600)">14<small>METRICS WATCHED</small></div>
+<div class="t053-stat" style="left:calc(var(--u)*400);top:calc(var(--u)*600)">2,418<small>EVENTS / SEC</small></div>
+<div class="t053-stat" style="left:calc(var(--u)*760);top:calc(var(--u)*600)">6 min<small>TO RESOLVE</small></div>
+<div class="t053-rule" style="left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*760);height:calc(var(--u)*1.5)"></div>
+<div class="t053-pill" style="left:50%;transform:translateX(-50%);top:calc(var(--u)*810);background:var(--alert);color:#fff;font-size:calc(var(--u)*36);padding:calc(var(--u)*22) calc(var(--u)*60)">Start free</div>
+</div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Double rule opens from the centre outward</b>, the lockup rises, the three stats count up together over one bar, and the coral pill drops from above on the sting.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Hairline grid</b> — 12 columns of 80 px, 1.5 px lines at 7 % ink — always visible, never decorative</li><li><b>Masthead</b> — mark + “ACME · PULSE REPORT” + issue number on a 3 px rule; the film reads as a publication</li><li><b>Hero numeral</b> — JetBrains Mono 230–300 px, tight tracking; the number is the headline</li><li><b>Task strip</b> — perforated vertical tape of chores scrolling in a loop; the active row takes the accent</li><li><b>Annotated chart</b> — single ink line, dashed event rule, coral point with a leader line and margin note</li><li><b>Colophon close</b> — double rule, centred lockup, three mono stats, one coral pill</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Mask rise</b> — headline blocks rise 100 % through a rule-aligned mask, power4.out 0.5 s, landing on the downbeat</li><li><b>Counter tick</b> — numerals step once per beat (0.5 s at 120 BPM) with steps(1) — no tweening, like a split-second ledger</li><li><b>Line draw + pin</b> — chart stroke-dashoffset 100 → 0 over one bar (2 s, linear); the anomaly numeral scales 1.08 → 1 in 0.2 s on the next downbeat</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Numbers are the product here, and editorial typography makes them feel audited and serious — ideal for buyers who distrust flashy AI promises. Risk: it can feel cold and static; keep strict beat-locked reveals so the page “prints” in rhythm, and never add a second accent colour to a frame.</p><p><b>Adapt to your product:</b> Choose the one number your product changes (time saved, errors caught, cost avoided) and make it the hero numeral; the chart simply shows the before/after around the moment your product intervenes.</p><p><b>References:</b> <a href="https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary">https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary</a> (FT Visual Vocabulary: newsroom chart grammar) · <a href="https://www.printmag.com/featured/swiss-style-principles-typefaces-designers/">https://www.printmag.com/featured/swiss-style-principles-typefaces-designers/</a> (Swiss Style grid and typographic principles) · <a href="https://posterhouse.org/exhibition/the-swiss-grid/">https://posterhouse.org/exhibition/the-swiss-grid/</a> (The Swiss Grid exhibition)</p></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+ "id": "094",
+ "slug": "match-cut",
+ "name": "Match Cut",
+ "category": "camera",
+ "summary": "Every beat hands off through one coral circle in the same place: clock face → Acme mark → anomaly point → the tagline’s full stop.",
+ "look": "Clean paper frames with bold graphic shapes, dashed onion-skin ghosts of the previous shot, coral registration marks and a dark A ▸ B filmstrip band that names each match.",
+ "components": [
+  {
+   "name": "Rhyme shape",
+   "role": "one coral circle that survives every cut (clock face → mark dot → data point → full stop)"
+  },
+  {
+   "name": "Onion-skin ghost",
+   "role": "dashed outline of the previous shot so the still shows what it matched from"
+  },
+  {
+   "name": "Registration marks",
+   "role": "coral crosshair ticks locking the shared centre and diameter"
+  },
+  {
+   "name": "A ▸ B cut strip",
+   "role": "dark filmstrip band with the two thumbnails and a one-line “match on …” caption"
+  },
+  {
+   "name": "Anomaly card",
+   "role": "white card carrying the −18% line and the Roll back / Acknowledge choice"
+  },
+  {
+   "name": "Dotted headline",
+   "role": "tagline whose full stop is the coral dot, so the last rhyme is the CTA"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Hard graphic cut",
+   "how": "0-frame cut, placed exactly on a downbeat (the drop at 0:08 and bar lines after it); shape centre and size identical on both sides of the cut"
+  },
+  {
+   "name": "Push-in to the rhyme",
+   "how": "scale 1 → 1.35 over 1 bar (2 s at 120 BPM) with power2.in into the shape, so the cut happens at peak motion"
+  },
+  {
+   "name": "Settle after the cut",
+   "how": "the incoming shot eases out from 1.08 → 1 in 0.5 s (expo.out) while secondary text staggers in at 0.25 s, one item per eighth note"
+  }
+ ],
+ "story": "Hook: a clock hits Friday 17:58, “And the drop still shipped on Friday.” Reveal: hard cut on the drop to the Acme mark in the same circle. Proof: push into the mark’s coral dot, cut to the checkout conversion chart where that dot is the 09:42 anomaly; the card offers Roll back. CTA: the dot becomes the full stop of “Caught before customers noticed.” with Start free.",
+ "adapt": "Find one shape your product already owns (an avatar circle, a status dot, a card corner, a cursor) and plan every scene so that shape sits at the same place in the frame at each cut. Build the shots around the rhyme, not the other way round.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Match_cut",
+   "note": "match cut definition; 2001 bone-to-satellite and North by Northwest examples",
+   "verified": true
+  },
+  {
+   "url": "https://www.studiobinder.com/blog/1917-one-shot-cinematography/",
+   "note": "hidden match cuts used to stitch long takes",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "low",
+  "risk": "Every rhyme has to match exactly in position and size or the cut looks like a mistake; too many rhymes turn into a gimmick, so keep it to three or four cuts."
+ },
+ "best_for": [
+  "any SaaS",
+  "brand films",
+  "social cut-downs",
+  "low-budget launches"
+ ],
+ "file": "themes/094-match-cut.html"
+}

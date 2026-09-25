@@ -1,0 +1,74 @@
+{
+ "id": "023",
+ "slug": "origami",
+ "name": "Origami",
+ "category": "material",
+ "summary": "One sheet of paper folds through the whole story; the anomaly is printed in coral on the inside of a peek fold.",
+ "look": "White paper with crisp creases and faceted shading on a pale sage ground, printed in teal ink. Coral appears only on inner faces of folds.",
+ "components": [
+  {
+   "name": "Fold panel",
+   "role": "a plane that rotates on its hinge edge with backface hidden; the unit of every transition"
+  },
+  {
+   "name": "Crease line",
+   "role": "dashed hairline that appears 4 frames before a fold — the visual count-in"
+  },
+  {
+   "name": "Facet shade",
+   "role": "panel fill darkens with its fold angle, giving depth without 3D"
+  },
+  {
+   "name": "Inner face",
+   "role": "the coral back side of a fold; the only place the anomaly colour appears"
+  },
+  {
+   "name": "Blintz flaps",
+   "role": "four triangles that open around the centre square for the logo reveal"
+  },
+  {
+   "name": "Dog-ear button",
+   "role": "paper tag with a folded corner used for “Roll back” and “Start free”"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Accordion unfold",
+   "how": "each panel rotates 180→0°, power3.inOut 0.45 s, staggered by 0.25 s (an eighth note at 120 BPM)"
+  },
+  {
+   "name": "Crease pre-flash",
+   "how": "4-frame dashed line + 2° pre-bend before every fold, so the eye knows where the paper will break before the beat"
+  },
+  {
+   "name": "Peek fold",
+   "how": "rotateY 0 → 30°, expo.out 0.3 s, hold 1 s (2 beats), then complete to 180° on the next downbeat"
+  }
+ ],
+ "story": "Hook: a fanfold of printed dashboards unfurls under “How many dashboards did you check today?”. Reveal: four blintz flaps spring open on the drop around the Acme mark and “Acme Pulse”. Proof: a tri-fold of calm metrics peeks open 30° to show the coral inner face “Checkout conversion −18% · since 09:42 · after deploy #2231”; the human picks the “Roll back” tag. CTA: the sheet refolds into an envelope sealed with the mark — “Every metric. Every minute.” — and “Start free”.",
+ "adapt": "Print your product's key screen onto the sheet and pick the one thing it surfaces as the inner face; any list-type UI (orders, tickets, builds) folds naturally into a tri-fold or accordion.",
+ "references": [
+  {
+   "url": "https://tympanus.net/codrops/2012/10/17/pfold-paper-like-unfolding-effect/",
+   "note": "paper-like unfolding in CSS",
+   "verified": true
+  },
+  {
+   "url": "https://github.com/joumorisu/CSS-Origami",
+   "note": "CSS origami experiments",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Diagonal CSS-3D folds are fiddly; plan every hinge edge and keep copy on camera-facing panels."
+ },
+ "best_for": [
+  "reporting tools",
+  "fintech-adjacent B2B",
+  "premium minimal brands"
+ ],
+ "file": "themes/023-origami.html"
+}

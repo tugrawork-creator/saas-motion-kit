@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>099 · Overhead Desk — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t099- (theme 099) ===== */
+.t099-desk{position:absolute;inset:0;background:
+ repeating-linear-gradient(88deg,rgba(120,80,40,.07) 0 calc(var(--u)*3),transparent calc(var(--u)*3) calc(var(--u)*22),rgba(120,80,40,.05) calc(var(--u)*22) calc(var(--u)*25),transparent calc(var(--u)*25) calc(var(--u)*61)),
+ linear-gradient(160deg,#E4CFAE,#D6BC96 60%,#CDB08A)}
+.t099-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.t099-rig{position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*60);font:600 calc(var(--u)*20) var(--mono);letter-spacing:.1em;color:#fff;background:rgba(14,23,38,.82);padding:calc(var(--u)*6) calc(var(--u)*12);border-radius:calc(var(--u)*6);z-index:3}
+.t099-guide{position:absolute;inset:calc(var(--u)*60);pointer-events:none;z-index:3}
+.t099-guide s{position:absolute;width:calc(var(--u)*44);height:calc(var(--u)*44);border:calc(var(--u)*3) solid rgba(14,23,38,.6)}
+.t099-guide s:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}.t099-guide s:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+.t099-guide s:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}.t099-guide s:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
+.t099-paper{position:absolute;background:#FBFAF6;box-shadow:calc(var(--u)*6) calc(var(--u)*12) calc(var(--u)*18) rgba(59,42,24,.28);padding:calc(var(--u)*18);display:flex;flex-direction:column;gap:calc(var(--u)*10)}
+.t099-paper b{font:600 calc(var(--u)*20) var(--mono);color:var(--muted);letter-spacing:.06em}
+.t099-pc{flex:1}
+.t099-sticky{position:absolute;width:calc(var(--u)*190);height:calc(var(--u)*170);padding:calc(var(--u)*18);font:400 italic calc(var(--u)*34)/1.05 var(--serif);color:#3A2E1A;box-shadow:calc(var(--u)*4) calc(var(--u)*10) calc(var(--u)*14) rgba(59,42,24,.25)}
+.t099-cup{position:absolute;border-radius:50%;background:radial-gradient(circle,#4A2F1C 0 54%,#F3EFE8 55% 66%,#E4DED4 67% 70%,transparent 71%);filter:drop-shadow(calc(var(--u)*8) calc(var(--u)*14) calc(var(--u)*10) rgba(59,42,24,.35))}
+.t099-cup i{position:absolute;right:calc(var(--u)*-26);top:40%;width:calc(var(--u)*44);height:calc(var(--u)*30);border:calc(var(--u)*9) solid #F3EFE8;border-left:0;border-radius:0 calc(var(--u)*20) calc(var(--u)*20) 0}
+.t099-card{position:absolute;background:#fff;box-shadow:calc(var(--u)*8) calc(var(--u)*16) calc(var(--u)*24) rgba(59,42,24,.3);border-radius:calc(var(--u)*6)}
+.t099-h{font:400 calc(var(--u)*72)/1.02 var(--serif);color:var(--ink);letter-spacing:-.01em}
+.t099-h em{color:var(--brand-deep)}
+.t099-ann{position:absolute;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.06em;color:#fff;background:var(--alert);padding:calc(var(--u)*5) calc(var(--u)*10);border-radius:calc(var(--u)*5);z-index:3}
+.t099-coaster{position:absolute;left:calc(var(--u)*390);top:calc(var(--u)*250);width:calc(var(--u)*300);height:calc(var(--u)*300);border-radius:calc(var(--u)*66);filter:drop-shadow(calc(var(--u)*10) calc(var(--u)*18) calc(var(--u)*14) rgba(59,42,24,.4))}
+.t099-word{position:absolute;left:calc(var(--u)*280);top:calc(var(--u)*610);width:calc(var(--u)*520);padding:calc(var(--u)*26) 0;text-align:center;font:800 calc(var(--u)*88)/1 var(--sans);letter-spacing:-.035em;color:var(--ink);background:#FBFAF6;box-shadow:calc(var(--u)*8) calc(var(--u)*16) calc(var(--u)*24) rgba(59,42,24,.3)}
+.t099-phone{position:absolute;left:calc(var(--u)*330);top:calc(var(--u)*150);width:calc(var(--u)*420);height:calc(var(--u)*790);border-radius:calc(var(--u)*60);background:#10151F;padding:calc(var(--u)*18);box-shadow:calc(var(--u)*16) calc(var(--u)*26) calc(var(--u)*30) rgba(59,42,24,.45)}
+.t099-scr{width:100%;height:100%;border-radius:calc(var(--u)*44);background:linear-gradient(#EAF7F6,#F6F5F1 40%);padding:calc(var(--u)*40) calc(var(--u)*22);display:flex;flex-direction:column;gap:calc(var(--u)*16)}
+.t099-st{display:flex;justify-content:space-between;font:600 calc(var(--u)*20) var(--mono);color:var(--ink);padding:0 calc(var(--u)*10)}
+.t099-note{background:#fff;border-radius:calc(var(--u)*26);padding:calc(var(--u)*22);box-shadow:0 calc(var(--u)*8) calc(var(--u)*20) rgba(14,23,38,.12)}
+.t099-nh{display:flex;align-items:center;gap:calc(var(--u)*10);font:700 calc(var(--u)*20) var(--sans);color:var(--muted)}
+.t099-nh img{width:calc(var(--u)*36);height:calc(var(--u)*36);border-radius:calc(var(--u)*9)}
+.t099-nt{font:700 calc(var(--u)*28)/1.15 var(--sans);color:var(--ink);margin-top:calc(var(--u)*12)}
+.t099-nb{font:400 calc(var(--u)*80)/1 var(--serif);color:var(--alert);margin:calc(var(--u)*6) 0}
+.t099-ns{font:500 calc(var(--u)*20)/1.35 var(--mono);color:var(--muted)}
+.t099-nbtn{display:flex;flex-direction:column;gap:calc(var(--u)*10);margin-top:calc(var(--u)*18)}
+.t099-nbtn span{font:700 calc(var(--u)*26) var(--sans);text-align:center;padding:calc(var(--u)*16);border-radius:calc(var(--u)*16);background:var(--alert);color:#fff}
+.t099-nbtn span.g{background:#EEF0F2;color:var(--ink)}
+.t099-mini{background:#fff;border-radius:calc(var(--u)*18);padding:calc(var(--u)*14) calc(var(--u)*18);font:600 calc(var(--u)*20) var(--mono);color:var(--muted);display:flex;justify-content:space-between}
+.t099-mini b{color:var(--ok)}
+.t099-lap{position:absolute;left:calc(var(--u)*150);top:calc(var(--u)*170);width:calc(var(--u)*780);border-radius:calc(var(--u)*26);background:#C9CDD3;padding:calc(var(--u)*18);box-shadow:calc(var(--u)*14) calc(var(--u)*24) calc(var(--u)*30) rgba(59,42,24,.4)}
+.t099-lscr{background:var(--ink);border-radius:calc(var(--u)*12);height:calc(var(--u)*470);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--u)*24);padding:0 calc(var(--u)*30)}
+.t099-kb{height:calc(var(--u)*230);margin-top:calc(var(--u)*16);border-radius:calc(var(--u)*10);background:repeating-linear-gradient(90deg,#B4B9C1 0 calc(var(--u)*4),transparent calc(var(--u)*4) calc(var(--u)*52)),repeating-linear-gradient(0deg,#B4B9C1 0 calc(var(--u)*4),transparent calc(var(--u)*4) calc(var(--u)*46)),#D3D7DC;position:relative}
+.t099-kb::after{content:"";position:absolute;left:35%;right:35%;bottom:calc(var(--u)*-8);height:calc(var(--u)*60);background:#D3D7DC;border-radius:calc(var(--u)*8)}
+.t099-ll{display:flex;align-items:center;gap:calc(var(--u)*16);font:800 calc(var(--u)*50)/1 var(--sans);color:#fff;letter-spacing:-.03em}
+.t099-ll img{width:calc(var(--u)*70);height:calc(var(--u)*70);border-radius:calc(var(--u)*16)}
+.t099-lt{font:400 calc(var(--u)*72)/1 var(--serif);color:#fff;text-align:center;letter-spacing:-.01em}
+.t099-lt em{color:#7FE0DA}
+.t099-lb{font:700 calc(var(--u)*30) var(--sans);background:var(--alert);color:#fff;padding:calc(var(--u)*16) calc(var(--u)*40);border-radius:calc(var(--u)*14)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 099 · Camera &amp; edit grammar</div>
+    <h1>Overhead Desk</h1>
+    <p class="dek">A 90° top-down “hands on the desk” film, the grammar of unboxing and tutorial videos. The hook is a desk buried in printed dashboards and sticky notes, a hand sweeps it clear and sets down the Acme mark on the drop, the anomaly arrives as a phone notification a real finger taps, and the lockup ends up on a tidy laptop.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t099-f1">
+<svg width="0" height="0" style="position:absolute"><defs><filter id="t099-sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="14" dy="22" stdDeviation="14" flood-color="#3B2A18" flood-opacity=".35"/></filter></defs></svg><div class="t099-desk"></div>
+<div class="t099-paper" style="left:calc(var(--u)*80);top:calc(var(--u)*400);width:calc(var(--u)*300);height:calc(var(--u)*230);transform:rotate(-8deg)"><b>SIGNUPS</b><div class="t099-pc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,19.3 10.0,20.2 20.0,26.3 30.0,25.8 40.0,25.9 50.0,27.2 60.0,22.6 70.0,22.8 80.0,24.7 90.0,28.9 100.0,23.0" fill="none" stroke="#5A6475" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div></div><div class="t099-paper" style="left:calc(var(--u)*650);top:calc(var(--u)*380);width:calc(var(--u)*320);height:calc(var(--u)*240);transform:rotate(6deg)"><b>ACTIVE USERS</b><div class="t099-pc"><svg viewBox="0 0 70 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><rect x="1" y="17.8" width="7" height="22.2" rx="1.5" fill="#9AA6B8"/><rect x="11" y="12.3" width="7" height="27.7" rx="1.5" fill="#9AA6B8"/><rect x="21" y="12.0" width="7" height="28.0" rx="1.5" fill="#9AA6B8"/><rect x="31" y="27.7" width="7" height="12.3" rx="1.5" fill="#9AA6B8"/><rect x="41" y="31.7" width="7" height="8.3" rx="1.5" fill="#9AA6B8"/><rect x="51" y="20.8" width="7" height="19.2" rx="1.5" fill="#9AA6B8"/><rect x="61" y="23.8" width="7" height="16.2" rx="1.5" fill="#9AA6B8"/></svg></div></div><div class="t099-paper" style="left:calc(var(--u)*360);top:calc(var(--u)*560);width:calc(var(--u)*330);height:calc(var(--u)*250);transform:rotate(3deg)"><b>P95 LATENCY</b><div class="t099-pc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,16.5 10.0,19.2 20.0,21.8 30.0,26.9 40.0,22.4 50.0,18.5 60.0,13.4 70.0,9.4 80.0,12.8 90.0,7.5 100.0,7.9" fill="none" stroke="#5A6475" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div></div>
+<div class="t099-paper" style="left:calc(var(--u)*120);top:calc(var(--u)*700);width:calc(var(--u)*280);height:calc(var(--u)*220);transform:rotate(12deg)"><b>ERROR RATE</b><div class="t099-pc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,26.7 10.0,19.7 20.0,23.1 30.0,18.1 40.0,25.1 50.0,18.2 60.0,23.7 70.0,26.3 80.0,31.4 90.0,36.0 100.0,32.3" fill="none" stroke="#5A6475" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div></div><div class="t099-paper" style="left:calc(var(--u)*700);top:calc(var(--u)*640);width:calc(var(--u)*290);height:calc(var(--u)*230);transform:rotate(-5deg)"><b>EVENTS/SEC</b><div class="t099-pc"><svg viewBox="0 0 70 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><rect x="1" y="28.8" width="7" height="11.2" rx="1.5" fill="#9AA6B8"/><rect x="11" y="10.9" width="7" height="29.1" rx="1.5" fill="#9AA6B8"/><rect x="21" y="12.4" width="7" height="27.6" rx="1.5" fill="#9AA6B8"/><rect x="31" y="3.8" width="7" height="36.2" rx="1.5" fill="#9AA6B8"/><rect x="41" y="23.9" width="7" height="16.1" rx="1.5" fill="#9AA6B8"/><rect x="51" y="24.3" width="7" height="15.7" rx="1.5" fill="#9AA6B8"/><rect x="61" y="10.0" width="7" height="30.0" rx="1.5" fill="#9AA6B8"/></svg></div></div>
+<div class="t099-sticky" style="left:calc(var(--u)*420);top:calc(var(--u)*420);transform:rotate(-6deg);background:#F4D56A">check signups?</div><div class="t099-sticky" style="left:calc(var(--u)*820);top:calc(var(--u)*600);transform:rotate(8deg);background:#FFB3A6">why Friday??</div><div class="t099-cup" style="left:calc(var(--u)*840);top:calc(var(--u)*190);width:calc(var(--u)*153.0);height:calc(var(--u)*153.0)"><i></i></div>
+<div class="t099-card" style="left:calc(var(--u)*90);top:calc(var(--u)*130);width:calc(var(--u)*700);padding:calc(var(--u)*30) calc(var(--u)*34);transform:rotate(-2deg)"><div class="t099-h">How many dashboards did you check <em>today?</em></div></div>
+<svg class="t099-svg" viewBox="0 0 1080 1080"><g transform="translate(560,560) rotate(-30)" filter="url(#t099-sh)">
+<rect x="-60" y="330" width="220" height="520" rx="30" fill="#0B6E6E"/>
+<rect x="-60" y="330" width="220" height="40" rx="10" fill="#0E1726" opacity=".25"/>
+<rect x="-44" y="140" width="184" height="220" rx="70" fill="#E3B08C"/>
+<rect x="-22" y="0" width="46" height="210" rx="23" fill="#E9BB98"/>
+<rect x="30" y="150" width="40" height="80" rx="20" fill="#D9A07A"/><rect x="70" y="162" width="38" height="76" rx="19" fill="#D9A07A"/><rect x="104" y="180" width="34" height="70" rx="17" fill="#D9A07A"/>
+<rect x="-86" y="170" width="44" height="150" rx="22" fill="#E3B08C" transform="rotate(-24 -64 300)"/>
+<rect x="-14" y="8" width="30" height="26" rx="10" fill="#F2D2B8" opacity=".7"/></g></svg>
+<div class="t099-guide"><s></s><s></s><s></s><s></s></div><div class="t099-rig">OVERHEAD RIG · 90° · 35 mm</div><div class="t099-ann" style="left:calc(var(--u)*60);top:calc(var(--u)*960)">HAND ENTERS ↖ FROM FRAME EDGE</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Papers land one by one from the frame edges</b> onto the desk, one per beat, then a hand enters from the bottom right and points at the sticky note; the headline card is dropped in last on beat 1 of bar 4.</p></div>
+  <div class="cw"><div class="cell" id="t099-f2">
+<div class="t099-desk"></div>
+<div style="position:absolute;inset:0;filter:blur(calc(var(--u)*6));opacity:.9"><div class="t099-paper" style="left:calc(var(--u)*-160);top:calc(var(--u)*380);width:calc(var(--u)*300);height:calc(var(--u)*230);transform:rotate(-18deg)"><b>SIGNUPS</b><div class="t099-pc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,19.3 10.0,20.2 20.0,26.3 30.0,25.8 40.0,25.9 50.0,27.2 60.0,22.6 70.0,22.8 80.0,24.7 90.0,28.9 100.0,23.0" fill="none" stroke="#5A6475" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div></div><div class="t099-paper" style="left:calc(var(--u)*-120);top:calc(var(--u)*640);width:calc(var(--u)*280);height:calc(var(--u)*220);transform:rotate(14deg)"><b>ERROR RATE</b><div class="t099-pc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,26.7 10.0,19.7 20.0,23.1 30.0,18.1 40.0,25.1 50.0,18.2 60.0,23.7 70.0,26.3 80.0,31.4 90.0,36.0 100.0,32.3" fill="none" stroke="#5A6475" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div></div></div>
+<div class="t099-cup" style="left:calc(var(--u)*840);top:calc(var(--u)*150);width:calc(var(--u)*153.0);height:calc(var(--u)*153.0)"><i></i></div>
+<img class="t099-coaster" src="../assets/brand/acme-mark.svg" alt="Acme">
+<div class="t099-word">Acme Pulse</div>
+<svg class="t099-svg" viewBox="0 0 1080 1080"><g stroke="#FF5A4E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M360 860 H120"/><path d="M140 842 L114 860 L140 878"/></g>
+<g transform="translate(680,330) rotate(-40)" filter="url(#t099-sh)">
+<rect x="-60" y="330" width="220" height="520" rx="30" fill="#0E1726"/>
+<rect x="-60" y="330" width="220" height="40" rx="10" fill="#0E1726" opacity=".25"/>
+<rect x="-44" y="140" width="184" height="220" rx="70" fill="#E3B08C"/>
+<rect x="-22" y="0" width="46" height="210" rx="23" fill="#E9BB98"/>
+<rect x="30" y="150" width="40" height="80" rx="20" fill="#D9A07A"/><rect x="70" y="162" width="38" height="76" rx="19" fill="#D9A07A"/><rect x="104" y="180" width="34" height="70" rx="17" fill="#D9A07A"/>
+<rect x="-86" y="170" width="44" height="150" rx="22" fill="#E3B08C" transform="rotate(-24 -64 300)"/>
+<rect x="-14" y="8" width="30" height="26" rx="10" fill="#F2D2B8" opacity=".7"/></g></svg>
+<div class="t099-guide"><s></s><s></s><s></s><s></s></div><div class="t099-rig">OVERHEAD RIG · 90° · 35 mm</div><div class="t099-ann" style="left:calc(var(--u)*120);top:calc(var(--u)*890)">PAPERS SWEPT ← · CARD PLACED ON THE DROP</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>A hand sweeps the papers out to the left in one move</b>; on the drop the Acme card is set down in the centre (a small bounce, shadow tightening) and the wordmark card slides in underneath.</p></div>
+  <div class="cw"><div class="cell" id="t099-f3">
+<div class="t099-desk"></div>
+<div class="t099-cup" style="left:calc(var(--u)*830);top:calc(var(--u)*120);width:calc(var(--u)*144.5);height:calc(var(--u)*144.5)"><i></i></div><div class="t099-sticky" style="left:calc(var(--u)*80);top:calc(var(--u)*180);transform:rotate(-5deg);background:#F4D56A">deploy #2231 today</div>
+<div class="t099-paper" style="left:calc(var(--u)*70);top:calc(var(--u)*560);width:calc(var(--u)*230);height:calc(var(--u)*300);transform:rotate(-4deg)"><b>ON-CALL</b><div class="t099-pc"><svg viewBox="0 0 100 40" preserveAspectRatio="none" style="width:100%;height:100%;display:block"><polyline points="0.0,13.0 10.0,7.4 20.0,5.9 30.0,8.5 40.0,4.0 50.0,4.0 60.0,4.0 70.0,7.7 80.0,4.0 90.0,7.5 100.0,9.8" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div></div>
+<div class="t099-phone"><div class="t099-scr"><div class="t099-st"><span>09:42</span><span>●●● 5G</span></div>
+<div class="t099-note"><div class="t099-nh"><img class="" src="../assets/brand/acme-mark.svg" alt="Acme">ACME PULSE · NOW</div><div class="t099-nt">Checkout conversion</div><div class="t099-nb">−18%</div>
+<div class="t099-ns">since 09:42<br>after deploy #2231</div><div class="t099-nbtn"><span>Roll back</span><span class="g">Acknowledge</span></div></div>
+<div class="t099-mini"><span>p95 212 ms</span><b>ok</b></div></div></div>
+<svg class="t099-svg" viewBox="0 0 1080 1080"><g transform="translate(540,562) rotate(-26)" filter="url(#t099-sh)">
+<rect x="-60" y="330" width="220" height="520" rx="30" fill="#0B6E6E"/>
+<rect x="-60" y="330" width="220" height="40" rx="10" fill="#0E1726" opacity=".25"/>
+<rect x="-44" y="140" width="184" height="220" rx="70" fill="#E3B08C"/>
+<rect x="-22" y="0" width="46" height="210" rx="23" fill="#E9BB98"/>
+<rect x="30" y="150" width="40" height="80" rx="20" fill="#D9A07A"/><rect x="70" y="162" width="38" height="76" rx="19" fill="#D9A07A"/><rect x="104" y="180" width="34" height="70" rx="17" fill="#D9A07A"/>
+<rect x="-86" y="170" width="44" height="150" rx="22" fill="#E3B08C" transform="rotate(-24 -64 300)"/>
+<rect x="-14" y="8" width="30" height="26" rx="10" fill="#F2D2B8" opacity=".7"/></g></svg>
+<div class="t099-guide"><s></s><s></s><s></s><s></s></div><div class="t099-rig">OVERHEAD RIG · 90° · 35 mm</div><div class="t099-ann" style="left:calc(var(--u)*790);top:calc(var(--u)*500)">TAP ROLL BACK ↖</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The phone buzzes (a 4 px shake) and the notification drops in from the top</b>; the finger enters from the bottom right and taps Roll back on the downbeat, with a ripple.</p></div>
+  <div class="cw"><div class="cell" id="t099-f4">
+<div class="t099-desk"></div>
+<div class="t099-lap"><div class="t099-lscr"><div class="t099-ll"><img class="" src="../assets/brand/acme-mark.svg" alt="Acme">Acme Pulse</div><div class="t099-lt">You ship. <em>Pulse watches.</em></div><span class="t099-lb">Start free</span></div><div class="t099-kb"></div></div>
+<div class="t099-cup" style="left:calc(var(--u)*820);top:calc(var(--u)*800);width:calc(var(--u)*136.0);height:calc(var(--u)*136.0)"><i></i></div>
+<div class="t099-sticky" style="left:calc(var(--u)*110);top:calc(var(--u)*800);transform:rotate(-4deg);background:#BFEDE8">resolved in 6 min ✓</div>
+<div class="t099-guide"><s></s><s></s><s></s><s></s></div><div class="t099-rig">OVERHEAD RIG · 90° · 35 mm</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The camera stays still while the desk tidies itself</b>: the laptop slides into centre, the tagline types on screen, Start free pops on beat 3 and the sticky note lands last.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Desk surface</b> — warm wood with grain; the stage every object is dropped onto</li><li><b>Printed dashboards</b> — paper sheets with charts, the physical form of “too many dashboards”</li><li><b>Hands</b> — stylised pointing hand with a drop shadow; the human in the loop</li><li><b>Phone notification</b> — the anomaly as a push notification with Roll back / Acknowledge</li><li><b>Brand coaster</b> — the Acme mark as an object that gets placed on the desk on the drop</li><li><b>Rig label + frame guides</b> — OVERHEAD RIG · 90° tag and corner guides that name the camera</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Object drop</b> — each object enters from off-frame (y ±300 px) with back.out(1.6) in 0.35 s and a shadow that tightens as it lands; one object per beat at 120 BPM</li><li><b>Hand sweep</b> — one arc move 0.5 s (power3.inOut) that pushes the papers out left with 6 px motion blur, finishing on the drop</li><li><b>Tap</b> — finger dips 8 px (scale 0.97) in 0.08 s on the downbeat, button ripple 0.4 s expo.out, phone shake ±4 px for 0.2 s when the notification arrives</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Overhead hands make software feel tangible and human, which fits a product where a person makes the final call. The grammar is familiar from tutorials and unboxings, so it reads instantly. Risk: illustrated hands are hard to make look premium, and it can drift toward generic stock-footage style; keep the palette tight and the objects few.</p><p><b>Adapt to your product:</b> Print your users’ current tools as paper sheets for the hook, and show your product’s key moment on a phone or laptop lying on the desk. Real overhead footage of hands with a screen-replaced phone works just as well as illustration.</p><p><b>References:</b> <a href="https://www.studiobinder.com/camera-shots/camera-angles/overhead-shot/">https://www.studiobinder.com/camera-shots/camera-angles/overhead-shot/</a> (the overhead (bird’s-eye) shot and how it is used) · <a href="https://morphic.com/ai-glossary/overhead-shot">https://morphic.com/ai-glossary/overhead-shot</a> (top-down 90° framing and flat-lay use in product video)</p></div>
+</div>
+</body>
+</html>

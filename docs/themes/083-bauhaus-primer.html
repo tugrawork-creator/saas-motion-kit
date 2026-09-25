@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>083 · Bauhaus Primer — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t083- (083 = theme number) ===== */
+.t083-svg{position:absolute;inset:0;width:100%;height:100%}
+.t083-abs{position:absolute}
+#t083-f1,#t083-f2,#t083-f3,#t083-f4{background:#F1ECDF}
+.t083-h{position:absolute;font-family:var(--sans);font-weight:800;color:var(--ink);text-transform:lowercase;letter-spacing:-.035em;line-height:.96}
+.t083-h i{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--alert)}
+.t083-m{position:absolute;font-family:var(--mono);font-size:calc(var(--u)*22);color:var(--ink);letter-spacing:.04em;text-transform:lowercase}
+.t083-mark{position:absolute}
+.t083-btn{position:absolute;display:flex;align-items:center;gap:calc(var(--u)*18);font-family:var(--sans);font-weight:800;text-transform:lowercase;letter-spacing:-.02em}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 083 · Art movements &amp; eras</div>
+    <h1>Bauhaus Primer</h1>
+    <p class="dek">The whole film is built from a 1920s classroom kit: circle, square, triangle, a thick black bar and all-lowercase sans in the Herbert Bayer spirit. Kandinsky-style shape–colour pairing is re-cast in Acme's palette (circle = teal, triangle = amber, square = ink), so when one square falls out of the grid and turns coral, everyone sees the anomaly before reading a word.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t083-f1">
+<svg class="t083-svg" viewBox="0 0 1080 1080"><rect x="60" y="60" width="430" height="26" fill="#0E1726"/><rect x="994" y="60" width="26" height="480" fill="#0E1726"/><circle cx="140" cy="640" r="46" fill="#0FA3A3"/><rect x="256" y="596" width="88" height="88" fill="#0E1726"/><path d="M460 590 L510 682 L410 682Z" fill="#F4B740"/><rect x="576" y="596" width="88" height="88" fill="#0E1726"/><circle cx="780" cy="640" r="46" fill="#0FA3A3"/><path d="M940 590 L990 682 L890 682Z" fill="#F4B740"/><path d="M140 725 L190 817 L90 817Z" fill="#F4B740"/><circle cx="300" cy="775" r="46" fill="#0FA3A3"/><rect x="416" y="731" width="88" height="88" fill="#0E1726"/><circle cx="620" cy="775" r="46" fill="#0FA3A3"/><path d="M780 725 L830 817 L730 817Z" fill="#F4B740"/><rect x="896" y="731" width="88" height="88" fill="#0E1726"/><rect x="96" y="866" width="88" height="88" fill="#0E1726"/><path d="M300 860 L350 952 L250 952Z" fill="#F4B740"/><circle cx="460" cy="910" r="46" fill="#0FA3A3"/><rect x="576" y="866" width="88" height="88" fill="none" stroke="#FF5A4E" stroke-width="5" stroke-dasharray="12 9"/><rect x="590" y="926" width="88" height="88" fill="#FF5A4E" transform="rotate(28 634 970)"/><rect x="736" y="866" width="88" height="88" fill="#0E1726"/><circle cx="940" cy="910" r="46" fill="#0FA3A3"/></svg>
+<div class="t083-h" style="left:calc(var(--u)*60);top:calc(var(--u)*118);font-size:calc(var(--u)*92);width:calc(var(--u)*900)">how many<br>dashboards did<br>you check <i>today?</i></div>
+<div class="t083-m" style="left:calc(var(--u)*60);top:calc(var(--u)*452)">38 dashboards · 14 metrics · 0 answers</div>
+<div class="t083-m" style="left:calc(var(--u)*742);top:calc(var(--u)*990);color:#FF5A4E;font-weight:600;font-size:calc(var(--u)*21)">fri 17:58 · missed</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Shapes stamp in on 8th notes</b> in a strict 6-column primer grid, left→right; the headline wipes up from the black bar. Downbeat at 0:06: one square slips off its slot, rotates 28° and goes coral.</p></div>
+  <div class="cw"><div class="cell" id="t083-f2">
+<svg class="t083-svg" viewBox="0 0 1080 1080">
+<circle cx="600" cy="470" r="330" fill="#0FA3A3"/>
+<path d="M60 1020 L360 500 L660 1020Z" fill="#F4B740"/>
+<rect x="800" y="70" width="170" height="170" fill="#FF5A4E" transform="rotate(12 885 155)"/>
+<rect x="-40" y="300" width="1200" height="30" fill="#0E1726" transform="rotate(-24 540 315)"/>
+<circle cx="600" cy="470" r="150" fill="#F1ECDF"/>
+</svg>
+<img class="t083-mark" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*505);top:calc(var(--u)*375);width:calc(var(--u)*190);height:calc(var(--u)*190)" alt="">
+<div class="t083-h" style="left:calc(var(--u)*60);top:calc(var(--u)*858);font-size:calc(var(--u)*124);white-space:nowrap">acme pulse</div>
+<div class="t083-m" style="left:calc(var(--u)*64);top:calc(var(--u)*990)">form follows function · the watcher</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the black diagonal bar slams in first</b>, then circle (scale 0→1), triangle (slide up) and coral square (drop from top) land on consecutive beats; the Acme mark appears in the circle's hole and "acme pulse" types in lowercase.</p></div>
+  <div class="cw"><div class="cell" id="t083-f3">
+<svg class="t083-svg" viewBox="0 0 1080 1080">
+<rect x="60" y="60" width="960" height="14" fill="#0E1726"/>
+<circle cx="150" cy="236" r="80" fill="#0FA3A3"/>
+<rect x="320" y="156" width="160" height="160" fill="#0E1726"/>
+<path d="M650 150 L745 316 L555 316Z" fill="#F4B740"/>
+<rect x="840" y="156" width="160" height="160" fill="none" stroke="#FF5A4E" stroke-width="5" stroke-dasharray="14 10"/>
+<rect x="100" y="450" width="470" height="470" fill="#FF5A4E" transform="rotate(-9 335 685)"/>
+<path d="M880 330 C 820 380 640 400 560 440" fill="none" stroke="#FF5A4E" stroke-width="4" stroke-dasharray="10 10"/>
+</svg>
+<div class="t083-m" style="left:calc(var(--u)*60);top:calc(var(--u)*92)">watching 14 metrics · 2,418 events/sec</div>
+<div class="t083-m" style="left:calc(var(--u)*70);top:calc(var(--u)*340)">signups ✓</div>
+<div class="t083-m" style="left:calc(var(--u)*318);top:calc(var(--u)*340)">active users ✓</div>
+<div class="t083-m" style="left:calc(var(--u)*560);top:calc(var(--u)*340)">p95 212 ms ✓</div>
+<div class="t083-m" style="left:calc(var(--u)*842);top:calc(var(--u)*340);color:#FF5A4E;font-weight:600">checkout ✕</div>
+<div class="t083-abs" style="left:calc(var(--u)*132);top:calc(var(--u)*520);width:calc(var(--u)*420);transform:rotate(-9deg);transform-origin:left top;color:#fff">
+  <div style="font:800 calc(var(--u)*168)/.9 var(--sans);letter-spacing:-.05em">−18%</div>
+  <div style="font:600 calc(var(--u)*28)/1.2 var(--mono);margin-top:calc(var(--u)*16);text-transform:lowercase">checkout<br>conversion</div>
+</div>
+<div class="t083-m" style="left:calc(var(--u)*640);top:calc(var(--u)*480);font-size:calc(var(--u)*28);line-height:1.5">since 09:42<br>after deploy #2231<br><span style="color:var(--muted)">your call ↓</span></div>
+<div class="t083-btn" style="left:calc(var(--u)*640);top:calc(var(--u)*720);width:calc(var(--u)*380);height:calc(var(--u)*110);background:var(--ink);color:#F1ECDF;font-size:calc(var(--u)*48);padding-left:calc(var(--u)*32)"><span style="width:calc(var(--u)*26);height:calc(var(--u)*26);border-radius:50%;background:#FF5A4E"></span>roll back</div>
+<div class="t083-btn" style="left:calc(var(--u)*640);top:calc(var(--u)*846);width:calc(var(--u)*300);height:calc(var(--u)*76);border:calc(var(--u)*5) solid var(--ink);color:var(--ink);font-size:calc(var(--u)*30);padding-left:calc(var(--u)*28)">acknowledge</div>
+<svg class="t083-svg" viewBox="0 0 1080 1080"><path d="M930 786 L930 850 L945 835 L958 864 L969 859 L956 830 L978 830Z" fill="#F4B740" stroke="#0E1726" stroke-width="4" stroke-linejoin="round"/></svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Three healthy shapes tick ✓ on the beat</b> while the fourth slot sits empty; the coral square falls into frame tilted −9° carrying −18%. On the bar line the black "roll back" block slides in from the right and the triangle cursor clicks it.</p></div>
+  <div class="cw"><div class="cell" id="t083-f4">
+<svg class="t083-svg" viewBox="0 0 1080 1080">
+<path d="M1080 700 A380 380 0 0 0 700 1080 L1080 1080Z" fill="#0FA3A3"/>
+<path d="M820 60 L1020 60 L1020 260Z" fill="#F4B740"/>
+<rect x="60" y="560" width="26" height="400" fill="#0E1726"/>
+<circle cx="962" cy="962" r="40" fill="#FF5A4E"/>
+</svg>
+<div class="t083-h" style="left:calc(var(--u)*60);top:calc(var(--u)*120);font-size:calc(var(--u)*124)">you ship.<br>pulse <i>watches.</i></div>
+<img class="t083-mark" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*126);top:calc(var(--u)*580);width:calc(var(--u)*96);height:calc(var(--u)*96)" alt="">
+<div class="t083-h" style="left:calc(var(--u)*244);top:calc(var(--u)*596);font-size:calc(var(--u)*64)">acme pulse</div>
+<div class="t083-btn" style="left:calc(var(--u)*126);top:calc(var(--u)*730);width:calc(var(--u)*420);height:calc(var(--u)*120);background:var(--ink);color:#F1ECDF;font-size:calc(var(--u)*52);padding-left:calc(var(--u)*40)"><span style="width:0;height:0;border-left:calc(var(--u)*22) solid #F4B740;border-top:calc(var(--u)*16) solid transparent;border-bottom:calc(var(--u)*16) solid transparent"></span>start free</div>
+<div class="t083-m" style="left:calc(var(--u)*126);top:calc(var(--u)*890)">acme.example · no card needed</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Headline builds word-by-word on quarter notes</b>, the teal quarter-circle grows from the corner like a compass arc and the ink CTA block stamps in on the final downbeat; the amber play-triangle nudges right twice.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Primer shapes</b> — circle / square / triangle as metric tokens (teal, ink, amber)</li><li><b>Black bar</b> — structural rule that wipes headlines and cuts diagonals</li><li><b>Lowercase universal type</b> — Manrope 800 lowercase, Bayer-style, one serif italic accent word</li><li><b>Empty slot</b> — dashed coral outline where a metric went missing</li><li><b>Fallen square</b> — the anomaly — tilted coral block carrying the number</li><li><b>Block button</b> — flat ink rectangle with a coral dot or amber triangle glyph</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Stamp-in</b> — shapes scale 0→1.06→1, back.out(2) 0.25 s, one per 8th note (0.25 s at 120 BPM)</li><li><b>Gravity slip</b> — anomaly square rotates 0→−9° and drops 40 px, power3.in 0.4 s, landing on a downbeat</li><li><b>Bar wipe</b> — black bar scaleX 0→1 from the left, expo.out 0.5 s, always on beat 1 of a bar; text rides behind it with clip-path</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Primitives read instantly at thumbnail size and the grammar (one shape leaves the grid = something is wrong) needs no explanation, which suits a background agent. Risk: the lowercase-plus-serif mix can look like a design-school exercise; keep every number big and every shape doing a job.</p><p><b>Adapt to your product:</b> Map your own metrics or features to the three primitives (e.g. circle = users, square = revenue, triangle = performance) and let the thing your product catches be the one that breaks the grid. Swap the button labels for your product's real action.</p><p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Bauhaus">https://en.wikipedia.org/wiki/Bauhaus</a> — school overview: geometric simplicity, Kandinsky colour teaching · <a href="https://en.wikipedia.org/wiki/Herbert_Bayer">https://en.wikipedia.org/wiki/Herbert_Bayer</a> — Bayer's all-lowercase sans for Bauhaus print</p></div>
+</div>
+</body>
+</html>

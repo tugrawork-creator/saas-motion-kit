@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>001 · Spreadsheet Cinema — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t001-s{position:absolute;inset:0;background:#fff;font-family:var(--sans);color:var(--ink);overflow:hidden}
+.t001-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t001-fbar{position:absolute;left:0;top:0;width:100%;height:calc(var(--u)*132);background:#F3F2EC;border-bottom:calc(var(--u)*2) solid #D9D7CD}
+.t001-dots{position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*24);display:flex;gap:calc(var(--u)*10)}
+.t001-dots i{width:calc(var(--u)*26);height:calc(var(--u)*8);border-radius:calc(var(--u)*4);background:#DAD8CE}
+.t001-nbox{position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*64);width:calc(var(--u)*172);height:calc(var(--u)*52);background:#fff;border:calc(var(--u)*2) solid #D3D1C7;border-radius:calc(var(--u)*6);font:600 calc(var(--u)*22) var(--mono);display:flex;align-items:center;padding-left:calc(var(--u)*14);color:var(--ink)}
+.t001-fx{position:absolute;left:calc(var(--u)*248);top:calc(var(--u)*64);height:calc(var(--u)*52);display:flex;align-items:center;font:italic 400 calc(var(--u)*36) var(--serif);color:var(--muted)}
+.t001-fml{position:absolute;left:calc(var(--u)*292);top:calc(var(--u)*64);width:calc(var(--u)*728);height:calc(var(--u)*52);background:#fff;border:calc(var(--u)*2) solid #D3D1C7;border-radius:calc(var(--u)*6);display:flex;align-items:center;padding-left:calc(var(--u)*16);font:400 calc(var(--u)*23) var(--mono);white-space:nowrap;overflow:hidden;color:var(--ink)}
+.t001-fml b{color:var(--brand-deep);font-weight:600}.t001-fml i{font-style:normal;color:var(--alert)}
+.t001-caret{display:inline-block;width:calc(var(--u)*3);height:calc(var(--u)*30);background:var(--ink);margin-left:calc(var(--u)*3);vertical-align:middle}
+.t001-corner{position:absolute;left:0;top:calc(var(--u)*132);width:calc(var(--u)*96);height:calc(var(--u)*44);background:#ECEAE2;border-right:calc(var(--u)*2) solid #D9D7CD;border-bottom:calc(var(--u)*2) solid #D9D7CD}
+.t001-ch{position:absolute;left:calc(var(--u)*96);top:calc(var(--u)*132);height:calc(var(--u)*44);display:flex;background:#F3F2EC;border-bottom:calc(var(--u)*2) solid #D9D7CD}
+.t001-ch span{flex:none;width:calc(var(--u)*var(--cw,132));border-right:calc(var(--u)*1.5) solid #E1DFD6;font:400 calc(var(--u)*20) var(--mono);color:#8A8F99;display:flex;align-items:center;justify-content:center}
+.t001-rh{position:absolute;left:0;top:calc(var(--u)*176);width:calc(var(--u)*96);display:flex;flex-direction:column;background:#F3F2EC;border-right:calc(var(--u)*2) solid #D9D7CD}
+.t001-rh span{flex:none;height:calc(var(--u)*var(--rw,60));border-bottom:calc(var(--u)*1.5) solid #E1DFD6;font:400 calc(var(--u)*20) var(--mono);color:#8A8F99;display:flex;align-items:center;justify-content:flex-end;padding-right:calc(var(--u)*14)}
+.t001-ch span.on,.t001-rh span.on{background:#DDE0E4;color:var(--ink)}
+.t001-ch span.ag,.t001-rh span.ag{background:var(--brand-soft);color:var(--brand-deep)}
+.t001-g{position:absolute;left:calc(var(--u)*96);top:calc(var(--u)*176);right:0;bottom:0;background-image:linear-gradient(to right,#E6E4DB calc(var(--u)*1.5),transparent calc(var(--u)*1.5)),linear-gradient(to bottom,#E6E4DB calc(var(--u)*1.5),transparent calc(var(--u)*1.5));background-size:calc(var(--u)*var(--cw,132)) calc(var(--u)*var(--rw,60))}
+.t001-c{--cs:1;--rs:1;position:absolute;left:calc(var(--u)*(96 + var(--c)*132));top:calc(var(--u)*(176 + (var(--r) - 1)*60));width:calc(var(--u)*var(--cs)*132);height:calc(var(--u)*var(--rs)*60);display:flex;align-items:center;padding:0 calc(var(--u)*14);white-space:nowrap}
+.t001-lbl{font:600 calc(var(--u)*22) var(--sans);color:var(--ink)}
+.t001-mut{font:500 calc(var(--u)*21) var(--sans);color:#8A8F99}
+.t001-v{font:400 calc(var(--u)*22) var(--mono);color:var(--ink);justify-content:flex-end}
+.t001-hd{font:600 calc(var(--u)*20) var(--mono);color:var(--muted);justify-content:flex-end;background:#FAF9F5}
+.t001-ok{background:#E3F2E9;color:var(--ok)}
+.t001-bad{background:#FFE1DD;color:#C9362C;font-weight:600}
+.t001-merge{background:#fff;box-shadow:0 0 0 calc(var(--u)*1.5) #E6E4DB;align-items:flex-start;padding:calc(var(--u)*18) calc(var(--u)*24);white-space:normal}
+.t001-hl{font:400 calc(var(--u)*80)/1.0 var(--serif);letter-spacing:-.015em;color:var(--ink)}
+.t001-hl em{font-style:italic;color:var(--brand-deep)}
+.t001-sel{outline:calc(var(--u)*4) solid var(--ink);outline-offset:calc(var(--u)*-2);z-index:3}
+.t001-sel::after{content:"";position:absolute;right:calc(var(--u)*-9);bottom:calc(var(--u)*-9);width:calc(var(--u)*16);height:calc(var(--u)*16);background:var(--ink);border:calc(var(--u)*3) solid #fff}
+.t001-ants{outline:calc(var(--u)*4) dashed var(--brand);outline-offset:calc(var(--u)*-2);z-index:2}
+.t001-antsbg{background:rgba(15,163,163,.07)}
+.t001-tri{position:absolute;right:0;top:0;width:0;height:0;border-top:calc(var(--u)*24) solid var(--alert);border-left:calc(var(--u)*24) solid transparent}
+.t001-tag{position:absolute;font:600 calc(var(--u)*20) var(--mono);padding:calc(var(--u)*6) calc(var(--u)*12);border-radius:calc(var(--u)*6) calc(var(--u)*6) calc(var(--u)*6) 0;white-space:nowrap;color:#fff;background:var(--brand);z-index:4}
+.t001-tabs{position:absolute;left:0;right:0;top:calc(var(--u)*956);bottom:0;background:#F3F2EC;border-top:calc(var(--u)*2) solid #D9D7CD;z-index:5}
+.t001-tabs div{position:absolute;left:calc(var(--u)*60);top:0;display:flex}
+.t001-tabs span{height:calc(var(--u)*56);padding:0 calc(var(--u)*20);display:flex;align-items:center;gap:calc(var(--u)*8);font:600 calc(var(--u)*20) var(--sans);color:var(--muted);border-right:calc(var(--u)*1.5) solid #DAD8CE}
+.t001-tabs span.on{background:#fff;color:var(--brand-deep);box-shadow:inset 0 calc(var(--u)*-4) 0 var(--brand)}
+.t001-tabs span.more{color:var(--alert)}
+.t001-tabs img{width:calc(var(--u)*26);height:calc(var(--u)*26)}
+.t001-note{position:absolute;left:calc(var(--u)*360);top:calc(var(--u)*560);width:calc(var(--u)*640);background:#FFFDF6;border:calc(var(--u)*2) solid #E3DFC9;border-radius:calc(var(--u)*6);box-shadow:0 calc(var(--u)*18) calc(var(--u)*40) rgba(14,23,38,.16);padding:calc(var(--u)*22) calc(var(--u)*26);z-index:6}
+.t001-note .h{display:flex;align-items:center;gap:calc(var(--u)*10);font:600 calc(var(--u)*20) var(--mono);color:var(--brand-deep);letter-spacing:.04em}
+.t001-note .h img{width:calc(var(--u)*30);height:calc(var(--u)*30)}
+.t001-note .t{font:800 calc(var(--u)*46)/1.1 var(--sans);margin-top:calc(var(--u)*12);color:var(--ink)}
+.t001-note .t b{color:var(--alert)}
+.t001-note .m{font:400 calc(var(--u)*25) var(--mono);color:var(--muted);margin-top:calc(var(--u)*6)}
+.t001-note .row{display:flex;gap:calc(var(--u)*12);margin-top:calc(var(--u)*18)}
+.t001-btn{height:calc(var(--u)*64);padding:0 calc(var(--u)*30);border-radius:calc(var(--u)*8);display:flex;align-items:center;font:700 calc(var(--u)*27) var(--sans)}
+.t001-btn.pri{background:var(--alert);color:#fff}.t001-btn.sec{border:calc(var(--u)*2) solid #CFCBBA;color:var(--ink)}
+.t001-cur{position:absolute;width:calc(var(--u)*44);height:calc(var(--u)*44);z-index:9}
+.t001-lock{display:flex;align-items:center;gap:calc(var(--u)*26)}
+.t001-lock img{width:calc(var(--u)*112);height:calc(var(--u)*112)}
+.t001-word{font:800 calc(var(--u)*104)/1 var(--sans);letter-spacing:-.035em;color:var(--ink)}
+.t001-cta{background:var(--alert);color:#fff;font:800 calc(var(--u)*34) var(--sans);justify-content:center;border-radius:calc(var(--u)*4)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 001 · Product UI as the stage</div>
+    <h1>Spreadsheet Cinema</h1>
+    <p class="dek">The whole square is a live spreadsheet: formula bar on top, sheet tabs below, gridlines everywhere. The selection rectangle is the camera, the formula bar is the subtitle track, and Acme Pulse is a second, dashed teal selection that quietly scans every row while you work.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t001-f1">
+<div class="t001-s">
+ <div class="t001-g"></div>
+ <div class="t001-fbar"><div class="t001-dots"><i></i><i></i><i></i><i></i></div></div>
+ <div class="t001-nbox">B2:G5</div><div class="t001-fx">fx</div>
+ <div class="t001-fml">=COUNTA(<b>dashboards_checked</b>, <i>TODAY()</i>)<span class="t001-caret"></span></div>
+ <div class="t001-corner"></div>
+ <div class="t001-ch"><span>A</span><span class="on">B</span><span class="on">C</span><span class="on">D</span><span class="on">E</span><span class="on">F</span><span class="on">G</span><span>H</span></div>
+ <div class="t001-rh"><span>1</span><span class="on">2</span><span class="on">3</span><span class="on">4</span><span class="on">5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span></div>
+ <div class="t001-c t001-merge t001-sel" style="--c:1;--r:2;--cs:6;--rs:4"><div class="t001-hl">How many dashboards did you check <em>today?</em></div></div>
+ <div class="t001-c t001-mut" style="--c:0;--r:7;--cs:2">Checkout funnel</div><div class="t001-c t001-v" style="--c:2;--r:7">viewed</div><div class="t001-c t001-v" style="--c:3;--r:7">09:02</div>
+ <div class="t001-c t001-mut" style="--c:0;--r:8;--cs:2">Signups · daily</div><div class="t001-c t001-v" style="--c:2;--r:8">viewed</div><div class="t001-c t001-v" style="--c:3;--r:8">09:14</div>
+ <div class="t001-c t001-mut" style="--c:0;--r:9;--cs:2">p95 latency</div><div class="t001-c t001-v" style="--c:2;--r:9">viewed</div><div class="t001-c t001-v" style="--c:3;--r:9">10:31</div>
+ <div class="t001-c t001-mut" style="--c:0;--r:10;--cs:2">Error rate</div><div class="t001-c t001-v" style="--c:2;--r:10">skipped</div><div class="t001-c t001-v" style="--c:3;--r:10">—</div>
+ <div class="t001-c t001-mut" style="--c:0;--r:11;--cs:2">Active users</div><div class="t001-c t001-v" style="--c:2;--r:11">skipped</div><div class="t001-c t001-v" style="--c:3;--r:11">—</div>
+ <div class="t001-c t001-hd" style="--c:5;--r:7">TOTAL</div>
+ <div class="t001-c t001-v t001-bad" style="--c:6;--r:7;font-size:calc(var(--u)*30)">38</div>
+ <div class="t001-c t001-hd" style="--c:5;--r:8">MISSED</div>
+ <div class="t001-c t001-v" style="--c:6;--r:8;font-size:calc(var(--u)*30);color:var(--muted)">?</div>
+ <div class="t001-tabs"><div><span>Checkout</span><span>Signups</span><span>Latency</span><span>Errors</span><span>Revenue</span><span class="more">+33 tabs</span></div></div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The ink selection snaps onto the merged headline range</b> (expo.inOut, 0.35 s) while the formula bar types <code>COUNTA(…)</code>; on the bar-4 downbeat the TOTAL cell flips to a coral <b>38</b> and the tab strip overflows to “+33 tabs”.</p></div>
+  <div class="cw"><div class="cell" id="t001-f2">
+<div class="t001-s">
+ <div class="t001-g" style="--cw:44;--rw:44"></div>
+ <div class="t001-fbar"><div class="t001-dots"><i></i><i></i><i></i><i></i></div></div>
+ <div class="t001-nbox">PULSE</div><div class="t001-fx">fx</div>
+ <div class="t001-fml">=PULSE.<b>WATCH</b>(every_metric, <b>24/7</b>)</div>
+ <div class="t001-corner"></div>
+ <div class="t001-ch" style="--cw:44"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span></div>
+ <div class="t001-rh" style="--rw:44"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span></div>
+ <svg class="t001-p" style="--x:0;--y:0;--w:1080;--h:1080" viewBox="0 0 1080 1080"><g fill="#0FA3A3" stroke="#fff" stroke-width="2"><rect x="96" y="396" width="44" height="44"/><rect x="140" y="396" width="44" height="44"/><rect x="184" y="396" width="44" height="44"/><rect x="228" y="396" width="44" height="44"/><rect x="272" y="396" width="44" height="44"/><rect x="316" y="396" width="44" height="44"/><rect x="360" y="352" width="44" height="44"/><rect x="404" y="308" width="44" height="44"/><rect x="404" y="264" width="44" height="44"/><rect x="448" y="220" width="44" height="44"/><rect x="448" y="264" width="44" height="44"/><rect x="492" y="308" width="44" height="44"/><rect x="492" y="352" width="44" height="44"/><rect x="536" y="396" width="44" height="44"/><rect x="536" y="440" width="44" height="44"/><rect x="580" y="484" width="44" height="44"/><rect x="580" y="528" width="44" height="44"/><rect x="624" y="484" width="44" height="44"/><rect x="668" y="440" width="44" height="44"/><rect x="668" y="396" width="44" height="44"/><rect x="712" y="352" width="44" height="44"/><rect x="756" y="352" width="44" height="44"/><rect x="800" y="352" width="44" height="44"/><rect x="844" y="352" width="44" height="44"/><rect x="888" y="352" width="44" height="44"/></g><rect x="932" y="352" width="44" height="44" fill="#FF5A4E" stroke="#fff" stroke-width="2"/><g fill="#0FA3A3" opacity=".16"><rect x="96" y="440" width="44" height="44"/><rect x="184" y="440" width="44" height="44"/><rect x="272" y="440" width="44" height="44"/><rect x="316" y="440" width="44" height="44"/></g></svg>
+ <div class="t001-p" style="--x:176;--y:616;--w:748;--h:236;background:#fff;box-shadow:0 0 0 calc(var(--u)*4) var(--ink),0 calc(var(--u)*24) calc(var(--u)*50) rgba(14,23,38,.14);display:flex;align-items:center;justify-content:center">
+  <div class="t001-lock"><img src="../assets/brand/acme-mark.svg" alt=""><span class="t001-word">Acme Pulse</span></div>
+ </div>
+ <div class="t001-tag" style="left:calc(var(--u)*176);top:calc(var(--u)*574)">C11:R15 · merged</div>
+ <div class="t001-tabs"><div><span class="on"><img src="../assets/brand/acme-mark.svg" alt="">Pulse</span><span>Checkout</span><span>Signups</span><span>Latency</span></div></div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the camera pulls out</b> to a fine 44 px grid and teal cell-pixels fire left→right, drawing the Acme pulse line one column per 1/16 note (random-seeded 0.6 s); the coral dot cell lands on the downbeat, then the merged range C11:R15 fills with the “Acme Pulse” lockup.</p></div>
+  <div class="cw"><div class="cell" id="t001-f3">
+<div class="t001-s">
+ <div class="t001-g"></div>
+ <div class="t001-fbar"><div class="t001-dots"><i></i><i></i><i></i><i></i></div></div>
+ <div class="t001-nbox">G4</div><div class="t001-fx">fx</div>
+ <div class="t001-fml">=PULSE.<b>FLAG</b>(C4:F4, <i>"deploy #2231"</i>)</div>
+ <div class="t001-corner"></div>
+ <div class="t001-ch"><span class="ag">A</span><span class="ag">B</span><span class="ag">C</span><span class="ag">D</span><span class="ag">E</span><span class="ag">F</span><span class="on">G</span><span>H</span></div>
+ <div class="t001-rh"><span>1</span><span>2</span><span>3</span><span class="ag">4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span></div>
+ <div class="t001-c t001-hd" style="--c:0;--r:1;--cs:2;justify-content:flex-start">METRIC</div>
+ <div class="t001-c t001-hd" style="--c:2;--r:1">09:30</div><div class="t001-c t001-hd" style="--c:3;--r:1">09:36</div><div class="t001-c t001-hd" style="--c:4;--r:1;color:var(--alert)">09:42</div><div class="t001-c t001-hd" style="--c:5;--r:1">09:48</div><div class="t001-c t001-hd" style="--c:6;--r:1">Δ 1h</div>
+ <div class="t001-c t001-lbl" style="--c:0;--r:2;--cs:2">Signups</div><div class="t001-c t001-v" style="--c:2;--r:2">412</div><div class="t001-c t001-v" style="--c:3;--r:2">418</div><div class="t001-c t001-v" style="--c:4;--r:2">409</div><div class="t001-c t001-v" style="--c:5;--r:2">415</div><div class="t001-c t001-v t001-ok" style="--c:6;--r:2">+0.7%</div>
+ <div class="t001-c t001-lbl" style="--c:0;--r:3;--cs:2">Active users</div><div class="t001-c t001-v" style="--c:2;--r:3">8,120</div><div class="t001-c t001-v" style="--c:3;--r:3">8,166</div><div class="t001-c t001-v" style="--c:4;--r:3">8,201</div><div class="t001-c t001-v" style="--c:5;--r:3">8,190</div><div class="t001-c t001-v t001-ok" style="--c:6;--r:3">+0.9%</div>
+ <div class="t001-c t001-antsbg t001-ants" style="--c:0;--r:4;--cs:7"></div>
+ <div class="t001-c t001-lbl" style="--c:0;--r:4;--cs:2">Checkout conv.</div><div class="t001-c t001-v" style="--c:2;--r:4">3.42%</div><div class="t001-c t001-v" style="--c:3;--r:4">3.40%</div><div class="t001-c t001-v t001-bad" style="--c:4;--r:4">2.80%</div><div class="t001-c t001-v t001-bad" style="--c:5;--r:4">2.79%</div>
+ <div class="t001-c t001-v t001-bad t001-sel" style="--c:6;--r:4;font-size:calc(var(--u)*26)">−18%<span class="t001-tri"></span></div>
+ 
+ <div class="t001-c t001-lbl" style="--c:0;--r:5;--cs:2">p95 latency</div><div class="t001-c t001-v" style="--c:2;--r:5">208</div><div class="t001-c t001-v" style="--c:3;--r:5">211</div><div class="t001-c t001-v" style="--c:4;--r:5">212</div><div class="t001-c t001-v" style="--c:5;--r:5">212</div><div class="t001-c t001-v t001-ok" style="--c:6;--r:5">+1.9%</div>
+ <div class="t001-c t001-lbl" style="--c:0;--r:6;--cs:2">Error rate</div><div class="t001-c t001-v" style="--c:2;--r:6">0.4%</div><div class="t001-c t001-v" style="--c:3;--r:6">0.4%</div><div class="t001-c t001-v" style="--c:4;--r:6">0.4%</div><div class="t001-c t001-v" style="--c:5;--r:6">0.4%</div><div class="t001-c t001-v t001-ok" style="--c:6;--r:6">0.0%</div>
+ <svg class="t001-p" style="--x:0;--y:0;--w:1080;--h:1080;z-index:5" viewBox="0 0 1080 1080"><path d="M954 416 L954 470 L760 470 L760 570" fill="none" stroke="#FF5A4E" stroke-width="3" stroke-dasharray="8 6"/></svg>
+ <div class="t001-note" style="left:calc(var(--u)*250);top:calc(var(--u)*570);width:calc(var(--u)*770)">
+  <div class="h"><img src="../assets/brand/acme-mark.svg" alt="">NOTE · ACME PULSE · 09:44</div>
+  <div class="t">Checkout conversion <b>−18%</b></div>
+  <div class="m">since 09:42 · after deploy #2231</div>
+  <div class="row"><span class="t001-btn pri">Roll back</span><span class="t001-btn sec">Acknowledge</span></div>
+ </div>
+ <svg class="t001-cur" style="left:calc(var(--u)*392);top:calc(var(--u)*786)" viewBox="0 0 44 44"><path d="M6 4 L6 36 L15 28 L21 41 L27 38 L21 26 L33 26 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>
+ <div class="t001-tabs"><div><span class="on"><img src="../assets/brand/acme-mark.svg" alt="">Live metrics</span><span>Deploys</span><span>Checkout</span><span>Signups</span></div></div>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The dashed teal agent selection slides down row by row</b> (0.12 s per row, sine.inOut) while the ink selection stays with the human; it stops on row 4, the Δ cell turns coral with an error triangle on the snare, and the cell note unfolds downward. The cursor clicks <b>Roll back</b> on the next downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t001-f4">
+<div class="t001-s">
+ <div class="t001-g"></div>
+ <div class="t001-fbar"><div class="t001-dots"><i></i><i></i><i></i><i></i></div></div>
+ <div class="t001-nbox">CTA</div><div class="t001-fx">fx</div>
+ <div class="t001-fml">="<b>Start free</b>"<span class="t001-caret"></span></div>
+ <div class="t001-corner"></div>
+ <div class="t001-ch"><span>A</span><span class="on">B</span><span class="on">C</span><span class="on">D</span><span class="on">E</span><span class="on">F</span><span class="on">G</span><span>H</span></div>
+ <div class="t001-rh"><span>1</span><span>2</span><span class="on">3</span><span class="on">4</span><span class="on">5</span><span class="on">6</span><span class="on">7</span><span class="on">8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span></div>
+ <div class="t001-c t001-merge" style="--c:1;--r:3;--cs:6;--rs:6;flex-direction:column;justify-content:center;align-items:flex-start;gap:calc(var(--u)*30);padding-left:calc(var(--u)*44)">
+  <div class="t001-lock"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*96);height:calc(var(--u)*96)"><span class="t001-word" style="font-size:calc(var(--u)*92)">Acme Pulse</span></div>
+  <div class="t001-hl" style="font-size:calc(var(--u)*78)">You ship. <em>Pulse watches.</em></div>
+ </div>
+ <div class="t001-c t001-cta t001-sel" style="--c:2;--r:11;--cs:3;--rs:1">Start free</div>
+ <div class="t001-c t001-mut" style="--c:5;--r:11;--cs:2">no card needed</div>
+ <div class="t001-c t001-ants" style="--c:1;--r:3;--cs:6;--rs:6"></div>
+ <svg class="t001-cur" style="left:calc(var(--u)*520);top:calc(var(--u)*818)" viewBox="0 0 44 44"><path d="M6 4 L6 36 L15 28 L21 41 L27 38 L21 26 L33 26 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>
+ <div class="t001-tabs"><div><span class="on"><img src="../assets/brand/acme-mark.svg" alt="">Pulse</span><span style="color:var(--ok)">All 14 metrics ✓</span></div></div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Gridlines fade to 30 % and the teal marching-ants border settles around the lockup</b>; the formula bar types <code>="Start free"</code> one character per 1/8 note and the CTA cell fills coral on the final downbeat, fill handle blinking.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Formula bar</b> — the subtitle track; every line of VO is a formula (<code>=PULSE.FLAG(…)</code>).</li><li><b>Name box</b> — scene label (B2:G5 · PULSE · G4 · CTA).</li><li><b>Ink selection + fill handle</b> — the human, and the camera.</li><li><b>Dashed teal selection</b> — Acme Pulse scanning rows in the background.</li><li><b>Conditional-format tint + coral error triangle</b> — the anomaly, with a cell note as the alert card.</li><li><b>Cell-pixel lettering / sheet tabs</b> — logo drawn in filled cells; tabs show dashboard overload.</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Marquee morph</b> — the selection resizes/jumps between ranges, expo.inOut 0.35 s, always landing on a beat (every 2 beats at 120 BPM = 1 s).</li><li><b>Fill-handle cascade</b> — values fill down row by row, stagger 0.015 s, total ≈ 1 beat (0.5 s) so a whole column resolves inside one kick.</li><li><b>Cell-pixel reveal</b> — pixels light in a random-seeded order over 0.6 s; the last pixel (the coral dot) is quantised onto the drop at 0:08.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> every team already lives in sheets, so the stage reads instantly, and a second dashed selection is the most literal possible picture of “an agent working in the background next to you”. <b>Risk:</b> gridlines become noise at feed size, so frame 6–8 columns and keep the headline in a merged range.</p><p><b>Adapt to your product:</b> put your own metrics or records in the rows and your product’s function name in the formula bar (<code>=YOURAPP.CHECK()</code>); the agent selection becomes whatever your product does automatically.</p><p><b>References:</b> <a href="https://kierandixon.com/google-sheets-animation/">kierandixon.com — Google Sheets animation</a></p></div>
+</div>
+</body>
+</html>

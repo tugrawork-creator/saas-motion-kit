@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>049 · The Conductor's Score — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t049-bg{background:#F7F2E4;background-image:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.7),transparent 60%)}
+.t049-s{position:absolute;inset:0;width:100%;height:100%}
+.t049-m{font-family:var(--mono)}
+.t049-se{font-family:var(--serif)}
+.t049-sa{font-family:var(--sans)}
+.t049-mark{position:absolute;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 049 · Metaphor concepts</div>
+    <h1>The Conductor's Score</h1>
+    <p class="dek">The film is a live orchestral score on ivory paper. Each staff is a metric, the notes are its values, and a baton-shaped playhead sweeps in time with the soundtrack, trailing swooping ligatures. One note goes sour; Pulse circles it in coral and the human gives the cue that brings it back into tune.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- F1 · HOOK -->
+  <div class="cw"><div class="cell t049-bg" id="t049-f1">
+    <svg class="t049-s" viewBox="0 0 1080 1080">
+      <defs>
+        <g id="t049-st"><line x1="0" y1="0" x2="760" y2="0"/><line x1="0" y1="16" x2="760" y2="16"/><line x1="0" y1="32" x2="760" y2="32"/><line x1="0" y1="48" x2="760" y2="48"/><line x1="0" y1="64" x2="760" y2="64"/></g>
+        <g id="t049-stt"><line x1="0" y1="0" x2="760" y2="0"/><line x1="0" y1="8" x2="760" y2="8"/><line x1="0" y1="16" x2="760" y2="16"/><line x1="0" y1="24" x2="760" y2="24"/><line x1="0" y1="32" x2="760" y2="32"/></g>
+      </defs>
+      <g class="t049-se" font-size="84" fill="#0E1726" letter-spacing="-1">
+        <text x="80" y="170">38 dashboards.</text>
+        <text x="80" y="260"><tspan font-style="italic" fill="#0B6E6E">Nobody</tspan> conducting.</text>
+      </g>
+      <text class="t049-se" x="80" y="336" font-size="34" font-style="italic" fill="#5A6475">Friday — presto, senza direttore</text>
+      <g stroke="#9C9384" stroke-width="1.5">
+        <use href="#t049-stt" x="250" y="390"/><use href="#t049-stt" x="250" y="460"/><use href="#t049-stt" x="250" y="530"/><use href="#t049-stt" x="250" y="600"/><use href="#t049-stt" x="250" y="670"/><use href="#t049-stt" x="250" y="740"/><use href="#t049-stt" x="250" y="810"/><use href="#t049-stt" x="250" y="880"/>
+      </g>
+      <g class="t049-m" font-size="20" fill="#5A6475" text-anchor="end">
+        <text x="230" y="414">Signups</text><text x="230" y="484">Active users</text><text x="230" y="554">p95 latency</text><text x="230" y="624">Error rate</text><text x="230" y="694">Checkout</text><text x="230" y="764">Events/sec</text><text x="230" y="834">Deploys</text><text x="230" y="904">+ 31 more</text>
+      </g>
+      <g fill="#0E1726">
+        <ellipse cx="300" cy="398" rx="8" ry="6"/><ellipse cx="380" cy="406" rx="8" ry="6"/><ellipse cx="470" cy="394" rx="8" ry="6"/><ellipse cx="620" cy="402" rx="8" ry="6"/><ellipse cx="790" cy="410" rx="8" ry="6"/><ellipse cx="930" cy="398" rx="8" ry="6"/>
+        <ellipse cx="330" cy="472" rx="8" ry="6"/><ellipse cx="520" cy="480" rx="8" ry="6"/><ellipse cx="700" cy="468" rx="8" ry="6"/><ellipse cx="880" cy="476" rx="8" ry="6"/>
+        <ellipse cx="290" cy="546" rx="8" ry="6"/><ellipse cx="410" cy="538" rx="8" ry="6"/><ellipse cx="560" cy="550" rx="8" ry="6"/><ellipse cx="740" cy="542" rx="8" ry="6"/><ellipse cx="960" cy="534" rx="8" ry="6"/>
+        <ellipse cx="350" cy="612" rx="8" ry="6"/><ellipse cx="600" cy="608" rx="8" ry="6"/><ellipse cx="850" cy="616" rx="8" ry="6"/>
+        <ellipse cx="310" cy="678" rx="8" ry="6"/><ellipse cx="450" cy="686" rx="8" ry="6"/><ellipse cx="650" cy="682" rx="8" ry="6"/>
+        <ellipse cx="380" cy="752" rx="8" ry="6"/><ellipse cx="540" cy="748" rx="8" ry="6"/><ellipse cx="720" cy="756" rx="8" ry="6"/><ellipse cx="900" cy="744" rx="8" ry="6"/>
+        <ellipse cx="480" cy="822" rx="8" ry="6"/><ellipse cx="820" cy="818" rx="8" ry="6"/>
+        <ellipse cx="300" cy="892" rx="8" ry="6"/><ellipse cx="500" cy="888" rx="8" ry="6"/><ellipse cx="700" cy="896" rx="8" ry="6"/><ellipse cx="930" cy="884" rx="8" ry="6"/>
+      </g>
+      <!-- the note nobody heard -->
+      <ellipse cx="880" cy="720" rx="9" ry="7" fill="#9C9384"/>
+      <circle cx="880" cy="720" r="26" fill="none" stroke="#B8AC93" stroke-width="2.5" stroke-dasharray="5 6"/>
+      <text class="t049-m" x="840" y="1000" font-size="20" fill="#8A7F6A">heard: Fri 17:40</text>
+      <text class="t049-m" x="80" y="1000" font-size="20" fill="#8A7F6A" letter-spacing="3">SCORE · 38 PARTS · p. 1</text>
+    </svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The camera scrolls right across an overcrowded 38-part score; notes pop on every 8th but nobody is conducting.</b> On the downbeat before the drop one grey note below the Checkout staff gets a dashed ring and "heard: Fri 17:40" types in.</p></div>
+
+  <!-- F2 · REVEAL -->
+  <div class="cw"><div class="cell t049-bg" id="t049-f2">
+    <svg class="t049-s" viewBox="0 0 1080 1080">
+      <g stroke="#CFC6B3" stroke-width="1.5"><use href="#t049-st" x="160" y="700"/><use href="#t049-st" x="160" y="840"/></g>
+      <g transform="translate(0 400) scale(1 .6)"><path d="M100 900 C 260 520, 420 980, 560 640 S 860 360, 1000 560" fill="none" stroke="#0FA3A3" stroke-width="12" stroke-linecap="round"/>
+      <path d="M120 960 C 300 640, 460 1000, 600 720 S 880 480, 990 640" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+      <circle cx="1000" cy="560" r="12" fill="#FF5A4E"/></g>
+      <text class="t049-m" x="540" y="120" font-size="22" fill="#8A7F6A" text-anchor="middle" letter-spacing="4">OP. 1 · FOR 14 METRICS AND ONE TEAM</text>
+      <text class="t049-sa" x="540" y="420" font-size="130" font-weight="800" fill="#0E1726" text-anchor="middle" letter-spacing="-4">Acme Pulse</text>
+      <text class="t049-se" x="540" y="494" font-size="48" font-style="italic" fill="#0B6E6E" text-anchor="middle">conducted, every minute</text>
+      <text class="t049-se" x="160" y="620" font-size="34" font-style="italic" fill="#5A6475">♩ = 120</text>
+    </svg>
+    <img class="t049-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*480);top:calc(var(--u)*160);width:calc(var(--u)*120);height:calc(var(--u)*120)">
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The baton's ligature swoops left to right across the page (path draw, power2.out 0.6 s) and lands on the coral dot exactly on the drop.</b> The title page sets: the mark, "Acme Pulse", then the italic credit on the next beat.</p></div>
+
+  <!-- F3 · PROOF MOMENT -->
+  <div class="cw"><div class="cell t049-bg" id="t049-f3">
+    <svg class="t049-s" viewBox="0 0 1080 1080">
+      <g class="t049-m" font-size="20" fill="#8A7F6A" letter-spacing="2"><text x="70" y="84">LIVE SCORE · ♩ = 120</text><text x="1010" y="84" text-anchor="end">BAR 12 · 09:42</text></g>
+      <g stroke="#9C9384" stroke-width="1.5"><use href="#t049-st" x="250" y="150"/><use href="#t049-st" x="250" y="290"/><use href="#t049-st" x="250" y="430"/><use href="#t049-st" x="250" y="660"/></g>
+      <g stroke="#0E1726" stroke-width="2"><line x1="250" y1="150" x2="250" y2="724"/><line x1="500" y1="150" x2="500" y2="494"/><line x1="500" y1="660" x2="500" y2="724"/><line x1="1010" y1="150" x2="1010" y2="494"/><line x1="1010" y1="660" x2="1010" y2="724"/></g>
+      <g class="t049-se" font-size="30" font-style="italic" fill="#0E1726" text-anchor="end">
+        <text x="232" y="192">Signups</text><text x="232" y="332">Active users</text><text x="232" y="472" fill="#C8322A">Checkout</text><text x="232" y="702">p95 latency</text>
+      </g>
+      <!-- notes: numeral heads -->
+      <g fill="#0E1726"><ellipse cx="320" cy="182" rx="11" ry="8"/><ellipse cx="420" cy="174" rx="11" ry="8"/><ellipse cx="560" cy="182" rx="11" ry="8"/><ellipse cx="660" cy="166" rx="11" ry="8"/><ellipse cx="800" cy="174" rx="11" ry="8"/><ellipse cx="930" cy="166" rx="11" ry="8"/>
+        <ellipse cx="320" cy="322" rx="11" ry="8"/><ellipse cx="420" cy="314" rx="11" ry="8"/><ellipse cx="560" cy="314" rx="11" ry="8"/><ellipse cx="660" cy="306" rx="11" ry="8"/><ellipse cx="800" cy="314" rx="11" ry="8"/><ellipse cx="930" cy="306" rx="11" ry="8"/>
+        <ellipse cx="320" cy="446" rx="11" ry="8"/><ellipse cx="420" cy="454" rx="11" ry="8"/><ellipse cx="560" cy="446" rx="11" ry="8"/><ellipse cx="660" cy="454" rx="11" ry="8"/>
+        <ellipse cx="320" cy="692" rx="11" ry="8"/><ellipse cx="420" cy="684" rx="11" ry="8"/><ellipse cx="560" cy="692" rx="11" ry="8"/><ellipse cx="660" cy="684" rx="11" ry="8"/><ellipse cx="800" cy="692" rx="11" ry="8"/><ellipse cx="930" cy="684" rx="11" ry="8"/></g>
+      <g stroke="#0E1726" stroke-width="2.5"><line x1="331" y1="182" x2="331" y2="130"/><line x1="431" y1="174" x2="431" y2="122"/><line x1="571" y1="182" x2="571" y2="130"/><line x1="671" y1="166" x2="671" y2="114"/><line x1="811" y1="174" x2="811" y2="122"/><line x1="941" y1="166" x2="941" y2="114"/>
+        <line x1="331" y1="446" x2="331" y2="394"/><line x1="431" y1="454" x2="431" y2="402"/><line x1="571" y1="446" x2="571" y2="394"/><line x1="671" y1="454" x2="671" y2="402"/></g>
+      <g class="t049-m" font-size="20" fill="#5A6475" text-anchor="middle"><text x="320" y="258">1,204</text><text x="560" y="258">1,211</text><text x="800" y="258">1,198</text><text x="320" y="398">18.9k</text><text x="660" y="398">18.9k</text><text x="320" y="652">212</text><text x="660" y="652">211</text><text x="930" y="652">212</text><text x="420" y="524">2.94</text><text x="660" y="524">2.95</text></g>
+      <!-- ghost correct note + sour note -->
+      <ellipse cx="800" cy="446" rx="11" ry="8" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-dasharray="4 4"/>
+      <path d="M800 470 L800 560" stroke="#FF8A80" stroke-width="2" stroke-dasharray="4 6"/>
+      <g stroke="#9C9384" stroke-width="1.5"><line x1="776" y1="510" x2="824" y2="510"/><line x1="776" y1="526" x2="824" y2="526"/><line x1="776" y1="542" x2="824" y2="542"/><line x1="776" y1="558" x2="824" y2="558"/></g>
+      <ellipse cx="800" cy="580" rx="13" ry="10" fill="#FF5A4E"/>
+      <circle cx="800" cy="580" r="36" fill="none" stroke="#FF5A4E" stroke-width="4"/>
+      <text class="t049-m" x="800" y="642" font-size="22" font-weight="600" fill="#C8322A" text-anchor="middle">2.41</text>
+      <g class="t049-m"><text x="850" y="566" font-size="40" font-weight="600" fill="#FF5A4E">−18%</text><text x="850" y="600" font-size="20" fill="#0E1726">since 09:42</text><text x="850" y="628" font-size="20" fill="#0E1726">deploy #2231</text></g>
+      <!-- baton playhead -->
+      <line x1="740" y1="130" x2="740" y2="744" stroke="#0FA3A3" stroke-width="4"/>
+      <path d="M740 130 C 700 90, 620 100, 560 140" fill="none" stroke="#0FA3A3" stroke-width="3" opacity=".6"/>
+      <circle cx="740" cy="130" r="8" fill="#0FA3A3"/>
+      <!-- cue -->
+      <rect x="60" y="790" width="960" height="230" rx="18" fill="#FFFDF6" stroke="#D9CFBA" stroke-width="2"/>
+      <text class="t049-se" x="96" y="870" font-size="48" fill="#0E1726">Conductor's <tspan font-style="italic" fill="#0B6E6E">cue</tspan></text>
+      <text class="t049-m" x="96" y="918" font-size="20" fill="#5A6475">bar 12 · Checkout is out of tune</text>
+      <text class="t049-m" x="96" y="950" font-size="20" fill="#5A6475">you give the downbeat</text>
+      <rect x="520" y="846" width="240" height="100" rx="18" fill="#FF5A4E"/>
+      <text class="t049-sa" x="640" y="908" font-size="34" font-weight="700" fill="#fff" text-anchor="middle">Roll back</text>
+      <rect x="776" y="846" width="220" height="100" rx="18" fill="none" stroke="#0E1726" stroke-width="3"/>
+      <text class="t049-sa" x="886" y="906" font-size="28" font-weight="600" fill="#0E1726" text-anchor="middle">Acknowledge</text>
+    </svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The baton playhead sweeps left to right one bar per 2 s; every note pops 1→1.15→1 exactly as it passes.</b> At bar 12 the Checkout note wobbles and sinks below the staff, the coral ring draws on, and on the human's cue ("Roll back") it slides back up to the dashed teal pitch with elastic.out.</p></div>
+
+  <!-- F4 · CTA -->
+  <div class="cw"><div class="cell t049-bg" id="t049-f4">
+    <svg class="t049-s" viewBox="0 0 1080 1080">
+      <text class="t049-sa" x="224" y="206" font-size="80" font-weight="800" fill="#0E1726" letter-spacing="-2">Acme Pulse</text>
+      <g class="t049-se" font-size="108" fill="#0E1726" letter-spacing="-1">
+        <text x="80" y="400">Every metric.</text>
+        <text x="80" y="510" font-style="italic" fill="#0B6E6E">Every minute.</text>
+      </g>
+      <rect x="80" y="590" width="330" height="106" rx="18" fill="#FF5A4E"/>
+      <text class="t049-sa" x="245" y="657" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Start free</text>
+      <g stroke="#9C9384" stroke-width="1.5"><line x1="80" y1="800" x2="1000" y2="800"/><line x1="80" y1="816" x2="1000" y2="816"/><line x1="80" y1="832" x2="1000" y2="832"/><line x1="80" y1="848" x2="1000" y2="848"/><line x1="80" y1="864" x2="1000" y2="864"/></g>
+      <rect x="966" y="800" width="4" height="64" fill="#0E1726"/><rect x="980" y="800" width="16" height="64" fill="#0E1726"/>
+      <g fill="#0FA3A3"><ellipse cx="860" cy="856" rx="12" ry="9"/><ellipse cx="860" cy="832" rx="12" ry="9"/><ellipse cx="860" cy="808" rx="12" ry="9"/></g>
+      <line x1="872" y1="856" x2="872" y2="752" stroke="#0FA3A3" stroke-width="3"/>
+      <text class="t049-se" x="700" y="940" font-size="44" font-style="italic" fill="#0E1726">fine.</text>
+      <text class="t049-m" x="80" y="940" font-size="20" fill="#8A7F6A" letter-spacing="3">RESOLVED IN 6 MIN · ALL 14 IN TUNE</text>
+    </svg>
+    <img class="t049-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*80);top:calc(var(--u)*130);width:calc(var(--u)*120);height:calc(var(--u)*120)">
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The score scrolls to its last bar; a teal final chord stacks bottom to top, one note per beat.</b> "Every metric." on beat 1, "Every minute." on beat 3, and the double barline and "fine." land on the last downbeat with the button.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Staves</b> — one five-line staff per metric, labelled in italic serif.</li>
+    <li><b>Number-notes</b> — note heads on stems with the metric value set as the lyric.</li>
+    <li><b>Baton playhead</b> — teal vertical line with a trailing swooping ligature.</li>
+    <li><b>Dissonance ring</b> — coral circle and ledger lines around the note that fell out of range.</li>
+    <li><b>Ghost pitch</b> — dashed teal note head showing where the value should be.</li>
+    <li><b>Conductor's cue + final barline</b> — the human decision, then "fine." as the CTA.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>On-beat pops</b> — each note scales 1→1.15→1 (0.12 s up, 0.2 s down) exactly when the playhead crosses it; one bar = 2 s at 120 BPM.</li>
+    <li><b>Baton ligature</b> — the swoop path draws along the baton's trail and fades, power2.out 0.6 s, always landing on a downbeat.</li>
+    <li><b>Retune</b> — the sour note wobbles ±4° for two 8ths, then slides to the ghost pitch with elastic.out(1, 0.5) in 0.6 s on the cue.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>A music-driven film about a score is self-reinforcing: every cut is literally on the beat, and "one note out of tune" is an instantly legible anomaly. Risk: with sound off the sour-note gag must read visually, so the note must fall well below the staff, wobble and turn coral.</p>
+    <p><b>Adapt to your product:</b> Give each of your signals its own staff (queues, regions, customers, costs) and let the playhead be your product's run or sync cycle.</p>
+    <p><b>References:</b> <a href="https://www.pentagram.com/work/the-conductor">Pentagram, The Conductor</a> · <a href="https://www.openculture.com/2018/01/the-movements-of-a-symphony-conductor-get-artistically-visualized-in-an-avant-garde-motion-capture-animation.html">Open Culture, conductor motion visualised</a></p>
+  </div>
+</div>
+</body>
+</html>

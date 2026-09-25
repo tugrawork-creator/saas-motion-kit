@@ -1,0 +1,75 @@
+{
+ "id": "075",
+ "slug": "8-bit-sidekick",
+ "name": "8-Bit Sidekick",
+ "category": "character",
+ "summary": "Pulse as a pixel-art sidekick: metrics are platforms, the checkout block crumbles, a red ‘!’ pops and Player 1 chooses ROLL BACK.",
+ "look": "Dark 8-bit night palette with teal and coral pixels, crisp-edge sprites, double-bordered RPG dialog boxes and big mono HUD numbers with hard pixel shadows.",
+ "components": [
+  {
+   "name": "Pixel sprite",
+   "role": "Pulse: 12×12 teal critter with a coral antenna dot, 3 poses (idle, wide-eyed, happy)"
+  },
+  {
+   "name": "Alert ‘!’",
+   "role": "red exclamation over the head = the moment of detection"
+  },
+  {
+   "name": "Metric platforms",
+   "role": "each metric is a column you can stand on; the anomaly crumbles"
+  },
+  {
+   "name": "Dialog / choice box",
+   "role": "double-bordered RPG box; the human picks ROLL BACK or ACKNOWLEDGE"
+  },
+  {
+   "name": "HUD counters",
+   "role": "DASHBOARDS 38, big −18% readout, score-style numbers"
+  },
+  {
+   "name": "Player 1 sprite",
+   "role": "the human teammate; always the one who makes the decision"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Stepped frames",
+   "how": "every sprite animates on 2s at 12 fps (no tweening); pose swaps land exactly on 8th notes (0.25 s at 120 BPM)"
+  },
+  {
+   "name": "Alert pop",
+   "how": "‘!’ appears in 2 frames (scale 0→1.3→1, steps(2)) with a square-wave blip on the backbeat"
+  },
+  {
+   "name": "Typewriter box",
+   "how": "dialog text reveals 3 characters per frame, pauses on punctuation; box opens with a 4-frame vertical wipe on the bar downbeat"
+  }
+ ],
+ "story": "Hook: a lost player in a maze of 38 dashboard rooms, 'How many dashboards did you check today?' in a dialog box. Reveal: 'PLAYER 2 HAS JOINED' and Pulse lands under the ACME PULSE logo. Proof: the checkout platform crumbles (−18% since 09:42 after deploy #2231), a red '!' pops over Pulse, the player picks ROLL BACK. CTA: STAGE CLEAR, resolved in 6 min, 'You ship. Pulse watches.' and a START FREE button.",
+ "adapt": "Turn your product’s objects (metrics, tickets, builds, orders) into platforms or rooms, keep one sprite as your agent, and put your real primary action in the choice box.",
+ "references": [
+  {
+   "url": "https://knowyourmeme.com/memes/metal-gear-solid-enemy-alert",
+   "note": "the red ‘!’ alert over a character’s head as instant ‘detected’ grammar",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Sprite_(computer_graphics)",
+   "note": "what sprites are and how 8-bit hardware drew them",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Retro-game nostalgia can feel gimmicky for serious buyers and pixel text is hard to read small — keep the data box big, use mono with pixel shadows rather than a bitmap font."
+ },
+ "best_for": [
+  "developer tools",
+  "gaming-adjacent SaaS",
+  "social ads",
+  "startups"
+ ],
+ "file": "themes/075-8-bit-sidekick.html"
+}

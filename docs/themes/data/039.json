@@ -1,0 +1,25 @@
+{"id":"039","slug":"long-exposure-light-trails","name":"Long-Exposure Light Trails","category":"light",
+ "summary":"Night photography with the shutter held open: metrics are teal light trails racing to the vanishing point, and one coral trail swerves out of its lane on the record.",
+ "look":"A dark navy highway converging on a vanishing point, overhead gantry signs and a shutter HUD. Metrics are glowing tubes (blurred wide stroke plus sharp core); the anomaly is a coral trail that leaves its lane in broken dashes, and the end card is the whole exposure frozen as a white-bordered print.",
+ "components":[
+  {"name":"Perspective road","role":"lane lines converging on a vanishing point on deep navy; the stream"},
+  {"name":"Light tubes","role":"SVG paths with blurred wide stroke plus sharp core; healthy metrics"},
+  {"name":"Gantry signs","role":"overhead lane signs labelled with metric names; also the reveal lockup"},
+  {"name":"Aberrant trail","role":"coral streak that leaves its lane with dashed stutters; the anomaly"},
+  {"name":"Shutter HUD","role":"'f/8 · 30 s · ISO 100 · ● shutter open'; always-on recording made visible"},
+  {"name":"Frozen print","role":"white-bordered photo of the whole exposure; the end card's proof"}
+ ],
+ "motion":[
+  {"name":"Trail draw","how":"stroke-dashoffset with gradient-masked head and fading tail; one new streak per beat at 120 BPM"},
+  {"name":"Warp speed-up","how":"perspective widens (scale 1 → 1.4, expo.in) across the pre-drop build, slams back on the drop"},
+  {"name":"Shutter close","how":"black iris wipes in on a downbeat (0.25 s) and the trails freeze as a still"}
+ ],
+ "story":"Hook: dashboard gantries (DASH 32–38) rush toward camera with the shutter closed, nothing recorded: 'How many dashboards did you check today?'. Reveal: on the drop the shutter opens, teal trails shoot out of the vanishing point and an overhead sign carries the Acme mark and 'Acme Pulse'. Proof: trails flow under lane signs Signups, Active users, p95 212 ms and Checkout; at 09:42 the checkout trail swerves out in coral dashes and a card reads 'Checkout conversion −18% · since 09:42 · after deploy #2231' with Roll back. CTA: an iris closes, the exposure freezes as a print '09:44 · caught on record', then 'Every metric. Every minute.' and Start free.",
+ "adapt":"Name the lanes after your own streams (orders, builds, API routes, regions) and let the aberrant trail be the thing your product catches.",
+ "references":[
+  {"url":"https://tympanus.net/codrops/2019/11/13/high-speed-light-trails-in-three-js/","note":"high-speed light trails in Three.js","verified":true},
+  {"url":"https://github.com/Anemolo/Infinite-Lights","note":"infinite light-trails source","verified":false}
+ ],
+ "fit":{"readability":2,"trust":2,"effort":"med","risk":"The synthwave neon-highway cliché; stay restrained with navy, teal and coral only, no pink or purple."},
+ "best_for":["data pipelines","CI/CD","logistics & ops","API platforms"],
+ "file":"themes/039-long-exposure-light-trails.html"}

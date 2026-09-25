@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>015 · Rubber Stamp &amp; Riso Ink — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t015- ===== */
+@property --x{syntax:'<number>';inherits:false;initial-value:0}
+@property --y{syntax:'<number>';inherits:false;initial-value:0}
+@property --w{syntax:'*';inherits:false}
+@property --h{syntax:'*';inherits:false}
+@property --r{syntax:'<number>';inherits:false;initial-value:0}
+.t015-bg{position:absolute;inset:0;background:radial-gradient(120% 100% at 20% 10%,#FBF8F0 0%,#F3EEE2 60%,#EAE3D3 100%)}
+.t015-grain{position:absolute;inset:0;width:100%;height:100%;opacity:.55;mix-blend-mode:multiply;pointer-events:none}
+.t015-a{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h));transform:rotate(calc(var(--r)*1deg))}
+.t015-tl{color:#0B8F8F} .t015-co{color:#FF5A4E}
+.t015-mis{position:relative;display:inline-block;color:#0B8F8F;mix-blend-mode:multiply}
+.t015-mis::after{content:attr(data-t);position:absolute;left:calc(var(--u)*3.5);top:calc(var(--u)*2.5);color:#FF5A4E;opacity:.9;mix-blend-mode:multiply;white-space:nowrap}
+.t015-mis.inv{color:#FF5A4E} .t015-mis.inv::after{color:#0B8F8F;opacity:.85}
+.t015-h{font:400 calc(var(--u)*80)/1.02 var(--serif);letter-spacing:-.01em}
+.t015-h em{font-style:italic}
+.t015-hero{font:400 calc(var(--u)*176)/1 var(--serif);letter-spacing:-.02em;white-space:nowrap}
+.t015-big{font:400 calc(var(--u)*132)/1 var(--serif);letter-spacing:-.02em;white-space:nowrap}
+.t015-lbl{font:600 calc(var(--u)*22)/1.2 var(--mono);letter-spacing:.14em;color:#0B8F8F}
+.t015-ht{border-radius:50%;background:radial-gradient(circle,var(--c) 38%,transparent 42%) 0 0/calc(var(--u)*16) calc(var(--u)*16);-webkit-mask-image:radial-gradient(circle,#000 25%,transparent 70%);mask-image:radial-gradient(circle,#000 25%,transparent 70%);mix-blend-mode:multiply;opacity:.8}
+.t015-card{background:#FCFAF4;box-shadow:0 calc(var(--u)*3) calc(var(--u)*10) rgba(60,50,30,.18);padding:calc(var(--u)*24);border:calc(var(--u)*3) solid rgba(11,143,143,.8)}
+.t015-card .t015-lbl{font-size:calc(var(--u)*22)}
+.t015-bars{display:flex;align-items:flex-end;gap:calc(var(--u)*10);height:calc(var(--u)*150);margin-top:calc(var(--u)*20)}
+.t015-bars i{flex:1;background:radial-gradient(circle,#0B8F8F 45%,transparent 50%) 0 0/calc(var(--u)*9) calc(var(--u)*9);mix-blend-mode:multiply}
+.t015-bars i.c{background:radial-gradient(circle,#FF5A4E 45%,transparent 50%) 0 0/calc(var(--u)*9) calc(var(--u)*9)}
+.t015-stamp{display:flex;flex-direction:column;align-items:center;justify-content:center;border:calc(var(--u)*9) solid currentColor;outline:calc(var(--u)*3) solid currentColor;outline-offset:calc(var(--u)*7);border-radius:calc(var(--u)*10);font:800 calc(var(--u)*64)/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;mix-blend-mode:multiply;filter:url(#t015-ink);text-align:center}
+.t015-stamp small{display:block;font:600 calc(var(--u)*24)/1 var(--mono);letter-spacing:.14em;margin-top:calc(var(--u)*12)}
+.t015-stamp.sm{border-width:calc(var(--u)*5);outline:0;font-size:calc(var(--u)*30);padding:calc(var(--u)*8) calc(var(--u)*14)}
+.t015-stamp.fill{background:#FF5A4E;color:#FF5A4E;outline-color:#FF5A4E}
+.t015-stamp.fill span{color:#FCFAF4}
+.t015-slip{background:#FCFAF4;box-shadow:0 calc(var(--u)*2) calc(var(--u)*8) rgba(60,50,30,.16);padding:calc(var(--u)*22) calc(var(--u)*24);border-top:calc(var(--u)*10) solid rgba(11,143,143,.85)}
+.t015-slip.co{border-top-color:#FF5A4E}
+.t015-val{font:600 calc(var(--u)*40)/1 var(--mono);color:#0E1726;margin-top:calc(var(--u)*14)}
+.t015-lock{display:flex;align-items:center;gap:calc(var(--u)*20);font:800 calc(var(--u)*56)/1 var(--sans);color:#0E1726}
+.t015-lock img{width:calc(var(--u)*88);height:calc(var(--u)*88)}
+.t015-mark{width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--w))}
+.t015-roundsvg{overflow:visible;mix-blend-mode:multiply;filter:url(#t015-ink)}
+.t015-rs{font:600 18px var(--mono);letter-spacing:.2em;fill:#0B8F8F}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="t015-ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -4 3.3" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in" result="s"/><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7" result="w"/><feDisplacementMap in="s" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="t015-gr"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" seed="11"/><feColorMatrix type="matrix" values="0 0 0 0 0.35  0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0.22 0"/></filter>
+</svg>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 015 · Typography &amp; graphic systems</div>
+    <h1>Rubber Stamp &amp; Riso Ink</h1>
+    <p class="dek">Everything is printed on warm stock in two riso inks, teal and fluorescent coral, with slight misregistration, halftone dots and translucent overprints. Pulse works like a clerk with two rubber stamps: teal "✓ WATCHED" on every healthy slip, and one coral "HOLD — YOUR CALL" slammed onto the anomaly.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t015-f1"><div class="t015-bg"></div><svg class="t015-grain" aria-hidden="true"><rect width="100%" height="100%" filter="url(#t015-gr)"/></svg>
+    <div class="t015-a t015-h" style="--x:60;--y:66;--w:960"><span class="t015-mis" data-t="And the drop still">And the drop still</span><br><span class="t015-mis" data-t="shipped on">shipped on</span> <em class="t015-co">Friday.</em></div>
+    <div class="t015-a t015-card" style="--x:90;--y:330;--w:440;--h:320;--r:-6"><div class="t015-lbl">DASHBOARD 07 · FUNNEL</div><div class="t015-bars"><i style="height:60%"></i><i style="height:74%"></i><i style="height:66%"></i><i style="height:82%"></i><i style="height:78%"></i><i style="height:88%"></i></div></div>
+    <div class="t015-a t015-card" style="--x:520;--y:300;--w:470;--h:330;--r:5"><div class="t015-lbl">DASHBOARD 22 · REVENUE</div><div class="t015-bars"><i style="height:70%"></i><i style="height:64%"></i><i style="height:80%"></i><i style="height:76%"></i><i style="height:84%"></i><i style="height:90%"></i></div></div>
+    <div class="t015-a t015-card" style="--x:80;--y:580;--w:500;--h:300;--r:-1.5"><div class="t015-lbl">DASHBOARD 38 · CHECKOUT</div><div class="t015-bars"><i style="height:80%"></i><i style="height:82%"></i><i style="height:84%"></i><i style="height:80%"></i><i class="c" style="height:40%"></i><i class="c" style="height:36%"></i></div></div>
+    <div class="t015-a t015-stamp t015-co" style="--x:390;--y:700;--w:620;--h:190;--r:-8;font-size:calc(var(--u)*58);white-space:nowrap">Found too late<small>FRI · 17:04 · BY A CUSTOMER</small></div>
+    <div class="t015-a t015-lbl" style="--x:60;--y:976">38 DASHBOARDS · 3 CHECKED</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Cards slide in from the right, stacking with a little rotation, one per beat.</b> The coral "FOUND TOO LATE" stamp slams down (scale 1.4 → 1) on beat 1 of bar 4 with a two-frame shake, and the headline plates drift apart by 2 px.</p></div>
+
+  <div class="cw"><div class="cell" id="t015-f2"><div class="t015-bg"></div><svg class="t015-grain" aria-hidden="true"><rect width="100%" height="100%" filter="url(#t015-gr)"/></svg>
+    <div class="t015-a t015-ht" style="--x:220;--y:90;--w:640;--h:640;--c:#FF5A4E"></div>
+    <img class="t015-a t015-mark" style="--x:420;--y:200;--w:240" src="../assets/brand/acme-mark.svg" alt="">
+    <div class="t015-a t015-hero" style="--x:0;--y:520;--w:1080;text-align:center"><span class="t015-mis" data-t="Acme">Acme</span> <span class="t015-mis inv" data-t="Pulse" style="font-style:italic">Pulse</span></div>
+    <svg class="t015-a t015-roundsvg" style="--x:760;--y:730;--w:240;--h:240;--r:-14" viewBox="0 0 240 240"><defs><path id="t015-circ" d="M120 120 m-86 0 a86 86 0 1 1 172 0 a86 86 0 1 1 -172 0"/></defs>
+      <circle cx="120" cy="120" r="114" fill="none" stroke="#0B8F8F" stroke-width="7"/><circle cx="120" cy="120" r="62" fill="none" stroke="#0B8F8F" stroke-width="4"/>
+      <text class="t015-rs"><textPath href="#t015-circ">NOW WATCHING · 14 METRICS · EVERY MINUTE ·</textPath></text>
+      <text x="120" y="140" text-anchor="middle" style="font:800 56px var(--sans);fill:#0B8F8F">ON</text></svg>
+    <div class="t015-a t015-lbl" style="--x:60;--y:976">PRINTED IN TWO INKS · TEAL + CORAL</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the teal plate prints first, the coral plate lands a frame later, 6 px off.</b> The halftone disk blooms outward from the mark; the round "NOW WATCHING" stamp thuds in on the next snare, leaving a 40% ghost as it lifts.</p></div>
+
+  <div class="cw"><div class="cell" id="t015-f3"><div class="t015-bg"></div><svg class="t015-grain" aria-hidden="true"><rect width="100%" height="100%" filter="url(#t015-gr)"/></svg>
+    <div class="t015-a t015-lbl" style="--x:60;--y:62">INSPECTION SLIPS · 09:44</div>
+    <div class="t015-a t015-slip" style="--x:60;--y:110;--w:290;--h:180;--r:-1.5"><div class="t015-lbl">SIGNUPS</div><div class="t015-val">1,204</div></div>
+    <div class="t015-a t015-slip" style="--x:395;--y:110;--w:290;--h:180;--r:1"><div class="t015-lbl">P95 LATENCY</div><div class="t015-val">212 ms</div></div>
+    <div class="t015-a t015-slip" style="--x:730;--y:110;--w:290;--h:180;--r:-1"><div class="t015-lbl">ERROR RATE</div><div class="t015-val">0.4 %</div></div>
+    <div class="t015-a t015-stamp sm t015-tl" style="--x:170;--y:238;--r:-8">✓ Watched</div>
+    <div class="t015-a t015-stamp sm t015-tl" style="--x:505;--y:240;--r:6">✓ Watched</div>
+    <div class="t015-a t015-stamp sm t015-tl" style="--x:840;--y:238;--r:-5">✓ Watched</div>
+    <div class="t015-a t015-slip co" style="--x:60;--y:340;--w:960;--h:400"><div class="t015-lbl t015-co">CHECKOUT CONVERSION</div>
+      <div class="t015-big" style="margin-top:calc(var(--u)*24);font-size:calc(var(--u)*190)"><span class="t015-mis inv" data-t="−18%">−18%</span></div>
+      <div class="t015-lbl" style="margin-top:calc(var(--u)*36);color:#0E1726">SINCE 09:42 · AFTER DEPLOY #2231</div></div>
+    <div class="t015-a t015-stamp t015-co" style="--x:620;--y:376;--w:380;--h:196;--r:-9;font-size:calc(var(--u)*60)">Hold<small>YOUR CALL · 09:44</small></div>
+    <div class="t015-a t015-stamp fill" style="--x:60;--y:800;--w:440;--h:130;--r:-2;font-size:calc(var(--u)*52)"><span>Roll back</span></div>
+    <div class="t015-a t015-stamp t015-tl" style="--x:560;--y:806;--w:400;--h:118;--r:1.5;font-size:calc(var(--u)*40);outline:0">Acknowledge</div>
+    <div class="t015-a t015-lbl" style="--x:60;--y:980">RESOLVED IN 6 MIN</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Slips feed in left → right; a teal "✓ WATCHED" stamp lands on each on consecutive off-beats.</b> The checkout slip slides up, the coral "HOLD" stamp slams on the downbeat (120 ms, power4.in) and the human's "ROLL BACK" stamp prints solid coral on the next bar.</p></div>
+
+  <div class="cw"><div class="cell" id="t015-f4"><div class="t015-bg"></div><svg class="t015-grain" aria-hidden="true"><rect width="100%" height="100%" filter="url(#t015-gr)"/></svg>
+    <div class="t015-a t015-ht" style="--x:620;--y:300;--w:440;--h:440;--c:#0B8F8F"></div>
+    <div class="t015-a t015-big" style="--x:60;--y:90;--w:960"><span class="t015-mis" data-t="You ship.">You ship.</span></div>
+    <div class="t015-a t015-big" style="--x:60;--y:240;--w:960"><span class="t015-mis inv" data-t="Pulse watches." style="font-style:italic">Pulse watches.</span></div>
+    <div class="t015-a t015-lock" style="--x:60;--y:470"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse</div>
+    <div class="t015-a t015-stamp fill" style="--x:430;--y:700;--w:540;--h:170;--r:-6;font-size:calc(var(--u)*74)"><span>Start free</span></div>
+    <div class="t015-a t015-lbl" style="--x:60;--y:976">CAUGHT BEFORE CUSTOMERS NOTICED</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>"You ship." prints in teal, "Pulse watches." overprints in coral one bar later.</b> The lockup stamps in plain ink, and the solid "START FREE" stamp slams on the final hit, leaving the paper shaking for two frames.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Plate pair</b> — every hero word printed twice, teal and coral, multiply-blended and 4–6 px out of register.</li>
+    <li><b>Halftone disk</b> — a dot screen in one ink, fading out radially, behind the mark and the CTA.</li>
+    <li><b>Rubber stamp</b> — double-ruled frame, uppercase Manrope 800, distressed with a noise mask and a slight edge wobble.</li>
+    <li><b>Round seal</b> — circular stamp with text on a path ("NOW WATCHING · 14 METRICS").</li>
+    <li><b>Inspection slip</b> — small printed form per metric with a colored header rule; the anomaly slip is the large coral one.</li>
+    <li><b>Paper stock</b> — warm off-white with grain; cards and slips cast soft, low shadows.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Stamp slam</b> — scale 1.4 → 1 in 120 ms (power4.in) plus a two-frame 3 px shake; always on a kick or snare at 120 BPM.</li>
+    <li><b>Plate drift</b> — the coral plate wanders 1–3 px on a 2 s sine loop (one bar), so printed words feel alive between hits.</li>
+    <li><b>Ghost lift</b> — the stamp lifts 20 px and fades, leaving a 40% impression that fully inks in over 300 ms.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>Stamps are the oldest symbol of "checked and approved", and two stamp colors make the split between routine and exception instant. Riso texture adds warmth to a product that otherwise lives in cold dashboards. Risk: the zine feel can undercut precision, so keep layouts rigid and numbers crisp.</p>
+    <p><b>Adapt to your product:</b> turn each item your product checks (orders, PRs, invoices, leads) into a slip; stamp the routine ones in your brand color and give the exception its own loud stamp and a human-action stamp.</p>
+    <p><b>References:</b> <a href="https://studio2am.co/blogs/news/the-risograph-effect-ink-misregistration-for-zines-gig-posters-and-editorial-work">Studio 2AM — the risograph effect and ink misregistration</a></p>
+  </div>
+</div>
+</body>
+</html>

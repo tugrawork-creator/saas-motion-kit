@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>040 · Under the Microscope — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t040-f{background:#050607;color:#0E1726}
+.t040-bright{position:absolute;inset:0;background:radial-gradient(circle at 48% 46%,#FBFDFB 0%,#EEF4F1 45%,#D8E6E2 100%)}
+.t040-dark{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#0B1A1C 0%,#050B0C 70%)}
+.t040-mask{position:absolute;inset:0;pointer-events:none;z-index:5;
+  background:radial-gradient(circle at calc(var(--u)*var(--cx)) calc(var(--u)*var(--cy)),transparent calc(var(--u)*(var(--r) - 70)),rgba(5,6,7,.55) calc(var(--u)*(var(--r) - 12)),#050607 calc(var(--u)*var(--r)))}
+.t040-ring{position:absolute;z-index:6;pointer-events:none;border-radius:50%;left:calc(var(--u)*(var(--cx) - var(--r)));top:calc(var(--u)*(var(--cy) - var(--r)));width:calc(var(--u)*var(--r)*2);height:calc(var(--u)*var(--r)*2);
+  box-shadow:calc(var(--u)*-3) 0 0 calc(var(--u)*1) rgba(255,90,78,.45),calc(var(--u)*3) 0 0 calc(var(--u)*1) rgba(15,163,163,.55)}
+.t040-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t040-mono{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase}
+.t040-mag{position:absolute;z-index:7;font:600 calc(var(--u)*34) var(--mono);color:#E8F2F0}
+.t040-h{font-family:var(--serif);line-height:1.02;letter-spacing:-.015em}
+.t040-h em{font-style:italic;color:#0B6E6E}
+.t040-word{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;line-height:1}
+.t040-cellb{position:absolute;border-radius:48% 52% 45% 55%/55% 45% 55% 45%;background:radial-gradient(circle at 40% 38%,rgba(15,163,163,.35),rgba(15,163,163,.12) 60%,rgba(15,163,163,.05));box-shadow:inset 0 0 0 calc(var(--u)*3) rgba(11,110,110,.35)}
+.t040-glow{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:47% 53% 50% 50%/55% 48% 52% 45%;
+  background:radial-gradient(circle at 45% 40%,rgba(95,227,214,.35),rgba(15,163,163,.14) 60%,rgba(15,163,163,.04));box-shadow:0 0 calc(var(--u)*40) rgba(46,230,201,.25),inset 0 0 0 calc(var(--u)*3) rgba(95,227,214,.55);color:#DFFBF7}
+.t040-glow b{font:600 calc(var(--u)*30) var(--mono)} .t040-glow span{font:500 calc(var(--u)*20) var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.t040-glow.hot{background:radial-gradient(circle at 45% 40%,rgba(255,138,128,.55),rgba(255,90,78,.22) 60%,rgba(255,90,78,.05));box-shadow:0 0 calc(var(--u)*80) rgba(255,90,78,.55),inset 0 0 0 calc(var(--u)*4) #FF7A70;color:#FFF1EF}
+.t040-label{position:absolute;background:#FBFBF8;border:calc(var(--u)*2) solid rgba(14,23,38,.15);box-shadow:0 calc(var(--u)*10) calc(var(--u)*24) rgba(14,23,38,.12)}
+.t040-btn{display:inline-block;font:800 calc(var(--u)*32) var(--sans);border-radius:calc(var(--u)*12);padding:calc(var(--u)*18) calc(var(--u)*34);white-space:nowrap}
+.t040-btn.c{background:#FF5A4E;color:#fff}
+.t040-btn.o{box-shadow:inset 0 0 0 calc(var(--u)*3) #0E1726;color:#0E1726}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 040 · Light, optics &amp; texture</div>
+    <h1>Under the Microscope</h1>
+    <p class="dek">A circular eyepiece with a soft vignette and a faint chromatic fringe. Your metrics are specimens on a glass slide: brightfield (near-white, teal stain) for the everyday view, then darkfield fluorescence where healthy numbers glow teal and only the anomaly fluoresces coral. Acme Pulse is the microscope that zooms from 4× to 40× without being asked.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t040-f" id="t040-f1" style="--cx:540;--cy:540;--r:480">
+    <div class="t040-bright"></div>
+    <div style="position:absolute;inset:0;filter:blur(calc(var(--u)*3))">
+      <div class="t040-cellb" style="left:calc(var(--u)*170);top:calc(var(--u)*170);width:calc(var(--u)*120);height:calc(var(--u)*90)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*330);top:calc(var(--u)*120);width:calc(var(--u)*140);height:calc(var(--u)*100)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*520);top:calc(var(--u)*140);width:calc(var(--u)*110);height:calc(var(--u)*90)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*680);top:calc(var(--u)*190);width:calc(var(--u)*140);height:calc(var(--u)*110)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*110);top:calc(var(--u)*300);width:calc(var(--u)*100);height:calc(var(--u)*80)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*860);top:calc(var(--u)*330);width:calc(var(--u)*100);height:calc(var(--u)*90)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*120);top:calc(var(--u)*730);width:calc(var(--u)*130);height:calc(var(--u)*100)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*290);top:calc(var(--u)*790);width:calc(var(--u)*140);height:calc(var(--u)*110)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*480);top:calc(var(--u)*830);width:calc(var(--u)*110);height:calc(var(--u)*90)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*640);top:calc(var(--u)*780);width:calc(var(--u)*150);height:calc(var(--u)*110)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*830);top:calc(var(--u)*700);width:calc(var(--u)*110);height:calc(var(--u)*90)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*230);top:calc(var(--u)*250);width:calc(var(--u)*70);height:calc(var(--u)*60)"></div>
+      <div class="t040-cellb" style="left:calc(var(--u)*780);top:calc(var(--u)*110);width:calc(var(--u)*80);height:calc(var(--u)*60)"></div>
+    </div>
+    <div class="t040-label" style="left:calc(var(--u)*140);top:calc(var(--u)*380);width:calc(var(--u)*800);padding:calc(var(--u)*34) calc(var(--u)*40)">
+      <div class="t040-mono" style="color:#5A6475">Slide 01 · 38 dashboards · unstained</div>
+      <div class="t040-h" style="font-size:calc(var(--u)*80);margin-top:calc(var(--u)*14)">How many dashboards did you check <em>today?</em></div>
+    </div>
+    <div class="t040-mask"></div><div class="t040-ring"></div>
+    <div class="t040-mag" style="left:calc(var(--u)*64);top:calc(var(--u)*56)">4×</div>
+    <div class="t040-mag" style="right:calc(var(--u)*64);bottom:calc(var(--u)*60);font-size:calc(var(--u)*22);display:flex;flex-direction:column;align-items:flex-end;gap:calc(var(--u)*8)"><span style="display:block;width:calc(var(--u)*120);height:calc(var(--u)*6);background:#E8F2F0"></span>1 dashboard</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>At 4× everything is a soft blur</b>: dozens of dashboard "cells" drift (seeded Brownian jitter) and never come into focus; the slide label slides in from the left and "today?" lands on the bar-2 downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t040-f" id="t040-f2" style="--cx:540;--cy:540;--r:480">
+    <div class="t040-bright" style="background:radial-gradient(circle at 50% 44%,#FFFFFF 0%,#F4F9F7 40%,#DCEAE6 100%)"></div>
+    <div class="t040-cellb" style="left:calc(var(--u)*160);top:calc(var(--u)*200);width:calc(var(--u)*120);height:calc(var(--u)*100);opacity:.6"></div>
+    <div class="t040-cellb" style="left:calc(var(--u)*790);top:calc(var(--u)*230);width:calc(var(--u)*120);height:calc(var(--u)*100);opacity:.6"></div>
+    <div class="t040-cellb" style="left:calc(var(--u)*200);top:calc(var(--u)*760);width:calc(var(--u)*130);height:calc(var(--u)*100);opacity:.5"></div>
+    <div class="t040-cellb" style="left:calc(var(--u)*760);top:calc(var(--u)*780);width:calc(var(--u)*120);height:calc(var(--u)*90);opacity:.5"></div>
+    <div style="position:absolute;left:calc(var(--u)*370);top:calc(var(--u)*170);width:calc(var(--u)*340);height:calc(var(--u)*340);border-radius:50%;background:radial-gradient(circle,rgba(15,163,163,.28),rgba(15,163,163,0) 70%)"></div>
+    <img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*450);top:calc(var(--u)*250);width:calc(var(--u)*180);height:calc(var(--u)*180)">
+    <div class="t040-p t040-word" style="--x:60;--y:500;text-align:center;font-size:calc(var(--u)*128)">Acme Pulse</div>
+    <div class="t040-p t040-mono" style="--x:60;--y:660;text-align:center;color:#0B6E6E">Specimen in focus</div>
+    <div class="t040-mask"></div><div class="t040-ring"></div>
+    <div class="t040-mag" style="left:calc(var(--u)*64);top:calc(var(--u)*56)">10×</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the objective turret clicks to 10×</b>: a 3-frame white bloom, then a focus pull (blur 8→0 px, power2.out) lands the Acme mark sharp on beat 1 and the wordmark on beat 3.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t040-f" id="t040-f3" style="--cx:540;--cy:460;--r:410">
+    <div class="t040-dark"></div>
+    <div class="t040-glow" style="left:calc(var(--u)*190);top:calc(var(--u)*140);width:calc(var(--u)*250);height:calc(var(--u)*180)"><span>Signups</span><b>1,204</b></div>
+    <div class="t040-glow" style="left:calc(var(--u)*470);top:calc(var(--u)*100);width:calc(var(--u)*260);height:calc(var(--u)*170)"><span>Active users</span><b>18,930</b></div>
+    <div class="t040-glow" style="left:calc(var(--u)*150);top:calc(var(--u)*370);width:calc(var(--u)*230);height:calc(var(--u)*180)"><span>p95</span><b>212 ms</b></div>
+    <div class="t040-glow" style="left:calc(var(--u)*760);top:calc(var(--u)*240);width:calc(var(--u)*190);height:calc(var(--u)*160)"><span>Errors</span><b>0.4 %</b></div>
+    <div class="t040-glow hot" style="left:calc(var(--u)*430);top:calc(var(--u)*330);width:calc(var(--u)*430);height:calc(var(--u)*300)"><span style="font-size:calc(var(--u)*22)">Checkout conversion</span><b style="font:800 calc(var(--u)*92)/1.05 var(--sans)">−18%</b><span>since 09:42</span></div>
+    <div class="t040-mask"></div><div class="t040-ring"></div>
+    <div class="t040-mag" style="left:calc(var(--u)*64);top:calc(var(--u)*56)">40×</div>
+    <div class="t040-mag" style="right:calc(var(--u)*64);top:calc(var(--u)*64);font-size:calc(var(--u)*22);letter-spacing:.1em">DARKFIELD · FLUOR</div>
+    <div class="t040-label" style="left:calc(var(--u)*60);top:calc(var(--u)*800);width:calc(var(--u)*960);z-index:8;padding:calc(var(--u)*24) calc(var(--u)*32);display:flex;justify-content:space-between;align-items:center;border-radius:calc(var(--u)*6)">
+      <div><div class="t040-mono" style="color:#5A6475">Specimen #2231</div><div style="font:700 calc(var(--u)*30) var(--sans);margin-top:calc(var(--u)*6)">After deploy #2231</div><div class="t040-mono" style="color:#FF5A4E;margin-top:calc(var(--u)*4)">fluoresces coral · needs you</div></div>
+      <div style="display:flex;flex-direction:column;gap:calc(var(--u)*10)"><span class="t040-btn c">Roll back</span><span class="t040-btn o">Acknowledge</span></div>
+    </div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Brightfield switches to darkfield on a downbeat</b>: healthy metric "cells" glow teal and drift, then the checkout specimen fluoresces coral and pulses brighter on each snare while the slide tag slides up from the bottom with the human's options.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t040-f" id="t040-f4" style="--cx:540;--cy:540;--r:480">
+    <div class="t040-bright"></div>
+    <div class="t040-cellb" style="left:calc(var(--u)*150);top:calc(var(--u)*230);width:calc(var(--u)*110);height:calc(var(--u)*90);opacity:.5"></div>
+    <div class="t040-cellb" style="left:calc(var(--u)*820);top:calc(var(--u)*260);width:calc(var(--u)*110);height:calc(var(--u)*90);opacity:.5"></div>
+    <div class="t040-cellb" style="left:calc(var(--u)*180);top:calc(var(--u)*780);width:calc(var(--u)*110);height:calc(var(--u)*90);opacity:.5"></div>
+    <div class="t040-cellb" style="left:calc(var(--u)*790);top:calc(var(--u)*760);width:calc(var(--u)*110);height:calc(var(--u)*90);opacity:.5"></div>
+    <div class="t040-p" style="--x:60;--y:250;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*22)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*96);height:calc(var(--u)*96)"><span class="t040-word" style="font-size:calc(var(--u)*72)">Acme Pulse</span></div>
+    <div class="t040-p t040-h" style="--x:60;--y:390;text-align:center;font-size:calc(var(--u)*108)">Caught <em>before</em><br>customers noticed.</div>
+    <div class="t040-p" style="--x:60;--y:680;text-align:center"><span class="t040-btn c" style="font-size:calc(var(--u)*42);padding:calc(var(--u)*26) calc(var(--u)*64)">Start free</span></div>
+    <div class="t040-mask"></div><div class="t040-ring"></div>
+    <div class="t040-mag" style="left:calc(var(--u)*64);top:calc(var(--u)*56)">1×</div>
+    <div class="t040-mag" style="right:calc(var(--u)*64);bottom:calc(var(--u)*60);font-size:calc(var(--u)*22);letter-spacing:.1em">RESOLVED · 6 MIN</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The turret spins back to 1× and the field pulls out</b> to calm brightfield; the lockup focus-pulls in first, the tagline on the next bar, and Start free lands on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Eyepiece mask</b> — circular vignette with an RGB-offset fringe; instantly says "looking closer".</li>
+    <li><b>Magnification readout</b> — 4× → 10× → 40× → 1× in the corner; chapters without a progress bar.</li>
+    <li><b>Specimen cells</b> — rounded, slightly irregular blobs that each hold one metric in mono.</li>
+    <li><b>Fluorescence channel</b> — darkfield switch where healthy cells glow teal and the anomaly glows coral.</li>
+    <li><b>Slide label</b> — paper label for the hook question and the "Specimen #2231" decision tag.</li>
+    <li><b>Scale bar</b> — a white bar labelled "1 dashboard"; a playful unit that keeps it about software.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Focus pull</b> — filter blur 8 → 0 px with power2.out over 0.5 s (one beat at 120 BPM) plus a slight scale breath 1.02 → 1.</li>
+    <li><b>Objective switch</b> — turret rotates, then a hard cut to the next magnification with a 3-frame white bloom, always on a downbeat.</li>
+    <li><b>Brownian drift</b> — specimens jitter a few px on seeded low-frequency noise; the anomaly pulses brighter on every snare.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Zooming from "all your dashboards" to "this one number" is exactly what an anomaly agent does for you, and fluorescence gives a scientific, trustworthy reason for one thing to glow. Risk: biology imagery can blur the product meaning; keep every specimen obviously numeric.</p><p><b>Adapt to your product:</b> Put your own objects on the slide (tickets, builds, transactions, accounts) and use the magnification steps as your drill-down path from overview to the single item your product flags.</p><p><b>References:</b> <a href="https://www.nikonsmallworld.com/">Nikon Small World</a> · <a href="https://en.wikipedia.org/wiki/Fluorescence_microscope">Fluorescence microscope (Wikipedia)</a></p></div>
+</div>
+</body>
+</html>

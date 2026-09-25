@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>003 · Multiplayer Cursors — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t003-s{position:absolute;inset:0;background-color:#F6F5F1;background-image:radial-gradient(circle,#D6D3C8 calc(var(--u)*2),transparent calc(var(--u)*2.2));background-size:calc(var(--u)*36) calc(var(--u)*36);font-family:var(--sans);color:var(--ink);overflow:hidden}
+.t003-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t003-fr{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h));background:#fff;border-radius:calc(var(--u)*6);box-shadow:0 calc(var(--u)*2) calc(var(--u)*6) rgba(14,23,38,.08),0 0 0 calc(var(--u)*1.5) rgba(14,23,38,.08)}
+.t003-fl{position:absolute;left:0;top:calc(var(--u)*-30);font:500 calc(var(--u)*20) var(--sans);color:var(--muted);white-space:nowrap}
+.t003-fr svg{position:absolute;left:0;top:0;width:100%;height:100%}
+.t003-sel{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h));border:calc(var(--u)*3) solid var(--c,var(--brand));z-index:4}
+.t003-sel i{position:absolute;width:calc(var(--u)*16);height:calc(var(--u)*16);background:#fff;border:calc(var(--u)*3) solid var(--c,var(--brand))}
+.t003-sel i:nth-child(1){left:calc(var(--u)*-9.5);top:calc(var(--u)*-9.5)}.t003-sel i:nth-child(2){right:calc(var(--u)*-9.5);top:calc(var(--u)*-9.5)}.t003-sel i:nth-child(3){left:calc(var(--u)*-9.5);bottom:calc(var(--u)*-9.5)}.t003-sel i:nth-child(4){right:calc(var(--u)*-9.5);bottom:calc(var(--u)*-9.5)}
+.t003-cur{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));z-index:8}
+.t003-cur svg{width:calc(var(--u)*40);height:calc(var(--u)*40);display:block}
+.t003-pill{position:absolute;left:calc(var(--u)*30);top:calc(var(--u)*34);display:flex;align-items:center;gap:calc(var(--u)*8);white-space:nowrap;font:700 calc(var(--u)*22) var(--sans);color:#fff;background:var(--c,var(--brand));padding:calc(var(--u)*7) calc(var(--u)*14);border-radius:calc(var(--u)*4) calc(var(--u)*16) calc(var(--u)*16) calc(var(--u)*16)}
+.t003-pill img{width:calc(var(--u)*26);height:calc(var(--u)*26);border-radius:calc(var(--u)*6);box-shadow:0 0 0 calc(var(--u)*2) #fff}
+.t003-bar{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*60);height:calc(var(--u)*64);display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:calc(var(--u)*14);box-shadow:0 calc(var(--u)*4) calc(var(--u)*16) rgba(14,23,38,.1);padding:0 calc(var(--u)*14) 0 calc(var(--u)*22);z-index:7}
+.t003-bar .f{font:600 calc(var(--u)*22) var(--sans);color:var(--ink)} .t003-bar .f span{color:var(--muted);font-weight:500}
+.t003-av{display:flex}
+.t003-av b{width:calc(var(--u)*44);height:calc(var(--u)*44);border-radius:50%;margin-left:calc(var(--u)*-10);border:calc(var(--u)*3) solid #fff;display:flex;align-items:center;justify-content:center;font:700 calc(var(--u)*20) var(--sans);color:#fff;background:var(--ink)}
+.t003-av img{width:calc(var(--u)*44);height:calc(var(--u)*44);border-radius:50%;margin-left:calc(var(--u)*-10);border:calc(var(--u)*3) solid #fff;background:#fff}
+.t003-hl{position:absolute;font:400 calc(var(--u)*84)/1.0 var(--serif);letter-spacing:-.01em;color:var(--ink)}
+.t003-hl em{color:var(--brand-deep)}
+.t003-follow{position:absolute;inset:0;border:calc(var(--u)*10) solid var(--brand);z-index:9;pointer-events:none}
+.t003-ftag{position:absolute;left:50%;top:0;transform:translateX(-50%);background:var(--brand);color:#fff;font:700 calc(var(--u)*22) var(--sans);padding:calc(var(--u)*8) calc(var(--u)*20) calc(var(--u)*12);border-radius:0 0 calc(var(--u)*12) calc(var(--u)*12);display:flex;align-items:center;gap:calc(var(--u)*10);white-space:nowrap}
+.t003-ftag img{width:calc(var(--u)*28);height:calc(var(--u)*28)}
+.t003-th{position:absolute;background:#fff;border-radius:calc(var(--u)*16);box-shadow:0 calc(var(--u)*24) calc(var(--u)*60) rgba(14,23,38,.22),0 0 0 calc(var(--u)*1.5) rgba(14,23,38,.08);z-index:6;overflow:hidden}
+.t003-msg{display:flex;gap:calc(var(--u)*14);padding:calc(var(--u)*20) calc(var(--u)*24)}
+.t003-msg+.t003-msg{border-top:calc(var(--u)*1.5) solid #ECEAE3}
+.t003-msg .a{width:calc(var(--u)*44);height:calc(var(--u)*44);border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 calc(var(--u)*20) var(--sans);color:#fff;background:var(--ink)}
+.t003-msg img.a{background:none}
+.t003-msg .n{font:700 calc(var(--u)*21) var(--sans);color:var(--ink)} .t003-msg .n span{font:400 calc(var(--u)*20) var(--mono);color:#8A8F99;margin-left:calc(var(--u)*8)}
+.t003-msg .t{font:800 calc(var(--u)*34)/1.15 var(--sans);margin-top:calc(var(--u)*4)} .t003-msg .t b{color:var(--alert)}
+.t003-msg .m{font:400 calc(var(--u)*22) var(--mono);color:var(--muted);margin-top:calc(var(--u)*4)}
+.t003-msg .r{font:500 calc(var(--u)*26) var(--sans);margin-top:calc(var(--u)*4)}
+.t003-btns{display:flex;gap:calc(var(--u)*12);padding:0 calc(var(--u)*24) calc(var(--u)*22) calc(var(--u)*82)}
+.t003-btn{height:calc(var(--u)*58);padding:0 calc(var(--u)*26);border-radius:calc(var(--u)*10);display:flex;align-items:center;font:700 calc(var(--u)*25) var(--sans)}
+.t003-btn.pri{background:var(--alert);color:#fff}.t003-btn.sec{box-shadow:inset 0 0 0 calc(var(--u)*2) #D6D3C8}
+.t003-pin{position:absolute;width:calc(var(--u)*56);height:calc(var(--u)*56);border-radius:50% 50% 50% 0;background:var(--alert);border:calc(var(--u)*4) solid #fff;box-shadow:0 calc(var(--u)*6) calc(var(--u)*14) rgba(14,23,38,.25);display:flex;align-items:center;justify-content:center;font:800 calc(var(--u)*24) var(--sans);color:#fff;z-index:5}
+.t003-chat{position:absolute;background:var(--ink);color:#fff;font:600 calc(var(--u)*24) var(--sans);padding:calc(var(--u)*10) calc(var(--u)*18);border-radius:calc(var(--u)*4) calc(var(--u)*20) calc(var(--u)*20) calc(var(--u)*20);white-space:nowrap;z-index:8}
+.t003-toast{position:absolute;display:flex;align-items:center;gap:calc(var(--u)*14);background:var(--ink);color:#fff;font:600 calc(var(--u)*24) var(--sans);padding:calc(var(--u)*14) calc(var(--u)*24);border-radius:calc(var(--u)*40);white-space:nowrap;z-index:7}
+.t003-toast img{width:calc(var(--u)*34);height:calc(var(--u)*34)}
+.t003-word{font:800 calc(var(--u)*120)/1 var(--sans);letter-spacing:-.04em;color:var(--ink);white-space:nowrap}
+.t003-cta{position:absolute;display:flex;align-items:center;justify-content:center;background:var(--alert);color:#fff;font:800 calc(var(--u)*40) var(--sans);border-radius:calc(var(--u)*18);box-shadow:0 calc(var(--u)*12) calc(var(--u)*30) rgba(255,90,78,.35)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 003 · Product UI as the stage</div>
+    <h1>Multiplayer Cursors</h1>
+    <p class="dek">A shared design-tool canvas where the cast are named cursors: one human on call, and a teal cursor labelled Acme Pulse that quietly inspects every chart frame. When the camera switches to follow mode we literally watch the agent work, and the human flies over to make the call.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t003-f1">
+<div class="t003-s">
+ <div class="t003-bar"><span class="f">Metrics board <span>/ 38 dashboards</span></span><span class="t003-av"><b style="background:#6B7A90">S</b></span></div>
+ <div class="t003-hl" style="left:calc(var(--u)*60);top:calc(var(--u)*170);width:calc(var(--u)*960)">38 dashboards. <em>Nobody</em> on checkout.</div>
+ <div class="t003-fr" style="--x:60;--y:460;--w:215;--h:150"><span class="t003-fl">Signups</span><svg viewBox="0 0 215 150"><path d="M16 110 L60 96 L100 100 L140 80 L200 70" fill="none" stroke="#0FA3A3" stroke-width="4"/></svg></div>
+ <div class="t003-fr" style="--x:308;--y:460;--w:215;--h:150"><span class="t003-fl">Active users</span><svg viewBox="0 0 215 150"><rect x="20" y="80" width="26" height="50" fill="#CFF1EE"/><rect x="60" y="64" width="26" height="66" fill="#CFF1EE"/><rect x="100" y="70" width="26" height="60" fill="#CFF1EE"/><rect x="140" y="50" width="26" height="80" fill="#0FA3A3"/></svg></div>
+ <div class="t003-fr" style="--x:556;--y:460;--w:215;--h:150"><span class="t003-fl">p95 latency</span><svg viewBox="0 0 215 150"><path d="M16 90 Q60 70 100 92 T200 84" fill="none" stroke="#5A6475" stroke-width="4"/></svg></div>
+ <div class="t003-fr" style="--x:804;--y:460;--w:215;--h:150"><span class="t003-fl">Error rate</span><svg viewBox="0 0 215 150"><path d="M16 100 H200" stroke="#5A6475" stroke-width="4"/></svg></div>
+ <div class="t003-fr" style="--x:60;--y:680;--w:215;--h:150"><span class="t003-fl">Revenue</span><svg viewBox="0 0 215 150"><path d="M16 110 L200 60" stroke="#5A6475" stroke-width="4"/></svg></div>
+ <div class="t003-fr" style="--x:308;--y:680;--w:215;--h:150"><span class="t003-fl">Events/sec</span><svg viewBox="0 0 215 150"><path d="M16 100 L40 80 L64 96 L88 70 L112 90 L136 66 L160 88 L200 72" fill="none" stroke="#5A6475" stroke-width="4"/></svg></div>
+ <div class="t003-fr" style="--x:556;--y:680;--w:215;--h:150"><span class="t003-fl">Retention</span><svg viewBox="0 0 215 150"><path d="M16 60 Q80 70 120 96 T200 110" fill="none" stroke="#5A6475" stroke-width="4"/></svg></div>
+ <div class="t003-fr" style="--x:804;--y:680;--w:215;--h:150;box-shadow:0 0 0 calc(var(--u)*1.5) rgba(255,90,78,.5)"><span class="t003-fl" style="color:var(--alert)">Checkout ⚠</span><svg viewBox="0 0 215 150"><path d="M16 60 L90 62 L110 64 L126 108 L200 110" fill="none" stroke="#FF5A4E" stroke-width="4"/></svg></div>
+ <div class="t003-fr" style="--x:60;--y:900;--w:215;--h:120;opacity:.6"><span class="t003-fl">Funnel v2</span></div>
+ <div class="t003-fr" style="--x:308;--y:900;--w:215;--h:120;opacity:.6"><span class="t003-fl">Cohorts</span></div>
+ <div class="t003-fr" style="--x:556;--y:900;--w:215;--h:120;opacity:.6"><span class="t003-fl">Deploys</span></div>
+ <div class="t003-fr" style="--x:804;--y:900;--w:215;--h:120;opacity:.6"><span class="t003-fl">+26 more</span></div>
+ <div class="t003-cur" style="--x:190;--y:560;--c:#6B7A90"><svg viewBox="0 0 40 40"><path d="M5 3 L5 33 L13 26 L19 38 L25 35 L19 23 L31 23 Z" fill="#6B7A90" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg><span class="t003-pill">Sam · on call</span></div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>A lone grey cursor drifts left, away from the checkout frame</b> (bezier glide, sine.inOut 0.8 s) while the headline types into a canvas text layer; on the bar-2 downbeat the checkout frame's border flushes coral for one beat and nobody notices.</p></div>
+  <div class="cw"><div class="cell" id="t003-f2">
+<div class="t003-s">
+ <div class="t003-bar"><span class="f">Metrics board <span>/ 38 dashboards</span></span><span class="t003-av"><b style="background:#6B7A90">S</b><img src="../assets/brand/acme-mark.svg" alt=""></span></div>
+ <div class="t003-toast" style="left:calc(var(--u)*250);top:calc(var(--u)*180)"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse joined the board</div>
+ <div class="t003-p" style="--x:110;--y:430;--w:860;--h:200;display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*30)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*140);height:calc(var(--u)*140)"><span class="t003-word">Acme Pulse</span></div>
+ <div class="t003-sel" style="--x:96;--y:416;--w:888;--h:228"><i></i><i></i><i></i><i></i></div>
+ <div class="t003-p" style="--x:96;--y:656;font:500 calc(var(--u)*20) var(--mono);color:var(--brand-deep)">888 × 228 · Text layer</div>
+ <div class="t003-cur" style="--x:690;--y:610"><svg viewBox="0 0 40 40"><path d="M5 3 L5 33 L13 26 L19 38 L25 35 L19 23 L31 23 Z" fill="#0FA3A3" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg><span class="t003-pill" style="font-size:calc(var(--u)*28)"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse</span></div>
+ <div class="t003-cur" style="--x:140;--y:840"><svg viewBox="0 0 40 40"><path d="M5 3 L5 33 L13 26 L19 38 L25 35 L19 23 L31 23 Z" fill="#0E1726" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg><span class="t003-pill" style="--c:#0E1726">Sam · on call</span></div>
+ <div class="t003-chat" style="left:calc(var(--u)*176);top:calc(var(--u)*930)">oh, hi Pulse</div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop a teal cursor streaks in from the right edge</b> (0.5 s expo.out with slight overshoot) dragging the Acme Pulse text layer; the selection box snaps 1.06→1 on the downbeat and a second avatar pops into the stack on the next beat.</p></div>
+  <div class="cw"><div class="cell" id="t003-f3">
+<div class="t003-s">
+ <div class="t003-fr" style="--x:70;--y:120;--w:640;--h:420"><span class="t003-fl" style="top:calc(var(--u)*14);left:calc(var(--u)*22);font-weight:700;color:var(--ink);font-size:calc(var(--u)*24)">Checkout conversion</span><svg viewBox="0 0 640 420"><g stroke="#ECEAE3" stroke-width="2"><path d="M40 120 H610 M40 220 H610 M40 320 H610"/></g><path d="M40 150 L120 142 L200 148 L280 138 L360 144 L380 146 L410 270 L480 276 L560 272 L610 278" fill="none" stroke="#0FA3A3" stroke-width="6" stroke-linejoin="round"/><path d="M380 146 L410 270 L480 276 L560 272 L610 278" fill="none" stroke="#FF5A4E" stroke-width="6" stroke-linejoin="round"/><path d="M380 70 V380" stroke="#FF5A4E" stroke-width="2" stroke-dasharray="6 6"/><text x="388" y="396" font-family="JetBrains Mono,monospace" font-size="20" fill="#FF5A4E">09:42 · deploy #2231</text></svg></div>
+ <div class="t003-sel" style="--x:350;--y:200;--w:300;--h:220"><i></i><i></i><i></i><i></i></div>
+ <div class="t003-pin" style="left:calc(var(--u)*640);top:calc(var(--u)*140)">!</div>
+ <div class="t003-cur" style="--x:540;--y:390"><svg viewBox="0 0 40 40"><path d="M5 3 L5 33 L13 26 L19 38 L25 35 L19 23 L31 23 Z" fill="#0FA3A3" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg><span class="t003-pill"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse</span></div>
+ <div class="t003-fr" style="--x:760;--y:150;--w:250;--h:170"><span class="t003-fl" style="top:calc(var(--u)*12);left:calc(var(--u)*16)">Signups ✓</span><svg viewBox="0 0 250 170"><path d="M20 130 L80 116 L140 120 L230 96" fill="none" stroke="#1F9D55" stroke-width="4"/></svg></div>
+ <div class="t003-fr" style="--x:760;--y:360;--w:250;--h:170"><span class="t003-fl" style="top:calc(var(--u)*12);left:calc(var(--u)*16)">p95 · 212 ms ✓</span><svg viewBox="0 0 250 170"><path d="M20 120 Q90 100 140 118 T230 110" fill="none" stroke="#1F9D55" stroke-width="4"/></svg></div>
+ <div class="t003-th" style="left:calc(var(--u)*150);top:calc(var(--u)*590);width:calc(var(--u)*790)">
+  <div class="t003-msg"><img class="a" src="../assets/brand/acme-mark.svg" alt=""><div><div class="n">Acme Pulse<span>09:44</span></div><div class="t">Checkout conversion <b>−18%</b></div><div class="m">since 09:42 · after deploy #2231</div></div></div>
+  <div class="t003-btns"><span class="t003-btn pri">Roll back</span><span class="t003-btn sec">Acknowledge</span></div>
+ </div>
+ <div class="t003-cur" style="--x:300;--y:748"><svg viewBox="0 0 40 40"><path d="M5 3 L5 33 L13 26 L19 38 L25 35 L19 23 L31 23 Z" fill="#0E1726" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg><span class="t003-pill" style="--c:#0E1726">Sam · on call</span></div>
+ <div class="t003-follow"><span class="t003-ftag"><img src="../assets/brand/acme-mark.svg" alt="">Following Acme Pulse</span></div>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera eases into Pulse's viewport with a 0.2 s lag</b> and the teal follow-mode border draws on; Pulse's cursor boxes the drop (snap 1.06→1, 0.18 s), drops a coral comment pin on the snare, and Sam's ink cursor glides in from bottom-left to click <b>Roll back</b> on the downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t003-f4">
+<div class="t003-s">
+ <div class="t003-bar"><span class="f">Metrics board <span>/ all quiet</span></span><span class="t003-av"><b>S</b><img src="../assets/brand/acme-mark.svg" alt=""></span></div>
+ <div class="t003-p" style="--x:60;--y:220;--w:960;display:flex;align-items:center;gap:calc(var(--u)*26)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*110);height:calc(var(--u)*110)"><span class="t003-word" style="font-size:calc(var(--u)*104)">Acme Pulse</span></div>
+ <div class="t003-hl" style="left:calc(var(--u)*60);top:calc(var(--u)*380);width:calc(var(--u)*960);font-size:calc(var(--u)*96)">You ship. <em>Pulse watches.</em></div>
+ <div class="t003-cta" style="left:calc(var(--u)*60);top:calc(var(--u)*640);width:calc(var(--u)*400);height:calc(var(--u)*120)">Start free</div>
+ <div class="t003-sel" style="--x:52;--y:632;--w:416;--h:136;--c:#0E1726"><i></i><i></i><i></i><i></i></div>
+ <div class="t003-cur" style="--x:400;--y:730"><svg viewBox="0 0 40 40"><path d="M5 3 L5 33 L13 26 L19 38 L25 35 L19 23 L31 23 Z" fill="#0E1726" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg><span class="t003-pill" style="--c:#0E1726">Sam · on call</span></div>
+ <div class="t003-cur" style="--x:640;--y:700"><svg viewBox="0 0 40 40"><path d="M5 3 L5 33 L13 26 L19 38 L25 35 L19 23 L31 23 Z" fill="#0FA3A3" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg><span class="t003-pill"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse</span></div>
+ <div class="t003-chat" style="left:calc(var(--u)*640);top:calc(var(--u)*800);background:var(--brand)">watching 14 metrics</div>
+ <div class="t003-p" style="--x:60;--y:900;font:500 calc(var(--u)*22) var(--mono);color:var(--muted)">acme.example/pulse · no card needed</div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Both cursors glide in from opposite sides</b> and park beside the CTA frame (0.7 s sine.inOut, 0.1 s apart); the ink selection snaps onto “Start free” on the final downbeat while Pulse's cursor-chat bubble types “watching 14 metrics”.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Named cursor + label pill</b> — the characters: ink “Sam · on call” and teal “Acme Pulse”.</li><li><b>Selection box with handles</b> — what a character is inspecting; snaps on beats.</li><li><b>Avatar stack</b> — who is present; Pulse joining is the reveal.</li><li><b>Comment pin + thread</b> — the anomaly and the human's options.</li><li><b>Cursor-chat bubble</b> — short live remarks (“watching 14 metrics”).</li><li><b>Follow-mode frame</b> — teal border + “Following Acme Pulse” = watching the agent work.</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Interpolated cursor glide</b> — bezier paths with 4–6 % overshoot, 0.6–0.9 s sine.inOut, never linear; arrival is quantised to the beat (every 1 s at 120 BPM).</li><li><b>Selection snap</b> — box scales 1.06→1 in 0.18 s on a snare, handles pop 0.03 s later.</li><li><b>Follow-cam</b> — the camera eases to the agent's viewport with a 0.2 s lag (power2.out 0.8 s) so the move feels like a person catching up; border draws on in 1 beat.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> it makes the agent and the human visible as co-workers on one canvas; follow mode is a native, already-understood way to say “watch what the agent is doing”. <b>Risk:</b> more than 2–3 cursors reads as chaos, and tiny chart frames die at feed size, so zoom until one frame fills half the square.</p><p><b>Adapt to your product:</b> swap the chart frames for your own screens or objects and name the agent cursor after your feature; the comment thread carries your product's single most important alert.</p><p><b>References:</b> <a href="https://www.figma.com/blog/multiplayer-editing-in-figma/">Figma — multiplayer editing</a> · <a href="https://mskelton.dev/blog/building-figma-multiplayer-cursors">Building Figma-style multiplayer cursors</a> · <a href="https://tldraw.dev/sdk-features/camera">tldraw — camera &amp; follow user</a></p></div>
+</div>
+</body>
+</html>

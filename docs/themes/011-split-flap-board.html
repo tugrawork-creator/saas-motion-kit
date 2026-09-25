@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>011 · Split-Flap Board — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t011- ===== */
+@property --x{syntax:'<number>';inherits:false;initial-value:0}
+@property --y{syntax:'<number>';inherits:false;initial-value:0}
+@property --w{syntax:'*';inherits:false}
+.t011-bg{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 8%,#1C2739 0%,#0E1726 52%,#060A12 100%)}
+.t011-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 calc(var(--u)*2),transparent calc(var(--u)*2) calc(var(--u)*6)),radial-gradient(90% 80% at 50% 50%,transparent 55%,rgba(0,0,0,.5))}
+.t011-a{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w))}
+.t011-hd{display:flex;justify-content:space-between;font:600 calc(var(--u)*20)/1 var(--mono);letter-spacing:.18em;color:#8D98AB}
+.t011-hd b{color:var(--brand);font-weight:600}
+.t011-hd .t011-live{color:var(--alert)}
+.t011-rule{height:calc(var(--u)*2);background:linear-gradient(90deg,rgba(141,152,171,.35),rgba(141,152,171,.08))}
+.t011-row{--s:60;display:flex;gap:calc(var(--u)*5);align-items:center}
+.t011-gap{flex:none;width:calc(var(--u)*22)}
+.t011-f{position:relative;flex:none;width:calc(var(--u)*var(--s)*.7);height:calc(var(--u)*var(--s));border-radius:calc(var(--u)*var(--s)*.07);
+  background:linear-gradient(180deg,#263145 0%,#1B2435 48.5%,#05080D 48.5%,#05080D 51.5%,#172030 51.5%,#0F1622 100%);
+  box-shadow:0 calc(var(--u)*4) calc(var(--u)*8) rgba(0,0,0,.55),inset 0 calc(var(--u)*1) 0 rgba(255,255,255,.07);
+  color:#F1ECE0;font:600 calc(var(--u)*var(--s)*.64)/1 var(--mono);font-style:normal;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.t011-f::after{content:"";position:absolute;left:0;right:0;top:calc(50% - var(--u)*1.2);height:calc(var(--u)*2.4);background:rgba(0,0,0,.6)}
+.t011-f.tl{background:linear-gradient(180deg,#19C0BE 0%,#10A6A5 48.5%,#034645 48.5%,#034645 51.5%,#0C8D8C 51.5%,#087777 100%);color:#fff}
+.t011-f.co{background:linear-gradient(180deg,#FF7166 0%,#FF5A4E 48.5%,#6E1712 48.5%,#6E1712 51.5%,#E9493E 51.5%,#CF3C32 100%);color:#fff}
+.t011-f.am{color:var(--amber)} .t011-f.gr{color:#7FD9A3} .t011-f.dm{color:#56627A}
+.t011-f.fl::before{content:attr(data-n);position:absolute;z-index:2;left:0;right:0;top:0;height:50%;display:flex;justify-content:center;align-items:flex-start;line-height:calc(var(--u)*var(--s));overflow:hidden;
+  background:linear-gradient(180deg,#34405A,#222C3E);color:#F1ECE0;transform:perspective(calc(var(--u)*260)) rotateX(-58deg);transform-origin:50% 100%;border-radius:calc(var(--u)*4) calc(var(--u)*4) 0 0;box-shadow:0 calc(var(--u)*-6) calc(var(--u)*10) rgba(0,0,0,.35)}
+.t011-f.fl.co::before{background:linear-gradient(180deg,#FF8A80,#FF5A4E);color:#fff}
+.t011-tile{position:relative;flex:none;width:calc(var(--u)*var(--s));height:calc(var(--u)*var(--s));border-radius:calc(var(--u)*var(--s)*.07);display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#263145 0%,#1B2435 48.5%,#05080D 48.5%,#05080D 51.5%,#172030 51.5%,#0F1622 100%);box-shadow:0 calc(var(--u)*4) calc(var(--u)*8) rgba(0,0,0,.55)}
+.t011-tile img{width:78%;height:78%;display:block}
+.t011-tile::after{content:"";position:absolute;left:0;right:0;top:calc(50% - var(--u)*1.2);height:calc(var(--u)*2.4);background:rgba(0,0,0,.35)}
+.t011-cap{font:400 calc(var(--u)*40)/1.15 var(--serif);color:#CFD6E2}
+.t011-cap em{color:var(--amber)}
+.t011-lbl{font:600 calc(var(--u)*20)/1 var(--mono);letter-spacing:.16em;color:#8D98AB}
+.t011-ctx{font:600 calc(var(--u)*26)/1 var(--mono);letter-spacing:.06em;color:var(--amber)}
+.t011-glow{position:absolute;border-radius:calc(var(--u)*14);background:radial-gradient(60% 120% at 50% 50%,rgba(255,90,78,.28),transparent 70%)}
+.t011-btn{display:flex;align-items:center;gap:calc(var(--u)*16);padding:calc(var(--u)*14) calc(var(--u)*18);border-radius:calc(var(--u)*14);background:#1A2232;box-shadow:inset 0 0 0 calc(var(--u)*2) rgba(255,90,78,.7),0 0 calc(var(--u)*40) rgba(255,90,78,.35)}
+.t011-btn2{display:flex;align-items:center;padding:calc(var(--u)*14) calc(var(--u)*18);border-radius:calc(var(--u)*14);box-shadow:inset 0 0 0 calc(var(--u)*2) rgba(141,152,171,.4)}
+.t011-cursor{width:calc(var(--u)*34);height:calc(var(--u)*44)}
+.t011-lock{display:flex;align-items:center;gap:calc(var(--u)*16);font:800 calc(var(--u)*44)/1 var(--sans);color:#F1ECE0;letter-spacing:-.01em}
+.t011-lock img{width:calc(var(--u)*64);height:calc(var(--u)*64)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 011 · Typography &amp; graphic systems</div>
+    <h1>Split-Flap Board</h1>
+    <p class="dek">The whole film is a station departures board: every metric is a row of mechanical flaps that clatter through the alphabet and settle. Healthy rows land "ON TIME"; one row refuses to settle, flips to coral and holds, and the board waits for a human to call it.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t011-f1"><div class="t011-bg"></div>
+    <div class="t011-a t011-hd" style="--x:60;--y:62;--w:960"><span><b>●</b> DEPARTURES · DASHBOARDS</span><span>09:41</span></div>
+    <div class="t011-a t011-rule" style="--x:60;--y:98;--w:960"></div>
+    <div class="t011-a t011-lbl" style="--x:60;--y:124">BOARD</div><div class="t011-a t011-lbl" style="--x:501;--y:124">LAST LOOK</div>
+    <div class="t011-a" style="--x:60;--y:160"><div class="t011-row" style="--s:52"><i class="t011-f">G</i><i class="t011-f">R</i><i class="t011-f">O</i><i class="t011-f">W</i><i class="t011-f">T</i><i class="t011-f">H</i><i class="t011-f sp"></i><i class="t011-f sp"></i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f dm">N</i><i class="t011-f dm">E</i><i class="t011-f dm">V</i><i class="t011-f dm">E</i><i class="t011-f dm">R</i></div></div>
+    <div class="t011-a" style="--x:60;--y:224"><div class="t011-row" style="--s:52"><i class="t011-f">R</i><i class="t011-f">E</i><i class="t011-f">V</i><i class="t011-f">E</i><i class="t011-f">N</i><i class="t011-f">U</i><i class="t011-f">E</i><i class="t011-f sp"></i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f dm">M</i><i class="t011-f dm">O</i><i class="t011-f dm">N</i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i></div></div>
+    <div class="t011-a" style="--x:60;--y:288"><div class="t011-row" style="--s:52"><i class="t011-f">R</i><i class="t011-f">E</i><i class="t011-f">T</i><i class="t011-f">E</i><i class="t011-f">N</i><i class="t011-f">T</i><i class="t011-f">I</i><i class="t011-f">O</i><i class="t011-f">N</i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f dm">N</i><i class="t011-f dm">E</i><i class="t011-f dm">V</i><i class="t011-f dm">E</i><i class="t011-f dm">R</i></div></div>
+    <div class="t011-a" style="--x:60;--y:352"><div class="t011-row" style="--s:52"><i class="t011-f">C</i><i class="t011-f">H</i><i class="t011-f">E</i><i class="t011-f">C</i><i class="t011-f">K</i><i class="t011-f">O</i><i class="t011-f">U</i><i class="t011-f">T</i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f am">F</i><i class="t011-f am fl" data-n="R">R</i><i class="t011-f am">I</i><i class="t011-f sp"></i><i class="t011-f sp"></i></div></div>
+    <div class="t011-a" style="--x:60;--y:470"><div class="t011-row" style="--s:120"><i class="t011-f">3</i><i class="t011-f">8</i></div></div>
+    <div class="t011-a" style="--x:260;--y:470"><div class="t011-row" style="--s:120"><i class="t011-f">O</i><i class="t011-f">P</i><i class="t011-f">E</i><i class="t011-f">N</i></div></div>
+    <div class="t011-a" style="--x:60;--y:610"><div class="t011-row" style="--s:120"><i class="t011-f am">3</i><i class="t011-f sp"></i><i class="t011-f am">R</i><i class="t011-f am">E</i><i class="t011-f am">A</i><i class="t011-f am">D</i></div></div>
+    <div class="t011-a t011-cap" style="--x:60;--y:800;--w:900">How many dashboards did you <em>check</em> today? The drop shipped on Friday anyway.</div>
+    <div class="t011-a t011-lbl" style="--x:60;--y:950">GATE 14 · ALL DASHBOARDS · UNATTENDED</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Rows clatter in top → bottom, 30 ms per flap.</b> The four dashboard rows settle on the off-beats; "38 OPEN" slams on beat 1 of bar 3 and "3 READ" lands in amber one bar later.</p></div>
+
+  <div class="cw"><div class="cell" id="t011-f2"><div class="t011-bg"></div>
+    <div class="t011-a t011-hd" style="--x:60;--y:62;--w:960"><span><b>●</b> NOW WATCHING</span><span>ALL GATES</span></div>
+    <div class="t011-a t011-rule" style="--x:60;--y:98;--w:960"></div>
+    <div class="t011-a" style="--x:60;--y:140"><div class="t011-row" style="--s:60"><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i></div></div>
+    <div class="t011-a" style="--x:60;--y:215"><div class="t011-row" style="--s:60"><i class="t011-f dm fl" data-n="A"></i><i class="t011-f dm"></i><i class="t011-f dm fl" data-n="P"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i></div></div>
+    <div class="t011-a" style="--x:124;--y:320"><div class="t011-row" style="--s:176"><span class="t011-tile"><img src="../assets/brand/acme-mark.svg" alt=""></span><i class="t011-f">A</i><i class="t011-f">C</i><i class="t011-f">M</i><i class="t011-f">E</i></div></div>
+    <div class="t011-a" style="--x:124;--y:512"><div class="t011-row" style="--s:176"><i class="t011-f tl">P</i><i class="t011-f tl">U</i><i class="t011-f tl">L</i><i class="t011-f tl">S</i><i class="t011-f tl">E</i></div></div>
+    <div class="t011-a" style="--x:60;--y:770"><div class="t011-row" style="--s:60"><i class="t011-f">1</i><i class="t011-f">4</i><i class="t011-f sp"></i><i class="t011-f">M</i><i class="t011-f">E</i><i class="t011-f">T</i><i class="t011-f">R</i><i class="t011-f">I</i><i class="t011-f">C</i><i class="t011-f">S</i><span class="t011-gap"></span><i class="t011-f gr">O</i><i class="t011-f gr">N</i><i class="t011-f gr sp"></i><i class="t011-f gr">T</i><i class="t011-f gr">I</i><i class="t011-f gr">M</i><i class="t011-f gr">E</i></div></div>
+    <div class="t011-a" style="--x:60;--y:850"><div class="t011-row" style="--s:60"><i class="t011-f dm fl" data-n="W"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i><i class="t011-f dm sp"></i></div></div>
+    <div class="t011-a t011-lbl" style="--x:60;--y:950">EVERY METRIC · EVERY MINUTE</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The whole board cascades left → right on the drop.</b> "ACME" settles with the mark tile on the downbeat, "PULSE" flips to teal on the next snare, then the status row reads "14 METRICS · ON TIME".</p></div>
+
+  <div class="cw"><div class="cell" id="t011-f3"><div class="t011-bg"></div>
+    <div class="t011-a t011-hd" style="--x:60;--y:62;--w:960"><span><b>●</b> PULSE · LIVE BOARD</span><span class="t011-live">● 09:44</span></div>
+    <div class="t011-a t011-rule" style="--x:60;--y:98;--w:960"></div>
+    <div class="t011-a t011-lbl" style="--x:60;--y:120">METRIC</div><div class="t011-a t011-lbl" style="--x:414;--y:120">NOW</div><div class="t011-a t011-lbl" style="--x:651;--y:120">STATUS</div>
+    <div class="t011-a" style="--x:60;--y:150"><div class="t011-row" style="--s:44"><i class="t011-f">S</i><i class="t011-f">I</i><i class="t011-f">G</i><i class="t011-f">N</i><i class="t011-f">U</i><i class="t011-f">P</i><i class="t011-f">S</i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f">1</i><i class="t011-f">2</i><i class="t011-f">0</i><i class="t011-f">4</i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f gr">O</i><i class="t011-f gr">N</i><i class="t011-f gr sp"></i><i class="t011-f gr">T</i><i class="t011-f gr">I</i><i class="t011-f gr">M</i><i class="t011-f gr">E</i></div></div>
+    <div class="t011-a" style="--x:60;--y:204"><div class="t011-row" style="--s:44"><i class="t011-f">P</i><i class="t011-f">9</i><i class="t011-f">5</i><i class="t011-f sp"></i><i class="t011-f">M</i><i class="t011-f">S</i><i class="t011-f sp"></i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f">2</i><i class="t011-f">1</i><i class="t011-f">2</i><i class="t011-f sp"></i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f gr">O</i><i class="t011-f gr">N</i><i class="t011-f gr sp"></i><i class="t011-f gr">T</i><i class="t011-f gr">I</i><i class="t011-f gr">M</i><i class="t011-f gr">E</i></div></div>
+    <div class="t011-a" style="--x:60;--y:258"><div class="t011-row" style="--s:44"><i class="t011-f">E</i><i class="t011-f">R</i><i class="t011-f">R</i><i class="t011-f">O</i><i class="t011-f">R</i><i class="t011-f">S</i><i class="t011-f sp"></i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f">0</i><i class="t011-f">.</i><i class="t011-f">4</i><i class="t011-f">%</i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f gr">O</i><i class="t011-f gr">N</i><i class="t011-f gr sp"></i><i class="t011-f gr">T</i><i class="t011-f gr">I</i><i class="t011-f gr">M</i><i class="t011-f gr">E</i></div></div>
+    <div class="t011-glow" style="left:calc(var(--u)*20);top:calc(var(--u)*378);width:calc(var(--u)*1040);height:calc(var(--u)*200)"></div>
+    <div class="t011-a" style="--x:60;--y:396"><div class="t011-row" style="--s:100"><i class="t011-f co">C</i><i class="t011-f co">H</i><i class="t011-f co">E</i><i class="t011-f co">C</i><i class="t011-f co">K</i><i class="t011-f co">O</i><i class="t011-f co">U</i><i class="t011-f co">T</i></div></div>
+    <div class="t011-a" style="--x:700;--y:396"><div class="t011-row" style="--s:100"><i class="t011-f co">−</i><i class="t011-f co">1</i><i class="t011-f co fl" data-n="9">8</i><i class="t011-f co">%</i></div></div>
+    <div class="t011-a t011-ctx" style="--x:60;--y:530">SINCE 09:42 · AFTER DEPLOY #2231 · HELD</div>
+    <div class="t011-a t011-lbl" style="--x:60;--y:640">YOUR CALL</div>
+    <div class="t011-a t011-btn" style="--x:60;--y:680"><div class="t011-row" style="--s:84"><i class="t011-f co">R</i><i class="t011-f co">O</i><i class="t011-f co">L</i><i class="t011-f co">L</i><i class="t011-f co sp"></i><i class="t011-f co">B</i><i class="t011-f co">A</i><i class="t011-f co">C</i><i class="t011-f co">K</i></div></div>
+    <div class="t011-a t011-btn2" style="--x:760;--y:692"><div class="t011-row" style="--s:60"><i class="t011-f dm">A</i><i class="t011-f dm">C</i><i class="t011-f dm">K</i></div></div>
+    <svg class="t011-a t011-cursor" style="--x:470;--y:760" viewBox="0 0 34 44"><path d="M2 2 L2 36 L11 28 L17 42 L23 39 L17 26 L29 26 Z" fill="#fff" stroke="#0E1726" stroke-width="2.5" stroke-linejoin="round"/></svg>
+    <div class="t011-a" style="--x:60;--y:312"><div class="t011-row" style="--s:44"><i class="t011-f">A</i><i class="t011-f">C</i><i class="t011-f">T</i><i class="t011-f">I</i><i class="t011-f">V</i><i class="t011-f">E</i><i class="t011-f sp"></i><i class="t011-f sp"></i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f">4</i><i class="t011-f">8</i><i class="t011-f">2</i><i class="t011-f">1</i><i class="t011-f">0</i><i class="t011-f sp"></i><span class="t011-gap"></span><i class="t011-f gr">O</i><i class="t011-f gr">N</i><i class="t011-f gr sp"></i><i class="t011-f gr">T</i><i class="t011-f gr">I</i><i class="t011-f gr">M</i><i class="t011-f gr">E</i></div></div>
+    <div class="t011-a t011-lbl" style="--x:60;--y:880;--w:960">13 OF 14 METRICS ON TIME · 2,418 EVENTS/SEC</div>
+    <div class="t011-a t011-lbl" style="--x:60;--y:950">RESOLVED IN 6 MIN</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Healthy rows keep ticking quietly; the CHECKOUT row keeps flipping, overshoots, then locks in coral.</b> "−18%" locks on a downbeat, the context line types out over one bar, and the cursor presses "ROLL BACK" on the next snare.</p></div>
+
+  <div class="cw"><div class="cell" id="t011-f4"><div class="t011-bg"></div>
+    <div class="t011-a t011-hd" style="--x:60;--y:62;--w:960"><span><b>●</b> FINAL CALL</span><span>GATE 01</span></div>
+    <div class="t011-a t011-rule" style="--x:60;--y:98;--w:960"></div>
+    <div class="t011-a" style="--x:60;--y:150"><div class="t011-row" style="--s:124"><i class="t011-f">Y</i><i class="t011-f">O</i><i class="t011-f">U</i><i class="t011-f sp"></i><i class="t011-f">S</i><i class="t011-f">H</i><i class="t011-f">I</i><i class="t011-f">P</i><i class="t011-f">.</i></div></div>
+    <div class="t011-a" style="--x:60;--y:292"><div class="t011-row" style="--s:124"><i class="t011-f tl">P</i><i class="t011-f tl">U</i><i class="t011-f tl">L</i><i class="t011-f tl">S</i><i class="t011-f tl">E</i></div></div>
+    <div class="t011-a" style="--x:60;--y:434"><div class="t011-row" style="--s:124"><i class="t011-f tl">W</i><i class="t011-f tl">A</i><i class="t011-f tl">T</i><i class="t011-f tl">C</i><i class="t011-f tl">H</i><i class="t011-f tl">E</i><i class="t011-f tl">S</i><i class="t011-f tl">.</i></div></div>
+    <div class="t011-a t011-lock" style="--x:60;--y:640"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse</div>
+    <div class="t011-a t011-lbl" style="--x:60;--y:730">CAUGHT BEFORE CUSTOMERS NOTICED</div>
+    <div class="t011-a t011-btn" style="--x:60;--y:820"><div class="t011-row" style="--s:84"><i class="t011-f co">S</i><i class="t011-f co">T</i><i class="t011-f co">A</i><i class="t011-f co">R</i><i class="t011-f co">T</i><i class="t011-f co sp"></i><i class="t011-f co">F</i><i class="t011-f co">R</i><i class="t011-f co">E</i><i class="t011-f co">E</i></div></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Row by row, top → bottom, one row per bar.</b> "YOU SHIP." lands in white, "PULSE / WATCHES." settle in teal on the next two downbeats, and the "START FREE" button flips last and holds on the final hit.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Flap cell</b> — a character tile with a split top/bottom half and a dark hinge; the only letterform in the film.</li>
+    <li><b>Board row</b> — a metric name, its value and a status column, the way a timetable lists departures.</li>
+    <li><b>Status flaps</b> — "ON TIME" in green, "HELD" in coral; the vocabulary of every health state.</li>
+    <li><b>Hero row</b> — the anomaly promoted to 104 px flaps in coral, with a soft coral glow bleeding behind it.</li>
+    <li><b>Ghost row</b> — half-flipped blank tiles above and below the action, for depth and constant low motion.</li>
+    <li><b>Action flaps</b> — "ROLL BACK" and "START FREE" built from the same tiles inside a lit button frame.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Cascade flip</b> — top half rotateX 0→−90° (60 ms, power2.in), bottom half 90→0° (60 ms, power2.out), 4–10 interim glyphs per cell; a full settle ≈ 1 beat at 120 BPM.</li>
+    <li><b>Row wave</b> — 30 ms stagger per cell, 120 ms between rows, so a 3-row block lands in exactly one bar.</li>
+    <li><b>Settle wobble</b> — each final flap overshoots 4° (back.out(3), 120 ms); the anomaly row wobbles twice and locks on the downbeat.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>Everyone can read a departures board instantly, and "the one row that stops" is a dramatic but calm way to show an anomaly. The motion is rhythmic by nature, so it cuts to music without any help. Risk: it has to feel mechanical even with the sound off, so flip timing matters more than detail.</p>
+    <p><b>Adapt to your product:</b> list your own objects (deploys, invoices, jobs, tickets) as rows and map your states to status words. Keep rows to 9–10 characters and let a single row turn to your alert color.</p>
+    <p><b>References:</b> <a href="https://github.com/conartist6/splitflap">github.com/conartist6/splitflap</a></p>
+  </div>
+</div>
+</body>
+</html>

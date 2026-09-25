@@ -1,0 +1,74 @@
+{
+ "id": "030",
+ "slug": "stitch-and-thread",
+ "name": "Stitch & Thread",
+ "category": "material",
+ "summary": "Metrics cross-stitched in teal on linen; a seam ripper unpicks the coral stitches where checkout conversion dropped.",
+ "look": "Oat linen, a wooden embroidery hoop, glossy teal cross-stitches with thread highlights, a silver needle and sewn fabric labels. Coral thread marks the anomaly.",
+ "components": [
+  {
+   "name": "Weave ground",
+   "role": "oat linen texture from two fine repeating gradients"
+  },
+  {
+   "name": "Stitch cell",
+   "role": "two diagonal thread strokes + a highlight — one data pixel"
+  },
+  {
+   "name": "Needle + running thread",
+   "role": "the agent: a silver sliver leading each row, trailing a thread path"
+  },
+  {
+   "name": "Seam ripper",
+   "role": "the anomaly tool; pulls out the coral stitches"
+  },
+  {
+   "name": "Sewn label",
+   "role": "fabric tag with a dashed stitch border for the anomaly details"
+  },
+  {
+   "name": "Sewn button",
+   "role": "a four-hole button on a fabric tag — the human action"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Stitch-reveal",
+   "how": "per-cell stroke-dashoffset on steps() at 12 fps, 0.03 s stagger; a row completes every beat at 120 BPM"
+  },
+  {
+   "name": "Needle bob",
+   "how": "0.15 s sine up/down ahead of the stitch front, locked to sixteenth notes"
+  },
+  {
+   "name": "Unpick",
+   "how": "coral thread pulls out with power2.in 0.3 s on the snare, then re-stitches teal over the next bar"
+  }
+ ],
+ "story": "Hook: a hoop full of cross-stitched mini dashboards fills in, one with a coral dip. Reveal: the hoop tightens on the drop around a stitched Acme mark patch and a satin “Acme Pulse”. Proof: a teal line chart stitches across until it drops into coral; the ripper unpicks it, a sewn label reads “Checkout conversion −18% · since 09:42 · after deploy #2231”, and the human presses the “Roll back” button. CTA: the linen drapes in with “Every metric. Every minute.” and a stitched “Start free” tag.",
+ "adapt": "Stitch your product's key chart or icon grid, let your agent be the needle, and turn the one thing it catches into the coral stitches that get unpicked; primary actions become sewn buttons.",
+ "references": [
+  {
+   "url": "https://www.itsnicethat.com/articles/blinkink-burberry-animation-fashion-project-050325",
+   "note": "stitched / textile animation in a fashion film",
+   "verified": true
+  },
+  {
+   "url": "https://tympanus.net/codrops/2020/02/11/how-to-create-a-physics-based-3d-cloth-with-cannon-js-and-three-js/",
+   "note": "physics-based cloth for the drape reveal",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Stitched digits get noisy; keep them large and few and set exact values as typeset labels."
+ },
+ "best_for": [
+  "quality & craft brands",
+  "internal tools",
+  "design-led SaaS"
+ ],
+ "file": "themes/030-stitch-and-thread.html"
+}

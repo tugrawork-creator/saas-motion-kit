@@ -1,0 +1,26 @@
+{"id":"036","slug":"sonar-sweep","name":"Sonar Sweep","category":"light",
+ "summary":"A calm scope whose conic beam never stops turning: metrics are blips, and one pings back coral so a human can decide.",
+ "look":"Deep teal-black glass with range rings labelled by metric, bearing ticks and faint scanlines. A conic-gradient beam with a phosphor tail rotates forever, blips glow and fade behind it, and the anomaly announces itself with coral ping rings and a slide-up contact card.",
+ "components":[
+  {"name":"Scope + range rings","role":"concentric rings labelled by metric; the whole product surface in one circle"},
+  {"name":"Conic sweep","role":"CSS conic-gradient beam with phosphor tail; the always-on background watcher"},
+  {"name":"Blips","role":"metric dots whose alpha decays after each pass; healthy signals"},
+  {"name":"Ping rings","role":"three coral expanding circles; the anomaly announcing itself"},
+  {"name":"Contact card","role":"'Contact 07 · locked' card with metric, context and Roll back / Acknowledge"},
+  {"name":"Bearing strip","role":"mono readouts (bearing, clock, metric count) around the scope"}
+ ],
+ "motion":[
+  {"name":"Sweep","how":"linear 360° per 2 bars (4 s at 120 BPM), never eased; the film's metronome"},
+  {"name":"Blip decay","how":"each blip 1 → 0.15 opacity over one rotation, triggered by its angle as the beam crosses"},
+  {"name":"Ping","how":"ring scale 0 → 3, opacity 1 → 0, power2.out; three staggered rings on three kicks"}
+ ],
+ "story":"Hook: a dead scope at 03:14, sweep off, grey blips flickering unseen: '38 dashboards. Nobody watching.' Reveal: on the drop the beam ignites from the Acme mark at the hub and starts turning; 'Acme Pulse' rises beneath. Proof: the beam turns across rings labelled Signups, Active users, p95 latency and Checkout; one blip pings coral, the scope locks and a card slides up: 'Contact 07 · Checkout conversion −18% · since 09:42 · after deploy #2231' with Roll back. CTA: the scope fills the frame behind 'You ship. Pulse watches.' and Start free.",
+ "adapt":"Label the rings with your own objects (services, regions, customers, pipelines) and let the contact card show your product's real alert and action.",
+ "references":[
+  {"url":"https://csswolf.com/radar-scanner-animation-effect-in-css-no-js/","note":"pure-CSS radar scanner","verified":false},
+  {"url":"https://codepen.io/robdimarzo/embed/vYreyxM","note":"radar sweep CodePen","verified":false},
+  {"url":"https://en.wikipedia.org/wiki/Territory_Studio","note":"fictional-UI studio lineage","verified":false}
+ ],
+ "fit":{"readability":3,"trust":3,"effort":"low","risk":"Radar carries military connotations; keep it calm and scientific, with no crosshairs or targeting language."},
+ "best_for":["observability","security","monitoring","fintech risk"],
+ "file":"themes/036-sonar-sweep.html"}

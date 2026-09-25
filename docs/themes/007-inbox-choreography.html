@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>007 · Inbox Choreography — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t007-s{position:absolute;inset:0;background:#F7F6F2;font-family:var(--sans);color:var(--ink);overflow:hidden}
+.t007-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t007-top{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*60);height:calc(var(--u)*64);display:flex;align-items:center;gap:calc(var(--u)*16)}
+.t007-search{flex:1;height:calc(var(--u)*56);border-radius:calc(var(--u)*28);background:#ECEAE3;display:flex;align-items:center;padding:0 calc(var(--u)*24);font:500 calc(var(--u)*22) var(--sans);color:#8A8F99}
+.t007-cnt{height:calc(var(--u)*56);display:flex;align-items:center;gap:calc(var(--u)*12);font:700 calc(var(--u)*24) var(--sans);white-space:nowrap}
+.t007-cnt b{min-width:calc(var(--u)*72);height:calc(var(--u)*48);border-radius:calc(var(--u)*24);background:var(--alert);color:#fff;display:flex;align-items:center;justify-content:center;font:600 calc(var(--u)*26) var(--mono);padding:0 calc(var(--u)*14)}
+.t007-list{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);background:#fff;border-radius:calc(var(--u)*16);box-shadow:0 0 0 calc(var(--u)*1.5) #E5E2D9;overflow:hidden}
+.t007-row{height:calc(var(--u)*86);display:flex;align-items:center;gap:calc(var(--u)*18);padding:0 calc(var(--u)*26);border-bottom:calc(var(--u)*1.5) solid #EFEDE6;white-space:nowrap;position:relative;overflow:hidden}
+.t007-row .dot{width:calc(var(--u)*12);height:calc(var(--u)*12);border-radius:50%;background:var(--brand);flex:none}
+.t007-row .fr{width:calc(var(--u)*230);flex:none;font:800 calc(var(--u)*25) var(--sans);overflow:hidden;text-overflow:ellipsis}
+.t007-row .sb{flex:1;font:500 calc(var(--u)*25) var(--sans);color:#33415C;overflow:hidden;text-overflow:ellipsis}
+.t007-row .sb b{color:var(--ink)}
+.t007-row .tm{font:400 calc(var(--u)*21) var(--mono);color:#8A8F99}
+.t007-row.al .fr{color:var(--alert)}
+.t007-row.read .fr{font-weight:600;color:var(--muted)} .t007-row.read .dot{visibility:hidden}
+.t007-row.gone{height:calc(var(--u)*30);opacity:.3}
+.t007-row.gone>*{visibility:hidden}
+.t007-row.swipe{background:var(--brand)}
+.t007-row.swipe .in{position:absolute;inset:0;left:auto;width:78%;background:#fff;display:flex;align-items:center;gap:calc(var(--u)*18);padding:0 calc(var(--u)*26);box-shadow:calc(var(--u)*-8) 0 calc(var(--u)*20) rgba(0,0,0,.1)}
+.t007-row.swipe .ar{position:absolute;left:calc(var(--u)*26);top:0;bottom:0;display:flex;align-items:center;gap:calc(var(--u)*10);font:700 calc(var(--u)*22) var(--sans);color:#fff}
+.t007-chip{font:600 calc(var(--u)*20) var(--mono);padding:calc(var(--u)*5) calc(var(--u)*12);border-radius:calc(var(--u)*8);background:var(--brand-soft);color:var(--brand-deep);white-space:nowrap}
+.t007-chip.co{background:#FFE1DD;color:#C9362C}
+.t007-hl{position:absolute;left:calc(var(--u)*60);width:calc(var(--u)*960);font:400 calc(var(--u)*84)/1.0 var(--serif);letter-spacing:-.01em}
+.t007-hl em{color:var(--alert)}
+.t007-mail{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);background:#fff;border-radius:calc(var(--u)*16);box-shadow:0 0 0 calc(var(--u)*1.5) #E5E2D9,0 calc(var(--u)*24) calc(var(--u)*60) rgba(14,23,38,.1);padding:calc(var(--u)*36) calc(var(--u)*40)}
+.t007-from{display:flex;align-items:center;gap:calc(var(--u)*16);white-space:nowrap}
+.t007-from img{width:calc(var(--u)*64);height:calc(var(--u)*64)}
+.t007-from .n{font:800 calc(var(--u)*28) var(--sans)} .t007-from .a{font:400 calc(var(--u)*21) var(--mono);color:#8A8F99}
+.t007-subj{font:400 calc(var(--u)*64)/1.05 var(--serif);margin-top:calc(var(--u)*24);letter-spacing:-.01em}
+.t007-card{margin-top:calc(var(--u)*26);border-radius:calc(var(--u)*14);background:#FFF4F2;box-shadow:inset 0 0 0 calc(var(--u)*2) #FFD2CC;padding:calc(var(--u)*24) calc(var(--u)*28);display:flex;gap:calc(var(--u)*24);align-items:center}
+.t007-card .t{font:800 calc(var(--u)*42)/1.1 var(--sans)} .t007-card .t b{color:var(--alert)}
+.t007-card .m{font:400 calc(var(--u)*23) var(--mono);color:var(--muted);margin-top:calc(var(--u)*6)}
+.t007-btn{height:calc(var(--u)*68);padding:0 calc(var(--u)*32);border-radius:calc(var(--u)*34);display:inline-flex;align-items:center;font:700 calc(var(--u)*28) var(--sans);white-space:nowrap}
+.t007-btn.pri{background:var(--alert);color:#fff}.t007-btn.sec{box-shadow:inset 0 0 0 calc(var(--u)*2) #D6D3C8}
+.t007-word{font:800 calc(var(--u)*92)/1 var(--sans);letter-spacing:-.035em;white-space:nowrap}
+.t007-ptr{position:absolute;width:calc(var(--u)*46);height:calc(var(--u)*46);z-index:9}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 007 · Product UI as the stage</div>
+    <h1>Inbox Choreography</h1>
+    <p class="dek">A desktop mail client fills the frame. First it floods — alert emails, support tickets, digests of 38 dashboards, an unread counter that keeps climbing. With Acme Pulse on, rows auto-label, collapse and archive in rhythm until one calm email remains, and after the human answers it the inbox reaches zero.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t007-f1">
+<div class="t007-s">
+ <div class="t007-hl" style="top:calc(var(--u)*60)">The email you needed was <em>#147.</em></div>
+ <div class="t007-top" style="top:calc(var(--u)*246)"><div class="t007-search">Search mail</div><div class="t007-cnt">Inbox <b>147</b></div></div>
+ <div class="t007-list" style="top:calc(var(--u)*330)">
+  <div class="t007-row al"><span class="dot" style="background:var(--alert)"></span><span class="fr">Customer</span><span class="sb"><b>Can't finish checkout??</b> — tried three times, the pay…</span><span class="tm">16:52</span></div>
+  <div class="t007-row"><span class="dot"></span><span class="fr">Alerts</span><span class="sb"><b>[warn] p95 latency 212 ms</b> — threshold 200 ms</span><span class="tm">16:40</span></div>
+  <div class="t007-row"><span class="dot"></span><span class="fr">Dashboards</span><span class="sb"><b>Daily digest: 38 dashboards</b> — 14 metrics changed</span><span class="tm">16:31</span></div>
+  <div class="t007-row al"><span class="dot" style="background:var(--alert)"></span><span class="fr">Support</span><span class="sb"><b>Ticket spike: payments</b> — 23 new since 10:00</span><span class="tm">15:58</span></div>
+  <div class="t007-row"><span class="dot"></span><span class="fr">Alerts</span><span class="sb"><b>[info] deploy #2231 finished</b> — checkout-v3</span><span class="tm">09:41</span></div>
+  <div class="t007-row"><span class="dot"></span><span class="fr">Alerts</span><span class="sb"><b>[warn] error rate 0.4 %</b> — auto-resolved</span><span class="tm">09:30</span></div>
+  <div class="t007-row read"><span class="dot"></span><span class="fr">Dashboards</span><span class="sb">Weekly digest — signups, active users, …</span><span class="tm">Mon</span></div>
+  <div class="t007-row read"><span class="dot"></span><span class="fr">Alerts</span><span class="sb">[info] 2,418 events/sec — new peak</span><span class="tm">Mon</span></div>
+ </div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Rows push in from the top one per 1/8 note</b> (y −86→0, 0.18 s power2.out) while the coral unread badge rolls up like an odometer; the headline's “#147.” lands on the bar-2 downbeat exactly as the customer complaint arrives at the top.</p></div>
+  <div class="cw"><div class="cell" id="t007-f2">
+<div class="t007-s">
+ <div class="t007-top"><div class="t007-search">Search mail</div><div class="t007-cnt">Inbox <b style="background:var(--brand)">3</b></div></div>
+ <div class="t007-list" style="top:calc(var(--u)*150);box-shadow:0 0 0 calc(var(--u)*3) var(--brand),0 calc(var(--u)*30) calc(var(--u)*70) rgba(15,163,163,.25)">
+  <div class="t007-row" style="height:calc(var(--u)*230);gap:calc(var(--u)*28);padding:0 calc(var(--u)*40);background:#F2FBFA"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*120);height:calc(var(--u)*120)"><span class="t007-word">Acme Pulse</span><span class="t007-chip" style="margin-left:auto">watching</span></div>
+ </div>
+ <div class="t007-list" style="top:calc(var(--u)*420)">
+  <div class="t007-row swipe"><span class="ar">✓ Archived</span><div class="in"><span class="fr" style="font:800 calc(var(--u)*25) var(--sans);width:calc(var(--u)*200)">Alerts</span><span class="sb" style="font:500 calc(var(--u)*25) var(--sans);color:#33415C">[warn] p95 latency 212 ms</span></div></div>
+  <div class="t007-row gone"><span>x</span></div>
+  <div class="t007-row"><span class="dot"></span><span class="fr">Dashboards</span><span class="sb"><b>Daily digest</b> — 38 dashboards</span><span class="t007-chip">summarised</span></div>
+  <div class="t007-row gone"><span>x</span></div>
+  <div class="t007-row"><span class="dot"></span><span class="fr">Alerts</span><span class="sb"><b>error rate 0.4 %</b></span><span class="t007-chip">normal</span></div>
+  <div class="t007-row gone"><span>x</span></div>
+  <div class="t007-row read"><span class="dot"></span><span class="fr">Alerts</span><span class="sb">deploy #2231 finished</span><span class="t007-chip">watched</span></div>
+ </div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the Pulse row slams in at hero height</b> (0→230 px, back.out 1.6, 0.3 s) with a teal rim; beneath it rows get labelled, swipe right to archive and collapse on every 1/16 note (height→30→0, 0.22 s power2.in) while the badge counts 147→3.</p></div>
+  <div class="cw"><div class="cell" id="t007-f3">
+<div class="t007-s">
+ <div class="t007-top"><div class="t007-search">Search mail</div><div class="t007-cnt">Inbox <b style="background:var(--brand)">1</b></div></div>
+ <div class="t007-mail" style="top:calc(var(--u)*150)">
+  <div class="t007-from"><img src="../assets/brand/acme-mark.svg" alt=""><div><div class="n">Acme Pulse</div><div class="a">pulse@acme.example · 09:44</div></div><span class="t007-chip co" style="margin-left:auto">anomaly</span><span class="t007-chip">checkout</span></div>
+  <div class="t007-subj">One anomaly, caught at 09:44.</div>
+  <div class="t007-card"><div style="flex:1"><div class="t">Checkout conversion <b>−18%</b></div><div class="m">since 09:42 · after deploy #2231</div></div>
+   <svg viewBox="0 0 200 110" style="width:calc(var(--u)*200);height:calc(var(--u)*110);flex:none"><path d="M6 30 L60 28 L96 32 L110 84 L150 86 L194 84" fill="none" stroke="#FF5A4E" stroke-width="5" stroke-linejoin="round"/><path d="M6 30 L60 28 L96 32" fill="none" stroke="#0FA3A3" stroke-width="5"/></svg></div>
+  <div style="font:500 calc(var(--u)*25)/1.5 var(--sans);color:#33415C;margin-top:calc(var(--u)*24)">No customer has written in yet. Your call:</div>
+  <div style="display:flex;gap:calc(var(--u)*14);margin-top:calc(var(--u)*18)"><span class="t007-btn pri">Roll back #2231</span><span class="t007-btn sec">Acknowledge</span></div>
+ </div>
+ <div class="t007-list" style="top:calc(var(--u)*790);opacity:.75">
+  <div class="t007-row read"><span class="dot"></span><span class="fr">Alerts</span><span class="sb">p95 latency 212 ms</span><span class="t007-chip">normal · archived</span></div>
+  <div class="t007-row read"><span class="dot"></span><span class="fr">Dashboards</span><span class="sb">Daily digest — 38 dashboards</span><span class="t007-chip">summarised</span></div>
+ </div>
+ <svg class="t007-ptr" style="left:calc(var(--u)*232);top:calc(var(--u)*628)" viewBox="0 0 46 46"><path d="M7 4 L7 36 L16 28 L22 42 L29 39 L23 25 L36 25 Z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></svg>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The last row opens into a full reading pane</b> (FLIP from row to card, 0.45 s power3.inOut); the coral anomaly card slides up one beat later, the mini chart draws left→right, and the pointer clicks <b>Roll back #2231</b> on the snare — the only email that needed a human.</p></div>
+  <div class="cw"><div class="cell" id="t007-f4">
+<div class="t007-s">
+ <div class="t007-top"><div class="t007-search">Search mail</div><div class="t007-cnt">Inbox <b style="background:var(--ok)">0</b></div></div>
+ <svg class="t007-p" style="--x:390;--y:170;--w:300;--h:240" viewBox="0 0 300 240"><circle cx="150" cy="120" r="112" fill="#CFF1EE"/><circle cx="150" cy="120" r="80" fill="#fff"/><path d="M84 124 H118 L134 84 L154 160 L168 116 H214" fill="none" stroke="#0FA3A3" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="222" cy="116" r="9" fill="#FF5A4E"/></svg>
+ <div class="t007-hl" style="top:calc(var(--u)*440);text-align:center;font-size:calc(var(--u)*92)">Caught <em>before</em> customers noticed.</div>
+ <div class="t007-p" style="--x:60;--y:720;--w:960;display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*40)">
+  <span style="display:flex;align-items:center;gap:calc(var(--u)*18)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*76);height:calc(var(--u)*76)"><span class="t007-word" style="font-size:calc(var(--u)*60)">Acme Pulse</span></span>
+  <span class="t007-btn pri" style="height:calc(var(--u)*88);font-size:calc(var(--u)*34);padding:0 calc(var(--u)*44);border-radius:calc(var(--u)*44)">Start free</span>
+ </div>
+ <div class="t007-p" style="--x:60;--y:900;--w:960;text-align:center;font:500 calc(var(--u)*22) var(--mono);color:#8A8F99">Inbox zero · resolved in 6 min · 0 customer emails</div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The reading pane archives away to the right</b> (x 0→110 %, 0.3 s power2.in) and the empty-state illustration draws its pulse line (stroke 0.5 s) as the badge ticks 1→0 and turns green on the downbeat; tagline and CTA fade up together on the final bar.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Mail row</b> — sender, subject, time; the unit of overload.</li><li><b>Unread badge</b> — coral odometer that climbs to 147 and falls to 0 (green).</li><li><b>Auto-label chips</b> — “summarised”, “normal”, “watched”, “anomaly”: Pulse triaging.</li><li><b>Swipe-reveal action</b> — teal “Archived” bleeding in behind a row.</li><li><b>Digest email from Pulse</b> — the single calm email with the anomaly card and two buttons.</li><li><b>Empty-state illustration</b> — the pulse mark as an inbox-zero reward.</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Row collapse</b> — height→0 with the rows below sliding up, 0.22 s power2.in, staggered on 1/16 notes (0.125 s at 120 BPM) for a rolling hi-hat feel.</li><li><b>Swipe triage</b> — x 0→−100 % with the teal action colour bleeding in from the left, 0.25 s power3.in, one swipe per beat.</li><li><b>Counter countdown</b> — 147→0 decelerating with expo.out over 2 bars, the last digit landing on a downbeat.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> everyone knows the dread of a flooded inbox and the relief of inbox zero, so the before/after is instant; one calm email from the agent is a believable, human-scale way to show “it filters the noise and asks you only once”. <b>Risk:</b> close to notification tropes — keep it desktop, typographic and slow in the proof beat.</p><p><b>Adapt to your product:</b> the flood becomes whatever noise your customers drown in (tickets, alerts, requests); your product's single summary email carries the one decision it needs from them.</p><p><b>References:</b> <a href="https://blog.superhuman.com/how-superhuman-chooses-inbox-zero-images/">Superhuman — inbox-zero imagery</a> · <a href="https://dribbble.com/tags/swipe_motion">Dribbble — swipe motion studies</a></p></div>
+</div>
+</body>
+</html>

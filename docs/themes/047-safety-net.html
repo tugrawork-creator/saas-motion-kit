@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>047 · The Safety Net — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t047-bg{background:#0F1A2B}
+.t047-s{position:absolute;inset:0;width:100%;height:100%}
+.t047-m{font-family:var(--mono)}
+.t047-se{font-family:var(--serif)}
+.t047-sa{font-family:var(--sans)}
+.t047-mark{position:absolute;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 047 · Metaphor concepts</div>
+    <h1>The Safety Net</h1>
+    <p class="dek">A flat, elegant big top. Faceless geometric trapeze artists pass metric chips between swings in time with the music; below them hangs an almost invisible net woven from thin data lines. One chip slips, the net catches it, and the ringmaster, a human, decides what happens next.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort high</span></div>
+</div>
+
+<div class="grid">
+  <!-- F1 · HOOK -->
+  <div class="cw"><div class="cell t047-bg" id="t047-f1">
+    <svg class="t047-s" viewBox="0 0 1080 1080">
+      <defs>
+        <g id="t047-tent"><path d="M540 -60 L0 1080 L180 1080 z" fill="#14223A"/><path d="M540 -60 L360 1080 L540 1080 z" fill="#14223A"/><path d="M540 -60 L720 1080 L900 1080 z" fill="#14223A"/><path d="M540 -60 L1080 1080 L1080 760 z" fill="#14223A"/></g>
+        <g id="t047-artist"><circle cx="0" cy="0" r="20" fill="#EEF2F6"/><rect x="-18" y="26" width="36" height="78" rx="18" fill="#EEF2F6"/><rect x="-14" y="98" width="12" height="64" rx="6" fill="#EEF2F6"/><rect x="2" y="98" width="12" height="64" rx="6" fill="#EEF2F6"/></g>
+      </defs>
+      <use href="#t047-tent"/>
+      <ellipse cx="540" cy="1040" rx="620" ry="120" fill="#1B2A42"/>
+      <g class="t047-sa" font-size="80" font-weight="800" fill="#EEF2F6" letter-spacing="-2">
+        <text x="70" y="170">Shipping on Friday.</text>
+        <text x="70" y="262"><tspan class="t047-se" font-weight="400" font-style="italic" fill="#FF8A80" font-size="92">Without</tspan> a net?</text>
+      </g>
+      <!-- trapezes -->
+      <g stroke="#6E7F99" stroke-width="3"><line x1="220" y1="300" x2="250" y2="480"/><line x1="320" y1="300" x2="340" y2="480"/><line x1="820" y1="300" x2="790" y2="470"/><line x1="920" y1="300" x2="880" y2="470"/></g>
+      <rect x="240" y="476" width="110" height="10" rx="5" fill="#F4B740"/><rect x="780" y="466" width="110" height="10" rx="5" fill="#F4B740"/>
+      <use href="#t047-artist" transform="translate(300 510) rotate(-18)"/>
+      <use href="#t047-artist" transform="translate(830 500) rotate(16)"/>
+      <!-- too many chips in the air -->
+      <g class="t047-m" font-size="22" font-weight="600" text-anchor="middle">
+        <rect x="430" y="380" width="150" height="48" rx="24" fill="#0FA3A3"/><text x="505" y="412" fill="#fff">Signups</text>
+        <rect x="560" y="450" width="150" height="48" rx="24" fill="#0FA3A3"/><text x="635" y="482" fill="#fff">Latency</text>
+        <rect x="440" y="520" width="140" height="48" rx="24" fill="#0FA3A3"/><text x="510" y="552" fill="#fff">Errors</text>
+        <rect x="590" y="600" width="160" height="48" rx="24" fill="#FF5A4E" transform="rotate(24 670 624)"/><text x="670" y="632" fill="#fff" transform="rotate(24 670 624)">Checkout</text>
+      </g>
+      <path d="M680 670 C 690 760, 700 820, 700 900" fill="none" stroke="#FF8A80" stroke-width="3" stroke-dasharray="6 10"/>
+      <line x1="120" y1="930" x2="960" y2="930" stroke="#3A4B66" stroke-width="2" stroke-dasharray="4 14"/>
+      <text class="t047-m" x="540" y="990" font-size="22" fill="#8C9BB3" text-anchor="middle" letter-spacing="4">NO NET · 38 DASHBOARDS</text>
+    </svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Two artists swing in counter-phase, passing more and more chips across the gap, one per beat.</b> On the last downbeat the coral Checkout chip tilts and starts to fall toward an empty ring: no net.</p></div>
+
+  <!-- F2 · REVEAL -->
+  <div class="cw"><div class="cell t047-bg" id="t047-f2">
+    <svg class="t047-s" viewBox="0 0 1080 1080">
+      <use href="#t047-tent"/>
+      <defs><radialGradient id="t047-spot" cx="50%" cy="0%" r="100%"><stop offset="0" stop-color="#FFF4D6" stop-opacity=".35"/><stop offset="1" stop-color="#FFF4D6" stop-opacity="0"/></radialGradient></defs>
+      <path d="M470 0 L610 0 L900 760 L180 760 z" fill="url(#t047-spot)"/>
+      <!-- banner -->
+      <path d="M150 220 L930 220 L900 270 L930 320 L150 320 L180 270 z" fill="#0FA3A3"/>
+      <path d="M150 320 L190 350 L190 320 z" fill="#0B6E6E"/><path d="M930 320 L890 350 L890 320 z" fill="#0B6E6E"/>
+      <text class="t047-sa" x="540" y="298" font-size="84" font-weight="800" fill="#fff" text-anchor="middle" letter-spacing="-2">Acme Pulse</text>
+      <!-- net -->
+      <g fill="none" stroke="#7FE7DE" stroke-width="2" opacity=".8">
+        <path d="M60 640 Q 540 760 1020 640"/><path d="M60 680 Q 540 800 1020 680"/><path d="M60 720 Q 540 840 1020 720"/><path d="M60 760 Q 540 880 1020 760"/>
+        <path d="M140 660 L150 780"/><path d="M240 677 L246 800"/><path d="M340 690 L343 812"/><path d="M440 697 L441 820"/><path d="M640 697 L639 820"/><path d="M740 690 L737 812"/><path d="M840 677 L834 800"/><path d="M940 660 L930 780"/>
+      </g>
+      <circle cx="540" cy="760" r="92" fill="#0F1A2B" stroke="#7FE7DE" stroke-width="3"/>
+      <text class="t047-m" x="540" y="950" font-size="22" fill="#7FE7DE" text-anchor="middle" letter-spacing="4">THE NET IS UP · 14 METRICS</text>
+    </svg>
+    <img class="t047-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*485);top:calc(var(--u)*705);width:calc(var(--u)*110);height:calc(var(--u)*110)">
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the net unrolls from the centre knot outward to both poles (0.5 s, expo.out) under a fresh spotlight.</b> The teal banner drops in from above with a small elastic bounce, "Acme Pulse" across it.</p></div>
+
+  <!-- F3 · PROOF MOMENT -->
+  <div class="cw"><div class="cell t047-bg" id="t047-f3">
+    <svg class="t047-s" viewBox="0 0 1080 1080">
+      <use href="#t047-tent"/>
+      <g stroke="#6E7F99" stroke-width="3"><line x1="120" y1="40" x2="170" y2="250"/><line x1="220" y1="40" x2="250" y2="250"/></g>
+      <rect x="160" y="246" width="100" height="10" rx="5" fill="#F4B740"/>
+      <use href="#t047-artist" transform="translate(212 282) rotate(-8)"/>
+      <!-- chip passes: ok chips -->
+      <g class="t047-m" font-size="21" font-weight="600" text-anchor="middle">
+        <rect x="330" y="150" width="200" height="50" rx="25" fill="#0FA3A3"/><text x="430" y="183" fill="#fff">Signups 1,204</text>
+        <rect x="350" y="230" width="200" height="50" rx="25" fill="#0FA3A3"/><text x="450" y="263" fill="#fff">p95 212 ms</text>
+      </g>
+      <path d="M480 300 C 520 420, 540 520, 548 600" fill="none" stroke="#FF8A80" stroke-width="3" stroke-dasharray="6 10"/>
+      <!-- net with catch -->
+      <g fill="none" stroke="#7FE7DE" stroke-width="2" opacity=".75">
+        <path d="M60 600 Q 300 650 450 660 Q 550 720 650 660 Q 800 650 1020 600"/>
+        <path d="M60 640 Q 300 690 450 700 Q 550 752 650 700 Q 800 690 1020 640"/>
+        <path d="M60 680 Q 300 730 450 740 Q 550 780 650 740 Q 800 730 1020 680"/>
+        <path d="M150 618 L156 700"/><path d="M260 634 L264 718"/><path d="M370 652 L372 736"/><path d="M470 672 L474 754"/><path d="M630 672 L626 754"/><path d="M730 652 L728 736"/><path d="M840 634 L836 718"/><path d="M950 618 L944 700"/>
+      </g>
+      <ellipse cx="550" cy="690" rx="120" ry="30" fill="none" stroke="#7FE7DE" stroke-width="2.5" opacity=".7"/>
+      <ellipse cx="550" cy="690" rx="200" ry="50" fill="none" stroke="#7FE7DE" stroke-width="1.5" opacity=".35"/>
+      <circle cx="550" cy="718" r="14" fill="#FF5A4E"/>
+      <g transform="rotate(-10 550 670)">
+        <rect x="440" y="630" width="220" height="56" rx="28" fill="#FF5A4E"/>
+        <text class="t047-m" x="550" y="667" font-size="24" font-weight="600" fill="#fff" text-anchor="middle">Checkout</text>
+      </g>
+      <!-- callout -->
+      <line x1="662" y1="640" x2="720" y2="460" stroke="#FF8A80" stroke-width="2.5"/>
+      <rect x="640" y="250" width="380" height="210" rx="16" fill="#152238" stroke="#FF5A4E" stroke-width="3"/>
+      <g class="t047-m"><text x="668" y="296" font-size="20" fill="#FF8A80" letter-spacing="3">CAUGHT · KNOT #07</text>
+        <text x="668" y="340" font-size="28" font-weight="600" fill="#EEF2F6">Checkout conv.</text>
+        <text x="668" y="396" font-size="54" font-weight="600" fill="#FF5A4E">−18%</text>
+        <text x="668" y="438" font-size="21" fill="#B8C4D6">09:42 · deploy #2231</text></g>
+      <!-- ringmaster -->
+      <rect x="60" y="820" width="960" height="200" rx="20" fill="#152238" stroke="#2A3B58" stroke-width="2"/>
+      <rect x="102" y="846" width="44" height="30" fill="#EEF2F6"/><rect x="92" y="874" width="64" height="8" fill="#EEF2F6"/><circle cx="124" cy="902" r="18" fill="#EEF2F6"/><rect x="104" y="926" width="40" height="64" rx="16" fill="#FF5A4E"/>
+      <text class="t047-se" x="186" y="908" font-size="44" fill="#EEF2F6">Ringmaster's <tspan font-style="italic" fill="#7FE7DE">call</tspan></text>
+      <text class="t047-m" x="186" y="956" font-size="20" fill="#8C9BB3">that's you</text>
+      <rect x="560" y="860" width="220" height="96" rx="16" fill="#FF5A4E"/>
+      <text class="t047-sa" x="670" y="920" font-size="32" font-weight="700" fill="#fff" text-anchor="middle">Roll back</text>
+      <rect x="796" y="860" width="200" height="96" rx="16" fill="none" stroke="#B8C4D6" stroke-width="3"/>
+      <text class="t047-sa" x="896" y="918" font-size="26" font-weight="600" fill="#EEF2F6" text-anchor="middle">Acknowledge</text>
+    </svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Mid-pass the Checkout chip slips and falls straight down; the net sags and snaps back with elastic.out while a ripple spreads across the mesh.</b> The caught knot lights coral on the downbeat, the callout draws out, and the ringmaster taps "Roll back" to toss the chip back up.</p></div>
+
+  <!-- F4 · CTA -->
+  <div class="cw"><div class="cell t047-bg" id="t047-f4">
+    <svg class="t047-s" viewBox="0 0 1080 1080">
+      <use href="#t047-tent"/>
+      <path d="M440 0 L640 0 L960 700 L120 700 z" fill="url(#t047-spot)"/>
+      <text class="t047-sa" x="224" y="210" font-size="80" font-weight="800" fill="#EEF2F6" letter-spacing="-2">Acme Pulse</text>
+      <g class="t047-sa" font-size="100" font-weight="800" fill="#EEF2F6" letter-spacing="-2">
+        <text x="80" y="400">You ship.</text>
+        <text x="80" y="510"><tspan class="t047-se" font-weight="400" font-style="italic" fill="#7FE7DE" font-size="116">Pulse watches.</tspan></text>
+      </g>
+      <rect x="80" y="580" width="330" height="106" rx="18" fill="#FF5A4E"/>
+      <text class="t047-sa" x="245" y="647" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Start free</text>
+      <g fill="none" stroke="#7FE7DE" stroke-width="2" opacity=".6">
+        <path d="M60 800 Q 540 900 1020 800"/><path d="M60 840 Q 540 940 1020 840"/><path d="M60 880 Q 540 980 1020 880"/>
+        <path d="M200 822 L204 912"/><path d="M360 840 L362 932"/><path d="M540 850 L540 942"/><path d="M720 840 L718 932"/><path d="M880 822 L876 912"/>
+      </g>
+      <g class="t047-m" font-size="20" font-weight="600" text-anchor="middle">
+        <rect x="640" y="600" width="170" height="46" rx="23" fill="#0FA3A3"/><text x="725" y="630" fill="#fff">Checkout ✓</text>
+        <rect x="830" y="560" width="150" height="46" rx="23" fill="#0FA3A3"/><text x="905" y="590" fill="#fff">Signups ✓</text>
+      </g>
+      <text class="t047-m" x="540" y="1010" font-size="20" fill="#8C9BB3" text-anchor="middle" letter-spacing="4">RESOLVED IN 6 MIN · THE SHOW GOES ON</text>
+    </svg>
+    <img class="t047-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*80);top:calc(var(--u)*130);width:calc(var(--u)*120);height:calc(var(--u)*120)">
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The corrected chip arcs back up into the spotlight (motion path, spinning) and lands in the catcher's hands on beat 1.</b> "You ship." on beat 1, "Pulse watches." on beat 3; the net glows once under the button on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Big-top stripes</b> — flat radiating tent panels in two inks; the stage.</li>
+    <li><b>Trapeze artists</b> — faceless geometric silhouettes on pendulum bars; the team doing the work.</li>
+    <li><b>Metric chips</b> — rounded tokens with mono labels, teal when fine, coral when slipping.</li>
+    <li><b>Data-line net</b> — thin teal mesh with knots; the agent, invisible until needed.</li>
+    <li><b>Catch ripple + callout</b> — rings spread from the caught knot; the callout carries the anomaly.</li>
+    <li><b>Ringmaster card</b> — the human decision (Roll back / Acknowledge).</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Pendulum</b> — bar rotation ±22°, sine.inOut, one full swing per two bars at 120 BPM (4 s); passes happen on the "and" of beat 4.</li>
+    <li><b>Net catch</b> — mesh vertices sag 40 px then recover with elastic.out(1, 0.35) over 0.9 s; the ripple ring expands over one beat.</li>
+    <li><b>Rebound toss</b> — the corrected chip rides an arcing motion path in 0.8 s with one full spin, landing on a downbeat.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>A safety net is the most intuitive picture of "you can move fast because something catches you", and it keeps the humans as the performers. Risk: it can imply the team keeps dropping things; frame the slip as the world changing mid-air (a deploy), not as human failure.</p>
+    <p><b>Adapt to your product:</b> Name the chips after what your team juggles (invoices, releases, tickets) and label the net's knots with the rules your product checks.</p>
+    <p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Flying_trapeze">Flying trapeze</a> · <a href="https://www.flying-trapeze.com/equipment">Trapeze rig and net</a></p>
+  </div>
+</div>
+</body>
+</html>

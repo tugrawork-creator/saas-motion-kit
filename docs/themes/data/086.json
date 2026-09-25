@@ -1,0 +1,74 @@
+{
+ "id": "086",
+ "slug": "art-deco-marquee",
+ "name": "Art Deco Marquee",
+ "category": "era",
+ "summary": "A 1930s premiere: sunbursts, stepped gold frames and an elevator dial whose coral needle swings to −18%.",
+ "look": "Lacquered deep teal-black fields, amber gold hairlines, ray fans and ziggurat frames, Instrument Serif display with widely tracked light Manrope caps. Coral appears only on the needle, the number and the CTA.",
+ "components": [
+  {
+   "name": "Sunburst",
+   "role": "alternating gold ray fans (7–14 % opacity) from a focal point"
+  },
+  {
+   "name": "Stepped frame",
+   "role": "ziggurat-cornered gold border, doubled with a hairline"
+  },
+  {
+   "name": "Medallion",
+   "role": "double-ringed circle holding a hero number or the mark"
+  },
+  {
+   "name": "Floor-indicator dial",
+   "role": "semicircular gauge with a teal safe zone and a coral needle"
+  },
+  {
+   "name": "Stepped plaque",
+   "role": "notched-corner button in gold or coral, tracked caps"
+  },
+  {
+   "name": "Marquee bulbs",
+   "role": "chasing lights around the CTA frame"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Sunburst bloom",
+   "how": "rays scale 0→1 from the focal point, expo.out 0.75 s (1.5 beats), slow 2°/s rotation afterwards"
+  },
+  {
+   "name": "Needle swing",
+   "how": "rotation 0→−54° with elastic.out(1, .5) 0.9 s; the overshoot peak lands on the downbeat"
+  },
+  {
+   "name": "Bulb chase",
+   "how": "every third bulb dims, pattern shifts by one bulb per 16th note (0.125 s at 120 BPM)"
+  }
+ ],
+ "story": "Hook: a stepped gold frame with a \"38\" medallion asks how many dashboards you checked today. Reveal: a 360° sunburst blooms behind the Acme mark and ACME PULSE letter-spaces between double rules. Proof: an Art Deco floor-indicator dial for checkout conversion swings its coral needle to −18% (since 09:42, after deploy #2231) and a human presses the gold ROLL BACK plaque. CTA: \"Caught before customers noticed.\" inside a chasing marquee with a START FREE plaque.",
+ "adapt": "Put your hero metric on the dial and your product's action on the plaque; the sunburst can radiate from your logo or from whatever your product produces. Works best for launches, anniversaries and premium tiers.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Art_Deco",
+   "note": "sunbursts, chevrons, stepped geometric forms",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Cassandre",
+   "note": "Cassandre's Deco posters (Nord Express, Normandie) and the Peignot face",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Gold ornament can feel like casino or hotel branding; thin tracked caps get small on phones."
+ },
+ "best_for": [
+  "fintech",
+  "premium tiers",
+  "launch events"
+ ],
+ "file": "themes/086-art-deco-marquee.html"
+}

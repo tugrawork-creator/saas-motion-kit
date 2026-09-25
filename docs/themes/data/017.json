@@ -1,0 +1,20 @@
+{"id":"017","slug":"variable-font-data-morph","name":"Variable-Font Data Morph","category":"type",
+ "summary":"Type weight is the data: a weight wave scans a grid of numerals and the one that stays heavy is the anomaly.",
+ "look":"A cool pale field of tabular numerals in a variable sans; glyph weight (200–800) encodes deviation from normal. Healthy numbers stay thin and grey-teal, the anomaly holds at black weight in coral with a halo, then swells into a hero number.",
+ "components":[
+  {"name":"Type grid","role":"12 columns of two-digit numerals in a 200–800 variable sans, tabular figures"},
+  {"name":"Weight wave","role":"moving front driving font-weight by distance: the visual form of the scan"},
+  {"name":"Anomaly glyph","role":"the one numeral that stays at 800, coral, with a halo ring"},
+  {"name":"Axis legend","role":"'wght = deviation' with sample glyphs from 200 to 800"},
+  {"name":"Hero number","role":"the anomaly promoted to 170 px black weight with a mono caption"},
+  {"name":"Weight-ramp headline","role":"tagline letters graded thin → heavy as a frozen wave"}],
+ "motion":[
+  {"name":"Wave sweep","how":"wght 200 → 800 → 200 by distance from a moving front, 60 ms stagger per column, sine.inOut; crosses the grid in one bar (2 s at 120 BPM)"},
+  {"name":"Tension hold","how":"anomalies stay heavy and pulse 800 ↔ 700 every beat (500 ms) while everything else relaxes to 200"},
+  {"name":"Hero morph","how":"the anomaly scales 1 → 3.6 at weight 800, expo.out 800 ms, landing on the downbeat"}],
+ "story":"Hook: a flat sea of numbers all at the same weight — '38 dashboards, everything looks equally important' — under 'How many dashboards did you check today?'. Reveal: a diagonal weight wave rolls across the grid on the drop and the lockup punches in at its peak, 'Acme' at 800, 'Pulse' at 200. Proof: the scan passes and everything thins back out except one glyph that holds at 800 in coral; it grows into '−18%' with 'Checkout conversion · since 09:42 · after deploy #2231', a wght legend explains the encoding, and the human hits Roll back. CTA: 'Every metric. Every minute.' as weight ramps, lockup and Start free.",
+ "adapt":"Fill the grid with your own values (response times, stock levels, lead scores) and map deviation from normal to font weight; any variable font with a wide weight axis works.",
+ "references":[{"url":"https://animationpatterns.art/animations/variable-font-weight-morph/","note":"variable-font weight morph animation pattern","verified":true}],
+ "fit":{"readability":2,"trust":2,"effort":"med","risk":"subtle weight steps vanish after compression and at thumbnail size; use only ~200, ~500 and 800"},
+ "best_for":["analytics","observability","data platforms","design-led brands"],
+ "file":"themes/017-variable-font-data-morph.html"}

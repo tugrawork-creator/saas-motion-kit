@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>052 · Depth / 3D — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t052 ===== */
+
+.t052-f{position:absolute;inset:0;overflow:hidden;color:var(--ink);font-family:var(--sans);
+ background:radial-gradient(120% 80% at 50% 0%,#FFFFFF 0%,#EEF4F3 55%,#DDE9E8 100%)}
+.t052-floor{position:absolute;left:calc(var(--u)*-300);right:calc(var(--u)*-300);bottom:calc(var(--u)*-200);height:calc(var(--u)*640);transform:perspective(calc(var(--u)*900)) rotateX(62deg);transform-origin:50% 100%;
+ background-image:linear-gradient(rgba(11,110,110,.14) calc(var(--u)*1.5),transparent calc(var(--u)*1.5)),linear-gradient(90deg,rgba(11,110,110,.14) calc(var(--u)*1.5),transparent calc(var(--u)*1.5));background-size:calc(var(--u)*90) calc(var(--u)*90);
+ -webkit-mask-image:linear-gradient(transparent,#000 60%);mask-image:linear-gradient(transparent,#000 60%)}
+.t052-h{position:absolute;font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+.t052-h i{color:var(--brand-deep)}
+.t052-k{position:absolute;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.t052-stage{position:absolute;inset:0;perspective:calc(var(--u)*1500);perspective-origin:50% 40%}
+.t052-rig{position:absolute;transform-style:preserve-3d}
+.t052-pl{position:absolute;inset:0;border-radius:calc(var(--u)*22);background:rgba(255,255,255,.74);border:calc(var(--u)*1.5) solid rgba(255,255,255,.95);
+ box-shadow:inset 0 0 0 calc(var(--u)*1) rgba(14,23,38,.08),0 calc(var(--u)*40) calc(var(--u)*70) rgba(14,23,38,.16);padding:calc(var(--u)*26) calc(var(--u)*30);backdrop-filter:blur(calc(var(--u)*6))}
+.t052-pl .t{font:700 calc(var(--u)*26) var(--sans);display:flex;justify-content:space-between;align-items:center}
+.t052-pl .t span{font:400 calc(var(--u)*20) var(--mono);color:var(--muted)}
+.t052-bars{display:flex;align-items:flex-end;gap:calc(var(--u)*12);height:calc(var(--u)*150);margin-top:calc(var(--u)*26)}
+.t052-bars i{flex:1;background:linear-gradient(#9FDAD6,#0FA3A3);border-radius:calc(var(--u)*6) calc(var(--u)*6) 0 0}
+.t052-rail{position:absolute;height:0;border-top:calc(var(--u)*3) dashed rgba(15,163,163,.7);transform-origin:0 0}
+.t052-ghost{position:absolute;inset:0;border-radius:calc(var(--u)*22);border:calc(var(--u)*2) solid rgba(15,163,163,.55);background:rgba(207,241,238,.18)}
+.t052-ghost b{position:absolute;left:calc(var(--u)*190);top:calc(var(--u)*120);font:800 calc(var(--u)*80) var(--sans);color:transparent;-webkit-text-stroke:calc(var(--u)*2) rgba(15,163,163,.6);letter-spacing:-.03em;white-space:nowrap}
+.t052-lock{display:flex;align-items:center;gap:calc(var(--u)*24);white-space:nowrap}
+.t052-lock img{width:calc(var(--u)*110);height:calc(var(--u)*110)}
+.t052-lock b{font:800 calc(var(--u)*80) var(--sans);letter-spacing:-.03em}
+.t052-tbl{position:absolute;inset:0;border-radius:calc(var(--u)*22);background:#fff;box-shadow:0 calc(var(--u)*30) calc(var(--u)*60) rgba(14,23,38,.18);overflow:hidden;font-family:var(--mono)}
+.t052-tbl .r{display:grid;grid-template-columns:calc(var(--u)*300) calc(var(--u)*150) calc(var(--u)*150) 1fr;height:calc(var(--u)*64);align-items:center;padding:0 calc(var(--u)*26);border-bottom:calc(var(--u)*1.5) solid #E7ECEC;font-size:calc(var(--u)*24)}
+.t052-tbl .hd{background:var(--ink);color:#fff;font-size:calc(var(--u)*20);letter-spacing:.1em}
+.t052-tbl .bad{background:#FFE9E6}
+.t052-tbl .bad span:nth-child(2){color:var(--alert);font-weight:600}
+.t052-glass{position:absolute;left:calc(var(--u)*450);top:calc(var(--u)*250);width:calc(var(--u)*540);border-radius:calc(var(--u)*26);background:rgba(255,255,255,.72);border:calc(var(--u)*1.5) solid #fff;
+ box-shadow:inset 0 0 0 calc(var(--u)*1) rgba(15,163,163,.25),0 calc(var(--u)*50) calc(var(--u)*90) rgba(14,23,38,.22);padding:calc(var(--u)*26) calc(var(--u)*30);transform:perspective(calc(var(--u)*1400)) rotateY(-14deg) rotateX(6deg);backdrop-filter:blur(calc(var(--u)*8))}
+.t052-glass .hd{display:flex;align-items:center;gap:calc(var(--u)*14);font:800 calc(var(--u)*25) var(--sans)}
+.t052-glass .hd img{width:calc(var(--u)*40);height:calc(var(--u)*40)}
+.t052-glass .hd span{margin-left:auto;font:600 calc(var(--u)*19) var(--mono);color:var(--brand-deep)}
+.t052-ck{display:flex;justify-content:space-between;align-items:center;font:600 calc(var(--u)*24) var(--sans);padding:calc(var(--u)*14) 0;border-bottom:calc(var(--u)*1.5) solid rgba(14,23,38,.07)}
+.t052-ck em{font-style:normal;font:600 calc(var(--u)*22) var(--mono);color:var(--ok)}
+.t052-ck.w{color:var(--ink)}
+.t052-ck.w em{color:var(--alert)}
+.t052-btn{display:inline-block;margin-top:calc(var(--u)*18);font:700 calc(var(--u)*24) var(--sans);color:#fff;background:var(--alert);border-radius:calc(var(--u)*14);padding:calc(var(--u)*14) calc(var(--u)*26);box-shadow:0 calc(var(--u)*12) calc(var(--u)*26) rgba(255,90,78,.35)}
+.t052-btn.o{background:#fff;color:var(--ink);box-shadow:none;border:calc(var(--u)*2) solid rgba(14,23,38,.15);margin-left:calc(var(--u)*10)}
+.t052-cta{display:inline-block;font:700 calc(var(--u)*34) var(--sans);color:#fff;background:var(--alert);border-radius:calc(var(--u)*18);padding:calc(var(--u)*24) calc(var(--u)*54);box-shadow:0 calc(var(--u)*20) calc(var(--u)*40) rgba(255,90,78,.35)}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 052 · Signature directions</div>
+    <h1>Depth / 3D</h1>
+    <p class="dek">Every scene is built from translucent glass plates floating in perspective — the launch-film language of dev-tool companies. The hook explodes a stack of dashboards along the Z axis, the drop slides four ghost planes into one flat lockup, and the proof separates two layers that never merge: your dashboard below, the Pulse audit layer hovering above it.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort high</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t052-f1"><div class="t052-f"><div class="t052-floor"></div>
+<div class="t052-h" style="left:calc(var(--u)*80);top:calc(var(--u)*78);width:calc(var(--u)*900);font-size:calc(var(--u)*80)">How many dashboards did you <i>check</i> today?</div>
+<div class="t052-stage"><div class="t052-rig" style="left:calc(var(--u)*130);top:calc(var(--u)*450);width:calc(var(--u)*560);height:calc(var(--u)*360);transform:scale(1.2) rotateX(14deg) rotateY(-34deg) rotateZ(2deg)">
+<div class="t052-pl" style="transform:translateZ(calc(var(--u)*-560))"><div class="t">Revenue<span>tab 38</span></div><div class="t052-bars"><i style="height:40%"></i><i style="height:60%"></i><i style="height:50%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:90%"></i></div></div>
+<div class="t052-pl" style="transform:translateZ(calc(var(--u)*-420))"><div class="t">Signups<span>no data</span></div><div class="t052-bars"><i style="height:30%"></i><i style="height:20%"></i><i style="height:10%"></i><i style="height:0%"></i><i style="height:0%"></i><i style="height:0%"></i></div></div>
+<div class="t052-pl" style="transform:translateZ(calc(var(--u)*-280))"><div class="t">Error rate 0.4 %<span>alert</span></div><svg viewBox="0 0 300 120" style="width:100%;height:calc(var(--u)*150);margin-top:calc(var(--u)*26)"><polyline points="0,90 40,70 80,80 120,40 160,55 200,30 240,45 300,20" fill="none" stroke="#0FA3A3" stroke-width="5" stroke-linecap="round"/></svg></div>
+<div class="t052-pl" style="transform:translateZ(calc(var(--u)*-140))"><div class="t">p95 latency<span>212 ms</span></div><div class="t052-bars"><i style="height:50%"></i><i style="height:55%"></i><i style="height:60%"></i><i style="height:58%"></i><i style="height:70%"></i><i style="height:72%"></i></div></div>
+<div class="t052-pl" style="transform:translateZ(calc(var(--u)*0))"><div class="t">Checkout<span>tab 12 of 38</span></div><svg viewBox="0 0 300 120" style="width:100%;height:calc(var(--u)*150);margin-top:calc(var(--u)*26)"><polyline points="0,90 40,70 80,80 120,40 160,55 200,30 240,45 300,20" fill="none" stroke="#0FA3A3" stroke-width="5" stroke-linecap="round"/></svg></div>
+<div class="t052-rail" style="left:0;top:0;width:calc(var(--u)*560);transform:translateZ(calc(var(--u)*-560)) rotateY(-90deg)"></div>
+<div class="t052-rail" style="left:calc(var(--u)*560);top:0;width:calc(var(--u)*560);transform:translateZ(calc(var(--u)*-560)) rotateY(-90deg)"></div>
+<div class="t052-rail" style="left:0;top:calc(var(--u)*360);width:calc(var(--u)*560);transform:translateZ(calc(var(--u)*-560)) rotateY(-90deg)"></div>
+<div class="t052-rail" style="left:calc(var(--u)*560);top:calc(var(--u)*360);width:calc(var(--u)*560);transform:translateZ(calc(var(--u)*-560)) rotateY(-90deg)"></div>
+</div></div>
+<div class="t052-k" style="left:calc(var(--u)*80);top:calc(var(--u)*960)">38 dashboards · 5 tabs deep</div>
+</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Plates fire forward out of depth</b> (−Z → 0) one per beat along dashed teal Z-rails while the question sits flat; on bar 3’s downbeat the stack explodes — gaps widen from 60 to 140 px and the camera orbits 6° right→left.</p></div>
+  <div class="cw"><div class="cell" id="t052-f2"><div class="t052-f"><div class="t052-floor"></div>
+<div class="t052-h" style="left:0;right:0;top:calc(var(--u)*110);text-align:center;font-size:calc(var(--u)*96)">You ship.<br><i>Pulse</i> watches.</div>
+<div class="t052-stage" style="perspective-origin:70% 30%"><div class="t052-rig" style="left:calc(var(--u)*150);top:calc(var(--u)*440);width:calc(var(--u)*780);height:calc(var(--u)*330);transform:rotateY(-10deg)">
+<div class="t052-ghost" style="transform:translateZ(calc(var(--u)*-600)) translateX(calc(var(--u)*150.0));opacity:0.35"><b>Acme Pulse</b></div><div class="t052-ghost" style="transform:translateZ(calc(var(--u)*-400)) translateX(calc(var(--u)*100.0));opacity:0.5"><b>Acme Pulse</b></div><div class="t052-ghost" style="transform:translateZ(calc(var(--u)*-200)) translateX(calc(var(--u)*50.0));opacity:0.7"><b>Acme Pulse</b></div>
+<div class="t052-pl" style="display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.9)"><div class="t052-lock"><img src="../assets/brand/acme-mark.svg" alt="Acme"><b>Acme Pulse</b></div></div>
+</div></div>
+<div class="t052-k" style="left:0;right:0;top:calc(var(--u)*860);text-align:center">four planes → one · tilt 16° → 0°</div>
+</div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop four ghost planes slide in from back-right</b>, half a beat apart, and lock into one plane; the tilt eases 16°→0° as the wordmark sharpens and the ghosts fade.</p></div>
+  <div class="cw"><div class="cell" id="t052-f3"><div class="t052-f"><div class="t052-floor"></div>
+<div class="t052-h" style="left:calc(var(--u)*80);top:calc(var(--u)*70);width:calc(var(--u)*900);font-size:calc(var(--u)*72)">You ship. <i>Pulse</i> watches.</div>
+<div class="t052-k" style="left:calc(var(--u)*80);top:calc(var(--u)*170)">team dashboard below · Pulse layer above</div>
+<div class="t052-stage" style="perspective-origin:40% 20%"><div class="t052-rig" style="left:calc(var(--u)*60);top:calc(var(--u)*420);width:calc(var(--u)*700);height:calc(var(--u)*460);transform:rotateX(46deg) rotateZ(-18deg)">
+<div class="t052-tbl"><div class="r hd"><span>METRIC</span><span>NOW</span><span>1H</span><span>TREND</span></div>
+<div class="r"><span>Signups</span><span>+4%</span><span>+2%</span><span>▁▂▃▄</span></div>
+<div class="r"><span>Active users</span><span>+1%</span><span>0%</span><span>▃▃▄▄</span></div>
+<div class="r bad"><span>Checkout conv.</span><span>−18%</span><span>−2%</span><span>▆▆▂▁</span></div>
+<div class="r"><span>p95 latency</span><span>212ms</span><span>209ms</span><span>▄▄▄▅</span></div>
+<div class="r"><span>Error rate</span><span>0.4%</span><span>0.4%</span><span>▂▂▂▂</span></div>
+<div class="r"><span>Events/sec</span><span>2,418</span><span>2,390</span><span>▅▅▆▅</span></div></div>
+</div></div>
+<svg viewBox="0 0 1080 1080" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"><line x1="520" y1="560" x2="336" y2="700" stroke="#FF5A4E" stroke-width="4" stroke-dasharray="10 8"/><circle cx="336" cy="700" r="12" fill="#FF5A4E"/><circle cx="336" cy="700" r="26" fill="none" stroke="#FF5A4E" stroke-width="3" opacity=".5"/></svg>
+<div class="t052-glass"><div class="hd"><img src="../assets/brand/acme-mark.svg" alt="Acme">Pulse · audit layer<span>● watching</span></div>
+<div class="t052-ck"><span>Signups</span><em>✓</em></div>
+<div class="t052-ck w"><span>Checkout conversion</span><em>−18% ⚠</em></div>
+<div style="font:400 calc(var(--u)*20) var(--mono);color:#7A4A44;padding:calc(var(--u)*10) 0 calc(var(--u)*4)">since 09:42 · after deploy #2231</div>
+<div class="t052-ck"><span>p95 latency</span><em>✓</em></div>
+<div class="t052-ck" style="border:0"><span>Error rate</span><em>✓</em></div>
+<span class="t052-btn">Roll back</span><span class="t052-btn o">Acknowledge</span></div>
+</div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera flies through to the floor table</b>, then the glass Pulse layer glides in above it (+Z); checks tick one per beat and on the bar-9 downbeat a coral line drops from the ⚠ row straight into the Checkout cell.</p></div>
+  <div class="cw"><div class="cell" id="t052-f4"><div class="t052-f"><div class="t052-floor" style="opacity:.6"></div>
+<div style="position:absolute;left:calc(var(--u)*170);top:calc(var(--u)*250);width:calc(var(--u)*740);height:calc(var(--u)*330);border-radius:calc(var(--u)*26);border:calc(var(--u)*2) solid rgba(15,163,163,.25);transform:translate(calc(var(--u)*-26),calc(var(--u)*-22))"></div>
+<div style="position:absolute;left:calc(var(--u)*170);top:calc(var(--u)*250);width:calc(var(--u)*740);height:calc(var(--u)*330);border-radius:calc(var(--u)*26);border:calc(var(--u)*2) solid rgba(15,163,163,.4);transform:translate(calc(var(--u)*-13),calc(var(--u)*-11))"></div>
+<div style="position:absolute;left:calc(var(--u)*170);top:calc(var(--u)*250);width:calc(var(--u)*740);height:calc(var(--u)*330);border-radius:calc(var(--u)*26);background:#fff;box-shadow:0 calc(var(--u)*40) calc(var(--u)*80) rgba(14,23,38,.14),inset 0 0 0 calc(var(--u)*1) rgba(14,23,38,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--u)*10)">
+<div class="t052-lock"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*100);height:calc(var(--u)*100)"><b style="font-size:calc(var(--u)*76)">Acme Pulse</b></div></div>
+<div class="t052-h" style="left:0;right:0;top:calc(var(--u)*640);text-align:center;font-size:calc(var(--u)*78)">Caught <i>before</i> customers noticed.</div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*790);text-align:center"><span class="t052-cta">Start free</span></div>
+</div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Depth collapses</b>: every angle to 0°, every Z to 0 in a single blur-crossfade; two hairline echoes stay behind the lockup, the tagline rises, and the coral button drops on the sting.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Glass plate</b> — white 74 % + bright inner edge + hairline + deep soft shadow, r22 — the only surface type</li><li><b>Exploded stack</b> — one 3D rig, plates 120–150 px apart in Z, joined by dashed rails</li><li><b>Z-rails</b> — 3 px dashed teal lines along the depth axis; make the space legible</li><li><b>Ghost echoes</b> — outlined teal copies of the wordmark that stream forward and lock into one plane</li><li><b>Audit layer</b> — glass panel hovering ~300 px above the floor table; a coral drop-line pins the anomaly to its cell</li><li><b>Depth collapse</b> — end state: all angles 0°, Z 0, two hairline echoes as a memory of the depth</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Plate fly-in</b> — translateZ −400 → 0 with 20° → 0° tilt, expo.out 0.6 s, one plate per beat (0.5 s at 120 BPM)</li><li><b>Camera orbit</b> — rig rotateY −34° → −28° + dolly 8 %, sine.inOut over 2 bars (4 s) — keeps the stack alive between hits</li><li><b>Drop-line pin</b> — coral line draws 0 → 100 % in 0.25 s (power2.in) exactly on a bar downbeat, followed by a 2-ring ripple 0.4 s</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Depth makes an invisible “background” product physical: the viewer literally sees Pulse as a layer above their own tools, which is the positioning in one image. Risk: text on tilted planes loses legibility — keep numbers on the flattest plane, cap tilt at 30° and never tilt the headline.</p><p><b>Adapt to your product:</b> Put your customer’s existing tool on the floor plate and your product as the hovering glass layer; any audit, copilot or observability product maps 1:1. Replace the plate contents with your own real screens exported as flat PNG/HTML.</p><p><b>References:</b> <a href="https://stripe.com/blog/connect-front-end-experience">https://stripe.com/blog/connect-front-end-experience</a> (3D CSS planes and cubes in a product launch page) · <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/perspective">https://developer.mozilla.org/en-US/docs/Web/CSS/perspective</a> (how CSS perspective builds a shared 3D space) · <a href="https://css-tricks.com/how-css-perspective-works/">https://css-tricks.com/how-css-perspective-works/</a> (perspective vs. perspective-origin in practice)</p></div>
+</div>
+</body>
+</html>

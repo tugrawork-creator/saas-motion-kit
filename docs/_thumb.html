@@ -1,0 +1,10 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>thumb helper</title>
+<style>html,body{margin:0;overflow:hidden;background:#ECEBE6}iframe{position:absolute;left:-40px;border:0;width:1480px;height:3000px}</style></head>
+<body><iframe id="f"></iframe>
+<script>
+// Used only by tools/make_thumbs.py: frames a theme sheet so the screenshot shows just its 4-cell grid.
+const f = document.getElementById("f");
+f.src = "themes/" + new URLSearchParams(location.search).get("f");
+f.onload = () => { const g = f.contentDocument.querySelector(".grid"); f.style.top = -(g.getBoundingClientRect().top) + "px"; };
+</script></body></html>

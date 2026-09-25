@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>016 · Proofreader's Redline — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t016- ===== */
+@property --x{syntax:'<number>';inherits:false;initial-value:0}
+@property --y{syntax:'<number>';inherits:false;initial-value:0}
+@property --w{syntax:'*';inherits:false}
+@property --r{syntax:'<number>';inherits:false;initial-value:0}
+.t016-bg{position:absolute;inset:0;background:linear-gradient(90deg,transparent calc(var(--u)*128),rgba(255,90,78,.28) calc(var(--u)*128),rgba(255,90,78,.28) calc(var(--u)*130),transparent calc(var(--u)*130)),#FBFAF6}
+.t016-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,transparent 60%,rgba(120,100,60,.08))}
+.t016-a{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));transform:rotate(calc(var(--r)*1deg))}
+.t016-slug{display:flex;justify-content:space-between;font:600 calc(var(--u)*20)/1 var(--mono);letter-spacing:.16em;color:#8A8F98;border-bottom:calc(var(--u)*2) solid rgba(14,23,38,.14);padding-bottom:calc(var(--u)*16)}
+.t016-ln{font:400 calc(var(--u)*20)/1 var(--mono);color:#A7ABB2;text-align:right;width:calc(var(--u)*40)}
+.t016-t{font:400 calc(var(--u)*76)/1.28 var(--serif);color:var(--ink);letter-spacing:-.005em}
+.t016-t2{font:400 calc(var(--u)*50)/1.35 var(--serif);color:#2A3342}
+.t016-hero{font:400 calc(var(--u)*176)/1 var(--serif);color:var(--ink);letter-spacing:-.02em;white-space:nowrap}
+.t016-hero em,.t016-t em{font-style:italic;color:var(--brand-deep)}
+.t016-m{position:relative;display:inline-block}
+.t016-pen{position:absolute;overflow:visible;fill:none;stroke:var(--alert);stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.t016-pen path{stroke-width:calc(var(--u)*6);vector-effect:non-scaling-stroke}
+.t016-pen.tl{stroke:var(--brand-deep)}
+.t016-st{left:-6%;width:112%;top:38%;height:30%}
+.t016-ci{left:-14%;top:-18%;width:128%;height:136%}
+.t016-ul{left:-2%;width:104%;top:88%;height:22%}
+.t016-ins{position:absolute;left:50%;bottom:78%;transform:translateX(-50%) rotate(-3deg);font:400 calc(var(--u)*62)/1 var(--serif);font-style:italic;color:var(--alert);white-space:nowrap}
+.t016-hand{font:400 calc(var(--u)*40)/1.15 var(--serif);font-style:italic;color:var(--alert)}
+.t016-hand.tl{color:var(--brand-deep)}
+.t016-gl{position:absolute;overflow:visible;fill:none;stroke:var(--alert);stroke-linecap:round}
+.t016-gl path{stroke-width:calc(var(--u)*3.5);vector-effect:non-scaling-stroke}
+.t016-row{display:flex;justify-content:space-between;align-items:baseline;font:400 calc(var(--u)*44)/1 var(--serif);color:var(--ink);padding:calc(var(--u)*16) 0;border-bottom:calc(var(--u)*1.5) solid rgba(14,23,38,.12)}
+.t016-row b{font:400 calc(var(--u)*34)/1 var(--mono);color:#2A3342}
+.t016-row.hot{border-bottom-color:rgba(255,90,78,.5)}
+.t016-th{display:flex;justify-content:space-between;font:600 calc(var(--u)*20)/1 var(--mono);letter-spacing:.16em;color:#8A8F98;padding-bottom:calc(var(--u)*10);border-bottom:calc(var(--u)*3) solid var(--ink)}
+.t016-lbl{font:600 calc(var(--u)*20)/1 var(--mono);letter-spacing:.16em;color:#8A8F98}
+.t016-act{display:flex;gap:calc(var(--u)*56);align-items:baseline;font:400 calc(var(--u)*48)/1 var(--serif);color:var(--ink)}
+.t016-act span.dim{color:#8A8F98}
+.t016-btn{display:inline-flex;align-items:center;height:calc(var(--u)*92);padding:0 calc(var(--u)*46);border-radius:calc(var(--u)*46);background:var(--alert);color:#fff;font:800 calc(var(--u)*36)/1 var(--sans)}
+.t016-lock{display:flex;align-items:center;gap:calc(var(--u)*18);font:800 calc(var(--u)*50)/1 var(--sans);color:var(--ink)}
+.t016-lock img{width:calc(var(--u)*76);height:calc(var(--u)*76)}
+.t016-init{display:inline-flex;align-items:center;gap:calc(var(--u)*14);padding:calc(var(--u)*10) calc(var(--u)*22);border:calc(var(--u)*3) solid var(--brand-deep);border-radius:calc(var(--u)*8)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 016 · Typography &amp; graphic systems</div>
+    <h1>Proofreader's Redline</h1>
+    <p class="dek">Your metrics are set like a galley proof: fine serif type, wide margins, line numbers. Pulse is the proofreader with a coral pen — it strikes the wrong figure, writes the right one above it and leaves a margin note — and a human initials the change in teal.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t016-f1"><div class="t016-bg"></div>
+    <div class="t016-a t016-slug" style="--x:60;--y:60;--w:960"><span>GALLEY 01 · FRIDAY REVIEW · PROOF 1</span><span>P. 1</span></div>
+    <div class="t016-a t016-ln" style="--x:60;--y:214">1</div><div class="t016-a t016-ln" style="--x:60;--y:334">2</div><div class="t016-a t016-ln" style="--x:60;--y:454">3</div><div class="t016-a t016-ln" style="--x:60;--y:652">4</div><div class="t016-a t016-ln" style="--x:60;--y:724">5</div>
+    <div class="t016-a t016-t" style="--x:160;--y:150;--w:700;font-size:calc(var(--u)*96);line-height:1.25">How many dashboards did you <span class="t016-m">check<svg class="t016-pen t016-st" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M2 12 C 30 7, 62 14, 98 8"/></svg><span class="t016-ins">open</span></span> today?</div>
+    <div class="t016-a t016-t2" style="--x:160;--y:620;--w:680;font-size:calc(var(--u)*56)">And the drop still shipped on <span class="t016-m">Friday.<svg class="t016-pen t016-ci" viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M18 8 C 44 -2, 92 2, 97 24 C 101 46, 34 54, 6 38 C -6 28, 6 8, 36 4"/></svg></span></div>
+    <div class="t016-a t016-hand" style="--x:872;--y:396;--w:150;--r:-4">38 open,<br>3 read.</div>
+    <div class="t016-a t016-hand" style="--x:872;--y:640;--w:150;--r:-3">found by a customer</div>
+    <svg class="t016-a t016-gl" style="--x:712;--y:410;--w:160" viewBox="0 0 160 60"><path d="M154 22 C 110 18, 60 24, 8 36"/></svg>
+    <div class="t016-a t016-lbl" style="--x:160;--y:960">38 DASHBOARDS · 3 CHECKED · 1 MISSED</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Type sets itself line by line, left → right.</b> On beat 1 of bar 3 the pen strikes "check" and writes "open" above it; the circle around "Friday." closes exactly on the last downbeat before the drop.</p></div>
+
+  <div class="cw"><div class="cell" id="t016-f2"><div class="t016-bg"></div>
+    <div class="t016-a t016-slug" style="--x:60;--y:60;--w:960"><span>GALLEY 02 · NEW TITLE · PROOF 1</span><span>P. 2</span></div>
+    <img class="t016-a" style="--x:160;--y:190;width:calc(var(--u)*150);height:calc(var(--u)*150)" src="../assets/brand/acme-mark.svg" alt="">
+    <div class="t016-a t016-hero" style="--x:150;--y:390">Acme <span class="t016-m"><em>Pulse</em><svg class="t016-pen t016-ul" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M3 6 C 30 3, 70 8, 97 4 M8 16 C 40 12, 70 17, 94 13"/></svg></span></div>
+    <div class="t016-a t016-t2" style="--x:160;--y:640;--w:700">An agent that reads every metric, every minute — so nobody has to.</div>
+    <div class="t016-a t016-hand" style="--x:872;--y:410;--w:150;--r:-4">stet — keep it big.</div>
+    <div class="t016-a t016-hand tl" style="--x:160;--y:880;--r:-2">✓ approved · the team</div>
+    <div class="t016-a t016-lbl" style="--x:720;--y:900">SIGNED OFF 0:08</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop "Acme Pulse" sets in one hit, left → right.</b> The pen's double underline sweeps under "Pulse" on the next beat, "stet" lands in the margin, and the teal sign-off writes itself on beat 1 of the following bar.</p></div>
+
+  <div class="cw"><div class="cell" id="t016-f3"><div class="t016-bg"></div>
+    <div class="t016-a t016-slug" style="--x:60;--y:60;--w:960"><span>GALLEY 03 · MORNING METRICS · 09:44</span><span>P. 3</span></div>
+    <div class="t016-a t016-t" style="--x:160;--y:120;--w:700;font-size:calc(var(--u)*64)">Morning <em>metrics</em></div>
+    <div class="t016-a" style="--x:160;--y:230;--w:680">
+      <div class="t016-th"><span>METRIC</span><span>NOW</span></div>
+      <div class="t016-row">Signups<b>1,204</b></div>
+      <div class="t016-row">Active users<b>48,210</b></div>
+      <div class="t016-row">p95 latency<b>212 ms</b></div>
+      <div class="t016-row">Error rate<b>0.4 %</b></div>
+      <div class="t016-row hot" style="padding-top:calc(var(--u)*52)">Checkout conversion<b class="t016-m">3.1 %<svg class="t016-pen t016-st" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M2 12 C 30 6, 62 14, 98 8"/></svg><span class="t016-ins" style="font-size:calc(var(--u)*52)">2.5 %</span></b></div>
+    </div>
+    <div class="t016-a t016-hand" style="--x:866;--y:560;--w:160;--r:-4;font-size:calc(var(--u)*36)"><b style="font-weight:400;font-size:calc(var(--u)*52)">−18%</b><br>since 09:42, after deploy #2231</div>
+    
+    <div class="t016-a t016-lbl" style="--x:160;--y:740">ACTION</div>
+    <div class="t016-a t016-act" style="--x:160;--y:780"><span class="t016-m">Roll back<svg class="t016-pen t016-ci" viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M18 8 C 44 -2, 92 2, 97 24 C 101 46, 34 54, 6 38 C -6 28, 6 8, 36 4"/></svg></span><span class="dim">Acknowledge</span></div>
+    <div class="t016-a t016-hand tl t016-init" style="--x:160;--y:880;--r:-2">✓ OK — on-call, 09:48</div>
+    <div class="t016-a t016-lbl" style="--x:720;--y:905">RESOLVED IN 6 MIN</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The table sets row by row; four rows pass untouched.</b> On the downbeat the pen strikes "3.1 %", writes "2.5 %" above it and pulls a leader to the margin note "−18% since 09:42, after deploy #2231"; the human circles "Roll back" and the teal initials land on the next bar.</p></div>
+
+  <div class="cw"><div class="cell" id="t016-f4"><div class="t016-bg"></div>
+    <div class="t016-a t016-slug" style="--x:60;--y:60;--w:960"><span>GALLEY 04 · FINAL · PASSED</span><span>P. 4</span></div>
+    <div class="t016-a t016-t" style="--x:160;--y:150;--w:700;font-size:calc(var(--u)*124);line-height:1.06">Caught <span class="t016-m"><em>before</em><svg class="t016-pen t016-ci" viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M18 8 C 44 -2, 92 2, 97 24 C 101 46, 34 54, 6 38 C -6 28, 6 8, 36 4"/></svg></span> customers noticed.</div>
+    <div class="t016-a t016-hand" style="--x:872;--y:190;--w:150;--r:-5">the whole point.</div>
+    <div class="t016-a t016-lock" style="--x:160;--y:600"><img src="../assets/brand/acme-mark.svg" alt="">Acme Pulse</div>
+    <div class="t016-a t016-btn" style="--x:160;--y:760">Start free</div>
+    <svg class="t016-a t016-gl" style="--x:500;--y:740;--w:260" viewBox="0 0 260 110"><path d="M250 20 C 180 10, 90 30, 20 70 M20 70 L 52 72 M20 70 L 34 42"/></svg>
+    <div class="t016-a t016-hand" style="--x:770;--y:720;--w:250;--r:-4">sign here.</div>
+    <div class="t016-a t016-lbl" style="--x:160;--y:960">YOU SHIP · PULSE WATCHES</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The headline sets clean, then the pen circles "before" on the downbeat.</b> The lockup slides up 20 px, the hand-drawn arrow strokes toward "Start free" and the button fills coral on the final hit.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Galley page</b> — warm white sheet, slug line, line numbers and a ruled left margin; type in Instrument Serif.</li>
+    <li><b>Strike &amp; replace</b> — a jittered coral line through the wrong figure, the corrected one written above in italic.</li>
+    <li><b>Circle</b> — a loose hand-drawn loop around one word or action; never more than three marks per shot.</li>
+    <li><b>Margin note</b> — italic coral annotation in the right margin with a thin leader line to the mark.</li>
+    <li><b>Metric table</b> — typeset rows with mono figures, set like a financial page.</li>
+    <li><b>Human initials</b> — a teal boxed sign-off ("✓ OK — on-call, 09:48") that closes each decision.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Pen stroke</b> — stroke-dashoffset with slight speed variance, power2.out, 250–500 ms per mark, each mark starting on a beat at 120 BPM.</li>
+    <li><b>Value swap</b> — the wrong figure dims to 30% while the correction masks up from below (200 ms), landing on the downbeat.</li>
+    <li><b>Margin pull</b> — the leader draws in 180 ms, then the note fades in with a 1° rotation settle (back.out, 300 ms).</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>A red pen on a proof is the most exact picture of "review": the machine points at the mistake, the person decides and signs. It stays calm, editorial and very readable in a square. Risk: too many marks become chaos — cap it at three per shot and keep the page mostly clean.</p>
+    <p><b>Adapt to your product:</b> typeset your own table (orders, test results, KPIs, contract terms) and let the pen correct one figure; the initials box is where your product's approve / reject action lives.</p>
+    <p><b>References:</b> <a href="https://reedsy.com/blog/proofreading-marks/">Reedsy — proofreading marks</a></p>
+  </div>
+</div>
+</body>
+</html>

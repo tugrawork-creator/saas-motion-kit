@@ -1,0 +1,22 @@
+{"id":"047","slug":"safety-net","name":"The Safety Net","category":"metaphor",
+ "summary":"A flat big top where artists pass metric chips mid-air; the Checkout chip slips, a net of data lines catches it and the ringmaster decides.",
+ "look":"Flat, elegant circus in deep ink with radiating tent panels and soft spotlights. Faceless geometric artists on amber trapeze bars pass teal metric chips; a thin teal data-line net with a central knot (the Acme mark) catches the one coral chip.",
+ "components":[
+  {"name":"Big-top stripes","role":"flat radiating tent panels; the stage"},
+  {"name":"Trapeze artists","role":"faceless geometric silhouettes on pendulum bars; the team"},
+  {"name":"Metric chips","role":"rounded mono tokens, teal when fine, coral when slipping"},
+  {"name":"Data-line net","role":"thin teal mesh with knots; the agent, invisible until needed"},
+  {"name":"Catch ripple + callout","role":"rings from the caught knot; the callout carries the anomaly"},
+  {"name":"Ringmaster card","role":"the human decision"}],
+ "motion":[
+  {"name":"Pendulum","how":"bar rotation ±22°, sine.inOut, one swing per two bars at 120 BPM; passes on the 'and' of beat 4"},
+  {"name":"Net catch","how":"mesh sags 40 px then recovers with elastic.out(1, 0.35) over 0.9 s; ripple ring expands over one beat"},
+  {"name":"Rebound toss","how":"corrected chip rides an arcing motion path in 0.8 s with one spin, landing on a downbeat"}],
+ "story":"Hook: 'Shipping on Friday. Without a net?' Artists juggle ever more chips until Checkout tilts and falls toward an empty ring. Reveal: on the drop the net unrolls from the Acme-mark knot and a teal 'Acme Pulse' banner drops in. Proof: the Checkout chip slips mid-pass, the net sags and ripples, the callout reads 'Checkout conv. −18% · 09:42 · deploy #2231', and the ringmaster taps Roll back to toss it back up. CTA: 'You ship. Pulse watches.' under the spotlight, chips back in the air, Start free.",
+ "adapt":"Name the chips after what your team juggles (invoices, releases, tickets) and label the net's knots with the rules your product checks.",
+ "references":[
+  {"url":"https://en.wikipedia.org/wiki/Flying_trapeze","note":"flying trapeze staging and roles","verified":false},
+  {"url":"https://www.flying-trapeze.com/equipment","note":"trapeze rig and net geometry","verified":false}],
+ "fit":{"readability":3,"trust":2,"effort":"high","risk":"Can imply the team keeps dropping things; frame the slip as the world changing mid-air (a deploy), not human failure."},
+ "best_for":["dev tools","CI/CD","monitoring","team collaboration"],
+ "file":"themes/047-safety-net.html"}

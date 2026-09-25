@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>014 · Blueprint Drawing — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t014- ===== */
+@property --x{syntax:'<number>';inherits:false;initial-value:0}
+@property --y{syntax:'<number>';inherits:false;initial-value:0}
+@property --w{syntax:'*';inherits:false}
+.t014-bg{position:absolute;inset:0;background:
+  repeating-linear-gradient(0deg,rgba(230,244,242,.10) 0 calc(var(--u)*1.5),transparent calc(var(--u)*1.5) calc(var(--u)*150)),
+  repeating-linear-gradient(90deg,rgba(230,244,242,.10) 0 calc(var(--u)*1.5),transparent calc(var(--u)*1.5) calc(var(--u)*150)),
+  repeating-linear-gradient(0deg,rgba(230,244,242,.045) 0 calc(var(--u)*1),transparent calc(var(--u)*1) calc(var(--u)*30)),
+  repeating-linear-gradient(90deg,rgba(230,244,242,.045) 0 calc(var(--u)*1),transparent calc(var(--u)*1) calc(var(--u)*30)),
+  radial-gradient(120% 100% at 30% 20%,#0E6573 0%,#0A4F5C 55%,#073A45 100%)}
+.t014-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.t014-a{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w))}
+.t014-ln{stroke:#E6F4F2;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.t014-thin{stroke-width:1.8;opacity:.75}
+.t014-dash{stroke-dasharray:10 8}
+.t014-co{stroke:#FF6B5F}
+.t014-in{stroke:#BFE3E0;stroke-width:1.3}
+circle.t014-cob{stroke:#FF6B5F} text.t014-cob{fill:#FF6B5F}
+.t014-tx{font:600 24px var(--mono);fill:#E6F4F2;letter-spacing:.06em}
+.t014-sm{font:600 20px var(--mono);fill:#A6D3CF;letter-spacing:.14em}
+.t014-tb{font:600 30px var(--mono);fill:#E6F4F2;letter-spacing:.04em}
+.t014-btn{font:800 34px var(--sans);fill:#fff;letter-spacing:.04em}
+.t014-hero{font:400 150px var(--serif);fill:#F4FBFA;letter-spacing:-.01em}
+.t014-h{font:400 80px var(--serif);fill:#F4FBFA}
+.t014-big{font:400 124px var(--serif);fill:#F4FBFA;letter-spacing:-.01em}
+.t014-it{font-style:italic;fill:#8FEAE1}
+.t014-dimco{font:600 46px var(--mono);fill:#FF6B5F}
+.t014-cot{fill:#FF6B5F} .t014-tlt{fill:#8FEAE1}
+.t014-hl{font:400 calc(var(--u)*66)/1.08 var(--serif);color:#F4FBFA;letter-spacing:-.01em}
+.t014-hl em{color:#8FEAE1}
+.t014-mk{display:block;width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--w));filter:drop-shadow(0 0 calc(var(--u)*30) rgba(0,0,0,.25))}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 014 · Typography &amp; graphic systems</div>
+    <h1>Blueprint Drawing</h1>
+    <p class="dek">The product is drafted like a machine part on a teal blueprint sheet: exploded views, dimension arrows, numbered callout balloons and a title block on every frame. Pulse "measures" each metric against its tolerance band; the one that falls outside turns coral and gets a revision cloud before a human signs the change.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t014-f1"><div class="t014-bg"></div><svg class="t014-svg" viewBox="0 0 1080 1080" fill="none"><defs><marker id="t014-ar" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L12 6 L0 11" fill="none" stroke="#E6F4F2" stroke-width="2"/></marker><marker id="t014-arc" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L12 6 L0 11" fill="none" stroke="#FF6B5F" stroke-width="2"/></marker></defs><path class="t014-ln" d="M180 570 L180 580 L380 695.4700538379252 L580 580 L580 570" fill="#094652"/><path class="t014-ln" d="M180 570 L380 454.52994616207485 L580 570 L380 685.4700538379252 Z" fill="#0A4F5C"/><g transform="matrix(2.0 -1.1547005383792515 2.0 1.1547005383792515 180 570)"><polyline class="t014-in" points="12,70 24,58 36,62 48,44 60,50 72,32 86,36"/><path class="t014-in" d="M8 8 H92 V92 H8 Z" style="opacity:.5"/></g><path class="t014-ln" d="M180 480 L180 490 L380 605.4700538379252 L580 490 L580 480" fill="#094652"/><path class="t014-ln" d="M180 480 L380 364.52994616207485 L580 480 L380 595.4700538379252 Z" fill="#0A4F5C"/><g transform="matrix(2.0 -1.1547005383792515 2.0 1.1547005383792515 180 480)"><polyline class="t014-in" points="12,70 24,58 36,62 48,44 60,50 72,32 86,36"/><path class="t014-in" d="M8 8 H92 V92 H8 Z" style="opacity:.5"/></g><path class="t014-ln" d="M180 390 L180 400 L380 515.4700538379252 L580 400 L580 390" fill="#094652"/><path class="t014-ln" d="M180 390 L380 274.52994616207485 L580 390 L380 505.47005383792515 Z" fill="#0A4F5C"/><g transform="matrix(2.0 -1.1547005383792515 2.0 1.1547005383792515 180 390)"><rect class="t014-in" x="14" y="60" width="8" height="20"/><rect class="t014-in" x="28" y="46" width="8" height="34"/><rect class="t014-in" x="42" y="52" width="8" height="28"/><rect class="t014-in" x="56" y="34" width="8" height="46"/><rect class="t014-in" x="70" y="42" width="8" height="38"/><rect class="t014-in" x="84" y="24" width="8" height="56"/><path class="t014-in" d="M8 8 H92 V92 H8 Z" style="opacity:.5"/></g><path class="t014-ln" d="M180 300 L180 310 L380 425.47005383792515 L580 310 L580 300" fill="#094652"/><path class="t014-ln" d="M180 300 L380 184.52994616207485 L580 300 L380 415.47005383792515 Z" fill="#0A4F5C"/><g transform="matrix(2.0 -1.1547005383792515 2.0 1.1547005383792515 180 300)"><circle class="t014-in" cx="50" cy="50" r="28"/><circle class="t014-in" cx="50" cy="50" r="14"/><path class="t014-in" d="M8 8 H92 V92 H8 Z" style="opacity:.5"/></g><path class="t014-ln" d="M180 210 L180 220 L380 335.47005383792515 L580 220 L580 210" fill="#094652"/><path class="t014-ln" d="M180 210 L380 94.52994616207485 L580 210 L380 325.47005383792515 Z" fill="#0A4F5C"/><g transform="matrix(2.0 -1.1547005383792515 2.0 1.1547005383792515 180 210)"><path class="t014-in" d="M14 22 H86"/><path class="t014-in" d="M14 36 H86"/><path class="t014-in" d="M14 50 H86"/><path class="t014-in" d="M14 64 H86"/><path class="t014-in" d="M14 78 H86"/><path class="t014-in" d="M8 8 H92 V92 H8 Z" style="opacity:.5"/></g><path class="t014-ln t014-thin" d="M580 210 L706 210"/><circle class="t014-ln " cx="730" cy="210" r="24" fill="#0A4F5C"/><text class="t014-tx " x="730" y="218" text-anchor="middle">1</text><text class="t014-tx" x="772" y="218">GROWTH</text><text class="t014-sm" x="772" y="246">UNREAD</text><path class="t014-ln t014-thin" d="M580 300 L706 300"/><circle class="t014-ln " cx="730" cy="300" r="24" fill="#0A4F5C"/><text class="t014-tx " x="730" y="308" text-anchor="middle">2</text><text class="t014-tx" x="772" y="308">REVENUE</text><text class="t014-sm" x="772" y="336">UNREAD</text><path class="t014-ln t014-thin" d="M580 390 L706 390"/><circle class="t014-ln " cx="730" cy="390" r="24" fill="#0A4F5C"/><text class="t014-tx " x="730" y="398" text-anchor="middle">3</text><text class="t014-tx" x="772" y="398">FUNNEL</text><text class="t014-sm" x="772" y="426">UNREAD</text><path class="t014-ln t014-thin" d="M580 480 L706 480"/><circle class="t014-ln " cx="730" cy="480" r="24" fill="#0A4F5C"/><text class="t014-tx " x="730" y="488" text-anchor="middle">4</text><text class="t014-tx" x="772" y="488">RETENTION</text><text class="t014-sm" x="772" y="516">UNREAD</text><path class="t014-ln t014-thin" d="M580 570 L706 570"/><circle class="t014-ln " cx="730" cy="570" r="24" fill="#0A4F5C"/><text class="t014-tx " x="730" y="578" text-anchor="middle">5</text><text class="t014-tx" x="772" y="578">CHECKOUT</text><text class="t014-sm" x="772" y="606">UNREAD</text><path class="t014-ln t014-thin" d="M180 210 H110 M180 570 H110"/><path class="t014-ln" d="M130 214 L130 566" marker-start="url(#t014-ar)" marker-end="url(#t014-ar)"/><text class="t014-tx" x="112" y="390" text-anchor="middle" transform="rotate(-90 112 390)">× 38</text><text class="t014-sm" x="60" y="86">DWG 01 · THE MORNING STACK</text><text class="t014-sm" x="1020" y="86" text-anchor="end">SCALE 1:38</text><path class="t014-ln t014-thin" d="M60 104 H1020"/><rect class="t014-ln" x="60" y="950" width="960" height="70"/><text class="t014-sm" x="74" y="974">DRAWN</text><text class="t014-tb " x="74" y="1006">38 DASHBOARDS</text><path class="t014-ln" d="M480 950 V1020"/><text class="t014-sm" x="494" y="974">INSPECTED</text><text class="t014-tb t014-cot" x="494" y="1006">3 / 38</text><path class="t014-ln" d="M760 950 V1020"/><text class="t014-sm" x="774" y="974">FOUND</text><text class="t014-tb " x="774" y="1006">FRIDAY</text></svg>
+    <div class="t014-a t014-hl" style="--x:60;--y:735;--w:960">How many dashboards did you <em>check</em> today?</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The stack explodes upward along the vertical axis, one sheet per beat.</b> Leader lines draw out to the balloons, each "UNREAD" types on an off-beat, and the "× 38" dimension snaps open from its centre on beat 1 of bar 4.</p></div>
+
+  <div class="cw"><div class="cell" id="t014-f2"><div class="t014-bg"></div><svg class="t014-svg" viewBox="0 0 1080 1080" fill="none"><defs><marker id="t014-ar" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L12 6 L0 11" fill="none" stroke="#E6F4F2" stroke-width="2"/></marker><marker id="t014-arc" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L12 6 L0 11" fill="none" stroke="#FF6B5F" stroke-width="2"/></marker></defs><path class="t014-ln t014-thin t014-dash" d="M540.0 120 V610 M290 360.0 H790"/><rect class="t014-ln t014-thin t014-dash" x="310" y="130" width="460" height="460" rx="125"/><circle class="t014-ln t014-thin" cx="435" cy="255" r="105" style="opacity:.45"/><path class="t014-ln t014-thin" d="M330 600 V650 M750 600 V650"/><path class="t014-ln" d="M334 634 L746 634" marker-start="url(#t014-ar)" marker-end="url(#t014-ar)"/><text class="t014-tx" x="540.0" y="624" text-anchor="middle">420</text><path class="t014-ln t014-thin" d="M435 255 L360 180 L240 180"/><text class="t014-tx" x="234" y="172" text-anchor="end">R 105</text><path class="t014-ln t014-thin" d="M678.5999999999999 347.4 L860 234.0"/><circle class="t014-ln t014-cob" cx="884" cy="234.0" r="24" fill="#0A4F5C"/><text class="t014-tx t014-cob" x="884" y="242.0" text-anchor="middle">A</text><text class="t014-sm" x="860" y="294.0">SIGNAL DOT</text><text class="t014-sm" x="60" y="86">DWG 02 · PART AP-01</text><text class="t014-sm" x="1020" y="86" text-anchor="end">REV A</text><path class="t014-ln t014-thin" d="M60 104 H1020"/><text class="t014-hero" x="540" y="800" text-anchor="middle">Acme <tspan class="t014-it">Pulse</tspan></text><rect class="t014-ln" x="60" y="950" width="960" height="70"/><text class="t014-sm" x="74" y="974">PART</text><text class="t014-tb " x="74" y="1006">ACME PULSE</text><path class="t014-ln" d="M540 950 V1020"/><text class="t014-sm" x="554" y="974">FUNCTION</text><text class="t014-tb t014-tlt" x="554" y="1006">WATCHES</text><path class="t014-ln" d="M780 950 V1020"/><text class="t014-sm" x="794" y="974">METRICS</text><text class="t014-tb " x="794" y="1006">14</text></svg>
+    <img class="t014-a t014-mk" style="--x:330;--y:150;--w:420" src="../assets/brand/acme-mark.svg" alt=""></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>Construction lines draw first (dashoffset, 500 ms), then the mark fills in on the drop.</b> The width dimension snaps out from the centre, balloon A points at the signal dot, and "Acme Pulse" writes on in serif on the next downbeat.</p></div>
+
+  <div class="cw"><div class="cell" id="t014-f3"><div class="t014-bg"></div><svg class="t014-svg" viewBox="0 0 1080 1080" fill="none"><defs><marker id="t014-ar" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L12 6 L0 11" fill="none" stroke="#E6F4F2" stroke-width="2"/></marker><marker id="t014-arc" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L12 6 L0 11" fill="none" stroke="#FF6B5F" stroke-width="2"/></marker></defs><text class="t014-sm" x="60" y="86">DETAIL A · CHECKOUT CONVERSION</text><text class="t014-sm t014-cot" x="1020" y="86" text-anchor="end">● 09:44 LIVE</text><path class="t014-ln t014-thin" d="M60 104 H1020"/><text class="t014-h" x="60" y="190">Out of <tspan class="t014-it">tolerance.</tspan></text><path class="t014-ln" d="M110 250 V640 H1000"/><rect x="110" y="330" width="890" height="100" fill="rgba(230,244,242,.06)"/><path class="t014-ln t014-thin t014-dash" d="M110 330 H1000 M110 430 H1000"/><text class="t014-sm" x="122" y="320">UPPER TOL</text><text class="t014-sm" x="122" y="458">LOWER TOL</text><polyline class="t014-ln" style="stroke-width:4" points="110,384 160,372 210,390 260,376 310,382 360,368 410,386 460,374 510,380 560,376 610,384"/><polyline class="t014-ln t014-co" style="stroke-width:5" points="610,384 650,470 700,520 760,530 820,524 880,532 940,528"/><path class="t014-ln t014-thin t014-dash" d="M620 250 V640"/><text class="t014-sm" x="632" y="272">09:42 · DEPLOY #2231</text><path class="t014-ln t014-co" d="M960 384 L960 524" marker-start="url(#t014-arc)" marker-end="url(#t014-arc)"/><text class="t014-tx" x="0" y="0" text-anchor="middle"></text><path class="t014-ln t014-co t014-thin" d="M900 380 H990"/><text class="t014-dimco" x="962" y="606" text-anchor="middle">−18%</text><path class="t014-ln t014-co" d="M640.0 450.0 A22 22 0 0 1 677.7 450.0 A22 22 0 0 1 715.3 450.0 A22 22 0 0 1 753.0 450.0 A22 22 0 0 1 790.7 450.0 A22 22 0 0 1 828.3 450.0 A22 22 0 0 1 866.0 450.0 A22 22 0 0 1 866.0 488.7 A22 22 0 0 1 866.0 527.3 A22 22 0 0 1 866.0 566.0 A22 22 0 0 1 828.3 566.0 A22 22 0 0 1 790.7 566.0 A22 22 0 0 1 753.0 566.0 A22 22 0 0 1 715.3 566.0 A22 22 0 0 1 677.7 566.0 A22 22 0 0 1 640.0 566.0 A22 22 0 0 1 640.0 527.3 A22 22 0 0 1 640.0 488.7 A22 22 0 0 1 640.0 450.0"/><circle class="t014-ln t014-cob" cx="560" cy="560" r="24" fill="#0A4F5C"/><text class="t014-tx t014-cob" x="560" y="568" text-anchor="middle">A</text><path class="t014-ln t014-co t014-thin" d="M584 560 L640 530"/><text class="t014-tx" x="110" y="700">NOTE A — CHECKOUT CONVERSION BELOW LOWER TOL.</text><text class="t014-sm" x="110" y="736">SINCE 09:42 · AFTER DEPLOY #2231 · 13 OTHERS IN TOL.</text><text class="t014-sm" x="110" y="772">P95 212 MS · ERROR RATE 0.4 % · 2,418 EVENTS/SEC</text><rect class="t014-ln" x="60" y="950" width="960" height="70"/><text class="t014-sm" x="74" y="974">CHECKED BY</text><text class="t014-tb t014-tlt" x="74" y="1006">PULSE</text><path class="t014-ln" d="M360 950 V1020"/><text class="t014-sm" x="374" y="974">APPROVED BY</text><text class="t014-tb " x="374" y="1006">YOU</text><path class="t014-ln" d="M660 950 V1020"/><rect x="660" y="950" width="360" height="70" fill="#FF5A4E"/><text class="t014-btn" x="840.0" y="996.0" text-anchor="middle">ROLL BACK</text><text class="t014-sm" x="60" y="930">RESOLVED IN 6 MIN · REV B</text></svg></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The measured line draws left → right inside the tolerance band, then dives past LOWER TOL in coral.</b> The −18% dimension arrow grows from the nominal line on a downbeat, the revision cloud scallops around the drop, and the "ROLL BACK" cell in the title block fills coral when the human approves.</p></div>
+
+  <div class="cw"><div class="cell" id="t014-f4"><div class="t014-bg"></div><svg class="t014-svg" viewBox="0 0 1080 1080" fill="none"><defs><marker id="t014-ar" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L12 6 L0 11" fill="none" stroke="#E6F4F2" stroke-width="2"/></marker><marker id="t014-arc" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L12 6 L0 11" fill="none" stroke="#FF6B5F" stroke-width="2"/></marker></defs><text class="t014-sm" x="60" y="86">DWG 04 · RELEASE</text><text class="t014-sm" x="1020" y="86" text-anchor="end">APPROVED</text><path class="t014-ln t014-thin" d="M60 104 H1020"/><text class="t014-big" x="60" y="400">Every metric.</text><text class="t014-big" x="60" y="530"><tspan class="t014-it">Every minute.</tspan></text><path class="t014-ln t014-thin" d="M60 572 H700"/><path class="t014-ln" d="M64 594 L696 594" marker-start="url(#t014-ar)" marker-end="url(#t014-ar)"/><text class="t014-tx" x="0" y="0" text-anchor="middle"></text><text class="t014-sm" x="380" y="632" text-anchor="middle">24 H · 7 D · 14 METRICS</text><rect class="t014-ln t014-thin t014-dash" x="770" y="160" width="250" height="250" rx="70"/><rect class="t014-ln" x="60" y="790" width="960" height="110"/><text class="t014-sm" x="74" y="814">PRODUCT</text><text class="t014-tb " x="74" y="846">ACME PULSE</text><path class="t014-ln" d="M580 790 V900"/><text class="t014-sm" x="594" y="814">BY</text><text class="t014-tb " x="594" y="846">ACME</text><path class="t014-ln" d="M740 790 V900"/><rect x="740" y="790" width="280" height="110" fill="#FF5A4E"/><text class="t014-btn" x="880.0" y="856.0" text-anchor="middle">START FREE</text><text class="t014-sm" x="60" y="960">YOU SHIP · PULSE WATCHES · CAUGHT BEFORE CUSTOMERS NOTICED</text></svg>
+    <img class="t014-a t014-mk" style="--x:795;--y:185;--w:200" src="../assets/brand/acme-mark.svg" alt=""></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The tagline letters draw on as outlines, then fill, one line per bar.</b> The dimension under it snaps open, the title block assembles cell by cell from the left, and "START FREE" floods coral on the final hit.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Drafting grid</b> — teal blueprint sheet with 30 px minor and 150 px major lines.</li>
+    <li><b>Exploded view</b> — dashboards or UI panels drawn as isometric plates pulled apart along one axis.</li>
+    <li><b>Dimension line</b> — arrowheads both ends, value in mono; used for counts, ranges and the −18% drop.</li>
+    <li><b>Callout balloon</b> — numbered circle on a leader line linking a part to its note.</li>
+    <li><b>Tolerance band + revision cloud</b> — the normal range as a dashed band; the anomaly gets a coral scalloped cloud.</li>
+    <li><b>Title block</b> — the bottom strip on every sheet: checked by Pulse, approved by you, and the action cell.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Line draw</b> — stroke-dashoffset 400–700 ms, power1.inOut, layers staggered by an 8th note (250 ms at 120 BPM).</li>
+    <li><b>Explode / assemble</b> — plates slide apart along the vertical axis, expo.out 900 ms, landing on consecutive downbeats.</li>
+    <li><b>Dimension snap</b> — arrows grow from the centre outward in 200 ms (power3.out) on the downbeat while the value counts up.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>Blueprints say "engineered, measured, reviewed" without a word, and a tolerance band is a perfect picture of normal vs. anomaly. The title block gives the human decision a formal home. Risk: hairlines shimmer after video compression, so keep strokes at 2 px or more and limit notes per sheet.</p>
+    <p><b>Adapt to your product:</b> draw your UI panels or architecture as exploded plates and your key metric as a measured line with its normal range; put the approval step in the title block.</p>
+    <p><b>References:</b> <a href="https://tympanus.net/codrops/2023/01/31/bringing-letters-to-life-coding-a-kinetic-svg-typography-animation/">Codrops — SVG stroke drawing technique</a></p>
+  </div>
+</div>
+</body>
+</html>

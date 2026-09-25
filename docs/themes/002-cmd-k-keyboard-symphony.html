@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>002 · ⌘K Keyboard Symphony — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t002-s{position:absolute;inset:0;background:#0E1726;font-family:var(--sans);overflow:hidden}
+.t002-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t002-app{position:absolute;inset:calc(var(--u)*-20);filter:blur(calc(var(--u)*7));opacity:.55}
+.t002-app i{position:absolute;display:block;border-radius:calc(var(--u)*18);background:#243247}
+.t002-app i.t{background:#1B6F70}.t002-app i.c{background:#6B2C33}
+.t002-dim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(14,23,38,.35),rgba(14,23,38,.85))}
+.t002-hl{position:absolute;left:calc(var(--u)*60);width:calc(var(--u)*960);text-align:center;font:400 calc(var(--u)*80)/1.0 var(--serif);color:#F6F5F1;letter-spacing:-.01em}
+.t002-hl em{color:#7FE0DA}
+.t002-pal{position:absolute;left:calc(var(--u)*110);width:calc(var(--u)*860);background:#FBFBF9;border-radius:calc(var(--u)*28);box-shadow:0 calc(var(--u)*40) calc(var(--u)*90) rgba(0,0,0,.55),0 0 0 calc(var(--u)*1.5) rgba(255,255,255,.4);overflow:hidden}
+.t002-in{height:calc(var(--u)*112);display:flex;align-items:center;gap:calc(var(--u)*20);padding:0 calc(var(--u)*34);border-bottom:calc(var(--u)*2) solid #E6E5DF;font:400 calc(var(--u)*42) var(--mono);color:var(--ink);white-space:nowrap}
+.t002-in svg{width:calc(var(--u)*40);height:calc(var(--u)*40);flex:none}
+.t002-in u{text-decoration:none;color:var(--alert);font-weight:600}
+.t002-in .ph{color:#A5A9B0}
+.t002-caret{display:inline-block;width:calc(var(--u)*4);height:calc(var(--u)*50);background:var(--brand);margin-left:calc(var(--u)*-14)}
+.t002-scope{display:flex;align-items:center;gap:calc(var(--u)*10);background:var(--brand-soft);color:var(--brand-deep);font:700 calc(var(--u)*24) var(--sans);border-radius:calc(var(--u)*10);padding:calc(var(--u)*8) calc(var(--u)*14)}
+.t002-scope img{width:calc(var(--u)*30);height:calc(var(--u)*30)}
+.t002-sec{font:600 calc(var(--u)*20) var(--mono);letter-spacing:.12em;color:#8A8F99;padding:calc(var(--u)*18) calc(var(--u)*34) calc(var(--u)*6)}
+.t002-row{height:calc(var(--u)*82);display:flex;align-items:center;gap:calc(var(--u)*20);padding:0 calc(var(--u)*34);font:600 calc(var(--u)*30) var(--sans);color:var(--ink);position:relative;white-space:nowrap}
+.t002-row .ic{width:calc(var(--u)*46);height:calc(var(--u)*46);border-radius:calc(var(--u)*11);background:#ECEBE5;flex:none;display:flex;align-items:center;justify-content:center}
+.t002-row .ic svg{width:calc(var(--u)*28);height:calc(var(--u)*28)}
+.t002-row .m{font:400 calc(var(--u)*22) var(--mono);color:#8A8F99;margin-left:auto}
+.t002-row.sel{background:var(--brand-soft)}
+.t002-row.sel::before{content:"";position:absolute;left:0;top:calc(var(--u)*14);bottom:calc(var(--u)*14);width:calc(var(--u)*7);border-radius:0 calc(var(--u)*6) calc(var(--u)*6) 0;background:var(--brand)}
+.t002-row.fade{opacity:.35}
+.t002-kbd{display:inline-flex;gap:calc(var(--u)*6);margin-left:auto}
+.t002-kbd b{min-width:calc(var(--u)*40);height:calc(var(--u)*40);border-radius:calc(var(--u)*8);background:#fff;border:calc(var(--u)*2) solid #D9D8D0;border-bottom-width:calc(var(--u)*4);font:600 calc(var(--u)*22) var(--mono);color:var(--muted);display:flex;align-items:center;justify-content:center;padding:0 calc(var(--u)*8)}
+.t002-keys{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:calc(var(--u)*26)}
+.t002-key{width:calc(var(--u)*150);height:calc(var(--u)*132);border-radius:calc(var(--u)*24);background:linear-gradient(180deg,#FFFFFF,#E4E6E9);box-shadow:0 calc(var(--u)*12) 0 #A9B1BB,0 calc(var(--u)*26) calc(var(--u)*40) rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;font:600 calc(var(--u)*60) var(--sans);color:var(--ink);position:relative}
+.t002-key small{position:absolute;left:calc(var(--u)*16);top:calc(var(--u)*12);font:600 calc(var(--u)*20) var(--mono);color:#8A8F99}
+.t002-key.dn{transform:translateY(calc(var(--u)*10));box-shadow:0 calc(var(--u)*2) 0 #A9B1BB,0 calc(var(--u)*8) calc(var(--u)*16) rgba(0,0,0,.5),0 0 0 calc(var(--u)*5) rgba(15,163,163,.55),0 0 calc(var(--u)*60) rgba(15,163,163,.6)}
+.t002-key.wide{width:calc(var(--u)*240)}
+.t002-key.co{background:linear-gradient(180deg,#FF7A70,#F0493E);color:#fff}.t002-key.co small{color:#FFE1DD}
+.t002-key.co.dn{box-shadow:0 calc(var(--u)*2) 0 #B8342B,0 calc(var(--u)*8) calc(var(--u)*16) rgba(0,0,0,.5),0 0 calc(var(--u)*70) rgba(255,90,78,.65)}
+.t002-plus{align-self:center;font:400 calc(var(--u)*44) var(--mono);color:#5A6475}
+.t002-big{height:calc(var(--u)*170);display:flex;align-items:center;gap:calc(var(--u)*28);padding:0 calc(var(--u)*34);background:var(--brand-soft);position:relative}
+.t002-big img{width:calc(var(--u)*104);height:calc(var(--u)*104)}
+.t002-big .w{font:800 calc(var(--u)*96)/1 var(--sans);letter-spacing:-.035em;color:var(--ink)}
+.t002-alert{background:#FFF0EE;padding:calc(var(--u)*20) calc(var(--u)*34) calc(var(--u)*22);border-left:calc(var(--u)*8) solid var(--alert)}
+.t002-alert .t{font:800 calc(var(--u)*44)/1.1 var(--sans);color:var(--ink)} .t002-alert .t b{color:var(--alert)}
+.t002-alert .m{font:400 calc(var(--u)*24) var(--mono);color:var(--muted);margin-top:calc(var(--u)*8)}
+.t002-glow{position:absolute;border-radius:50%;border:calc(var(--u)*3) solid rgba(127,224,218,.35)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 002 · Product UI as the stage</div>
+    <h1>⌘K Keyboard Symphony</h1>
+    <p class="dek">The product dims and blurs behind one oversized command palette; the typed query is the headline and chunky 3D keycaps get struck on the kick drum. Acme Pulse lives inside the palette, so finding the anomaly and deciding what to do are the same two keystrokes.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t002-f1">
+<div class="t002-s">
+ <div class="t002-app"><i style="left:0;top:0;width:calc(var(--u)*230);height:calc(var(--u)*1120)"></i><i style="left:calc(var(--u)*270);top:calc(var(--u)*60);width:calc(var(--u)*380);height:calc(var(--u)*260)"></i><i class="t" style="left:calc(var(--u)*680);top:calc(var(--u)*60);width:calc(var(--u)*380);height:calc(var(--u)*260)"></i><i style="left:calc(var(--u)*270);top:calc(var(--u)*350);width:calc(var(--u)*790);height:calc(var(--u)*330)"></i><i style="left:calc(var(--u)*270);top:calc(var(--u)*710);width:calc(var(--u)*380);height:calc(var(--u)*380)"></i><i style="left:calc(var(--u)*680);top:calc(var(--u)*710);width:calc(var(--u)*380);height:calc(var(--u)*380)"></i></div>
+ <div class="t002-dim"></div>
+ <div class="t002-hl" style="top:calc(var(--u)*66)">How many dashboards did you check <em>today?</em></div>
+ <div class="t002-pal" style="top:calc(var(--u)*262)">
+  <div class="t002-in"><svg viewBox="0 0 40 40"><circle cx="17" cy="17" r="11" fill="none" stroke="#5A6475" stroke-width="4"/><path d="M25 25 L35 35" stroke="#5A6475" stroke-width="4" stroke-linecap="round"/></svg><span>dash<span class="t002-caret" style="margin-left:0"></span></span><span class="ph" style="margin-left:auto;font-size:calc(var(--u)*24)">38 results</span></div>
+  <div class="t002-row sel"><span class="ic"><svg viewBox="0 0 28 28"><path d="M3 22 L10 14 L15 18 L25 6" fill="none" stroke="#0B6E6E" stroke-width="3"/></svg></span>Checkout funnel<span class="m">viewed 09:02</span></div>
+  <div class="t002-row"><span class="ic"><svg viewBox="0 0 28 28"><rect x="4" y="12" width="5" height="12" fill="#5A6475"/><rect x="12" y="7" width="5" height="17" fill="#5A6475"/><rect x="20" y="3" width="5" height="21" fill="#5A6475"/></svg></span>Signups · daily<span class="m">viewed 09:14</span></div>
+  <div class="t002-row"><span class="ic"><svg viewBox="0 0 28 28"><path d="M3 20 Q10 4 14 14 T25 8" fill="none" stroke="#5A6475" stroke-width="3"/></svg></span>p95 latency<span class="m">viewed 10:31</span></div>
+  <div class="t002-row"><span class="ic"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="9" fill="none" stroke="#5A6475" stroke-width="3"/></svg></span>Error rate<span class="m" style="color:var(--alert)">not today</span></div>
+  <div class="t002-row fade"><span class="ic"></span>Active users<span class="m">+33 more</span></div>
+ </div>
+ <div class="t002-keys" style="top:calc(var(--u)*850)"><div class="t002-key"><small>cmd</small>⌘</div><div class="t002-key dn">K</div></div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The K keycap slams down on the first kick</b> (translateY 10 px, 80 ms) and the palette springs up from 96 % scale; the query types one letter per 1/8 note and the “38 results” counter ticks up on beat 4.</p></div>
+  <div class="cw"><div class="cell" id="t002-f2">
+<div class="t002-s">
+ <div class="t002-app"><i style="left:0;top:0;width:calc(var(--u)*230);height:calc(var(--u)*1120)"></i><i class="t" style="left:calc(var(--u)*270);top:calc(var(--u)*60);width:calc(var(--u)*790);height:calc(var(--u)*260)"></i><i style="left:calc(var(--u)*270);top:calc(var(--u)*350);width:calc(var(--u)*790);height:calc(var(--u)*740)"></i></div>
+ <div class="t002-dim"></div>
+ <div class="t002-glow" style="left:calc(var(--u)*40);top:calc(var(--u)*130);width:calc(var(--u)*1000);height:calc(var(--u)*660)"></div>
+ <div class="t002-glow" style="left:calc(var(--u)*-60);top:calc(var(--u)*60);width:calc(var(--u)*1200);height:calc(var(--u)*800);opacity:.5"></div>
+ <div class="t002-pal" style="top:calc(var(--u)*200)">
+  <div class="t002-in"><svg viewBox="0 0 40 40"><circle cx="17" cy="17" r="11" fill="none" stroke="#5A6475" stroke-width="4"/><path d="M25 25 L35 35" stroke="#5A6475" stroke-width="4" stroke-linecap="round"/></svg><span><u>p</u><u>u</u><u>l</u><u>s</u><u>e</u></span></div>
+  <div class="t002-big"><img src="../assets/brand/acme-mark.svg" alt=""><span class="w">Acme Pulse</span><span class="t002-kbd"><b>↵</b></span></div>
+  <div class="t002-row"><span class="ic"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="10" fill="none" stroke="#0B6E6E" stroke-width="3"/><circle cx="14" cy="14" r="3" fill="#0B6E6E"/></svg></span>Watch every metric<span class="t002-kbd"><b>⌥</b><b>W</b></span></div>
+  <div class="t002-row fade"><span class="ic"></span>Pulse settings</div>
+ </div>
+ <div class="t002-keys" style="top:calc(var(--u)*850)"><div class="t002-key wide dn"><small>return</small>↵</div></div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the ↵ key strikes</b> and the top result expands in place (height 82→170 px, back.out 1.4, 0.3 s) into the Acme Pulse lockup; two teal rings radiate outward from the palette on the next two beats while the app behind stays blurred.</p></div>
+  <div class="cw"><div class="cell" id="t002-f3">
+<div class="t002-s">
+ <div class="t002-app"><i style="left:0;top:0;width:calc(var(--u)*230);height:calc(var(--u)*1120)"></i><i class="c" style="left:calc(var(--u)*270);top:calc(var(--u)*60);width:calc(var(--u)*790);height:calc(var(--u)*300)"></i><i style="left:calc(var(--u)*270);top:calc(var(--u)*400);width:calc(var(--u)*380);height:calc(var(--u)*690)"></i><i style="left:calc(var(--u)*680);top:calc(var(--u)*400);width:calc(var(--u)*380);height:calc(var(--u)*690)"></i></div>
+ <div class="t002-dim"></div>
+ <div class="t002-pal" style="top:calc(var(--u)*70)">
+  <div class="t002-in"><span class="t002-scope"><img src="../assets/brand/acme-mark.svg" alt="">Pulse ›</span><span>checkout<span class="t002-caret" style="margin-left:calc(var(--u)*2)"></span></span></div>
+  <div class="t002-sec">ANOMALY · 09:44</div>
+  <div class="t002-alert"><div class="t">Checkout conversion <b>−18%</b></div><div class="m">since 09:42 · after deploy #2231</div></div>
+  <div class="t002-sec">YOUR CALL</div>
+  <div class="t002-row sel"><span class="ic" style="background:#FFE1DD"><svg viewBox="0 0 28 28"><path d="M9 7 L4 12 L9 17 M4 12 H18 A6 6 0 0 1 18 24 H12" fill="none" stroke="#FF5A4E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Roll back deploy #2231<span class="t002-kbd"><b>⌥</b><b>R</b></span></div>
+  <div class="t002-row"><span class="ic"><svg viewBox="0 0 28 28"><path d="M6 14 L12 20 L23 8" fill="none" stroke="#5A6475" stroke-width="3" stroke-linecap="round"/></svg></span>Acknowledge<span class="t002-kbd"><b>⌥</b><b>A</b></span></div>
+  <div class="t002-row fade"><span class="ic"></span>Open deploy #2231<span class="t002-kbd"><b>⌥</b><b>O</b></span></div>
+ </div>
+ <div class="t002-keys" style="top:calc(var(--u)*742)"><div class="t002-key"><small>opt</small>⌥</div><span class="t002-plus">+</span><div class="t002-key co dn">R</div></div>
+ <div class="t002-p" style="--x:250;--y:926;--w:580;--h:76;border-radius:calc(var(--u)*40);background:rgba(31,157,85,.16);border:calc(var(--u)*2) solid rgba(31,157,85,.6);display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*14);font:600 calc(var(--u)*26) var(--sans);color:#BFF0D2"><span style="width:calc(var(--u)*14);height:calc(var(--u)*14);border-radius:50%;background:#3DDC84"></span>Rolled back · resolved in 6 min</div>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The anomaly row drops in from the top of the list</b> (y −24→0, power3.out 0.25 s) and the result rows FLIP-re-rank beneath it; the selection bar slides onto “Roll back” and the coral ⌥ R keycaps strike together on the snare. The human's keystroke is the decision.</p></div>
+  <div class="cw"><div class="cell" id="t002-f4">
+<div class="t002-s">
+ <div class="t002-app"><i style="left:0;top:0;width:calc(var(--u)*230);height:calc(var(--u)*1120)"></i><i class="t" style="left:calc(var(--u)*270);top:calc(var(--u)*60);width:calc(var(--u)*790);height:calc(var(--u)*300)"></i><i style="left:calc(var(--u)*270);top:calc(var(--u)*400);width:calc(var(--u)*790);height:calc(var(--u)*690)"></i></div>
+ <div class="t002-dim"></div>
+ <div class="t002-hl" style="top:calc(var(--u)*72);font-size:calc(var(--u)*92)">Every metric. <em>Every minute.</em></div>
+ <div class="t002-pal" style="top:calc(var(--u)*300)">
+  <div class="t002-big" style="background:#fff;height:calc(var(--u)*176)"><img src="../assets/brand/acme-mark.svg" alt=""><span class="w" style="font-size:calc(var(--u)*88)">Acme Pulse</span></div>
+  <div class="t002-row sel" style="height:calc(var(--u)*110);font-size:calc(var(--u)*40);background:#FFF0EE"><span class="ic" style="background:var(--alert);width:calc(var(--u)*56);height:calc(var(--u)*56)"><svg viewBox="0 0 28 28"><path d="M8 14 H20 M14 8 L20 14 L14 20" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Start free<span class="t002-kbd"><b>↵</b></span></div>
+  <div class="t002-row fade" style="font-size:calc(var(--u)*26)"><span class="ic"></span>acme.example/pulse</div>
+ </div>
+ <div class="t002-keys" style="top:calc(var(--u)*850)"><div class="t002-key wide co dn"><small>return</small>↵</div></div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The palette shrinks to three rows</b> (FLIP, 0.25 s power3.out) as the tagline types in above it; the coral ↵ keycap is struck on the last downbeat and holds, glowing, under the “Start free” row.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Palette modal</b> — search field + result list; the whole stage.</li><li><b>3D keycap HUD</b> — ⌘ K, ↵, ⌥ R keys that physically press on the beat.</li><li><b>Fuzzy-match highlight</b> — matched letters in coral as the query types.</li><li><b>Scope chip</b> — “Pulse ›” shows we are now inside the agent.</li><li><b>Result row with shortcut hint</b> — right-aligned ⌥ R / ⌥ A keys; the selected row carries a teal bar.</li><li><b>Half-visible last row</b> — faded row that hints there is always more (+33).</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Beat-typed query</b> — one character per 1/8 note (0.25 s at 120 BPM), caret blink 530 ms between phrases.</li><li><b>Result re-rank</b> — rows swap places with FLIP, 0.25 s power3.out; the new top row lands exactly on a beat.</li><li><b>Keycap press</b> — translateY 10 px + shadow collapse in 80 ms on the kick, spring release (elastic.out 1, 0.5) 0.2 s later.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> the command palette is the most recognisable “power user” gesture in modern software, and it makes human control literal: the anomaly only goes away when a key is pressed. Readable at feed size because it is one centred box. <b>Risk:</b> reads developer-only; soften with plain-language result rows and keep the typed query short.</p><p><b>Adapt to your product:</b> replace the result rows with your own objects and actions, and let your product's name be the scope chip; the final ↵ is always your CTA.</p><p><b>References:</b> <a href="https://blog.superhuman.com/how-to-build-a-remarkable-command-palette/">Superhuman — building a remarkable command palette</a> · <a href="https://linear.app/now/behind-the-latest-design-refresh">Linear — behind the design refresh</a></p></div>
+</div>
+</body>
+</html>

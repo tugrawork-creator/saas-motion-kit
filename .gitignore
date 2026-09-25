@@ -1,0 +1,11 @@
+# rendered output lives in GitHub Releases, not in git
+renders/
+*.mp4
+*.mov
+*.wav
+snapshots/
+.hyperframes/
+node_modules/
+__pycache__/
+.DS_Store
+Thumbs.db

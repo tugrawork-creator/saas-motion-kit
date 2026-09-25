@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>031 · Vector-Phosphor Oscilloscope — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t031-f{background:radial-gradient(ellipse at 50% 45%,#0B1D1C 0%,#051110 55%,#020606 100%);color:#DFFFF8}
+.t031-f::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  box-shadow:inset 0 0 calc(var(--u)*140) rgba(0,0,0,.85);
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 calc(var(--u)*2),transparent calc(var(--u)*2) calc(var(--u)*5))}
+.t031-svg{position:absolute;inset:0;width:100%;height:100%}
+.t031-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t031-grat{fill:none;stroke:#2B6A63;stroke-opacity:.45;stroke-width:1.5}
+.t031-tick{fill:none;stroke:#3B8C82;stroke-opacity:.55}
+.t031-beam{fill:none;stroke:#C9FFF4;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.t031-halo{fill:none;stroke:#2EE6C9;stroke-width:14;stroke-linecap:round;stroke-linejoin:round;opacity:.28}
+.t031-coral{stroke:#FFB3AC}
+.t031-coralhalo{stroke:#FF5A4E;opacity:.45}
+.t031-mono{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase;color:#6FD9C8}
+.t031-svgmono{font-family:var(--mono);font-size:22px;letter-spacing:.1em;fill:#6FD9C8}
+.t031-h{font-family:var(--serif);font-size:calc(var(--u)*82);line-height:1.04;letter-spacing:-.01em;color:#E6FFF9;
+  text-shadow:0 0 calc(var(--u)*6) #2EE6C9,0 0 calc(var(--u)*26) rgba(46,230,201,.55)}
+.t031-h em{font-style:italic;color:#9DFFEE}
+.t031-word{font-family:var(--sans);font-weight:800;letter-spacing:-.02em;color:#E6FFF9;
+  text-shadow:0 0 calc(var(--u)*8) #2EE6C9,0 0 calc(var(--u)*34) rgba(46,230,201,.6)}
+.t031-mark{position:absolute;filter:drop-shadow(0 0 calc(var(--u)*18) rgba(46,230,201,.8)) drop-shadow(0 0 calc(var(--u)*50) rgba(15,163,163,.6))}
+.t031-strip{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);top:calc(var(--u)*918);height:calc(var(--u)*100);
+  display:flex;align-items:center;gap:calc(var(--u)*26);border-top:calc(var(--u)*2) solid #173F3B;padding-top:calc(var(--u)*6)}
+.t031-knob{width:calc(var(--u)*56);height:calc(var(--u)*56);border-radius:50%;flex:none;
+  background:radial-gradient(circle at 38% 32%,#3A4A49,#121A1A 70%);box-shadow:0 0 0 calc(var(--u)*3) #0A1111,inset 0 calc(var(--u)*-4) calc(var(--u)*6) rgba(0,0,0,.6);position:relative}
+.t031-knob::after{content:"";position:absolute;left:50%;top:calc(var(--u)*6);width:calc(var(--u)*4);height:calc(var(--u)*18);margin-left:calc(var(--u)*-2);background:#9DFFEE;border-radius:2px;transform-origin:50% calc(var(--u)*22);transform:rotate(var(--r,0deg))}
+.t031-key{font-family:var(--sans);font-weight:800;font-size:calc(var(--u)*30);border-radius:calc(var(--u)*12);padding:calc(var(--u)*16) calc(var(--u)*30);white-space:nowrap}
+.t031-key.hot{background:#FF5A4E;color:#1A0503;box-shadow:0 0 calc(var(--u)*24) rgba(255,90,78,.75),inset 0 calc(var(--u)*-4) 0 rgba(0,0,0,.25)}
+.t031-key.cold{border:calc(var(--u)*2) solid #3B8C82;color:#9DFFEE}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 031 · Light, optics &amp; texture</div>
+    <h1>Vector-Phosphor Oscilloscope</h1>
+    <p class="dek">A black-glass scope face with a faint graticule: a single electron beam draws every word, number and trace as one glowing stroke that leaves a teal phosphor afterglow. Acme Pulse is the trigger that finally locks a jittering mess of signals into one stable, readable wave, and the anomaly is the moment the beam turns coral.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t031-f" id="t031-f1">
+    <svg class="t031-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs>
+        <pattern id="t031-gr1" width="96" height="100" patternUnits="userSpaceOnUse" x="60" y="96"><path class="t031-grat" d="M96 0V100M0 100H96"/></pattern>
+        <clipPath id="t031-cl1"><rect x="60" y="96" width="960" height="800"/></clipPath>
+      </defs>
+      <rect x="60" y="96" width="960" height="800" fill="url(#t031-gr1)"/>
+      <rect x="60" y="96" width="960" height="800" class="t031-grat"/>
+      <path class="t031-tick" d="M60 496H1020" stroke-width="10" stroke-dasharray="1.5 17.7"/>
+      <path class="t031-tick" d="M540 96V896" stroke-width="10" stroke-dasharray="1.5 18.5"/>
+      <g clip-path="url(#t031-cl1)">
+        <g id="t031-sine1">
+          <path class="t031-halo" d="M60 700 C100 580,140 580,180 700 S260 820,300 700 S380 580,420 700 S500 820,540 700 S620 580,660 700 S740 820,780 700 S860 580,900 700 S980 820,1020 700 S1100 580,1140 700"/>
+          <path class="t031-beam" d="M60 700 C100 580,140 580,180 700 S260 820,300 700 S380 580,420 700 S500 820,540 700 S620 580,660 700 S740 820,780 700 S860 580,900 700 S980 820,1020 700 S1100 580,1140 700"/>
+        </g>
+        <use href="#t031-sine1" transform="translate(-38 0)" opacity=".55"/>
+        <use href="#t031-sine1" transform="translate(-81 0)" opacity=".4"/>
+        <use href="#t031-sine1" transform="translate(-137 0)" opacity=".3"/>
+        <use href="#t031-sine1" transform="translate(-173 0)" opacity=".22"/>
+        <use href="#t031-sine1" transform="translate(-212 0)" opacity=".14"/>
+      </g>
+      <text x="80" y="136" class="t031-svgmono">CH 01–38 · 38 DASHBOARDS</text>
+      <text x="1000" y="136" class="t031-svgmono" text-anchor="end" fill="#F4B740" style="fill:#F4B740">TRIG ? · UNLOCKED</text>
+    </svg>
+    <div class="t031-p t031-h" style="--x:96;--y:196;--w:900">How many dashboards did you <em>check</em> today?</div>
+    <div class="t031-strip"><span class="t031-knob" style="--r:-40deg"></span><span class="t031-mono">Time/div<br>1 s</span><span class="t031-knob" style="--r:120deg"></span><span class="t031-mono">Trig level<br>— none —</span><span class="t031-mono" style="margin-left:auto;color:#F4B740">● no lock</span></div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Six ghosted copies of one sine slide left</b>: an untriggered scope, 38 signals nobody locks onto. The serif question is drawn stroke by stroke by the beam and finishes on bar 2's downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t031-f" id="t031-f2">
+    <svg class="t031-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs>
+        <pattern id="t031-gr2" width="96" height="100" patternUnits="userSpaceOnUse" x="60" y="96"><path class="t031-grat" d="M96 0V100M0 100H96"/></pattern>
+      </defs>
+      <rect x="60" y="96" width="960" height="800" fill="url(#t031-gr2)"/>
+      <rect x="60" y="96" width="960" height="800" class="t031-grat"/>
+      <path class="t031-tick" d="M60 496H1020" stroke-width="10" stroke-dasharray="1.5 17.7"/>
+      <path class="t031-tick" d="M540 96V896" stroke-width="10" stroke-dasharray="1.5 18.5"/>
+      <!-- afterglow ghosts (decaying clones) -->
+      <path class="t031-halo" opacity=".08" d="M60 396H180L214 330L252 470L286 396H420"/>
+      <path class="t031-beam" opacity=".18" d="M60 396H180L214 330L252 470L286 396H420"/>
+      <path class="t031-halo" d="M60 390H180L214 318L252 470L286 390H420"/>
+      <path class="t031-beam" d="M60 390H180L214 318L252 470L286 390H420"/>
+      <path class="t031-halo" d="M660 390H790L824 318L862 470L880 425"/>
+      <path class="t031-beam" d="M660 390H790L824 318L862 470L880 425"/>
+      <circle cx="880" cy="425" r="22" fill="#2EE6C9" opacity=".35"/>
+      <circle cx="880" cy="425" r="9" fill="#FFFFFF"/>
+      <text x="80" y="136" class="t031-svgmono">XY MODE · CH 01</text>
+      <text x="1000" y="136" class="t031-svgmono" text-anchor="end">TRIG ● LOCKED</text>
+    </svg>
+    <img class="t031-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*440);top:calc(var(--u)*290);width:calc(var(--u)*200);height:calc(var(--u)*200)">
+    <div class="t031-p t031-word" style="--x:60;--y:560;--w:960;text-align:center;font-size:calc(var(--u)*128);line-height:1">Acme Pulse</div>
+    <div class="t031-p t031-mono" style="--x:60;--y:722;--w:960;text-align:center;font-size:calc(var(--u)*26)">one beam · every signal · locked</div>
+    <div class="t031-strip"><span class="t031-knob" style="--r:0deg"></span><span class="t031-mono">Time/div<br>1 s</span><span class="t031-knob" style="--r:30deg"></span><span class="t031-mono">Trig level<br>auto</span><span class="t031-mono" style="margin-left:auto;color:#9DFFEE">● lock 0:08</span></div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the trace snaps still</b> (trigger lock, steps(1)) and the beam races left→right through a pulse spike into the glowing Acme mark; "Acme Pulse" burns in as one XY-mode stroke on the next beat.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t031-f" id="t031-f3">
+    <svg class="t031-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs>
+        <pattern id="t031-gr3" width="96" height="100" patternUnits="userSpaceOnUse" x="60" y="96"><path class="t031-grat" d="M96 0V100M0 100H96"/></pattern>
+      </defs>
+      <rect x="60" y="96" width="960" height="800" fill="url(#t031-gr3)"/>
+      <rect x="60" y="96" width="960" height="800" class="t031-grat"/>
+      <!-- steady conversion trace -->
+      <path class="t031-halo" d="M60 270 L110 262 L160 276 L210 266 L260 272 L310 260 L360 274 L410 264 L460 270 L510 262 L588 268"/>
+      <path class="t031-beam" d="M60 270 L110 262 L160 276 L210 266 L260 272 L310 260 L360 274 L410 264 L460 270 L510 262 L588 268"/>
+      <!-- the drop, beam turns coral -->
+      <path class="t031-halo t031-coralhalo" d="M588 268 L600 452 L650 446 L700 458 L750 448 L800 456 L850 444 L900 454 L950 446 L1020 452"/>
+      <path class="t031-beam t031-coral" d="M588 268 L600 452 L650 446 L700 458 L750 448 L800 456 L850 444 L900 454 L950 446 L1020 452"/>
+      <!-- cursors -->
+      <path d="M60 266H1020M60 450H1020" stroke="#F4B740" stroke-width="2" stroke-dasharray="10 10" opacity=".8"/>
+      <path d="M594 150V560" stroke="#F4B740" stroke-width="2" stroke-dasharray="10 10" opacity=".8"/>
+      <path d="M960 274V442" stroke="#F4B740" stroke-width="3" marker-end="none"/>
+      <path d="M950 432L960 446L970 432" fill="none" stroke="#F4B740" stroke-width="3"/>
+      <text x="946" y="370" class="t031-svgmono" text-anchor="end" style="fill:#F4B740;font-size:30px;font-weight:600">ΔY −18%</text>
+      <text x="610" y="182" class="t031-svgmono" style="fill:#F4B740">09:42 · DEPLOY #2231</text>
+      <text x="80" y="136" class="t031-svgmono">CH 01 · CHECKOUT CONVERSION · 1 MIN/DIV</text>
+      <!-- other channels, calm -->
+      <path d="M80 540 L140 536 L200 542 L260 537 L320 541 L380 538 L440 540" fill="none" stroke="#6FD9C8" stroke-width="2.5" opacity=".6"/>
+      <text x="80" y="590" class="t031-svgmono" opacity=".8">CH 02 P95 212 MS ✓   CH 03 ERR 0.4% ✓</text>
+    </svg>
+    <div class="t031-p" style="--x:84;--y:640;--w:920;display:flex;align-items:center;gap:calc(var(--u)*36)">
+      <div style="font:600 calc(var(--u)*150)/1 var(--mono);color:#FFD2CE;text-shadow:0 0 calc(var(--u)*8) #FF5A4E,0 0 calc(var(--u)*40) rgba(255,90,78,.7);letter-spacing:-.04em">−18%</div>
+      <div class="t031-mono" style="font-size:calc(var(--u)*26);line-height:1.5;color:#DFFFF8;text-transform:none;letter-spacing:.02em">Checkout conversion<br><span style="color:#6FD9C8">since 09:42 · after deploy #2231</span></div>
+    </div>
+    <div class="t031-strip"><span class="t031-key hot">Roll back</span><span class="t031-key cold">Acknowledge</span><span class="t031-mono" style="margin-left:auto;text-align:right">your call<br><span style="color:#9DFFEE">14 metrics steady</span></span></div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The beam traces a calm line left→right at constant speed</b>, then falls and flips to coral on a snare; amber cursors slide in to measure "ΔY −18%" and the lit Roll back key pulses on the downbeat, waiting for a human.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t031-f" id="t031-f4">
+    <svg class="t031-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <path class="t031-halo" opacity=".07" d="M940 470 L935 501 L920 532 L896 563 L864 592 L823 620 L775 646 L722 671 L664 693 L603 713 L540 730 L477 744 L416 755 L358 763 L305 768 L257 770 L216 768 L184 763 L160 755 L145 744 L140 730 L145 713 L160 693 L184 671 L216 646 L257 620 L305 592 L358 563 L416 532 L477 501 L540 470 L603 439 L664 408 L722 377 L775 348 L823 320 L864 294 L896 269 L920 247 L935 227 L940 210 L935 196 L920 185 L896 177 L864 172 L823 170 L775 172 L722 177 L664 185 L603 196 L540 210 L477 227 L416 247 L358 269 L305 294 L257 320 L216 348 L184 377 L160 408 L145 439 L140 470 L145 501 L160 532 L184 563 L216 592 L257 620 L305 646 L358 671 L416 693 L477 713 L540 730 L603 744 L664 755 L722 763 L775 768 L823 770 L864 768 L896 763 L920 755 L935 744 L940 730 L935 713 L920 693 L896 671 L864 646 L823 620 L775 592 L722 563 L664 532 L603 501 L540 470 L477 439 L416 408 L358 377 L305 348 L257 320 L216 294 L184 269 L160 247 L145 227 L140 210 L145 196 L160 185 L184 177 L216 172 L257 170 L305 172 L358 177 L416 185 L477 196 L540 210 L603 227 L664 247 L722 269 L775 294 L823 320 L864 348 L896 377 L920 408 L935 439 L940 470Z"/>
+      <path class="t031-beam" opacity=".13" stroke-width="3" d="M940 470 L935 501 L920 532 L896 563 L864 592 L823 620 L775 646 L722 671 L664 693 L603 713 L540 730 L477 744 L416 755 L358 763 L305 768 L257 770 L216 768 L184 763 L160 755 L145 744 L140 730 L145 713 L160 693 L184 671 L216 646 L257 620 L305 592 L358 563 L416 532 L477 501 L540 470 L603 439 L664 408 L722 377 L775 348 L823 320 L864 294 L896 269 L920 247 L935 227 L940 210 L935 196 L920 185 L896 177 L864 172 L823 170 L775 172 L722 177 L664 185 L603 196 L540 210 L477 227 L416 247 L358 269 L305 294 L257 320 L216 348 L184 377 L160 408 L145 439 L140 470 L145 501 L160 532 L184 563 L216 592 L257 620 L305 646 L358 671 L416 693 L477 713 L540 730 L603 744 L664 755 L722 763 L775 768 L823 770 L864 768 L896 763 L920 755 L935 744 L940 730 L935 713 L920 693 L896 671 L864 646 L823 620 L775 592 L722 563 L664 532 L603 501 L540 470 L477 439 L416 408 L358 377 L305 348 L257 320 L216 294 L184 269 L160 247 L145 227 L140 210 L145 196 L160 185 L184 177 L216 172 L257 170 L305 172 L358 177 L416 185 L477 196 L540 210 L603 227 L664 247 L722 269 L775 294 L823 320 L864 348 L896 377 L920 408 L935 439 L940 470Z"/>
+      <circle cx="140" cy="470" r="8" fill="#fff"/>
+    </svg>
+    <div class="t031-p" style="--x:60;--y:150;--w:960;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*28)">
+      <img class="t031-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="position:static;width:calc(var(--u)*112);height:calc(var(--u)*112)">
+      <span class="t031-word" style="font-size:calc(var(--u)*92)">Acme Pulse</span>
+    </div>
+    <div class="t031-p t031-h" style="--x:60;--y:370;--w:960;text-align:center;font-size:calc(var(--u)*112)">You ship.<br><em>Pulse watches.</em></div>
+    <div class="t031-p" style="--x:60;--y:700;--w:960;text-align:center"><span class="t031-key hot" style="display:inline-block;font-size:calc(var(--u)*40);padding:calc(var(--u)*24) calc(var(--u)*64);border-radius:calc(var(--u)*16)">Start free</span></div>
+    <div class="t031-strip"><span class="t031-knob" style="--r:0deg"></span><span class="t031-mono">XY mode<br>idle loop</span><span class="t031-mono" style="margin-left:auto;color:#9DFFEE">● trig locked</span></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>A 3:2 Lissajous "heartbeat" idles behind</b> while the lockup is re-traced top-down; the tagline's italic line glows up on beat 1 and the coral Start free key lights on beat 3, then holds.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Graticule</b> — 10×8 grid with tick-marked centre axes; the constant "instrument" frame across every scene.</li>
+    <li><b>Beam head</b> — white-hot dot with a two-layer teal bloom; the one "pen" that draws everything.</li>
+    <li><b>Persistence trail</b> — 3–5 stacked path clones at decaying opacity; the phosphor afterglow.</li>
+    <li><b>Measurement cursors</b> — amber dashed ΔY / Δt lines that turn an anomaly into a readable number.</li>
+    <li><b>Bezel strip</b> — knobs + lit hardware keys (Roll back / Acknowledge / Start free) as the UI layer.</li>
+    <li><b>Lissajous idle</b> — XY-mode loop that fills any "waiting" moment and the end card.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Beam draw</b> — stroke-dashoffset at constant linear speed (a beam never eases); one full-width sweep = 1 bar at 120 BPM (2 s).</li>
+    <li><b>Phosphor decay</b> — trailing clones at 0.6 / 0.35 / 0.15 opacity, offset 40–80 ms; keeps every stroke alive between hits.</li>
+    <li><b>Trigger lock</b> — 6 frames of horizontal jitter from a seeded table, then steps(1) snap to stable exactly on the 0:08 drop and on each proof hit.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>A scope is literally a machine that watches a signal and catches the glitch, so "background monitoring" needs no explanation. Risk: thin glowing strokes smear under social compression; keep beams ≥ 3 px and text large.</p><p><b>Adapt to your product:</b> Replace the conversion trace with your own key time series (latency, sync lag, queue depth) and put your primary action on the lit bezel key; the cursor readout becomes your alert copy.</p><p><b>References:</b> <a href="https://gingerbeardman.github.io/webgl-crt-shader/">WebGL CRT shader</a> · <a href="https://en.wikipedia.org/wiki/Oscilloscope_Music">Oscilloscope music</a> · <a href="https://www.perfectcircuit.com/signal/lzx-vectrex-rescanning">Vector rescanning (Perfect Circuit)</a></p></div>
+</div>
+</body>
+</html>

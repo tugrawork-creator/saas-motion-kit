@@ -1,0 +1,20 @@
+{"id":"012","slug":"thermal-receipt","name":"Thermal Receipt","category":"type",
+ "summary":"Pulse prints a running receipt of your product; the feed stalls on the one wrong line and a coral circle lands around it.",
+ "look":"A warm thermal strip feeds out of a small dark printer onto a deep-teal desk: mono line items, dotted leaders, a zig-zag tear and a black-and-coral two-color print head. One hand-drawn coral loop marks the anomaly.",
+ "components":[
+  {"name":"Paper strip","role":"warm white roll with feed lines, curl shading and a zig-zag tear"},
+  {"name":"Line item","role":"label · dotted leader · value, 32–34 characters per line"},
+  {"name":"Two-color head","role":"black for normal lines, coral for the anomaly"},
+  {"name":"Dithered header","role":"one-bit Acme mark plus double-height ACME / PULSE"},
+  {"name":"Marker circle","role":"a single hand-drawn coral loop around the line that matters"},
+  {"name":"Printer body","role":"dark device with slot and a status LED that turns coral on pause"}],
+ "motion":[
+  {"name":"Stepped feed","how":"translateY one line per step, steps(1) with 70 ms hold, one line per 16th note at 120 BPM"},
+  {"name":"Print-head scan","how":"each line reveals with clip-path left → right in 90 ms linear, sounding like the hi-hat"},
+  {"name":"Pause & tear","how":"feed freezes one full bar on the anomaly; the final tear slides up 20 px and rotates −4° with power3.out over 400 ms on a downbeat"}],
+ "story":"Hook: a DASHBOARD CHECK receipt lists SKIPPED over and over, OPEN 38 / CHECKED 3, under 'How many dashboards did you check today?'. Reveal: on the drop the printer bursts a header with the dithered mark and double-height ACME PULSE. Proof: an audit receipt prints OK lines until CHECKOUT −18% since 09:42 after deploy #2231 prints in coral, the feed pauses, a circle lands and the human ticks ROLL BACK. CTA: the torn receipt (anomalies 1, customers hit 0) swings aside for 'Caught before customers noticed.' and Start free.",
+ "adapt":"Print your own checks as line items (tests, sync jobs, invoices, API calls) and let only the failing one print in your accent color; put your key number in the totals block.",
+ "references":[{"url":"https://www.itsnicethat.com/articles/co-op-owned-by-you-right-by-you-vccp-blinkink-sam-gainsborough-advertising-animation-230724","note":"campaign animation built around receipts","verified":true}],
+ "fit":{"readability":2,"trust":3,"effort":"low","risk":"a tall strip fights the square frame; crop tight and keep to about 12 lines"},
+ "best_for":["analytics","fintech-adjacent tools","e-commerce","QA / testing"],
+ "file":"themes/012-thermal-receipt.html"}

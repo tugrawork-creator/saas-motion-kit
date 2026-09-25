@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>062 · Mascot Agent — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t062 ===== */
+
+.t062-f{position:absolute;inset:0;overflow:hidden;color:var(--ink);font-family:var(--sans);background:radial-gradient(80% 70% at 60% 30%,#E4F6F3 0%,#F6F5F1 60%,#F9EEE8 100%)}
+.t062-ov{position:absolute;inset:0;width:100%;height:100%}
+.t062-h{position:absolute;font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+.t062-h i{color:var(--brand-deep)}
+.t062-card{position:absolute;background:#fff;border-radius:calc(var(--u)*22);box-shadow:0 calc(var(--u)*14) calc(var(--u)*34) rgba(14,23,38,.1),0 0 0 calc(var(--u)*1.5) rgba(14,23,38,.06);padding:calc(var(--u)*18) calc(var(--u)*22);white-space:nowrap}
+.t062-card b{display:block;font:700 calc(var(--u)*26) var(--sans)}
+.t062-card small{font:400 calc(var(--u)*20) var(--mono);color:var(--muted)}
+.t062-tbl{position:absolute;background:#fff;border-radius:calc(var(--u)*26);box-shadow:0 calc(var(--u)*24) calc(var(--u)*60) rgba(14,23,38,.12),0 0 0 calc(var(--u)*1.5) rgba(14,23,38,.06);overflow:hidden}
+.t062-r{display:grid;grid-template-columns:1fr calc(var(--u)*170) calc(var(--u)*120);align-items:center;height:calc(var(--u)*76);padding:0 calc(var(--u)*30);border-bottom:calc(var(--u)*1.5) solid #EEF0EE;font:600 calc(var(--u)*27) var(--sans)}
+.t062-r span+span{font:600 calc(var(--u)*25) var(--mono);text-align:right}
+.t062-r.hd{height:calc(var(--u)*60);background:#F4F6F6;font:600 calc(var(--u)*19) var(--mono);letter-spacing:.12em;color:var(--muted)}
+.t062-btn{display:inline-block;font:700 calc(var(--u)*27) var(--sans);border-radius:calc(var(--u)*100);padding:calc(var(--u)*16) calc(var(--u)*32);white-space:nowrap}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 062 · Signature directions</div>
+    <h1>Mascot Agent</h1>
+    <p class="dek">The agent becomes a character: a round teal body with two white oval eyes, born from the coral dot of the Acme mark on the drop. It never talks — it looks, blinks, squashes and cheers — and all of its expression lives in the eyes. The team’s dashboard does the computing; the mascot peeks over its edge and hands what it finds to a human.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort high</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t062-f1"><div class="t062-f">
+<svg class="t062-ov" viewBox="0 0 1080 1080"><ellipse cx="540" cy="560" rx="420" ry="330" fill="none" stroke="#0E1726" stroke-width="2" stroke-dasharray="4 12" opacity=".35"/>
+<path d="M880 330 A 420 330 0 0 1 960 520" fill="none" stroke="#FF5A4E" stroke-width="5" stroke-linecap="round"/><path d="M944 500 L 960 522 L 972 496" fill="none" stroke="#FF5A4E" stroke-width="5" stroke-linecap="round"/></svg>
+<div class="t062-card" style="left:calc(var(--u)*364);top:calc(var(--u)*180);transform:rotate(-16deg);opacity:.18"><b>Checkout dashboard</b><small>tab 12 of 38</small></div><div class="t062-card" style="left:calc(var(--u)*390);top:calc(var(--u)*170);transform:rotate(-8deg)"><b>Checkout dashboard</b><small>tab 12 of 38</small></div><div class="t062-card" style="left:calc(var(--u)*664);top:calc(var(--u)*310);transform:rotate(-2deg);opacity:.18"><b>p95 latency 212 ms</b><small>alert · muted</small></div><div class="t062-card" style="left:calc(var(--u)*690);top:calc(var(--u)*300);transform:rotate(6deg)"><b>p95 latency 212 ms</b><small>alert · muted</small></div><div class="t062-card" style="left:calc(var(--u)*634);top:calc(var(--u)*770);transform:rotate(-13deg);opacity:.18"><b>Error rate 0.4 %</b><small>no owner</small></div><div class="t062-card" style="left:calc(var(--u)*660);top:calc(var(--u)*760);transform:rotate(-5deg)"><b>Error rate 0.4 %</b><small>no owner</small></div><div class="t062-card" style="left:calc(var(--u)*104);top:calc(var(--u)*770);transform:rotate(-1deg);opacity:.18"><b>Signups · no data</b><small>since last night</small></div><div class="t062-card" style="left:calc(var(--u)*130);top:calc(var(--u)*760);transform:rotate(7deg)"><b>Signups · no data</b><small>since last night</small></div><div class="t062-card" style="left:calc(var(--u)*54);top:calc(var(--u)*310);transform:rotate(-14deg);opacity:.18"><b>38 dashboards</b><small>none watching</small></div><div class="t062-card" style="left:calc(var(--u)*80);top:calc(var(--u)*300);transform:rotate(-6deg)"><b>38 dashboards</b><small>none watching</small></div>
+<div class="t062-h" style="left:calc(var(--u)*260);top:calc(var(--u)*470);width:calc(var(--u)*560);text-align:center;font-size:calc(var(--u)*68)">How many dashboards did you <i style="color:var(--alert)">check</i> today?</div>
+<div style="position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*80);font:600 calc(var(--u)*20) var(--mono);letter-spacing:.14em;color:var(--muted)">NO MASCOT YET · THE CHAOS IS HUMAN</div>
+</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>No mascot yet — the chaos is human.</b> Cards enter a dashed ring one per beat and orbit clockwise with ghost trails; on the bar-3 downbeat the sixth card closes the ring and the whole orbit tightens at once.</p></div>
+  <div class="cw"><div class="cell" id="t062-f2"><div class="t062-f">
+<div class="t062-h" style="left:0;right:0;top:calc(var(--u)*66);text-align:center;font-size:calc(var(--u)*84)">You ship. <i>Pulse</i> watches.</div>
+<img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*150);top:calc(var(--u)*430);width:calc(var(--u)*190);height:calc(var(--u)*190)">
+<svg class="t062-ov" viewBox="0 0 1080 1080"><path d="M290 470 C 420 250, 640 250, 760 560" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round"/>
+<circle cx="360" cy="370" r="16" fill="#FF5A4E" opacity=".35"/><g opacity="0.3"><ellipse cx="470" cy="305" rx="25.5" ry="44.2" fill="#7FC9C0"/><ellipse cx="459.29" cy="282.9" rx="5.61" ry="5.746" fill="#fff" opacity=".35" transform="rotate(-30 459.29 282.9)"/></g><g opacity="0.45"><ellipse cx="610" cy="330" rx="41.6" ry="65.0" fill="#3DB5AC"/><ellipse cx="592.528" cy="297.5" rx="9.152000000000001" ry="8.450000000000001" fill="#fff" opacity=".35" transform="rotate(-30 592.528 297.5)"/></g><g opacity="1"><ellipse cx="790" cy="710.8" rx="113.28" ry="14.399999999999999" fill="#0E1726" opacity=".14"/><ellipse cx="790" cy="600" rx="141.6" ry="100.8" fill="#0FA3A3"/><ellipse cx="730.528" cy="549.6" rx="31.151999999999997" ry="13.104" fill="#fff" opacity=".35" transform="rotate(-30 730.528 549.6)"/><ellipse cx="756.4" cy="591.904" rx="13.2" ry="24.0" fill="#fff"/><ellipse cx="823.6" cy="591.904" rx="13.2" ry="24.0" fill="#fff"/></g></svg>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*810);display:flex;justify-content:center;font:800 calc(var(--u)*88) var(--sans);letter-spacing:-.03em;white-space:nowrap">Acme Pulse</div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*925);text-align:center;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.14em;color:var(--muted)">BORN FROM THE DOT · THE MARK NEVER CHANGES</div>
+</div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the mark’s dot pulses once</b>; beat 2 a copy peels off and stretches along an arc, beat 3 the body lands and squashes, and on beat 4 the eyes open straight at the viewer — the mark itself never changes.</p></div>
+  <div class="cw"><div class="cell" id="t062-f3"><div class="t062-f">
+<div class="t062-h" style="left:calc(var(--u)*60);top:calc(var(--u)*60);width:calc(var(--u)*960);font-size:calc(var(--u)*68)">Caught <i>before</i> customers noticed.</div>
+<svg class="t062-ov" viewBox="0 0 1080 1080"><g opacity="1"><ellipse cx="790" cy="290" rx="110" ry="110" fill="#0FA3A3"/><ellipse cx="743.8" cy="235.0" rx="24.2" ry="14.3" fill="#fff" opacity=".35" transform="rotate(-30 743.8 235.0)"/><ellipse cx="725.2" cy="300.8" rx="15.125" ry="27.5" fill="#fff"/><ellipse cx="786.8" cy="300.8" rx="15.125" ry="27.5" fill="#fff"/></g></svg>
+<div class="t062-tbl" style="left:calc(var(--u)*60);top:calc(var(--u)*340);width:calc(var(--u)*960)">
+<div class="t062-r hd"><span>METRIC · YOUR DASHBOARD</span><span>NOW</span><span>PULSE</span></div>
+<div class="t062-r"><span>Signups</span><span>+4%</span><span style="color:var(--ok)">✓</span></div>
+<div class="t062-r"><span>Active users</span><span>+1%</span><span style="color:var(--ok)">✓</span></div>
+<div class="t062-r" style="background:#FFF1EF;height:auto;padding-top:calc(var(--u)*16);padding-bottom:calc(var(--u)*16)"><span>Checkout conversion<br><small style="font:400 calc(var(--u)*20) var(--mono);color:#8A5A55">since 09:42 · after deploy #2231</small></span><span style="color:var(--alert);font-size:calc(var(--u)*34)">−18%</span><span style="color:var(--alert)">⚠</span></div>
+<div class="t062-r"><span>p95 latency</span><span>212 ms</span><span style="color:var(--ok)">✓</span></div>
+<div class="t062-r" style="border:0"><span>Error rate</span><span>0.4 %</span><span style="color:var(--ok)">✓</span></div>
+</div>
+<svg class="t062-ov" viewBox="0 0 1080 1080"><circle cx="700" cy="342" r="22" fill="#0FA3A3"/><circle cx="880" cy="342" r="22" fill="#0FA3A3"/><path d="M740 300 C 700 400, 800 500, 730 575" fill="none" stroke="#FF5A4E" stroke-width="3" stroke-dasharray="3 10" stroke-linecap="round"/><circle cx="730" cy="578" r="8" fill="#FF5A4E"/></svg>
+<div style="position:absolute;left:calc(var(--u)*60);top:calc(var(--u)*880);right:calc(var(--u)*60);display:flex;align-items:center;gap:calc(var(--u)*16)"><span style="font:600 calc(var(--u)*21) var(--mono);letter-spacing:.1em;color:var(--muted);margin-right:auto">PULSE FLAGS · YOU DECIDE</span><span class="t062-btn" style="background:var(--alert);color:#fff;box-shadow:0 calc(var(--u)*12) calc(var(--u)*28) rgba(255,90,78,.35)">Roll back</span><span class="t062-btn" style="border:calc(var(--u)*2) solid #DADFDF;background:#fff">Acknowledge</span></div>
+</div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The mascot rises silently behind the table</b> and grips its edge; its eyes track each column as checks pop one per beat; on the bar-9 downbeat the Checkout row turns coral, the eyes go wide and a dotted gaze line lands on the cell — it blinks once, and the human gets the buttons.</p></div>
+  <div class="cw"><div class="cell" id="t062-f4"><div class="t062-f">
+<div style="position:absolute;left:calc(var(--u)*90);top:calc(var(--u)*250);display:flex;align-items:center;gap:calc(var(--u)*24);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*112);height:calc(var(--u)*112)"><span style="font:800 calc(var(--u)*88) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+<svg class="t062-ov" viewBox="0 0 1080 1080"><g opacity="1"><ellipse cx="905" cy="382.15999999999997" rx="73.47200000000001" ry="9.84" fill="#0E1726" opacity=".14"/><ellipse cx="905" cy="300" rx="91.84" ry="72.16" fill="#0FA3A3"/><ellipse cx="866.4272" cy="263.92" rx="20.204800000000002" ry="9.3808" fill="#fff" opacity=".35" transform="rotate(-30 866.4272 263.92)"/><path d="M862.1999999999999 300.2608 Q 872.04 282.2208 881.88 300.2608" stroke="#fff" stroke-width="6.5600000000000005" fill="none" stroke-linecap="round"/><path d="M908.12 300.2608 Q 917.96 282.2208 927.8000000000001 300.2608" stroke="#fff" stroke-width="6.5600000000000005" fill="none" stroke-linecap="round"/></g>
+<path d="M870 380 C 850 560, 600 700, 430 740" fill="none" stroke="#0FA3A3" stroke-width="3" stroke-dasharray="3 10" stroke-linecap="round"/></svg>
+<div class="t062-h" style="left:calc(var(--u)*90);top:calc(var(--u)*440);width:calc(var(--u)*900);font-size:calc(var(--u)*84)">Every metric. <i>Every minute.</i></div>
+<div style="position:absolute;left:calc(var(--u)*90);top:calc(var(--u)*700)"><span class="t062-btn" style="background:var(--alert);color:#fff;font-size:calc(var(--u)*36);padding:calc(var(--u)*24) calc(var(--u)*60);box-shadow:0 calc(var(--u)*16) calc(var(--u)*36) rgba(255,90,78,.35)">Start free</span></div>
+</div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The lockup slides in from the left</b> and the mascot hops beside it with a small squash; on the sting downbeat the coral button drops and the mascot’s eyes glance down-left, leading the viewer’s gaze to “Start free”; one final blink.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Mascot body</b> — teal ellipse with a soft top-left highlight; distinct from the logo — no face is ever added to the mark</li><li><b>Eye kit</b> — neutral · focus (narrow) · alarm (wide) · happy (arcs) · blink — the only expressions</li><li><b>Squash & stretch</b> — ±16 % from the base, volume preserved; landings always on a beat, shadow scales with it</li><li><b>Gaze line</b> — dotted arc from the eyes to the target (anomaly cell, CTA)</li><li><b>Hands</b> — two small round nubs that appear only when gripping or holding</li><li><b>Onion skin</b> — faded previous poses along the path — storyboard only; plays as real motion in production</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Birth arc</b> — dot → body along a bezier over 3 beats (1.5 s at 120 BPM), stretch 1.3 on the way, squash 0.84 on landing, back.out(2)</li><li><b>Eye tracking</b> — eyes translate ≤ 0.3 r toward the active column, power2.out 0.2 s, one move per beat</li><li><b>Blink + hop</b> — blink = eye scaleY 1 → 0.1 → 1 in 0.12 s on off-beats; hop = y −40 px + squash in 0.35 s landing on the downbeat</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>A character makes an invisible background agent lovable and memorable, and eye-only acting keeps it calm and trustworthy rather than cartoonish. Risk: mascots can trivialise a serious product and are expensive to animate well; keep the acting minimal and never let the character do the human’s job.</p><p><b>Adapt to your product:</b> Derive the character from a shape in your own mark (a dot, a corner, a letter counter) without altering the logo itself, and give it one job: pointing the human to what matters.</p><p><b>References:</b> <a href="https://blog.duolingo.com/world-character-visemes/">https://blog.duolingo.com/world-character-visemes/</a> (how Duolingo animates its characters with state-driven poses) · <a href="https://www.creativebloq.com/advice/understand-the-12-principles-of-animation">https://www.creativebloq.com/advice/understand-the-12-principles-of-animation</a> (squash & stretch and the 12 principles of animation)</p></div>
+</div>
+</body>
+</html>

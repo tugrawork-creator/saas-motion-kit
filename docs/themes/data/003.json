@@ -1,0 +1,80 @@
+{
+ "id": "003",
+ "slug": "multiplayer-cursors",
+ "name": "Multiplayer Cursors",
+ "category": "product-ui",
+ "summary": "A shared canvas where a teal 'Acme Pulse' cursor inspects every chart frame and the on-call human flies over to make the call.",
+ "look": "Dotted off-white design-tool canvas with white chart frames, named cursors with label pills, selection handles and an avatar stack. The proof beat switches to follow mode: a thick teal border and a 'Following Acme Pulse' tab.",
+ "components": [
+  {
+   "name": "Named cursor + label pill",
+   "role": "the characters"
+  },
+  {
+   "name": "Selection box with handles",
+   "role": "what is being inspected"
+  },
+  {
+   "name": "Avatar stack",
+   "role": "who is present; Pulse joining is the reveal"
+  },
+  {
+   "name": "Comment pin + thread",
+   "role": "the anomaly and the options"
+  },
+  {
+   "name": "Cursor-chat bubble",
+   "role": "short live remarks"
+  },
+  {
+   "name": "Follow-mode frame",
+   "role": "watching the agent work"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Interpolated cursor glide",
+   "how": "bezier paths with slight overshoot, 0.6-0.9 s sine.inOut, arrival on the beat"
+  },
+  {
+   "name": "Selection snap",
+   "how": "scale 1.06 to 1 in 0.18 s on the snare"
+  },
+  {
+   "name": "Follow-cam",
+   "how": "camera eases to the agent's viewport with a 0.2 s lag, border draws on in one beat"
+  }
+ ],
+ "story": "Hook: a board of 38 dashboard frames, one lone cursor drifting away from the checkout frame. Reveal: a teal cursor streaks in dragging the Acme Pulse text layer and joins the avatar stack. Proof: follow mode on Pulse, which boxes the checkout conversion drop, pins 'Checkout conversion −18% · since 09:42 · after deploy #2231', and Sam's cursor clicks Roll back. CTA: lockup, 'You ship. Pulse watches.', both cursors parked by a selected Start free button.",
+ "adapt": "Replace the chart frames with your own screens or objects and name the agent cursor after your feature; the comment thread carries your single most important alert.",
+ "references": [
+  {
+   "url": "https://www.figma.com/blog/multiplayer-editing-in-figma/",
+   "note": "multiplayer canvas conventions",
+   "verified": true
+  },
+  {
+   "url": "https://mskelton.dev/blog/building-figma-multiplayer-cursors",
+   "note": "cursor interpolation and label pills",
+   "verified": true
+  },
+  {
+   "url": "https://tldraw.dev/sdk-features/camera",
+   "note": "camera and follow-user mode",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "med",
+  "risk": "more than 2-3 cursors reads as chaos; zoom so one frame fills half the square"
+ },
+ "best_for": [
+  "collaboration tools",
+  "design tools",
+  "analytics",
+  "AI agents"
+ ],
+ "file": "themes/003-multiplayer-cursors.html"
+}

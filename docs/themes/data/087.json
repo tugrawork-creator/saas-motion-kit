@@ -1,0 +1,74 @@
+{
+ "id": "087",
+ "slug": "cut-paper-title-sequence",
+ "name": "Cut-Paper Title Sequence",
+ "category": "era",
+ "summary": "Mid-century opening titles: sliding paper bars, a hand-cut zigzag pulse and a torn bar that falls away as the anomaly.",
+ "look": "Flat coral, teal, cream and near-black fields with hand-cut paper shapes whose edges wobble. Jaunty word-by-word Manrope 800 titles, one serif italic word, and tracked uppercase credit captions.",
+ "components": [
+  {
+   "name": "Cut-paper strip",
+   "role": "rectangles with jittered 28 px edges — bars, rules, buttons"
+  },
+  {
+   "name": "Zigzag pulse strip",
+   "role": "one paper cut-out forming the heartbeat line"
+  },
+  {
+   "name": "Jaunty title words",
+   "role": "each word rotated ±2.5° and offset ±6 px"
+  },
+  {
+   "name": "Credits caption",
+   "role": "tracked uppercase Manrope 600 in title-card style"
+  },
+  {
+   "name": "Torn bar",
+   "role": "the anomaly: a bar ripped in two, top piece falling in coral"
+  },
+  {
+   "name": "Paper disc",
+   "role": "hand-cut circle for the coral dot or accents"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Stop-motion hold",
+   "how": "animate on 2s or 3s (12 or 8 fps) with 1–2 px jitter per frame to sell hand-made paper"
+  },
+  {
+   "name": "Slide & snap",
+   "how": "strips slide from off-frame, power2.out 0.3 s, then a 3-frame overshoot, one per 8th note"
+  },
+  {
+   "name": "Tear & tumble",
+   "how": "torn piece rotate 0→24° and y +120 px, power2.in 0.5 s; tear lands on a downbeat with a paper-rip SFX"
+  }
+ ],
+ "story": "Hook: black paper bars slide over a coral field as \"How many dashboards did you check today?\" jolts in. Reveal: the bars snap into one zigzag paper pulse line, coral dot, \"Acme presents … Pulse\". Proof: a paper bar chart where the checkout bar tears and falls, −18% since 09:42 after deploy #2231, a paper arrow points to the teal Roll back strip. CTA: \"You ship. Pulse watches.\" with a teal Start free strip and credit line.",
+ "adapt": "Rebuild your product's key chart or UI element as paper cut-outs and let the moment your product acts be a single cut, tear or snap. Your CTA becomes the final credit card.",
+ "references": [
+  {
+   "url": "https://www.artofthetitle.com/designer/saul-bass/",
+   "note": "Art of the Title: Saul Bass title sequences (The Man with the Golden Arm, Anatomy of a Murder, Vertigo)",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Saul_Bass",
+   "note": "Bass's cut-paper animation and kinetic typography",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Retro pastiche if overdone; jittery edges on data can look sloppy at small sizes."
+ },
+ "best_for": [
+  "creative tools",
+  "brand launches",
+  "consumer apps"
+ ],
+ "file": "themes/087-cut-paper-title-sequence.html"
+}

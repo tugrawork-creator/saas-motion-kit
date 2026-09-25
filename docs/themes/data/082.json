@@ -1,0 +1,75 @@
+{
+ "id": "082",
+ "slug": "kaomoji-terminal",
+ "name": "Kaomoji Terminal",
+ "category": "character",
+ "summary": "Pulse is just a kaomoji in a terminal — (-_-) → (•_•) → (°o°;) → (^_^)b — and the human answers the roll-back prompt with one key.",
+ "look": "Dark terminal with faint scanlines, JetBrains Mono everywhere, teal prompts, coral anomaly row, and one enormous kaomoji face per frame as the character.",
+ "components": [
+  {
+   "name": "Kaomoji face",
+   "role": "Pulse’s entire body: 4 expressions built from ASCII"
+  },
+  {
+   "name": "Log stream",
+   "role": "timestamped metric lines in mono; ok in green"
+  },
+  {
+   "name": "Hot line",
+   "role": "the anomaly row: coral bar, tinted background"
+  },
+  {
+   "name": "Prompt box",
+   "role": "the question + [R] roll back / [A] acknowledge keys"
+  },
+  {
+   "name": "Human input",
+   "role": "‘you> R’ with a blinking block cursor"
+  },
+  {
+   "name": "Terminal chrome",
+   "role": "minimal window bar + faint scanlines"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Type-on",
+   "how": "characters at 20 chars/s, 1 line per 8th note in logs; punctuation pauses snap to the next beat (120 BPM grid)"
+  },
+  {
+   "name": "Face swap",
+   "how": "hard cut between kaomoji on quarter notes, with a 1-frame scale 1.08 pop — never tweened"
+  },
+  {
+   "name": "Cursor blink",
+   "how": "block cursor 0.25 s on / 0.25 s off (8ths), holding solid while the human types"
+  }
+ ],
+ "story": "Hook: a log of 38 opened dashboards and a sleeping (-_-) under '> how many dashboards did you check today?'. Reveal: the screen clears to a giant (•_•), '$ acme pulse --watch all' and the Acme Pulse lockup. Proof: the stream flags 'checkout conversion −18%' at 09:42 after deploy #2231, the face gasps (°o°;), and the human types R to roll back. CTA: (^_^)b, 'resolved in 6 min', 'Every metric. Every minute.' and [ Start free ].",
+ "adapt": "Replace the log lines with your own CLI or event stream, pick 4 kaomoji for your idle/watching/alert/done states, and turn your primary action into a single-key prompt.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Kaomoji",
+   "note": "Japanese text faces read upright, emphasising the eyes",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Emoticon",
+   "note": "the 1982 origin of text faces in plain-text messaging",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "low",
+  "risk": "Terminal aesthetics exclude non-technical buyers and dense logs are hard to read at feed size; keep only 5 log lines and one giant face per frame."
+ },
+ "best_for": [
+  "developer tools",
+  "CLIs",
+  "infra / DevOps",
+  "open-source projects"
+ ],
+ "file": "themes/082-kaomoji-terminal.html"
+}

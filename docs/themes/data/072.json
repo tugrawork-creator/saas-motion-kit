@@ -1,0 +1,70 @@
+{
+ "id": "072",
+ "slug": "streamgraph-river",
+ "name": "Streamgraph River",
+ "category": "data",
+ "summary": "An organic streamgraph river where the checkout layer pinches and turns coral after deploy #2231.",
+ "look": "Warm paper and flowing stacked layers with paper seams, a teal family for healthy streams and coral for the pinched stretch. Italic serif labels live inside the layers; mono time guide and axis.",
+ "components": [
+  {
+   "name": "Stream layer",
+   "role": "stacked organic band with paper-coloured seams"
+  },
+  {
+   "name": "Silhouette baseline",
+   "role": "centre-weighted wiggle so the river breathes"
+  },
+  {
+   "name": "In-stream label",
+   "role": "italic serif name set inside its own layer"
+  },
+  {
+   "name": "Event guide",
+   "role": "dashed vertical with mono time + deploy id"
+  },
+  {
+   "name": "Pinch segment",
+   "role": "the anomalous stretch of a layer recoloured coral"
+  },
+  {
+   "name": "Decision strip",
+   "role": "rule, −18%, context, Roll back / Acknowledge"
+  }
+ ],
+ "motion": [
+  {
+   "name": "River scroll",
+   "how": "whole stream translates left continuously, 1 frame-width per 4 bars (8 s at 120 BPM), linear"
+  },
+  {
+   "name": "Swell / thin",
+   "how": "layer thickness morphs with sine.inOut 1 s (two beats); the teal swell peaks exactly on the drop"
+  },
+  {
+   "name": "Pinch",
+   "how": "coral region wipes downstream from the 09:42 guide with power2.out 0.5 s on the snare"
+  }
+ ],
+ "story": "Hook: 38 grey dashboard streams with a thin coral thread nobody follows. Drop: the grey layers thin out and one teal stream swells, carrying the Acme mark. Proof: Signups, Active users, Events, Checkout flow on; at 09:42 after deploy #2231 Checkout pinches coral, −18%, Roll back. CTA: a calm teal river, Caught before customers noticed., Start free.",
+ "adapt": "Stack your product's parallel volumes (traffic sources, job types, plan tiers, model calls) as layers; name them inside the stream and let the anomaly be the one layer that pinches after an event.",
+ "references": [
+  {
+   "url": "https://leebyron.com/streamgraph/",
+   "note": "Byron & Wattenberg's streamgraph paper, used by the NYT for 21 years of box office",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Streamgraphs are beautiful but hard to read exactly; use them for shape and mood and put the precise number in the card."
+ },
+ "best_for": [
+  "analytics",
+  "media / streaming",
+  "marketing tools",
+  "AI usage dashboards"
+ ],
+ "file": "themes/072-streamgraph-river.html"
+}

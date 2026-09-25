@@ -1,0 +1,74 @@
+{
+ "id": "024",
+ "slug": "glass-loupe",
+ "name": "Glass Loupe & Refraction",
+ "category": "material",
+ "summary": "A heavy optical loupe glides over a calm metrics table and reveals the coral anomaly that is invisible outside the glass.",
+ "look": "Near-white grid paper, dense calm tables and a metal-barrelled loupe with Fresnel rim, caustic light and chromatic fringes. Coral ink exists only under the lens.",
+ "components": [
+  {
+   "name": "SDF lens",
+   "role": "a circular refraction pass (or a scaled DOM copy) magnifying what sits under it"
+  },
+  {
+   "name": "Metal barrel",
+   "role": "conic-gradient ring and handle that make it a physical instrument"
+  },
+  {
+   "name": "Dispersion",
+   "role": "red/cyan channel offset on everything seen through the glass"
+  },
+  {
+   "name": "Fresnel rim",
+   "role": "bright edge band + faint coral/ink fringe at the lens border"
+  },
+  {
+   "name": "Hidden ink",
+   "role": "coral marks that only render inside the lens mask — the anomaly"
+  },
+  {
+   "name": "Hanging tag",
+   "role": "mono readout on a leader line off the loupe: time + deploy"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Lens glide",
+   "how": "bezier path, sine.inOut 3 s = 6 beats; each row or card crossing lands on a beat"
+  },
+  {
+   "name": "Magnify settle",
+   "how": "scale 1 → 1.8, expo.out 0.3 s, triggered on a downbeat when the lens stops"
+  },
+  {
+   "name": "Dispersion spike",
+   "how": "RGB split 0 → 8 px → 0 over 3 frames on the snare when the anomaly is found"
+  }
+ ],
+ "story": "Hook: a loupe glides over 38 calm dashboard thumbnails and finds Friday's missed drop. Reveal: the lens centres on the drop, magnifies and splits the Acme mark, then “Acme Pulse” resolves. Proof: the loupe scans a metrics table; on the checkout row the neutral 3.1% refracts into “−18%” with the tag “since 09:42 · after deploy #2231”, and the human chooses “Roll back”. CTA: “Caught before customers noticed.” with the loupe at rest and “Start free”.",
+ "adapt": "Lay your product's densest real screen (a log, a list, a table) flat and let the loupe find the one row your product flags; the hidden-ink trick works for any “we noticed this” feature.",
+ "references": [
+  {
+   "url": "https://tympanus.net/codrops/2026/09/08/building-an-infinite-liquid-glass-grid-with-three-js-webgpu-and-tsl/",
+   "note": "refractive glass over a grid in WebGPU",
+   "verified": true
+  },
+  {
+   "url": "https://github.com/ybouane/liquidglass",
+   "note": "DOM liquid-glass refraction library",
+   "verified": false
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "high",
+  "risk": "Real refraction needs WebGL and a pre-baked table texture; the DOM fallback must line up exactly."
+ },
+ "best_for": [
+  "observability",
+  "security & compliance",
+  "data quality tools"
+ ],
+ "file": "themes/024-glass-loupe.html"
+}

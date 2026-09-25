@@ -1,0 +1,74 @@
+{
+ "id": "084",
+ "slug": "swiss-grid",
+ "name": "Swiss Grid",
+ "category": "era",
+ "summary": "International Typographic Style: a visible 12-module grid, giant numerals and one coral row that says everything.",
+ "look": "Off-white or ink fields with faint 80 px module hairlines, huge tightly tracked Manrope 800 numerals and flush-left headlines. Teal is the single spot colour; coral appears only in the anomaly row and CTA.",
+ "components": [
+  {
+   "name": "Visible grid",
+   "role": "12 × 12 modules of 80 px, hairlines at 7–16 % opacity"
+  },
+  {
+   "name": "Giant numeral",
+   "role": "one number per beat, 300–600 px Manrope 800, tight tracking"
+  },
+  {
+   "name": "Flush-left headline",
+   "role": "ragged right, never centred, one serif italic word"
+  },
+  {
+   "name": "Timetable table",
+   "role": "objective rows of metrics in mono; the anomaly row floods coral"
+  },
+  {
+   "name": "Caption column",
+   "role": "mono figure notes parked in the rightmost 3 modules"
+  },
+  {
+   "name": "Module button",
+   "role": "rectangular CTA exactly 5 modules wide, arrow in mono"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Grid stroke-on",
+   "how": "hairlines draw 0→100 % in 0.5 s, power2.out, staggered 0.03 s — finishes on beat 1"
+  },
+  {
+   "name": "Module snap",
+   "how": "blocks move only in whole-module steps (80 px), steps(4) or expo.out 0.25 s, one step per 8th note"
+  },
+  {
+   "name": "Row flood",
+   "how": "coral background scaleX 0→1 from the left, 0.5 s power3.inOut = one beat at 120 BPM"
+  }
+ ],
+ "story": "Hook: a Der Film-style ink poster with a giant \"38\" and the dashboards question. Reveal: a teal field and \"Acme / Pulse\" in 230 px grotesk snap to the grid. Proof: an objective timetable of metrics where the checkout conversion row floods coral, −18% since 09:42 after deploy #2231, with an ink Roll back block. CTA: \"Every metric. Every minute.\" on teal with a coral Start free block.",
+ "adapt": "Replace the table rows with your own KPIs or features and keep exactly one spot colour for the moment your product intervenes. Any screenshot you add should be cropped to whole grid modules.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/International_Typographic_Style",
+   "note": "grid, flush-left sans, asymmetric layout, objectivity",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Josef_M%C3%BCller-Brockmann",
+   "note": "Der Film poster and Grid Systems in Graphic Design",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "low",
+  "risk": "Can read as a generic corporate slide if the numerals are timid or extra colours creep in."
+ },
+ "best_for": [
+  "analytics",
+  "fintech",
+  "infrastructure"
+ ],
+ "file": "themes/084-swiss-grid.html"
+}

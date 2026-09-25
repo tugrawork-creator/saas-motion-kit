@@ -1,0 +1,75 @@
+{
+ "id": "100",
+ "slug": "rack-focus",
+ "name": "Rack Focus",
+ "category": "camera",
+ "summary": "Shallow depth of field does the storytelling: focus racks from 38 tabs to the Acme Pulse screen to the one sharp anomaly, then stops down for the CTA.",
+ "look": "Soft, bright frames full of teal, coral and amber bokeh, blurred foreground UI cards, a coral focus-peaking outline on the sharp subject and a dark focus-puller distance scale with taped marks.",
+ "components": [
+  {
+   "name": "Focal planes",
+   "role": "foreground, subject and background layers with different blur radii"
+  },
+  {
+   "name": "Bokeh field",
+   "role": "soft circles in teal, coral and amber that turn out-of-focus UI into atmosphere"
+  },
+  {
+   "name": "Focus peaking",
+   "role": "coral outline glow on whatever is sharp, a real camera-monitor aid"
+  },
+  {
+   "name": "Focus scale",
+   "role": "dark distance ruler (0.3 m → ∞) with a coral focus dot"
+  },
+  {
+   "name": "Tape marks A / B / C",
+   "role": "amber focus-puller marks and a rack arrow between them"
+  },
+  {
+   "name": "Anomaly card",
+   "role": "the only sharp object in the proof beat"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Rack",
+   "how": "blur radii swap between layers over 0.6 s (sine.inOut, just over one beat at 120 BPM), starting half a beat early so the new plane is sharp on the downbeat"
+  },
+  {
+   "name": "Focus breathing",
+   "how": "the sharp layer scales 1.00 → 1.02 during the rack, like a real lens breathing, then settles"
+  },
+  {
+   "name": "Stop-down",
+   "how": "all blur radii go to 0 and bokeh shrinks to 40% over 1 bar (2 s, power2.out) for the CTA"
+  }
+ ],
+ "story": "Hook: sharp on one browser tab out of 38, “How many dashboards did you check today?”. Reveal: rack A → B on the drop to the Acme Pulse screen. Proof: rack to mark C where “Checkout conversion −18% since 09:42 after deploy #2231” is the only sharp thing among 14 metrics; Roll back. CTA: stop down to deep focus, “Caught before customers noticed.”, Start free.",
+ "adapt": "Layer your product’s screens at different depths: the noise your users face today in front, your product behind, and the one object your product surfaces as the final sharp plane. Every rack should land on something the viewer must read.",
+ "references": [
+  {
+   "url": "https://www.studiobinder.com/blog/rack-focus-shot-camera-movement-angles/",
+   "note": "rack focus: shifting the focal plane during a shot",
+   "verified": true
+  },
+  {
+   "url": "https://nofilmschool.com/rack-focus",
+   "note": "practical uses of rack focus and focus marks",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Blur is beautiful but can hide the UI; if the sharp plane is too small or text sits in the blurred layer the frame becomes unreadable. Racks slower than ~0.6 s feel sluggish on a music cut."
+ },
+ "best_for": [
+  "AI products",
+  "analytics",
+  "premium brand films",
+  "prioritisation tools"
+ ],
+ "file": "themes/100-rack-focus.html"
+}

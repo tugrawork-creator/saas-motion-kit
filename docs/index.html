@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>100 Motion Themes — saas-motion-kit</title>
+<meta name="description" content="100 storyboard themes for software promo videos made with HyperFrames + Claude Code, all shown on the same fictional product.">
+<link rel="icon" href="assets/brand/acme-mark.svg">
+<link rel="stylesheet" href="assets/brand/acme.css">
+<style>
+*{box-sizing:border-box;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);padding:48px 40px 80px}
+header{max-width:1360px;margin:0 auto 28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+.kicker{font:600 12px var(--mono);letter-spacing:.16em;color:var(--brand-deep);text-transform:uppercase}
+h1{font:400 64px/1 var(--serif);letter-spacing:-.01em;margin:10px 0 14px} h1 em{color:var(--brand-deep)}
+.dek{max-width:760px;font-size:17px;line-height:1.55;color:#33415C}
+.dek a{color:var(--brand-deep)}
+.logo{display:flex;align-items:center;gap:10px;font:800 18px var(--sans)} .logo img{width:36px;height:36px}
+.bar{max-width:1360px;margin:0 auto 22px;display:flex;flex-wrap:wrap;gap:8px}
+.bar button{font:600 13px var(--sans);border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:100px;padding:8px 14px;cursor:pointer}
+.bar button i{font:500 11px var(--mono);font-style:normal;color:var(--muted);margin-left:4px}
+.bar button.on{background:var(--ink);color:#fff;border-color:var(--ink)} .bar button.on i{color:#9fb0c9}
+.grid{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:22px}
+.card{display:block;background:#fff;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid var(--line);transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(14,23,38,.12)}
+.card img{display:block;width:100%;height:auto;background:#ECEBE6;border-bottom:1px solid var(--line)}
+.meta{padding:14px 16px 16px}
+.k{display:flex;justify-content:space-between;font:500 11px var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.card h3{font:400 28px/1.1 var(--serif);margin:6px 0 6px}
+.card p{font-size:14px;line-height:1.5;color:#33415C}
+.fit{display:flex;gap:12px;margin-top:10px;font:500 11px var(--mono);color:var(--muted)}
+footer{max-width:1360px;margin:48px auto 0;font-size:13px;color:var(--muted);line-height:1.6}
+@media(max-width:700px){body{padding:24px 16px} header{grid-template-columns:1fr} h1{font-size:44px} .grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="kicker">saas-motion-kit · theme gallery</div>
+    <h1>100 ways to tell <em>one</em> product story</h1>
+    <p class="dek">Every sheet below tells the same 45-second story about the same fictional product, <b>Acme Pulse</b>, in a different visual theme. Each one has four key frames, a six-part component kit, three motion techniques and notes on how to adapt it to your own product. Pick one and hand it to Claude Code with <a href="https://github.com/heygen-com/hyperframes">HyperFrames</a>.</p>
+  </div>
+  <div class="logo"><img src="assets/brand/acme-mark.svg" alt="">Acme <span style="font-weight:500;color:var(--muted)">(fictional)</span></div>
+</header>
+<nav class="bar"><button class="on" data-c="all">All <i>100</i></button><button data-c="product-ui">Product UI as the stage <i>10</i></button><button data-c="type">Typography &amp; graphic systems <i>10</i></button><button data-c="material">Material &amp; 3D <i>10</i></button><button data-c="light">Light, optics &amp; texture <i>10</i></button><button data-c="metaphor">Metaphor concepts <i>10</i></button><button data-c="signature">Signature directions <i>12</i></button><button data-c="data">Data storytelling <i>10</i></button><button data-c="character">Characters &amp; mascots <i>10</i></button><button data-c="era">Art movements &amp; eras <i>10</i></button><button data-c="camera">Camera &amp; edit grammar <i>8</i></button></nav>
+<main class="grid">
+  <a class="card" href="themes/001-spreadsheet-cinema.html" data-cat="product-ui" data-effort="med">
+    <img src="themes/thumbs/001.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>001</span><span>Product UI as the stage</span></div>
+      <h3>Spreadsheet Cinema</h3>
+      <p>The frame is a live spreadsheet: the selection is the camera, the formula bar is the subtitle track and Pulse is a dashed teal selection scanning every row.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/002-cmd-k-keyboard-symphony.html" data-cat="product-ui" data-effort="low">
+    <img src="themes/thumbs/002.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>002</span><span>Product UI as the stage</span></div>
+      <h3>⌘K Keyboard Symphony</h3>
+      <p>One oversized command palette over a blurred app; the query is the headline and 3D keycaps are struck on the kick drum.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/003-multiplayer-cursors.html" data-cat="product-ui" data-effort="med">
+    <img src="themes/thumbs/003.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>003</span><span>Product UI as the stage</span></div>
+      <h3>Multiplayer Cursors</h3>
+      <p>A shared canvas where a teal &#x27;Acme Pulse&#x27; cursor inspects every chart frame and the on-call human flies over to make the call.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/004-code-review-diff.html" data-cat="product-ui" data-effort="low">
+    <img src="themes/thumbs/004.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>004</span><span>Product UI as the stage</span></div>
+      <h3>Code Review Diff</h3>
+      <p>The story as a pull request: Pulse is the status check that keeps running after merge and posts a suggested rollback that only a human can apply.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/005-light-mode-data-hud.html" data-cat="product-ui" data-effort="med">
+    <img src="themes/thumbs/005.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>005</span><span>Product UI as the stage</span></div>
+      <h3>Light-Mode Data HUD</h3>
+      <p>A near-white cockpit of sixteen hairline micro-panels; a teal scanline sweeps it and corner brackets snap onto the one wrong number.</p>
+      <div class="fit"><span>read ●○○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/006-os-window-choreography.html" data-cat="product-ui" data-effort="med">
+    <img src="themes/thumbs/006.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>006</span><span>Product UI as the stage</span></div>
+      <h3>OS Window Choreography</h3>
+      <p>Windows are the cast: dashboards pile up, spread Exposé-style and genie away while Pulse stays on top as a small utility window.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/007-inbox-choreography.html" data-cat="product-ui" data-effort="low">
+    <img src="themes/thumbs/007.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>007</span><span>Product UI as the stage</span></div>
+      <h3>Inbox Choreography</h3>
+      <p>A flooded inbox triages itself in rhythm until one calm email from Pulse asks for a single decision, then inbox zero.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/008-calendar-timeline-scrub.html" data-cat="product-ui" data-effort="med">
+    <img src="themes/thumbs/008.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>008</span><span>Product UI as the stage</span></div>
+      <h3>Calendar Timeline Scrub</h3>
+      <p>The work week as an editing timeline: Pulse is a lane of per-minute ticks, and a Friday incident fades out once the Tuesday catch lands.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/009-form-field-macro.html" data-cat="product-ui" data-effort="low">
+    <img src="themes/thumbs/009.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>009</span><span>Product UI as the stage</span></div>
+      <h3>Form-Field Macro</h3>
+      <p>Form controls shot like macro product photography: a giant field shakes red with the fix suggested, and Pulse is a switch you flip on.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/010-powers-of-ten-zoom.html" data-cat="product-ui" data-effort="high">
+    <img src="themes/thumbs/010.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>010</span><span>Product UI as the stage</span></div>
+      <h3>Powers-of-Ten Zoom</h3>
+      <p>One continuous infinite-canvas dive from 38 dashboards of dots down to the single wrong data point Pulse found, and back out as every dot turns teal.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/011-split-flap-board.html" data-cat="type" data-effort="med">
+    <img src="themes/thumbs/011.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>011</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Split-Flap Board</h3>
+      <p>Every metric is a row on a clattering departures board; one row flips to coral and holds until a human calls it.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/012-thermal-receipt.html" data-cat="type" data-effort="low">
+    <img src="themes/thumbs/012.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>012</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Thermal Receipt</h3>
+      <p>Pulse prints a running receipt of your product; the feed stalls on the one wrong line and a coral circle lands around it.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/013-led-dot-matrix-ticker.html" data-cat="type" data-effort="med">
+    <img src="themes/thumbs/013.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>013</span><span>Typography &amp; graphic systems</span></div>
+      <h3>LED Dot-Matrix Ticker</h3>
+      <p>A physical LED sign scrolls your metrics like a stock ticker until one freezes and inverts into a coral alert block.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/014-blueprint-drawing.html" data-cat="type" data-effort="med">
+    <img src="themes/thumbs/014.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>014</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Blueprint Drawing</h3>
+      <p>The product is drafted like a machine part; the metric that falls outside its tolerance band gets a coral revision cloud.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/015-rubber-stamp-riso-ink.html" data-cat="type" data-effort="low">
+    <img src="themes/thumbs/015.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>015</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Rubber Stamp &amp; Riso Ink</h3>
+      <p>Two riso inks and two rubber stamps: teal &#x27;✓ WATCHED&#x27; on every healthy slip, one coral &#x27;HOLD — YOUR CALL&#x27; on the anomaly.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/016-proofreaders-redline.html" data-cat="type" data-effort="med">
+    <img src="themes/thumbs/016.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>016</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Proofreader&#x27;s Redline</h3>
+      <p>Metrics set like a galley proof; Pulse strikes the wrong figure with a coral pen, writes the right one and a human initials it.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/017-variable-font-data-morph.html" data-cat="type" data-effort="med">
+    <img src="themes/thumbs/017.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>017</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Variable-Font Data Morph</h3>
+      <p>Type weight is the data: a weight wave scans a grid of numerals and the one that stays heavy is the anomaly.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/018-typographic-window-reveal.html" data-cat="type" data-effort="low">
+    <img src="themes/thumbs/018.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>018</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Typographic Window Reveal</h3>
+      <p>Giant numerals fill the frame and act as windows onto the product; scene changes dive through a glyph&#x27;s counter.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/019-guilloche-banknote-engraving.html" data-cat="type" data-effort="med">
+    <img src="themes/thumbs/019.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>019</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Guilloche Banknote Engraving</h3>
+      <p>Every frame is printed like a banknote; Pulse&#x27;s UV sweep breaks one rosette ring in coral and reveals the hidden context.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/020-museum-specimen-labels.html" data-cat="type" data-effort="low">
+    <img src="themes/thumbs/020.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>020</span><span>Typography &amp; graphic systems</span></div>
+      <h3>Museum Specimen Labels</h3>
+      <p>Every caught anomaly becomes a curated museum exhibit: a pinned specimen under glass with a crisp wall label.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/021-clay-studio.html" data-cat="material" data-effort="low">
+    <img src="themes/thumbs/021.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>021</span><span>Material &amp; 3D</span></div>
+      <h3>Clay Studio</h3>
+      <p>Metrics as matte plasticine slabs on a felt table; Pulse&#x27;s sculpting stick pokes the one lumpy coral tile.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/022-pop-up-book.html" data-cat="material" data-effort="med">
+    <img src="themes/thumbs/022.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>022</span><span>Material &amp; 3D</span></div>
+      <h3>Pop-up Book</h3>
+      <p>A hardcover pop-up book where metric stands rise from the gutter and the anomaly pops up in coral with a pull-tab to roll back.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/023-origami.html" data-cat="material" data-effort="med">
+    <img src="themes/thumbs/023.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>023</span><span>Material &amp; 3D</span></div>
+      <h3>Origami</h3>
+      <p>One sheet of paper folds through the whole story; the anomaly is printed in coral on the inside of a peek fold.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/024-glass-loupe.html" data-cat="material" data-effort="high">
+    <img src="themes/thumbs/024.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>024</span><span>Material &amp; 3D</span></div>
+      <h3>Glass Loupe &amp; Refraction</h3>
+      <p>A heavy optical loupe glides over a calm metrics table and reveals the coral anomaly that is invisible outside the glass.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/025-liquid-metaball.html" data-cat="material" data-effort="med">
+    <img src="themes/thumbs/025.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>025</span><span>Material &amp; 3D</span></div>
+      <h3>Liquid Metaball</h3>
+      <p>Metrics flow as glossy teal droplets into one calm pool; the anomaly is a coral bead that refuses to merge.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/026-pixel-to-voxel.html" data-cat="material" data-effort="high">
+    <img src="themes/thumbs/026.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>026</span><span>Material &amp; 3D</span></div>
+      <h3>Pixel-to-Voxel</h3>
+      <p>Flat pixel dashboards extrude into a voxel skyline; the anomalous tower ejects a coral voxel and leaves dashed ghost cubes.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/027-tilt-shift-diorama.html" data-cat="material" data-effort="med">
+    <img src="themes/thumbs/027.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>027</span><span>Material &amp; 3D</span></div>
+      <h3>Tilt-Shift Diorama</h3>
+      <p>A toy model town under a tilt-shift lens; the Pulse van patrols and focus pulls to the one billboard that dropped.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/028-marble-run.html" data-cat="material" data-effort="med">
+    <img src="themes/thumbs/028.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>028</span><span>Material &amp; 3D</span></div>
+      <h3>Marble-Run Machine</h3>
+      <p>A kraft-cardboard marble run where metrics roll through stencilled gates and the failing marble is diverted to a coral review cup.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/029-paper-collage.html" data-cat="material" data-effort="low">
+    <img src="themes/thumbs/029.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>029</span><span>Material &amp; 3D</span></div>
+      <h3>Stop-Motion Paper Collage</h3>
+      <p>Photocopied dashboards and ransom-note words on kraft; the anomaly value is snipped out and replaced by a coral-circled clipping.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/030-stitch-and-thread.html" data-cat="material" data-effort="med">
+    <img src="themes/thumbs/030.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>030</span><span>Material &amp; 3D</span></div>
+      <h3>Stitch &amp; Thread</h3>
+      <p>Metrics cross-stitched in teal on linen; a seam ripper unpicks the coral stitches where checkout conversion dropped.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/031-vector-phosphor-oscilloscope.html" data-cat="light" data-effort="med">
+    <img src="themes/thumbs/031.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>031</span><span>Light, optics &amp; texture</span></div>
+      <h3>Vector-Phosphor Oscilloscope</h3>
+      <p>A single glowing electron beam draws the whole film on a black scope face, and the anomaly is the moment the trace turns coral.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/032-risograph-two-drum-print.html" data-cat="light" data-effort="low">
+    <img src="themes/thumbs/032.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>032</span><span>Light, optics &amp; texture</span></div>
+      <h3>Risograph Two-Drum Print</h3>
+      <p>Two riso inks on uncoated paper: the first drum prints your dashboards, and Acme Pulse is the coral second drum that lands only where something is wrong.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/033-ascii-dither-resolve.html" data-cat="light" data-effort="med">
+    <img src="themes/thumbs/033.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>033</span><span>Light, optics &amp; texture</span></div>
+      <h3>ASCII / Dither Resolve</h3>
+      <p>Everything starts as a coarse field of characters and sharpens into crisp UI as Acme Pulse understands it, except the one coral cluster that refuses to resolve.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/034-darkroom-development.html" data-cat="light" data-effort="med">
+    <img src="themes/thumbs/034.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>034</span><span>Light, optics &amp; texture</span></div>
+      <h3>Darkroom Development</h3>
+      <p>In a red safelight room the metrics print slowly develops in the tray, but the coral mark on the problem is there first, because Acme Pulse already found it.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/035-point-cloud.html" data-cat="light" data-effort="high">
+    <img src="themes/thumbs/035.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>035</span><span>Light, optics &amp; texture</span></div>
+      <h3>Point Cloud</h3>
+      <p>Thousands of event particles morph from a swarm of dashboards into the pulse line and a dot-stacked chart, where three coral embers refuse to settle.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/036-sonar-sweep.html" data-cat="light" data-effort="low">
+    <img src="themes/thumbs/036.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>036</span><span>Light, optics &amp; texture</span></div>
+      <h3>Sonar Sweep</h3>
+      <p>A calm scope whose conic beam never stops turning: metrics are blips, and one pings back coral so a human can decide.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/037-x-ray-thermal-scanner.html" data-cat="light" data-effort="med">
+    <img src="themes/thumbs/037.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>037</span><span>Light, optics &amp; texture</span></div>
+      <h3>X-Ray / Thermal Scanner</h3>
+      <p>Every card on the surface says OK, but inside a scanner band the product turns to X-ray and one bone of the checkout flow is fractured.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/038-noir.html" data-cat="light" data-effort="med">
+    <img src="themes/thumbs/038.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>038</span><span>Light, optics &amp; texture</span></div>
+      <h3>Noir</h3>
+      <p>A 1940s detective story in hard light and venetian-blind shadow: Acme Pulse reads every file overnight, circles the clue in coral, and hands the human the call at dawn.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/039-long-exposure-light-trails.html" data-cat="light" data-effort="med">
+    <img src="themes/thumbs/039.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>039</span><span>Light, optics &amp; texture</span></div>
+      <h3>Long-Exposure Light Trails</h3>
+      <p>Night photography with the shutter held open: metrics are teal light trails racing to the vanishing point, and one coral trail swerves out of its lane on the record.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/040-under-the-microscope.html" data-cat="light" data-effort="low">
+    <img src="themes/thumbs/040.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>040</span><span>Light, optics &amp; texture</span></div>
+      <h3>Under the Microscope</h3>
+      <p>Metrics become specimens under a circular eyepiece: Acme Pulse zooms from 4× to 40×, and in darkfield only the anomaly fluoresces coral.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/041-editors-pass.html" data-cat="metaphor" data-effort="low">
+    <img src="themes/thumbs/041.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>041</span><span>Metaphor concepts</span></div>
+      <h3>The Editor&#x27;s Pass</h3>
+      <p>Your metrics digest as a galley proof: an unseen copy editor marks the one wrong figure and a human initials the page.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/042-security-belt-scan.html" data-cat="metaphor" data-effort="med">
+    <img src="themes/thumbs/042.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>042</span><span>Metaphor concepts</span></div>
+      <h3>Security Belt Scan</h3>
+      <p>Every release rides a conveyor through an X-ray arch; the one package with a coral glow is diverted to a human while the belt keeps rolling.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/043-weather-forecast.html" data-cat="metaphor" data-effort="med">
+    <img src="themes/thumbs/043.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>043</span><span>Metaphor concepts</span></div>
+      <h3>The Weather Forecast</h3>
+      <p>Product health as a Doppler weather map: one storm cell blooms over Checkout, a human forecaster calls it, and the film ends in clear skies.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/044-air-traffic-control.html" data-cat="metaphor" data-effort="med">
+    <img src="themes/thumbs/044.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>044</span><span>Metaphor concepts</span></div>
+      <h3>Air-Traffic Control</h3>
+      <p>Every metric is a flight on a calm radar console; the one in conflict moves to HOLD and the human controller clears it.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/045-lighthouse.html" data-cat="metaphor" data-effort="high">
+    <img src="themes/thumbs/045.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>045</span><span>Metaphor concepts</span></div>
+      <h3>The Lighthouse</h3>
+      <p>A lighthouse lit by the Acme mark sweeps a sea of live numbers; the beam reveals one hidden rock and the keeper turns the release back.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/046-conservators-uv-lamp.html" data-cat="metaphor" data-effort="med">
+    <img src="themes/thumbs/046.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>046</span><span>Metaphor concepts</span></div>
+      <h3>Conservator&#x27;s UV Lamp</h3>
+      <p>Dashboards hang like paintings that look flawless in normal light; a UV lamp reveals the overpainted figure and a human conservator decides.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/047-safety-net.html" data-cat="metaphor" data-effort="high">
+    <img src="themes/thumbs/047.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>047</span><span>Metaphor concepts</span></div>
+      <h3>The Safety Net</h3>
+      <p>A flat big top where artists pass metric chips mid-air; the Checkout chip slips, a net of data lines catches it and the ringmaster decides.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/048-gps-reroute.html" data-cat="metaphor" data-effort="med">
+    <img src="themes/thumbs/048.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>048</span><span>Metaphor concepts</span></div>
+      <h3>GPS Reroute</h3>
+      <p>Your release is a route on a tilted map; Pulse spots the hazard ahead, shows &#x27;Recalculating…&#x27;, and you confirm the safe road and still arrive on time.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/049-conductors-score.html" data-cat="metaphor" data-effort="med">
+    <img src="themes/thumbs/049.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>049</span><span>Metaphor concepts</span></div>
+      <h3>The Conductor&#x27;s Score</h3>
+      <p>A live orchestral score where each staff is a metric; the Checkout note goes sour, Pulse circles it, and the human gives the cue that retunes it.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/050-tailors-fitting.html" data-cat="metaphor" data-effort="med">
+    <img src="themes/thumbs/050.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>050</span><span>Metaphor concepts</span></div>
+      <h3>The Tailor&#x27;s Fitting</h3>
+      <p>&#x27;Measure twice, cut once&#x27; on a cutting table: a tape measures every metric, chalk marks the one that doesn&#x27;t fit, and only after the human&#x27;s call do the shears make one clean cut.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/051-clean-product-film.html" data-cat="signature" data-effort="low">
+    <img src="themes/thumbs/051.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>051</span><span>Signature directions</span></div>
+      <h3>Clean Product Film</h3>
+      <p>The airy baseline: real product UI on warm white with soft colour clouds, one coral anomaly row and one human click.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/052-depth-3d.html" data-cat="signature" data-effort="high">
+    <img src="themes/thumbs/052.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>052</span><span>Signature directions</span></div>
+      <h3>Depth / 3D</h3>
+      <p>Glass plates floating in perspective: your dashboard on the floor, Pulse as the audit layer hovering above it.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/053-editorial-data.html" data-cat="signature" data-effort="low">
+    <img src="themes/thumbs/053.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>053</span><span>Signature directions</span></div>
+      <h3>Editorial Data</h3>
+      <p>A Swiss financial report come alive: hairline grid, giant mono numerals, one accent per frame and a circled −18%.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/054-agent-chat.html" data-cat="signature" data-effort="med">
+    <img src="themes/thumbs/054.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>054</span><span>Signature directions</span></div>
+      <h3>Agent Chat</h3>
+      <p>One chat window for the whole film: the agent messages first and the anomaly arrives as a tool card with a Roll back chip.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/055-bento-grid.html" data-cat="signature" data-effort="med">
+    <img src="themes/thumbs/055.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>055</span><span>Signature directions</span></div>
+      <h3>Bento Grid</h3>
+      <p>A 6×6 bento of white tiles — one message per tile, collapsing into one hero tile on the drop.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/056-workflow-canvas.html" data-cat="signature" data-effort="med">
+    <img src="themes/thumbs/056.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>056</span><span>Signature directions</span></div>
+      <h3>Workflow Canvas</h3>
+      <p>A dark node canvas where packets hop on the beat and one coral branch hands the anomaly to a human.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/057-isometric-world.html" data-cat="signature" data-effort="high">
+    <img src="themes/thumbs/057.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>057</span><span>Signature directions</span></div>
+      <h3>Isometric World</h3>
+      <p>A floating isometric factory: your pipeline as a belt, Pulse as a teal glass layer, one coral cube diverted to a human.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/058-hand-drawn-marker.html" data-cat="signature" data-effort="med">
+    <img src="themes/thumbs/058.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>058</span><span>Signature directions</span></div>
+      <h3>Hand-Drawn Marker</h3>
+      <p>Marker scribbles on dotted paper for the problem, an eraser on the drop, and clean UI with one coral ring for the proof.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/059-mobile-notifications.html" data-cat="signature" data-effort="med">
+    <img src="themes/thumbs/059.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>059</span><span>Signature directions</span></div>
+      <h3>Mobile Notifications</h3>
+      <p>The phone as stage: a lock screen buried in banners, then a Live Activity that surfaces one anomaly with a Roll back button.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/060-neo-brutalist.html" data-cat="signature" data-effort="low">
+    <img src="themes/thumbs/060.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>060</span><span>Signature directions</span></div>
+      <h3>Neo-Brutalist</h3>
+      <p>Hard shadows, ink outlines, stickers and a ticker: loud neo-brutalist cards that press on every beat.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/061-dark-keynote.html" data-cat="signature" data-effort="med">
+    <img src="themes/thumbs/061.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>061</span><span>Signature directions</span></div>
+      <h3>Dark Keynote</h3>
+      <p>A cinematic navy keynote stage: one spotlight per frame and a teal AI edge glow that flashes coral when Pulse finds the anomaly.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/062-mascot-agent.html" data-cat="signature" data-effort="high">
+    <img src="themes/thumbs/062.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>062</span><span>Signature directions</span></div>
+      <h3>Mascot Agent</h3>
+      <p>The agent as a quiet teal character born from the logo’s dot, peeking over your dashboard and pointing at the anomaly with its eyes.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/063-isotype-unit-chart.html" data-cat="data" data-effort="low">
+    <img src="themes/thumbs/063.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>063</span><span>Data storytelling</span></div>
+      <h3>Isotype Unit Chart</h3>
+      <p>Neurath-style picture statistics: countable pictogram rows where the anomaly is two carts that simply go missing.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/064-bar-chart-race.html" data-cat="data" data-effort="med">
+    <img src="themes/thumbs/064.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>064</span><span>Data storytelling</span></div>
+      <h3>Bar Chart Race</h3>
+      <p>A broadcast-style ranking race where Acme Pulse enters at #1 and Checkout conversion plunges down the board.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/065-sankey-leak.html" data-cat="data" data-effort="med">
+    <img src="themes/thumbs/065.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>065</span><span>Data storytelling</span></div>
+      <h3>Sankey Leak</h3>
+      <p>A Minard-style flow of ribbons where the anomaly is a coral leak peeling off the checkout stage.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/066-small-multiples.html" data-cat="data" data-effort="low">
+    <img src="themes/thumbs/066.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>066</span><span>Data storytelling</span></div>
+      <h3>Small Multiples</h3>
+      <p>A Tufte-style grid of same-scale sparklines where one tile, Checkout conversion, breaks the pattern.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/067-pulsar-ridgeline.html" data-cat="data" data-effort="med">
+    <img src="themes/thumbs/067.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>067</span><span>Data storytelling</span></div>
+      <h3>Pulsar Ridgeline</h3>
+      <p>Unknown Pleasures-style stacked ridgelines where the checkout peaks go flat the minute the deploy lands.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/068-rosling-bubble-trails.html" data-cat="data" data-effort="med">
+    <img src="themes/thumbs/068.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>068</span><span>Data storytelling</span></div>
+      <h3>Rosling Bubble Trails</h3>
+      <p>Gapminder-style bubbles and trails under a giant watermark clock; the checkout bubble sinks at 09:42.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/069-trace-waterfall.html" data-cat="data" data-effort="med">
+    <img src="themes/thumbs/069.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>069</span><span>Data storytelling</span></div>
+      <h3>Trace Waterfall</h3>
+      <p>A tracing-UI film: log stream, then cascading spans where one coral span after deploy #2231 explains the −18%.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/070-hex-tile-cartogram.html" data-cat="data" data-effort="med">
+    <img src="themes/thumbs/070.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>070</span><span>Data storytelling</span></div>
+      <h3>Hex Tile Cartogram</h3>
+      <p>A newsroom hex tile map where Pulse lights every region and one tile&#x27;s coral drop spreads to its neighbours.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/071-nightingale-rose.html" data-cat="data" data-effort="med">
+    <img src="themes/thumbs/071.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>071</span><span>Data storytelling</span></div>
+      <h3>Nightingale Rose</h3>
+      <p>An engraved, Victorian polar-area rose where three wedges after 09:42 fall short of the dotted norm.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/072-streamgraph-river.html" data-cat="data" data-effort="med">
+    <img src="themes/thumbs/072.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>072</span><span>Data storytelling</span></div>
+      <h3>Streamgraph River</h3>
+      <p>An organic streamgraph river where the checkout layer pinches and turns coral after deploy #2231.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/073-living-widgets.html" data-cat="character" data-effort="med">
+    <img src="themes/thumbs/073.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>073</span><span>Characters &amp; mascots</span></div>
+      <h3>Living Widgets</h3>
+      <p>Dashboard widgets become googly-eyed characters that doze until Pulse makes them look — the checkout card literally slumps.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/074-felt-puppet-show.html" data-cat="character" data-effort="high">
+    <img src="themes/thumbs/074.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>074</span><span>Characters &amp; mascots</span></div>
+      <h3>Felt Puppet Show</h3>
+      <p>A felt hand-puppet Pulse pops up on a tabletop stage to point at the anomaly — only a real human hand can press Roll back.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/075-8-bit-sidekick.html" data-cat="character" data-effort="med">
+    <img src="themes/thumbs/075.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>075</span><span>Characters &amp; mascots</span></div>
+      <h3>8-Bit Sidekick</h3>
+      <p>Pulse as a pixel-art sidekick: metrics are platforms, the checkout block crumbles, a red ‘!’ pops and Player 1 chooses ROLL BACK.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/076-sticker-cast.html" data-cat="character" data-effort="low">
+    <img src="themes/thumbs/076.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>076</span><span>Characters &amp; mascots</span></div>
+      <h3>Sticker Cast</h3>
+      <p>A die-cut sticker world where a one-eyed teal Pulse sticker spots the anomaly and an emoji cast reacts from tired to shocked to happy.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/077-mood-blob.html" data-cat="character" data-effort="low">
+    <img src="themes/thumbs/077.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>077</span><span>Characters &amp; mascots</span></div>
+      <h3>Mood Blob</h3>
+      <p>A single teal blob whose outline is the system’s mood: bouncy when fine, stretched and bristling at the anomaly, a cushion once you decide.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/078-rubber-hose-gloves.html" data-cat="character" data-effort="high">
+    <img src="themes/thumbs/078.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>078</span><span>Characters &amp; mascots</span></div>
+      <h3>Rubber-Hose Gloves</h3>
+      <p>A 1930s rubber-hose cartoon where Pulse is a teal alarm clock that rings and points at the broken chalkboard while a human hand pushes the ROLL BACK plunger.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/079-shadow-puppet-theatre.html" data-cat="character" data-effort="med">
+    <img src="themes/thumbs/079.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>079</span><span>Characters &amp; mascots</span></div>
+      <h3>Shadow Puppet Theatre</h3>
+      <p>Cut-paper silhouettes on a tinted screen: a heron stands in the river of a metric and sees the waterfall first; a human lifts the Roll back lantern.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/080-pocket-pet.html" data-cat="character" data-effort="med">
+    <img src="themes/thumbs/080.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>080</span><span>Characters &amp; mascots</span></div>
+      <h3>Pocket Pet</h3>
+      <p>Pulse as a virtual pet in a teal egg keychain: its LCD critter flashes a ‘!’ when checkout gets sick and you press A to roll back.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/081-night-owl.html" data-cat="character" data-effort="med">
+    <img src="themes/thumbs/081.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>081</span><span>Characters &amp; mascots</span></div>
+      <h3>Night Owl</h3>
+      <p>A geometric night-owl mascot perched on the metric line: when the branch sags it swivels and hoots, and a human in the lit window rolls back.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/082-kaomoji-terminal.html" data-cat="character" data-effort="low">
+    <img src="themes/thumbs/082.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>082</span><span>Characters &amp; mascots</span></div>
+      <h3>Kaomoji Terminal</h3>
+      <p>Pulse is just a kaomoji in a terminal — (-_-) → (•_•) → (°o°;) → (^_^)b — and the human answers the roll-back prompt with one key.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/083-bauhaus-primer.html" data-cat="era" data-effort="low">
+    <img src="themes/thumbs/083.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>083</span><span>Art movements &amp; eras</span></div>
+      <h3>Bauhaus Primer</h3>
+      <p>Circle, square, triangle and a black bar: a Bauhaus primer where the one shape that falls out of the grid is the anomaly.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/084-swiss-grid.html" data-cat="era" data-effort="low">
+    <img src="themes/thumbs/084.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>084</span><span>Art movements &amp; eras</span></div>
+      <h3>Swiss Grid</h3>
+      <p>International Typographic Style: a visible 12-module grid, giant numerals and one coral row that says everything.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/085-constructivist-agitprop.html" data-cat="era" data-effort="med">
+    <img src="themes/thumbs/085.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>085</span><span>Art movements &amp; eras</span></div>
+      <h3>Constructivist Agitprop</h3>
+      <p>1920s agitprop poster grammar: a teal wedge pierces the circle of blind spots and a megaphone shouts the anomaly.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/086-art-deco-marquee.html" data-cat="era" data-effort="med">
+    <img src="themes/thumbs/086.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>086</span><span>Art movements &amp; eras</span></div>
+      <h3>Art Deco Marquee</h3>
+      <p>A 1930s premiere: sunbursts, stepped gold frames and an elevator dial whose coral needle swings to −18%.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/087-cut-paper-title-sequence.html" data-cat="era" data-effort="med">
+    <img src="themes/thumbs/087.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>087</span><span>Art movements &amp; eras</span></div>
+      <h3>Cut-Paper Title Sequence</h3>
+      <p>Mid-century opening titles: sliding paper bars, a hand-cut zigzag pulse and a torn bar that falls away as the anomaly.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/088-op-art-illusion.html" data-cat="era" data-effort="med">
+    <img src="themes/thumbs/088.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>088</span><span>Art movements &amp; eras</span></div>
+      <h3>Op Art Illusion</h3>
+      <p>Riley and Vasarely optical art: healthy data is a perfect pattern, the anomaly is a coral warp your eye catches first.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/089-pop-art-ben-day.html" data-cat="era" data-effort="med">
+    <img src="themes/thumbs/089.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>089</span><span>Art movements &amp; eras</span></div>
+      <h3>Pop-Art Ben-Day</h3>
+      <p>Lichtenstein-style comic panels: Ben-Day dots, speech balloons and a ZAP! that marks the anomaly.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●○○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/090-memphis-milano.html" data-cat="era" data-effort="med">
+    <img src="themes/thumbs/090.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>090</span><span>Art movements &amp; eras</span></div>
+      <h3>Memphis Milano</h3>
+      <p>80s Memphis Milano maximalism: laminate slabs, squiggles and terrazzo, where a friendly squiggle snaps into a coral zigzag.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/091-beveled-95-desktop.html" data-cat="era" data-effort="med">
+    <img src="themes/thumbs/091.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>091</span><span>Art movements &amp; eras</span></div>
+      <h3>Beveled &#x27;95 Desktop</h3>
+      <p>Mid-90s desktop nostalgia: cascading spreadsheet windows, a Pulse alert dialog and a Start button that says Start free.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/092-y2k-liquid-chrome.html" data-cat="era" data-effort="med">
+    <img src="themes/thumbs/092.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>092</span><span>Art movements &amp; eras</span></div>
+      <h3>Y2K Liquid Chrome</h3>
+      <p>Turn-of-the-millennium tech optimism: liquid-chrome lettering, candy-teal jelly windows and a coral gel capsule for the anomaly.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/093-one-take-oner.html" data-cat="camera" data-effort="high">
+    <img src="themes/thumbs/093.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>093</span><span>Camera &amp; edit grammar</span></div>
+      <h3>One-Take Oner</h3>
+      <p>The whole film as one unbroken camera move through a UI set: dashboard corridor, reveal room, crane down to the anomaly, pull out the window.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/094-match-cut.html" data-cat="camera" data-effort="low">
+    <img src="themes/thumbs/094.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>094</span><span>Camera &amp; edit grammar</span></div>
+      <h3>Match Cut</h3>
+      <p>Every beat hands off through one coral circle in the same place: clock face → Acme mark → anomaly point → the tagline’s full stop.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/095-split-screen.html" data-cat="camera" data-effort="med">
+    <img src="themes/thumbs/095.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>095</span><span>Camera &amp; edit grammar</span></div>
+      <h3>Split Screen</h3>
+      <p>Hard ink gutters split the frame into simultaneous views: six dashboards, a slammed gutter for the reveal, three synced cameras on one anomaly, then the gutters close.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/096-whip-pan.html" data-cat="camera" data-effort="med">
+    <img src="themes/thumbs/096.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>096</span><span>Camera &amp; edit grammar</span></div>
+      <h3>Whip Pan</h3>
+      <p>Rooms of a 360° panorama joined by 0.25 s whips that smear the world into streaks and land sharp on each downbeat.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/097-speed-ramp.html" data-cat="camera" data-effort="low">
+    <img src="themes/thumbs/097.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>097</span><span>Camera &amp; edit grammar</span></div>
+      <h3>Speed Ramp</h3>
+      <p>Time is the edit: 8× fast-forward through a week of dashboards, a snap to 1× on the drop, ¼× slow motion for the human decision, with a speed graph under every frame.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort low</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/098-dolly-zoom.html" data-cat="camera" data-effort="high">
+    <img src="themes/thumbs/098.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>098</span><span>Camera &amp; edit grammar</span></div>
+      <h3>Dolly Zoom</h3>
+      <p>Hitchcock’s vertigo shot on the proof beat: the anomaly card stays locked in size while the dashboard wall behind it stretches into a tunnel.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●○</span><span>effort high</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/099-overhead-desk.html" data-cat="camera" data-effort="med">
+    <img src="themes/thumbs/099.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>099</span><span>Camera &amp; edit grammar</span></div>
+      <h3>Overhead Desk</h3>
+      <p>A 90° top-down desk film: printed dashboards swept away by a hand, the Acme mark set down on the drop, a finger tapping Roll back on a phone notification.</p>
+      <div class="fit"><span>read ●●●</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+  <a class="card" href="themes/100-rack-focus.html" data-cat="camera" data-effort="med">
+    <img src="themes/thumbs/100.jpg" alt="" loading="lazy">
+    <div class="meta">
+      <div class="k"><span>100</span><span>Camera &amp; edit grammar</span></div>
+      <h3>Rack Focus</h3>
+      <p>Shallow depth of field does the storytelling: focus racks from 38 tabs to the Acme Pulse screen to the one sharp anomaly, then stops down for the CTA.</p>
+      <div class="fit"><span>read ●●○</span><span>trust ●●●</span><span>effort med</span></div>
+    </div>
+  </a>
+</main>
+<footer>Acme and Acme Pulse are fictional, and every number shown in the sheets is invented for the demo. Fonts: Manrope, Instrument Serif and JetBrains Mono (SIL OFL 1.1).</footer>
+<script>
+const bs = document.querySelectorAll(".bar button"), cs = document.querySelectorAll(".card");
+bs.forEach(b => b.onclick = () => {
+  bs.forEach(x => x.classList.toggle("on", x === b));
+  cs.forEach(c => c.style.display = (b.dataset.c === "all" || c.dataset.cat === b.dataset.c) ? "" : "none");
+});
+</script>
+</body>
+</html>

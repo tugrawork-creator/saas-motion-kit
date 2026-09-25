@@ -1,0 +1,75 @@
+{
+ "id": "076",
+ "slug": "sticker-cast",
+ "name": "Sticker Cast",
+ "category": "character",
+ "summary": "A die-cut sticker world where a one-eyed teal Pulse sticker spots the anomaly and an emoji cast reacts from tired to shocked to happy.",
+ "look": "Mint dotted backdrop, everything a vinyl sticker with a fat white border and soft shadow; emoji-style amber faces, chart stickers and die-cut lettering.",
+ "components": [
+  {
+   "name": "Die-cut sticker",
+   "role": "any element with a fat white border and soft drop shadow"
+  },
+  {
+   "name": "Pulse eye",
+   "role": "teal one-eyed sticker creature with the coral dot; the watcher"
+  },
+  {
+   "name": "Emoji reactions",
+   "role": "tired → shocked → happy faces carry the emotional beat"
+  },
+  {
+   "name": "Chart stickers",
+   "role": "mini dashboards, overlapping and rotated = overload"
+  },
+  {
+   "name": "Die-cut lettering",
+   "role": "headlines with a thick white stroke outline"
+  },
+  {
+   "name": "Sticker sheet",
+   "role": "backing paper with kiss-cut outlines for the CTA"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Slap-on",
+   "how": "scale 1.25→1 with rotation settle, 0.12 s expo.out + 0.2 s elastic wobble; every slap sits on an 8th or quarter note"
+  },
+  {
+   "name": "Peel & re-stick",
+   "how": "corner curl via a rotating triangle mask, 0.3 s power2.inOut, released on the backbeat"
+  },
+  {
+   "name": "Eye dart",
+   "how": "Pulse’s iris snaps to its target in 0.08 s power4.out, 1 beat before the thing it looks at reacts"
+  }
+ ],
+ "story": "Hook: a pile of 38 dashboard stickers and a tired face under 'How many dashboards did you check today?'. Reveal: the Acme mark sticker slams down with 'Acme Pulse' lettering and the Pulse eye. Proof: an anomaly card sticker (checkout −18% since 09:42 after deploy #2231), a shocked face, and a hand sticker pressing Roll back. CTA: a sticker sheet with 'Every metric. Every minute.' and a Start free sticker.",
+ "adapt": "Die-cut your own UI cards, logo and one mascot as stickers, pick 3 emoji-style reactions for your before/during/after, and make your CTA the last sticker on the sheet.",
+ "references": [
+  {
+   "url": "https://github.com/microsoft/fluentui-emoji",
+   "note": "open-source (MIT) emoji faces for flat/3D reaction styles",
+   "verified": true
+  },
+  {
+   "url": "https://telegram.org/blog/animated-stickers",
+   "note": "Lottie-based animated stickers at 60 fps: the motion language of chat",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "low",
+  "risk": "Can tip into ‘meme’ and undercut trust — keep one real data card crisp and unrotated enough to read, and limit the cast to 3 characters."
+ },
+ "best_for": [
+  "collaboration tools",
+  "consumer SaaS",
+  "social ads",
+  "chat integrations"
+ ],
+ "file": "themes/076-sticker-cast.html"
+}

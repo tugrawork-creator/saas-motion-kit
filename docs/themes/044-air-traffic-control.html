@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>044 · Air-Traffic Control — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t044-bg{background:#0C1618;background-image:radial-gradient(ellipse at 40% 30%,rgba(15,163,163,.10),transparent 65%)}
+.t044-s{position:absolute;inset:0;width:100%;height:100%}
+.t044-m{font-family:var(--mono)}
+.t044-se{font-family:var(--serif)}
+.t044-sa{font-family:var(--sans)}
+.t044-mark{position:absolute;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 044 · Metaphor concepts</div>
+    <h1>Air-Traffic Control</h1>
+    <p class="dek">Every metric is a flight: a paper progress strip in a holder, a blip with a datablock on a calm radar console. Acme Pulse is the tower's second pair of eyes; when one flight drifts into conflict its strip moves to HOLD and the human controller gives the clearance.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- F1 · HOOK -->
+  <div class="cw"><div class="cell t044-bg" id="t044-f1">
+    <svg class="t044-s" viewBox="0 0 1080 1080">
+      <defs>
+        <symbol id="t044-strip" viewBox="0 0 620 72"><rect width="620" height="72" rx="4" fill="#EDE4CC"/><rect width="22" height="72" fill="#5E6B6E"/><line x1="250" y1="0" x2="250" y2="72" stroke="#C8BC9E" stroke-width="2"/><line x1="470" y1="0" x2="470" y2="72" stroke="#C8BC9E" stroke-width="2"/></symbol>
+      </defs>
+      <g class="t044-sa" font-size="80" font-weight="800" fill="#EAF2F1" letter-spacing="-2">
+        <text x="70" y="170">38 dashboards.</text>
+        <text x="70" y="262"><tspan class="t044-se" font-weight="400" font-style="italic" fill="#F4B740" font-size="92">One</tspan> controller.</text>
+      </g>
+      <g transform="rotate(-2 400 560)">
+        <use href="#t044-strip" x="70" y="360" width="620" height="72"/>
+        <use href="#t044-strip" x="110" y="444" width="620" height="72"/>
+        <use href="#t044-strip" x="60" y="528" width="620" height="72"/>
+        <use href="#t044-strip" x="130" y="612" width="620" height="72"/>
+        <use href="#t044-strip" x="80" y="696" width="620" height="72"/>
+        <use href="#t044-strip" x="120" y="780" width="620" height="72"/>
+        <g class="t044-m" font-size="26" font-weight="600" fill="#1B2426">
+          <text x="110" y="406">SGNUP</text><text x="150" y="490">ACTV</text><text x="100" y="574">P95</text><text x="170" y="658">ERR</text><text x="120" y="742">CHKOUT</text><text x="160" y="826">EVT/S</text>
+        </g>
+        <g class="t044-m" font-size="24" fill="#1B2426">
+          <text x="340" y="406">1,204</text><text x="380" y="490">18,930</text><text x="330" y="574">212 ms</text><text x="400" y="658">0.4 %</text><text x="350" y="742">—  ?</text><text x="390" y="826">2,418</text>
+        </g>
+        <g class="t044-m" font-size="20" fill="#9A5A00">
+          <text x="560" y="406">UNWATCHED</text><text x="600" y="490">UNWATCHED</text><text x="550" y="574">UNWATCHED</text><text x="620" y="658">UNWATCHED</text><text x="570" y="742">UNWATCHED</text><text x="610" y="826">UNWATCHED</text>
+        </g>
+      </g>
+      <g fill="none" stroke="#F4B740" stroke-width="4"><rect x="770" y="380" width="240" height="420" rx="10" stroke-dasharray="14 10"/></g>
+      <g class="t044-m" font-size="22" fill="#F4B740" text-anchor="middle" letter-spacing="2"><text x="890" y="560">32 MORE</text><text x="890" y="596">IN QUEUE</text></g>
+      <text class="t044-m" x="70" y="960" font-size="22" fill="#6E8C8C" letter-spacing="3">BAY 1 · OVERLOADED · NO SECOND PAIR OF EYES</text>
+    </svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Strips slap into the bay from the top, one per beat, each a little crooked, until the bay overflows to the right.</b> The dashed "32 MORE" box pulses amber on the downbeat before the drop.</p></div>
+
+  <!-- F2 · REVEAL -->
+  <div class="cw"><div class="cell t044-bg" id="t044-f2">
+    <svg class="t044-s" viewBox="0 0 1080 1080">
+      <g fill="none" stroke="#1E4A4A" stroke-width="2">
+        <circle cx="540" cy="470" r="330" stroke="#2F7070" stroke-width="3"/><circle cx="540" cy="470" r="240"/><circle cx="540" cy="470" r="150"/>
+        <line x1="210" y1="470" x2="870" y2="470"/><line x1="540" y1="140" x2="540" y2="800"/>
+      </g>
+      <!-- blips with trails -->
+      <g fill="#7FE7DE">
+        <circle cx="330" cy="300" r="9"/><circle cx="312" cy="286" r="5" opacity=".5"/><circle cx="296" cy="274" r="4" opacity=".3"/>
+        <circle cx="760" cy="330" r="9"/><circle cx="780" cy="316" r="5" opacity=".5"/><circle cx="798" cy="304" r="4" opacity=".3"/>
+        <circle cx="720" cy="660" r="9"/><circle cx="740" cy="676" r="5" opacity=".5"/><circle cx="758" cy="690" r="4" opacity=".3"/>
+        <circle cx="360" cy="640" r="9"/><circle cx="342" cy="656" r="5" opacity=".5"/>
+      </g>
+      <g class="t044-m" font-size="20" fill="#7FE7DE">
+        <text x="230" y="250">SGNUP 1,204</text><text x="780" y="370">P95 212</text><text x="740" y="640">ERR 0.4</text><text x="250" y="700">ACTV 18.9K</text>
+      </g>
+      <g class="t044-m" font-size="20" fill="#6E8C8C" letter-spacing="3">
+        <text x="70" y="96">TOWER · ACME</text><text x="1010" y="96" text-anchor="end">ONLINE</text>
+      </g>
+      <circle cx="998" cy="89" r="0" fill="#1F9D55"/>
+      <text class="t044-sa" x="540" y="930" font-size="112" font-weight="800" fill="#EAF2F1" text-anchor="middle" letter-spacing="-3">Acme Pulse</text>
+      <text class="t044-m" x="540" y="1000" font-size="22" fill="#7FE7DE" text-anchor="middle" letter-spacing="4">SECOND PAIR OF EYES · 14 METRICS</text>
+    </svg>
+    <img class="t044-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*475);top:calc(var(--u)*405);width:calc(var(--u)*130);height:calc(var(--u)*130)">
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The strip pile slides off left and the radar console fades up from black.</b> On the drop the tower (the Acme mark) lands at centre, blips spring to life with their datablocks and "Acme Pulse" types in below.</p></div>
+
+  <!-- F3 · PROOF MOMENT -->
+  <div class="cw"><div class="cell t044-bg" id="t044-f3">
+    <svg class="t044-s" viewBox="0 0 1080 1080">
+      <g class="t044-m" font-size="20" fill="#6E8C8C" letter-spacing="2"><text x="70" y="84">SCOPE · 2,418 EVENTS/SEC</text></g>
+      <g fill="none" stroke="#1E4A4A" stroke-width="2">
+        <circle cx="300" cy="340" r="230" stroke="#2F7070" stroke-width="3"/><circle cx="300" cy="340" r="150"/><circle cx="300" cy="340" r="75"/>
+      </g>
+      <line x1="120" y1="500" x2="480" y2="220" stroke="#3E5A5A" stroke-width="10" stroke-linecap="round" opacity=".5"/>
+      <text class="t044-m" x="170" y="560" font-size="20" fill="#6E8C8C" transform="rotate(-38 170 560)">RELEASE 09:42</text>
+      <g fill="#7FE7DE"><circle cx="190" cy="240" r="8"/><circle cx="410" cy="430" r="8"/><circle cx="220" cy="450" r="8"/></g>
+      <circle cx="370" cy="250" r="10" fill="#FF5A4E"/><circle cx="352" cy="236" r="6" fill="#FF5A4E" opacity=".5"/><circle cx="336" cy="224" r="4" fill="#FF5A4E" opacity=".3"/>
+      <rect x="340" y="220" width="60" height="60" fill="none" stroke="#F4B740" stroke-width="4"/>
+      <line x1="400" y1="236" x2="580" y2="170" stroke="#F4B740" stroke-width="3"/>
+      <!-- conflict datablock -->
+      <rect x="580" y="110" width="430" height="420" rx="12" fill="#101F21" stroke="#F4B740" stroke-width="3"/>
+      <g class="t044-m">
+        <text x="610" y="160" font-size="22" fill="#F4B740" letter-spacing="3">CONFLICT ALERT</text>
+        <text x="610" y="220" font-size="30" font-weight="600" fill="#EAF2F1">CHKOUT · Checkout</text>
+        <text x="610" y="258" font-size="30" font-weight="600" fill="#EAF2F1">conversion</text>
+        <text x="610" y="360" font-size="92" font-weight="600" fill="#FF5A4E">−18%</text>
+        <text x="610" y="420" font-size="24" fill="#B9CCCB">since 09:42</text>
+        <text x="610" y="458" font-size="24" fill="#B9CCCB">after deploy #2231</text>
+        <text x="610" y="500" font-size="20" fill="#6E8C8C">customers: not yet</text>
+      </g>
+      <!-- strip bay -->
+      <text class="t044-m" x="70" y="604" font-size="20" fill="#6E8C8C" letter-spacing="3">ACTIVE</text>
+      <text class="t044-m" x="620" y="604" font-size="20" fill="#FF8A80" letter-spacing="3">HOLD</text>
+      <g>
+        <rect x="70" y="624" width="500" height="80" rx="4" fill="#EDE4CC"/><rect x="70" y="624" width="22" height="80" fill="#0FA3A3"/>
+        <rect x="70" y="720" width="500" height="80" rx="4" fill="#EDE4CC"/><rect x="70" y="720" width="22" height="80" fill="#0FA3A3"/>
+        <rect x="70" y="816" width="500" height="80" rx="4" fill="#EDE4CC"/><rect x="70" y="816" width="22" height="80" fill="#0FA3A3"/>
+        <rect x="70" y="912" width="500" height="80" rx="4" fill="#EDE4CC"/><rect x="70" y="912" width="22" height="80" fill="#0FA3A3"/>
+      </g>
+      <g class="t044-m" font-size="26" fill="#1B2426">
+        <text x="112" y="674" font-weight="600">SGNUP</text><text x="290" y="674">1,204</text><text x="480" y="674" font-size="20" fill="#0B6E6E">CLR</text>
+        <text x="112" y="770" font-weight="600">ACTV</text><text x="290" y="770">18,930</text><text x="480" y="770" font-size="20" fill="#0B6E6E">CLR</text>
+        <text x="112" y="866" font-weight="600">P95</text><text x="290" y="866">212 ms</text><text x="480" y="866" font-size="20" fill="#0B6E6E">CLR</text>
+        <text x="112" y="962" font-weight="600">ERR</text><text x="290" y="962">0.4 %</text><text x="480" y="962" font-size="20" fill="#0B6E6E">CLR</text>
+      </g>
+      <rect x="620" y="624" width="390" height="176" rx="4" fill="#F7E3DC"/><rect x="620" y="624" width="22" height="176" fill="#FF5A4E"/>
+      <rect x="616" y="620" width="398" height="184" rx="6" fill="none" stroke="#F4B740" stroke-width="4"/>
+      <g class="t044-m" fill="#1B2426"><text x="664" y="676" font-size="28" font-weight="600">CHKOUT</text><text x="664" y="724" font-size="26" fill="#C8322A">−18% · 09:42</text><text x="664" y="768" font-size="24">DEP #2231</text></g>
+      <rect x="620" y="820" width="390" height="80" rx="12" fill="#FF5A4E"/>
+      <text class="t044-sa" x="815" y="872" font-size="32" font-weight="700" fill="#fff" text-anchor="middle">Roll back</text>
+      <rect x="620" y="912" width="390" height="80" rx="12" fill="none" stroke="#B9CCCB" stroke-width="3"/>
+      <text class="t044-sa" x="815" y="964" font-size="30" font-weight="600" fill="#EAF2F1" text-anchor="middle">Acknowledge</text>
+    </svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Blips glide along linear tracks with fading echo trails; one turns coral and the amber conflict box blinks at 2 Hz for one second, then holds.</b> Its strip slides right into HOLD with a back.out clack on the snare and the controller clears "Roll back".</p></div>
+
+  <!-- F4 · CTA -->
+  <div class="cw"><div class="cell t044-bg" id="t044-f4">
+    <svg class="t044-s" viewBox="0 0 1080 1080">
+      <text class="t044-sa" x="230" y="196" font-size="80" font-weight="800" fill="#EAF2F1" letter-spacing="-2">Acme Pulse</text>
+      <g class="t044-sa" font-size="96" font-weight="800" fill="#EAF2F1" letter-spacing="-2">
+        <text x="80" y="380">Every metric.</text>
+        <text x="80" y="486"><tspan class="t044-se" font-weight="400" font-style="italic" fill="#7FE7DE" font-size="110">Every minute.</tspan></text>
+      </g>
+      <rect x="80" y="560" width="330" height="106" rx="18" fill="#FF5A4E"/>
+      <text class="t044-sa" x="245" y="627" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Start free</text>
+      <g>
+        <rect x="80" y="740" width="920" height="64" rx="4" fill="#EDE4CC"/><rect x="80" y="740" width="22" height="64" fill="#0FA3A3"/>
+        <rect x="80" y="816" width="920" height="64" rx="4" fill="#EDE4CC"/><rect x="80" y="816" width="22" height="64" fill="#0FA3A3"/>
+        <rect x="80" y="892" width="920" height="64" rx="4" fill="#EDE4CC"/><rect x="80" y="892" width="22" height="64" fill="#0FA3A3"/>
+      </g>
+      <g class="t044-m" font-size="24" fill="#1B2426">
+        <text x="124" y="782" font-weight="600">CHKOUT</text><text x="330" y="782">back to 2.94 %</text>
+        <text x="124" y="858" font-weight="600">DEP #2231</text><text x="330" y="858">rolled back · 6 min</text>
+        <text x="124" y="934" font-weight="600">ALL 14</text><text x="330" y="934">holding steady</text>
+      </g>
+      <g transform="rotate(-6 850 850)">
+        <rect x="720" y="800" width="260" height="100" rx="6" fill="none" stroke="#0B6E6E" stroke-width="5"/>
+        <text class="t044-m" x="850" y="866" font-size="40" font-weight="600" fill="#0B6E6E" text-anchor="middle" letter-spacing="4">CLEARED</text>
+      </g>
+    </svg>
+    <img class="t044-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*80);top:calc(var(--u)*120);width:calc(var(--u)*120);height:calc(var(--u)*120)">
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Strips stack neatly from the bottom up, one per beat, all teal.</b> "Every metric." lands on beat 1, "Every minute." on beat 3, and the CLEARED stamp thumps across the strips on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Flight progress strip</b> — buff paper strip in a coloured holder: callsign = metric, value, status (CLR / HOLD).</li>
+    <li><b>Strip bay</b> — ACTIVE and HOLD columns; position tells the story.</li>
+    <li><b>Radar PPI</b> — range rings, blips with fading echo trails, the Acme mark as the tower.</li>
+    <li><b>Datablock</b> — mono tag tethered to each blip.</li>
+    <li><b>Conflict box</b> — amber outline that blinks, then holds, around the drifting metric.</li>
+    <li><b>Clearance stamp</b> — "CLEARED" once the human has acted.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Strip slide-and-clack</b> — strips snap into holders with back.out(1.4) in 0.25 s and a 2 px settle, synced to the hi-hat (8th notes at 120 BPM).</li>
+    <li><b>Blip trails</b> — linear motion, three echo dots at 70/45/25% opacity, updated every beat like a radar refresh.</li>
+    <li><b>Alert pulse</b> — conflict outline blinks at 2 Hz (on/off each 8th note) for 1 s, then holds solid on the next downbeat.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>Air-traffic control is the cultural shorthand for calm, expert oversight of many moving things, and the strip bay makes "hold this one, clear the rest" literally visible. Risk: dense at 1:1; cap the bay at 8 strips and keep the radar to 4–5 blips.</p>
+    <p><b>Adapt to your product:</b> Make each strip one of your objects (a job, a customer account, a shipment, a pipeline) and let HOLD be whatever your product asks a human to decide.</p>
+    <p><b>References:</b> <a href="https://nats.aero/blog/2026/01/atc-explained-flight-progress-strips/">NATS, flight progress strips explained</a> · <a href="https://en.wikipedia.org/wiki/Flight_progress_strip">Flight progress strip</a></p>
+  </div>
+</div>
+</body>
+</html>

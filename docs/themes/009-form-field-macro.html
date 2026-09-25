@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>009 · Form-Field Macro — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t009-s{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,#FFFFFF 0%,#F3F2ED 55%,#E4E2DA 100%);font-family:var(--sans);color:var(--ink);overflow:hidden}
+.t009-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t009-f{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h));background:#fff;border-radius:calc(var(--u)*28);box-shadow:inset 0 0 0 calc(var(--u)*3) #D3D1C7,0 calc(var(--u)*20) calc(var(--u)*50) rgba(14,23,38,.08)}
+.t009-f.focus{box-shadow:inset 0 0 0 calc(var(--u)*4) var(--brand),0 0 0 calc(var(--u)*14) rgba(15,163,163,.18),0 calc(var(--u)*30) calc(var(--u)*60) rgba(14,23,38,.12)}
+.t009-f.err{box-shadow:inset 0 0 0 calc(var(--u)*4) var(--alert),0 0 0 calc(var(--u)*14) rgba(255,90,78,.18),0 calc(var(--u)*30) calc(var(--u)*60) rgba(255,90,78,.18)}
+.t009-lab{position:absolute;left:calc(var(--u)*44);top:calc(var(--u)*-22);background:linear-gradient(#F7F6F2 50%,#fff 50%);padding:0 calc(var(--u)*14);font:700 calc(var(--u)*26) var(--sans);color:var(--brand-deep);letter-spacing:.02em;white-space:nowrap}
+.t009-f.err .t009-lab{color:var(--alert)}
+.t009-val{position:absolute;left:calc(var(--u)*56);top:0;bottom:0;display:flex;align-items:center;font:500 calc(var(--u)*var(--fs,80))/1 var(--sans);letter-spacing:-.025em;white-space:nowrap}
+.t009-caret{display:inline-block;width:calc(var(--u)*6);height:calc(var(--u)*var(--ch,100));background:var(--brand);margin-left:calc(var(--u)*8);border-radius:calc(var(--u)*3)}
+.t009-blur{filter:blur(calc(var(--u)*5));opacity:.55}
+.t009-hl{position:absolute;left:calc(var(--u)*60);width:calc(var(--u)*960);font:400 calc(var(--u)*86)/1.0 var(--serif);letter-spacing:-.01em}
+.t009-hl em{color:var(--brand-deep)}
+.t009-dd{position:absolute;background:#fff;border-radius:calc(var(--u)*24);box-shadow:0 calc(var(--u)*30) calc(var(--u)*60) rgba(14,23,38,.14),0 0 0 calc(var(--u)*1.5) #E3E0D6;overflow:hidden}
+.t009-dd div{height:calc(var(--u)*84);display:flex;align-items:center;padding:0 calc(var(--u)*40);font:500 calc(var(--u)*34) var(--sans);border-bottom:calc(var(--u)*1.5) solid #F0EEE8;white-space:nowrap}
+.t009-dd div span{margin-left:auto;font:400 calc(var(--u)*22) var(--mono);color:#8A8F99}
+.t009-dd div.sel{background:var(--brand-soft);color:var(--brand-deep);font-weight:700}
+.t009-tg{position:absolute;border-radius:calc(var(--u)*200);background:var(--brand);box-shadow:inset 0 calc(var(--u)*6) calc(var(--u)*14) rgba(0,0,0,.18),0 0 0 calc(var(--u)*16) rgba(15,163,163,.16),0 calc(var(--u)*30) calc(var(--u)*60) rgba(15,163,163,.3)}
+.t009-kn{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#EDEDEA);box-shadow:0 calc(var(--u)*10) calc(var(--u)*24) rgba(0,0,0,.28)}
+.t009-help{position:absolute;display:flex;align-items:center;gap:calc(var(--u)*14);font:500 calc(var(--u)*28) var(--sans);white-space:nowrap}
+.t009-help.err{color:#C9362C}
+.t009-help i{width:calc(var(--u)*36);height:calc(var(--u)*36);border-radius:50%;background:var(--alert);color:#fff;font:800 calc(var(--u)*24) var(--sans);font-style:normal;display:flex;align-items:center;justify-content:center;flex:none}
+.t009-seg{position:absolute;display:flex;background:#ECEAE3;border-radius:calc(var(--u)*26);padding:calc(var(--u)*8);gap:calc(var(--u)*8)}
+.t009-seg span{height:calc(var(--u)*92);padding:0 calc(var(--u)*46);display:flex;align-items:center;font:700 calc(var(--u)*34) var(--sans);border-radius:calc(var(--u)*20);color:var(--muted);white-space:nowrap}
+.t009-seg span.on{background:var(--alert);color:#fff;box-shadow:0 0 0 calc(var(--u)*5) #fff,0 0 0 calc(var(--u)*11) rgba(255,90,78,.35)}
+.t009-sug{position:absolute;display:flex;align-items:center;gap:calc(var(--u)*10);font:600 calc(var(--u)*22) var(--mono);color:var(--brand-deep);background:var(--brand-soft);border-radius:calc(var(--u)*30);padding:calc(var(--u)*8) calc(var(--u)*16) calc(var(--u)*8) calc(var(--u)*10);white-space:nowrap}
+.t009-sug img{width:calc(var(--u)*30);height:calc(var(--u)*30)}
+.t009-word{font:800 calc(var(--u)*110)/1 var(--sans);letter-spacing:-.04em;white-space:nowrap}
+.t009-cur{position:absolute;width:calc(var(--u)*56);height:calc(var(--u)*56);z-index:9}
+.t009-shake{position:absolute;width:calc(var(--u)*6);border-radius:calc(var(--u)*3);background:var(--alert);opacity:.6}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 009 · Product UI as the stage</div>
+    <h1>Form-Field Macro</h1>
+    <p class="dek">Form controls shot like macro product photography: one gigantic input fills the frame with a crisp focus ring, a floating label and a caret as tall as a column, while neighbouring fields fall out of focus. The camera dollies from field to field; Acme Pulse is a switch you flip on, and the anomaly is a field that shakes red with the fix already suggested.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t009-f1">
+<div class="t009-s">
+ <div class="t009-hl" style="top:calc(var(--u)*70)">38 dashboards to check. <em>Before lunch.</em></div>
+ <div class="t009-f focus" style="--x:60;--y:330;--w:960;--h:210"><span class="t009-lab">Dashboard</span><span class="t009-val">Checkout funnel<span class="t009-caret"></span></span>
+  <svg viewBox="0 0 40 40" style="position:absolute;right:calc(var(--u)*50);top:calc(var(--u)*80);width:calc(var(--u)*50);height:calc(var(--u)*50)"><path d="M8 14 L20 26 L32 14" fill="none" stroke="#0E1726" stroke-width="4" stroke-linecap="round"/></svg></div>
+ <div class="t009-dd" style="left:calc(var(--u)*60);top:calc(var(--u)*580);width:calc(var(--u)*960)">
+  <div class="sel">Checkout funnel<span>1 / 38</span></div>
+  <div>Signups · daily<span>2 / 38</span></div>
+  <div class="t009-blur" style="filter:blur(calc(var(--u)*2))">p95 latency<span>3 / 38</span></div>
+  <div class="t009-blur">Error rate<span>4 / 38</span></div>
+  <div class="t009-blur" style="filter:blur(calc(var(--u)*8));opacity:.3">Active users · 34 more</div>
+ </div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The camera dollies down onto the dropdown</b> (y +120 → 0, 1.2 s sine.inOut, shallow-focus blur on the rows beyond); the list opens on the kick (scaleY from top, 0.25 s power3.out) and the “1 / 38” counter lands on the bar-2 downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t009-f2">
+<div class="t009-s">
+ <div class="t009-f t009-blur" style="--x:60;--y:-80;--w:960;--h:160"></div>
+ <div class="t009-tg" style="left:calc(var(--u)*300);top:calc(var(--u)*170);width:calc(var(--u)*480);height:calc(var(--u)*240)"></div>
+ <div class="t009-kn" style="left:calc(var(--u)*556);top:calc(var(--u)*186);width:calc(var(--u)*208);height:calc(var(--u)*208)"></div>
+ <div class="t009-p" style="--x:360;--y:260;font:800 calc(var(--u)*50) var(--sans);color:#fff;letter-spacing:.04em">ON</div>
+ <div class="t009-p" style="--x:60;--y:510;--w:960;display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*30)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*130);height:calc(var(--u)*130)"><span class="t009-word">Acme Pulse</span></div>
+ <div class="t009-help" style="left:calc(var(--u)*60);width:calc(var(--u)*960);justify-content:center;top:calc(var(--u)*700);color:var(--brand-deep)"><svg viewBox="0 0 36 36" style="width:calc(var(--u)*36);height:calc(var(--u)*36)"><circle cx="18" cy="18" r="16" fill="#0FA3A3"/><path d="M10 18 L16 24 L26 12" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>Watching 14 metrics in the background</div>
+ <div class="t009-f t009-blur" style="--x:60;--y:860;--w:960;--h:200"></div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the knob slides left→right</b> (0.28 s back.out 1.8) and the track floods teal from the knob outward; the focus-ring halo springs 0→16 px on the downbeat and the lockup rises beneath it one beat later, the checkmark drawing on the snare.</p></div>
+  <div class="cw"><div class="cell" id="t009-f3">
+<div class="t009-s">
+ <div class="t009-f t009-blur" style="--x:60;--y:-60;--w:960;--h:150"><span class="t009-val" style="--fs:50;color:var(--muted)">Signups  412 ✓</span></div>
+ <div class="t009-sug" style="left:calc(var(--u)*60);top:calc(var(--u)*130)"><img src="../assets/brand/acme-mark.svg" alt="">flagged by Pulse · 09:44</div>
+ <div class="t009-f err" style="--x:60;--y:230;--w:960;--h:230"><span class="t009-lab">Checkout conversion</span><span class="t009-val" style="--fs:120;color:var(--ink)">2.80%<span style="font:600 calc(var(--u)*56) var(--mono);color:var(--alert);margin-left:calc(var(--u)*30);letter-spacing:0">−18%</span></span></div>
+ <span class="t009-shake" style="left:calc(var(--u)*30);top:calc(var(--u)*270);height:calc(var(--u)*150)"></span><span class="t009-shake" style="left:calc(var(--u)*42);top:calc(var(--u)*300);height:calc(var(--u)*90);opacity:.35"></span>
+ <span class="t009-shake" style="left:calc(var(--u)*1044);top:calc(var(--u)*270);height:calc(var(--u)*150)"></span><span class="t009-shake" style="left:calc(var(--u)*1032);top:calc(var(--u)*300);height:calc(var(--u)*90);opacity:.35"></span>
+ <div class="t009-help err" style="left:calc(var(--u)*72);top:calc(var(--u)*494)"><i>!</i>since 09:42 · after deploy #2231</div>
+ <div class="t009-p" style="--x:60;--y:600;font:600 calc(var(--u)*22) var(--mono);letter-spacing:.1em;color:var(--muted)">YOUR CALL</div>
+ <div class="t009-seg" style="left:calc(var(--u)*60);top:calc(var(--u)*644)"><span class="on">Roll back</span><span>Acknowledge</span></div>
+ <svg class="t009-cur" style="left:calc(var(--u)*230);top:calc(var(--u)*704)" viewBox="0 0 56 56"><path d="M9 5 L9 45 L20 35 L28 52 L36 48 L28 32 L44 32 Z" fill="#0E1726" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/></svg>
+ <div class="t009-f t009-blur" style="--x:60;--y:850;--w:960;--h:190"><span class="t009-val" style="--fs:50;color:var(--muted)">p95 latency  212 ms ✓</span></div>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera racks from the green Signups field down to Checkout conversion</b>; the field's ring turns coral and it shakes 5 px × 3 cycles (0.3 s) on the snare, the helper text types in, and the Roll back segment fills coral under the cursor on the next downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t009-f4">
+<div class="t009-s">
+ <div class="t009-p" style="--x:60;--y:110;--w:960;display:flex;align-items:center;gap:calc(var(--u)*26)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*100);height:calc(var(--u)*100)"><span class="t009-word" style="font-size:calc(var(--u)*90)">Acme Pulse</span></div>
+ <div class="t009-hl" style="top:calc(var(--u)*260);font-size:calc(var(--u)*96)">You ship. <em>Pulse watches.</em></div>
+ <div class="t009-p" style="--x:60;--y:520;--w:960;--h:220;border-radius:calc(var(--u)*36);background:var(--alert);box-shadow:0 0 0 calc(var(--u)*10) #fff,0 0 0 calc(var(--u)*24) rgba(255,90,78,.28),0 calc(var(--u)*40) calc(var(--u)*80) rgba(255,90,78,.35);display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*30);font:800 calc(var(--u)*96) var(--sans);color:#fff;letter-spacing:-.03em">Start free<svg viewBox="0 0 60 60" style="width:calc(var(--u)*80);height:calc(var(--u)*80)"><path d="M12 30 H46 M32 16 L46 30 L32 44" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+ <svg class="t009-cur" style="left:calc(var(--u)*800);top:calc(var(--u)*690)" viewBox="0 0 56 56"><path d="M9 5 L9 45 L20 35 L28 52 L36 48 L28 32 L44 32 Z" fill="#0E1726" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/></svg>
+ <div class="t009-help" style="left:calc(var(--u)*60);width:calc(var(--u)*960);justify-content:center;top:calc(var(--u)*800);color:var(--muted);font-size:calc(var(--u)*26)">No card · 14 metrics watched in minutes</div>
+ <div class="t009-f t009-blur" style="--x:60;--y:900;--w:960;--h:180"></div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The camera dollies up from the blurred fields to one giant button</b>; the focus ring springs out (box-shadow spread 0→24 px, 0.25 s) and the arrow nudges right on each of the last four beats before the cursor presses it on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Floating-label input</b> — the metric as a giant field; label sits in the border.</li><li><b>Focus ring</b> — teal halo = attention; coral halo = anomaly.</li><li><b>Dropdown with depth of field</b> — 38 options falling out of focus.</li><li><b>Macro toggle switch</b> — turning Acme Pulse on is the reveal.</li><li><b>Inline validation</b> — shake + helper text “since 09:42 · after deploy #2231”.</li><li><b>Segmented control / giant button</b> — the human's choice, then the CTA.</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Focus-ring morph</b> — box-shadow spread 0→14 px plus a radius spring, 0.25 s, triggered on the kick.</li><li><b>Error shake</b> — 5 px, 3 cycles, 0.3 s (fits inside one beat at 120 BPM), then the helper text types in at one word per 1/16.</li><li><b>Macro dolly + rack focus</b> — camera glides between fields, 1.2 s sine.inOut, with 0→5 px blur on the neighbours; each arrival on a downbeat.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> form controls are universal and extremely legible at feed size; shooting them huge with product-photography light turns a boring UI into a tactile object, and “the field turns red with a suggested fix” is exactly how trustworthy validation feels. <b>Risk:</b> it can look like a UI-kit demo, so the macro camera, shallow focus and lighting must carry it.</p><p><b>Adapt to your product:</b> pick the one field or setting that matters most in your product and shoot it huge; your agent is a switch the viewer watches being turned on.</p><p><b>References:</b> <a href="https://www.nngroup.com/articles/errors-forms-design-guidelines/">Nielsen Norman Group — error messages in forms</a> · <a href="https://m3.material.io/components/text-fields/overview">Material 3 — text fields</a></p></div>
+</div>
+</body>
+</html>

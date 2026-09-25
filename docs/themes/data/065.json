@@ -1,0 +1,70 @@
+{
+ "id": "065",
+ "slug": "sankey-leak",
+ "name": "Sankey Leak",
+ "category": "data",
+ "summary": "A Minard-style flow of ribbons where the anomaly is a coral leak peeling off the checkout stage.",
+ "look": "Warm paper, thin ink stage nodes and translucent teal ribbons with bezier curves; exits dissolve in grey gradients. The only saturated colour is the coral leak band.",
+ "components": [
+  {
+   "name": "Flow ribbon",
+   "role": "cubic-bezier band, width = volume, teal at 55–90 % opacity"
+  },
+  {
+   "name": "Stage node",
+   "role": "thin ink bar with a bold stage label above it"
+  },
+  {
+   "name": "Exit fade",
+   "role": "gradient ribbon that dissolves = users who normally leave"
+  },
+  {
+   "name": "Leak band",
+   "role": "the one coral ribbon that is new since the deploy"
+  },
+  {
+   "name": "Rule + callout",
+   "role": "hairline rule separating the diagram from the numbers"
+  },
+  {
+   "name": "Terminal button",
+   "role": "the last node of the flow is the CTA itself"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Pour-through",
+   "how": "ribbon clip-path wipes left → right with power1.inOut 0.5 s per stage, one beat per stage at 120 BPM"
+  },
+  {
+   "name": "Braid snap",
+   "how": "ribbon endpoints tween to the knot with expo.inOut 0.75 s ending exactly on the drop"
+  },
+  {
+   "name": "Leak peel",
+   "how": "coral band grows from 0 to full width with elastic.out(1,0.6) 0.6 s on the snare; label types 30 ms/char"
+  }
+ ],
+ "story": "Hook: 38 grey ribbons tangle, a thin coral one hides inside. Drop: they braid into one knot where the Acme mark lands and a teal channel pours out. Proof: Visits → Cart → Checkout → Paid, a coral band leaks −18% since 09:42 after deploy #2231, Roll back. CTA: the channel bends into the Start free button.",
+ "adapt": "Map your core funnel (signup → activate → pay, request → queue → worker) as three or four nodes and let the anomaly be a coloured band leaking from the stage that broke.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Sankey_diagram",
+   "note": "width-as-flow and Minard's 1869 Napoleon map lineage",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Flow diagrams get unreadable fast; keep ≤ 4 stages and one coloured leak, everything else neutral."
+ },
+ "best_for": [
+  "e-commerce",
+  "growth / funnels",
+  "data pipelines",
+  "fintech"
+ ],
+ "file": "themes/065-sankey-leak.html"
+}

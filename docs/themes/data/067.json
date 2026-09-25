@@ -1,0 +1,75 @@
+{
+ "id": "067",
+ "slug": "pulsar-ridgeline",
+ "name": "Pulsar Ridgeline",
+ "category": "data",
+ "summary": "Unknown Pleasures-style stacked ridgelines where the checkout peaks go flat the minute the deploy lands.",
+ "look": "Near-black field with occluding off-white ridgelines stacked like a pulsar plot; teal takes over for Pulse and one coral ridge marks 09:42. Mono minute labels, Instrument Serif headlines.",
+ "components": [
+  {
+   "name": "Ridge line",
+   "role": "occluding filled stroke, one per minute, front lines hide back ones"
+  },
+  {
+   "name": "Signal ridge",
+   "role": "the front line redrawn as the Acme pulse shape"
+  },
+  {
+   "name": "Time gutter",
+   "role": "mono minute labels every 5 ridges on the left"
+  },
+  {
+   "name": "Event ridge",
+   "role": "one coral line + dashed guide at the anomaly minute"
+  },
+  {
+   "name": "Stat column",
+   "role": "serif −18% with mono context on the right"
+  },
+  {
+   "name": "Black field",
+   "role": "deep near-black ground, off-white strokes, no grid"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Ridge print",
+   "how": "each new ridge slides up 17 px with power1.out 0.25 s — one 8th note at 120 BPM — the stack scrolls like a pen plotter"
+  },
+  {
+   "name": "Morph to pulse",
+   "how": "front ridge path morphs into the mark's pulse shape, expo.inOut 0.75 s, landing on the drop; stroke goes white → teal"
+  },
+  {
+   "name": "Flatten",
+   "how": "post-09:42 ridges scale Y to 0.42 with sine.inOut 0.5 s, staggered 0.05 s, so the flattening ripples down on the snare"
+  }
+ ],
+ "story": "Hook: 38 dashboards as a wall of noisy ridges. Drop: the noise calms and the front ridge becomes the Acme pulse line. Proof: one ridge per minute of checkouts, a coral ridge at 09:42 and flatter peaks after deploy #2231, −18%, Roll back. CTA: a calm teal ridge field, You ship. Pulse watches., Start free.",
+ "adapt": "Any time-series with a rhythm (requests per minute, builds per hour, messages per second) can be stacked as ridges; swap the pulse shape for your own logo line and show your anomaly as the moment the peaks change.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Unknown_Pleasures",
+   "note": "Peter Saville's cover: CP 1919 pulsar ridgeline, reversed to white on black",
+   "verified": true
+  },
+  {
+   "url": "https://www.data-to-viz.com/graph/ridgeline.html",
+   "note": "ridgeline (joyplot) chart definition and use",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Iconic but moody; the pop-culture reference can overpower the product if the ridges are not clearly labelled as data."
+ },
+ "best_for": [
+  "observability",
+  "audio / streaming",
+  "dev tools",
+  "brand-led launches"
+ ],
+ "file": "themes/067-pulsar-ridgeline.html"
+}

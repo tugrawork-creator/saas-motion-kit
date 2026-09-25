@@ -1,0 +1,80 @@
+{
+ "id": "010",
+ "slug": "powers-of-ten-zoom",
+ "name": "Powers-of-Ten Zoom",
+ "category": "product-ui",
+ "summary": "One continuous infinite-canvas dive from 38 dashboards of dots down to the single wrong data point Pulse found, and back out as every dot turns teal.",
+ "look": "A dark infinite canvas of glowing dot clusters with a zoom pill, breadcrumb and minimap as the only chrome. Nested outlines mark depth; the deepest level is one coral data point with its value set huge in mono.",
+ "components": [
+  {
+   "name": "Dot field",
+   "role": "metrics and events; 38 clusters"
+  },
+  {
+   "name": "Cluster labels",
+   "role": "mid-altitude orientation"
+  },
+  {
+   "name": "Nested frames",
+   "role": "depth indicator"
+  },
+  {
+   "name": "Data-point macro",
+   "role": "the single wrong number"
+  },
+  {
+   "name": "Minimap with viewport",
+   "role": "orientation at any scale"
+  },
+  {
+   "name": "Zoom pill + breadcrumb",
+   "role": "altitude and path"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Log-space zoom",
+   "how": "interpolate log(scale), 4-6 s per dive, sine.inOut, land on a downbeat"
+  },
+  {
+   "name": "Level-of-detail cross-fade",
+   "how": "dots to labels to chart to number at scale thresholds over 0.2 s"
+  },
+  {
+   "name": "Pull-back reveal",
+   "how": "expo.out zoom-out 1.6 s with a teal ripple staggered by distance"
+  }
+ ],
+ "story": "Hook: at 3% zoom 38 dashboards are clouds of dots and one flickers coral: '38 dashboards. Where is the problem?' Reveal: every dot flies onto the pulse line and the Acme Pulse lockup appears. Proof: a log-space dive through dashboards › checkout › conversion to the 09:42 point, 2.80% (was 3.42%), with a card for checkout conversion −18% since 09:42 after deploy #2231 and the human choosing Roll back. CTA: pull back to 100% as a teal ripple turns every dot teal; 'Every metric. Every minute.' and Start free.",
+ "adapt": "Map your own hierarchy onto the dive (workspace, project, item, field) and make the deepest level the one value your product catches.",
+ "references": [
+  {
+   "url": "https://www.eamesoffice.com/the-work/powers-of-ten/",
+   "note": "the original continuous powers-of-ten zoom",
+   "verified": false
+  },
+  {
+   "url": "https://tldraw.dev/sdk-features/camera",
+   "note": "infinite-canvas camera",
+   "verified": true
+  },
+  {
+   "url": "https://prezi.com/blog/mastering-the-prezi-zoom/",
+   "note": "zoom-based storytelling",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "high",
+  "risk": "text and SVG blur at extreme scale; swap nested layers at thresholds instead of scaling one DOM"
+ },
+ "best_for": [
+  "analytics",
+  "observability",
+  "data platforms",
+  "large-scale monitoring"
+ ],
+ "file": "themes/010-powers-of-ten-zoom.html"
+}

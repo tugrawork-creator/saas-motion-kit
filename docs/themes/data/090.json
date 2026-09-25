@@ -1,0 +1,74 @@
+{
+ "id": "090",
+ "slug": "memphis-milano",
+ "name": "Memphis Milano",
+ "category": "era",
+ "summary": "80s Memphis Milano maximalism: laminate slabs, squiggles and terrazzo, where a friendly squiggle snaps into a coral zigzag.",
+ "look": "Warm paper and soft-teal dot grids, laminate patterns (bacterio, diagonal stripes), terrazzo confetti, tilted blocks with hard black shadows. Teal, coral, amber and blush, with chunky Manrope 800 type.",
+ "components": [
+  {
+   "name": "Laminate slab",
+   "role": "tilted card with pattern fill and a 14 px hard ink shadow"
+  },
+  {
+   "name": "Bacterio pattern",
+   "role": "scattered black squiggle marks on paper, 80 px tile"
+  },
+  {
+   "name": "Squiggle / zigzag",
+   "role": "healthy metric = squiggle, anomaly = zigzag"
+  },
+  {
+   "name": "Totem",
+   "role": "stacked geometric solids crowned by the Acme mark"
+  },
+  {
+   "name": "Terrazzo confetti",
+   "role": "random coloured flecks as background texture"
+  },
+  {
+   "name": "Shadow pill",
+   "role": "rounded CTA with 6 px outline and offset solid shadow"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Drop & tilt",
+   "how": "slabs fall from −200 px with rotation, bounce.out 0.4 s, one per 8th note (0.25 s)"
+  },
+  {
+   "name": "Squiggle wiggle",
+   "how": "path phase shifts half a wavelength per beat, stepped — reads like a bassline"
+  },
+  {
+   "name": "Snap to zigzag",
+   "how": "squiggle morphs to zigzag in 0.12 s (3 frames) exactly on a downbeat, with a 4-frame colour flash"
+  }
+ ],
+ "story": "Hook: a pile of tilted laminate dashboard slabs under \"How many dashboards did you check today?\". Reveal: a Memphis totem assembles with the Acme mark on top, \"Acme Pulse\". Proof: on a laminate-framed chart the teal squiggle snaps into a coral zigzag at deploy #2231 · 09:42, a triangle tag says −18% checkout conversion, a human presses the Roll back pill. CTA: \"Caught before customers noticed.\" with an amber Start free pill on terrazzo.",
+ "adapt": "Turn your product's core objects (projects, tickets, files) into laminate slabs and let your 'normal' visual be a squiggle that your product protects. Swap the totem pieces for shapes that echo your own logo.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Memphis_Group",
+   "note": "Memphis Group 1980–87: laminates, asymmetry, colourful abstract decoration",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Ettore_Sottsass",
+   "note": "Sottsass, founder of Memphis; the Carlton bookcase",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Pattern noise competes with data; can feel unserious for regulated or enterprise buyers."
+ },
+ "best_for": [
+  "consumer apps",
+  "creative tools",
+  "startup launches"
+ ],
+ "file": "themes/090-memphis-milano.html"
+}

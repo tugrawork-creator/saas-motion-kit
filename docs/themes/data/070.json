@@ -1,0 +1,70 @@
+{
+ "id": "070",
+ "slug": "hex-tile-cartogram",
+ "name": "Hex Tile Cartogram",
+ "category": "data",
+ "summary": "A newsroom hex tile map where Pulse lights every region and one tile's coral drop spreads to its neighbours.",
+ "look": "Warm paper, equal hexagons with paper gutters, a strict 5-step coral↔teal ramp legend and mono tile codes. Election-night graphic energy, calm when all is teal.",
+ "components": [
+  {
+   "name": "Hex tile",
+   "role": "equal-area region with 4 px paper gutters"
+  },
+  {
+   "name": "Ramp legend",
+   "role": "5-step diverging key, coral ↔ teal, mono end labels"
+  },
+  {
+   "name": "Tile code",
+   "role": "short mono code inside the hot tile (W2)"
+  },
+  {
+   "name": "Leader line",
+   "role": "ink elbow from the hot tile to the explanation"
+  },
+  {
+   "name": "Ring ripple",
+   "role": "colour wave spreading by hex distance"
+  },
+  {
+   "name": "Decision strip",
+   "role": "rule, −18%, context and the two actions"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Tile flip",
+   "how": "each hex rotates Y 180° with power2.inOut 0.25 s (8th note at 120 BPM), colour swaps at the midpoint"
+  },
+  {
+   "name": "Ring ripple",
+   "how": "rings keyed by hex distance, delay = ring × 0.5 s so each ring hits a beat"
+  },
+  {
+   "name": "Contagion",
+   "how": "hot tile flips on the snare, neighbours follow at +0.25 s and +0.5 s with a 1.06 scale pulse, sine.out"
+  }
+ ],
+ "story": "Hook: a hex map in nine random colours with one coral tile nobody sees. Drop: the map flips grey and teal rings ripple out from the Acme mark in the centre hex. Proof: checkout conversion by region, W2 turns coral and spreads, −18% since 09:42 after deploy #2231, Roll back. CTA: a calm teal cluster, Every metric. Every minute., Start free.",
+ "adapt": "Tile whatever your product has many of (regions, stores, services, customers, devices) into an equal-size hex grid; the anomaly is the tile that flips and starts to spread.",
+ "references": [
+  {
+   "url": "https://blog.apps.npr.org/2015/05/11/hex-tile-maps.html",
+   "note": "NPR on why equal hex tiles beat choropleths for quick reads",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "med",
+  "risk": "Hex maps imply geography; if your product has no regions, relabel tiles as services or customers or the metaphor confuses."
+ },
+ "best_for": [
+  "multi-region SaaS",
+  "retail / e-commerce",
+  "logistics",
+  "infra / CDN"
+ ],
+ "file": "themes/070-hex-tile-cartogram.html"
+}

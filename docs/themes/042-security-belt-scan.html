@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>042 · Security Belt Scan — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t042-bg{background:#121820;background-image:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.05),transparent 70%)}
+.t042-s{position:absolute;inset:0;width:100%;height:100%}
+.t042-m{font-family:var(--mono)}
+.t042-se{font-family:var(--serif)}
+.t042-sa{font-family:var(--sans)}
+.t042-mark{position:absolute;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 042 · Metaphor concepts</div>
+    <h1>Security Belt Scan</h1>
+    <p class="dek">Every release rides a top-down conveyor through a scanner arch. Inside the arch the frame flips to false-colour X-ray: teal for healthy structure, coral for the thing that should not be there. One package is pushed onto the inspection tray for a human; the belt never stops.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- F1 · HOOK -->
+  <div class="cw"><div class="cell t042-bg" id="t042-f1">
+    <svg class="t042-s" viewBox="0 0 1080 1080">
+      <defs>
+        <pattern id="t042-slat" width="44" height="300" patternUnits="userSpaceOnUse"><rect width="44" height="300" fill="#262E38"/><rect width="4" height="300" fill="#1B222B"/></pattern>
+        <symbol id="t042-tile" viewBox="0 0 180 124"><rect width="180" height="124" rx="10" fill="#E6EBF0"/><rect x="14" y="14" width="64" height="10" rx="3" fill="#8D99A8"/><rect x="132" y="14" width="34" height="10" rx="3" fill="#C4CDD7"/><polyline points="14,104 44,82 74,90 104,62 134,72 166,44" fill="none" stroke="#0FA3A3" stroke-width="5" stroke-linejoin="round"/><rect x="14" y="110" width="152" height="3" fill="#C4CDD7"/></symbol>
+      </defs>
+      <g class="t042-sa" fill="#F2F4F7" font-size="76" font-weight="800" letter-spacing="-2">
+        <text x="70" y="160">How many dashboards</text>
+        <text x="70" y="248">did you <tspan class="t042-se" font-weight="400" font-style="italic" fill="#7FE7DE" font-size="88">check</tspan> today?</text>
+      </g>
+      <rect x="0" y="500" width="1080" height="300" fill="url(#t042-slat)"/>
+      <rect x="0" y="482" width="1080" height="18" fill="#3A4451"/><rect x="0" y="800" width="1080" height="18" fill="#3A4451"/>
+      <g opacity=".96">
+        <use href="#t042-tile" x="40" y="520" width="180" height="124" transform="rotate(-6 130 582)"/>
+        <use href="#t042-tile" x="150" y="600" width="180" height="124" transform="rotate(8 240 662)"/>
+        <use href="#t042-tile" x="290" y="530" width="180" height="124" transform="rotate(-3 380 592)"/>
+        <use href="#t042-tile" x="360" y="640" width="180" height="124" transform="rotate(12 450 702)"/>
+        <use href="#t042-tile" x="500" y="560" width="180" height="124" transform="rotate(-10 590 622)"/>
+        <use href="#t042-tile" x="610" y="650" width="180" height="124" transform="rotate(4 700 712)"/>
+        <use href="#t042-tile" x="690" y="520" width="180" height="124" transform="rotate(7 780 582)"/>
+        <use href="#t042-tile" x="830" y="600" width="180" height="124" transform="rotate(-8 920 662)"/>
+      </g>
+      <g class="t042-m" font-size="22" letter-spacing="2">
+        <text x="70" y="900" fill="#F4B740">38 DASHBOARDS ON THE BELT</text>
+        <text x="70" y="940" fill="#8D99A8">0 SCANNED · NO ARCH INSTALLED</text>
+      </g>
+      <g fill="#F4B740"><circle cx="990" cy="893" r="9"/></g>
+      <text class="t042-m" x="970" y="900" font-size="22" fill="#F4B740" text-anchor="end" letter-spacing="2">MANUAL</text>
+    </svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Dashboard tiles tumble onto the belt from the left and pile up while it scrolls right at a steady linear pace.</b> The amber "0 SCANNED" counter blinks on each downbeat of bar 4, just before the drop.</p></div>
+
+  <!-- F2 · REVEAL -->
+  <div class="cw"><div class="cell t042-bg" id="t042-f2">
+    <svg class="t042-s" viewBox="0 0 1080 1080">
+      <defs>
+        <radialGradient id="t042-spill" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#0FA3A3" stop-opacity=".55"/><stop offset="1" stop-color="#0FA3A3" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect x="0" y="360" width="1080" height="360" fill="url(#t042-slat)"/>
+      <rect x="0" y="342" width="1080" height="18" fill="#3A4451"/><rect x="0" y="720" width="1080" height="18" fill="#3A4451"/>
+      <ellipse cx="540" cy="540" rx="520" ry="300" fill="url(#t042-spill)"/>
+      <use href="#t042-tile" x="40" y="480" width="150" height="104"/>
+      <use href="#t042-tile" x="890" y="480" width="150" height="104"/>
+      <!-- lead curtain -->
+      <g fill="#3B4654" opacity=".9"><rect x="200" y="300" width="14" height="480"/><rect x="220" y="300" width="14" height="480"/><rect x="240" y="300" width="14" height="480"/><rect x="826" y="300" width="14" height="480"/><rect x="846" y="300" width="14" height="480"/><rect x="866" y="300" width="14" height="480"/></g>
+      <!-- arch roof -->
+      <rect x="262" y="250" width="556" height="580" rx="28" fill="#1B232D" stroke="#465363" stroke-width="4"/>
+      <rect x="292" y="280" width="496" height="520" rx="18" fill="#0C1218" stroke="#0FA3A3" stroke-width="3"/>
+      <text class="t042-sa" x="540" y="610" font-size="96" font-weight="800" fill="#F2F4F7" text-anchor="middle" letter-spacing="-2">Acme Pulse</text>
+      <g fill="#0FA3A3"><circle cx="440" cy="720" r="9"/><circle cx="480" cy="720" r="9"/><circle cx="520" cy="720" r="9"/><circle cx="560" cy="720" r="9"/><circle cx="600" cy="720" r="9"/></g>
+      <circle cx="640" cy="720" r="9" fill="#FF5A4E"/>
+      <text class="t042-m" x="540" y="340" font-size="22" fill="#7FE7DE" text-anchor="middle" letter-spacing="4">ARCH ONLINE · SCANNING</text>
+      <g class="t042-m" font-size="20" fill="#8D99A8" letter-spacing="2">
+        <text x="70" y="960">LANE 2 · EVERY RELEASE</text>
+        <text x="1010" y="960" text-anchor="end">EVERY METRIC · EVERY MINUTE</text>
+      </g>
+    </svg>
+    <img class="t042-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*475);top:calc(var(--u)*380);width:calc(var(--u)*130);height:calc(var(--u)*130)">
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The camera cranes down onto the arch roof; the lead curtain flaps swing as the belt restarts.</b> On the drop the teal spill blooms outward, the mark and "Acme Pulse" light, and the status LEDs tick on one per 16th note.</p></div>
+
+  <!-- F3 · PROOF MOMENT -->
+  <div class="cw"><div class="cell t042-bg" id="t042-f3">
+    <svg class="t042-s" viewBox="0 0 1080 1080">
+      <defs>
+        <pattern id="t042-slat2" width="36" height="220" patternUnits="userSpaceOnUse"><rect width="36" height="220" fill="#262E38"/><rect width="4" height="220" fill="#1B222B"/></pattern>
+        <radialGradient id="t042-org" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FF5A4E" stop-opacity=".95"/><stop offset=".6" stop-color="#FF5A4E" stop-opacity=".45"/><stop offset="1" stop-color="#FF5A4E" stop-opacity="0"/></radialGradient>
+      </defs>
+      <g class="t042-m" font-size="20" letter-spacing="2">
+        <text x="60" y="84" fill="#8D99A8">LANE 2 · RELEASES</text>
+        <text x="1020" y="84" fill="#7FE7DE" text-anchor="end">2,418 EVENTS/SEC SCANNED</text>
+      </g>
+      <!-- belt -->
+      <rect x="0" y="130" width="1080" height="200" fill="url(#t042-slat2)"/>
+      <rect x="0" y="116" width="1080" height="14" fill="#3A4451"/><rect x="0" y="330" width="1080" height="14" fill="#3A4451"/>
+      <!-- packages on belt -->
+      <rect x="60" y="170" width="180" height="120" rx="10" fill="#C9A77A" stroke="#A7865C" stroke-width="3"/>
+      <rect x="140" y="170" width="20" height="120" fill="#B89468"/>
+      <text class="t042-m" x="150" y="316" font-size="20" fill="#C4CDD7" text-anchor="middle">#2232</text>
+      <!-- arch with xray window -->
+      <rect x="340" y="104" width="340" height="252" rx="16" fill="#0B1117" stroke="#465363" stroke-width="4"/>
+      <rect x="356" y="120" width="308" height="220" rx="8" fill="#06121A"/>
+      <rect x="400" y="168" width="220" height="124" rx="10" fill="none" stroke="#7FE7DE" stroke-width="3" opacity=".9"/>
+      <polyline points="416,270 446,246 476,254 506,226" fill="none" stroke="#0FA3A3" stroke-width="5"/>
+      <rect x="420" y="186" width="70" height="10" rx="3" fill="#0FA3A3" opacity=".7"/>
+      <ellipse cx="560" cy="236" rx="46" ry="34" fill="url(#t042-org)"/>
+      <rect x="506" y="192" width="108" height="88" fill="none" stroke="#FF5A4E" stroke-width="3" stroke-dasharray="8 6"/>
+      <text class="t042-m" x="510" y="376" font-size="20" fill="#FF5A4E" text-anchor="middle" letter-spacing="2">#2231 · FLAGGED</text>
+      <!-- divert arm + chute -->
+      <rect x="710" y="150" width="30" height="130" rx="6" fill="#465363"/>
+      <rect x="740" y="200" width="120" height="24" rx="6" fill="#7B8796" transform="rotate(26 740 212)"/>
+      <path d="M800 332 L800 396" stroke="#FF5A4E" stroke-width="5" stroke-linecap="round"/>
+      <path d="M784 380 L800 400 L816 380" fill="none" stroke="#FF5A4E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="900" y="176" width="140" height="110" rx="10" fill="#C9A77A" stroke="#A7865C" stroke-width="3"/>
+      <path d="M950 236 l14 14 l26 -30" fill="none" stroke="#0FA3A3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- inspection monitor -->
+      <rect x="60" y="420" width="960" height="600" rx="20" fill="#050D13" stroke="#2E3A46" stroke-width="3"/>
+      <g class="t042-m" font-size="20" letter-spacing="2">
+        <text x="92" y="464" fill="#7FE7DE">X-RAY · DEPLOY #2231 · INSPECTION TRAY</text>
+        <text x="990" y="464" fill="#FF5A4E" text-anchor="end">DIVERTED</text>
+      </g>
+      <line x1="92" y1="484" x2="990" y2="484" stroke="#1E2B36" stroke-width="2"/>
+      <!-- xray enlarged -->
+      <rect x="96" y="510" width="420" height="300" rx="16" fill="none" stroke="#7FE7DE" stroke-width="3"/>
+      <g stroke="#0FA3A3" stroke-width="1.5" opacity=".35"><line x1="96" y1="585" x2="516" y2="585"/><line x1="96" y1="660" x2="516" y2="660"/><line x1="96" y1="735" x2="516" y2="735"/><line x1="201" y1="510" x2="201" y2="810"/><line x1="306" y1="510" x2="306" y2="810"/><line x1="411" y1="510" x2="411" y2="810"/></g>
+      <polyline points="120,760 170,720 220,734 270,680 320,700" fill="none" stroke="#0FA3A3" stroke-width="6" stroke-linejoin="round"/>
+      <ellipse cx="420" cy="640" rx="78" ry="62" fill="url(#t042-org)"/>
+      <rect x="330" y="560" width="176" height="160" fill="none" stroke="#FF5A4E" stroke-width="3.5" stroke-dasharray="10 7"/>
+      <g class="t042-m" font-size="20" fill="#7FE7DE"><text x="120" y="548">signups ✓</text><text x="120" y="790">latency ✓</text></g>
+      <text class="t042-sa" x="560" y="560" font-size="40" font-weight="700" fill="#F2F4F7">Checkout conversion</text>
+      <text class="t042-m" x="560" y="650" font-size="84" font-weight="600" fill="#FF5A4E">−18%</text>
+      <g class="t042-m" font-size="24" fill="#C4CDD7"><text x="560" y="706">since 09:42</text><text x="560" y="740">after deploy #2231</text></g>
+      <rect x="96" y="870" width="300" height="100" rx="16" fill="#FF5A4E"/>
+      <text class="t042-sa" x="246" y="935" font-size="36" font-weight="700" fill="#fff" text-anchor="middle">Roll back</text>
+      <rect x="416" y="870" width="300" height="100" rx="16" fill="none" stroke="#C4CDD7" stroke-width="3"/>
+      <text class="t042-sa" x="566" y="935" font-size="34" font-weight="600" fill="#F2F4F7" text-anchor="middle">Acknowledge</text>
+      <g class="t042-m" font-size="20" fill="#8D99A8" letter-spacing="1"><text x="750" y="912">belt keeps</text><text x="750" y="942">moving ▸▸</text></g>
+    </svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Packages glide left to right; as each crosses the arch a clip-path wipe flips it to X-ray.</b> #2231 lights coral, the pusher arm snaps it down onto the tray on a downbeat (back.out), the monitor punches in, and the human hits "Roll back" while the belt keeps rolling above.</p></div>
+
+  <!-- F4 · CTA -->
+  <div class="cw"><div class="cell t042-bg" id="t042-f4">
+    <svg class="t042-s" viewBox="0 0 1080 1080">
+      <text class="t042-sa" x="230" y="200" font-size="80" font-weight="800" fill="#F2F4F7" letter-spacing="-2">Acme Pulse</text>
+      <g class="t042-sa" font-size="84" font-weight="800" fill="#F2F4F7" letter-spacing="-2">
+        <text x="80" y="380">Caught <tspan class="t042-se" font-weight="400" font-style="italic" fill="#7FE7DE" font-size="98">before</tspan></text>
+        <text x="80" y="476">customers noticed.</text>
+      </g>
+      <rect x="80" y="540" width="330" height="106" rx="18" fill="#FF5A4E"/>
+      <text class="t042-sa" x="245" y="607" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Start free</text>
+      <text class="t042-m" x="450" y="604" font-size="22" fill="#8D99A8" letter-spacing="2">RESOLVED IN 6 MIN</text>
+      <rect x="0" y="720" width="1080" height="220" fill="url(#t042-slat2)"/>
+      <rect x="0" y="706" width="1080" height="14" fill="#3A4451"/><rect x="0" y="940" width="1080" height="14" fill="#3A4451"/>
+      <g stroke="#A7865C" stroke-width="3" fill="#C9A77A">
+        <rect x="70" y="770" width="170" height="120" rx="10"/><rect x="330" y="770" width="170" height="120" rx="10"/><rect x="590" y="770" width="170" height="120" rx="10"/><rect x="850" y="770" width="170" height="120" rx="10"/>
+      </g>
+      <g fill="none" stroke="#0FA3A3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M130 830 l16 16 l30 -34"/><path d="M390 830 l16 16 l30 -34"/><path d="M650 830 l16 16 l30 -34"/><path d="M910 830 l16 16 l30 -34"/>
+      </g>
+      <text class="t042-m" x="1010" y="1010" font-size="20" fill="#8D99A8" text-anchor="end" letter-spacing="2">ACME · LANE 2 · ALL CLEAR</text>
+    </svg>
+    <img class="t042-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*80);top:calc(var(--u)*120);width:calc(var(--u)*120);height:calc(var(--u)*120)">
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The camera tilts up off the belt, which keeps scrolling below as a metronome.</b> The tagline slams in word by word on quarter notes; teal ticks pop onto each passing package on the last bar and the coral button lands on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Belt &amp; rollers</b> — repeating slat pattern that scrolls; the film's only linear motion and its metronome.</li>
+    <li><b>Scanner arch</b> — roof panel with lead-flap curtain, status LEDs and the lit Acme lockup.</li>
+    <li><b>X-ray window</b> — false-colour view: teal for healthy structure, coral glow for the anomaly.</li>
+    <li><b>Detection box</b> — dashed coral bounding box around the suspect layer.</li>
+    <li><b>Divert arm &amp; tray</b> — pushes one package off the belt to a human; the rest pass.</li>
+    <li><b>Inspection monitor</b> — enlarged X-ray plus anomaly readout and the Roll back / Acknowledge buttons.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Belt scroll</b> — constant linear translateX, one slat (44 px) per 8th note at 120 BPM; never eases, never stops.</li>
+    <li><b>Scan wipe</b> — clip-path inset reveals the X-ray view as each package crosses the arch, 0.4 s per item, landing on beats.</li>
+    <li><b>Divert push</b> — pusher arm rotates 26° with back.out(1.6) in 0.3 s on a snare hit; the monitor punches in 0.95→1 on the next beat.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>A conveyor is the clearest picture of "high volume, checked continuously", and false-colour X-ray makes the invisible problem literally visible. Risk: security and suspicion overtones; scan objects only, never people, and keep the palette calm.</p>
+    <p><b>Adapt to your product:</b> Swap the packages for whatever your product processes (pull requests, invoices, orders, uploads) and put your own check result inside the X-ray window.</p>
+    <p><b>References:</b> <a href="https://en.wikipedia.org/wiki/Hugh_Turvey">Hugh Turvey, X-ray art</a> · <a href="https://elements.envato.com/instruction-animation-of-how-airport-security-lugg-4367W7B">Baggage-scanner colour logic</a></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>037 · X-Ray / Thermal Scanner — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t037-surf{background:#F2F1EC;color:#0E1726}
+.t037-xr{background:radial-gradient(ellipse at 50% 40%,#0B1B24 0%,#060F16 60%,#02060A 100%);color:#DDF6F2}
+.t037-xr::after,.t037-band::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 calc(var(--u)*2),transparent calc(var(--u)*2) calc(var(--u)*4))}
+.t037-cool{background:radial-gradient(circle at 22% 25%,rgba(15,163,163,.55),transparent 38%),radial-gradient(circle at 80% 78%,rgba(15,163,163,.45),transparent 42%),radial-gradient(circle at 75% 20%,rgba(40,70,160,.5),transparent 40%),linear-gradient(160deg,#0A1638,#0B2A45 55%,#0C3A48);color:#F0FBFA}
+.t037-svg{position:absolute;inset:0;width:100%;height:100%}
+.t037-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t037-mono{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase}
+.t037-h{font-family:var(--serif);line-height:1;letter-spacing:-.015em}
+.t037-h em{font-style:italic}
+.t037-word{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;line-height:.95}
+.t037-card{position:absolute;background:#fff;border-radius:calc(var(--u)*18);box-shadow:0 calc(var(--u)*6) calc(var(--u)*20) rgba(14,23,38,.08);padding:calc(var(--u)*22) calc(var(--u)*24);width:calc(var(--u)*300);height:calc(var(--u)*230)}
+.t037-card .n{font:600 calc(var(--u)*22) var(--mono);color:#5A6475;letter-spacing:.06em}
+.t037-card .v{font:800 calc(var(--u)*48) var(--sans);margin-top:calc(var(--u)*8)}
+.t037-card .ok{position:absolute;right:calc(var(--u)*20);top:calc(var(--u)*18);font:700 calc(var(--u)*20) var(--mono);color:#1F9D55;background:#E3F4EA;border-radius:calc(var(--u)*99);padding:calc(var(--u)*4) calc(var(--u)*12)}
+.t037-band{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,#030A10,#07141C 50%,#030A10);box-shadow:calc(var(--u)*-4) 0 0 #E9FFFB,calc(var(--u)*4) 0 0 #E9FFFB,0 0 calc(var(--u)*60) calc(var(--u)*10) rgba(157,255,238,.45);overflow:hidden}
+.t037-btn{display:inline-block;font:800 calc(var(--u)*32) var(--sans);border-radius:calc(var(--u)*12);padding:calc(var(--u)*18) calc(var(--u)*34);white-space:nowrap}
+.t037-btn.c{background:#FF5A4E;color:#fff}
+.t037-btn.o{box-shadow:inset 0 0 0 calc(var(--u)*2) #7FD9CF;color:#DDF6F2}
+.t037-xcard{background:rgba(8,20,28,.9);border:calc(var(--u)*2) solid rgba(221,246,242,.35);border-radius:calc(var(--u)*20);padding:calc(var(--u)*26) calc(var(--u)*30)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 037 · Light, optics &amp; texture</div>
+    <h1>X-Ray / Thermal Scanner</h1>
+    <p class="dek">On the surface every dashboard card looks healthy. A bright scanner band passes over them and, inside it, the product turns to X-ray: the hidden skeleton of the flow glows in bone-white lines, and one bone is fractured. A thermal pass then shows the heat spreading around the break until a human cools it down.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t037-surf" id="t037-f1">
+    <div class="t037-p t037-h" style="--x:70;--y:70;--w:940;font-size:calc(var(--u)*96)">And the drop still shipped on <em style="color:#0B6E6E">Friday.</em></div>
+    <div class="t037-card" style="left:calc(var(--u)*70);top:calc(var(--u)*400)"><span class="ok">✓ OK</span><div class="n">SIGNUPS</div><div class="v">1,204</div><svg viewBox="0 0 250 70" style="width:100%;margin-top:calc(var(--u)*10)"><polyline points="0,55 50,45 100,50 150,30 200,34 250,20" fill="none" stroke="#0FA3A3" stroke-width="5"/></svg></div>
+    <div class="t037-card" style="left:calc(var(--u)*390);top:calc(var(--u)*400)"><span class="ok">✓ OK</span><div class="n">ACTIVE USERS</div><div class="v">18,930</div><svg viewBox="0 0 250 70" style="width:100%;margin-top:calc(var(--u)*10)"><polyline points="0,40 50,42 100,34 150,38 200,28 250,30" fill="none" stroke="#0FA3A3" stroke-width="5"/></svg></div>
+    <div class="t037-card" style="left:calc(var(--u)*710);top:calc(var(--u)*400)"><span class="ok">✓ OK</span><div class="n">P95 LATENCY</div><div class="v">212 ms</div><svg viewBox="0 0 250 70" style="width:100%;margin-top:calc(var(--u)*10)"><polyline points="0,40 50,38 100,44 150,40 200,42 250,39" fill="none" stroke="#0FA3A3" stroke-width="5"/></svg></div>
+    <div class="t037-card" style="left:calc(var(--u)*70);top:calc(var(--u)*660)"><span class="ok">✓ OK</span><div class="n">ERROR RATE</div><div class="v">0.4 %</div><svg viewBox="0 0 250 70" style="width:100%;margin-top:calc(var(--u)*10)"><polyline points="0,50 50,52 100,48 150,50 200,51 250,49" fill="none" stroke="#0FA3A3" stroke-width="5"/></svg></div>
+    <div class="t037-card" style="left:calc(var(--u)*390);top:calc(var(--u)*660)"><span class="ok">✓ OK</span><div class="n">CHECKOUT</div><div class="v">3.1 %</div><svg viewBox="0 0 250 70" style="width:100%;margin-top:calc(var(--u)*10)"><polyline points="0,30 50,32 100,28 150,31 200,30 250,33" fill="none" stroke="#0FA3A3" stroke-width="5"/></svg></div>
+    <div class="t037-card" style="left:calc(var(--u)*710);top:calc(var(--u)*660)"><span class="ok">✓ OK</span><div class="n">EVENTS/SEC</div><div class="v">2,418</div><svg viewBox="0 0 250 70" style="width:100%;margin-top:calc(var(--u)*10)"><polyline points="0,44 50,36 100,40 150,32 200,38 250,30" fill="none" stroke="#0FA3A3" stroke-width="5"/></svg></div>
+    <div class="t037-p t037-mono" style="--x:70;--y:930;color:#5A6475">Surface view · every card says fine</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Six healthy cards pop in, left→right, one per beat</b>, each stamping a green "✓ OK"; the calm is the joke. "Friday." lands on the bar-2 downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t037-surf" id="t037-f2">
+    <div class="t037-card" style="left:calc(var(--u)*70);top:calc(var(--u)*140)"><span class="ok">✓ OK</span><div class="n">SIGNUPS</div><div class="v">1,204</div></div>
+    <div class="t037-card" style="left:calc(var(--u)*710);top:calc(var(--u)*140)"><span class="ok">✓ OK</span><div class="n">P95 LATENCY</div><div class="v">212 ms</div></div>
+    <div class="t037-card" style="left:calc(var(--u)*70);top:calc(var(--u)*420)"><span class="ok">✓ OK</span><div class="n">ERROR RATE</div><div class="v">0.4 %</div></div>
+    <div class="t037-card" style="left:calc(var(--u)*710);top:calc(var(--u)*420)"><span class="ok">✓ OK</span><div class="n">EVENTS/SEC</div><div class="v">2,418</div></div>
+    <div class="t037-card" style="left:calc(var(--u)*70);top:calc(var(--u)*700)"><span class="ok">✓ OK</span><div class="n">UPTIME</div><div class="v">99.9 %</div></div>
+    <div class="t037-card" style="left:calc(var(--u)*710);top:calc(var(--u)*700)"><span class="ok">✓ OK</span><div class="n">QUEUE</div><div class="v">12 ms</div></div>
+    <div class="t037-band" style="left:calc(var(--u)*310);width:calc(var(--u)*460)">
+      <svg viewBox="310 0 460 1080" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+        <g fill="none" stroke="#7FD9CF" stroke-opacity=".35" stroke-width="2"><rect x="70" y="140" width="300" height="230" rx="18"/><rect x="710" y="140" width="300" height="230" rx="18"/><rect x="70" y="420" width="300" height="230" rx="18"/><rect x="710" y="420" width="300" height="230" rx="18"/><rect x="70" y="700" width="300" height="230" rx="18"/><rect x="710" y="700" width="300" height="230" rx="18"/></g>
+        <g stroke="#DDF6F2" stroke-opacity=".5" stroke-width="3"><path d="M370 255H710M370 535H710M370 815H710M540 255V815"/></g>
+        <g fill="#DDF6F2" fill-opacity=".6"><circle cx="540" cy="255" r="8"/><circle cx="540" cy="535" r="8"/><circle cx="540" cy="815" r="8"/></g>
+      </svg>
+      <img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*155);top:calc(var(--u)*300);width:calc(var(--u)*150);height:calc(var(--u)*150);filter:drop-shadow(0 0 calc(var(--u)*30) rgba(157,255,238,.7))">
+      <div class="t037-word" style="position:absolute;left:0;right:0;top:calc(var(--u)*500);text-align:center;font-size:calc(var(--u)*132);color:#F0FFFC;text-shadow:0 0 calc(var(--u)*24) rgba(157,255,238,.5)">Acme<br>Pulse</div>
+    </div>
+    <div class="t037-p t037-mono" style="--x:70;--y:66;--w:230;color:#5A6475">Scan pass 1</div><div class="t037-p t037-mono" style="--x:790;--y:66;--w:230;text-align:right;color:#5A6475">X-ray band</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the scanner band slams in from the left</b> and parks at centre; inside it the cards become bone-white wireframes and the Acme mark and "Acme Pulse" glow as the only solid things, on beats 1 and 3.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t037-xr" id="t037-f3">
+    <svg class="t037-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <defs>
+        <radialGradient id="t037-heat"><stop offset="0" stop-color="#FFF4D6"/><stop offset=".18" stop-color="#F4B740"/><stop offset=".45" stop-color="#FF5A4E" stop-opacity=".8"/><stop offset=".75" stop-color="#7A2B6B" stop-opacity=".35"/><stop offset="1" stop-color="#0B1B24" stop-opacity="0"/></radialGradient>
+        <linearGradient id="t037-lut" x1="0" x2="1"><stop offset="0" stop-color="#0A1638"/><stop offset=".3" stop-color="#0FA3A3"/><stop offset=".6" stop-color="#F4B740"/><stop offset=".85" stop-color="#FF5A4E"/><stop offset="1" stop-color="#FFF4D6"/></linearGradient>
+      </defs>
+      <circle cx="515" cy="340" r="190" fill="url(#t037-heat)" opacity=".85"/>
+      <g stroke="#DDF6F2" stroke-width="7" stroke-linecap="round" fill="none" style="filter:drop-shadow(0 0 6px rgba(157,255,238,.7))">
+        <path d="M152 332H378M152 348H378"/>
+        <path d="M402 332H488M402 348H496"/>
+        <path d="M540 332H628M532 348H628"/>
+        <path d="M652 332H878M652 348H878"/>
+      </g>
+      <path d="M488 326 L500 340 L490 352 M540 326 L528 338 L538 354" fill="none" stroke="#FF5A4E" stroke-width="6" stroke-linejoin="round"/>
+      <g fill="#060F16" stroke="#DDF6F2" stroke-width="6" style="filter:drop-shadow(0 0 6px rgba(157,255,238,.7))">
+        <circle cx="140" cy="340" r="26"/><circle cx="390" cy="340" r="26"/><circle cx="640" cy="340" r="26"/><circle cx="890" cy="340" r="26"/>
+      </g>
+      <g font-family="JetBrains Mono" font-size="22" letter-spacing="2" fill="#9FC9C3" text-anchor="middle">
+        <text x="140" y="410">VISIT</text><text x="390" y="410">CART</text><text x="640" y="410">CHECKOUT</text><text x="890" y="410">PAID</text>
+      </g>
+      <text x="515" y="200" text-anchor="middle" font-family="JetBrains Mono" font-size="24" font-weight="600" fill="#FFD2CE">RISK 0.87 · DEPLOY #2231</text>
+      <path d="M515 210V300" stroke="#FFD2CE" stroke-width="2" stroke-dasharray="5 5"/>
+      <rect x="70" y="512" width="420" height="20" rx="10" fill="url(#t037-lut)"/>
+      <text x="70" y="566" font-family="JetBrains Mono" font-size="20" fill="#9FC9C3">COOL</text><text x="490" y="566" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9FC9C3">HOT</text>
+      <text x="1010" y="566" text-anchor="end" font-family="JetBrains Mono" font-size="20" fill="#9FC9C3">14 METRICS SCANNED</text>
+    </svg>
+    <div class="t037-p t037-mono" style="--x:70;--y:66;color:#9FC9C3">Scan pass 2 · the flow under the card</div>
+    <div class="t037-p t037-xcard" style="--x:70;--y:640;--w:940">
+      <div style="display:flex;align-items:baseline;gap:calc(var(--u)*22)"><span style="font:800 calc(var(--u)*84)/1 var(--sans);color:#FF7A70;letter-spacing:-.03em">−18%</span><span style="font:700 calc(var(--u)*34) var(--sans)">Checkout conversion</span></div>
+      <div class="t037-mono" style="margin-top:calc(var(--u)*8);color:#9FC9C3;text-transform:none;letter-spacing:.04em">since 09:42 · after deploy #2231 · the card on the surface still says OK</div>
+      <div style="display:flex;gap:calc(var(--u)*16);margin-top:calc(var(--u)*22)"><span class="t037-btn c">Roll back</span><span class="t037-btn o">Acknowledge</span></div>
+    </div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The band travels left→right at constant speed</b>, drawing the flow's bones node by node; at Cart→Checkout it finds the fracture, the palette cross-fades to thermal on the downbeat and the heat blooms (sine.inOut, 1.2 s loop) until the card asks for a human call.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t037-cool" id="t037-f4">
+    <div class="t037-p" style="--x:60;--y:210;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*22)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*96);height:calc(var(--u)*96)"><span class="t037-word" style="font-size:calc(var(--u)*72)">Acme Pulse</span></div>
+    <div class="t037-p t037-h" style="--x:60;--y:360;text-align:center;font-size:calc(var(--u)*112)">Caught <em style="color:#FF8A80">before</em><br>customers noticed.</div>
+    <div class="t037-p" style="--x:60;--y:680;text-align:center"><span class="t037-btn c" style="font-size:calc(var(--u)*42);padding:calc(var(--u)*26) calc(var(--u)*64)">Start free</span></div>
+    <div class="t037-p" style="--x:330;--y:880;--w:420"><div style="height:calc(var(--u)*16);border-radius:calc(var(--u)*8);background:linear-gradient(90deg,#0A1638,#0FA3A3 60%,rgba(15,163,163,.2))"></div><div class="t037-mono" style="text-align:center;margin-top:calc(var(--u)*12);color:#A9E6E0">thermal · all cool</div></div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The thermal image cools from coral to teal and navy</b> as the heat drains out, right→left; the lockup and tagline fade up through the cool field and Start free lands warm on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Surface cards</b> — ordinary healthy-looking UI with green "✓ OK" chips; the lie on the surface.</li>
+    <li><b>Scanner band</b> — bright-edged vertical band with a soft bleed; everything inside it is X-ray.</li>
+    <li><b>Skeleton layer</b> — the product's hidden flow (Visit → Cart → Checkout → Paid) drawn as glowing bones and joints.</li>
+    <li><b>Fracture</b> — a coral zigzag break between two bones; the anomaly, precisely located.</li>
+    <li><b>Thermal LUT</b> — navy → teal → amber → coral → white legend; heat means risk.</li>
+    <li><b>Hot-spot readout</b> — "RISK 0.87 · DEPLOY #2231" callout over the heat bloom.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Band mask</b> — clip-path inset() window travelling at constant speed, 1 frame-width per bar (2 s at 120 BPM); only inside the band is X-ray.</li>
+    <li><b>Palette switch</b> — X-ray → thermal via CSS filter / SVG feComponentTransfer cross-fade over 400 ms, exactly on a downbeat.</li>
+    <li><b>Heat bloom</b> — hot spot scales 0.9 → 1.1 with sine.inOut on a 1.2 s loop; cools right→left for the CTA.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>It shows the product's core truth in one image: the surface looks fine while something underneath is broken, and only a scan can see it. Risk: medical imagery can feel clinical or alarming; keep fractures small and always resolve them with a human decision.</p><p><b>Adapt to your product:</b> Put your own dashboard on the surface and draw your real pipeline or architecture as the skeleton; the fracture sits wherever your product finds problems.</p><p><b>References:</b> <a href="https://tympanus.net/codrops/2026/03/23/building-a-dual-scene-fluid-x-ray-reveal-effect-in-three-js/">Codrops: dual-scene X-ray reveal</a> · <a href="https://www.shadertoy.com/view/4dfczf">Thermal shader (Shadertoy)</a> · <a href="https://codepen.io/erikrahm/pen/qBwMMR">X-ray hover CodePen</a></p></div>
+</div>
+</body>
+</html>

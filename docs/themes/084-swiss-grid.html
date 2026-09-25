@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>084 · Swiss Grid — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .t084- (084 = theme number) ===== */
+.t084-svg{position:absolute;inset:0;width:100%;height:100%}
+.t084-a{position:absolute}
+#t084-f1{background:#0E1726}
+#t084-f2,#t084-f3{background:#F4F3EF}
+#t084-f4{background:var(--brand)}
+.t084-g{position:absolute;font-family:var(--sans);font-weight:800;letter-spacing:-.045em;line-height:.9}
+.t084-h{position:absolute;font-family:var(--sans);font-weight:700;letter-spacing:-.03em;line-height:1.02}
+.t084-h i{font-family:var(--serif);font-weight:400;letter-spacing:-.01em}
+.t084-m{position:absolute;font-family:var(--mono);font-size:calc(var(--u)*22);line-height:1.35;letter-spacing:.02em}
+.t084-row{position:absolute;left:calc(var(--u)*60);width:calc(var(--u)*960);height:calc(var(--u)*64);display:grid;grid-template-columns:calc(var(--u)*400) calc(var(--u)*200) calc(var(--u)*200) calc(var(--u)*160);align-items:center;font-family:var(--sans);font-weight:600;font-size:calc(var(--u)*28);color:var(--ink);border-top:calc(var(--u)*2) solid var(--ink)}
+.t084-row span:not(:first-child){font-family:var(--mono);font-weight:400;font-size:calc(var(--u)*24)}
+.t084-row.t084-hd{font-family:var(--mono);font-weight:400;font-size:calc(var(--u)*20);color:var(--muted);border-top:calc(var(--u)*6) solid var(--ink);height:calc(var(--u)*54)}
+.t084-row.t084-hd span{font-size:calc(var(--u)*20)}
+.t084-row.t084-bad{background:var(--alert);color:#fff;border-top-color:var(--alert)}
+.t084-btn{position:absolute;display:flex;align-items:center;justify-content:space-between;padding:0 calc(var(--u)*28);font-family:var(--sans);font-weight:700;font-size:calc(var(--u)*36);letter-spacing:-.02em}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 084 · Art movements &amp; eras</div>
+    <h1>Swiss Grid</h1>
+    <p class="dek">International Typographic Style played straight: a visible 12-module grid, flush-left grotesk, giant numerals and a single spot colour. Every beat snaps to a module, so the one row that turns coral in an otherwise objective table is the whole story.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t084-f1">
+<svg class="t084-svg" viewBox="0 0 1080 1080"><g stroke="#F4F3EF" stroke-opacity="0.09" stroke-width="1.5"><line x1="60" y1="0" x2="60" y2="1080"/><line x1="140" y1="0" x2="140" y2="1080"/><line x1="220" y1="0" x2="220" y2="1080"/><line x1="300" y1="0" x2="300" y2="1080"/><line x1="380" y1="0" x2="380" y2="1080"/><line x1="460" y1="0" x2="460" y2="1080"/><line x1="540" y1="0" x2="540" y2="1080"/><line x1="620" y1="0" x2="620" y2="1080"/><line x1="700" y1="0" x2="700" y2="1080"/><line x1="780" y1="0" x2="780" y2="1080"/><line x1="860" y1="0" x2="860" y2="1080"/><line x1="940" y1="0" x2="940" y2="1080"/><line x1="1020" y1="0" x2="1020" y2="1080"/><line x1="0" y1="60" x2="1080" y2="60"/><line x1="0" y1="140" x2="1080" y2="140"/><line x1="0" y1="220" x2="1080" y2="220"/><line x1="0" y1="300" x2="1080" y2="300"/><line x1="0" y1="380" x2="1080" y2="380"/><line x1="0" y1="460" x2="1080" y2="460"/><line x1="0" y1="540" x2="1080" y2="540"/><line x1="0" y1="620" x2="1080" y2="620"/><line x1="0" y1="700" x2="1080" y2="700"/><line x1="0" y1="780" x2="1080" y2="780"/><line x1="0" y1="860" x2="1080" y2="860"/><line x1="0" y1="940" x2="1080" y2="940"/><line x1="0" y1="1020" x2="1080" y2="1020"/></g></svg>
+<div class="t084-g" style="left:calc(var(--u)*52);top:calc(var(--u)*70);font-size:calc(var(--u)*600);color:#F4F3EF">38</div>
+<div class="t084-m" style="left:calc(var(--u)*780);top:calc(var(--u)*70);color:var(--brand)">Fig. 1<br>dashboards<br>checked today<br>by one team</div>
+<div class="t084-h" style="left:calc(var(--u)*60);top:calc(var(--u)*620);width:calc(var(--u)*880);font-size:calc(var(--u)*80);color:#F4F3EF">How many dashboards did you check <i style="color:var(--brand)">today?</i></div>
+<div class="t084-m" style="left:calc(var(--u)*60);top:calc(var(--u)*940);color:var(--alert)">— And the drop still shipped on Friday.</div>
+<div class="t084-m" style="left:calc(var(--u)*780);top:calc(var(--u)*940);color:#8A93A3">0:00 / 0:45</div>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The grid draws first (hairlines stroke on, top→bottom)</b>, then the giant "38" cuts in on the downbeat like a Der Film poster; the headline sets line by line, flush-left, each line on a quarter note.</p></div>
+  <div class="cw"><div class="cell" id="t084-f2">
+<svg class="t084-svg" viewBox="0 0 1080 1080"><g stroke="#0E1726" stroke-opacity="0.07" stroke-width="1.5"><line x1="60" y1="0" x2="60" y2="1080"/><line x1="140" y1="0" x2="140" y2="1080"/><line x1="220" y1="0" x2="220" y2="1080"/><line x1="300" y1="0" x2="300" y2="1080"/><line x1="380" y1="0" x2="380" y2="1080"/><line x1="460" y1="0" x2="460" y2="1080"/><line x1="540" y1="0" x2="540" y2="1080"/><line x1="620" y1="0" x2="620" y2="1080"/><line x1="700" y1="0" x2="700" y2="1080"/><line x1="780" y1="0" x2="780" y2="1080"/><line x1="860" y1="0" x2="860" y2="1080"/><line x1="940" y1="0" x2="940" y2="1080"/><line x1="1020" y1="0" x2="1020" y2="1080"/><line x1="0" y1="60" x2="1080" y2="60"/><line x1="0" y1="140" x2="1080" y2="140"/><line x1="0" y1="220" x2="1080" y2="220"/><line x1="0" y1="300" x2="1080" y2="300"/><line x1="0" y1="380" x2="1080" y2="380"/><line x1="0" y1="460" x2="1080" y2="460"/><line x1="0" y1="540" x2="1080" y2="540"/><line x1="0" y1="620" x2="1080" y2="620"/><line x1="0" y1="700" x2="1080" y2="700"/><line x1="0" y1="780" x2="1080" y2="780"/><line x1="0" y1="860" x2="1080" y2="860"/><line x1="0" y1="940" x2="1080" y2="940"/><line x1="0" y1="1020" x2="1080" y2="1020"/></g></svg>
+<svg class="t084-svg" viewBox="0 0 1080 1080"><rect x="380" y="60" width="640" height="560" fill="#0FA3A3"/><rect x="60" y="620" width="960" height="8" fill="#0E1726"/></svg>
+<img class="t084-a" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*60);top:calc(var(--u)*60);width:calc(var(--u)*240);height:calc(var(--u)*240)" alt="">
+<div class="t084-m" style="left:calc(var(--u)*60);top:calc(var(--u)*320);color:var(--ink)">Acme<br>Anomaly agent<br>Release 1.0</div>
+<div class="t084-m" style="left:calc(var(--u)*700);top:calc(var(--u)*80);color:#fff">Every metric<br>in the<br>background.</div>
+<div class="t084-g" style="left:calc(var(--u)*56);top:calc(var(--u)*652);font-size:calc(var(--u)*205);color:var(--ink)">Acme<br>Pulse</div>
+<div class="t084-m" style="left:calc(var(--u)*780);top:calc(var(--u)*660);color:var(--brand-deep)">01<br>Reveal<br>0:08</div>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the teal field wipes right→left across eight modules</b>, the mark snaps into module 1, and "Acme / Pulse" slams in at 205 px — the two words land on beats 1 and 3.</p></div>
+  <div class="cw"><div class="cell" id="t084-f3">
+<svg class="t084-svg" viewBox="0 0 1080 1080"><g stroke="#0E1726" stroke-opacity="0.06" stroke-width="1.5"><line x1="60" y1="0" x2="60" y2="1080"/><line x1="140" y1="0" x2="140" y2="1080"/><line x1="220" y1="0" x2="220" y2="1080"/><line x1="300" y1="0" x2="300" y2="1080"/><line x1="380" y1="0" x2="380" y2="1080"/><line x1="460" y1="0" x2="460" y2="1080"/><line x1="540" y1="0" x2="540" y2="1080"/><line x1="620" y1="0" x2="620" y2="1080"/><line x1="700" y1="0" x2="700" y2="1080"/><line x1="780" y1="0" x2="780" y2="1080"/><line x1="860" y1="0" x2="860" y2="1080"/><line x1="940" y1="0" x2="940" y2="1080"/><line x1="1020" y1="0" x2="1020" y2="1080"/><line x1="0" y1="60" x2="1080" y2="60"/><line x1="0" y1="140" x2="1080" y2="140"/><line x1="0" y1="220" x2="1080" y2="220"/><line x1="0" y1="300" x2="1080" y2="300"/><line x1="0" y1="380" x2="1080" y2="380"/><line x1="0" y1="460" x2="1080" y2="460"/><line x1="0" y1="540" x2="1080" y2="540"/><line x1="0" y1="620" x2="1080" y2="620"/><line x1="0" y1="700" x2="1080" y2="700"/><line x1="0" y1="780" x2="1080" y2="780"/><line x1="0" y1="860" x2="1080" y2="860"/><line x1="0" y1="940" x2="1080" y2="940"/><line x1="0" y1="1020" x2="1080" y2="1020"/></g></svg>
+<div class="t084-m" style="left:calc(var(--u)*60);top:calc(var(--u)*64);color:var(--brand-deep);font-weight:600">Pulse · watching 14 metrics</div>
+<div class="t084-m" style="left:calc(var(--u)*780);top:calc(var(--u)*64);color:var(--muted)">09:47 · live</div>
+<div class="t084-row t084-hd" style="top:calc(var(--u)*120)"><span>Metric</span><span>Now</span><span>Δ 24 h</span><span>Status</span></div>
+<div class="t084-row" style="top:calc(var(--u)*174)"><span>Signups</span><span>1,204</span><span>+2.1%</span><span>ok</span></div>
+<div class="t084-row" style="top:calc(var(--u)*238)"><span>Active users</span><span>18,630</span><span>+0.4%</span><span>ok</span></div>
+<div class="t084-row" style="top:calc(var(--u)*302)"><span>p95 latency</span><span>212 ms</span><span>−3 ms</span><span>ok</span></div>
+<div class="t084-row t084-bad" style="top:calc(var(--u)*366)"><span>&nbsp;Checkout conversion</span><span>2.9%</span><span>−18%</span><span>alert</span></div>
+<div class="t084-row" style="top:calc(var(--u)*430);border-top-width:calc(var(--u)*6)"><span>Error rate</span><span>0.4%</span><span>±0</span><span>ok</span></div>
+<div class="t084-g" style="left:calc(var(--u)*52);top:calc(var(--u)*530);font-size:calc(var(--u)*300);color:var(--alert)">−18%</div>
+<div class="t084-m" style="left:calc(var(--u)*60);top:calc(var(--u)*830);color:var(--ink);font-size:calc(var(--u)*26)">Checkout conversion<br>since 09:42 · after deploy #2231</div>
+<div class="t084-btn" style="left:calc(var(--u)*620);top:calc(var(--u)*840);width:calc(var(--u)*400);height:calc(var(--u)*96);background:var(--ink);color:#F4F3EF">Roll back <span style="font-family:var(--mono);font-weight:400">→</span></div>
+<div class="t084-m" style="left:calc(var(--u)*648);top:calc(var(--u)*956);color:var(--muted);text-decoration:underline">or acknowledge</div>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Rows set in one by one like a timetable</b>; on a downbeat the checkout row floods coral from left to right and the numeral −18% drops into the grid below. The ink "Roll back" block slides up one module on the next bar.</p></div>
+  <div class="cw"><div class="cell" id="t084-f4">
+<svg class="t084-svg" viewBox="0 0 1080 1080"><g stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="1.5"><line x1="60" y1="0" x2="60" y2="1080"/><line x1="140" y1="0" x2="140" y2="1080"/><line x1="220" y1="0" x2="220" y2="1080"/><line x1="300" y1="0" x2="300" y2="1080"/><line x1="380" y1="0" x2="380" y2="1080"/><line x1="460" y1="0" x2="460" y2="1080"/><line x1="540" y1="0" x2="540" y2="1080"/><line x1="620" y1="0" x2="620" y2="1080"/><line x1="700" y1="0" x2="700" y2="1080"/><line x1="780" y1="0" x2="780" y2="1080"/><line x1="860" y1="0" x2="860" y2="1080"/><line x1="940" y1="0" x2="940" y2="1080"/><line x1="1020" y1="0" x2="1020" y2="1080"/><line x1="0" y1="60" x2="1080" y2="60"/><line x1="0" y1="140" x2="1080" y2="140"/><line x1="0" y1="220" x2="1080" y2="220"/><line x1="0" y1="300" x2="1080" y2="300"/><line x1="0" y1="380" x2="1080" y2="380"/><line x1="0" y1="460" x2="1080" y2="460"/><line x1="0" y1="540" x2="1080" y2="540"/><line x1="0" y1="620" x2="1080" y2="620"/><line x1="0" y1="700" x2="1080" y2="700"/><line x1="0" y1="780" x2="1080" y2="780"/><line x1="0" y1="860" x2="1080" y2="860"/><line x1="0" y1="940" x2="1080" y2="940"/><line x1="0" y1="1020" x2="1080" y2="1020"/></g></svg>
+<div class="t084-g" style="left:calc(var(--u)*56);top:calc(var(--u)*70);font-size:calc(var(--u)*170);color:#fff">Every<br>metric.<br>Every<br><i style="font-family:var(--serif);font-weight:400;letter-spacing:-.01em;color:var(--ink)">minute.</i></div>
+<img class="t084-a" src="../assets/brand/acme-mark.svg" style="left:calc(var(--u)*60);top:calc(var(--u)*860);width:calc(var(--u)*100);height:calc(var(--u)*100);border-radius:calc(var(--u)*22);box-shadow:0 0 0 calc(var(--u)*3) #fff" alt="">
+<div class="t084-h" style="left:calc(var(--u)*180);top:calc(var(--u)*876);font-size:calc(var(--u)*64);font-weight:800;color:#fff">Acme Pulse</div>
+<div class="t084-btn" style="left:calc(var(--u)*620);top:calc(var(--u)*700);width:calc(var(--u)*400);height:calc(var(--u)*110);background:var(--alert);color:#fff;font-size:calc(var(--u)*44)">Start free <span style="font-family:var(--mono);font-weight:400">→</span></div>
+<div class="t084-m" style="left:calc(var(--u)*620);top:calc(var(--u)*830);color:#fff">acme.example<br>Free for 14 days</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>Words stack on quarter notes</b>, "minute." switches to italic serif on the last beat; the coral CTA block snaps from width 0 to 5 modules on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Visible grid</b> — 12 × 12 modules of 80 px, hairlines at 7–16 % opacity</li><li><b>Giant numeral</b> — one number per beat, 300–600 px Manrope 800, tight tracking</li><li><b>Flush-left headline</b> — ragged right, never centred, one serif italic word</li><li><b>Timetable table</b> — objective rows of metrics in mono; the anomaly row floods coral</li><li><b>Caption column</b> — mono figure notes parked in the rightmost 3 modules</li><li><b>Module button</b> — rectangular CTA exactly 5 modules wide, arrow in mono</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Grid stroke-on</b> — hairlines draw 0→100 % in 0.5 s, power2.out, staggered 0.03 s — finishes on beat 1</li><li><b>Module snap</b> — blocks move only in whole-module steps (80 px), steps(4) or expo.out 0.25 s, one step per 8th note</li><li><b>Row flood</b> — coral background scaleX 0→1 from the left, 0.5 s power3.inOut = one beat at 120 BPM</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Swiss objectivity reads as honesty: nothing decorates the data, so a monitoring product looks precise and trustworthy. Risk: it can feel cold or generic-corporate; the oversized numerals and the one-colour discipline are what keep it a poster rather than a slide.</p><p><b>Adapt to your product:</b> Replace the table rows with your own KPIs or features and keep exactly one spot colour for the moment your product intervenes. Any screenshot you add should be cropped to whole grid modules.</p><p><b>References:</b> <a href="https://en.wikipedia.org/wiki/International_Typographic_Style">https://en.wikipedia.org/wiki/International_Typographic_Style</a> — grid, flush-left sans, asymmetric layout, objectivity · <a href="https://en.wikipedia.org/wiki/Josef_M%C3%BCller-Brockmann">https://en.wikipedia.org/wiki/Josef_M%C3%BCller-Brockmann</a> — Der Film poster and Grid Systems in Graphic Design</p></div>
+</div>
+</body>
+</html>

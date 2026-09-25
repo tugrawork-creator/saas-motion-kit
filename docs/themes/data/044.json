@@ -1,0 +1,22 @@
+{"id":"044","slug":"air-traffic-control","name":"Air-Traffic Control","category":"metaphor",
+ "summary":"Every metric is a flight on a calm radar console; the one in conflict moves to HOLD and the human controller clears it.",
+ "look":"A dark slate-teal ATC console with phosphor range rings, blips with echo trails and mono datablocks, plus buff paper flight strips in teal holders. Conflict is an amber blinking box and a coral strip in the HOLD column.",
+ "components":[
+  {"name":"Flight progress strip","role":"paper strip per metric: callsign, value, status"},
+  {"name":"Strip bay","role":"ACTIVE and HOLD columns; position tells the story"},
+  {"name":"Radar PPI","role":"range rings and blips; the Acme mark is the tower"},
+  {"name":"Datablock","role":"mono tag tethered to each blip"},
+  {"name":"Conflict box","role":"amber outline that blinks, then holds, around the drifting metric"},
+  {"name":"Clearance stamp","role":"'CLEARED' once the human has acted"}],
+ "motion":[
+  {"name":"Strip slide-and-clack","how":"strips snap into holders with back.out(1.4) in 0.25 s plus a 2 px settle, on the hi-hat at 120 BPM"},
+  {"name":"Blip trails","how":"linear tracks with three echo dots at 70/45/25% opacity, refreshed every beat"},
+  {"name":"Alert pulse","how":"conflict outline blinks at 2 Hz for 1 s, then holds solid on the next downbeat"}],
+ "story":"Hook: '38 dashboards. One controller.' Strips slap into an overflowing bay, all UNWATCHED. Reveal: the radar fades up, the Acme mark lands as the tower and 'Acme Pulse' types in on the drop. Proof: one blip turns coral inside an amber conflict box; the datablock reads 'Checkout conversion −18% · since 09:42 · after deploy #2231' and its strip slides into HOLD, where the controller taps Roll back. CTA: 'Every metric. Every minute.' over a neat bay of teal strips and a CLEARED stamp, Start free.",
+ "adapt":"Make each strip one of your objects (a job, an account, a shipment, a pipeline) and let HOLD be whatever your product asks a human to decide.",
+ "references":[
+  {"url":"https://nats.aero/blog/2026/01/atc-explained-flight-progress-strips/","note":"colour-coded strips whose position tells the story","verified":true},
+  {"url":"https://en.wikipedia.org/wiki/Flight_progress_strip","note":"strip layout and fields","verified":false}],
+ "fit":{"readability":2,"trust":3,"effort":"med","risk":"Dense at 1:1; cap the bay at 8 strips and the radar at 4–5 blips."},
+ "best_for":["monitoring","ops & incident tools","logistics","fintech"],
+ "file":"themes/044-air-traffic-control.html"}

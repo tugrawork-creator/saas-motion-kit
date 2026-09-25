@@ -1,0 +1,75 @@
+{
+ "id": "099",
+ "slug": "overhead-desk",
+ "name": "Overhead Desk",
+ "category": "camera",
+ "summary": "A 90° top-down desk film: printed dashboards swept away by a hand, the Acme mark set down on the drop, a finger tapping Roll back on a phone notification.",
+ "look": "Warm wood desk with soft top light, paper printouts, sticky notes, a coffee cup, a phone and a laptop seen straight down; flat illustrated hands with drop shadows; rig label and frame guides as camera annotations.",
+ "components": [
+  {
+   "name": "Desk surface",
+   "role": "warm wood with grain; the stage every object is dropped onto"
+  },
+  {
+   "name": "Printed dashboards",
+   "role": "paper sheets with charts, the physical form of “too many dashboards”"
+  },
+  {
+   "name": "Hands",
+   "role": "stylised pointing hand with a drop shadow; the human in the loop"
+  },
+  {
+   "name": "Phone notification",
+   "role": "the anomaly as a push notification with Roll back / Acknowledge"
+  },
+  {
+   "name": "Brand coaster",
+   "role": "the Acme mark as an object that gets placed on the desk on the drop"
+  },
+  {
+   "name": "Rig label + frame guides",
+   "role": "OVERHEAD RIG · 90° tag and corner guides that name the camera"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Object drop",
+   "how": "each object enters from off-frame (y ±300 px) with back.out(1.6) in 0.35 s and a shadow that tightens as it lands; one object per beat at 120 BPM"
+  },
+  {
+   "name": "Hand sweep",
+   "how": "one arc move 0.5 s (power3.inOut) that pushes the papers out left with 6 px motion blur, finishing on the drop"
+  },
+  {
+   "name": "Tap",
+   "how": "finger dips 8 px (scale 0.97) in 0.08 s on the downbeat, button ripple 0.4 s expo.out, phone shake ±4 px for 0.2 s when the notification arrives"
+  }
+ ],
+ "story": "Hook: a desk buried in printed dashboards, “How many dashboards did you check today?”. Reveal: a hand sweeps the papers away and sets the Acme Pulse card down on the drop. Proof: the phone buzzes with “Checkout conversion −18% since 09:42 after deploy #2231” and a finger taps Roll back. CTA: a tidy desk, laptop showing “You ship. Pulse watches.” and Start free.",
+ "adapt": "Print your users’ current tools as paper sheets for the hook, and show your product’s key moment on a phone or laptop lying on the desk. Real overhead footage of hands with a screen-replaced phone works just as well as illustration.",
+ "references": [
+  {
+   "url": "https://www.studiobinder.com/camera-shots/camera-angles/overhead-shot/",
+   "note": "the overhead (bird’s-eye) shot and how it is used",
+   "verified": true
+  },
+  {
+   "url": "https://morphic.com/ai-glossary/overhead-shot",
+   "note": "top-down 90° framing and flat-lay use in product video",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Top-down desk shots are warm and human but a little generic; illustrated hands must be very well drawn (or real footage) or the frame looks cheap, and the phone UI has to stay big enough to read at 1:1."
+ },
+ "best_for": [
+  "SMB tools",
+  "mobile apps",
+  "productivity",
+  "human-in-the-loop products"
+ ],
+ "file": "themes/099-overhead-desk.html"
+}

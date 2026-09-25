@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>060 · Neo-Brutalist — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t060 ===== */
+
+.t060-f{position:absolute;inset:0;overflow:hidden;color:var(--ink);font-family:var(--sans);background:#F3EFE6;
+ background-image:linear-gradient(rgba(14,23,38,.06) calc(var(--u)*2),transparent calc(var(--u)*2)),linear-gradient(90deg,rgba(14,23,38,.06) calc(var(--u)*2),transparent calc(var(--u)*2));background-size:calc(var(--u)*72) calc(var(--u)*72);background-position:calc(var(--u)*60) calc(var(--u)*60)}
+.t060-c{position:absolute;border:calc(var(--u)*5) solid var(--ink);border-radius:calc(var(--u)*14);background:#fff;box-shadow:calc(var(--u)*9) calc(var(--u)*9) 0 var(--ink)}
+.t060-blk{position:absolute;border:calc(var(--u)*5) solid var(--ink);border-radius:calc(var(--u)*12);box-shadow:calc(var(--u)*9) calc(var(--u)*9) 0 var(--ink);font:800 calc(var(--u)*78)/1 var(--sans);text-transform:uppercase;letter-spacing:-.02em;padding:calc(var(--u)*18) calc(var(--u)*26);white-space:nowrap}
+.t060-stk{position:absolute;border:calc(var(--u)*4) solid var(--ink);border-radius:calc(var(--u)*100);font:800 calc(var(--u)*26) var(--sans);text-transform:uppercase;padding:calc(var(--u)*10) calc(var(--u)*24);white-space:nowrap;box-shadow:calc(var(--u)*5) calc(var(--u)*5) 0 var(--ink)}
+.t060-tape{position:absolute;width:calc(var(--u)*130);height:calc(var(--u)*40);background:rgba(207,241,238,.9);border:calc(var(--u)*2) dashed rgba(14,23,38,.35)}
+.t060-lb{font:600 calc(var(--u)*20) var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.t060-v{font:700 calc(var(--u)*44) var(--mono);letter-spacing:-.03em}
+.t060-ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.t060-tick{position:absolute;left:0;right:0;height:calc(var(--u)*74);background:var(--alert);border-top:calc(var(--u)*5) solid var(--ink);border-bottom:calc(var(--u)*5) solid var(--ink);font:800 calc(var(--u)*30) var(--sans);color:#fff;display:flex;align-items:center;gap:calc(var(--u)*34);white-space:nowrap;padding-left:calc(var(--u)*30);text-transform:uppercase}
+.t060-btn{position:absolute;border:calc(var(--u)*5) solid var(--ink);border-radius:calc(var(--u)*14);background:var(--alert);color:#fff;font:800 calc(var(--u)*44) var(--sans);text-transform:uppercase;padding:calc(var(--u)*22) calc(var(--u)*40);box-shadow:calc(var(--u)*14) calc(var(--u)*14) 0 var(--ink);white-space:nowrap}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 060 · Signature directions</div>
+    <h1>Neo-Brutalist</h1>
+    <p class="dek">Neo-brutalism, braked for a serious product: off-white paper on a 72 px grid, 5 px ink outlines, hard unblurred offset shadows, flat fills, taped cards, rotated stickers, starbursts and one scrolling ticker. Everything moves in steps and every press lands on a beat — loud, but never messy: numbers and tables are never tilted.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t060-f1"><div class="t060-f">
+<div class="t060-blk" style="left:calc(var(--u)*60);top:calc(var(--u)*70);background:#fff">How many</div>
+<div class="t060-blk" style="left:calc(var(--u)*60);top:calc(var(--u)*190);background:var(--amber)">dashboards</div>
+<div class="t060-blk" style="left:calc(var(--u)*60);top:calc(var(--u)*310);background:#fff">did you</div>
+<div class="t060-blk" style="left:calc(var(--u)*80);top:calc(var(--u)*440);background:var(--alert);color:#fff;transform:rotate(-3deg)">check today?</div>
+<div class="t060-c" style="left:calc(var(--u)*80);top:calc(var(--u)*600);width:calc(var(--u)*420);height:calc(var(--u)*170);padding:calc(var(--u)*24);transform:rotate(-2deg)"><div class="t060-lb">checkout · tab 12/38</div><div class="t060-v" style="margin-top:calc(var(--u)*14)">looks fine?</div></div>
+<div class="t060-c" style="left:calc(var(--u)*560);top:calc(var(--u)*600);width:calc(var(--u)*420);height:calc(var(--u)*170);padding:calc(var(--u)*24);transform:rotate(2deg);background:var(--brand-soft)"><div class="t060-lb">p95 latency</div><div class="t060-v" style="margin-top:calc(var(--u)*14)">212 ms</div></div>
+<div class="t060-c" style="left:calc(var(--u)*180);top:calc(var(--u)*820);width:calc(var(--u)*440);height:calc(var(--u)*170);padding:calc(var(--u)*24);transform:rotate(1deg);background:#FFE3D6"><div class="t060-lb">error rate · no owner</div><div class="t060-v" style="margin-top:calc(var(--u)*14)">0.4 %</div></div>
+<div class="t060-tape" style="left:calc(var(--u)*230);top:calc(var(--u)*580);transform:rotate(-8deg)"></div><div class="t060-tape" style="left:calc(var(--u)*700);top:calc(var(--u)*582);transform:rotate(6deg)"></div><div class="t060-tape" style="left:calc(var(--u)*340);top:calc(var(--u)*802);transform:rotate(-3deg)"></div>
+<svg class="t060-ov" viewBox="0 0 1080 1080"><polygon points="969.5,900.5 938.3,915.7 956.4,945.4 921.7,947.6 927.1,981.9 894.3,970.7 886.1,1004.4 860.0,981.5 839.5,1009.5 824.3,978.3 794.6,996.4 792.4,961.7 758.1,967.1 769.3,934.3 735.6,926.1 758.5,900.0 730.5,879.5 761.7,864.3 743.6,834.6 778.3,832.4 772.9,798.1 805.7,809.3 813.9,775.6 840.0,798.5 860.5,770.5 875.7,801.7 905.4,783.6 907.6,818.3 941.9,812.9 930.7,845.7 964.4,853.9 941.5,880.0" fill="#F4B740" stroke="#0E1726" stroke-width="5" stroke-linejoin="round"/><text x="850" y="880" text-anchor="middle" font-family="Manrope" font-weight="800" font-size="54" fill="#0E1726">38</text><text x="850" y="925" text-anchor="middle" font-family="Manrope" font-weight="800" font-size="24" fill="#0E1726">TABS</text></svg>
+<div class="t060-stk" style="left:calc(var(--u)*740);top:calc(var(--u)*330);background:#fff;transform:rotate(8deg)">again?!</div>
+</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Headline blocks slam in from the top</b> with a 2-frame stepped hold, one per beat; cards drop onto the pile and press into their shadows, tape sticks half a beat later, and the coral “check today?” sticker slaps on the bar-3 downbeat (1.3 → 1, 3° wobble).</p></div>
+  <div class="cw"><div class="cell" id="t060-f2"><div class="t060-f">
+<div class="t060-blk" style="left:calc(var(--u)*60);top:calc(var(--u)*120);background:var(--brand);color:#fff;font-size:calc(var(--u)*110)">You ship.</div>
+<div class="t060-blk" style="left:calc(var(--u)*200);top:calc(var(--u)*290);background:var(--brand-soft);font-size:calc(var(--u)*110)">Pulse <span style="font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none">watches.</span></div>
+<div class="t060-c" style="left:calc(var(--u)*170);top:calc(var(--u)*560);width:calc(var(--u)*740);height:calc(var(--u)*230);display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*26);white-space:nowrap;box-shadow:calc(var(--u)*14) calc(var(--u)*14) 0 var(--ink)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*118);height:calc(var(--u)*118)"><span style="font:800 calc(var(--u)*90) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+<div class="t060-tape" style="left:calc(var(--u)*140);top:calc(var(--u)*540);transform:rotate(-20deg)"></div><div class="t060-tape" style="left:calc(var(--u)*820);top:calc(var(--u)*540);transform:rotate(18deg)"></div>
+<div class="t060-tick" style="top:calc(var(--u)*900);background:var(--ink)">✱ AI agent ✱ every metric ✱ every minute ✱ you decide ✱ AI agent ✱</div>
+</div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop every card presses into its shadow at once</b> (100 ms) and collapses into a strip; the teal “You ship.” block slams from the left on beat 1, the soft block from the right a beat later, and the lockup card drops and presses on bar 2.</p></div>
+  <div class="cw"><div class="cell" id="t060-f3"><div class="t060-f">
+<div class="t060-blk" style="left:calc(var(--u)*60);top:calc(var(--u)*64);background:#fff;font-size:calc(var(--u)*56)">Caught <span style="background:var(--alert);color:#fff;padding:0 calc(var(--u)*10)">before</span> they noticed.</div>
+<div class="t060-c" style="left:calc(var(--u)*60);top:calc(var(--u)*230);width:calc(var(--u)*300);height:calc(var(--u)*150);padding:calc(var(--u)*22)"><div class="t060-stk" style="right:calc(var(--u)*-18);top:calc(var(--u)*-22);background:var(--ok);color:#fff;font-size:calc(var(--u)*22);padding:calc(var(--u)*6) calc(var(--u)*16);transform:rotate(6deg)">✓ ok</div><div class="t060-lb">signups</div><div class="t060-v" style="margin-top:calc(var(--u)*12);font-size:calc(var(--u)*40)">+4%</div></div><div class="t060-c" style="left:calc(var(--u)*60);top:calc(var(--u)*420);width:calc(var(--u)*300);height:calc(var(--u)*150);padding:calc(var(--u)*22)"><div class="t060-stk" style="right:calc(var(--u)*-18);top:calc(var(--u)*-22);background:var(--ok);color:#fff;font-size:calc(var(--u)*22);padding:calc(var(--u)*6) calc(var(--u)*16);transform:rotate(6deg)">✓ ok</div><div class="t060-lb">active users</div><div class="t060-v" style="margin-top:calc(var(--u)*12);font-size:calc(var(--u)*40)">+1%</div></div><div class="t060-c" style="left:calc(var(--u)*60);top:calc(var(--u)*610);width:calc(var(--u)*300);height:calc(var(--u)*150);padding:calc(var(--u)*22)"><div class="t060-stk" style="right:calc(var(--u)*-18);top:calc(var(--u)*-22);background:var(--ok);color:#fff;font-size:calc(var(--u)*22);padding:calc(var(--u)*6) calc(var(--u)*16);transform:rotate(6deg)">✓ ok</div><div class="t060-lb">p95 latency</div><div class="t060-v" style="margin-top:calc(var(--u)*12);font-size:calc(var(--u)*40)">212 ms</div></div>
+<div class="t060-c" style="left:calc(var(--u)*420);top:calc(var(--u)*220);width:calc(var(--u)*600);height:calc(var(--u)*380);padding:calc(var(--u)*30);background:#FFE3D6;box-shadow:calc(var(--u)*16) calc(var(--u)*16) 0 var(--ink);transform:translate(calc(var(--u)*-6),calc(var(--u)*-6))">
+<div class="t060-lb" style="color:var(--ink)">⚠ checkout conversion</div>
+<div style="font:800 calc(var(--u)*150)/1 var(--mono);letter-spacing:-.06em;margin-top:calc(var(--u)*24);color:var(--alert);-webkit-text-stroke:calc(var(--u)*4) var(--ink)">−18%</div>
+<div style="font:600 calc(var(--u)*24) var(--mono);margin-top:calc(var(--u)*22)">since 09:42 · after deploy #2231</div></div>
+<svg class="t060-ov" viewBox="0 0 1080 1080"><polygon points="1040.0,230.0 1018.8,241.7 1033.9,260.6 1009.9,263.3 1016.6,286.6 993.3,279.9 990.6,303.9 971.7,288.8 960.0,310.0 948.3,288.8 929.4,303.9 926.7,279.9 903.4,286.6 910.1,263.3 886.1,260.6 901.2,241.7 880.0,230.0 901.2,218.3 886.1,199.4 910.1,196.7 903.4,173.4 926.7,180.1 929.4,156.1 948.3,171.2 960.0,150.0 971.7,171.2 990.6,156.1 993.3,180.1 1016.6,173.4 1009.9,196.7 1033.9,199.4 1018.8,218.3" fill="#FF5A4E" stroke="#0E1726" stroke-width="5" stroke-linejoin="round"/><text x="960" y="242" text-anchor="middle" font-family="Manrope" font-weight="800" font-size="32" fill="#fff">!!</text></svg>
+<div class="t060-btn" style="left:calc(var(--u)*430);top:calc(var(--u)*660)">Roll back →</div>
+<div class="t060-stk" style="left:calc(var(--u)*760);top:calc(var(--u)*640);background:#fff;transform:rotate(-7deg);font-size:calc(var(--u)*22)">your call</div>
+<svg class="t060-ov" viewBox="0 0 1080 1080"><path d="M760 730 l 0 64 l 16 -15 l 12 28 l 12 -5 l -12 -27 l 22 -2 z" fill="#fff" stroke="#0E1726" stroke-width="4" stroke-linejoin="round"/></svg>
+<div class="t060-tick" style="top:calc(var(--u)*880)">✱ 2,418 events/sec ✱ 14 metrics watched ✱ 1 anomaly ✱ checkout −18% ✱</div>
+</div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Metric cards press in column by column</b>, each ✓ sticker sticking half a beat later; on the bar-9 downbeat the coral card pops out 6 px with a bigger shadow and the starburst slaps its corner; the cursor clicks Roll back on the next downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t060-f4"><div class="t060-f">
+<div class="t060-c" style="left:calc(var(--u)*150);top:calc(var(--u)*110);width:calc(var(--u)*780);height:calc(var(--u)*240);display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*26);white-space:nowrap;box-shadow:calc(var(--u)*14) calc(var(--u)*14) 0 var(--ink)"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*122);height:calc(var(--u)*122)"><span style="font:800 calc(var(--u)*96) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+<div class="t060-tape" style="left:calc(var(--u)*120);top:calc(var(--u)*92);transform:rotate(-22deg)"></div><div class="t060-tape" style="left:calc(var(--u)*840);top:calc(var(--u)*92);transform:rotate(20deg)"></div>
+<div class="t060-blk" style="left:calc(var(--u)*60);top:calc(var(--u)*430);background:var(--brand-soft);font-size:calc(var(--u)*66)">Every metric.</div>
+<div class="t060-blk" style="left:calc(var(--u)*330);top:calc(var(--u)*540);background:var(--brand);color:#fff;font-size:calc(var(--u)*66)">Every minute.</div>
+<svg class="t060-ov" viewBox="0 0 1080 1080"><polygon points="1029.0,483.9 1001.8,495.1 1016.2,520.8 986.7,520.6 990.2,549.9 963.0,538.5 955.0,566.8 934.3,545.9 916.1,569.0 904.9,541.8 879.2,556.2 879.4,526.7 850.1,530.2 861.5,503.0 833.2,495.0 854.1,474.3 831.0,456.1 858.2,444.9 843.8,419.2 873.3,419.4 869.8,390.1 897.0,401.5 905.0,373.2 925.7,394.1 943.9,371.0 955.1,398.2 980.8,383.8 980.6,413.3 1009.9,409.8 998.5,437.0 1026.8,445.0 1005.9,465.7" fill="#F4B740" stroke="#0E1726" stroke-width="5" stroke-linejoin="round"/><text x="930" y="468" text-anchor="middle" font-family="Manrope" font-weight="800" font-size="46" fill="#0E1726">14</text><text x="930" y="502" text-anchor="middle" font-family="Manrope" font-weight="800" font-size="20" fill="#0E1726">METRICS</text></svg>
+<div class="t060-btn" style="left:calc(var(--u)*290);top:calc(var(--u)*740);font-size:calc(var(--u)*54);padding:calc(var(--u)*26) calc(var(--u)*56)">Start free →</div>
+<svg class="t060-ov" viewBox="0 0 1080 1080"><path d="M690 840 l 0 64 l 16 -15 l 12 28 l 12 -5 l -12 -27 l 22 -2 z" fill="#fff" stroke="#0E1726" stroke-width="4" stroke-linejoin="round"/></svg>
+</div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The lockup card drops and presses</b>, tape sticks on the off-beats, tagline blocks slide in from opposite sides, and the CTA slams up from below into its 14 px shadow on the sting; the cursor clicks and the button depresses for 120 ms.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Heavy card</b> — 5 px ink outline + 9 px hard offset shadow, no blur, r14</li><li><b>Press</b> — card translates into its own shadow in 80–120 ms, always on a beat</li><li><b>Block headline</b> — Manrope 800 uppercase on flat fills (white, amber, teal, soft teal, coral)</li><li><b>Sticker + starburst</b> — rotated 2–8°, slapped on with 1.3 → 1 + wobble; starbursts only for errors and one stat</li><li><b>Tape</b> — soft-teal strips with dashed edges holding cards to the page</li><li><b>Ticker strip</b> — the only continuously moving element: a coral/ink band scrolling left</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Slam-in</b> — y −120 → 0 on steps(3) at 12 fps, 0.25 s, landing on the beat; no easing curves</li><li><b>Press</b> — translate(9 px, 9 px) + shadow 9 → 0 in 0.1 s, then back in 0.1 s — the “click” on every downbeat (every 2 s at 120 BPM)</li><li><b>Ticker</b> — linear x scroll at 1 bar per 480 px (240 px/s) for the whole scene — the constant against the stepped hits</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>It is instantly recognisable and survives any feed — nobody scrolls past a hard shadow. Risk: playful styles can undercut trust for a data product, and contrast/clutter get out of hand fast; keep the 72 px grid rigid, max three fills per frame, coral only for errors and the CTA.</p><p><b>Adapt to your product:</b> Turn your product’s key objects into heavy cards and let the one that needs attention pop out with a starburst; your CTA is simply the heaviest card in the film.</p><p><b>References:</b> <a href="https://www.nngroup.com/articles/neobrutalism/">https://www.nngroup.com/articles/neobrutalism/</a> (NN/G: neobrutalism definition and usability cautions) · <a href="https://www.figma.com/blog/config-2024-branding/">https://www.figma.com/blog/config-2024-branding/</a> (Config 2024 identity: shapes and motion principles (shift, transform))</p></div>
+</div>
+</body>
+</html>

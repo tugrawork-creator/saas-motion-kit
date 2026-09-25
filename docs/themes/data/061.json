@@ -1,0 +1,74 @@
+{
+ "id": "061",
+ "slug": "dark-keynote",
+ "name": "Dark Keynote",
+ "category": "signature",
+ "summary": "A cinematic navy keynote stage: one spotlight per frame and a teal AI edge glow that flashes coral when Pulse finds the anomaly.",
+ "look": "Deep navy stage with vignette and grain, a soft spotlight cone and floor pool, blurred floating cards, dark glass panels with a conic teal edge glow and a single coral glow for the anomaly and CTA.",
+ "components": [
+  {
+   "name": "Navy stage + vignette",
+   "role": "#0C1830 base, lighter centre, edges fall to navy shadow — never pure black (keeps compression clean)"
+  },
+  {
+   "name": "Spotlight cone",
+   "role": "soft trapezoid from above plus an elliptical pool on the floor; one focal point per frame"
+  },
+  {
+   "name": "AI edge glow",
+   "role": "conic teal ring with a blurred bloom copy; slow rotation = agent is working"
+  },
+  {
+   "name": "Floating panel",
+   "role": "dark glass card with gradient edge light and 6–16° tilt"
+  },
+  {
+   "name": "Depth of field",
+   "role": "foreground cards 9 px blur, background 2–3 px; only the hero element is sharp"
+  },
+  {
+   "name": "Film grain",
+   "role": "fixed-seed noise at ~16 % overlay so the dark gradients never band"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Spot click-on",
+   "how": "cone opacity 0 → 1 in 2 frames with a 0.4 s flicker-settle, synced to the first downbeat"
+  },
+  {
+   "name": "Glow ignition",
+   "how": "four stroke layers scale 0.96 → 1 and fade in inside→out over one beat (0.5 s at 120 BPM); conic rotation 360° per 8 bars (16 s), linear"
+  },
+  {
+   "name": "Focus pull",
+   "how": "background blur 0 → 3 px while the panel sharpens 3 → 0 px, power2.inOut 0.6 s, triggered on the anomaly downbeat"
+  }
+ ],
+ "story": "Hook: a spotlight finds the question while blurred dashboard cards drift in from the dark. Reveal: on the drop the teal edge glow ignites around the frame and a light sweep reveals the Acme Pulse lockup. Proof: the glowing Pulse panel floats in front of a soft team table; checks light up until the glow turns coral for Checkout conversion −18% since 09:42 after deploy #2231, a light thread points to the cell and Roll back glows. CTA: one spotlight, lockup, “Caught before customers noticed.” and a coral Start free with a warm floor glow.",
+ "adapt": "Wrap whatever surface your AI acts on (editor, inbox, dashboard) in the edge glow, keep your real UI soft in the background, and let the glow change colour only when the AI surfaces a result that needs a human.",
+ "references": [
+  {
+   "url": "https://github.com/kyh/uicapsule/pull/34",
+   "note": "edge-glow border effect recreated in code (conic gradient + blur layers)",
+   "verified": true
+  },
+  {
+   "url": "https://stripe.com/sessions/2025",
+   "note": "dark, lit keynote-stage presentation of a product launch",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 2,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Dark gradients band and crush in social compression; keep midtones, grain and one coral moment."
+ },
+ "best_for": [
+  "AI products",
+  "launch events",
+  "premium B2B"
+ ],
+ "file": "themes/061-dark-keynote.html"
+}

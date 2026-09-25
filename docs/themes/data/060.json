@@ -1,0 +1,74 @@
+{
+ "id": "060",
+ "slug": "neo-brutalist",
+ "name": "Neo-Brutalist",
+ "category": "signature",
+ "summary": "Hard shadows, ink outlines, stickers and a ticker: loud neo-brutalist cards that press on every beat.",
+ "look": "Off-white paper with a 72 px grid, 5 px ink outlines, hard offset shadows, flat amber/teal/coral fills, taped cards, rotated stickers, 16-point starbursts and one scrolling ticker strip.",
+ "components": [
+  {
+   "name": "Heavy card",
+   "role": "5 px ink outline + 9 px hard offset shadow, no blur, r14"
+  },
+  {
+   "name": "Press",
+   "role": "card translates into its own shadow in 80–120 ms, always on a beat"
+  },
+  {
+   "name": "Block headline",
+   "role": "Manrope 800 uppercase on flat fills (white, amber, teal, soft teal, coral)"
+  },
+  {
+   "name": "Sticker + starburst",
+   "role": "rotated 2–8°, slapped on with 1.3 → 1 + wobble; starbursts only for errors and one stat"
+  },
+  {
+   "name": "Tape",
+   "role": "soft-teal strips with dashed edges holding cards to the page"
+  },
+  {
+   "name": "Ticker strip",
+   "role": "the only continuously moving element: a coral/ink band scrolling left"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Slam-in",
+   "how": "y −120 → 0 on steps(3) at 12 fps, 0.25 s, landing on the beat; no easing curves"
+  },
+  {
+   "name": "Press",
+   "how": "translate(9 px, 9 px) + shadow 9 → 0 in 0.1 s, then back in 0.1 s — the “click” on every downbeat (every 2 s at 120 BPM)"
+  },
+  {
+   "name": "Ticker",
+   "how": "linear x scroll at 1 bar per 480 px (240 px/s) for the whole scene — the constant against the stepped hits"
+  }
+ ],
+ "story": "Hook: “How many dashboards did you check today?” slams in as blocks over a pile of taped metric cards and a “38 tabs” starburst. Reveal: the pile presses flat on the drop; “You ship.” and “Pulse watches.” slam in and the Acme Pulse card drops. Proof: metric cards press in with ✓ stickers until the Checkout conversion card pops out coral with −18% (since 09:42 · after deploy #2231) and a cursor clicks ROLL BACK while the ticker scrolls. CTA: taped lockup card, tagline blocks, a “14 metrics” star and a heavy coral Start free button.",
+ "adapt": "Turn your product’s key objects into heavy cards and let the one that needs attention pop out with a starburst; your CTA is simply the heaviest card in the film.",
+ "references": [
+  {
+   "url": "https://www.nngroup.com/articles/neobrutalism/",
+   "note": "NN/G: neobrutalism definition and usability cautions",
+   "verified": true
+  },
+  {
+   "url": "https://www.figma.com/blog/config-2024-branding/",
+   "note": "Config 2024 identity: shapes and motion principles (shift, transform)",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "low",
+  "risk": "Loud style can undercut trust for data products; keep the grid rigid and numbers untilted."
+ },
+ "best_for": [
+  "creator tools",
+  "developer-facing startups",
+  "social-first launches"
+ ],
+ "file": "themes/060-neo-brutalist.html"
+}

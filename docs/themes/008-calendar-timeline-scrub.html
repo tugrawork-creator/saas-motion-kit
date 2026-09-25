@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>008 · Calendar Timeline Scrub — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t008-s{position:absolute;inset:0;background:#111B2B;font-family:var(--sans);color:#E9EEF3;overflow:hidden}
+.t008-p{position:absolute;left:calc(var(--u)*var(--x,0));top:calc(var(--u)*var(--y,0));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--h))}
+.t008-hl{position:absolute;left:calc(var(--u)*60);width:calc(var(--u)*960);font:400 calc(var(--u)*86)/1.0 var(--serif);letter-spacing:-.01em;color:#F6F5F1}
+.t008-hl em{color:var(--alert)}
+.t008-rul{position:absolute;left:calc(var(--u)*240);width:calc(var(--u)*780);height:calc(var(--u)*50);display:flex;border-bottom:calc(var(--u)*2) solid #2A3850}
+.t008-rul span{flex:1;font:600 calc(var(--u)*21) var(--mono);color:#8FA0B5;padding-left:calc(var(--u)*10);border-left:calc(var(--u)*1.5) solid #2A3850;display:flex;align-items:center;letter-spacing:.04em}
+.t008-rul span.on{color:#fff;background:rgba(255,255,255,.06)}
+.t008-lane{position:absolute;left:calc(var(--u)*60);width:calc(var(--u)*960);height:calc(var(--u)*var(--h));border-bottom:calc(var(--u)*1.5) solid #22304A}
+.t008-lane>.n{position:absolute;left:0;top:0;bottom:0;width:calc(var(--u)*170);display:flex;align-items:center;gap:calc(var(--u)*10);font:600 calc(var(--u)*20) var(--mono);letter-spacing:.08em;color:#8FA0B5}
+.t008-lane>.n img{width:calc(var(--u)*30);height:calc(var(--u)*30)}
+.t008-lane.pl{background:rgba(15,163,163,.08)}
+.t008-lane.pl>.n{color:#7FE0DA}
+.t008-gr{position:absolute;left:calc(var(--u)*240);top:0;width:calc(var(--u)*780);bottom:0;background-image:linear-gradient(to right,#22304A calc(var(--u)*1.5),transparent calc(var(--u)*1.5));background-size:calc(var(--u)*156) 100%}
+.t008-blk{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w));height:calc(var(--u)*var(--bh,64));border-radius:calc(var(--u)*10);background:#33445F;display:flex;align-items:center;padding:0 calc(var(--u)*14);font:700 calc(var(--u)*21) var(--sans);color:#fff;white-space:nowrap;overflow:hidden}
+.t008-blk.te{background:#0B6E6E}
+.t008-blk.co{background:var(--alert)}
+.t008-blk.gh{background:repeating-linear-gradient(135deg,rgba(255,90,78,.22) 0 calc(var(--u)*10),rgba(255,90,78,.1) calc(var(--u)*10) calc(var(--u)*20));box-shadow:inset 0 0 0 calc(var(--u)*2) rgba(255,90,78,.8);color:#FFB3AD}
+.t008-blk.gh.x{opacity:.35;text-decoration:line-through}
+.t008-ph{position:absolute;top:calc(var(--u)*var(--y));bottom:calc(var(--u)*var(--b,60));width:calc(var(--u)*3);background:var(--amber);z-index:5}
+.t008-ph b{position:absolute;left:50%;top:calc(var(--u)*-44);transform:translateX(-50%);background:var(--amber);color:#111B2B;font:600 calc(var(--u)*21) var(--mono);padding:calc(var(--u)*6) calc(var(--u)*12);border-radius:calc(var(--u)*8);white-space:nowrap}
+.t008-ticks{position:absolute;display:flex;align-items:center;gap:calc(var(--u)*var(--g,6))}
+.t008-ticks i{width:calc(var(--u)*4);height:calc(var(--u)*var(--th,26));border-radius:calc(var(--u)*2);background:#0FA3A3;flex:none}
+.t008-ticks i.c{background:var(--alert);height:calc(var(--u)*46);width:calc(var(--u)*8)}
+.t008-brk{position:absolute;height:calc(var(--u)*18);border:calc(var(--u)*3) solid var(--c,#8FA0B5);border-top:none;font:600 calc(var(--u)*21) var(--mono);color:var(--c,#8FA0B5)}
+.t008-brk span{position:absolute;left:50%;top:calc(var(--u)*24);transform:translateX(-50%);white-space:nowrap}
+.t008-card{position:absolute;background:#F6F5F1;color:var(--ink);border-radius:calc(var(--u)*16);padding:calc(var(--u)*22) calc(var(--u)*26);box-shadow:0 calc(var(--u)*24) calc(var(--u)*60) rgba(0,0,0,.45);border-top:calc(var(--u)*8) solid var(--alert);z-index:6}
+.t008-card .t{font:800 calc(var(--u)*40)/1.1 var(--sans)} .t008-card .t b{color:var(--alert)}
+.t008-card .m{font:400 calc(var(--u)*23) var(--mono);color:var(--muted);margin-top:calc(var(--u)*6)}
+.t008-btn{height:calc(var(--u)*62);padding:0 calc(var(--u)*28);border-radius:calc(var(--u)*10);display:inline-flex;align-items:center;font:700 calc(var(--u)*26) var(--sans)}
+.t008-btn.pri{background:var(--alert);color:#fff}.t008-btn.sec{box-shadow:inset 0 0 0 calc(var(--u)*2) #D6D3C8;color:var(--ink)}
+.t008-word{font:800 calc(var(--u)*100)/1 var(--sans);letter-spacing:-.035em;color:#fff;white-space:nowrap}
+.t008-tag{position:absolute;font:600 calc(var(--u)*20) var(--mono);letter-spacing:.08em;color:#8FA0B5}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 008 · Product UI as the stage</div>
+    <h1>Calendar Timeline Scrub</h1>
+    <p class="dek">The work week drawn as an editing timeline: a day ruler, a team lane, a customers lane and a playhead that scrubs with the music. Acme Pulse is a new lane of tiny ticks underneath everything — the invisible background work made visible — and the counterfactual Friday incident fades out once the Tuesday catch lands.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●●</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  
+  <div class="cw"><div class="cell" id="t008-f1">
+<div class="t008-s">
+ <div class="t008-hl" style="top:calc(var(--u)*80)">And the drop still shipped on <em>Friday.</em></div>
+ <div class="t008-rul" style="top:calc(var(--u)*380)"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span class="on">FRI</span></div>
+ <div class="t008-lane" style="top:calc(var(--u)*430);--h:150"><span class="n">TEAM</span><span class="t008-gr"></span>
+  <div class="t008-blk" style="--x:180;--y:20;--w:140">Planning</div>
+  <div class="t008-blk" style="--x:342;--y:20;--w:150">deploy #2231</div>
+  <div class="t008-blk" style="--x:500;--y:84;--w:200;--bh:50;opacity:.7">Sprint work</div>
+  <div class="t008-blk" style="--x:810;--y:20;--w:140">Release</div></div>
+ <div class="t008-lane" style="top:calc(var(--u)*580);--h:150"><span class="n">CUSTOMERS</span><span class="t008-gr"></span>
+  <div class="t008-blk gh" style="--x:804;--y:30;--w:156;--bh:90">Tickets ×23</div></div>
+ <div class="t008-lane" style="top:calc(var(--u)*730);--h:110"><span class="n">DASHBOARDS</span><span class="t008-gr"></span>
+  <div class="t008-p" style="--x:180;--y:28;display:flex;gap:calc(var(--u)*10)"><div class="t008-blk" style="position:static;width:calc(var(--u)*120);height:calc(var(--u)*54);opacity:.5">38 open</div></div></div>
+ <div class="t008-brk" style="left:calc(var(--u)*420);top:calc(var(--u)*866);width:calc(var(--u)*456);--c:#FF8A80"><span>found 3 days late</span></div>
+ <div class="t008-ph" style="left:calc(var(--u)*870);--y:376;--b:180"><b>FRI 16:02</b></div>
+</div>
+</div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The playhead scrubs left→right across the week on a speed ramp</b> (fast over Wed–Thu with directional blur, easing out on Friday) and stops as the striped coral ticket block grows from its left edge (scaleX, back.out 1.4) on the bar-2 downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t008-f2">
+<div class="t008-s">
+ <div class="t008-p" style="--x:60;--y:120;--w:960;display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*28)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*120);height:calc(var(--u)*120)"><span class="t008-word">Acme Pulse</span></div>
+ <div class="t008-rul" style="top:calc(var(--u)*380)"><span>MON</span><span class="on">TUE</span><span>WED</span><span>THU</span><span>FRI</span></div>
+ <div class="t008-lane" style="top:calc(var(--u)*430);--h:130;opacity:.6"><span class="n">TEAM</span><span class="t008-gr"></span>
+  <div class="t008-blk" style="--x:180;--y:34;--w:140">Planning</div>
+  <div class="t008-blk" style="--x:342;--y:34;--w:150">deploy #2231</div>
+  <div class="t008-blk" style="--x:810;--y:34;--w:140">Release</div></div>
+ <div class="t008-lane pl" style="top:calc(var(--u)*560);--h:140;box-shadow:inset 0 0 0 calc(var(--u)*3) var(--brand)"><span class="n"><img src="../assets/brand/acme-mark.svg" alt="">PULSE</span><span class="t008-gr"></span>
+  <div class="t008-ticks" style="left:calc(var(--u)*186);top:calc(var(--u)*56);--g:8"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+ <div class="t008-lane" style="top:calc(var(--u)*700);--h:130;opacity:.6"><span class="n">CUSTOMERS</span><span class="t008-gr"></span>
+  <div class="t008-blk gh" style="--x:804;--y:24;--w:156;--bh:80">Tickets ×23</div></div>
+ <div class="t008-ph" style="left:calc(var(--u)*400);--y:376;--b:230"><b>◀◀ TUE 09:30</b></div>
+ <div class="t008-tag" style="left:calc(var(--u)*240);top:calc(var(--u)*880)">NEW LANE · 1 TICK PER MINUTE · 14 METRICS</div>
+</div>
+</div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop the playhead rewinds hard</b> (Fri→Tue, 0.4 s expo.inOut with a reverse blur) and a new teal lane pushes the others apart (height 0→140, back.out); ticks fill it left→right one per 1/16 note as the Acme Pulse lockup drops in above the ruler.</p></div>
+  <div class="cw"><div class="cell" id="t008-f3">
+<div class="t008-s">
+ <div class="t008-tag" style="left:calc(var(--u)*60);top:calc(var(--u)*72)">TUESDAY · ZOOM 09:30 → 10:00</div>
+ <div class="t008-rul" style="top:calc(var(--u)*120)"><span>09:30</span><span class="on">09:36</span><span class="on">09:42</span><span>09:48</span><span>09:54</span></div>
+ <div class="t008-lane" style="top:calc(var(--u)*170);--h:130"><span class="n">TEAM</span><span class="t008-gr"></span>
+  <div class="t008-blk" style="--x:466;--y:32;--w:170">deploy #2231</div>
+  <div class="t008-blk te" style="--x:648;--y:32;--w:250;box-shadow:0 0 0 calc(var(--u)*3) #7FE0DA">↺ Roll back · 09:48</div></div>
+ <div class="t008-lane pl" style="top:calc(var(--u)*300);--h:130"><span class="n"><img src="../assets/brand/acme-mark.svg" alt="">PULSE</span><span class="t008-gr"></span>
+  <div class="t008-ticks" style="left:calc(var(--u)*190);top:calc(var(--u)*42);--g:22"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="c"></i><i style="background:var(--alert)"></i><i style="background:var(--alert)"></i><i style="background:var(--alert)"></i><i style="background:var(--alert)"></i><i style="background:var(--alert)"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+ <div class="t008-lane" style="top:calc(var(--u)*430);--h:110"><span class="n">CUSTOMERS</span><span class="t008-gr"></span>
+  <div class="t008-p" style="--x:180;--y:36;font:500 calc(var(--u)*22) var(--mono);color:#6FD39F">0 tickets · nobody noticed</div></div>
+ <div class="t008-brk" style="left:calc(var(--u)*552);top:calc(var(--u)*404);width:calc(var(--u)*156);--c:#7FE0DA;z-index:4"></div>
+ <div class="t008-ph" style="left:calc(var(--u)*706);--y:116;--b:520"><b>09:48</b></div>
+ <div class="t008-card" style="left:calc(var(--u)*60);top:calc(var(--u)*600);width:calc(var(--u)*960)">
+  <div style="display:flex;align-items:center;gap:calc(var(--u)*24)"><div style="flex:1"><div class="t">Checkout conversion <b>−18%</b></div><div class="m">since 09:42 · after deploy #2231</div></div><div style="display:flex;flex-direction:column;gap:calc(var(--u)*10)"><span class="t008-btn pri">Roll back</span><span class="t008-btn sec">Acknowledge</span></div></div>
+ </div>
+ <div class="t008-p" style="--x:60;--y:880;--w:960;display:flex;align-items:center;justify-content:space-between;font:600 calc(var(--u)*24) var(--mono);color:#8FA0B5"><span style="color:#7FE0DA">09:42 caught → 09:48 rolled back · 6 min</span><span style="color:#FF8A80;text-decoration:line-through;opacity:.7">FRI tickets ×23</span></div>
+</div>
+</div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera zooms the ruler from days to minutes</b> (0.8 s sine.inOut); Pulse's ticks march on the hi-hat until the 09:42 tick grows into a coral flag on the snare, the card rises from it, and the human's teal “Roll back · 09:48” block grows from its left edge on the next downbeat while the Friday ghost desaturates.</p></div>
+  <div class="cw"><div class="cell" id="t008-f4">
+<div class="t008-s">
+ <div class="t008-p" style="--x:60;--y:90;--w:960;display:flex;align-items:center;gap:calc(var(--u)*26)"><img src="../assets/brand/acme-mark.svg" alt="" style="width:calc(var(--u)*104);height:calc(var(--u)*104)"><span class="t008-word" style="font-size:calc(var(--u)*92)">Acme Pulse</span></div>
+ <div class="t008-hl" style="top:calc(var(--u)*230)">Every metric. <em style="color:#7FE0DA">Every minute.</em></div>
+ <div class="t008-rul" style="top:calc(var(--u)*430)"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span></div>
+ <div class="t008-lane" style="top:calc(var(--u)*480);--h:120"><span class="n">TEAM</span><span class="t008-gr"></span>
+  <div class="t008-blk" style="--x:180;--y:30;--w:140">Planning</div>
+  <div class="t008-blk" style="--x:342;--y:30;--w:150">deploy #2231</div>
+  <div class="t008-blk" style="--x:810;--y:30;--w:140">Release ✓</div></div>
+ <div class="t008-lane pl" style="top:calc(var(--u)*600);--h:110"><span class="n"><img src="../assets/brand/acme-mark.svg" alt="">PULSE</span><span class="t008-gr"></span>
+  <div class="t008-ticks" style="left:calc(var(--u)*186);top:calc(var(--u)*42);--g:8"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+ <div class="t008-lane" style="top:calc(var(--u)*710);--h:100"><span class="n">CUSTOMERS</span><span class="t008-gr"></span><div class="t008-p" style="--x:180;--y:34;font:500 calc(var(--u)*22) var(--mono);color:#6FD39F">quiet week</div></div>
+ <div class="t008-blk co" style="--x:580;--y:860;--w:320;--bh:100;justify-content:center;font-size:calc(var(--u)*36);font-weight:800;border-radius:calc(var(--u)*14)">Start free</div>
+ <div class="t008-p" style="--x:240;--y:894;font:500 calc(var(--u)*22) var(--mono);color:#8FA0B5">acme.example/pulse</div>
+ <div class="t008-ph" style="left:calc(var(--u)*576);--y:426;--b:100"><b>NOW</b></div>
+</div>
+</div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The ruler zooms back out to the whole week</b> and the playhead glides to “NOW”; the Start free clip snaps onto the playhead like an edit (scaleX from 0, 0.25 s back.out) on the final downbeat while the Pulse lane keeps ticking.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>Day / minute ruler</b> — the timeline header; zooms from week to minutes.</li><li><b>Playhead + time pill</b> — amber “now” line that scrubs with the music.</li><li><b>Event blocks</b> — team work (deploy #2231, Roll back · 09:48) as clips.</li><li><b>Pulse lane</b> — a teal lane of per-minute ticks: the background work made visible.</li><li><b>Ghost event</b> — striped coral “Tickets ×23” on Friday: the counterfactual.</li><li><b>Duration bracket</b> — “found 3 days late” vs “resolved in 6 min”.</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Speed-ramped scrub</b> — the playhead eases fast/slow along a custom curve with a directional blur ramp; every stop is on a downbeat (2 s per bar at 120 BPM).</li><li><b>Block growth</b> — event blocks scaleX from the left edge, 0.3 s back.out(1.4), each on a kick.</li><li><b>Ghost dissolve</b> — the Friday event desaturates and fades to 35 % over 1 s as the Tuesday catch lands; Pulse ticks march on 1/16 notes throughout.</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p><b>Why:</b> the counterfactual (Friday tickets) against the actual (a Tuesday catch) is the clearest possible proof of “before customers noticed”, and ticks in their own lane make invisible background work concrete. <b>Risk:</b> the before/after logic must read instantly — label the ghost and the brackets boldly and keep only three lanes.</p><p><b>Adapt to your product:</b> put your users' real week on the ruler, your product's activity in its own lane, and show the bad event your product prevents as a ghost that fades.</p><p><b>References:</b> <a href="https://dribbble.com/tags/calendar_animation">Dribbble — calendar animation</a></p></div>
+</div>
+</body>
+</html>

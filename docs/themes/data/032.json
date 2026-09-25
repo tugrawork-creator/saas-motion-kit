@@ -1,0 +1,26 @@
+{"id":"032","slug":"risograph-two-drum-print","name":"Risograph Two-Drum Print","category":"light",
+ "summary":"Two riso inks on uncoated paper: the first drum prints your dashboards, and Acme Pulse is the coral second drum that lands only where something is wrong.",
+ "look":"Warm uncoated stock with speckle grain, coarse halftone dots and crop marks. Teal and fluorescent coral print as semi-transparent layers in multiply, a few pixels off-register, so every overlap turns deep green-black and the whole film steps along at 12 fps like a flip-book.",
+ "components":[
+  {"name":"Paper + grain","role":"uncoated stock with an SVG feTurbulence speckle multiplied over everything"},
+  {"name":"Halftone field","role":"SVG dot patterns (teal 45°, coral 15°) where dot size carries the value"},
+  {"name":"Misregistered headline","role":"two stacked copies (teal, coral) in multiply, 3–8 px apart"},
+  {"name":"Crop marks + colour bar","role":"printer furniture that signals a physical proof"},
+  {"name":"Flag stamp","role":"circular coral stamp with ring text; the agent's signature on the anomaly"},
+  {"name":"Overprint button","role":"coral block with an off-register teal outline; the human action"}
+ ],
+ "motion":[
+  {"name":"Plate-by-plate build","how":"teal drum prints, coral lands 4 frames later; everything stepped at 12 fps so each plate hit sits on an 8th note at 120 BPM"},
+  {"name":"Registration wobble","how":"the coral layer drifts 1–2 px per frame from a seeded offset table"},
+  {"name":"Dot-grow reveal","how":"halftone radius 0→full, power2.out over 0.5 s (one beat), like ink soaking into paper"}
+ ],
+ "story":"Hook: twelve halftone dashboard tiles stamp in and 'And the drop still shipped on Friday.' prints teal, then coral. Reveal: on the drop a coral halftone disc dot-grows behind the Acme mark and a giant two-plate 'Acme Pulse'. Proof: a teal sheet of healthy metrics prints; the coral pass hits only the 'Checkout conversion −18% · since 09:42 · after deploy #2231' row with a FLAGGED stamp, and a coral Roll back button waits for the human. CTA: 'Caught before customers noticed.' in two plates, lockup and an off-register Start free block.",
+ "adapt":"Print your own table or dashboard as plate 1 and let plate 2 hit only the rows your product flags; the stamp text becomes your status label.",
+ "references":[
+  {"url":"https://www.itsnicethat.com/articles/hiromu-oka-hodo-station-process-animation-051222","note":"riso process animation by Hiromu Oka","verified":true},
+  {"url":"https://stencil.wiki/wiki/Category:Riso_inks","note":"riso ink colour library","verified":false},
+  {"url":"https://spectrolite.app/how-to/overview/riso-ify","note":"how to separate artwork into riso plates","verified":false}
+ ],
+ "fit":{"readability":3,"trust":2,"effort":"low","risk":"The zine texture can read as playful for serious B2B; keep type strict and numbers in mono."},
+ "best_for":["analytics","data quality tools","creative tools","startups with an indie voice"],
+ "file":"themes/032-risograph-two-drum-print.html"}

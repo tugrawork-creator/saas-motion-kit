@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>038 · Noir — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t038-f{background:#0D0D0C;color:#E9E6DF;isolation:isolate}
+.t038-svg{position:absolute;inset:0;width:100%;height:100%}
+.t038-p{position:absolute;left:calc(var(--u)*var(--x));top:calc(var(--u)*var(--y));width:calc(var(--u)*var(--w,960))}
+.t038-blinds{position:absolute;inset:calc(var(--u)*-200);pointer-events:none;z-index:3;
+  background:repeating-linear-gradient(var(--ang,-14deg),rgba(0,0,0,var(--sd,.55)) 0 calc(var(--u)*34),transparent calc(var(--u)*34) calc(var(--u)*70))}
+.t038-spot{position:absolute;inset:0;pointer-events:none;z-index:4;background:radial-gradient(ellipse at var(--sx,60%) var(--sy,45%),transparent 0,transparent 28%,rgba(0,0,0,.72) 70%)}
+.t038-grain{position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none;mix-blend-mode:overlay;opacity:.55}
+.t038-type{font-family:var(--mono);color:#1A1918}
+.t038-mono{font-family:var(--mono);font-size:calc(var(--u)*22);letter-spacing:.12em;text-transform:uppercase}
+.t038-h{font-family:var(--serif);line-height:1.02;letter-spacing:-.015em}
+.t038-h em{font-style:italic}
+.t038-word{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;line-height:1}
+.t038-paper{position:absolute;background:#DAD6CE;box-shadow:0 calc(var(--u)*14) calc(var(--u)*30) rgba(0,0,0,.6);color:#1A1918}
+.t038-pin{position:absolute;width:calc(var(--u)*22);height:calc(var(--u)*22);border-radius:50%;background:radial-gradient(circle at 35% 35%,#9A9894,#3A3936);box-shadow:0 calc(var(--u)*4) calc(var(--u)*4) rgba(0,0,0,.5)}
+.t038-btn{display:inline-block;font:800 calc(var(--u)*32) var(--sans);border-radius:calc(var(--u)*10);padding:calc(var(--u)*18) calc(var(--u)*34);white-space:nowrap}
+.t038-btn.c{background:#FF5A4E;color:#fff}
+.t038-btn.o{box-shadow:inset 0 0 0 calc(var(--u)*3) #1A1918;color:#1A1918}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 038 · Light, optics &amp; texture</div>
+    <h1>Noir</h1>
+    <p class="dek">Hard key light, no fill, venetian-blind shadows slicing across a desk of case files, grain and gate weave from 1940s film. Acme Pulse is the tireless detective reading every file overnight; the only colour allowed is coral, drawn around the clue. At dawn the blinds open and the film ends in daylight and brand colour.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●○</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <!-- 1 · HOOK -->
+  <div class="cw"><div class="cell t038-f" id="t038-f1">
+    <svg class="t038-svg" viewBox="0 0 1080 1080" aria-hidden="true">
+      <rect x="0" y="690" width="1080" height="390" fill="#2A2724"/>
+      <g stroke="#111" stroke-width="2">
+        <rect x="420" y="846" width="560" height="60" fill="#8E877B" transform="rotate(-2 700 876)"/>
+        <rect x="440" y="800" width="540" height="58" fill="#A39C8F" transform="rotate(1.5 710 829)"/>
+        <rect x="410" y="756" width="560" height="56" fill="#948D80" transform="rotate(-1 690 784)"/>
+        <rect x="450" y="712" width="520" height="56" fill="#B0A99C" transform="rotate(2 710 740)"/>
+        <rect x="430" y="668" width="540" height="56" fill="#9C9588" transform="rotate(-1.5 700 696)"/>
+      </g>
+      <g font-family="JetBrains Mono" font-size="22" fill="#1A1918" letter-spacing="2">
+        <text x="470" y="702" transform="rotate(-1.5 700 696)">DASHBOARD 34 — UNREAD</text>
+        <text x="490" y="746" transform="rotate(2 710 740)">DASHBOARD 35 — UNREAD</text>
+        <text x="450" y="790" transform="rotate(-1 690 784)">DASHBOARD 36 — UNREAD</text>
+        <text x="480" y="836" transform="rotate(1.5 710 829)">DASHBOARD 37 — UNREAD</text>
+        <text x="460" y="882" transform="rotate(-2 700 876)">DASHBOARD 38 — UNREAD</text>
+      </g>
+      <g transform="translate(150 780)"><rect x="-40" y="0" width="120" height="150" rx="12" fill="#3B3834"/><path d="M80 30 q40 0 40 40 t-40 40" fill="none" stroke="#3B3834" stroke-width="14"/><ellipse cx="20" cy="4" rx="60" ry="12" fill="#1A1816"/></g>
+    </svg>
+    <div class="t038-blinds" style="--ang:-14deg"></div>
+    <div class="t038-spot" style="--sx:62%;--sy:72%"></div>
+    <div class="t038-p t038-h" style="--x:70;--y:90;--w:900;font-size:calc(var(--u)*104);z-index:5;color:#EDEAE3">And the drop still shipped on <em>Friday.</em></div>
+    <div class="t038-p t038-mono" style="--x:70;--y:460;z-index:5;color:#9C978D">Case file · 38 dashboards · 11:52 p.m.</div>
+    <svg class="t038-grain" viewBox="0 0 1080 1080" aria-hidden="true"><filter id="t038-n1"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="38"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1080" filter="url(#t038-n1)"/></svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The blind shadows tilt 4° as someone adjusts them</b> (power1.inOut, 1.5 s) while the lamp swings over the stack of unread dashboard files; the intertitle types in and "Friday." lands on the bar-2 downbeat.</p></div>
+
+  <!-- 2 · REVEAL -->
+  <div class="cw"><div class="cell t038-f" id="t038-f2" style="background:#1A1714">
+    <div style="position:absolute;left:calc(var(--u)*110);top:calc(var(--u)*70);width:calc(var(--u)*860);height:calc(var(--u)*940);background:#2A2520;box-shadow:inset 0 0 0 calc(var(--u)*24) #3A322A"></div>
+    <div style="position:absolute;left:calc(var(--u)*160);top:calc(var(--u)*120);width:calc(var(--u)*760);height:calc(var(--u)*560);background:radial-gradient(ellipse at 50% 55%,#F3EEE4 0%,#C9C2B5 45%,#7E776C 100%);box-shadow:inset 0 0 calc(var(--u)*60) rgba(0,0,0,.45)"></div>
+    <img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*475);top:calc(var(--u)*170);width:calc(var(--u)*130);height:calc(var(--u)*130);z-index:2">
+    <div class="t038-p t038-word" style="--x:160;--y:330;--w:760;text-align:center;font-size:calc(var(--u)*118);color:#15130F;z-index:2">Acme Pulse</div>
+    <div class="t038-p t038-mono" style="--x:160;--y:480;--w:760;text-align:center;color:#2A2520;font-size:calc(var(--u)*26);z-index:2">Anomaly investigations</div>
+    <div class="t038-p t038-mono" style="--x:160;--y:524;--w:760;text-align:center;color:#4A443C;z-index:2">Open all night · knock anytime</div>
+    <div style="position:absolute;left:calc(var(--u)*800);top:calc(var(--u)*760);width:calc(var(--u)*110);height:calc(var(--u)*34);border-radius:calc(var(--u)*17);background:linear-gradient(#B7AE9E,#6D665A)"></div>
+    <div class="t038-blinds" style="--ang:-8deg;--sd:.4"></div>
+    <div class="t038-spot" style="--sx:50%;--sy:36%"></div>
+    <svg class="t038-grain" viewBox="0 0 1080 1080" aria-hidden="true"><filter id="t038-n2"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="39"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1080" filter="url(#t038-n2)"/></svg>
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop a light snaps on behind the frosted door</b>: the glass flares from black to lit in 2 frames and the lettering reads in silhouette, the Acme mark first, the name on beat 3; blind shadows drift slowly down.</p></div>
+
+  <!-- 3 · PROOF -->
+  <div class="cw"><div class="cell t038-f" id="t038-f3" style="background:radial-gradient(ellipse at 50% 40%,#3A332A,#1B1814 70%)">
+    <div class="t038-paper" style="left:calc(var(--u)*80);top:calc(var(--u)*100);width:calc(var(--u)*490);height:calc(var(--u)*340);transform:rotate(-2deg)">
+      <svg viewBox="0 0 490 340" style="position:absolute;inset:0;width:100%;height:100%"><text x="28" y="48" font-family="JetBrains Mono" font-size="22" fill="#1A1918" letter-spacing="2">CHECKOUT CONVERSION</text><path d="M28 290H462" stroke="#1A1918" stroke-width="2"/><polyline points="28,140 80,132 130,146 180,128 230,140 280,130 318,138 330,236 380,228 430,240 462,232" fill="none" stroke="#1A1918" stroke-width="6" stroke-linejoin="round"/><ellipse cx="342" cy="196" rx="70" ry="80" fill="none" stroke="#FF5A4E" stroke-width="7" transform="rotate(-10 342 196)"/></svg>
+    </div>
+    <div class="t038-paper" style="left:calc(var(--u)*610);top:calc(var(--u)*120);width:calc(var(--u)*390);height:calc(var(--u)*220);transform:rotate(3deg);padding:calc(var(--u)*26)">
+      <div class="t038-type" style="font-size:calc(var(--u)*22);letter-spacing:.14em">EXHIBIT A</div>
+      <div class="t038-type" style="font-size:calc(var(--u)*26);margin-top:calc(var(--u)*8)">Checkout conversion</div>
+      <div style="font:800 calc(var(--u)*64)/1.1 var(--sans);color:#FF5A4E">−18%</div>
+      <div class="t038-type" style="font-size:calc(var(--u)*22)">since 09:42</div>
+    </div>
+    <div class="t038-paper" style="left:calc(var(--u)*620);top:calc(var(--u)*390);width:calc(var(--u)*380);height:calc(var(--u)*150);transform:rotate(-2deg);padding:calc(var(--u)*24)">
+      <div class="t038-type" style="font-size:calc(var(--u)*22);letter-spacing:.14em">EXHIBIT B</div>
+      <div class="t038-type" style="font-size:calc(var(--u)*26);margin-top:calc(var(--u)*8)">deploy #2231 · 09:40</div>
+    </div>
+    <div class="t038-paper" style="left:calc(var(--u)*90);top:calc(var(--u)*480);width:calc(var(--u)*230);height:calc(var(--u)*120);transform:rotate(2deg);padding:calc(var(--u)*20);background:#BEB9AF"><div class="t038-type" style="font-size:calc(var(--u)*22)">p95 212 ms</div><div class="t038-type" style="font-size:calc(var(--u)*20);margin-top:calc(var(--u)*8);letter-spacing:.14em">CLEARED</div></div>
+    <div class="t038-paper" style="left:calc(var(--u)*345);top:calc(var(--u)*490);width:calc(var(--u)*230);height:calc(var(--u)*120);transform:rotate(-3deg);padding:calc(var(--u)*20);background:#BEB9AF"><div class="t038-type" style="font-size:calc(var(--u)*22)">Error 0.4 %</div><div class="t038-type" style="font-size:calc(var(--u)*20);margin-top:calc(var(--u)*8);letter-spacing:.14em">CLEARED</div></div>
+    <svg class="t038-svg" viewBox="0 0 1080 1080" aria-hidden="true" style="z-index:2"><polyline points="420,300 634,132 640,404" fill="none" stroke="#FF5A4E" stroke-width="3"/></svg>
+    <div class="t038-pin" style="left:calc(var(--u)*409);top:calc(var(--u)*289);z-index:2"></div><div class="t038-pin" style="left:calc(var(--u)*623);top:calc(var(--u)*121);z-index:2"></div><div class="t038-pin" style="left:calc(var(--u)*629);top:calc(var(--u)*393);z-index:2"></div>
+    <div class="t038-blinds" style="--ang:-14deg;--sd:.28"></div>
+    <div class="t038-paper" style="left:calc(var(--u)*70);top:calc(var(--u)*680);width:calc(var(--u)*940);height:calc(var(--u)*320);z-index:4;background:#E6E2DA;padding:calc(var(--u)*30) calc(var(--u)*40)">
+      <div class="t038-h" style="font-size:calc(var(--u)*72);color:#1A1918">Your call, <em>boss.</em></div>
+      <div class="t038-type" style="font-size:calc(var(--u)*22);letter-spacing:.1em;margin-top:calc(var(--u)*8)">PULSE · FOUND IT 2 MIN AFTER THE DEPLOY</div>
+      <div style="display:flex;gap:calc(var(--u)*16);margin-top:calc(var(--u)*22)"><span class="t038-btn c">Roll back</span><span class="t038-btn o">Acknowledge</span></div>
+    </div>
+    <svg class="t038-grain" viewBox="0 0 1080 1080" aria-hidden="true"><filter id="t038-n3"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="40"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1080" filter="url(#t038-n3)"/></svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>The camera pans the evidence board left→right</b> under a swinging lamp (±6°, 3 s): cleared suspects stay grey, the coral circle is drawn on the drop on the snare, the string runs to deploy #2231, and the memo slides up asking the human to decide.</p></div>
+
+  <!-- 4 · CTA -->
+  <div class="cw"><div class="cell t038-f" id="t038-f4" style="background:linear-gradient(170deg,#FFFDF7 0%,#F6F3EA 55%,#D9EFEC 100%);color:#0E1726">
+    <div class="t038-blinds" style="--ang:-14deg;--sd:.035"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(15,163,163,.12) 45%,transparent 60%)"></div>
+    <div class="t038-p" style="--x:60;--y:220;display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*22);z-index:5"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*96);height:calc(var(--u)*96)"><span class="t038-word" style="font-size:calc(var(--u)*72)">Acme Pulse</span></div>
+    <div class="t038-p t038-h" style="--x:60;--y:370;text-align:center;font-size:calc(var(--u)*120);z-index:5">You ship.<br><em style="color:#0B6E6E">Pulse watches.</em></div>
+    <div class="t038-p" style="--x:60;--y:690;text-align:center;z-index:5"><span class="t038-btn c" style="font-size:calc(var(--u)*42);padding:calc(var(--u)*26) calc(var(--u)*64)">Start free</span></div>
+    <div class="t038-p t038-mono" style="--x:60;--y:860;text-align:center;color:#5A6475;z-index:5">Case closed · 6 min</div>
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The blinds rotate open</b> and the shadows thin to hairlines as daylight floods in from the top-left; colour returns in one beat (teal first), the tagline fades up and Start free lands on the final downbeat.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Blind gobo</b> — skewed repeating-linear-gradient stripes; the signature light pattern, adjustable per scene.</li>
+    <li><b>Hard spotlight</b> — radial mask with no fill light; decides what the viewer is allowed to see.</li>
+    <li><b>Case files</b> — stacked folders typed "DASHBOARD 38 — UNREAD"; the pain as a physical pile.</li>
+    <li><b>Frosted door</b> — backlit glass lettering with the Acme mark; the reveal as a detective agency.</li>
+    <li><b>Evidence board</b> — exhibits, cleared suspects, pins and a coral string; the only colour is the clue.</li>
+    <li><b>Typed memo</b> — "Your call, boss." with Roll back / Acknowledge; the human decision.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Blind tilt</b> — stripes rotate 4° and change thickness as the blinds are adjusted, power1.inOut 1.5 s, starting on bar downbeats.</li>
+    <li><b>Light swing</b> — hanging-lamp spotlight sways ±6° on a 3 s sine (1.5 bars at 120 BPM), so light and music breathe together.</li>
+    <li><b>Gate weave</b> — whole-frame 0.5 px jitter from a seeded table plus grain stepped at 24 fps; never Math.random.</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>A detective who reads every file overnight is a warm, human way to describe a background agent, and "only the clue is in colour" makes the anomaly impossible to miss. Risk: noir implies crime and fraud; frame it as a mistake hunt, never wrongdoing, and end in bright daylight.</p><p><b>Adapt to your product:</b> Pin your own screens as exhibits, grey out what your product clears, and draw the coral string from the finding to its root cause.</p><p><b>References:</b> <a href="https://mubi.com/en/notebook/posts/video-essay-venetian-shadows">MUBI: Venetian Shadows video essay</a> · <a href="https://www.premiumbeat.com/blog/lighting-for-film-noir/">PremiumBeat: lighting for film noir</a> · <a href="https://nofilmschool.com/2014/10/peek-through-venetian-blinds-what-film-noir">No Film School: venetian blinds in noir</a></p></div>
+</div>
+</body>
+</html>

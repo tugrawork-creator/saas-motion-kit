@@ -1,0 +1,74 @@
+{
+ "id": "083",
+ "slug": "bauhaus-primer",
+ "name": "Bauhaus Primer",
+ "category": "era",
+ "summary": "Circle, square, triangle and a black bar: a Bauhaus primer where the one shape that falls out of the grid is the anomaly.",
+ "look": "Warm cream paper, flat geometric primitives in teal, amber and ink, heavy black rules and all-lowercase Manrope 800. Coral is used only for the element that breaks the grid.",
+ "components": [
+  {
+   "name": "Primer shapes",
+   "role": "circle / square / triangle as metric tokens (teal, ink, amber)"
+  },
+  {
+   "name": "Black bar",
+   "role": "structural rule that wipes headlines and cuts diagonals"
+  },
+  {
+   "name": "Lowercase universal type",
+   "role": "Manrope 800 lowercase, Bayer-style, one serif italic accent word"
+  },
+  {
+   "name": "Empty slot",
+   "role": "dashed coral outline where a metric went missing"
+  },
+  {
+   "name": "Fallen square",
+   "role": "the anomaly — tilted coral block carrying the number"
+  },
+  {
+   "name": "Block button",
+   "role": "flat ink rectangle with a coral dot or amber triangle glyph"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Stamp-in",
+   "how": "shapes scale 0→1.06→1, back.out(2) 0.25 s, one per 8th note (0.25 s at 120 BPM)"
+  },
+  {
+   "name": "Gravity slip",
+   "how": "anomaly square rotates 0→−9° and drops 40 px, power3.in 0.4 s, landing on a downbeat"
+  },
+  {
+   "name": "Bar wipe",
+   "how": "black bar scaleX 0→1 from the left, expo.out 0.5 s, always on beat 1 of a bar; text rides behind it with clip-path"
+  }
+ ],
+ "story": "Hook: a 6×3 primer grid of shapes (38 dashboards) with one square slipping away on Friday. Reveal: bar, circle, triangle and square assemble around the Acme mark. Proof: three healthy shapes tick while the checkout square falls coral with −18%, since 09:42 after deploy #2231, and a human clicks the ink \"roll back\" block. CTA: \"you ship. pulse watches.\" with a start free block.",
+ "adapt": "Map your own metrics or features to the three primitives (e.g. circle = users, square = revenue, triangle = performance) and let the thing your product catches be the one that breaks the grid. Swap the button labels for your product's real action.",
+ "references": [
+  {
+   "url": "https://en.wikipedia.org/wiki/Bauhaus",
+   "note": "school overview: geometric simplicity, Kandinsky colour teaching",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Herbert_Bayer",
+   "note": "Bayer's all-lowercase sans for Bauhaus print",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "low",
+  "risk": "Can feel academic or like a kids' shape-sorter if the numbers are not big and the pacing is not tight."
+ },
+ "best_for": [
+  "analytics",
+  "design tools",
+  "dev tools"
+ ],
+ "file": "themes/083-bauhaus-primer.html"
+}

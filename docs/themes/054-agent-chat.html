@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>054 · Agent Chat — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+/* ===== THEME CSS — t054 ===== */
+
+.t054-f{position:absolute;inset:0;overflow:hidden;color:var(--ink);font-family:var(--sans);background:linear-gradient(160deg,#F3F6F5 0%,#F6F5F1 60%,#FBEFEA 100%)}
+.t054-h{position:absolute;font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.01em}
+.t054-h i{color:var(--brand-deep)}
+.t054-win{position:absolute;left:calc(var(--u)*60);right:calc(var(--u)*60);background:#fff;border-radius:calc(var(--u)*34);box-shadow:0 calc(var(--u)*30) calc(var(--u)*70) rgba(14,23,38,.12),0 0 0 calc(var(--u)*1) rgba(14,23,38,.06);overflow:hidden}
+.t054-top{height:calc(var(--u)*92);display:flex;align-items:center;gap:calc(var(--u)*16);padding:0 calc(var(--u)*30);border-bottom:calc(var(--u)*1.5) solid #EEF0F2;font:800 calc(var(--u)*27) var(--sans);white-space:nowrap}
+.t054-top small{font:400 calc(var(--u)*20) var(--mono);color:var(--muted)}
+.t054-top .pill{margin-left:auto;font:600 calc(var(--u)*20) var(--mono);color:#fff;background:var(--alert);border-radius:calc(var(--u)*100);padding:calc(var(--u)*6) calc(var(--u)*16)}
+.t054-av{width:calc(var(--u)*52);height:calc(var(--u)*52);border-radius:50%;display:grid;place-items:center;font:700 calc(var(--u)*20) var(--sans);color:#fff;flex:none}
+.t054-av img{width:calc(var(--u)*52);height:calc(var(--u)*52);border-radius:calc(var(--u)*14)}
+.t054-body{position:absolute;left:0;right:0;top:calc(var(--u)*92);bottom:calc(var(--u)*96);padding:calc(var(--u)*26) calc(var(--u)*30);display:flex;flex-direction:column;gap:calc(var(--u)*16);justify-content:flex-end}
+.t054-me{align-self:flex-end;max-width:calc(var(--u)*620);background:var(--ink);color:#fff;font:600 calc(var(--u)*27)/1.3 var(--sans);padding:calc(var(--u)*18) calc(var(--u)*26);border-radius:calc(var(--u)*28) calc(var(--u)*28) calc(var(--u)*8) calc(var(--u)*28)}
+.t054-them{align-self:flex-start;max-width:calc(var(--u)*640);background:#F1F3F5;font:500 calc(var(--u)*27)/1.3 var(--sans);padding:calc(var(--u)*18) calc(var(--u)*26);border-radius:calc(var(--u)*28) calc(var(--u)*28) calc(var(--u)*28) calc(var(--u)*8)}
+.t054-meta{font:400 calc(var(--u)*20) var(--mono);color:var(--muted)}
+.t054-comp{position:absolute;left:calc(var(--u)*24);right:calc(var(--u)*24);bottom:calc(var(--u)*20);height:calc(var(--u)*60);border-radius:calc(var(--u)*100);background:#F4F5F6;display:flex;align-items:center;padding:0 calc(var(--u)*10) 0 calc(var(--u)*28);font:400 calc(var(--u)*23) var(--sans);color:var(--muted)}
+.t054-comp b{margin-left:auto;width:calc(var(--u)*44);height:calc(var(--u)*44);border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:calc(var(--u)*24)}
+.t054-ag{display:flex;gap:calc(var(--u)*14);align-items:flex-start;align-self:flex-start;max-width:calc(var(--u)*860)}
+.t054-ag img{width:calc(var(--u)*52);height:calc(var(--u)*52);flex:none}
+.t054-bub{background:#fff;border:calc(var(--u)*1.5) solid #E6EAEC;box-shadow:0 calc(var(--u)*8) calc(var(--u)*20) rgba(14,23,38,.06);border-radius:calc(var(--u)*8) calc(var(--u)*28) calc(var(--u)*28) calc(var(--u)*28);padding:calc(var(--u)*20) calc(var(--u)*26);font:500 calc(var(--u)*27)/1.35 var(--sans)}
+.t054-bub .who{font:600 calc(var(--u)*20) var(--mono);color:var(--brand-deep);margin-bottom:calc(var(--u)*8);letter-spacing:.06em}
+.t054-tool{margin-top:calc(var(--u)*16);border:calc(var(--u)*1.5) solid #F4C9C4;border-radius:calc(var(--u)*22);overflow:hidden;background:#FFF8F7}
+.t054-tool .hd{font:600 calc(var(--u)*19) var(--mono);letter-spacing:.12em;color:#fff;background:var(--alert);padding:calc(var(--u)*10) calc(var(--u)*20)}
+.t054-tool .bd{padding:calc(var(--u)*18) calc(var(--u)*20);display:grid;grid-template-columns:auto 1fr;gap:calc(var(--u)*6) calc(var(--u)*22);align-items:center}
+.t054-tool .big{font:600 calc(var(--u)*64)/1 var(--mono);color:var(--alert);letter-spacing:-.04em}
+.t054-tool .ctx{grid-column:1/-1;font:400 calc(var(--u)*21) var(--mono);color:#6B4A45}
+.t054-chips{display:flex;gap:calc(var(--u)*12);padding:0 calc(var(--u)*20) calc(var(--u)*18)}
+.t054-chip{font:700 calc(var(--u)*23) var(--sans);border-radius:calc(var(--u)*100);padding:calc(var(--u)*12) calc(var(--u)*24);border:calc(var(--u)*2) solid rgba(14,23,38,.15);background:#fff}
+.t054-chip.p{background:var(--alert);border-color:var(--alert);color:#fff}
+.t054-sys{align-self:center;font:400 calc(var(--u)*20) var(--mono);color:var(--muted)}
+.t054-ring{position:absolute;border-radius:50%;border:calc(var(--u)*2) solid rgba(15,163,163,.3)}
+
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 054 · Signature directions</div>
+    <h1>Agent Chat</h1>
+    <p class="dek">The whole film is one conversation. The hook is a noisy team chat nobody answers; on the drop the thread clears and the agent arrives; the proof is the agent messaging first, with the anomaly rendered as a tool card inside its bubble and the human replying “Roll back”. Serif titles sit above the chat like film subtitles.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●○</span><span class="chip">effort med</span></div>
+</div>
+
+<div class="grid">
+  <div class="cw"><div class="cell" id="t054-f1"><div class="t054-f">
+<div class="t054-h" style="left:calc(var(--u)*60);top:calc(var(--u)*70);width:calc(var(--u)*960);font-size:calc(var(--u)*74)">How many dashboards did you <i style="color:var(--alert)">check</i> today?</div>
+<div class="t054-win" style="top:calc(var(--u)*270);height:calc(var(--u)*750)"><div class="t054-top"><div class="t054-av" style="background:#6C7A91">MT</div>#metrics-team <small>· group chat · Friday</small></div>
+<div class="t054-body">
+<div class="t054-me" style="opacity:.35">is checkout still red??</div>
+<div class="t054-me" style="opacity:.6">which dashboard, there are 38</div>
+<div class="t054-me">tab 12 says fine, tab 31 says −18%</div>
+<div class="t054-me">who is on call?</div>
+<div class="t054-meta" style="align-self:flex-end">✓✓ seen by 6 · no reply</div>
+<div class="t054-them" style="color:var(--muted)">typing …</div>
+</div>
+<div class="t054-comp">Message #metrics-team<b>↑</b></div></div>
+</div></div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>Bubbles shoot up from the composer</b>, one per beat, pushing older ones up into a fade mask; in bar 4 the tempo doubles to half-beats, “typing…” appears and dies unanswered on the last downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t054-f2"><div class="t054-f" style="background:radial-gradient(60% 50% at 50% 30%,#D9F4F1 0%,#F6F5F1 70%)">
+<div class="t054-ring" style="left:calc(var(--u)*390);top:calc(var(--u)*70);width:calc(var(--u)*300);height:calc(var(--u)*300)"></div>
+<div class="t054-ring" style="left:calc(var(--u)*340);top:calc(var(--u)*20);width:calc(var(--u)*400);height:calc(var(--u)*400);opacity:.6"></div>
+<div class="t054-ring" style="left:calc(var(--u)*290);top:calc(var(--u)*-30);width:calc(var(--u)*500);height:calc(var(--u)*500);opacity:.3"></div>
+<img src="../assets/brand/acme-mark.svg" alt="Acme" style="position:absolute;left:calc(var(--u)*460);top:calc(var(--u)*140);width:calc(var(--u)*160);height:calc(var(--u)*160);box-shadow:0 calc(var(--u)*20) calc(var(--u)*50) rgba(15,163,163,.35);border-radius:calc(var(--u)*40)">
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*470);text-align:center;font:800 calc(var(--u)*76) var(--sans);letter-spacing:-.03em;white-space:nowrap">Acme Pulse</div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*565);text-align:center;font:600 calc(var(--u)*21) var(--mono);color:var(--brand-deep);letter-spacing:.12em">● ONLINE · WATCHING 14 METRICS</div>
+<div class="t054-ag" style="position:absolute;left:calc(var(--u)*100);top:calc(var(--u)*640)"><img src="../assets/brand/acme-mark.svg" alt="Acme"><div class="t054-bub"><div class="who">ACME PULSE</div>You ship. I’ll watch every metric, every minute — <i style="font-family:var(--serif);font-size:calc(var(--u)*34);color:var(--brand-deep)">you</i> make the call.</div></div>
+<div class="t054-comp" style="left:calc(var(--u)*100);right:calc(var(--u)*100);bottom:calc(var(--u)*70);background:#fff;box-shadow:0 calc(var(--u)*8) calc(var(--u)*24) rgba(14,23,38,.08)">Ask Pulse anything…<b>↑</b></div>
+</div></div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>On the drop every bubble is swept upward</b> and the thread empties; the mark pops at centre with three rings expanding outward, then one beat of “typing…” and the first agent bubble pops in from bottom-left.</p></div>
+  <div class="cw"><div class="cell" id="t054-f3"><div class="t054-f">
+<div class="t054-h" style="left:calc(var(--u)*60);top:calc(var(--u)*62);width:calc(var(--u)*960);font-size:calc(var(--u)*66)">Pulse writes <i>first.</i></div>
+<div class="t054-win" style="top:calc(var(--u)*160);height:calc(var(--u)*870)"><div class="t054-top"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*48);height:calc(var(--u)*48)">Acme Pulse <small>· 14 metrics · 2,418 events/sec</small><span class="pill">● new</span></div>
+<div class="t054-body" style="bottom:calc(var(--u)*20)">
+<div class="t054-ag" style="opacity:.45"><img src="../assets/brand/acme-mark.svg" alt="Acme"><div class="t054-bub" style="font-size:calc(var(--u)*24)">Morning check: all 14 metrics normal ✓</div></div>
+<div class="t054-sys">— 09:44 · you didn’t ask · Pulse started this —</div>
+<div class="t054-ag"><img src="../assets/brand/acme-mark.svg" alt="Acme"><div class="t054-bub" style="width:calc(var(--u)*760)"><div class="who">ACME PULSE</div>I caught a drop right after a deploy:
+<div class="t054-tool"><div class="hd">ANOMALY · CHECKOUT CONVERSION</div>
+<div class="bd"><span class="big">−18%</span><svg viewBox="0 0 300 60" style="width:100%;height:calc(var(--u)*70)"><polyline points="0,14 60,12 120,15 150,14 170,46 210,50 300,52" fill="none" stroke="#FF5A4E" stroke-width="4" stroke-linejoin="round"/><line x1="160" y1="0" x2="160" y2="60" stroke="#0E1726" stroke-dasharray="4 4" stroke-width="1.5"/></svg>
+<span class="ctx">since 09:42 · after deploy #2231</span></div>
+<div class="t054-chips"><span class="t054-chip p">Roll back</span><span class="t054-chip">Acknowledge</span></div></div></div></div>
+<div class="t054-me">Roll back.</div>
+<div class="t054-meta" style="align-self:flex-end">✓ decided by you · 09:45</div>
+</div></div>
+</div></div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>No user message first</b>: the “● new” pill lights, the agent bubble pops from the left and the tool card unfolds top→down on the bar-9 downbeat; the user’s “Roll back.” flies in from the right on the next downbeat.</p></div>
+  <div class="cw"><div class="cell" id="t054-f4"><div class="t054-f" style="background:radial-gradient(70% 60% at 50% 45%,#E3F6F3 0%,#F6F5F1 70%)">
+<div style="position:absolute;left:calc(var(--u)*120);top:calc(var(--u)*130);right:calc(var(--u)*120);bottom:calc(var(--u)*130);border:calc(var(--u)*2.5) dashed rgba(15,163,163,.35);border-radius:calc(var(--u)*40)"></div>
+<div style="position:absolute;left:calc(var(--u)*200);top:calc(var(--u)*210);right:calc(var(--u)*200);bottom:calc(var(--u)*210);border:calc(var(--u)*2.5) dashed rgba(15,163,163,.55);border-radius:calc(var(--u)*34)"></div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*320);display:flex;justify-content:center;align-items:center;gap:calc(var(--u)*24);white-space:nowrap"><img src="../assets/brand/acme-mark.svg" alt="Acme" style="width:calc(var(--u)*112);height:calc(var(--u)*112)"><span style="font:800 calc(var(--u)*88) var(--sans);letter-spacing:-.03em">Acme Pulse</span></div>
+<div class="t054-h" style="left:0;right:0;top:calc(var(--u)*480);text-align:center;font-size:calc(var(--u)*78)">You ship. <i>Pulse watches.</i></div>
+<div style="position:absolute;left:0;right:0;top:calc(var(--u)*640);display:flex;justify-content:center"><span style="font:700 calc(var(--u)*34) var(--sans);color:#fff;background:var(--alert);padding:calc(var(--u)*22) calc(var(--u)*34) calc(var(--u)*22) calc(var(--u)*48);border-radius:calc(var(--u)*40) calc(var(--u)*40) calc(var(--u)*10) calc(var(--u)*40);box-shadow:0 calc(var(--u)*18) calc(var(--u)*40) rgba(255,90,78,.35);display:flex;gap:calc(var(--u)*22);align-items:center">Start free <b style="width:calc(var(--u)*52);height:calc(var(--u)*52);border-radius:50%;background:#fff;color:var(--alert);display:grid;place-items:center">↑</b></span></div>
+</div></div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The window’s edges shrink inward</b> as dashed frames while the chat folds into the lockup; the tagline rises and the CTA pops up from below like the last message bubble on the sting.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul><li><b>User bubble</b> — right-aligned, ink fill, white text, sharp bottom-right corner</li><li><b>Agent bubble</b> — left, white card with hairline + Acme mark avatar and a mono “ACME PULSE” label</li><li><b>Typing indicator</b> — three dots pulsing on the beat; in the hook it dies unanswered</li><li><b>Tool card</b> — coral header strip, giant mono number, sparkline with deploy rule, context line, action chips</li><li><b>System note</b> — centred mono line (“you didn’t ask · Pulse started this”) that gives time and agency</li><li><b>Composer</b> — pill input with teal send button; the CTA is styled as the final outgoing message</li></ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul><li><b>Bubble pop</b> — scale .9 → 1 + 30 px rise from its sender side, back.out(1.6) 0.3 s, one per beat (0.5 s at 120 BPM)</li><li><b>Thread scroll</b> — older bubbles translate up by bubble height, power2.out 0.25 s, synced to each new pop</li><li><b>Tool-card unfold</b> — height 0 → auto via clip-path over 0.5 s (power3.out) landing on a bar downbeat; chips stagger in 0.1 s apart</li></ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3><p>Chat is the native mental model for “an AI agent”, and a proactive first message is the clearest possible proof of a background agent. The risk is looking like every other chatbot demo — the tool card and the human decision must be visibly the hero, not the typing animation.</p><p><b>Adapt to your product:</b> Replace the tool card with the richest result your product returns (a diff, a chart, a booking, a draft) and keep the pattern: the agent speaks first, the human answers with one decisive action.</p><p><b>References:</b> <a href="https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces">https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces</a> (tool results rendered as components inside chat) · <a href="https://vercel.com/blog/ai-sdk-3-generative-ui">https://vercel.com/blog/ai-sdk-3-generative-ui</a> (generative UI announcement with streaming components)</p></div>
+</div>
+</body>
+</html>

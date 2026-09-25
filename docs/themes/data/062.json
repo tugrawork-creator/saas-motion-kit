@@ -1,0 +1,74 @@
+{
+ "id": "062",
+ "slug": "mascot-agent",
+ "name": "Mascot Agent",
+ "category": "signature",
+ "summary": "The agent as a quiet teal character born from the logo’s dot, peeking over your dashboard and pointing at the anomaly with its eyes.",
+ "look": "Soft teal-to-peach paper, white product cards, and a round teal mascot with two white oval eyes that squashes, stretches and acts only with its eyes; dotted gaze lines connect it to what matters.",
+ "components": [
+  {
+   "name": "Mascot body",
+   "role": "teal ellipse with a soft top-left highlight; distinct from the logo — no face is ever added to the mark"
+  },
+  {
+   "name": "Eye kit",
+   "role": "neutral · focus (narrow) · alarm (wide) · happy (arcs) · blink — the only expressions"
+  },
+  {
+   "name": "Squash & stretch",
+   "role": "±16 % from the base, volume preserved; landings always on a beat, shadow scales with it"
+  },
+  {
+   "name": "Gaze line",
+   "role": "dotted arc from the eyes to the target (anomaly cell, CTA)"
+  },
+  {
+   "name": "Hands",
+   "role": "two small round nubs that appear only when gripping or holding"
+  },
+  {
+   "name": "Onion skin",
+   "role": "faded previous poses along the path — storyboard only; plays as real motion in production"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Birth arc",
+   "how": "dot → body along a bezier over 3 beats (1.5 s at 120 BPM), stretch 1.3 on the way, squash 0.84 on landing, back.out(2)"
+  },
+  {
+   "name": "Eye tracking",
+   "how": "eyes translate ≤ 0.3 r toward the active column, power2.out 0.2 s, one move per beat"
+  },
+  {
+   "name": "Blink + hop",
+   "how": "blink = eye scaleY 1 → 0.1 → 1 in 0.12 s on off-beats; hop = y −40 px + squash in 0.35 s landing on the downbeat"
+  }
+ ],
+ "story": "Hook: dashboard cards orbit the question on a dashed ring — no mascot, the chaos is human. Reveal: the Acme mark’s dot pulses, a copy stretches along an arc and lands as the mascot, which opens its eyes; the Acme Pulse wordmark sets. Proof: the mascot peeks over the team’s metrics table, eyes tracking checks, until they widen at Checkout conversion −18% (since 09:42, after deploy #2231) and the human gets Roll back / Acknowledge. CTA: the mascot sits beside the lockup and glances at the coral Start free button.",
+ "adapt": "Derive the character from a shape in your own mark (a dot, a corner, a letter counter) without altering the logo itself, and give it one job: pointing the human to what matters.",
+ "references": [
+  {
+   "url": "https://blog.duolingo.com/world-character-visemes/",
+   "note": "how Duolingo animates its characters with state-driven poses",
+   "verified": true
+  },
+  {
+   "url": "https://www.creativebloq.com/advice/understand-the-12-principles-of-animation",
+   "note": "squash & stretch and the 12 principles of animation",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 2,
+  "effort": "high",
+  "risk": "Can feel childish for serious buyers; character animation is costly to do well."
+ },
+ "best_for": [
+  "consumer-friendly B2B",
+  "onboarding",
+  "AI assistants"
+ ],
+ "file": "themes/062-mascot-agent.html"
+}

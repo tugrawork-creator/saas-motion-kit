@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>041 · The Editor's Pass — saas-motion-kit</title>
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+/* ===== SHARED SHEET CHROME — do not edit (every theme sheet looks alike) ===== */
+*{box-sizing:border-box;margin:0}
+body{background:#ECEBE6;color:var(--ink);font-family:var(--sans);padding:32px 40px 64px}
+.top{max-width:1400px;margin:0 auto 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:10px}
+.kicker{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.01em;line-height:1.05;margin-top:4px}
+.dek{max-width:780px;color:#33415C;font-size:16px;line-height:1.55;margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--mono);border-radius:100px;padding:6px 12px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:640px){.grid{grid-template-columns:1fr} body{padding:16px}}
+.cw{display:flex;flex-direction:column;gap:8px}
+.cell{aspect-ratio:1/1;container-type:inline-size;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);--u:calc(100cqw/1080)}
+.lab{display:flex;justify-content:space-between;font:500 11.5px var(--mono);color:var(--muted);letter-spacing:.06em}
+.lab b{color:var(--ink)}
+.note{font-size:13.5px;line-height:1.5;color:#33415C} .note b{color:var(--ink)}
+.kit{max-width:1400px;margin:26px auto 0;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+@media(max-width:1000px){.kit{grid-template-columns:1fr}}
+.panel{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(14,23,38,.05)}
+.panel h3{font:600 11.5px var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:10px}
+.panel ul{padding-left:18px;font-size:14px;line-height:1.55;color:#33415C} .panel li{margin:3px 0} .panel li b{color:var(--ink)}
+.panel p{font-size:14px;line-height:1.55;color:#33415C} .panel p+p{margin-top:8px}
+.panel a{color:var(--brand-deep);word-break:break-all}
+/* ===== THEME CSS BELOW — prefix every class with .tNNN- (NNN = theme number) ===== */
+.t041-bg{background:#F3EEE2;background-image:radial-gradient(ellipse at 28% 18%,rgba(255,255,255,.6),transparent 62%),repeating-linear-gradient(0deg,rgba(120,96,60,.03) 0 calc(var(--u)*2),transparent calc(var(--u)*2) calc(var(--u)*6))}
+.t041-s{position:absolute;inset:0;width:100%;height:100%}
+.t041-m{font-family:var(--mono)}
+.t041-se{font-family:var(--serif)}
+.t041-sa{font-family:var(--sans)}
+.t041-mark{position:absolute;display:block}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <a class="back" href="../index.html">← all 100 themes</a>
+    <div class="kicker">Theme 041 · Metaphor concepts</div>
+    <h1>The Editor's Pass</h1>
+    <p class="dek">Your metrics digest is set like a galley proof: warm paper, wide margins, numbered lines. An unseen copy editor reads every line in the background, leaves exact typographic proof marks (caret, squiggle, circled figure, margin query) and hands the final call to a human who initials the page.</p>
+  </div>
+  <div class="chips"><span class="chip">readability ●●●</span><span class="chip">trust ●●●</span><span class="chip">effort low</span></div>
+</div>
+
+<div class="grid">
+  <!-- F1 · HOOK -->
+  <div class="cw"><div class="cell t041-bg" id="t041-f1">
+    <svg class="t041-s" viewBox="0 0 1080 1080">
+      <g class="t041-m" font-size="20" fill="#8A7F6A" letter-spacing="2">
+        <text x="80" y="96">GALLEY 01 · WEEKLY METRICS DIGEST</text>
+        <text x="1000" y="96" text-anchor="end">p. 1 / 38</text>
+      </g>
+      <line x1="80" y1="116" x2="1000" y2="116" stroke="#CFC4AC" stroke-width="2"/>
+      <g class="t041-se" fill="#0E1726" font-size="84" letter-spacing="-1">
+        <text x="80" y="214">How many dashboards</text>
+        <text x="80" y="300">did you <tspan font-style="italic" fill="#0B6E6E">check</tspan> today?</text>
+      </g>
+      <!-- galley slip -->
+      <rect x="80" y="370" width="640" height="530" fill="#FFFCF4" stroke="#D9CFBA" stroke-width="2"/>
+      <g stroke="#E3D9C4" stroke-width="1.5" stroke-dasharray="3 5">
+        <line x1="100" y1="445" x2="700" y2="445"/><line x1="100" y1="520" x2="700" y2="520"/><line x1="100" y1="595" x2="700" y2="595"/><line x1="100" y1="670" x2="700" y2="670"/><line x1="100" y1="745" x2="700" y2="745"/><line x1="100" y1="820" x2="700" y2="820"/>
+      </g>
+      <g class="t041-m" font-size="20" fill="#A99E86">
+        <text x="102" y="418">01</text><text x="102" y="493">02</text><text x="102" y="568">03</text><text x="102" y="643">04</text><text x="102" y="718">05</text><text x="102" y="793">06</text><text x="102" y="868">07</text>
+      </g>
+      <g class="t041-se" font-size="34" fill="#0E1726">
+        <text x="160" y="420">Dashboards open</text><text x="160" y="495">Metrics tracked</text><text x="160" y="570">Signups</text><text x="160" y="645">Active users</text><text x="160" y="720">p95 latency</text><text x="160" y="795">Checkout conversion</text><text x="160" y="870">Error rate</text>
+      </g>
+      <g class="t041-m" font-size="26" fill="#0E1726" text-anchor="end">
+        <text x="696" y="420">38</text><text x="696" y="495">14</text><text x="696" y="570">1,204</text><text x="696" y="645">18,930</text><text x="696" y="720">212 ms</text><text x="696" y="870">0.4 %</text>
+      </g>
+      <rect x="560" y="774" width="136" height="16" rx="3" fill="#E4DAC6"/>
+      <!-- margin: nobody read it -->
+      <line x1="760" y1="370" x2="760" y2="900" stroke="#D9CFBA" stroke-width="1.5"/>
+      <g class="t041-m" font-size="21" fill="#8A7F6A">
+        <text x="790" y="780">read: Fri 17:40</text>
+        <text x="790" y="812">editor: nobody</text>
+      </g>
+      <path d="M700 784 C 730 784, 750 790, 780 790" fill="none" stroke="#B8AC93" stroke-width="2" stroke-dasharray="4 6"/>
+      <circle cx="848" cy="700" r="34" fill="none" stroke="#B8AC93" stroke-width="3"/>
+      <text class="t041-se" x="848" y="716" font-size="46" font-style="italic" fill="#B8AC93" text-anchor="middle">?</text>
+      <g class="t041-m" font-size="20" fill="#8A7F6A" letter-spacing="2">
+        <text x="80" y="990">PROOF STATUS · UNREAD SINCE MONDAY</text>
+      </g>
+    </svg>
+  </div>
+    <div class="lab"><b>1 · HOOK</b><span>0:00–0:08</span></div><p class="note"><b>The camera pans down the galley, top to bottom,</b> while the headline sets line by line. On the downbeat before the drop, a grey pencil "?" is circled in the margin and "editor: nobody" types in with steps().</p></div>
+
+  <!-- F2 · REVEAL -->
+  <div class="cw"><div class="cell t041-bg" id="t041-f2">
+    <svg class="t041-s" viewBox="0 0 1080 1080">
+      <g class="t041-m" font-size="20" fill="#8A7F6A" letter-spacing="2">
+        <text x="80" y="96">GALLEY 02 · INSERT ∧</text>
+        <text x="1000" y="96" text-anchor="end">p. 2</text>
+      </g>
+      <line x1="80" y1="116" x2="1000" y2="116" stroke="#CFC4AC" stroke-width="2"/>
+      <g class="t041-m" font-size="20" fill="#BFB39B">
+        <text x="80" y="240">12</text><text x="80" y="400">13</text><text x="80" y="560">14</text><text x="80" y="720">15</text><text x="80" y="880">16</text>
+      </g>
+      <line x1="124" y1="170" x2="124" y2="930" stroke="#D9CFBA" stroke-width="1.5"/>
+      <!-- struck-out old way -->
+      <text class="t041-se" x="540" y="248" font-size="56" fill="#9A8F78" text-anchor="middle">38 dashboards, read by hand</text>
+      <line x1="228" y1="232" x2="852" y2="232" stroke="#FF5A4E" stroke-width="5" stroke-linecap="round"/>
+      <path d="M852 232 C 900 232, 918 196, 896 184 C 874 172, 862 206, 884 214 C 906 222, 934 206, 950 190" fill="none" stroke="#FF5A4E" stroke-width="4" stroke-linecap="round"/>
+      <!-- wordmark inserted -->
+      <text class="t041-sa" x="540" y="590" font-size="124" font-weight="800" fill="#0E1726" text-anchor="middle" letter-spacing="-3">Acme Pulse</text>
+      <path d="M470 690 L540 626 L610 690" fill="none" stroke="#FF5A4E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M610 676 C 720 676, 800 720, 846 770" fill="none" stroke="#FF5A4E" stroke-width="3"/>
+      <circle cx="846" cy="770" r="6" fill="#FF5A4E"/>
+      <g class="t041-m" font-size="22" fill="#FF5A4E">
+        <text x="620" y="818">∧ insert: an editor</text>
+        <text x="620" y="850">who reads every line,</text>
+        <text x="620" y="882">every minute.</text>
+      </g>
+      <g class="t041-m" font-size="20" fill="#8A7F6A" letter-spacing="2">
+        <text x="160" y="990">SET IN · 14 METRICS · 2,418 EVENTS/SEC</text>
+      </g>
+    </svg>
+    <img class="t041-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*470);top:calc(var(--u)*330);width:calc(var(--u)*140);height:calc(var(--u)*140)">
+  </div>
+    <div class="lab"><b>2 · REVEAL</b><span>0:08 (drop)</span></div><p class="note"><b>The old line is struck through and pigtailed left-to-right (stroke draw-on, 0.5 s power2.inOut).</b> On the drop the coral insert caret stabs up and "Acme Pulse" drops into the line with the mark above it.</p></div>
+
+  <!-- F3 · PROOF MOMENT -->
+  <div class="cw"><div class="cell t041-bg" id="t041-f3">
+    <svg class="t041-s" viewBox="0 0 1080 1080">
+      <g class="t041-m" font-size="20" fill="#8A7F6A" letter-spacing="2">
+        <text x="70" y="86">GALLEY 03 · LIVE PROOF</text>
+        <text x="1010" y="86" text-anchor="end">2,418 EVENTS/SEC</text>
+      </g>
+      <line x1="70" y1="104" x2="1010" y2="104" stroke="#CFC4AC" stroke-width="2"/>
+      <rect x="70" y="140" width="600" height="560" fill="#FFFCF4" stroke="#D9CFBA" stroke-width="2"/>
+      <g class="t041-m" font-size="20" fill="#A99E86">
+        <text x="90" y="212">01</text><text x="90" y="302">02</text><text x="90" y="392">03</text><text x="90" y="482">04</text><text x="90" y="572">05</text><text x="90" y="662">06</text>
+      </g>
+      <g stroke="#E3D9C4" stroke-width="1.5" stroke-dasharray="3 5">
+        <line x1="86" y1="245" x2="654" y2="245"/><line x1="86" y1="335" x2="654" y2="335"/><line x1="86" y1="425" x2="654" y2="425"/><line x1="86" y1="515" x2="654" y2="515"/><line x1="86" y1="605" x2="654" y2="605"/>
+      </g>
+      <g class="t041-se" font-size="34" fill="#0E1726">
+        <text x="140" y="214">Signups</text><text x="140" y="304">Active users</text><text x="140" y="394">p95 latency</text><text x="140" y="484">Error rate</text><text x="140" y="574">Checkout conv.</text><text x="140" y="664">Deploys today</text>
+      </g>
+      <g class="t041-m" font-size="26" fill="#0E1726" text-anchor="end">
+        <text x="600" y="214">1,204</text><text x="600" y="304">18,930</text><text x="600" y="394">212 ms</text><text x="600" y="484">0.4 %</text><text x="600" y="574" fill="#FF5A4E" font-weight="600">2.41 %</text><text x="600" y="664">3</text>
+      </g>
+      <!-- teal ticks: read and fine -->
+      <g fill="none" stroke="#0FA3A3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M620 202 l8 8 l14 -18"/><path d="M620 292 l8 8 l14 -18"/><path d="M620 382 l8 8 l14 -18"/><path d="M620 472 l8 8 l14 -18"/><path d="M620 652 l8 8 l14 -18"/>
+      </g>
+      <!-- squiggle + circled figure -->
+      <path d="M140 590 q10 -10 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0" fill="none" stroke="#FF5A4E" stroke-width="3.5" stroke-linecap="round"/>
+      <ellipse cx="548" cy="564" rx="78" ry="34" fill="none" stroke="#FF5A4E" stroke-width="4"/>
+      <path d="M626 560 C 670 556, 690 506, 712 480" fill="none" stroke="#FF5A4E" stroke-width="3"/>
+      <circle cx="712" cy="480" r="6" fill="#FF5A4E"/>
+      <!-- margin query -->
+      <line x1="700" y1="140" x2="700" y2="700" stroke="#D9CFBA" stroke-width="1.5"/>
+      <g class="t041-m" fill="#FF5A4E">
+        <text x="730" y="190" font-size="20" letter-spacing="2" fill="#8A7F6A">QUERY · PULSE</text>
+        <text x="730" y="250" font-size="30" font-weight="600">Checkout</text>
+        <text x="730" y="290" font-size="30" font-weight="600">conversion</text>
+        <text x="730" y="338" font-size="44" font-weight="600">−18%</text>
+        <text x="730" y="384" font-size="22" fill="#0E1726">since 09:42</text>
+        <text x="730" y="414" font-size="22" fill="#0E1726">after deploy</text>
+        <text x="730" y="444" font-size="22" fill="#0E1726">#2231</text>
+      </g>
+      <!-- sign-off -->
+      <text class="t041-se" x="70" y="786" font-size="44" fill="#0E1726">Your call, <tspan font-style="italic" fill="#0B6E6E">editor</tspan>:</text>
+      <rect x="70" y="830" width="300" height="96" rx="16" fill="#FF5A4E"/>
+      <text class="t041-sa" x="220" y="891" font-size="36" font-weight="700" fill="#fff" text-anchor="middle">Roll back</text>
+      <rect x="392" y="830" width="300" height="96" rx="16" fill="none" stroke="#0E1726" stroke-width="3"/>
+      <text class="t041-sa" x="542" y="891" font-size="34" font-weight="600" fill="#0E1726" text-anchor="middle">Acknowledge</text>
+      <rect x="730" y="820" width="280" height="116" fill="#FFFCF4" stroke="#0E1726" stroke-width="2.5"/>
+      <text class="t041-m" x="746" y="848" font-size="20" fill="#8A7F6A">INITIALS</text>
+      <text class="t041-se" x="870" y="914" font-size="60" font-style="italic" fill="#0B6E6E" text-anchor="middle">mk</text>
+      <!-- cursor -->
+      <path d="M300 900 l0 52 l13 -12 l10 22 l10 -5 l-10 -21 l18 0 z" fill="#0E1726" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+  </div>
+    <div class="lab"><b>3 · PROOF MOMENT</b><span>0:12–0:32</span></div><p class="note"><b>Teal ticks land down the rows on every hi-hat; row 05 gets a crawling squiggle and a circle, then a leader line draws right to the margin query.</b> The query types in on bar 3; on the next downbeat the human taps "Roll back" and initials the box.</p></div>
+
+  <!-- F4 · CTA -->
+  <div class="cw"><div class="cell t041-bg" id="t041-f4">
+    <svg class="t041-s" viewBox="0 0 1080 1080">
+      <g class="t041-m" font-size="20" fill="#8A7F6A" letter-spacing="2">
+        <text x="80" y="96">GALLEY 04 · PASSED FOR PRESS</text>
+        <text x="1000" y="96" text-anchor="end">final</text>
+      </g>
+      <line x1="80" y1="116" x2="1000" y2="116" stroke="#CFC4AC" stroke-width="2"/>
+      <text class="t041-sa" x="244" y="300" font-size="92" font-weight="800" fill="#0E1726" letter-spacing="-2">Acme Pulse</text>
+      <g class="t041-se" fill="#0E1726" font-size="118" letter-spacing="-2">
+        <text x="80" y="520">You ship.</text>
+        <text x="80" y="640" font-style="italic" fill="#0B6E6E">Pulse watches.</text>
+      </g>
+      <rect x="80" y="760" width="340" height="110" rx="20" fill="#FF5A4E"/>
+      <text class="t041-sa" x="250" y="830" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Start free</text>
+      <g transform="rotate(-8 790 800)">
+        <rect x="590" y="720" width="400" height="160" rx="6" fill="rgba(243,238,226,.85)" stroke="#0B6E6E" stroke-width="5"/>
+        <rect x="602" y="732" width="376" height="136" rx="3" fill="none" stroke="#0B6E6E" stroke-width="2"/>
+        <text class="t041-m" x="790" y="800" font-size="42" font-weight="600" fill="#0B6E6E" text-anchor="middle" letter-spacing="4">OK TO SHIP</text>
+        <text class="t041-m" x="790" y="842" font-size="20" fill="#0B6E6E" text-anchor="middle" letter-spacing="2">14 METRICS · READ</text>
+      </g>
+      <g class="t041-m" font-size="20" fill="#8A7F6A" letter-spacing="2">
+        <text x="80" y="990">EDITOR · ACME PULSE    ·    SIGN-OFF · YOU</text>
+      </g>
+    </svg>
+    <img class="t041-mark" src="../assets/brand/acme-mark.svg" alt="Acme" style="left:calc(var(--u)*80);top:calc(var(--u)*200);width:calc(var(--u)*130);height:calc(var(--u)*130)">
+  </div>
+    <div class="lab"><b>4 · CTA</b><span>0:36–0:45</span></div><p class="note"><b>The galley slides up and away; the clean page settles.</b> Tagline sets word by word on beats; the teal "OK TO SHIP" stamp thumps on the final downbeat with a 2-frame 1.06 overshoot, then the coral button fades up.</p></div>
+</div>
+
+<div class="kit">
+  <div class="panel"><h3>COMPONENT KIT</h3><ul>
+    <li><b>Galley slip</b> — line-numbered metrics digest on warm paper with wide margins; the stage for every beat.</li>
+    <li><b>Squiggle underline</b> — wavy coral path under a suspect figure, borrowed from spell-check.</li>
+    <li><b>Circled figure + leader line</b> — ties the anomaly value to the margin.</li>
+    <li><b>Margin query</b> — mono annotation carrying the anomaly text ("−18% · since 09:42 · deploy #2231").</li>
+    <li><b>Proof glyphs</b> — insert caret, delete pigtail, teal tick; exact vectors, never sketchy.</li>
+    <li><b>Initials box + OK TO SHIP stamp</b> — the human sign-off; approval is always a person.</li>
+  </ul></div>
+  <div class="panel"><h3>MOTION · MUSIC</h3><ul>
+    <li><b>Stroke draw-on</b> — stroke-dashoffset 0.5–0.7 s, power2.inOut; carets and circles start exactly on a downbeat (every 0.5 s at 120 BPM).</li>
+    <li><b>Squiggle crawl</b> — wave path translateX loop, 1 s per cycle (two beats), linear; draws the eye without alarm.</li>
+    <li><b>Leader-line callout</b> — line draws 0.35 s power3.out, then the margin note types in with steps(18) across one bar (2 s).</li>
+  </ul></div>
+  <div class="panel"><h3>WHY / RISK · ADAPT IT</h3>
+    <p>Everyone recognises the spell-check squiggle and the editor's red mark, so the proof moment reads at 1:1 with the sound off. The editor never rewrites the page; the human initials it. Risk: drifting into the hand-drawn look; keep every mark typographic and exact.</p>
+    <p><b>Adapt to your product:</b> Set your own report, invoice, config or changelog as the galley and let your product's finding become the margin query. The human action becomes the initials box.</p>
+    <p><b>References:</b> <a href="https://en.wikipedia.org/wiki/List_of_proofreader%27s_marks">Proofreader's marks</a> · <a href="https://www.ogilvy.com/work/misspelling-scramble">Ogilvy, Misspelling Scramble</a> · <a href="https://weareroyale.com/case-studies/grammarly-explainer-campaign/">Royale, Grammarly explainer</a></p>
+  </div>
+</div>
+</body>
+</html>
