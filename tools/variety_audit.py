@@ -3,7 +3,7 @@
 Usage:
   python tools/variety_audit.py STORYBOARD.md
   python tools/variety_audit.py STORYBOARD.md --history ~/.motion-ledger.json
-  python tools/variety_audit.py STORYBOARD.md --history ~/.motion-ledger.json --append "film-name"
+  python tools/variety_audit.py STORYBOARD.md --history ~/.motion-ledger.json --append "film-name" --theme 055
 
 Reads the first markdown table in the file that has a `transition_out` column (see templates/STORYBOARD.md)
 and checks the rules in creative/variety-rules.md and creative/tone-matrix.md. Values prefixed with
@@ -214,6 +214,7 @@ def main():
     ap.add_argument("storyboard")
     ap.add_argument("--history", help="JSON file that remembers your previous films")
     ap.add_argument("--append", metavar="FILM", help="after delivery: record this film in --history")
+    ap.add_argument("--theme", action="append", default=[], metavar="NNN", help="gallery theme id(s) the film used; recorded with --append so pick_themes.py can skip it")
     a = ap.parse_args()
     rows, accent = parse(a.storyboard)
     hist_path = os.path.expanduser(a.history) if a.history else None
@@ -230,7 +231,7 @@ def main():
     if a.append:
         if not hist_path:
             sys.exit("--append needs --history")
-        history["films"].append({"name": a.append, "date": datetime.date.today().isoformat(), **summary})
+        history["films"].append({"name": a.append, "date": datetime.date.today().isoformat(), "themes": [t.zfill(3) for t in a.theme], **summary})
         json.dump(history, open(hist_path, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
         print(f"  recorded '{a.append}' in {hist_path}")
     sys.exit(1 if warn else 0)

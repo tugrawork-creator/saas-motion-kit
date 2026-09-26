@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1080" />
+<title>Acme Pulse · ⌘K Keyboard Symphony</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+<style>
+/* Fonts: SIL OFL 1.1, see assets/fonts/OFL.txt */
+@font-face{font-family:"Manrope";font-weight:200 800;font-display:block;src:url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:block;src:url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:block;src:url("assets/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:600;font-display:block;src:url("assets/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2")}
+
+:root{
+  --ink:#0E1726;--muted:#5A6475;--paper:#F6F5F1;
+  --brand:#0FA3A3;--deep:#0B6E6E;--soft:#CFF1EE;--alert:#FF5A4E;--alert-soft:#FFF0EE;--alert-ink:#D93F35;--alert-small:#C0362D;--meta:#646B78;
+  --sans:"Manrope",system-ui,sans-serif;--serif:"Instrument Serif",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#0E1726}
+#root{position:relative;width:1080px;height:1080px;overflow:hidden;font-family:var(--sans);color:var(--ink)}
+/* every timed layer is a full-frame sheet; the camera scales them all around the keycaps */
+.L{position:absolute;left:0;top:0;width:1080px;height:1080px;transform-origin:540px 892px}
+.a{position:absolute;display:block}
+.full{left:0;top:0;width:1080px;height:1080px}
+
+/* ---------- the blurred product behind the palette ---------- */
+.app{position:absolute;left:-20px;top:-20px;width:1120px;height:1120px;filter:blur(7px);opacity:0}
+.app i{position:absolute;display:block;border-radius:18px;background:#243247}
+.app i.t{background:#1B6F70}.app i.c{background:#6B2C33}
+#app1{opacity:.55}
+#dim{background:radial-gradient(ellipse at 50% 45%,rgba(14,23,38,.35),rgba(14,23,38,.85))}
+.ring{left:40px;top:153px;width:1000px;height:660px;border-radius:50%;border:3px solid rgba(127,224,218,.55)}
+
+/* ---------- headline ---------- */
+.hl{left:60px;width:960px;text-align:center;font:400 100px/1.02 var(--serif);color:#F6F5F1;letter-spacing:-.01em}
+.hl em{color:#7FE0DA}
+
+/* ---------- palette ---------- */
+#cardWrap{filter:drop-shadow(0 34px 44px rgba(0,0,0,.5))}
+#card{left:110px;top:0;width:860px;height:1080px;background:#FBFBF9;clip-path:inset(262px 0px 714px 0px round 28px)}
+.srch{width:40px;height:40px}
+.q{height:54px;font:400 42px/54px var(--mono);color:var(--ink);white-space:nowrap}
+.q span{display:inline-block}
+.q u{text-decoration:none;color:var(--alert-ink);font-weight:600}
+.caret{width:4px;height:50px;background:var(--brand)}
+.divl{height:2px;background:#E6E5DF}
+.cnt{right:144px;top:299px;font:400 24px/30px var(--mono);color:#7C828D;white-space:nowrap;opacity:0}
+.sel{left:0;width:860px;height:80px;background:var(--soft)}
+.sel::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:7px;border-radius:0 6px 6px 0;background:var(--brand)}
+.row{left:0;width:860px;height:80px;display:flex;align-items:center;gap:20px;padding:0 34px;font:600 30px var(--sans);color:var(--ink);white-space:nowrap}
+.row .ic{width:46px;height:46px;border-radius:11px;background:#ECEBE5;flex:none;display:flex;align-items:center;justify-content:center}
+.row .ic svg{width:28px;height:28px}
+.row img.ic{background:none}
+.row .m{margin-left:auto;font:400 22px var(--mono);color:var(--meta);display:flex;align-items:center;gap:10px}
+.row .m.co{color:var(--alert-small);font-weight:600}
+.row .m.co i{width:12px;height:12px;border-radius:50%;background:var(--alert);display:block}
+.row .fz{color:var(--alert-ink)}
+.kb{display:inline-flex;gap:6px;margin-left:auto}
+.kb b{min-width:40px;height:40px;border-radius:8px;background:#fff;border:2px solid #D9D8D0;border-bottom-width:4px;font:600 22px var(--mono);color:var(--muted);display:flex;align-items:center;justify-content:center;padding:0 8px}
+.kb b svg{width:20px;height:20px}
+.kb b.hot{color:var(--alert-small);border-color:#F3B8B2}
+/* reveal: the lockup row */
+#lockRow{left:0;top:0;width:860px;height:170px;background:var(--soft);opacity:0;clip-path:inset(0px 0px 90px 0px)}
+#lockRow .kb{position:absolute;right:34px;top:63px}
+#lockC{left:144px;top:401px;height:104px;display:flex;align-items:center;gap:28px;white-space:nowrap;opacity:0}
+#lockC img{width:104px;height:104px;display:block}
+.w{font:800 96px/1 var(--sans);letter-spacing:-.035em;color:var(--ink)}
+/* proof: scope chip, sections, alert */
+.chip{display:flex;align-items:center;gap:10px;height:46px;background:var(--soft);color:var(--deep);font:700 24px var(--sans);border-radius:10px;padding:0 14px;white-space:nowrap;opacity:0}
+.chip img{width:30px;height:30px;display:block}
+.ph{font:400 32px var(--mono);color:#7C828D;white-space:nowrap;opacity:0}
+.caret2{width:4px;height:44px;background:var(--brand);opacity:0;margin-left:-8px}
+.sec{height:44px;display:flex;align-items:center;gap:12px;font:600 18px var(--mono);letter-spacing:.12em;color:#5F6673;white-space:nowrap}
+.dot{width:10px;height:10px;border-radius:50%;display:block}
+.title{font:800 44px/52px var(--sans);color:var(--ink);white-space:nowrap}
+.title b{color:var(--alert-ink)}
+.meta{font:400 24px/30px var(--mono);color:var(--muted);white-space:nowrap}
+/* the metric stave (new component) */
+.sl{height:2px;background:rgba(14,23,38,.17)}
+.bl{width:2px;background:rgba(14,23,38,.4)}
+.bl.b1{background:var(--alert)}.bl.b2{background:var(--brand);width:3px}
+.blab{font:600 18px/22px var(--mono);color:#5F6673;white-space:nowrap}
+.blab.b1{color:var(--alert-small)}.blab.b2{color:var(--deep)}
+.nt{position:absolute;width:20px;height:15px}
+.nt.st{color:#0E1726}.nt.dr{color:var(--alert)}.nt.rc{color:var(--deep)}
+.nt .hd{position:absolute;left:0;top:0;width:20px;height:15px;border-radius:50%;background:currentColor;transform:rotate(-20deg)}
+.nt .sm{position:absolute;width:2px;height:40px;background:currentColor;opacity:.75}
+.nt .lg{position:absolute;left:-6px;width:32px;height:2px;background:rgba(14,23,38,.3)}
+#phd{background:var(--brand);opacity:0}
+#phd::before{content:"";position:absolute;left:-4px;top:-6px;width:10px;height:10px;border-radius:50%;background:var(--brand)}
+
+/* ---------- CTA ---------- */
+#hz{left:152px;top:406px;width:784px;height:4px;border-radius:2px;background:var(--brand);opacity:0}
+.tag{left:60px;width:960px;text-align:center;font:400 108px/1.04 var(--serif);color:#F6F5F1;letter-spacing:-.01em}
+.tag em{color:#7FE0DA}
+#ctaWrap{filter:drop-shadow(0 34px 44px rgba(0,0,0,.5))}
+#ctaCard{left:110px;top:364px;width:860px;height:346px;background:#FBFBF9;overflow:hidden;clip-path:inset(0px 0px 346px 0px round 28px)}
+#ctaLock{left:0;top:0;width:860px;height:176px;display:flex;align-items:center;gap:28px;padding:0 34px;white-space:nowrap}
+#ctaLock img{width:104px;height:104px;display:block}
+#ctaLock .w{font-size:88px}
+.cf{left:0;top:178px;width:860px;height:110px;display:flex;align-items:center;gap:24px;padding:0 34px;font:800 40px var(--sans);white-space:nowrap}
+.cf .ic{width:56px;height:56px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.cf .ic svg{width:30px;height:30px}
+#cfRow{background:var(--alert-soft);color:var(--ink)}
+#cfRow::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:7px;border-radius:0 6px 6px 0;background:var(--alert)}
+#cfRow .ic{background:var(--alert)}
+#cfSolid{background:var(--alert);color:#fff;opacity:0}
+#cfSolid .ic{background:#fff}
+#cfSolid .kb b{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);color:#fff}
+
+/* ---------- 3D keycap HUD ---------- */
+.kset{left:0;top:826px;width:1080px;height:150px;display:flex;justify-content:center;gap:26px}
+.key{position:relative;width:150px;height:144px;flex:none}
+.key.wide{width:240px}
+.key .drop{position:absolute;left:10px;right:10px;top:34px;height:118px;border-radius:24px;background:rgba(0,0,0,.6);filter:blur(18px)}
+.key .skirt{position:absolute;left:0;top:12px;width:100%;height:132px;border-radius:24px;background:#A9B1BB}
+.key .cap{position:absolute;left:0;top:0;width:100%;height:132px;border-radius:24px;background:linear-gradient(180deg,#FFFFFF,#E4E6E9);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.key .cap small{position:absolute;left:16px;top:12px;font:700 20px var(--mono);color:#4E5663}
+.key .cap svg{width:64px;height:64px}
+.key .cap b{font:700 64px/1 var(--sans)}
+.key .glow{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:24px;box-shadow:0 0 0 5px rgba(15,163,163,.55),0 0 60px rgba(15,163,163,.6);opacity:0}
+.key.co .cap{background:linear-gradient(180deg,#F2584C,#D8392E);color:#fff}
+.key.co .skirt{background:#B8342B}
+.key.co .cap small{color:#fff}
+.key.co .glow{box-shadow:0 0 0 5px rgba(255,90,78,.45),0 0 70px rgba(255,90,78,.7)}
+.plus{align-self:center;font:400 44px var(--mono);color:#7C8697;margin-top:-14px}
+#k2,#k3,#k4{opacity:0}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1080">
+
+  <!-- product behind glass: four app states, blurred and dimmed -->
+  <div id="Lbg" class="L cam clip" data-start="0" data-duration="12" data-track-index="0">
+    <div class="a full" style="background:#0E1726"></div>
+    <div class="app" id="app1">
+      <i style="left:0;top:0;width:230px;height:1120px"></i>
+      <i style="left:270px;top:40px;width:250px;height:180px"></i><i class="t" style="left:540px;top:40px;width:250px;height:180px"></i><i style="left:810px;top:40px;width:250px;height:180px"></i>
+      <i style="left:270px;top:250px;width:250px;height:180px"></i><i style="left:540px;top:250px;width:250px;height:180px"></i><i style="left:810px;top:250px;width:250px;height:180px"></i>
+      <i style="left:270px;top:460px;width:250px;height:180px"></i><i style="left:540px;top:460px;width:250px;height:180px"></i><i class="c" style="left:810px;top:460px;width:250px;height:180px"></i>
+      <i style="left:270px;top:670px;width:250px;height:180px"></i><i style="left:540px;top:670px;width:250px;height:180px"></i><i style="left:810px;top:670px;width:250px;height:180px"></i>
+      <i style="left:270px;top:880px;width:250px;height:180px"></i><i class="t" style="left:540px;top:880px;width:250px;height:180px"></i><i style="left:810px;top:880px;width:250px;height:180px"></i>
+    </div>
+    <div class="app" id="app2">
+      <i style="left:0;top:0;width:230px;height:1120px"></i><i class="t" style="left:270px;top:60px;width:790px;height:260px"></i><i style="left:270px;top:350px;width:790px;height:740px"></i>
+    </div>
+    <div class="app" id="app3">
+      <i style="left:0;top:0;width:230px;height:1120px"></i><i class="c" style="left:270px;top:60px;width:790px;height:300px"></i><i style="left:270px;top:400px;width:380px;height:690px"></i><i style="left:680px;top:400px;width:380px;height:690px"></i>
+    </div>
+    <div class="app" id="app4">
+      <i style="left:0;top:0;width:230px;height:1120px"></i><i class="t" style="left:270px;top:60px;width:790px;height:300px"></i><i style="left:270px;top:400px;width:790px;height:690px"></i>
+    </div>
+    <div id="dim" class="a full"></div>
+  </div>
+
+  <!-- two teal rings radiate on the beats after the reveal -->
+  <div id="Lr1" class="L cam clip" data-start="4" data-duration="0.7" data-track-index="1"><i id="ring1" class="a ring"></i></div>
+  <div id="Lr2" class="L cam clip" data-start="4.25" data-duration="0.7" data-track-index="2"><i id="ring2" class="a ring"></i></div>
+
+  <!-- the palette card: one surface whose edges move between acts -->
+  <div id="Lcard" class="L cam clip" data-start="0" data-duration="9.4" data-track-index="3">
+    <div id="cardWrap" class="a full" style="opacity:0"><div id="card" class="a"></div></div>
+  </div>
+
+  <!-- 1 · HOOK -->
+  <div id="Lhook" class="L cam clip" data-start="0" data-duration="3" data-track-index="4">
+    <div id="hl" class="a hl" style="top:318px">How many dashboards<br><em>today?</em></div>
+    <div id="hPal" class="a full" style="opacity:0">
+      <svg class="a srch" style="left:144px;top:294px" viewBox="0 0 40 40"><circle cx="17" cy="17" r="11" fill="none" stroke="#5A6475" stroke-width="4"/><path d="M25 25 L35 35" stroke="#5A6475" stroke-width="4" stroke-linecap="round"/></svg>
+      <div class="a q" style="left:204px;top:287px"><span id="hq" style="clip-path:inset(0px 100% 0px 0px)">dash</span></div>
+      <i id="hcaret" class="a caret" style="left:206px;top:289px"></i>
+      <div id="c96" class="a cnt">96 results</div><div id="c61" class="a cnt">61 results</div><div id="c44" class="a cnt">44 results</div><div id="c38" class="a cnt">38 results</div>
+      <i class="a divl" style="left:110px;top:366px;width:860px"></i>
+      <div class="a" style="left:110px;top:368px;width:860px;height:398px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 68%,rgba(0,0,0,.25) 100%);mask-image:linear-gradient(180deg,#000 68%,rgba(0,0,0,.25) 100%)">
+        <div id="hSel" class="a sel" style="top:0;opacity:0"></div>
+        <div id="hList" class="a" style="left:0;top:0;width:860px;height:960px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 · REVEAL -->
+  <div id="Lrev" class="L cam clip" data-start="3" data-duration="1.95" data-track-index="5">
+    <div id="rIn" class="a full">
+      <svg class="a srch" style="left:144px;top:294px" viewBox="0 0 40 40"><circle cx="17" cy="17" r="11" fill="none" stroke="#5A6475" stroke-width="4"/><path d="M25 25 L35 35" stroke="#5A6475" stroke-width="4" stroke-linecap="round"/></svg>
+      <div class="a q" style="left:204px;top:287px"><span id="rq" style="clip-path:inset(0px 80% 0px 0px)"><u>p</u><u>u</u><u>l</u><u>s</u><u>e</u></span></div>
+      <i id="rcaret" class="a caret" style="left:231.2px;top:289px"></i>
+      <i class="a divl" style="left:110px;top:366px;width:860px"></i>
+    </div>
+    <div id="rView" class="a" style="left:110px;top:368px;width:860px;height:330px;overflow:hidden">
+      <div class="a sel" style="top:0"></div>
+      <div id="rY" class="a row" style="top:0"><span class="ic"><svg viewBox="0 0 28 28"><rect x="4" y="8" width="20" height="13" rx="3" fill="none" stroke="#5A6475" stroke-width="3"/></svg></span><span><span class="fz">P</span>ayouts · weekly</span></div>
+      <div id="rQ" class="a row" style="top:80px"><span class="ic"><svg viewBox="0 0 28 28"><path d="M6 6h11l6 6-9 10-8-8z" fill="none" stroke="#5A6475" stroke-width="3" stroke-linejoin="round"/></svg></span><span><span class="fz">P</span>ricing page</span></div>
+      <div id="rP" class="a row" style="top:0"><img class="ic" src="assets/brand/acme-mark.svg" alt=""><span>Acme <span class="fz">P</span><span id="fz1">u</span><span id="fz2">l</span><span id="fz3">s</span><span id="fz4">e</span></span><span class="kb"><b><svg viewBox="0 0 32 32"><path d="M25 6v9a5 5 0 0 1-5 5H7m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span></div>
+      <div id="rW" class="a row" style="top:80px;opacity:0"><span class="ic"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="10" fill="none" stroke="#0B6E6E" stroke-width="3"/><circle cx="14" cy="14" r="3" fill="#0B6E6E"/></svg></span>Watch every metric<span class="kb"><b><svg viewBox="0 0 32 32"><path d="M4 8h7l10 16h7M19 8h9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b><b>W</b></span></div>
+      <div id="rS" class="a row" style="top:160px;opacity:0" data-layout-ignore><span class="ic"></span>Pulse settings</div>
+      <div id="lockRow" class="a"><span class="kb"><b><svg viewBox="0 0 32 32"><path d="M25 6v9a5 5 0 0 1-5 5H7m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span></div>
+    </div>
+    <div id="lockC" class="a"><img src="assets/brand/acme-mark.svg" alt=""><span class="w">Acme Pulse</span></div>
+  </div>
+
+  <!-- 3 + 4 · PROOF and the human's call -->
+  <div id="Lproof" class="L cam clip" data-start="4.5" data-duration="4.9" data-track-index="6"><div id="pG" class="a full">
+    <div id="pIn" class="a" style="left:144px;top:40px;height:104px;display:flex;align-items:center;gap:18px">
+      <span id="chip" class="chip"><img src="assets/brand/acme-mark.svg" alt="">Pulse ›</span>
+      <span id="ph" class="ph">watching 38 dashboards</span>
+      <i id="pcaret" class="caret2"></i>
+    </div>
+    <i id="pDiv" class="a divl" style="left:110px;top:144px;width:860px;opacity:0"></i>
+    <div id="pLab" class="a sec" style="left:144px;top:146px;width:792px;opacity:0">
+      <span style="position:relative;width:10px;height:10px;display:block"><i class="dot a" style="left:0;top:0;background:var(--alert)"></i><i id="dotT" class="dot a" style="left:0;top:0;background:var(--brand);opacity:0"></i></span>
+      <span style="position:relative;display:block;width:420px;height:22px"><span id="labA" class="a" style="left:0;top:0">ANOMALY · FLAGGED BY PULSE</span><span id="labR" class="a" style="left:0;top:0;color:var(--deep);opacity:0">RECOVERED</span></span>
+      <span style="margin-left:auto">09:<span id="mm">44</span></span>
+    </div>
+    <div id="alertG" class="a full" style="opacity:0">
+      <i class="a" style="left:110px;top:190px;width:860px;height:340px;background:var(--alert-soft)"></i>
+      <i id="aBgT" class="a" style="left:110px;top:190px;width:860px;height:340px;background:#E9F7F5;opacity:0"></i>
+      <i class="a" style="left:110px;top:190px;width:8px;height:340px;background:var(--alert)"></i>
+      <i id="aBarT" class="a" style="left:110px;top:190px;width:8px;height:340px;background:var(--brand);opacity:0"></i>
+      <div class="a title" style="left:152px;top:206px">Checkout conversion <b id="pct" style="opacity:0">−<span id="pn">18</span>%</b></div>
+      <div class="a meta" style="left:152px;top:262px">since 09:42 · after deploy #2231</div>
+    </div>
+    <div id="stave" class="a full" style="opacity:0"></div>
+    <div id="pLab2" class="a sec" style="left:144px;top:530px;opacity:0">YOUR CALL</div>
+    <div id="pView" class="a" style="left:110px;top:574px;width:860px;height:200px;overflow:hidden">
+      <div id="pSel" class="a sel" style="top:80px;opacity:0"></div>
+      <i id="pFlash" class="a" style="left:0;top:0;width:860px;height:80px;background:#FFD6D1;opacity:0"></i>
+      <div id="pA" class="a row" style="top:0;opacity:0"><span class="ic" style="background:#FFE1DD"><svg viewBox="0 0 28 28"><path d="M9 7 L4 12 L9 17 M4 12 H18 A6 6 0 0 1 18 24 H12" fill="none" stroke="#FF5A4E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Roll back deploy #2231<span class="kb"><b><svg viewBox="0 0 32 32"><path d="M4 8h7l10 16h7M19 8h9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b><b class="hot">R</b></span></div>
+      <div id="pA2" class="a row" style="top:0;opacity:0"><span class="ic" style="background:var(--soft)"><svg viewBox="0 0 28 28"><path d="M6 14l6 6L23 8" fill="none" stroke="#0B6E6E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Rolled back deploy #2231<span class="m" style="color:var(--deep);font-weight:600">by you · 09:44</span></div>
+      <div id="pB" class="a row" style="top:80px;opacity:0"><span class="ic"><svg viewBox="0 0 28 28"><path d="M6 14l6 6L23 8" fill="none" stroke="#5A6475" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Acknowledge<span class="kb"><b><svg viewBox="0 0 32 32"><path d="M4 8h7l10 16h7M19 8h9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b><b>A</b></span></div>
+      <div id="pC" class="a row" style="top:160px;opacity:0" data-layout-ignore><span class="ic"></span>Open deploy #2231<span class="kb"><b><svg viewBox="0 0 32 32"><path d="M4 8h7l10 16h7M19 8h9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b><b>O</b></span></div>
+    </div>
+  </div></div>
+
+  <!-- 5 · CTA -->
+  <div id="Lcta" class="L cam clip" data-start="9" data-duration="3" data-track-index="7">
+    <div class="a" style="left:0;top:40px;width:1080px;height:290px;overflow:hidden">
+      <div id="tag" class="a tag" style="top:49px">You ship.<br><em>Pulse watches.</em></div>
+    </div>
+    <i id="hz" class="a"></i>
+    <div id="ctaWrap" class="a full">
+      <div id="ctaCard" class="a">
+        <div id="ctaLock" class="a" style="opacity:0"><img src="assets/brand/acme-mark.svg" alt=""><span class="w">Acme Pulse</span></div>
+        <i class="a divl" style="left:0;top:176px;width:860px"></i>
+        <div id="cfRow" class="a cf" style="opacity:0"><span class="ic"><svg viewBox="0 0 28 28"><path d="M8 14 H20 M14 8 L20 14 L14 20" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Start free<span class="kb"><b><svg viewBox="0 0 32 32"><path d="M25 6v9a5 5 0 0 1-5 5H7m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span></div>
+        <div id="cfSolid" class="a cf"><span class="ic"><svg viewBox="0 0 28 28"><path d="M8 14 H20 M14 8 L20 14 L14 20" fill="none" stroke="#FF5A4E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Start free<span class="kb"><b><svg viewBox="0 0 32 32"><path d="M25 6v9a5 5 0 0 1-5 5H7m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span></div>
+        <div id="cfUrl" class="a row" style="top:288px;font-size:26px;opacity:0" data-layout-ignore><span class="ic"></span>acme.example/pulse</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D keycap HUD: the keys are the percussion -->
+  <div id="Lkeys" class="L cam clip" data-start="0" data-duration="12" data-track-index="8">
+    <div id="k1" class="a kset">
+      <div class="key" id="kCmd"><i class="drop"></i><i class="skirt"></i><div class="cap"><small>cmd</small><svg viewBox="0 0 32 32"><path d="M11 11V7a4 4 0 1 0-4 4h18a4 4 0 1 0-4-4v18a4 4 0 1 0 4-4H7a4 4 0 1 0 4 4z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg><i class="glow"></i></div></div>
+      <div class="key" id="kK"><i class="drop"></i><i class="skirt"></i><div class="cap"><b>K</b><i class="glow"></i></div></div>
+    </div>
+    <div id="k2" class="a kset">
+      <div class="key wide" id="kRet"><i class="drop"></i><i class="skirt"></i><div class="cap"><small>return</small><svg viewBox="0 0 32 32"><path d="M25 6v9a5 5 0 0 1-5 5H7m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><i class="glow"></i></div></div>
+    </div>
+    <div id="k3" class="a kset">
+      <div class="key" id="kOpt"><i class="drop"></i><i class="skirt"></i><div class="cap"><small>opt</small><svg viewBox="0 0 32 32"><path d="M4 8h7l10 16h7M19 8h9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><i class="glow"></i></div></div>
+      <span class="plus">+</span>
+      <div class="key co" id="kR"><i class="drop"></i><i class="skirt"></i><div class="cap"><b>R</b><i class="glow"></i></div></div>
+    </div>
+    <div id="k4" class="a kset">
+      <div class="key wide co" id="kGo"><i class="drop"></i><i class="skirt"></i><div class="cap"><small>return</small><svg viewBox="0 0 32 32"><path d="M25 6v9a5 5 0 0 1-5 5H7m5-5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><i class="glow"></i></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+
+  // ---------- repeated DOM, built from data (deterministic) ----------
+  const ICON = {
+    line: '<svg viewBox="0 0 28 28"><path d="M3 22 L10 14 L15 18 L25 6" fill="none" stroke="#5A6475" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    teal: '<svg viewBox="0 0 28 28"><path d="M3 22 L10 14 L15 18 L25 6" fill="none" stroke="#0B6E6E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    bars: '<svg viewBox="0 0 28 28"><rect x="4" y="12" width="5" height="12" rx="1" fill="#5A6475"/><rect x="12" y="7" width="5" height="17" rx="1" fill="#5A6475"/><rect x="20" y="3" width="5" height="21" rx="1" fill="#5A6475"/></svg>',
+    wave: '<svg viewBox="0 0 28 28"><path d="M3 20 Q10 4 14 14 T25 8" fill="none" stroke="#5A6475" stroke-width="3" stroke-linecap="round"/></svg>',
+    ring: '<svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="9" fill="none" stroke="#5A6475" stroke-width="3"/></svg>'
+  };
+  // the results the hook scrolls through; the one nobody opened today is Checkout
+  const HOOK = [
+    ["line", "Signups · daily", "viewed 09:14"], ["bars", "p95 latency", "viewed 10:31"],
+    ["wave", "Error rate", "viewed 08:50"], ["bars", "Revenue · weekly", "viewed 09:20"],
+    ["ring", "Active users", "viewed 09:05"], ["line", "Onboarding funnel", "yesterday"],
+    ["wave", "API errors", "viewed 10:02"], ["teal", "Checkout funnel", "not today", 1],
+    ["ring", "Churn cohorts", "viewed Mon"], ["bars", "Refunds", "viewed 09:40"],
+    ["wave", "Search CTR", "viewed Tue"], ["ring", "Trial starts", "viewed 08:12"]
+  ];
+  $("#hList").innerHTML = HOOK.map(([ic, name, meta, miss], i) =>
+    `<div class="a row hr" style="top:${i * 80}px"><span class="ic">${ICON[ic]}</span>${name}` +
+    `<span class="m${miss ? " co" : ""}">${miss ? '<i id="hMiss"></i>' : ""}${meta}</span></div>`).join("");
+
+  // metric stave: checkout conversion as notes, one every 30 s from 09:35
+  const MID = 408, X0 = 190, DX = 29, HS = 11; // HS: one half-step in px
+  const LEVEL = [1, 2, 1, 1, 2, 1, 0, 1, 2, 1, 1, 2, 1, 1, -1, -3, -5, -7, -7, -5, -3, -1, 0, 1, 1, 2];
+  const KIND = (i) => (i < 14 ? "st" : i < 18 ? "dr" : "rc"); // steady · dropping · recovering
+  const BARS = [[233.5, "09:36", "b0"], [407.5, "09:39", "b0"], [581.5, "09:42", "b1"], [697.5, "09:44 · you", "b2"]];
+  let sv = "";
+  for (let k = 0; k < 5; k++) sv += `<i class="a sl${k === 2 ? " mid" : ""}" style="left:152px;top:${363 + 22 * k}px;width:784px"></i>`;
+  BARS.forEach(([x, lab, c], j) => {
+    sv += `<i id="bl${j}" class="a bl ${c}" style="left:${x - 1}px;top:364px;height:88px"></i>` +
+          `<span id="bll${j}" class="a blab ${c}" style="left:${x + 7}px;top:316px">${lab}</span>`;
+  });
+  LEVEL.forEach((L, i) => {
+    const x = X0 + DX * i, y = MID - HS * L, up = L < 0;
+    sv += `<div id="n${i}" class="nt ${KIND(i)}" style="left:${x - 10}px;top:${y - 7.5}px">` +
+          (y >= 474 ? `<i class="lg" style="top:${480.5 - y}px"></i>` : "") + // ledger line below the staff
+          `<i class="sm" style="left:${up ? 18 : 0}px;top:${up ? -32.5 : 7.5}px"></i><i class="hd"></i></div>`;
+  });
+  sv += `<i id="phd" class="a" style="left:0;top:350px;width:2px;height:150px"></i>`;
+  $("#stave").innerHTML = sv;
+
+  // ---------- one paused timeline ----------
+  const tl = gsap.timeline({ paused: true });
+  const clip = (T, B) => `inset(${T}px 0px ${1080 - B}px 0px round 28px)`;
+
+  // keycap strike: 10 px down + shadow collapse in 80 ms, elastic release 0.2 s later (or held)
+  function strike(id, t, releaseAt) {
+    const key = document.getElementById(id);
+    const cap = key.querySelector(".cap"), glow = key.querySelector(".glow"), drop = key.querySelector(".drop");
+    tl.fromTo(cap, { y: 0 }, { y: 10, duration: 0.08, ease: "power2.in" }, t);
+    tl.fromTo(glow, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, t);
+    tl.fromTo(drop, { opacity: 1, scale: 1 }, { opacity: 0.4, scale: 0.9, duration: 0.08, ease: "power2.in" }, t);
+    if (releaseAt == null) return;
+    tl.fromTo(cap, { y: 10 }, { y: 0, duration: 0.5, ease: "elastic.out(1,0.5)", immediateRender: false }, releaseAt);
+    tl.fromTo(glow, { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.out", immediateRender: false }, releaseAt);
+    tl.fromTo(drop, { opacity: 0.4, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out", immediateRender: false }, releaseAt);
+  }
+
+  // resting states for elements tweened on more than one property
+  tl.set("#rP", { y: 160, opacity: 1 }, 0);
+  tl.set("#rIn", { y: 0, opacity: 1 }, 0);
+  tl.set("#pSel", { y: 0, opacity: 0 }, 0);
+  tl.set("#hz", { x: 0, y: 0, scaleX: 1, opacity: 0 }, 0);
+
+  // ===== 1 · HOOK (0–3 s) — the first 0.5 s is the poster, held still =====
+  strike("kCmd", 0.5, 0.95);
+  strike("kK", 0.75, 0.95); // K lands on the kick
+  tl.fromTo(["#cardWrap", "#hPal"], { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out", transformOrigin: "540px 514px" }, 0.75);
+  tl.fromTo("#hl", { y: 0, scale: 1 }, { y: -262, scale: 0.84, duration: 0.4, ease: "power3.inOut", transformOrigin: "480px 0px" }, 0.45);
+  tl.fromTo("#card", { clipPath: clip(262, 366) }, { clipPath: clip(262, 766), duration: 0.35, ease: "power3.out" }, 1.0);
+  // "dash", one letter per 1/8 note (monospace: each key reveals one 25.2 px cell)
+  [1.0, 1.25, 1.5, 1.75].forEach((t, j) => {
+    tl.set("#hq", { clipPath: `inset(0px ${100 - (j + 1) * 25}% 0px 0px)` }, t);
+    tl.set("#hcaret", { x: (j + 1) * 25.2 }, t);
+  });
+  // the count narrows as the query grows, landing on 38 with the last letter
+  const CNT = ["#c96", "#c61", "#c44", "#c38"];
+  CNT.forEach((c, j) => {
+    tl.set(c, { opacity: 1 }, 1.0 + 0.25 * j);
+    if (j) tl.set(CNT[j - 1], { opacity: 0 }, 1.0 + 0.25 * j);
+  });
+  tl.fromTo("#hSel", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 1.0);
+  tl.fromTo($$(".hr").slice(0, 5), { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out", stagger: 0.04 }, 1.0);
+  tl.set("#hcaret", { opacity: 0 }, 2.28); // caret blink, 530 ms
+  tl.set("#hcaret", { opacity: 1 }, 2.81);
+  // overload: the list flicks through the results and freezes on the one nobody opened (hold-frame)
+  tl.fromTo("#hList", { y: 0 }, { y: -560, duration: 0.55, ease: "power4.inOut" }, 1.98);
+  tl.fromTo("#hMiss", { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(3)", transformOrigin: "50% 50%" }, 2.5);
+
+  // ===== 2 · REVEAL (3–4.5 s) — hard cut on the downbeat =====
+  tl.set("#card", { clipPath: clip(262, 608) }, 3.0);
+  tl.set("#k1", { opacity: 0 }, 3.0);
+  tl.set("#k2", { opacity: 1 }, 3.0);
+  tl.set("#app1", { opacity: 0 }, 3.0);
+  tl.set("#app2", { opacity: 0.55 }, 3.0);
+  // "pulse" in 1/16 notes; "p" is already typed at the cut
+  [3.125, 3.25, 3.375, 3.5].forEach((t, j) => {
+    const k = j + 2;
+    tl.set("#rq", { clipPath: `inset(0px ${100 - k * 20}% 0px 0px)` }, t);
+    tl.set("#rcaret", { x: (k - 1) * 25.2 }, t);
+    tl.set("#fz" + (j + 1), { color: "#D93F35" }, t); // fuzzy match lights the same letter in the result
+  });
+  // result re-rank (FLIP): Acme Pulse climbs to the top row and lands on the beat
+  tl.fromTo("#rP", { y: 160 }, { y: 0, duration: 0.25, ease: "power3.out" }, 3.25);
+  tl.fromTo(["#rY", "#rQ"], { opacity: 1, x: 0 }, { opacity: 0, x: 40, duration: 0.15, ease: "power2.in", stagger: 0.03 }, 3.25);
+  tl.fromTo("#rW", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, 3.3);
+  tl.fromTo("#rS", { opacity: 0, y: 30 }, { opacity: 0.35, y: 0, duration: 0.25, ease: "power3.out" }, 3.35);
+  // ↵ strikes and the top row expands in place into the lockup
+  strike("kRet", 3.75, 3.95);
+  tl.fromTo("#rP", { opacity: 1 }, { opacity: 0, duration: 0.08, ease: "none" }, 3.77);
+  tl.set("#lockRow", { opacity: 1 }, 3.77);
+  tl.fromTo("#lockRow", { clipPath: "inset(0px 0px 90px 0px)" }, { clipPath: "inset(0px 0px 0px 0px)", duration: 0.3, ease: "back.out(1.4)" }, 3.77);
+  tl.fromTo("#lockC", { x: -29, y: -45, scale: 0.442, opacity: 0 }, { x: 0, y: 0, scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.4)", transformOrigin: "52px 52px" }, 3.77);
+  tl.fromTo(["#rW", "#rS"], { y: 0 }, { y: 90, duration: 0.3, ease: "back.out(1.4)", immediateRender: false }, 3.77);
+  tl.fromTo("#card", { clipPath: clip(262, 608) }, { clipPath: clip(262, 698), duration: 0.3, ease: "back.out(1.4)", immediateRender: false }, 3.77);
+  // rings on the next two beats (their layers start at 4.0 and 4.25)
+  tl.fromTo("#ring1", { scale: 0.92, opacity: 0.9 }, { scale: 1.16, opacity: 0, duration: 0.7, ease: "power2.out", transformOrigin: "50% 50%" }, 4.0);
+  tl.fromTo("#ring2", { scale: 0.92, opacity: 0.6 }, { scale: 1.22, opacity: 0, duration: 0.7, ease: "power2.out", transformOrigin: "50% 50%" }, 4.25);
+
+  // ===== object carry (4.5 s): the lockup shrinks into the "Pulse ›" scope chip =====
+  tl.fromTo("#card", { clipPath: clip(262, 698) }, { clipPath: clip(190, 296), duration: 0.4, ease: "power3.inOut", immediateRender: false }, 4.5);
+  tl.fromTo("#rIn", { y: 0 }, { y: -72, duration: 0.4, ease: "power3.inOut" }, 4.5);
+  tl.fromTo("#rIn", { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, 4.52);
+  tl.fromTo("#rView", { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "power1.in" }, 4.5);
+  tl.fromTo("#lockC", { x: 0, y: 0, scale: 1 }, { x: -23, y: -211, scale: 0.2885, duration: 0.4, ease: "power3.inOut", transformOrigin: "52px 52px", immediateRender: false }, 4.5);
+  tl.fromTo("#lockC", { opacity: 1 }, { opacity: 0, duration: 0.08, ease: "none", immediateRender: false }, 4.76);
+  tl.fromTo("#k2", { y: 0 }, { y: 300, duration: 0.3, ease: "power2.in", immediateRender: false }, 4.5);
+  tl.set("#k2", { opacity: 0 }, 4.8);
+  tl.fromTo("#app2", { opacity: 0.55 }, { opacity: 0, duration: 0.4, ease: "none", immediateRender: false }, 4.5);
+  tl.fromTo("#app3", { opacity: 0 }, { opacity: 0.55, duration: 0.4, ease: "none" }, 4.5);
+
+  // ===== 3 · PROOF (4.5–7 s): Pulse flags it, no key pressed =====
+  tl.fromTo("#chip", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 4.8);
+  tl.fromTo("#pDiv", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none" }, 4.8);
+  tl.fromTo("#ph", { opacity: 0, x: -12 }, { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, 4.86);
+  tl.set("#pcaret", { opacity: 1 }, 4.9);
+  for (let k = 1; 4.9 + 0.53 * k < 9.0; k++) tl.set("#pcaret", { opacity: k % 2 ? 0 : 1 }, +(4.9 + 0.53 * k).toFixed(2));
+  // the anomaly drops in from the top of the list, the card grows to hold it
+  tl.fromTo("#pLab", { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, 5.0);
+  tl.fromTo(["#alertG", "#stave"], { opacity: 0, y: -24 }, { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, 5.0);
+  tl.fromTo("#card", { clipPath: clip(190, 296) }, { clipPath: clip(190, 680), duration: 0.3, ease: "power3.out", immediateRender: false }, 5.0);
+  $$("#stave .sl").forEach((l, k) => tl.fromTo(l, { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power2.out", transformOrigin: "0% 50%" }, 5.12 + 0.03 * k));
+  // the playhead plays the stave; notes sound as it passes
+  const tAt = (x) => 5.3 + ((x - 160) / 537.5) * 1.1;
+  const tRec = (x) => 8.25 + ((x - 697.5) / 232.5) * 0.6;
+  tl.set("#phd", { opacity: 1 }, 5.3);
+  tl.fromTo("#phd", { x: 160 }, { x: 697.5, duration: 1.1, ease: "none" }, 5.3);
+  LEVEL.forEach((L, i) => {
+    const x = X0 + DX * i, n = "#n" + i;
+    if (i < 14 || i >= 18) {
+      tl.fromTo(n, { scale: 0 }, { scale: 1, duration: 0.18, ease: "back.out(2.2)", transformOrigin: "10px 7.5px" }, (i < 14 ? tAt(x) : tRec(x)) - 0.03);
+    } else {
+      // after the 09:42 barline the notes fall off the staff
+      tl.fromTo(n, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, tAt(x) - 0.03);
+      tl.fromTo(n, { y: -HS * (1 - L) }, { y: 0, duration: 0.26, ease: "power2.in" }, tAt(x) - 0.03);
+    }
+  });
+  BARS.slice(0, 3).forEach(([x], j) => {
+    tl.fromTo("#bl" + j, { scaleY: 0 }, { scaleY: 1, duration: 0.14, ease: "power3.out", transformOrigin: "50% 0%" }, tAt(x));
+    tl.fromTo("#bll" + j, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, tAt(x));
+  });
+  tl.fromTo("#pct", { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tAt(581.5));
+  tl.fromTo("#pn", { innerText: 1 }, { innerText: 18, snap: { innerText: 1 }, duration: 0.24, ease: "none" }, tAt(581.5) + 0.02);
+
+  // ===== 4 · THE HUMAN'S CALL (6.5–9 s) =====
+  tl.fromTo("#card", { clipPath: clip(190, 680) }, { clipPath: clip(40, 530), duration: 0.35, ease: "power3.inOut", immediateRender: false }, 6.4);
+  tl.fromTo("#pG", { y: 150 }, { y: 0, duration: 0.35, ease: "power3.inOut" }, 6.4); // the palette makes room for your call
+  tl.fromTo("#card", { clipPath: clip(40, 530) }, { clipPath: clip(40, 774), duration: 0.3, ease: "power3.out", immediateRender: false }, 6.75);
+  tl.fromTo("#pLab2", { opacity: 0, x: -12 }, { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, 6.72);
+  tl.fromTo("#pA", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, 6.76);
+  tl.fromTo("#pB", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, 6.84);
+  tl.fromTo("#pC", { opacity: 0, y: -20 }, { opacity: 0.35, y: 0, duration: 0.22, ease: "power3.out" }, 6.92);
+  tl.fromTo("#k3", { y: 300 }, { y: 0, duration: 0.4, ease: "power3.out" }, 6.7);
+  tl.set("#k3", { opacity: 1 }, 6.7);
+  tl.fromTo("#pSel", { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, 6.95);
+  tl.fromTo("#pSel", { y: 0 }, { y: -80, duration: 0.2, ease: "power3.out" }, 7.08);
+  // surprise: the lens drops onto the keys
+  tl.fromTo(".cam", { scale: 1 }, { scale: 1.38, duration: 0.36, ease: "power4.inOut", transformOrigin: "540px 892px" }, 7.1);
+  strike("kOpt", 7.5, 7.7);
+  strike("kR", 7.5, 7.7);
+  // the keystroke writes its own barline into the stave
+  tl.fromTo("#bl3", { scaleY: 0 }, { scaleY: 1, duration: 0.16, ease: "power3.out", transformOrigin: "50% 0%" }, 7.53);
+  tl.fromTo("#bll3", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 7.56);
+  tl.fromTo("#pFlash", { opacity: 0 }, { opacity: 1, duration: 0.06, ease: "none" }, 7.52);
+  tl.fromTo("#pFlash", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, 7.6);
+  tl.fromTo("#pA", { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "none", immediateRender: false }, 7.62);
+  tl.fromTo("#pA2", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none" }, 7.66);
+  tl.fromTo(".cam", { scale: 1.38 }, { scale: 1, duration: 0.4, ease: "power3.inOut", transformOrigin: "540px 892px", immediateRender: false }, 7.85);
+  // time-lapse tick: 09:44 → 09:47, the notes climb back
+  tl.fromTo("#phd", { x: 697.5 }, { x: 930, duration: 0.6, ease: "none", immediateRender: false }, 8.25);
+  tl.fromTo("#mm", { innerText: 44 }, { innerText: 47, snap: { innerText: 1 }, duration: 0.6, ease: "none" }, 8.25);
+  tl.fromTo(["#aBgT", "#aBarT", "#dotT"], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.inOut" }, 8.4);
+  tl.fromTo("#labA", { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "none" }, 8.66);
+  tl.fromTo("#labR", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none" }, 8.72);
+
+  // ===== line-to-horizon (9 s): the settled stave becomes the horizon =====
+  tl.fromTo(["#pIn", "#pDiv", "#pLab", "#alertG", "#pLab2", "#pView"], { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "none", immediateRender: false }, 9.0);
+  tl.fromTo($$("#stave .sl:not(.mid), #stave .bl, #stave .blab, #phd"), { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "none", immediateRender: false }, 9.0);
+  LEVEL.forEach((L, i) => tl.fromTo("#n" + i, { y: 0, opacity: 1 }, { y: HS * L, opacity: 0, duration: 0.3, ease: "power2.inOut", immediateRender: false }, 9.0 + i * 0.006));
+  tl.fromTo("#stave .sl.mid", { opacity: 1 }, { opacity: 0, duration: 0.1, ease: "none", immediateRender: false }, 9.2);
+  tl.fromTo("#card", { clipPath: clip(40, 774) }, { clipPath: clip(406, 410), duration: 0.25, ease: "power2.inOut", immediateRender: false }, 9.05);
+  tl.fromTo("#cardWrap", { opacity: 1 }, { opacity: 0, duration: 0.05, ease: "none", immediateRender: false }, 9.25);
+  tl.fromTo("#k3", { y: 0 }, { y: 300, duration: 0.3, ease: "power2.in", immediateRender: false }, 9.0);
+  tl.set("#k3", { opacity: 0 }, 9.3);
+  tl.fromTo("#app3", { opacity: 0.55 }, { opacity: 0, duration: 0.5, ease: "none", immediateRender: false }, 9.0);
+  tl.fromTo("#app4", { opacity: 0 }, { opacity: 0.55, duration: 0.5, ease: "none" }, 9.0);
+
+  // ===== 5 · CTA (9–12 s) =====
+  tl.fromTo("#hz", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 9.02);
+  tl.fromTo("#hz", { x: 0, y: 0, scaleX: 1 }, { x: -4, y: -76, scaleX: 1.2245, duration: 0.4, ease: "power2.inOut", transformOrigin: "50% 50%" }, 9.32);
+  tl.fromTo("#tag", { y: 260 }, { y: 0, duration: 0.6, ease: "power2.out" }, 9.5); // rises out of the horizon
+  tl.fromTo("#k4", { y: 300 }, { y: 0, duration: 0.45, ease: "power3.out" }, 9.55);
+  tl.set("#k4", { opacity: 1 }, 9.55);
+  tl.fromTo("#ctaCard", { clipPath: "inset(0px 0px 346px 0px round 28px)" }, { clipPath: "inset(0px 0px 0px 0px round 28px)", duration: 0.45, ease: "power2.out" }, 9.75);
+  tl.fromTo("#ctaLock", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 9.8);
+  tl.fromTo("#cfRow", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 9.92);
+  tl.fromTo("#cfUrl", { opacity: 0 }, { opacity: 0.35, duration: 0.3, ease: "none" }, 10.02);
+  // the last downbeat: coral ↵ is struck and stays down
+  strike("kGo", 10.5);
+  tl.fromTo("#cfSolid", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, 10.53);
+  tl.fromTo("#kGo .glow", { opacity: 1 }, { opacity: 0.75, duration: 0.5, ease: "sine.out", immediateRender: false }, 10.62);
+  // 11.2–12 s: held still
+  tl.set({}, {}, 12);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>

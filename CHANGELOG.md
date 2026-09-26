@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.2: same story, six films (2026-09-26)
+
+**Added**
+- `examples/six-films/`: one 12-second Acme Pulse script built in six gallery themes (002, 021, 058, 061, 075, 089). Each film has its tone sentence, a ledger that passes the variety audit, its own new component and a README. The folder also holds the shared `BRIEF.md` and a synced 3×2 grid GIF (`docs/six-films.gif`). The renders are on the v1.2 release.
+- `tools/pick_themes.py`: shortlists themes for a tone and an audience, and skips the themes of your last five films.
+- `tools/history_report.py`: a one-page HTML report of your motion history, with the transitions and themes to try next.
+- `.github/workflows/variety-audit.yml`: runs the variety audit on every `STORYBOARD.md` on push and pull request. It also compiles the tools and smoke-tests the theme picker.
+- The repository is now a GitHub template (**Use this template**).
+- The v1.2 release has an Acme Suite v1-vs-v2 comparison clip.
+
+**Changed**
+- `variety_audit.py --append` takes `--theme NNN` (repeatable) and records it in the history.
+- The `/saas-motion-video` skill starts stage 3 from `pick_themes.py` and records the theme at delivery. `playbook/03-theme.md` and `creative/README.md` show the new tools.
+- The README's "What's new" moved to v1.2; the v1.1 notes are folded underneath.
+
 ## v1.1.1: prompt examples (2026-09-26)
 
 - `examples/prompts/`: the exact prompt behind a finished 35 s mascot product promo (1:1, music + SFX), plus a fill-in template and a gate-by-gate account of what happened.

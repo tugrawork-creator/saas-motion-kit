@@ -4,7 +4,7 @@
 
 Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **100 görsel tema**. Amaç, "bir lansman videosuna ihtiyacımız var" noktasından render alınmış bir MP4'e, sonuç yapay zekâ işi gibi görünmeden ulaşmak.
 
-[English README →](README.md) · [Tema galerisi →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Geçiş atlası →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Yaratıcı kas →](creative) · [Örnek proje →](examples/acme-suite-loop)
+[English README →](README.md) · [Tema galerisi →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Geçiş atlası →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Yaratıcı kas →](creative) · [Altı film →](examples/six-films) · [Örnek proje →](examples/acme-suite-loop)
 
 > Bu repodaki bütün örneklerde **Acme** adında hayali bir şirket ve onun hayali ürünleri kullanılıyor. Gösterilen tüm rakamlar uydurmadır.
 
@@ -12,13 +12,30 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 
 **Yeni: [gerçek bir prompt ile başlayın](examples/prompts).** Bitmiş, 35 saniyelik maskotlu bir tanıtım videosunu üreten prompt'un kendisi, doldurulabilir şablonu ve her kapıda neler olduğu.
 
-## v1.1'de neler yeni: yaratıcı kas
+## v1.2'de neler yeni: aynı hikâye, altı film
+
+![Aynı 12 saniyelik senaryo altı temada, altısı birlikte oynuyor](docs/six-films.gif)
+
+- **[Aynı hikâye, altı film](examples/six-films).** Tek bir 12 saniyelik Acme Pulse senaryosu, galeriden altı tema ve hikâye dışında hiçbir şeyi ortak olmayan altı film. Her storyboard tekrar denetiminden geçti, her film kendi bileşenini icat etti: nota çizgisine yazılmış metrik (⌘K Keyboard Symphony), geri alan oklava (Clay Studio), canlı çizen kalem sismografı (Hand-Drawn Marker), sahne ışığı işareti (Dark Keynote), P1 oyun kolu (8-Bit Sidekick) ve yarım ton grafik (Pop-Art Ben-Day). Ortak [brief](examples/six-films/BRIEF.md) de klasörde; yedinci bir tema numarasıyla ajanınıza verebilirsiniz. Filmler [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2) sayfasında.
+- **`tools/pick_themes.py`** ton ve hedef kitleye göre galeriden tema önerir, son beş videonuzda kullandığınız temaları atlar:
+  ```bash
+  python tools/pick_themes.py --tone playful --audience "developers" --history ~/.motion-ledger.json
+  ```
+- **`tools/history_report.py`** video geçmişinizi tek sayfalık bir rapora çevirir: sürekli başvurduğunuz geçiş, giriş ve ease'ler ile hiç denemediğiniz atlas geçişleri ve temalar. `variety_audit.py --append` artık `--theme NNN` de alıyor, böylece geçmiş hangi videoda hangi temanın kullanıldığını biliyor.
+- **GitHub Action** ([`variety-audit.yml`](.github/workflows/variety-audit.yml)) her push ve pull request'te bütün `STORYBOARD.md` dosyalarını denetler. Kendini tekrar eden bir storyboard kontrolden geçemez.
+- **Şablon repo.** GitHub'da **Use this template** ile araçları, yaratıcı kuralları ve denetim Action'ı hazır kendi video reponuzu başlatabilirsiniz.
+- **Önce ve sonra, yan yana:** Acme Suite döngüsünün v1 ve v2 hâlleri [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2) sayfasında yan yana oynuyor.
+
+<details>
+<summary><b>v1.1'de neler yeniydi: yaratıcı kas</b></summary>
 
 - **[`creative/`](creative)** artık kitin kalbi. İçinde her storyboard'da sorulacak 7 soru, "şu mesajı şu tonda vermek istiyorum" diyen [ton matrisi](creative/tone-matrix.md), [tekrar kuralları](creative/variety-rules.md) ve 15 dakikada yeni bileşen icat etmek için [bileşen atölyesi](creative/component-forge.md) var.
 - **[Geçiş atlası](https://tugrawork-creator.github.io/saas-motion-kit/transitions/):** 24 anlatımsal geçiş, her biri canlı demolu: match cut, nesne ya da kelime taşıma, kamera hareketleri, maskeler, malzeme ve zaman geçişleri.
 - **`tools/variety_audit.py`:** storyboard defterindeki tekrarları yakalar. Aynı geçiş, giriş, ease ya da yön; eşit çekim süreleri; eksik sürpriz; vurgu renginin aşırı kullanımı; ton uyuşmazlığı ve eksik yeni bileşen. `--history` ile önceki videolarınızı hatırlar.
 - **Acme örneği bir ders olarak yeniden kuruldu.** Aracı kendi ilk taslağımızda çalıştırdık ve **11 tekrar** yakaladı: aynı dönüş 5 kez, aynı başlık girişi, her yerde aynı ease, eşit süreler, hiç sürpriz yok. v2'de her ürünün kendi girişi var (bulanıktan harf harf, maske silme, sahneler arası taşınan kelime, yukarıdan düşme). Dönüşler farklılaştı (hareket bulanıklıklı kamçı, yavaş sinüs), süreler eşit değil. Forecast'te ekranın teal renge boğulduğu, kameranın yaklaştığı bir sürpriz var. Önce/sonra [`examples/acme-suite-loop`](examples/acme-suite-loop) klasöründe, yeni video [v1.1 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.1) sayfasında.
 - Storyboard şablonu artık **"Mesaj ve ton"** cümlesi ve sahne başına bir satırlık **hareket defteri** ile başlıyor. `/saas-motion-video` skill'i de build'den önce bir **yaratıcı kontrol** kapısı çalıştırıyor.
+
+</details>
 
 ## İçinde neler var
 
@@ -28,11 +45,13 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 | `playbook/` | Her aşamanın sonunda bir karar kapısı olan 7 aşamalı üretim rehberi |
 | `components/` | **Temiz ya da hayali bileşen** kuralı: ürünün arayüzü temizse gerçeğini canlandır, değilse hayali bileşen tasarla |
 | `docs/` | Tema galerisi (GitHub Pages). **100 tema** var; her birinde 4 anahtar kare, bileşen kiti, hareket notları ve referanslar bulunuyor |
+| `examples/six-films/` | **Aynı hikâye, altı film:** tek bir 12 sn'lik senaryonun altı temadaki hâli; her birinin storyboard'u, hareket defteri ve yeni bileşeni, ayrıca ortak brief |
 | `examples/acme-suite-loop/` | Eksiksiz bir HyperFrames projesi: stant ekranı için sessiz, kesintisiz dönen 40 saniyelik 3D döngü |
 | `.claude/skills/saas-motion-video/` | Bütün süreci sizinle birlikte yürüten Claude Code skill'i |
 | `templates/` | BRIEF, STORYBOARD ve tema sayfası şablonları |
 | `examples/prompts/` | Bitmiş videoları üreten gerçek prompt'lar ve şablonları |
-| `tools/` | Teslim (4K → 1080p/2K), döngü birleşim kontrolü, sıcak arayüz efekt sesi üretici, galeri araçları |
+| `tools/` | **Tekrar denetimi**, tema seçici, geçmiş raporu, teslim (4K → 1080p/2K), döngü birleşim kontrolü, sıcak arayüz efekt sesi üretici, galeri araçları |
+| `.github/workflows/` | GitHub Action olarak tekrar denetimi: her push ve pull request'te bütün storyboard'lar kontrol edilir |
 
 ## Süreç: 7 aşama, 7 kapı
 
@@ -57,6 +76,8 @@ Her aşama bir **insan kararıyla** biter. Üretimi ajan yapar, zevk kararların
 Aynı 45 saniyelik hikâye 10 ailede 100 farklı görsel dille çizildi. Hikâye hayali **Acme Pulse** ürünü üzerine: metrikleri arka planda izleyen, anomaliyi müşteri fark etmeden yakalayan ve kararı insana bırakan bir yapay zekâ. Galeriden beğendiğiniz temaları seçip numaralarını brief'inize yazmanız yeterli.
 
 ## Hızlı başlangıç
+
+GitHub'da **Use this template** ile denetim Action'ı hazır kendi reponuzu açabilir ya da kiti klonlayabilirsiniz:
 
 ```bash
 git clone https://github.com/tugrawork-creator/saas-motion-kit && cd saas-motion-kit

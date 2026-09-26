@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1080" />
+    <title>Acme Pulse · 8-Bit Sidekick</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      /* JetBrains Mono · SIL OFL 1.1 (assets/fonts/OFL.txt) */
+      @font-face {
+        font-family: "JetBrains Mono";
+        font-weight: 600;
+        font-display: block;
+        src: url("assets/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2190-21FF, U+2212;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        font-weight: 600;
+        font-display: block;
+        src: url("assets/fonts/jetbrains-mono-latin-ext-600-normal.woff2") format("woff2");
+        unicode-range: U+0100-02BA, U+02BD-02FF, U+1E00-1EFF, U+20A0-20C0;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1080px; overflow: hidden; background: #0B1220; }
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden; background: #0B1220;
+        font-family: "JetBrains Mono", ui-monospace, monospace; font-weight: 600; color: #F6F5F1;
+      }
+      .clip { position: absolute; inset: 0; }
+      #screen { width: 1080px; height: 1080px; display: block; image-rendering: pixelated; }
+      .layer { position: absolute; inset: 0; }
+
+      /* 1 · hook */
+      .hud { position: absolute; left: 84px; top: 72px; font-size: 30px; letter-spacing: .06em; color: #7FE0D8; white-space: nowrap; }
+      .hud b { color: #F4B740; }
+      .q { position: absolute; left: 120px; top: 780px; width: 760px; font-size: 64px; line-height: 1.12; letter-spacing: -.02em; color: #F6F5F1; }
+      .q em { font-style: normal; color: #0FA3A3; }
+
+      /* 2 · reveal */
+      .join { position: absolute; left: 0; right: 0; top: 120px; padding-left: .2em; text-align: center; font-size: 34px; letter-spacing: .2em; color: #F4B740; }
+      .logo { position: absolute; left: 0; right: 0; top: 220px; display: flex; justify-content: center; align-items: center; gap: 30px; font-size: 96px; line-height: 1; letter-spacing: -.02em; color: #F6F5F1; text-shadow: 8px 8px 0 #0B6E6E; }
+      .logo img { width: 120px; height: 120px; display: block; }
+      .tag { position: absolute; width: 120px; text-align: center; font-size: 26px; letter-spacing: .1em; }
+      .p1tag { left: 138px; top: 580px; color: #F4B740; }
+      .p2tag { left: 480px; top: 444px; color: #7FE0D8; }
+
+      /* 3 · proof */
+      .names { position: absolute; left: 96px; top: 822px; display: grid; grid-template-columns: repeat(4, 192px); column-gap: 36px; font-size: 22px; letter-spacing: .06em; color: #8C97AA; text-align: center; }
+      .hud3 { position: absolute; right: 66px; top: 120px; display: flex; flex-direction: column; align-items: flex-end; }
+      .lbl { display: block; font-size: 26px; letter-spacing: .1em; color: #7FE0D8; }
+      .val { display: block; margin-top: 10px; font-size: 120px; line-height: 1; letter-spacing: -.04em; color: #FF5A4E; text-shadow: 8px 8px 0 #3A1E28; transform-origin: 100% 50%; }
+      .l1 { position: absolute; left: 108px; top: 792px; font-size: 26px; letter-spacing: .04em; color: #7FE0D8; white-space: pre; }
+      .p1d { position: absolute; right: 102px; top: 796px; font-size: 20px; letter-spacing: .1em; color: #F4B740; }
+      .choice { position: absolute; top: 860px; font-size: 40px; line-height: 1; color: #8C97AA; white-space: nowrap; }
+      .rb { left: 156px; color: #F6F5F1; }
+      .ack { left: 462px; }
+      .rwl { position: absolute; left: 168px; top: 74px; font-size: 26px; letter-spacing: .1em; color: #F6F5F1; opacity: 0; }
+
+      /* 4 · CTA */
+      .clear { position: absolute; left: 0; right: 0; top: 92px; padding-left: .14em; text-align: center; font-size: 30px; letter-spacing: .14em; color: #F4B740; }
+      .h4 { position: absolute; left: 0; right: 0; top: 170px; text-align: center; font-size: 92px; line-height: 1.08; letter-spacing: -.03em; color: #F6F5F1; text-shadow: 8px 8px 0 #0B6E6E; }
+      .h4 span { display: block; }
+      .h4 .em { color: #0FA3A3; }
+      .ctaWrap { position: absolute; left: 342px; top: 414px; width: 396px; height: 102px; }
+      .cta { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-left: 30px; font-size: 44px; color: #FFFFFF; background: #FF5A4E; box-shadow: 0 0 0 6px #0E1726, 0 0 0 12px #F6F5F1, 12px 12px 0 12px #0B6E6E; }
+      .cta i { position: absolute; left: 40px; top: 37px; width: 0; height: 0; border-left: 24px solid #FFFFFF; border-top: 14px solid transparent; border-bottom: 14px solid transparent; }
+      .mini { position: absolute; left: 0; right: 0; top: 940px; display: flex; justify-content: center; align-items: center; gap: 16px; font-size: 30px; letter-spacing: .1em; color: #7FE0D8; }
+      .mini img { width: 48px; height: 48px; display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1080">
+      <!-- the whole pixel world: drawn at 180×180 and upscaled ×6 with nearest-neighbour -->
+      <canvas id="screen" class="clip" width="1080" height="1080" data-start="0" data-duration="12" data-track-index="0" data-layout-allow-overflow></canvas>
+
+      <section id="s1" class="clip" data-start="0" data-duration="3" data-track-index="1">
+        <div id="hookHud" class="hud">DASHBOARDS <b id="cnt">32</b></div>
+        <p id="hookQ" class="q">SOMETHING DROPPED. BUT <em>WHERE?</em></p>
+      </section>
+
+      <section id="s2" class="clip" data-start="3" data-duration="1.9" data-track-index="2">
+        <div id="rw" class="layer" data-layout-allow-overflow>
+          <div id="join" class="join">PLAYER 2 HAS JOINED</div>
+          <div id="logo" class="logo" data-layout-allow-overflow><img src="assets/brand/acme-mark.svg" alt="Acme" /><span>ACME PULSE</span></div>
+          <div id="p1tag" class="tag p1tag">P1</div>
+          <div id="p2tag" class="tag p2tag">P2</div>
+        </div>
+      </section>
+
+      <section id="s3" class="clip" data-start="4.3" data-duration="4.7" data-track-index="3">
+        <div id="lw" class="layer" data-layout-allow-overflow>
+          <div id="names" class="names"><span>SIGNUPS</span><span>ACTIVE</span><span id="nCheckout">CHECKOUT</span><span>P95</span></div>
+        </div>
+        <div id="hud3" class="hud3"><span id="lbl" class="lbl">CHECKOUT CONVERSION</span><b id="val" class="val">−18%</b></div>
+        <div id="l1" class="l1"></div>
+        <div id="p1d" class="p1d">PLAYER 1 DECIDES</div>
+        <div id="rb" class="choice rb">ROLL BACK</div>
+        <div id="ack" class="choice ack">ACKNOWLEDGE</div>
+        <div id="rwl" class="rwl">ROLLING BACK #2231</div>
+      </section>
+
+      <section id="s6" class="clip" data-start="9" data-duration="3" data-track-index="4">
+        <div id="clear" class="clear">STAGE CLEAR · RESOLVED IN 6 MIN</div>
+        <div class="h4"><span id="h4a">YOU SHIP.</span><span id="h4b" class="em">PULSE WATCHES.</span></div>
+        <div id="ctaWrap" class="ctaWrap"><div id="cta" class="cta"><i id="ctaCur"></i>START FREE</div></div>
+        <div id="mini" class="mini"><img src="assets/brand/acme-mark.svg" alt="" /><span>ACME PULSE</span></div>
+      </section>
+    </div>
+
+    <script>
+      (() => {
+        // ───────────────────────── pixel world setup ─────────────────────────
+        const V = 180; // virtual resolution (1 virtual px = 6 real px)
+        const S = 6;
+        const C = {
+          BG: "#0B1220", NAVY: "#16233A", SLATE: "#2A3A55", STEEL: "#33415C", GREY: "#5A6475",
+          MINT: "#7FE0D8", TEAL: "#0FA3A3", DEEP: "#0B6E6E", CORAL: "#FF5A4E", CORAL_HI: "#FF9A90",
+          CORAL_DK: "#C8433A", PLUM: "#3A1E28", PLUM2: "#2A141C", GHOST: "#5A2A35", PAPER: "#F6F5F1",
+          INK: "#0E1726", AMBER: "#F4B740", HAIR: "#3B2A20", SKIN: "#E9B48E", SKIN2: "#C98E6A",
+          NAIL: "#F7DCC8", TUFT: "#1F3050", GLOW: "#0D3A45", PADL: "#A7B0BF", PADD: "#4A5770"
+        };
+        const screen = document.getElementById("screen");
+        const out = screen.getContext("2d");
+        const mk = () => { const c = document.createElement("canvas"); c.width = V; c.height = V; return c.getContext("2d", { willReadFrequently: true }); };
+        const lo = mk(), ga = mk(), gb = mk();
+
+        const R = (g, x, y, w, h, c) => { if (w <= 0 || h <= 0) return; g.fillStyle = c; g.fillRect(x, y, w, h); };
+        const PAL = { c: C.CORAL, d: C.DEEP, t: C.TEAL, m: C.MINT, w: C.PAPER, k: C.INK, h: C.HAIR, s: C.SKIN, a: C.AMBER, p: C.STEEL, r: "#A3483C" };
+        function spr(g, rows, x, y, sc, color) {
+          for (let r = 0; r < rows.length; r++) {
+            const row = rows[r];
+            for (let c = 0; c < row.length; c++) {
+              if (row[c] === ".") continue;
+              R(g, x + c * sc, y + r * sc, sc, sc, color || PAL[row[c]]);
+            }
+          }
+        }
+        function rng(a) { // mulberry32: seeded, deterministic
+          return () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+        }
+
+        // ───────────────────────── sprites ─────────────────────────
+        const PULSE_TOP = ["....cc....", "....cc....", ".....d....", "..tttttt..", ".tmmttttt."];
+        const PULSE_FEET = ["dttdttdttd", "d.dd..dd.d"];
+        const PULSE = {
+          idle: [...PULSE_TOP, "tttttttttt", "ttkkttkktt", "ttkkttkktt", "tttttttttt", "ttttkktttt", ...PULSE_FEET],
+          wide: [...PULSE_TOP, "twwwttwwwt", "twkwttwkwt", "twwwttwwwt", "ttttkktttt", "ttttkktttt", ...PULSE_FEET],
+          happy: [...PULSE_TOP, "ttkttttktt", "tktkttktkt", "tttttttttt", "ttkttttktt", "tttkkkkttt", ...PULSE_FEET]
+        };
+        const P1_HEAD = ["..hhhh..", ".hhhhhh.", ".hssssh."];
+        const P1_BODY = [".aaaaaa.", "aaaaaaaa", "saaaaaas", "saaaaaas", ".pppppp."];
+        const P1_LEGS_A = [".pp..pp.", ".kk..kk."];
+        const P1_LEGS_B = ["..pppp..", "..kkkk.."];
+        const p1 = (eyes, chin, legs) => [...P1_HEAD, eyes, ".ssssss.", chin, ...P1_BODY, ...legs];
+        const P1 = {
+          idle: p1(".skssks.", "..ssss..", P1_LEGS_A),
+          walk: p1(".skssks.", "..ssss..", P1_LEGS_B),
+          left: p1(".ksskss.", "..ssss..", P1_LEGS_A),
+          right: p1(".sskssk.", "..ssss..", P1_LEGS_A),
+          happy: p1(".skssks.", "..srrs..", P1_LEGS_A)
+        };
+        const HEART = [".xx.xx.", "xxxxxxx", "xxxxxxx", ".xxxxx.", "..xxx..", "...x..."];
+        const REW = ["....x", "...xx", "..xxx", ".xxxx", "xxxxx", ".xxxx", "..xxx", "...xx", "....x"];
+        const CURSOR = ["x...", "xx..", "xxx.", "xxxx", "xxx.", "xx..", "x..."];
+        const GRASS = ["x..x..x", "x.xx.x.", ".xxxxx."];
+
+        // ───────────────────────── world data (seeded) ─────────────────────────
+        const STARS = [];
+        { const r = rng(75); for (let i = 0; i < 90; i++) STARS.push({ x: Math.floor(r() * 300), y: Math.floor(r() * 122), c: [C.STEEL, C.GREY, C.GREY, C.MINT][Math.floor(r() * 4)], tw: r() < 0.22 }); }
+        const TUFTS = [];
+        { const r = rng(12); let x = 4; while (x < 520) { TUFTS.push(x); x += 18 + Math.floor(r() * 22); } }
+        const ROOMS = [];
+        {
+          const r = rng(38);
+          for (let c = 0; c < 12; c++) for (let w = 0; w < 3; w++) {
+            const bars = [];
+            for (let i = 0; i < 5; i++) bars.push({ h: 4 + Math.floor(r() * 9), c: [C.STEEL, C.TEAL, C.DEEP, C.STEEL][Math.floor(r() * 4)] });
+            ROOMS.push({ c, w, bars });
+          }
+          // the one room nobody looks at: the drop is already there
+          const miss = ROOMS.find((o) => o.c === 5 && o.w === 0);
+          miss.bars = [{ h: 10, c: C.DEEP }, { h: 11, c: C.TEAL }, { h: 10, c: C.DEEP }, { h: 9, c: C.TEAL }, { h: 3, c: C.CORAL }];
+        }
+        const PLAT = [{ x: 16, top: 66 }, { x: 54, top: 60 }, { x: 92, top: 64 }, { x: 130, top: 68 }];
+        const DEBRIS = [];
+        {
+          const r = rng(2231);
+          for (let cy = 0; cy < 8; cy++) for (let cx = 0; cx < 8; cx++) {
+            const vx = (r() - 0.5) * 50 + (cx - 3.5) * 6;
+            const vy = -(35 + r() * 55) - (7 - cy) * 5;
+            const k = r();
+            DEBRIS.push({ x0: 92 + cx * 4, y0: 64 + cy * 4, vx, vy, c: k < 0.18 ? C.CORAL : k < 0.3 ? C.MINT : C.TEAL });
+          }
+        }
+        const BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]];
+        // decision-box typewriter: 3 characters per 12-fps frame, pause on the "·"
+        const L1 = "SINCE 09:42 · DEPLOY #2231";
+        const TYPE = [3, 6, 9, 12, 13, 13, 16, 19, 22, 25, 26];
+        // the rollback rewind: which scene time each of the 12 rewind frames shows
+        const RW = [7.45, 7.0, 6.6, 6.3, 5.95, 5.85, 5.7, 5.55, 5.4, 5.25, 5.12, 5.0];
+
+        // ───────────────────────── drawing ─────────────────────────
+        // text areas (virtual px) where no star may sit, so a star never reads as punctuation
+        const Z_REVEAL = [[38, 18, 142, 28], [28, 34, 154, 59], [22, 95, 44, 102], [82, 72, 98, 81]];
+        const Z_LEVEL = [[104, 18, 172, 48], [12, 8, 82, 21]];
+        const Z_CTA = [[30, 13, 150, 23], [24, 26, 156, 64], [52, 66, 132, 91]];
+        function drawSky(g, camX, F, zones) {
+          R(g, 0, 0, V, V, C.BG);
+          const off = Math.round(camX * 0.3); // far layer, 0.3×
+          for (const s of STARS) {
+            const x = s.x - off;
+            if (x < 0 || x >= V) continue;
+            if (zones && zones.some(([a, b, c, d, dx]) => x >= a + dx && x <= c + dx && s.y >= b && s.y <= d)) continue;
+            let c = s.c;
+            if (s.tw && F < 132 && ((F >> 2) + s.x) % 3 === 0) c = C.PAPER;
+            R(g, x, s.y, 1, 1, c);
+          }
+        }
+        function drawGround(g, camX) { // mid layer, 1×
+          R(g, 0, 130, V, 50, C.NAVY);
+          const off = Math.round(camX);
+          for (let bx = 0; bx < 400; bx += 10) {
+            const x = bx - off;
+            if (x + 9 < 0 || x >= V) continue;
+            R(g, x, 130, 9, 4, C.DEEP);
+            R(g, x, 130, 9, 1, C.TEAL);
+          }
+        }
+        function drawFore(g, camX) { // near layer, 1.4×
+          const off = Math.round(camX * 1.4);
+          for (const tx of TUFTS) {
+            const x = tx - off;
+            if (x < -6 || x >= V) continue;
+            spr(g, GRASS, x, 172, 1, C.TUFT);
+          }
+        }
+        function dust(g, cx, feet, half, f) {
+          const c = f === 0 ? C.PAPER : C.GREY;
+          const d = f === 0 ? 2 : 5;
+          R(g, cx - half - d, feet - 2, 2, 2, c); R(g, cx + half + d - 2, feet - 2, 2, 2, c);
+          R(g, cx - half - d + 3, feet - 4 - f, 1, 1, c); R(g, cx + half + d - 4, feet - 4 - f, 1, 1, c);
+        }
+        function drawBox(g, x, y, w, h, frac) {
+          if (frac <= 0) return;
+          const hh = Math.max(3, Math.round(h * frac));
+          const yy = y + Math.round((h - hh) / 2);
+          R(g, x, yy, w, hh, C.INK);
+          R(g, x + 1, yy + 1, w - 2, hh - 2, C.PAPER);
+          if (hh > 6) { R(g, x + 2, yy + 2, w - 4, hh - 4, C.SLATE); R(g, x + 3, yy + 3, w - 6, hh - 6, C.INK); }
+          R(g, x + 1, yy + 1, 1, 1, C.INK); R(g, x + w - 2, yy + 1, 1, 1, C.INK);
+          R(g, x + 1, yy + hh - 2, 1, 1, C.INK); R(g, x + w - 2, yy + hh - 2, 1, 1, C.INK);
+        }
+        function drawBricks(g, x, top, body, line, hi) {
+          R(g, x, top, 32, 130 - top, body);
+          for (let y = top + 5; y < 130; y += 6) R(g, x, y, 32, 1, line);
+          let row = 0;
+          for (let y = top; y < 130; y += 6, row++) {
+            const off = row % 2 ? 15 : 7;
+            for (let jx = off; jx < 32; jx += 16) R(g, x + jx, y, 1, Math.min(5, 130 - y), line);
+          }
+          if (hi) R(g, x, top, 32, 1, hi);
+        }
+        function drawRoom(g, x, y, room, F) {
+          R(g, x, y, 35, 27, C.NAVY);
+          R(g, x, y, 35, 2, C.SLATE);
+          R(g, x + 30, y, 2, 2, C.STEEL);
+          room.bars.forEach((b, i) => {
+            let c = b.c;
+            if (c === C.CORAL && Math.floor(F / 3) % 2 === 1) c = C.PLUM;
+            R(g, x + 4 + i * 6, y + 22 - b.h, 4, b.h, c);
+          });
+          R(g, x + 3, y + 22, 29, 1, C.SLATE);
+          R(g, x + 15, y + 25, 5, 2, C.INK);
+        }
+        function drawHeart(g, x, y, color, hi) {
+          spr(g, HEART, x, y, 1, color);
+          if (hi) R(g, x + 1, y + 1, 1, 1, hi);
+        }
+        function drawBang(g, cx, top, big) { // the red "!" of detection
+          if (big) {
+            const x = cx - 3, y = top - 18;
+            R(g, x - 1, y - 1, 8, 12, C.INK); R(g, x - 1, y + 12, 8, 5, C.INK);
+            R(g, x, y, 6, 10, C.CORAL); R(g, x, y + 13, 6, 3, C.CORAL);
+          } else {
+            const x = cx - 2, y = top - 14;
+            R(g, x - 1, y - 1, 6, 10, C.INK); R(g, x - 1, y + 9, 6, 4, C.INK);
+            R(g, x, y, 4, 8, C.CORAL); R(g, x, y + 10, 4, 2, C.CORAL);
+            R(g, x, y, 1, 5, C.CORAL_HI);
+          }
+        }
+        function drawPad(g, x, y, pressed) { // NEW COMPONENT: Player 1's controller
+          R(g, x + 1, y, 30, 14, C.PADL); R(g, x, y + 1, 32, 12, C.PADL);
+          R(g, x + 2, y + 1, 28, 1, C.PAPER);
+          R(g, x + 1, y + 13, 30, 1, C.GREY);
+          R(g, x + 2, y + 3, 28, 9, C.INK);
+          R(g, x + 5, y + 6, 7, 3, C.PADD); R(g, x + 7, y + 4, 3, 7, C.PADD); // d-pad
+          R(g, x + 14, y + 5, 5, 1, C.STEEL);
+          R(g, x + 14, y + 8, 2, 1, C.GREY); R(g, x + 17, y + 8, 2, 1, C.GREY); // select / start
+          const btn = (bx, by, c, hi) => { R(g, bx + 1, by, 2, 4, c); R(g, bx, by + 1, 4, 2, c); if (hi) R(g, bx + 1, by + 1, 1, 1, hi); };
+          btn(x + 20, y + 6, C.CORAL, C.CORAL_HI); // B
+          if (pressed) btn(x + 25, y + 7, C.CORAL_DK, null); else btn(x + 25, y + 6, C.CORAL, C.CORAL_HI); // A = ROLL BACK
+        }
+        function drawThumb(g, tx, ty) { // the only thing not from the pixel world: a human thumb from below the frame
+          R(g, tx + 1, ty, 4, 1, C.INK);
+          R(g, tx, ty + 1, 6, 172 - ty, C.INK);
+          R(g, tx + 1, ty + 1, 4, 171 - ty, C.SKIN);
+          R(g, tx + 2, ty + 1, 2, 2, C.NAIL);
+          R(g, tx + 1, ty + 6, 4, 1, C.SKIN2);
+        }
+
+        // ── scene 1 · the dashboard maze
+        const snaps = (F) => (F < 6 ? 0 : Math.min(6, Math.floor((F - 6) / 3) + 1));
+        function drawHook(g, F) {
+          R(g, 0, 0, V, V, C.BG);
+          const camX = snaps(F) * 39; // hard cut: one room per 8th note
+          for (const room of ROOMS) {
+            const x = 14 + room.c * 39 - camX;
+            if (x >= V || x + 35 <= 0) continue;
+            drawRoom(g, x, 25 + room.w * 31, room, F);
+          }
+          // HUD lives: the third heart drains while you search
+          drawHeart(g, 147, 12, C.PAPER); drawHeart(g, 155, 12, C.PAPER);
+          const drained = F >= 24 || (F >= 12 && Math.floor(F / 3) % 2 === 1);
+          drawHeart(g, 163, 12, drained ? C.SLATE : C.PAPER);
+          // the lost player
+          let pose = P1.idle;
+          if (F >= 6 && F < 24) pose = F % 2 ? P1.walk : P1.idle;
+          else if (F >= 24 && F < 27) pose = P1.left;
+          else if (F >= 27 && F < 30) pose = P1.right;
+          else if (F >= 30) pose = P1.left;
+          R(g, 86, 84, 8, 1, C.INK);
+          spr(g, pose, 86, 71, 1);
+          const a = F < 6 ? 0 : Math.floor(F / 2) % 2;
+          R(g, a ? 84 : 95, a ? 72 : 70, 1, 2, C.MINT);
+          if (F >= 24) R(g, a ? 96 : 83, a ? 69 : 71, 1, 2, C.MINT);
+          // dialog box closes with a 4-frame wipe
+          const frac = F < 29 ? 1 : Math.max(0, (32 - F) / 4);
+          drawBox(g, 11, 122, 158, 40, frac);
+        }
+
+        // ── scenes 2–3 · one side-scrolling world (reveal at x 0, metrics level at x 180)
+        function camAt(t) {
+          if (t < 52 / 12) return 0;
+          if (t >= 58 / 12) return 180;
+          const p = (t - 52 / 12) / 0.5;
+          const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          return Math.round(180 * e); // camera moves at 30 fps but snaps to the pixel grid
+        }
+        function drawReveal(g, F, camX) {
+          const ox = -camX;
+          spr(g, F >= 41 ? P1.right : P1.idle, 25 + ox, 104, 2);
+          if (F >= 39 && F <= 54) {
+            let y = F === 39 ? -22 : F === 40 ? 30 : 82; // 3 stepped frames, no easing
+            if (F === 48) y -= 3;
+            if (F === 49) y -= 1;
+            if (F === 52) y = 50;
+            if (F === 53) y = 8;
+            if (F === 54) y = -40;
+            const pose = F <= 42 ? PULSE.wide : F <= 44 ? PULSE.idle : PULSE.happy;
+            spr(g, pose, 70 + ox, y, 4);
+            if (F === 41 || F === 42) dust(g, 90 + ox, 130, 20, F - 41);
+          }
+        }
+        function drawLevel(g, F, camX, s, sF, restored) {
+          const ox = 180 - camX;
+          const crumbled = !restored && sF >= 60;
+          PLAT.forEach((p, i) => {
+            const x = ox + p.x;
+            if (x >= V || x + 32 <= 0) return;
+            if (i === 2 && crumbled) {
+              drawBricks(g, x, 96, C.PLUM, C.PLUM2, null);
+              R(g, x, 96, 32, 2, C.CORAL);
+              for (let gx = 0; gx < 32; gx += 4) R(g, x + gx, 64, 2, 1, C.GHOST); // where it used to be
+            } else {
+              drawBricks(g, x, p.top, C.TEAL, C.DEEP, C.MINT);
+              if (i === 2 && !restored && sF === 59) { // cracks, one frame before it goes
+                [[6, 70], [7, 71], [8, 72], [9, 72], [10, 73], [20, 68], [21, 69], [21, 70], [22, 71], [14, 77], [15, 78], [16, 78]].forEach(([cx, cy]) => R(g, x + cx, cy, 1, 1, C.CORAL));
+              }
+              if (i === 2 && restored && F <= 106) R(g, x, p.top, 32, 3, F === 105 ? C.PAPER : C.MINT);
+            }
+          });
+          if (crumbled) {
+            const tq = Math.max(0, Math.floor((s - 5) * 12 + 1e-6) / 12);
+            for (const d of DEBRIS) {
+              const x = Math.round(ox + d.x0 + d.vx * tq);
+              const y = Math.round(d.y0 + d.vy * tq + 130 * tq * tq);
+              if (y + 4 > 130 || y < -4 || x < -4 || x >= V) continue;
+              R(g, x, y, 4, 4, d.c);
+              R(g, x, y + 3, 4, 1, d.c === C.CORAL ? C.PLUM : C.DEEP);
+            }
+          }
+          // Pulse, standing on the ACTIVE platform
+          if (F >= 56) {
+            let top = F === 56 ? -10 : F === 57 ? 14 : 36;
+            let pose = PULSE.idle;
+            if (!restored) {
+              if (F >= 58 && (sF === 66 || sF === 69)) top -= 2;
+              if (sF >= 62) pose = PULSE.wide;
+            } else {
+              pose = PULSE.happy;
+              if (F >= 106) { const tau = (F - 106) / 12; top = Math.round(60 - 80 * tau + 200 * tau * tau) - 24; }
+            }
+            const px = 240 - camX;
+            spr(g, pose, px, top, 2);
+            if (F === 58 || F === 59) dust(g, px + 10, 60, 10, F - 58);
+            if (!restored && sF >= 62) drawBang(g, px + 10, top, sF === 62);
+          }
+        }
+        function drawDecision(g, F, sF, restored) {
+          if (restored || sF < 69) return;
+          drawBox(g, 11, 126, 158, 40, sF >= 72 ? 1 : (sF - 68) / 4);
+          if (sF < 72) return;
+          if (F === 90 || F === 92) R(g, 24, 141, 40, 11, C.PAPER); // ROLL BACK confirm flash
+          const cursorOn = sF >= 90 || (sF - 72) % 6 < 3;
+          if (cursorOn) spr(g, CURSOR, 19, 143, 1, C.CORAL);
+          drawPad(g, 132, 143, sF >= 90);
+          if (F === 90) [[155, 147], [161, 147], [154, 151], [162, 151]].forEach(([x, y]) => R(g, x, y, 1, 1, C.MINT));
+          if (F === 91) [[153, 145], [163, 145], [152, 151], [164, 151]].forEach(([x, y]) => R(g, x, y, 1, 1, C.MINT));
+          if (sF >= 84) {
+            const ty = sF === 84 ? 164 : sF === 85 ? 158 : sF === 86 ? 155 : sF < 90 ? 154 : 150;
+            drawThumb(g, 156, ty);
+          }
+        }
+
+        // ── scene 4 · stage clear
+        function drawCTA(g, F) {
+          drawSky(g, 180, F, Z_CTA.map((z) => [...z, 0]));
+          for (let y = 117; y < 130; y++) { // teal dawn on the horizon, ordered dither
+            const lvl = y >= 127 ? 16 : y >= 124 ? 8 : y >= 121 ? 4 : 2;
+            for (let x = 0; x < V; x++) if (BAYER[y & 3][x & 3] < lvl) R(g, x, y, 1, 1, C.GLOW);
+          }
+          drawGround(g, 180);
+          drawFore(g, 180);
+          const hop = F === 124 ? -3 : F === 125 ? -1 : 0;
+          spr(g, P1.happy, 116, 104 + hop, 2);
+          const tau = (F - 106) / 12;
+          let feet = Math.min(130, Math.round(60 - 80 * tau + 200 * tau * tau));
+          if (F === 130) feet -= 2;
+          spr(g, PULSE.happy, 60, feet - 24, 2);
+          if (F === 116 || F === 117) dust(g, 70, 130, 10, F - 116);
+          [[124, 86, 100], [128, 95, 93], [132, 104, 101]].forEach(([st, x, y]) => {
+            if (F < st) return;
+            const yy = F === st ? y + 14 : F === st + 1 ? y - 4 : y;
+            drawHeart(g, x, yy, C.CORAL, C.CORAL_HI);
+          });
+        }
+
+        // ───────────────────────── DOM handles ─────────────────────────
+        const $ = (id) => document.getElementById(id);
+        const el = {
+          cnt: $("cnt"), rw: $("rw"), lw: $("lw"), names: $("names"), nCheckout: $("nCheckout"),
+          hud3: $("hud3"), lbl: $("lbl"), val: $("val"), l1: $("l1"), p1d: $("p1d"), rb: $("rb"), ack: $("ack"), rwl: $("rwl")
+        };
+
+        // ───────────────────────── render(t): a pure function of time ─────────────────────────
+        let lastT = -1;
+        function render(tIn) {
+          const t = Math.min(12, Math.max(0, +tIn || 0));
+          if (t === lastT) return;
+          lastT = t;
+          const F = Math.min(143, Math.floor(t * 12 + 1e-6)); // sprites live at 12 fps
+          let ox = 0, oy = 0, jitter = null;
+          let camX = 0, s = t, sF = F, restored = false;
+
+          if (F < 33) {
+            drawHook(lo, F);
+          } else if (F < 108) {
+            camX = camAt(t);
+            if (F >= 90 && F <= 92) s = 7.5; // freeze on the press
+            else if (F >= 93 && F <= 104) { s = RW[F - 93]; jitter = F; } // rewind scrub
+            else if (F >= 105) restored = true;
+            sF = Math.floor(s * 12 + 1e-6);
+            const g = F < 36 ? gb : lo;
+            drawSky(g, camX, F, [...Z_REVEAL.map((z) => [...z, -camX]), ...Z_LEVEL.map((z) => [...z, 180 - camX])]);
+            drawGround(g, camX);
+            if (camX < 180) drawReveal(g, F, camX);
+            if (F >= 52) drawLevel(g, F, camX, s, sF, restored);
+            drawFore(g, camX);
+            if (camX === 180) drawDecision(g, F, sF, restored);
+            if (F === 41) oy = 1; // landing thud
+            if (!restored && sF === 67 && F < 90) ox = 1; // −18% hits
+            if (F < 36) { // dither dissolve: the maze breaks into chunky pixels
+              drawHook(ga, F);
+              const a = ga.getImageData(0, 0, V, V), b = gb.getImageData(0, 0, V, V);
+              const o = lo.createImageData(V, V);
+              const lvl = (F - 32) * 4;
+              for (let y = 0; y < V; y++) for (let x = 0; x < V; x++) {
+                const src = BAYER[((y / 3) | 0) & 3][((x / 3) | 0) & 3] < lvl ? b.data : a.data;
+                const i = (y * V + x) * 4;
+                o.data[i] = src[i]; o.data[i + 1] = src[i + 1]; o.data[i + 2] = src[i + 2]; o.data[i + 3] = 255;
+              }
+              lo.putImageData(o, 0, 0);
+            }
+          } else {
+            drawCTA(lo, F);
+          }
+
+          // upscale ×6, nearest-neighbour
+          out.imageSmoothingEnabled = false;
+          out.fillStyle = C.BG;
+          out.fillRect(0, 0, 1080, 1080);
+          if (jitter === null) out.drawImage(lo.canvas, 0, 0, V, V, ox * S, oy * S, 1080, 1080);
+          else {
+            for (let b = 0; b < 30; b++) { const off = (b + jitter) % 3 === 0 ? 1 : 0; out.drawImage(lo.canvas, 0, b * 6, V, 6, off * S, b * 36, 1080, 36); }
+            [[15, 11, C.INK], [21, 11, C.INK], [14, 10, C.PAPER], [20, 10, C.PAPER]].forEach(([x, y, c]) => {
+              out.fillStyle = c;
+              REW.forEach((row, r) => { for (let k = 0; k < row.length; k++) if (row[k] !== ".") out.fillRect((x + k) * S, (y + r) * S, S, S); });
+            });
+          }
+
+          // DOM that belongs to the pixel world
+          el.cnt.textContent = String(32 + snaps(F));
+          el.rw.style.transform = `translateX(${-camX * S}px)`;
+          el.lw.style.transform = `translateX(${(180 - camX) * S}px)`;
+          const live = !restored && F >= 52 && F < 108;
+          el.names.style.opacity = live && sF >= 69 ? 0 : 1;
+          el.nCheckout.style.color = live && sF >= 60 ? C.CORAL : "";
+          el.lbl.style.opacity = live && sF >= 63 ? 1 : 0;
+          el.lbl.style.clipPath = sF === 63 ? "inset(0 50% 0 0)" : "none";
+          el.val.style.opacity = live && sF >= 64 ? 1 : 0;
+          el.val.textContent = ["−4%", "−9%", "−13%", "−18%"][Math.max(0, Math.min(3, sF - 64))];
+          el.val.style.transform = `scale(${sF === 64 ? 1.25 : sF === 65 ? 1.1 : 1})`;
+          el.hud3.style.transform = `translateX(${ox * S}px)`;
+          const boxOpen = live && sF >= 72;
+          el.l1.textContent = boxOpen ? L1.slice(0, TYPE[Math.min(TYPE.length - 1, sF - 72)]) : "";
+          el.p1d.style.opacity = boxOpen ? 1 : 0;
+          el.rb.style.opacity = boxOpen ? 1 : 0;
+          el.ack.style.opacity = boxOpen ? 1 : 0;
+          el.rb.style.color = F === 90 || F === 92 ? C.INK : "";
+          el.rwl.style.opacity = jitter !== null ? 1 : 0;
+        }
+
+        // ───────────────────────── timeline ─────────────────────────
+        const f = (n) => n / 12; // 12-fps frame → seconds
+        const q = (ease, n) => { const e = gsap.parseEase(ease); return (p) => e(Math.floor(p * n + 1e-6) / n); }; // an ease sampled at 12 fps
+        const tl = gsap.timeline({ paused: true, onUpdate: () => render(tl.time()) });
+        const clock = { _t: 0 };
+        Object.defineProperty(clock, "t", { get() { return this._t; }, set(v) { this._t = v; render(v); } });
+        tl.fromTo(clock, { t: 0 }, { t: 12, duration: 12, ease: "none", immediateRender: false }, 0);
+
+        // 1 · hook exits
+        tl.set("#hookQ", { opacity: 0 }, f(29));
+        tl.set("#hookHud", { opacity: 0 }, f(33));
+        // 2 · reveal
+        tl.set("#join", { opacity: 0 }, f(37));
+        tl.set("#join", { opacity: 1 }, f(38));
+        tl.set("#join", { opacity: 0 }, f(39));
+        tl.set("#join", { opacity: 1 }, f(40));
+        tl.fromTo("#logo", { x: 1080 }, { x: 0, duration: f(4), ease: "steps(4)" }, f(42));
+        tl.fromTo("#p2tag", { opacity: 0 }, { opacity: 1, duration: f(1), ease: "steps(1)" }, f(43));
+        tl.set("#p2tag", { opacity: 0 }, f(52));
+        // 4 · CTA
+        tl.fromTo("#clear", { scale: 1.6 }, { scale: 1, duration: f(2), ease: "steps(2)" }, f(108));
+        tl.fromTo("#h4a", { clipPath: "inset(-10% 100% -20% -2%)" }, { clipPath: "inset(-10% -2% -20% -2%)", duration: f(4), ease: "steps(4)" }, f(112));
+        tl.fromTo("#h4b", { clipPath: "inset(-10% 100% -20% -2%)" }, { clipPath: "inset(-10% -2% -20% -2%)", duration: f(5), ease: "steps(5)" }, f(114));
+        tl.fromTo("#mini", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: f(2), ease: "steps(2)" }, f(116));
+        tl.fromTo("#ctaWrap", { opacity: 0 }, { opacity: 1, duration: f(1), ease: "steps(1)" }, f(119));
+        tl.fromTo("#cta", { y: 60 }, { y: 0, duration: f(3), ease: q("back.out(3)", 3) }, f(120));
+        [[127, true], [128, false], [130, true], [131, false]].forEach(([fr, on]) => {
+          tl.set("#cta", { backgroundColor: on ? C.PAPER : C.CORAL, color: on ? C.CORAL : "#FFFFFF" }, f(fr));
+          tl.set("#ctaCur", { borderLeftColor: on ? C.CORAL : "#FFFFFF" }, f(fr));
+        });
+
+        window.addEventListener("hf-seek", (e) => render(e && e.detail ? e.detail.time : tl.time()));
+        render(0);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

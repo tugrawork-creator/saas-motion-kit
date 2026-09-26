@@ -1,0 +1,41 @@
+name: variety-audit
+
+# Every storyboard that lands in the repo must pass the variety audit.
+# First drafts kept as lessons are named STORYBOARD.v1.md and are skipped on purpose.
+on:
+  pull_request:
+    paths:
+      - "**/STORYBOARD.md"
+      - "tools/**"
+      - ".github/workflows/variety-audit.yml"
+  push:
+    branches: [main]
+    paths:
+      - "**/STORYBOARD.md"
+      - "tools/**"
+      - ".github/workflows/variety-audit.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tools compile
+        run: python -m py_compile tools/*.py
+      - name: Audit every storyboard
+        run: |
+          status=0
+          while IFS= read -r f; do
+            echo "::group::$f"
+            python tools/variety_audit.py "$f" || status=1
+            echo "::endgroup::"
+          done < <(git ls-files '**/STORYBOARD.md' 'STORYBOARD.md' | grep -v '^templates/')
+          exit $status
+      - name: Theme picker smoke test
+        run: python tools/pick_themes.py --tone calm -n 1

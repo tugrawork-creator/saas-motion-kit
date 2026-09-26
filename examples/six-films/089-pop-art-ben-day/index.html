@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1080" />
+    <title>Acme Pulse · Pop-Art Ben-Day</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      /* Fonts: SIL OFL 1.1, bundled locally (see assets/fonts/LICENSES.md) */
+      @font-face{font-family:"Manrope";font-weight:200 800;font-display:block;src:url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215}
+      @font-face{font-family:"Manrope";font-weight:200 800;font-display:block;src:url("assets/fonts/manrope-latin-ext-wght-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1EFF,U+20A0-20C0,U+2C60-2C7F,U+A720-A7FF}
+      @font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:block;src:url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC}
+      @font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:block;src:url("assets/fonts/instrument-serif-latin-ext-400-italic.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02FF,U+1E00-1EFF,U+20A0-20C0}
+      @font-face{font-family:"Bangers";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/bangers-latin-400-normal.woff2") format("woff2")}
+
+      :root{
+        --ink:#0E1726; --paper:#FFFDF6; --teal:#0FA3A3; --teal-deep:#0B6E6E; --coral:#FF5A4E; --amber:#F4B740; --muted:#5A6475;
+        --sans:"Manrope",system-ui,sans-serif; --serif:"Instrument Serif",Georgia,serif; --comic:"Bangers",system-ui,sans-serif;
+      }
+      *{margin:0;padding:0;box-sizing:border-box}
+      html,body{width:1080px;height:1080px;overflow:hidden;background:#FFFDF6}
+      #root{position:relative;width:100%;height:100%;overflow:hidden;background:var(--paper)}
+      .clip{position:absolute;inset:0;overflow:hidden}
+      .layer{position:absolute;inset:0}
+      .full{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+      .cam{position:absolute;left:0;top:0;width:2160px;height:2160px}
+      /* every comic page is authored at 2x (2160 px, 1 page unit = 2 px) and only ever shown at scale <= 1 */
+      .page{position:absolute;top:0;width:2160px;height:2160px;--u:2px;background:var(--paper)}
+      .a{position:absolute;left:calc(var(--x)*var(--u));top:calc(var(--y)*var(--u));width:calc(var(--w)*var(--u));height:calc(var(--h)*var(--u))}
+      .p{position:absolute;left:calc(var(--x)*var(--u));top:calc(var(--y)*var(--u))}
+
+      /* caption box: amber narration rectangle */
+      .cap{position:absolute;left:calc(var(--x)*var(--u));top:calc(var(--y)*var(--u));background:var(--amber);border:calc(var(--u)*7) solid var(--ink);padding:calc(var(--u)*9) calc(var(--u)*18) calc(var(--u)*10);font:800 calc(var(--u)*28)/1.1 var(--sans);text-transform:uppercase;color:var(--ink);letter-spacing:.02em;white-space:nowrap}
+      .cap.white{background:#fff}
+      /* comic lettering (Manrope 800, uppercase, skewed like hand lettering) */
+      .k{display:block;font-family:var(--sans);font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1.02;color:var(--ink);text-align:center;transform:skewX(-6deg);white-space:nowrap}
+      .k i{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;color:var(--coral)}
+      /* onomatopoeia lettering */
+      .fx{display:block;font-family:var(--comic);font-weight:400;text-transform:uppercase;letter-spacing:.02em;line-height:1;color:#fff;white-space:nowrap;-webkit-text-stroke:calc(var(--u)*7) var(--ink);paint-order:stroke fill;text-shadow:calc(var(--u)*8) calc(var(--u)*8) 0 var(--ink);text-align:center}
+      /* comic button: coral pill, hard ink shadow, skewed -6deg */
+      .btn-skew{position:absolute;inset:0;transform:skewX(-6deg)}
+      .btn-sh{position:absolute;left:calc(var(--u)*10);top:calc(var(--u)*10);width:100%;height:100%;background:var(--ink);border-radius:calc(var(--u)*22)}
+      .btn-face{position:absolute;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--coral);border:calc(var(--u)*8) solid var(--ink);border-radius:calc(var(--u)*22);font-family:var(--sans);font-weight:800;text-transform:uppercase;color:#fff;letter-spacing:.01em;text-shadow:calc(var(--u)*3) calc(var(--u)*3) 0 var(--ink);white-space:nowrap}
+      .mark{position:absolute;left:calc(var(--x)*var(--u));top:calc(var(--y)*var(--u));width:calc(var(--w)*var(--u));height:calc(var(--w)*var(--u));border-radius:calc(var(--w)*var(--u)*.25);box-shadow:0 0 0 calc(var(--u)*7) var(--ink);display:block}
+      .panel{position:absolute;overflow:hidden}
+      .bal-text{position:absolute;display:flex;flex-direction:column;align-items:center}
+      .dot{position:absolute;border-radius:50%;background:var(--coral);border:calc(var(--u)*5) solid var(--ink)}
+      .ring{position:absolute;border-radius:50%;border:calc(var(--u)*5) solid var(--coral)}
+      #s-cta{z-index:1} #s-hook{z-index:2} #s-world{z-index:3} #s-iris{z-index:4} #s-speed{z-index:5}
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1080">
+
+      <!-- ============ CTA page (sits under the proof page; revealed by the page turn) ============ -->
+      <section id="s-cta" class="clip" data-start="9" data-duration="3" data-track-index="0">
+        <div class="cam" id="cam3" style="transform:scale(.5);transform-origin:0 0">
+          <div class="page" id="pg-cta" style="left:0">
+            <svg class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+              <defs>
+                <pattern id="ct-dots" width="26" height="26" patternUnits="userSpaceOnUse"><rect width="26" height="26" fill="#FFFDF6"/><circle class="bd-ct" cx="6.5" cy="6.5" r="7" fill="#FFD98A"/><circle class="bd-ct" cx="19.5" cy="19.5" r="7" fill="#FFD98A"/></pattern>
+              </defs>
+              <rect x="60" y="60" width="960" height="960" fill="url(#ct-dots)" stroke="#0E1726" stroke-width="10"/>
+              <polygon id="ct-burst" points="997.4,829.5 935.6,849.3 949.9,900.6 896.0,894.3 889.2,962.6 838.9,901.9 798.3,980.1 784.9,896.6 724.5,925.7 733.0,867.9 681.1,854.2 719.0,809.7 654.2,769.0 738.3,757.2 692.4,684.6 766.6,709.5 775.5,650.3 819.7,681.8 858.3,639.7 875.5,702.5 947.2,660.4 913.5,741.6 993.9,740.3 943.8,790.0" fill="#0FA3A3" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/>
+            </svg>
+            <div class="cap" id="ct-cap" data-layout-allow-overlap style="--x:60;--y:60">Next Friday…</div>
+            <div class="a" id="ct-balloon" style="--x:110;--y:140;--w:860;--h:580">
+              <svg class="full" viewBox="0 0 860 580" aria-hidden="true">
+                <path d="M510 414 L690 560 L620 398 Z" fill="#FFFDF6" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/>
+                <ellipse cx="430" cy="220" rx="420" ry="205" fill="#FFFDF6" stroke="#0E1726" stroke-width="8"/>
+                <path d="M520 417 L611 401" stroke="#FFFDF6" stroke-width="13"/>
+              </svg>
+              <div class="bal-text" style="left:calc(var(--u)*60);top:calc(var(--u)*106);width:calc(var(--u)*740)">
+                <span class="k" id="ct-l1" style="font-size:calc(var(--u)*100)">You ship.</span>
+                <span class="k" id="ct-l2" style="font-size:calc(var(--u)*100);margin-top:calc(var(--u)*6)"><span id="ct-l2a" style="display:inline-block">Pulse</span> <i id="ct-l2b" style="display:inline-block;font-size:calc(var(--u)*120)">watches.</i></span>
+              </div>
+            </div>
+            <img class="mark" id="ct-mark" src="assets/acme-mark.svg" alt="Acme" style="--x:770;--y:710;--w:120" />
+            <div class="a" id="ct-btn" data-layout-allow-overflow style="--x:110;--y:760;--w:420;--h:130">
+              <div class="btn-skew"><div class="btn-sh"></div><div class="btn-face" style="font-size:calc(var(--u)*56)">Start free</div></div>
+            </div>
+            <div class="p" id="ct-word" style="--x:112;--y:934"><span class="k" style="font-size:calc(var(--u)*40);text-transform:none;letter-spacing:-.02em;text-align:left">Acme Pulse</span></div>
+          </div>
+        </div>
+        <div class="layer" id="ct-cast" style="background:linear-gradient(90deg,rgba(14,23,38,.42),rgba(14,23,38,0) 55%);opacity:0"></div>
+      </section>
+
+      <!-- ============ HOOK: Friday 5:58 PM, a wall of dashboards ============ -->
+      <section id="s-hook" class="clip" data-start="0" data-duration="3" data-track-index="2">
+        <div class="cam" id="cam1">
+          <div class="page" id="pg-hook" style="left:0">
+            <svg class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+              <defs>
+                <pattern id="hk-dots" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="#FFFDF6"/><circle class="bd-hk" cx="6" cy="6" r="6" fill="#9FDCD9"/><circle class="bd-hk" cx="18" cy="18" r="6" fill="#9FDCD9"/></pattern>
+              </defs>
+              <rect x="60" y="60" width="960" height="960" fill="url(#hk-dots)" stroke="#0E1726" stroke-width="10"/>
+              <g id="hk-mons"></g>
+              <g id="hk-ticks"></g>
+              <circle id="hk-ring" cx="785" cy="870" r="34" fill="none" stroke="#FF5A4E" stroke-width="9" opacity="0"/>
+              <!-- thought bubbles trailing to the (off-panel) reader -->
+              <circle cx="432" cy="452" r="20" fill="#FFFDF6" stroke="#0E1726" stroke-width="7"/>
+              <circle cx="400" cy="490" r="13" fill="#FFFDF6" stroke="#0E1726" stroke-width="6"/>
+              <circle cx="378" cy="518" r="8" fill="#FFFDF6" stroke="#0E1726" stroke-width="5"/>
+            </svg>
+            <div class="a" id="hk-balloon" style="--x:250;--y:110;--w:740;--h:350">
+              <svg class="full" viewBox="0 0 740 350" aria-hidden="true"><path id="hk-cloud" d="" fill="#FFFDF6" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/></svg>
+              <div class="bal-text" style="left:calc(var(--u)*80);top:calc(var(--u)*92);width:calc(var(--u)*580)">
+                <span class="k" style="font-size:calc(var(--u)*64)">38 dashboards</span>
+                <span class="k" style="font-size:calc(var(--u)*100);line-height:.98"><i>today?!</i></span>
+              </div>
+            </div>
+            <div class="cap" id="hk-cap" style="--x:60;--y:60">Friday, 5:58 PM…</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WORLD: splash page + proof page side by side; the camera travels across them ============ -->
+      <section id="s-world" class="clip" data-start="2.5" data-duration="7.1" data-track-index="1">
+        <div class="layer" id="w-mask">
+          <div class="layer" id="w-shake">
+            <div class="cam" id="cam2">
+
+              <!-- ---- splash page ---- -->
+              <div class="page" id="pg-splash" style="left:0">
+                <svg class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+                  <defs>
+                    <pattern id="sp-dots" width="26" height="26" patternUnits="userSpaceOnUse"><rect width="26" height="26" fill="#FFFDF6"/><circle class="bd-sp" cx="6.5" cy="6.5" r="7" fill="#FFD98A"/><circle class="bd-sp" cx="19.5" cy="19.5" r="7" fill="#FFD98A"/></pattern>
+                    <clipPath id="sp-clip"><rect x="65" y="65" width="950" height="950"/></clipPath>
+                  </defs>
+                  <rect x="60" y="60" width="960" height="960" fill="url(#sp-dots)"/>
+                  <g clip-path="url(#sp-clip)">
+                    <g id="sp-lines"></g>
+                    <polygon id="sp-burst1" points="975.7,601.2 856.9,660.7 876.9,764.8 770.2,783.1 767.8,925.6 630.5,823.5 580.1,1011.5 496.8,847.2 388.8,936.9 348.7,826.6 242.1,822.0 260.8,704.9 99.9,680.6 246.6,564.9 79.7,475.3 239.6,425.5 196.9,311.1 302.7,289.3 325.7,177.2 444.8,242.0 500.1,70.0 581.2,246.5 700.8,118.0 724.5,263.5 834.6,261.1 833.5,366.6 955.5,407.3 841.8,514.4" fill="#FF5A4E" stroke="#0E1726" stroke-width="10" stroke-linejoin="round"/>
+                    <polygon id="sp-burst2" points="840.0,540.0 775.4,603.1 779.2,678.1 710.2,710.2 692.7,804.4 595.4,746.6 540.0,862.6 482.3,755.4 395.2,790.8 364.9,715.1 297.8,679.8 314.9,600.3 225.0,540.0 335.6,485.2 265.5,381.5 376.6,376.6 399.4,296.5 475.8,300.3 540.0,252.7 598.2,322.8 700.8,261.4 690.6,389.4 806.6,386.1 770.8,478.2" fill="#F4B740" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/>
+                  </g>
+                  <rect x="60" y="60" width="960" height="960" fill="none" stroke="#0E1726" stroke-width="10"/>
+                </svg>
+                <img class="mark" id="sp-mark" src="assets/acme-mark.svg" alt="Acme" style="--x:460;--y:318;--w:160;box-shadow:0 0 0 calc(var(--u)*8) var(--ink)" />
+                <div class="a" id="sp-fx" style="--x:140;--y:520;--w:800;--h:240"><span class="fx" style="font-size:calc(var(--u)*236);transform:rotate(-6deg)">Pulse!</span></div>
+                <div class="cap" id="sp-cap" style="--x:60;--y:60">Enter… Acme Pulse</div>
+              </div>
+
+              <!-- ---- proof page ---- -->
+              <div class="page" id="pg-proof" style="left:2160px">
+                <!-- blue-pencil layout of the panels that are not inked yet -->
+                <svg class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+                  <g fill="none" stroke="#86BFE6" stroke-width="3" stroke-linecap="round">
+                    <rect x="60" y="550" width="470" height="470" stroke-dasharray="16 9"/>
+                    <rect x="64" y="554" width="463" height="463" stroke-opacity=".45"/>
+                    <rect x="550" y="550" width="470" height="470" stroke-dasharray="16 9"/>
+                    <rect x="546" y="547" width="476" height="476" stroke-opacity=".45"/>
+                    <ellipse cx="295" cy="700" rx="200" ry="135" stroke-dasharray="10 8"/>
+                    <rect x="248" y="895" width="100" height="100" rx="24" stroke-dasharray="10 8"/>
+                    <rect x="600" y="710" width="360" height="140" rx="22" stroke-dasharray="10 8"/>
+                    <path d="M80 1000 L510 570 M570 1000 L1000 570" stroke-opacity=".3"/>
+                  </g>
+                </svg>
+
+                <!-- panel A: the halftone chart -->
+                <div class="panel a" id="pA" style="--x:60;--y:60;--w:960;--h:470">
+                  <svg class="full" viewBox="0 0 960 470" aria-hidden="true">
+                    <defs>
+                      <pattern id="pa-dots" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#FFFDF6"/><circle class="bd-pa" cx="5" cy="5" r="5" fill="#9FDCD9"/><circle class="bd-pa" cx="15" cy="15" r="5" fill="#9FDCD9"/></pattern>
+                    </defs>
+                    <rect width="960" height="470" fill="url(#pa-dots)"/>
+                    <rect x="40" y="90" width="880" height="350" rx="16" fill="#FFFDF6" stroke="#0E1726" stroke-width="8"/>
+                    <g stroke="#0E1726" stroke-opacity=".16" stroke-width="2" stroke-dasharray="4 8"><line x1="70" y1="180" x2="890" y2="180"/><line x1="70" y1="270" x2="890" y2="270"/><line x1="70" y1="360" x2="890" y2="360"/></g>
+                  </svg>
+                  <div class="p" style="--x:66;--y:104"><span class="k" style="font-size:calc(var(--u)*17);letter-spacing:.06em;color:#33415C;transform:none;text-align:left">Checkout conversion</span></div>
+                  <div class="layer" id="pa-a1"><svg class="full" viewBox="0 0 960 470" aria-hidden="true">
+                    <defs><pattern id="ht-teal" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="4.1" fill="#0FA3A3"/><circle cx="10.5" cy="10.5" r="4.1" fill="#0FA3A3"/></pattern></defs>
+                    <polygon id="pa-poly-left" points="" fill="url(#ht-teal)"/>
+                  </svg></div>
+                  <div class="layer" id="pa-a1c"><svg class="full" viewBox="0 0 960 470" aria-hidden="true">
+                    <defs><pattern id="ht-coral" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="2.3" fill="#FF5A4E"/><circle cx="10.5" cy="10.5" r="2.3" fill="#FF5A4E"/></pattern></defs>
+                    <polygon id="pa-poly-right" points="" fill="url(#ht-coral)"/>
+                  </svg></div>
+                  <div class="layer" id="pa-a2"><svg class="full" viewBox="0 0 960 470" aria-hidden="true">
+                    <defs><pattern id="ht-teal2" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="4.1" fill="#0FA3A3"/><circle cx="10.5" cy="10.5" r="4.1" fill="#0FA3A3"/></pattern></defs>
+                    <polygon id="pa-poly-rec" points="" fill="url(#ht-teal2)"/>
+                  </svg></div>
+                  <svg class="full" viewBox="0 0 960 470" aria-hidden="true">
+                    <line x1="70" y1="420" x2="890" y2="420" stroke="#0E1726" stroke-width="5"/>
+                    <line x1="580" y1="100" x2="580" y2="430" stroke="#0E1726" stroke-width="4" stroke-dasharray="12 10"/>
+                    <polyline id="pa-line" points="" fill="none" stroke="#0E1726" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+                    <circle id="pa-anom" cx="0" cy="0" r="12" fill="#FF5A4E" stroke="#0E1726" stroke-width="5"/>
+                    <circle id="pa-anom-ring" cx="0" cy="0" r="14" fill="none" stroke="#FF5A4E" stroke-width="6"/>
+                    <g id="pa-ok"><circle id="pa-ok-c" cx="0" cy="0" r="27" fill="#0FA3A3" stroke="#0E1726" stroke-width="6"/><path id="pa-ok-p" d="" fill="none" stroke="#FFFDF6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+                  </svg>
+                  <div class="a" id="pa-tag" style="--x:548;--y:94;--w:64;--h:26;background:var(--ink);border-radius:calc(var(--u)*5);display:flex;align-items:center;justify-content:center;font:800 calc(var(--u)*15)/1 var(--sans);color:#fff">#2231</div>
+                  <div class="a" id="pa-zap" style="--x:635;--y:92;--w:220;--h:200">
+                    <svg class="full" viewBox="0 0 220 200" aria-hidden="true"><polygon id="pa-zap-poly" points="" fill="#F4B740" stroke="#0E1726" stroke-width="6" stroke-linejoin="round"/></svg>
+                    <div class="layer" style="display:flex;align-items:center;justify-content:center"><span class="fx" style="font-size:calc(var(--u)*70);-webkit-text-stroke:calc(var(--u)*5) var(--ink);text-shadow:calc(var(--u)*5) calc(var(--u)*5) 0 var(--ink);transform:rotate(-9deg)">Zap!</span></div>
+                  </div>
+                  <svg class="full" viewBox="0 0 960 470" aria-hidden="true"><rect x="5" y="5" width="950" height="460" fill="none" stroke="#0E1726" stroke-width="10"/></svg>
+                  <div class="cap" id="pa-cap" style="--x:0;--y:0;font-size:calc(var(--u)*26)">09:42 — deploy #2231 goes out…</div>
+                </div>
+
+                <!-- panel B: the mark speaks -->
+                <div class="panel a" id="pB" style="--x:60;--y:550;--w:470;--h:470">
+                  <svg class="full" viewBox="0 0 470 470" aria-hidden="true">
+                    <defs><pattern id="pb-dots" width="22" height="22" patternUnits="userSpaceOnUse"><rect width="22" height="22" fill="#FFFDF6"/><circle class="bd-pb" cx="5.5" cy="5.5" r="6" fill="#FFC2BC"/><circle class="bd-pb" cx="16.5" cy="16.5" r="6" fill="#FFC2BC"/></pattern></defs>
+                    <rect width="470" height="470" fill="url(#pb-dots)"/>
+                  </svg>
+                  <div class="a" id="pb-balloon" style="--x:20;--y:18;--w:430;--h:330">
+                    <svg class="full" viewBox="0 0 430 330" aria-hidden="true">
+                      <path d="M170 282 L205 322 L240 285 Z" fill="#FFFDF6" stroke="#0E1726" stroke-width="8" stroke-linejoin="round"/>
+                      <ellipse cx="215" cy="150" rx="205" ry="142" fill="#FFFDF6" stroke="#0E1726" stroke-width="8"/>
+                      <path d="M178 286 L233 288" stroke="#FFFDF6" stroke-width="13"/>
+                    </svg>
+                    <div class="bal-text" style="left:calc(var(--u)*40);top:calc(var(--u)*60);width:calc(var(--u)*350)">
+                      <span class="k" id="pb-t1" style="font-size:calc(var(--u)*24)">Checkout conversion</span>
+                      <span id="pb-t2" style="display:block"><span class="k" style="font-size:calc(var(--u)*116);line-height:.98;color:var(--coral);-webkit-text-stroke:calc(var(--u)*3) var(--ink);paint-order:stroke fill;text-shadow:calc(var(--u)*5) calc(var(--u)*5) 0 var(--ink)">−18%</span></span>
+                      <span class="k" id="pb-t3" style="font-size:calc(var(--u)*27);margin-top:calc(var(--u)*6)">since 09:42</span>
+                    </div>
+                  </div>
+                  <img class="mark" id="pb-mark" src="assets/acme-mark.svg" alt="Acme" style="--x:185;--y:345;--w:110" />
+                  <div class="ring" id="pb-ripple" style="left:calc(var(--u)*262);top:calc(var(--u)*382.6);width:calc(var(--u)*28);height:calc(var(--u)*28);opacity:0"></div>
+                  <svg class="full" viewBox="0 0 470 470" aria-hidden="true"><rect x="5" y="5" width="460" height="460" fill="none" stroke="#0E1726" stroke-width="10"/></svg>
+                </div>
+
+                <!-- panel C: your call -->
+                <div class="panel a" id="pC" style="--x:550;--y:550;--w:470;--h:470">
+                  <svg class="full" viewBox="0 0 470 470" aria-hidden="true"><rect width="470" height="470" fill="#FFFDF6"/></svg>
+                  <div class="a" id="pc-btn" style="--x:50;--y:160;--w:360;--h:140">
+                    <div class="btn-skew"><div class="btn-sh"></div><div class="btn-face" id="pc-face" style="font-size:calc(var(--u)*54)">Roll back!</div></div>
+                  </div>
+                  <div class="a" id="pc-click" style="--x:262;--y:74;--w:200;--h:76"><span class="fx" style="font-size:calc(var(--u)*62);color:var(--amber);-webkit-text-stroke:calc(var(--u)*5) var(--ink);text-shadow:calc(var(--u)*5) calc(var(--u)*5) 0 var(--ink);transform:rotate(8deg)">Click!</span></div>
+                  <div class="a" id="pc-hand" data-layout-allow-overflow style="--x:232;--y:273.1;--w:170;--h:272">
+                    <div class="layer" style="transform:rotate(-25deg);transform-origin:calc(var(--u)*68) calc(var(--u)*11.9)">
+                      <svg class="full" viewBox="0 0 200 320" aria-hidden="true">
+                        <defs><pattern id="skin" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#FFEFE9"/><circle cx="3" cy="3" r="2.7" fill="#FFB9AE"/><circle cx="9" cy="9" r="2.7" fill="#FFB9AE"/></pattern></defs>
+                        <path d="M40 150 Q40 118 70 118 L160 118 Q190 118 190 150 L190 232 Q190 262 160 262 L70 262 Q40 262 40 232 Z" fill="url(#skin)" stroke="#0E1726" stroke-width="7" stroke-linejoin="round"/>
+                        <path d="M58 136 L58 40 Q58 14 80 14 Q102 14 102 40 L102 136" fill="url(#skin)" stroke="#0E1726" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+                        <path d="M68 46 Q80 33 92 46 L92 62 Q80 69 68 62 Z" fill="#FFFDF6" stroke="#0E1726" stroke-width="4" stroke-linejoin="round"/>
+                        <path d="M104 150 Q125 134 147 150 M147 150 Q168 134 188 150 M114 192 Q150 201 186 192 M114 226 Q150 235 186 226 M44 198 Q74 186 104 206" fill="none" stroke="#0E1726" stroke-width="5" stroke-linecap="round"/>
+                        <path d="M48 256 L184 256 L188 320 L44 320 Z" fill="#0FA3A3" stroke="#0E1726" stroke-width="7" stroke-linejoin="round"/>
+                        <path d="M47 278 L185 278" stroke="#0E1726" stroke-width="5"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <svg class="full" viewBox="0 0 470 470" aria-hidden="true"><rect x="5" y="5" width="460" height="460" fill="none" stroke="#0E1726" stroke-width="10"/></svg>
+                  <div class="cap white" id="pc-cap" style="--x:0;--y:0">Your call!</div>
+                </div>
+
+                <!-- the anomaly dot that travels from the chart into the mark -->
+                <div class="dot" id="pr-carry" style="width:calc(var(--u)*28);height:calc(var(--u)*28);opacity:0"></div>
+                <div class="layer" id="pr-shade" style="background:var(--ink);opacity:0"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ink outline of the burst-shaped iris -->
+      <section id="s-iris" class="clip" data-start="2.5" data-duration="0.55" data-track-index="3">
+        <svg class="full" viewBox="0 0 1080 1080" aria-hidden="true"><polygon id="iris-line" points="" fill="none" stroke="#0E1726" stroke-width="12" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+      </section>
+
+      <!-- comic speed lines for the whip pan -->
+      <section id="s-speed" class="clip" data-start="4.25" data-duration="0.5" data-track-index="4">
+        <svg class="full" viewBox="0 0 1080 1080" aria-hidden="true"><g id="speed-g"></g></svg>
+      </section>
+
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <filter id="hblur" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB"><feGaussianBlur id="hblur-g" stdDeviation="0 0"/></filter>
+      </svg>
+    </div>
+
+    <script>
+      (function () {
+        const NS = "http://www.w3.org/2000/svg";
+        const $ = (s) => document.querySelector(s);
+        const $$ = (s) => Array.from(document.querySelectorAll(s));
+        const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+        const f = (n) => n.toFixed(1);
+        const pts = (arr) => arr.map((p) => f(p[0]) + "," + f(p[1])).join(" ");
+
+        // ---------- HOOK: monitor wall ----------
+        const MON = [
+          { x: 110, y: 560, w: 250, h: 160, pts: "130,690 180,650 230,670 280,620 340,630" },
+          { x: 410, y: 540, w: 250, h: 160, pts: "430,670 480,640 530,660 580,600 640,610" },
+          { x: 710, y: 560, w: 250, h: 160, pts: "730,650 780,670 830,630 880,640 940,620" },
+          { x: 160, y: 790, w: 250, h: 160, pts: "180,900 230,880 280,890 330,860 390,870" },
+          { x: 420, y: 820, w: 220, h: 140, pts: "440,920 480,900 520,910 560,880 620,890" },
+          { x: 660, y: 790, w: 250, h: 160, pts: "680,835 730,840 780,850 830,880 890,900", coral: true },
+        ];
+        const monG = $("#hk-mons"), tickG = $("#hk-ticks");
+        MON.forEach((m, i) => {
+          const g = mk("g", { id: "hk-m" + i }, monG);
+          mk("rect", { x: m.x + m.w / 2 - 18, y: m.y + m.h, width: 36, height: 22, fill: "#0E1726" }, g);
+          mk("rect", { x: m.x, y: m.y, width: m.w, height: m.h, rx: 10, fill: "#FFFDF6", stroke: "#0E1726", "stroke-width": 7 }, g);
+          mk("rect", { x: m.x + 16, y: m.y + 16, width: 64 + (i % 3) * 14, height: 9, rx: 4.5, fill: "#0E1726", opacity: 0.75 }, g);
+          mk("polyline", { id: "hk-l" + i, points: m.pts, fill: "none", stroke: m.coral ? "#FF5A4E" : "#0FA3A3", "stroke-width": 7, "stroke-linejoin": "round", "stroke-linecap": "round" }, g);
+          if (!m.coral) {
+            const cx = m.x + m.w - 62, cy = m.y + 50;
+            const d = `M${cx - 26} ${cy} L${cx - 6} ${cy + 22} L${cx + 30} ${cy - 24}`;
+            mk("path", { class: "hk-tick", d, fill: "none", stroke: "#FFFDF6", "stroke-width": 22, "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-dasharray": 110, "stroke-dashoffset": 110 }, tickG);
+            mk("path", { class: "hk-tick", d, fill: "none", stroke: "#0E1726", "stroke-width": 11, "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-dasharray": 110, "stroke-dashoffset": 110 }, tickG);
+          }
+        });
+
+        // ---------- HOOK: scalloped thought balloon ----------
+        (function () {
+          const cx = 370, cy = 175, rx = 338, ry = 143, n = 20, P = [];
+          for (let i = 0; i < n; i++) { const a = -Math.PI / 2 + (i * 2 * Math.PI) / n; P.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); }
+          let d = `M${f(P[0][0])} ${f(P[0][1])}`;
+          for (let i = 0; i < n; i++) { const p = P[i], q = P[(i + 1) % n]; const r = Math.hypot(q[0] - p[0], q[1] - p[1]) * 0.6; d += ` A${f(r)} ${f(r)} 0 0 1 ${f(q[0])} ${f(q[1])}`; }
+          $("#hk-cloud").setAttribute("d", d + " Z");
+        })();
+
+        // ---------- SPLASH: radial action lines ----------
+        (function () {
+          const g = $("#sp-lines"), cx = 540, cy = 540, n = 44;
+          for (let i = 0; i < n; i++) {
+            const a = (i * 2 * Math.PI) / n + (((i * 29) % 7) - 3) * 0.012;
+            const rin = 380 + ((i * 37) % 11) * 13, rout = 900, w = 0.017 + ((i * 13) % 5) * 0.004;
+            mk("polygon", { points: pts([[cx + Math.cos(a) * rin, cy + Math.sin(a) * rin], [cx + Math.cos(a - w) * rout, cy + Math.sin(a - w) * rout], [cx + Math.cos(a + w) * rout, cy + Math.sin(a + w) * rout]]), fill: "#0E1726" }, g);
+          }
+        })();
+
+        // ---------- bursts (index-derived jitter, no randomness) ----------
+        function burst(cx, cy, R, rin, n, rot, seed) {
+          const out = [];
+          for (let i = 0; i < n * 2; i++) {
+            const k = i % 2 === 0 ? 1 - ((i * 37 + seed) % 9) / 100 : rin + ((i * 53 + seed) % 7) / 100;
+            const a = rot + (i * Math.PI) / n;
+            out.push([cx + Math.cos(a) * R * k, cy + Math.sin(a) * R * k]);
+          }
+          return out;
+        }
+        $("#pa-zap-poly").setAttribute("points", pts(burst(110, 100, 102, 0.6, 12, -0.2, 3)));
+
+        // ---------- IRIS: burst-shaped opening from the unchecked monitor ----------
+        const IO = { x: 776.25, y: 865.5 }; // coral monitor centre in frame px when the hook camera has settled
+        const IRIS = burst(IO.x, IO.y, 1900, 0.65, 14, 0.1, 5);
+        const irisPoly = (k) => "polygon(" + IRIS.map((p) => f(IO.x + (p[0] - IO.x) * k) + "px " + f(IO.y + (p[1] - IO.y) * k) + "px").join(", ") + ")";
+        $("#iris-line").setAttribute("points", pts(IRIS));
+
+        // ---------- SPEED LINES ----------
+        (function () {
+          const g = $("#speed-g");
+          for (let i = 0; i < 34; i++) {
+            const y = 16 + i * 32 + ((i * 17) % 9) * 2, x = ((i * 53) % 520) - 160, len = 260 + ((i * 97) % 440);
+            mk("line", { x1: x, y1: y, x2: x + len, y2: y, stroke: "#0E1726", "stroke-width": 3 + (i % 3) * 2.5, "stroke-linecap": "round" }, g);
+          }
+        })();
+
+        // ---------- HALFTONE CHART data (deterministic) ----------
+        const XS = [];
+        for (let x = 70; x <= 570; x += 20) XS.push(x);
+        XS.push(580, 610);
+        for (let x = 630; x <= 890; x += 20) XS.push(x);
+        const pre = (i) => 198 + 13 * Math.sin(i * 0.9) + 7 * Math.sin(i * 2.3 + 1);
+        const post = (i) => 312 + 9 * Math.sin(i * 1.3) + 6 * Math.sin(i * 2.9);
+        const rec = (i) => 201 + 11 * Math.sin(i * 0.9 + 0.4) + 6 * Math.sin(i * 2.1);
+        const DROP = XS.map((x, i) => [x, x <= 580 ? pre(i) : post(i)]);
+        const REC = XS.map((x, i) => [x, x <= 580 ? pre(i) : rec(i)]);
+        const iDeploy = XS.indexOf(580), iPlunge = XS.indexOf(610), iAnom = XS.indexOf(650);
+        $("#pa-line").setAttribute("points", pts(DROP));
+        $("#pa-poly-left").setAttribute("points", pts([...DROP.slice(0, iDeploy + 1), [580, 420], [70, 420]]));
+        $("#pa-poly-right").setAttribute("points", pts([[580, 420], ...DROP.slice(iDeploy), [890, 420]]));
+        $("#pa-poly-rec").setAttribute("points", pts([[580, 420], ...REC.slice(iDeploy), [890, 420]]));
+        let LEN = 0; const cum = [0];
+        for (let i = 1; i < DROP.length; i++) { LEN += Math.hypot(DROP[i][0] - DROP[i - 1][0], DROP[i][1] - DROP[i - 1][1]); cum.push(LEN); }
+        const line = $("#pa-line");
+        line.setAttribute("stroke-dasharray", f(LEN + 2));
+        line.setAttribute("stroke-dashoffset", f(LEN + 2));
+        const A = DROP[iAnom];
+        ["#pa-anom", "#pa-anom-ring"].forEach((s) => { $(s).setAttribute("cx", f(A[0])); $(s).setAttribute("cy", f(A[1])); });
+        const OKP = [A[0], REC[iAnom][1] - 52];
+        $("#pa-ok-c").setAttribute("cx", f(OKP[0])); $("#pa-ok-c").setAttribute("cy", f(OKP[1]));
+        $("#pa-ok-p").setAttribute("d", `M${f(OKP[0] - 12)} ${f(OKP[1] + 1)} L${f(OKP[0] - 3)} ${f(OKP[1] + 10)} L${f(OKP[0] + 13)} ${f(OKP[1] - 10)}`);
+        // carried dot starts on the anomaly (page units: panel A sits at 60,60)
+        const carry = $("#pr-carry");
+        const C0 = { x: 60 + A[0], y: 60 + A[1] }, C1 = { x: 60 + 185 + (110 * 53) / 64, y: 550 + 345 + (110 * 30) / 64 };
+        carry.style.left = `calc(var(--u)*${f(C0.x - 14)})`;
+        carry.style.top = `calc(var(--u)*${f(C0.y - 14)})`;
+
+        // ---------- camera ----------
+        const OX = 2160; // proof page offset inside the world, px
+        const cam = (px, py, s, ox) => ({ x: 540 - (ox + px * 2) * s, y: 540 - py * 2 * s, scale: s });
+        const S0 = cam(540, 540, 0.5, 0), A0 = cam(540, 460, 0.56, OX), A1 = cam(505, 380, 0.62, OX);
+        const B = cam(295, 785, 1.0, OX), Cc = cam(785, 785, 1.0, OX), P = cam(540, 540, 0.5, OX);
+
+        // ---------- initial states ----------
+        gsap.set(["#cam1", "#cam2"], { transformOrigin: "0 0", force3D: false });
+        gsap.set("#cam1", { x: 0, y: 0, scale: 0.5 });
+        gsap.set("#cam2", { x: S0.x, y: S0.y, scale: S0.scale });
+        gsap.set("#w-mask", { clipPath: irisPoly(0.03) });
+        gsap.set("#iris-line", { scale: 0.03, svgOrigin: IO.x + " " + IO.y });
+        gsap.set("#hk-ring", { scale: 0.6, svgOrigin: "785 870" });
+        MON.forEach((m, i) => gsap.set("#hk-m" + i, { svgOrigin: `${m.x + m.w / 2} ${m.y + m.h / 2}` }));
+        gsap.set("#sp-burst1", { scale: 0, svgOrigin: "540 540" });
+        gsap.set("#sp-burst2", { scale: 0, rotation: -14, svgOrigin: "540 560" });
+        gsap.set("#sp-lines", { scale: 0.7, opacity: 0, svgOrigin: "540 540" });
+        gsap.set("#sp-mark", { scale: 0 });
+        gsap.set("#sp-fx", { scale: 0.2, opacity: 0 });
+        gsap.set("#sp-cap", { y: -60, rotation: -4, opacity: 0 });
+        gsap.set("#speed-g", { x: 420, opacity: 0 });
+        gsap.set("#pa-cap", { x: -60, opacity: 0 });
+        gsap.set(["#pa-a1", "#pa-a1c"], { clipPath: "inset(0% 92.7% 0% 0%)" });
+        gsap.set("#pa-a2", { clipPath: "inset(0% 39.6% 0% 0%)" });
+        gsap.set("#pa-zap", { scale: 0, rotation: -18, transformOrigin: "50% 50%" });
+        gsap.set("#pa-anom", { scale: 0, svgOrigin: `${f(A[0])} ${f(A[1])}` });
+        gsap.set("#pa-anom-ring", { scale: 1, opacity: 0, svgOrigin: `${f(A[0])} ${f(A[1])}` });
+        gsap.set("#pa-ok", { scale: 0, svgOrigin: `${f(OKP[0])} ${f(OKP[1])}` });
+        gsap.set(["#pB", "#pC"], { opacity: 0, scale: 1.15, rotation: 2, transformOrigin: "50% 50%" });
+        gsap.set("#pC", { rotation: -2 });
+        gsap.set("#pb-mark", { scale: 0 });
+        gsap.set("#pb-balloon", { scale: 0, transformOrigin: "47.7% 97.6%" });
+        gsap.set(["#pb-t1", "#pb-t3"], { opacity: 0 });
+        gsap.set("#pb-t2", { opacity: 0, scale: 1.7 });
+        gsap.set("#pc-cap", { y: -40, rotation: -4, opacity: 0 });
+        gsap.set("#pc-hand", { x: 212, y: 453, transformOrigin: "40% 4.4%" });
+        gsap.set("#pc-click", { scale: 0, transformOrigin: "50% 50%" });
+        gsap.set("#pg-proof", { transformOrigin: "0% 50%", transformPerspective: 6000 });
+        gsap.set("#ct-balloon", { scale: 0, transformOrigin: "80.2% 96.6%" });
+        gsap.set(["#ct-l1", "#ct-l2a"], { opacity: 0, y: 30 });
+        gsap.set("#ct-l2b", { opacity: 0, scale: 1.35, rotation: -5, transformOrigin: "50% 60%" });
+        gsap.set("#ct-burst", { scale: 0, rotation: -140, svgOrigin: "825 810" });
+        gsap.set("#ct-mark", { scale: 0 });
+        gsap.set("#ct-btn", { y: -2000 });
+        gsap.set("#ct-word", { x: -60, opacity: 0 });
+
+        // ---------- timeline ----------
+        const tl = gsap.timeline({ paused: true });
+        const FR = 1 / 30;
+        function shake(el, t, amp, frames) {
+          const seq = [[1, -0.7], [-0.85, 0.6], [0.6, 0.9], [-0.45, -0.5]];
+          for (let i = 0; i < frames; i++) tl.set(el, { x: seq[i % 4][0] * amp, y: seq[i % 4][1] * amp }, t + i * FR);
+          tl.set(el, { x: 0, y: 0 }, t + frames * FR);
+        }
+        function breathe(sel, r1, t0, t1) {
+          const n = Math.floor((t1 - t0) / 0.5);
+          if (n < 1) return;
+          tl.to(sel, { attr: { r: r1 }, duration: 0.25, ease: "sine.inOut", yoyo: true, repeat: n * 2 - 1 }, t0);
+        }
+        function bang(el, t, peak) {
+          tl.to(el, { scale: peak || 1.1, rotation: 0, duration: 0.18, ease: "power2.out" }, t);
+          tl.to(el, { scale: 1, duration: 0.12, ease: "power1.inOut" }, t + 0.18);
+        }
+
+        // HOOK 0–3 s: the first 0.6 s hold still (poster)
+        breathe(".bd-hk", 7.2, 0.6, 2.5);
+        tl.to("#cam1", { x: -48, y: -48, scale: 0.525, duration: 1.9, ease: "sine.inOut" }, 0.6);
+        const ticks = $$(".hk-tick");
+        [0, 1, 2, 3, 4].forEach((mi, j) => {
+          const t = 0.72 + j * 0.25;
+          tl.to([ticks[j * 2], ticks[j * 2 + 1]], { attr: { "stroke-dashoffset": 0 }, duration: 0.16, ease: "power2.out" }, t);
+          tl.fromTo("#hk-m" + mi, { scale: 1.07 }, { scale: 1, duration: 0.22, ease: "back.out(2)", immediateRender: false }, t);
+        });
+        tl.to("#hk-l5", { attr: { points: "680,835 730,840 780,864 830,918 890,938" }, duration: 0.45, ease: "power2.in" }, 1.85);
+        tl.set("#hk-ring", { opacity: 1 }, 2.18);
+        tl.to("#hk-ring", { scale: 2.5, opacity: 0, duration: 0.34, ease: "power2.out" }, 2.2);
+        tl.to("#hk-m5", { rotation: 2.5, duration: 0.05, ease: "none" }, 2.2);
+        tl.to("#hk-m5", { rotation: -2.5, duration: 0.07, ease: "none" }, 2.25);
+        tl.to("#hk-m5", { rotation: 0, duration: 0.06, ease: "none" }, 2.32);
+
+        // IRIS 2.5–3.0: a burst-shaped window opens from the unchecked monitor onto the splash page
+        tl.to("#w-mask", { clipPath: irisPoly(1), duration: 0.5, ease: "power3.in" }, 2.5);
+        tl.to("#iris-line", { scale: 1, duration: 0.5, ease: "power3.in" }, 2.5);
+        tl.set("#w-mask", { clipPath: "none" }, 3.02);
+
+        // REVEAL 3.0–4.3: splash page
+        bang("#sp-burst1", 3.02);
+        shake("#w-shake", 3.02, 8, 4);
+        tl.to("#sp-lines", { scale: 1, opacity: 1, duration: 0.24, ease: "expo.out" }, 3.1);
+        bang("#sp-burst2", 3.14);
+        tl.to("#sp-mark", { scale: 1, duration: 0.3, ease: "back.out(2.2)" }, 3.26);
+        tl.to("#sp-fx", { scale: 1.08, opacity: 1, duration: 0.14, ease: "power3.out" }, 3.4);
+        tl.to("#sp-fx", { scale: 1, duration: 0.1, ease: "power1.inOut" }, 3.54);
+        tl.set("#sp-fx", { x: 14 }, 3.46); tl.set("#sp-fx", { x: -10 }, 3.46 + FR); tl.set("#sp-fx", { x: 0 }, 3.46 + 2 * FR);
+        tl.to("#sp-cap", { y: 0, rotation: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 3.6);
+        breathe(".bd-sp", 8.4, 3.3, 4.3);
+
+        // WHIP PAN 4.3–4.62: speed lines + horizontal-only blur
+        tl.to("#cam2", { x: A0.x, y: A0.y, scale: A0.scale, duration: 0.32, ease: "power4.inOut" }, 4.3);
+        tl.set("#w-shake", { filter: "url(#hblur)" }, 4.3);
+        tl.to("#hblur-g", { attr: { stdDeviation: "70 0" }, duration: 0.16, ease: "power2.in" }, 4.3);
+        tl.to("#hblur-g", { attr: { stdDeviation: "0 0" }, duration: 0.16, ease: "power2.out" }, 4.46);
+        tl.set("#w-shake", { filter: "none" }, 4.63);
+        tl.to("#speed-g", { opacity: 1, duration: 0.07 }, 4.28);
+        tl.to("#speed-g", { x: -420, duration: 0.42, ease: "none" }, 4.28);
+        tl.to("#speed-g", { opacity: 0, duration: 0.14 }, 4.58);
+
+        // PROOF a 4.62–5.95: the halftone chart prints; ZAP! on the drop
+        tl.to("#pa-cap", { x: 0, opacity: 1, duration: 0.25, ease: "power3.out" }, 4.66);
+        tl.to("#cam2", { x: A1.x, y: A1.y, scale: A1.scale, duration: 1.28, ease: "power1.inOut" }, 4.65);
+        const T_PRINT = 4.72, D_PRINT = 0.8;
+        tl.to("#pa-line", { attr: { "stroke-dashoffset": 0 }, duration: D_PRINT, ease: "none" }, T_PRINT);
+        tl.to(["#pa-a1", "#pa-a1c"], { clipPath: "inset(0% 0% 0% 0%)", duration: D_PRINT, ease: "steps(12)" }, T_PRINT);
+        tl.set("#pa-line", { attr: { "stroke-dasharray": "none" } }, T_PRINT + D_PRINT + 0.02);
+        const T_ZAP = T_PRINT + D_PRINT * (cum[iPlunge] / LEN);
+        bang("#pa-zap", T_ZAP, 1.12);
+        shake("#w-shake", T_ZAP, 8, 4);
+        breathe(".bd-pa", 6.2, 4.65, 6.9);
+        tl.to("#pa-anom", { scale: 1, duration: 0.2, ease: "back.out(3)" }, 5.55);
+        tl.set("#pa-anom-ring", { opacity: 1 }, 5.62);
+        tl.to("#pa-anom-ring", { scale: 3.2, opacity: 0, duration: 0.3, ease: "power2.out" }, 5.63);
+
+        // OBJECT CARRY 5.95–6.4: the anomaly dot travels into the mark's own dot; camera tilts down
+        tl.set("#pa-anom", { opacity: 0 }, 5.95);
+        tl.set("#pr-carry", { opacity: 1 }, 5.95);
+        tl.to("#pr-carry", { x: (C1.x - C0.x) * 2, duration: 0.45, ease: "power1.inOut" }, 5.95);
+        tl.to("#pr-carry", { y: (C1.y - C0.y) * 2, duration: 0.45, ease: "power2.in" }, 5.95);
+        tl.to("#pr-carry", { scale: 1.35, duration: 0.2, ease: "power1.out" }, 5.95);
+        tl.to("#pr-carry", { scale: 1, duration: 0.25, ease: "power1.in" }, 6.15);
+        tl.to("#cam2", { x: B.x, y: B.y, scale: B.scale, duration: 0.5, ease: "power2.inOut" }, 5.94);
+        tl.to("#pB", { opacity: 1, duration: 0.06 }, 5.98);
+        tl.to("#pB", { scale: 1, rotation: 0, duration: 0.25, ease: "back.out(2)" }, 5.98);
+        tl.to("#pb-mark", { scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 6.12);
+        tl.to("#pr-carry", { opacity: 0, duration: 0.06 }, 6.4);
+        tl.fromTo("#pb-mark", { scale: 1 }, { scale: 1.12, duration: 0.07, ease: "power2.out", immediateRender: false }, 6.4);
+        tl.to("#pb-mark", { scale: 1, duration: 0.16, ease: "power2.inOut" }, 6.48);
+        tl.fromTo("#pb-ripple", { opacity: 1, scale: 1 }, { opacity: 0, scale: 2.8, duration: 0.3, ease: "power2.out", immediateRender: false }, 6.4);
+
+        // PROOF b 6.45–7.3: the mark speaks, then a freeze
+        tl.to("#pb-balloon", { scale: 1, duration: 0.3, ease: "back.out(1.7)" }, 6.46);
+        tl.fromTo("#pb-t1", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out", immediateRender: false }, 6.6);
+        tl.to("#pb-t2", { opacity: 1, scale: 1, duration: 0.18, ease: "power4.out" }, 6.68);
+        tl.set("#pb-t2", { x: 10 }, 6.86); tl.set("#pb-t2", { x: -8 }, 6.86 + FR); tl.set("#pb-t2", { x: 0 }, 6.86 + 2 * FR);
+        tl.fromTo("#pb-t3", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.15, ease: "power2.out", immediateRender: false }, 6.8);
+        breathe(".bd-pb", 7.2, 6.2, 6.7);
+
+        // BEAT CUT 7.3: hard cut to panel C; a hand presses ROLL BACK!
+        tl.set("#cam2", { x: Cc.x, y: Cc.y, scale: Cc.scale }, 7.3);
+        tl.set("#pC", { opacity: 1 }, 7.3);
+        tl.to("#pC", { scale: 1, rotation: 0, duration: 0.25, ease: "back.out(2)" }, 7.3);
+        tl.to("#pc-cap", { y: 0, rotation: 0, opacity: 1, duration: 0.22, ease: "power3.out" }, 7.36);
+        tl.to("#pc-hand", { x: 0, y: 0, duration: 0.38, ease: "power3.out" }, 7.42);
+        tl.to("#pc-hand", { x: 20, y: 20, scale: 0.94, duration: 0.07, ease: "power2.in" }, 7.86);
+        tl.to("#pc-face", { x: 20, y: 20, duration: 0.07, ease: "power2.in" }, 7.86);
+        tl.to("#pc-click", { scale: 1.12, duration: 0.14, ease: "power2.out" }, 7.9);
+        tl.to("#pc-click", { scale: 1, duration: 0.1, ease: "power1.inOut" }, 8.05);
+        tl.to("#pc-hand", { scale: 1, duration: 0.15, ease: "power2.out" }, 8.02);
+
+        // DOLLY-OUT 8.15–8.75: the three close-ups were one page; the chart re-inks teal
+        tl.to("#cam2", { x: P.x, y: P.y, scale: P.scale, duration: 0.6, ease: "power3.inOut" }, 8.15);
+        tl.to("#pa-line", { attr: { points: pts(REC) }, duration: 0.45, ease: "power2.out" }, 8.3);
+        tl.to("#pa-a2", { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "steps(8)" }, 8.3);
+        tl.fromTo("#pa-a1c", { clipPath: "inset(0% 0% 0% 60.4%)" }, { clipPath: "inset(0% 0% 0% 92.7%)", duration: 0.45, ease: "steps(8)", immediateRender: false }, 8.3);
+        tl.to("#pa-zap", { scale: 0, rotation: 20, duration: 0.25, ease: "power2.in" }, 8.3);
+        tl.to("#pa-ok", { scale: 1, duration: 0.25, ease: "back.out(2.5)" }, 8.72);
+
+        // PAGE TURN 9.0–9.6 onto the CTA page
+        tl.to("#pg-proof", { rotationY: -90, duration: 0.6, ease: "power1.out" }, 9.0);
+        tl.to("#pr-shade", { opacity: 0.5, duration: 0.6, ease: "power1.in" }, 9.0);
+        tl.to("#ct-cast", { opacity: 1, duration: 0.35, ease: "power1.in" }, 9.0);
+        tl.to("#ct-cast", { opacity: 0, duration: 0.3, ease: "power1.out" }, 9.35);
+
+        // CTA 9.55–11.2, then hold still to 12
+        tl.to("#ct-balloon", { scale: 1, duration: 0.35, ease: "back.out(1.7)" }, 9.55);
+        tl.to("#ct-l1", { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, 9.75);
+        tl.to("#ct-l2a", { opacity: 1, y: 0, duration: 0.25, ease: "power3.out" }, 9.9);
+        tl.to("#ct-l2b", { opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "back.out(2)" }, 9.98);
+        tl.to("#ct-burst", { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(1.6)" }, 10.1);
+        tl.to("#ct-mark", { scale: 1, duration: 0.3, ease: "back.out(2.2)" }, 10.2);
+        tl.to("#ct-btn", { y: 0, duration: 0.3, ease: "power2.in" }, 10.42);
+        tl.to("#ct-btn", { y: -36, duration: 0.12, ease: "power2.out" }, 10.72);
+        tl.to("#ct-btn", { y: 0, duration: 0.13, ease: "power2.in" }, 10.84);
+        tl.to("#ct-word", { x: 0, opacity: 1, duration: 0.28, ease: "power2.out" }, 10.86);
+        breathe(".bd-ct", 8.4, 9.6, 11.2);
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

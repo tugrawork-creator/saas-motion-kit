@@ -10,6 +10,12 @@ Open the [gallery](https://tugrawork-creator.github.io/saas-motion-kit/) and sho
 | booth / big screen | 052 Depth / 3D, 057 Isometric World, 089 Pop-Art Ben-Day |
 | premium / keynote | 061 Dark Keynote, 024 Glass Loupe, 100 Rack Focus |
 
+Or let the picker do the first pass. It scores every theme against the tone and the audience words and skips the themes of your last five films:
+
+```bash
+python tools/pick_themes.py --tone warm --audience "finance ops" --history ~/.motion-ledger.json
+```
+
 Ask the agent to redraw the key frame (cell 3, the proof moment) of each shortlisted theme **in your brand and with your components**. Choose one from those redrawn frames, not from the Acme versions.
 
 **Gate:** you pick one theme and write its number and any changes into the brief.

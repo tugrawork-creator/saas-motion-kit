@@ -33,10 +33,17 @@ write message + tone  →  draft the storyboard ledger  →  run the variety aud
    python tools/variety_audit.py STORYBOARD.md --history ~/.motion-ledger.json
    ```
 3. Fix what it flags, or write down *why* the repetition is intentional (a **motif**; see below).
-4. After delivery, record the film so the next one avoids it:
+4. After delivery, record the film and its theme so the next one avoids them:
    ```bash
-   python tools/variety_audit.py STORYBOARD.md --history ~/.motion-ledger.json --append "film-name"
+   python tools/variety_audit.py STORYBOARD.md --history ~/.motion-ledger.json --append "film-name" --theme 055
    ```
+5. Every few films, look at the pattern instead of the single film:
+   ```bash
+   python tools/history_report.py ~/.motion-ledger.json -o motion-history.html
+   ```
+   The report shows what you keep reaching for, and lists the atlas transitions and gallery themes you have never used, starting with the least-used families.
+
+To see the rule in practice, watch [Same story, six films](../examples/six-films): one script told in six themes, each with its own component.
 
 ## Motif vs. repetition
 

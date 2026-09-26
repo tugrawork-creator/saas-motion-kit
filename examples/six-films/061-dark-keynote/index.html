@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1080" />
+    <title>Acme Pulse · 061 Dark Keynote</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      /* Fonts: SIL OFL 1.1, see assets/fonts/OFL.txt */
+      @font-face { font-family: "Manrope"; font-weight: 200 800; font-display: block; src: url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block; src: url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: block; src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: block; src: url("assets/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 600; font-display: block; src: url("assets/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2"); }
+
+      :root {
+        --teal: #0FA3A3; --teal-deep: #0B6E6E; --teal-soft: #CFF1EE; --mint: #6FE3DA; --ok: #5FD08A;
+        --coral: #FF5A4E; --coral-soft: #FF8A80; --ink: #0E1726; --paper: #F6F5F1; --navy: #0C1830;
+        --sans: "Manrope", sans-serif; --serif: "Instrument Serif", serif; --mono: "JetBrains Mono", monospace;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1080px; overflow: hidden; background: #0C1830; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: var(--sans); color: #EAF1F6; }
+      .clip { position: absolute; inset: 0; }
+
+      /* ---------- stage: radial navy ground (never a full-frame linear gradient) ---------- */
+      #ground { position: absolute; inset: 0; background: radial-gradient(78% 68% at 50% 42%, #1B2F53 0%, #12223F 38%, #0C1830 68%, #09142A 100%); }
+      #house { position: absolute; inset: 0; background: #060D1C; opacity: 0; }
+
+      /* ---------- spotlight rig (motif) ---------- */
+      #spot { position: absolute; inset: 0; }
+      .cone { position: absolute; filter: blur(12px); mix-blend-mode: screen; transform-origin: 50% 0; }
+      .cone-shape { position: absolute; inset: 0; }
+      #cone { left: 160px; top: -40px; width: 760px; height: 900px; }
+      #cone .cone-shape { clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%); background: radial-gradient(62% 100% at 50% 0%, rgba(222,246,243,.34) 0%, rgba(205,236,236,.12) 58%, rgba(205,236,236,0) 100%); }
+      #pool-w { position: absolute; left: 130px; top: 660px; width: 820px; height: 190px; border-radius: 50%; background: radial-gradient(closest-side, rgba(207,241,238,.30), rgba(207,241,238,0)); }
+      #pool-c { position: absolute; left: 150px; top: 770px; width: 780px; height: 200px; border-radius: 50%; opacity: 0; background: radial-gradient(closest-side, rgba(255,90,78,.42), rgba(255,90,78,.12) 60%, rgba(255,90,78,0)); }
+
+      /* ---------- hook ---------- */
+      .card { position: absolute; border-radius: 24px; background: rgba(40,60,92,.72); border: 1.5px solid rgba(160,200,220,.25); padding: 22px 26px; font: 700 28px/1.2 var(--sans); color: #D8E4EE; white-space: nowrap; }
+      .card small { display: block; font: 400 20px/1.2 var(--mono); color: #8FA3B8; margin-top: 6px; }
+      .card.bk { filter: blur(3px); opacity: .5; }
+      .card.fr { filter: blur(4.5px); opacity: .3; }
+      .card.fg { filter: blur(9px); opacity: .8; }
+      #hook-h { position: absolute; left: 0; right: 0; top: 318px; text-align: center; font-family: var(--serif); font-weight: 400; font-size: 118px; line-height: 1.1; letter-spacing: -.01em; color: #F2F6F8; }
+      #hook-h .ln { display: block; }
+      #hook-h .hw { display: inline-block; }
+      #hook-h i { color: #9DB0C6; }
+      #dotph { display: inline-block; width: 22px; height: 22px; margin-left: 7px; }
+
+      /* the carried full stop */
+      #carrydot { position: absolute; left: 0; top: 0; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 18px rgba(255,90,78,.85), 0 0 44px rgba(255,90,78,.45); }
+      #cd-ring { position: absolute; inset: -3px; border-radius: 50%; border: 2px solid var(--coral-soft); opacity: 0; }
+
+      /* ---------- main: reveal + proof ---------- */
+      #main-wrap { position: absolute; inset: 0; transform-origin: 60% 50%; }
+
+      #table { position: absolute; left: 34px; top: 372px; width: 262px; padding: 20px 20px 16px; border-radius: 22px; background: #1B2E4F; border: 1.5px solid rgba(160,200,220,.16); font: 400 21px/1 var(--mono); color: #9FB2C7; opacity: 0; filter: blur(.5px); }
+      #table .th { font-size: 16px; letter-spacing: .12em; color: #8696AB; margin-bottom: 10px; }
+      #table .tr { position: relative; display: flex; align-items: center; height: 48px; white-space: nowrap; }
+      #table .tr i { flex: 1; height: 0; border-bottom: 2px dotted rgba(159,178,199,.35); margin: 6px 8px 0; }
+      #table .tr b { font-weight: 400; }
+      #tb-hl { position: absolute; left: -10px; right: -10px; top: 4px; bottom: 4px; border-radius: 10px; background: rgba(255,90,78,.26); border: 1.5px solid rgba(255,138,128,.6); opacity: 0; }
+      #tb-co span, #tb-co b { position: relative; }
+
+      #panel { position: absolute; left: 320px; top: 160px; width: 720px; height: 720px; }
+      .gl { position: absolute; inset: 0; border-radius: 36px; overflow: hidden; opacity: 0; }
+      #gl-bl { filter: blur(34px); }
+      #gl-bs { filter: blur(10px); }
+      .spin { position: absolute; left: 50%; top: 50%; width: 1100px; height: 1100px; margin: -550px 0 0 -550px; }
+      .spin.t { background: conic-gradient(from 200deg, #0FA3A3, #6FE3DA, #CFF1EE, #0FA3A3, #0B6E6E, #0FA3A3); }
+      .spin.c { background: conic-gradient(from 200deg, #FF5A4E, #FF8A80, #FFD3CD, #FF5A4E, #B63A30, #FF5A4E); }
+      .cw { position: absolute; inset: 0; }
+      .pan { position: absolute; inset: 3px; border-radius: 33px; overflow: hidden; }
+      .pan-bg { position: absolute; inset: 0; opacity: 0; background: radial-gradient(110% 92% at 46% 28%, #1B3053 0%, #13233F 55%, #0E1B33 100%); }
+      .pan-glow { position: absolute; inset: 0; border-radius: 33px; opacity: 0; box-shadow: inset 0 0 64px rgba(15,163,163,.45), inset 0 0 14px rgba(111,227,218,.6); }
+      .pan-c { position: absolute; inset: 0; }
+
+      #pmark { position: absolute; left: 297px; top: 238px; width: 120px; height: 120px; transform-origin: 0 0; }
+      #pmark svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+      #mk-sq { transform-origin: 82.8125% 46.875%; }
+      #pname { position: absolute; left: 0; top: 390px; font: 800 72px/1 var(--sans); letter-spacing: -.03em; color: #fff; white-space: nowrap; transform-origin: 0 0; }
+      #hwatch { position: absolute; right: 36px; top: 45px; display: flex; align-items: center; gap: 12px; font: 600 22px/1 var(--mono); color: var(--mint); white-space: nowrap; opacity: 0; }
+      #live { position: relative; width: 12px; height: 12px; border-radius: 50%; background: var(--mint); }
+      #live-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--mint); opacity: 0; }
+      #hdiv { position: absolute; left: 36px; right: 36px; top: 108px; height: 1.5px; background: rgba(255,255,255,.12); transform-origin: 0 50%; }
+
+      #rows { position: absolute; left: 36px; right: 36px; top: 116px; }
+      .rowi { position: relative; opacity: 0; }
+      .row { position: relative; display: flex; align-items: center; justify-content: space-between; height: 80px; border-bottom: 1.5px solid rgba(255,255,255,.08); font: 600 30px/1 var(--sans); color: #EAF1F6; white-space: nowrap; }
+      .flash { position: absolute; left: -14px; right: -14px; top: 6px; bottom: 6px; border-radius: 12px; background: rgba(15,163,163,.20); opacity: 0; }
+      .val { position: relative; width: 260px; height: 44px; }
+      .val > * { position: absolute; right: 0; top: 50%; }
+      .pend { font: 600 26px/26px var(--mono); color: #7D8FA8; letter-spacing: .08em; margin-top: -13px; }
+      .ck { width: 34px; height: 34px; margin-top: -17px; opacity: 0; }
+      #co-wrap { position: relative; border-bottom: 1.5px solid rgba(255,255,255,.08); }
+      #co-wrap .row { border-bottom: 0; height: 74px; }
+      #co-pool { position: absolute; left: -60px; right: -60px; top: -60px; bottom: -60px; border-radius: 50%; opacity: 0; background: radial-gradient(closest-side, rgba(255,232,224,.20), rgba(255,215,205,.07) 60%, rgba(255,215,205,0)); }
+      #co-bg { position: absolute; left: -14px; right: -14px; top: 6px; bottom: 8px; border-radius: 14px; background: rgba(255,90,78,.13); border: 1.5px solid rgba(255,138,128,.35); opacity: 0; }
+      #co-num { display: flex; align-items: center; gap: 12px; margin-top: -20px; opacity: 0; }
+      #co-num svg { width: 34px; height: 34px; }
+      #co-n { display: inline-block; min-width: 4.2ch; text-align: right; font: 600 36px/40px var(--mono); color: #FF7A70; }
+      #co-done { margin-top: -13px; font: 600 24px/26px var(--mono); color: var(--ok); opacity: 0; white-space: nowrap; }
+      #co-subrow { position: relative; height: 44px; }
+      #co-sub { display: inline-block; font: 400 21px/1 var(--mono); color: #D4B0AC; white-space: nowrap; }
+
+      #btns { position: absolute; left: 36px; top: 592px; display: flex; gap: 14px; opacity: 0; }
+      .btn { position: relative; display: flex; align-items: center; justify-content: center; height: 66px; border-radius: 16px; font: 700 27px/1 var(--sans); white-space: nowrap; }
+      #rollback { min-width: 244px; padding: 0 30px; background: var(--coral); color: #fff; }
+      #rb-glow { position: absolute; inset: 0; border-radius: 16px; box-shadow: 0 0 34px rgba(255,90,78,.7), 0 0 12px rgba(255,138,128,.6); opacity: 0; }
+      #rb-done { position: absolute; inset: 0; border-radius: 16px; background: #0B6E6E; border: 2px solid rgba(111,227,218,.7); opacity: 0; }
+      .rbl { position: absolute; left: 0; right: 0; top: 50%; margin-top: -14px; text-align: center; line-height: 28px; }
+      #rb-l2 { opacity: 0; color: #E6FBF8; }
+      #ack { padding: 0 30px; border: 2px solid rgba(255,255,255,.22); color: #D8E4EE; }
+
+      #fgcard { opacity: 0; }
+      #fspot { opacity: 0; }
+      #fspot .cone-shape { background: radial-gradient(60% 100% at 50% 0%, rgba(255,238,230,.30) 0%, rgba(255,214,204,.11) 62%, rgba(255,214,204,0) 100%); }
+      #thread-svg { position: absolute; left: 0; top: 0; width: 1080px; height: 1080px; overflow: visible; }
+      #sweep { position: absolute; left: 0; top: -140px; width: 190px; height: 1360px; mix-blend-mode: screen; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(235,250,248,.34), rgba(255,255,255,0)); }
+      #ripple { position: absolute; left: 0; top: 0; border-radius: 18px; border: 3px solid var(--coral-soft); opacity: 0; }
+      #cursor { position: absolute; left: 0; top: 0; width: 40px; height: 52px; }
+      #cursor-in { position: absolute; inset: 0; transform-origin: 0 0; }
+      #cursor svg { width: 40px; height: 52px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.45)); }
+
+      /* ---------- CTA ---------- */
+      #cta-lock { position: absolute; left: 0; right: 0; top: 178px; display: flex; justify-content: center; align-items: center; gap: 24px; opacity: 0; }
+      #cta-lock img { width: 96px; height: 96px; border-radius: 24px; box-shadow: 0 0 48px rgba(111,227,218,.45); }
+      #cta-lock span { font: 800 78px/1 var(--sans); letter-spacing: -.03em; color: #fff; white-space: nowrap; }
+      #cta-h { position: absolute; left: 0; right: 0; top: 336px; text-align: center; font-family: var(--serif); font-weight: 400; font-size: 128px; line-height: 1.1; letter-spacing: -.01em; color: #F2F6F8; }
+      #cta-h .cl { display: block; opacity: 0; }
+      #cta-h i { color: var(--mint); }
+      #cta-row { position: absolute; left: 0; right: 0; top: 704px; display: flex; justify-content: center; }
+      #cta-btn { position: relative; font: 700 40px/1 var(--sans); color: #fff; background: var(--coral); border-radius: 100px; padding: 28px 66px; white-space: nowrap; opacity: 0; }
+      #cta-glow { position: absolute; inset: 0; border-radius: 100px; box-shadow: 0 0 72px rgba(255,90,78,.62), 0 0 22px rgba(255,138,128,.5); opacity: 0; }
+
+      /* ---------- film finish ---------- */
+      #grain { position: absolute; left: 0; top: 0; width: 1080px; height: 1080px; opacity: .16; mix-blend-mode: overlay; }
+      #vig { position: absolute; inset: 0; background: radial-gradient(75% 75% at 50% 50%, rgba(4,9,20,0) 50%, rgba(4,9,20,.58) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1080">
+
+      <!-- stage ground, persistent -->
+      <div id="bg" class="clip" data-start="0" data-duration="12" data-track-index="0">
+        <div id="ground"></div>
+        <div id="house"></div>
+      </div>
+
+      <!-- spotlight rig: hook + CTA (motif) -->
+      <div id="rig" class="clip" data-start="0" data-duration="12" data-track-index="1">
+        <div id="spot">
+          <div id="pool-w"></div>
+          <div id="pool-c"></div>
+          <div id="cone" class="cone"><div class="cone-shape"></div></div>
+        </div>
+      </div>
+
+      <!-- 1 · HOOK -->
+      <div id="hook" class="clip" data-start="0" data-duration="3" data-track-index="2">
+        <div class="card bk hc" id="hc1" data-layout-ignore style="left:92px;top:118px">p95 latency 212 ms<small>alert · muted</small></div>
+        <div class="card bk hc" id="hc2" data-layout-ignore style="left:690px;top:150px">Signups · no data<small>since last night</small></div>
+        <div class="card fr hc" id="hc3" data-layout-ignore style="left:420px;top:26px">Activation funnel<small>3 tabs open</small></div>
+        <div class="card fg hc" id="hc4" data-layout-ignore style="left:-30px;top:770px">Checkout dashboard<small>tab 12 of 38</small></div>
+        <div class="card fg hc" id="hc5" data-layout-ignore style="left:716px;top:812px">Error rate 0.4 %<small>no owner</small></div>
+        <div id="hook-h">
+          <span class="ln"><span class="hw">38 dashboards.</span></span>
+          <span class="ln"><span class="hw">One</span> <i class="hw">missed</i> <span class="hw">drop</span><span id="dotph"></span></span>
+        </div>
+      </div>
+
+      <!-- 2+3 · REVEAL + PROOF (one continuous stage) -->
+      <div id="main" class="clip" data-start="3" data-duration="6.35" data-track-index="3">
+        <div id="main-wrap">
+          <div id="table" data-layout-ignore>
+            <div class="th">CHECKOUT-WEB · TEAM</div>
+            <div class="tr"><span>Signups</span><i></i><b>+4%</b></div>
+            <div class="tr"><span>Active</span><i></i><b>+1%</b></div>
+            <div class="tr" id="tb-co"><div id="tb-hl"></div><span>Checkout</span><i></i><b>−18%</b></div>
+            <div class="tr"><span>p95</span><i></i><b>212ms</b></div>
+            <div class="tr"><span>Errors</span><i></i><b>0.4%</b></div>
+            <div class="tr"><span>Events/s</span><i></i><b>2,418</b></div>
+          </div>
+
+          <div id="panel">
+            <div class="gl" data-layout-ignore id="gl-bl"><div class="spin t" data-layout-ignore data-layout-allow-overflow></div><div class="cw"><div class="spin c" data-layout-ignore data-layout-allow-overflow></div></div></div>
+            <div class="gl" data-layout-ignore id="gl-bs"><div class="spin t" data-layout-ignore data-layout-allow-overflow></div><div class="cw"><div class="spin c" data-layout-ignore data-layout-allow-overflow></div></div></div>
+            <div class="gl" data-layout-ignore id="gl-rg"><div class="spin t" data-layout-ignore data-layout-allow-overflow></div><div class="cw"><div class="spin c" data-layout-ignore data-layout-allow-overflow></div></div></div>
+            <div class="pan">
+              <div class="pan-bg"></div>
+              <div class="pan-glow"></div>
+              <div class="pan-c">
+                <div id="hdiv"></div>
+                <div id="hwatch"><span id="live"><span id="live-ring"></span></span>watching 14</div>
+
+                <div id="rows">
+                  <div class="rowi ok"><div class="flash"></div><div class="row"><span>Signups</span><span class="val"><span class="pend">···</span><svg class="ck" viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="rgba(95,208,138,.16)"/><path d="M10.5 17.5l4.5 4.5 8.5-9.5" fill="none" stroke="#5FD08A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+                  <div class="rowi ok"><div class="flash"></div><div class="row"><span>Active users</span><span class="val"><span class="pend">···</span><svg class="ck" viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="rgba(95,208,138,.16)"/><path d="M10.5 17.5l4.5 4.5 8.5-9.5" fill="none" stroke="#5FD08A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+                  <div class="rowi" id="co-wrap">
+                    <div id="co-pool"></div>
+                    <div id="co-bg"></div>
+                    <div class="row" id="co-row"><span id="co-label">Checkout conversion</span><span class="val"><span class="pend" id="co-pend">···</span><span id="co-num"><svg viewBox="0 0 34 34"><path d="M17 5 L30 28 H4 Z" fill="rgba(255,90,78,.18)" stroke="#FF7A70" stroke-width="2.6" stroke-linejoin="round"/><path d="M17 13v7" stroke="#FF7A70" stroke-width="2.8" stroke-linecap="round"/><circle cx="17" cy="24" r="1.7" fill="#FF7A70"/></svg><span id="co-n" data-layout-allow-overlap>−18%</span></span><span id="co-done" data-layout-allow-overlap>rolled back</span></span></div>
+                    <div id="co-subrow"><span id="co-sub">since 09:42 · after deploy #2231</span></div>
+                  </div>
+                  <div class="rowi ok"><div class="flash"></div><div class="row"><span>p95 latency</span><span class="val"><span class="pend">···</span><svg class="ck" viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="rgba(95,208,138,.16)"/><path d="M10.5 17.5l4.5 4.5 8.5-9.5" fill="none" stroke="#5FD08A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+                  <div class="rowi ok"><div class="flash"></div><div class="row" style="border-bottom:0"><span>Error rate</span><span class="val"><span class="pend">···</span><svg class="ck" viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="rgba(95,208,138,.16)"/><path d="M10.5 17.5l4.5 4.5 8.5-9.5" fill="none" stroke="#5FD08A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+                </div>
+
+                <div id="btns">
+                  <div class="btn" id="rollback"><div id="rb-glow"></div><div id="rb-done"></div><span class="rbl" id="rb-l1">Roll back</span><span class="rbl" id="rb-l2">Rolled back</span></div>
+                  <div class="btn" id="ack">Acknowledge</div>
+                </div>
+
+                <!-- the Acme mark (same geometry as assets/brand/acme-mark.svg), split so it can grow out of the carried dot -->
+                <div id="pmark">
+                  <svg id="mk-sq" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0FA3A3"/><path id="mk-line" d="M11 36h10l7-17 8 27 6-16h11" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <svg id="mk-dt" viewBox="0 0 64 64"><circle cx="53" cy="30" r="4.2" fill="#FF5A4E"/></svg>
+                </div>
+                <div id="pname">Acme Pulse</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card fg" id="fgcard" data-layout-ignore style="left:-40px;top:880px">Checkout dashboard<small>tab 12 of 38</small></div>
+          <div id="fspot" class="cone"><div class="cone-shape"></div></div>
+          <svg id="thread-svg" viewBox="0 0 1080 1080"><path id="thread" d="M0 0" fill="none" stroke="#FF8A80" stroke-width="3" stroke-linecap="round"/><circle id="thread-halo" cx="0" cy="0" r="16" fill="#FF5A4E" opacity="0"/><circle id="thread-dot" cx="0" cy="0" r="7" fill="#FF5A4E" opacity="0"/></svg>
+          <div id="sweep"></div>
+          <div id="ripple"></div>
+          <div id="cursor"><div id="cursor-in"><svg viewBox="0 0 40 52"><path d="M3 3 L3 40 L12.5 31 L19 46 L25.5 43.2 L19.2 28.6 L32 28.6 Z" fill="#FFFFFF" stroke="#0E1726" stroke-width="2.4" stroke-linejoin="round"/></svg></div></div>
+        </div>
+      </div>
+
+      <!-- 4 · CTA -->
+      <div id="cta" class="clip" data-start="9" data-duration="3" data-track-index="4">
+        <div id="cta-lock"><img src="assets/brand/acme-mark.svg" alt="Acme" /><span>Acme Pulse</span></div>
+        <div id="cta-h"><span class="cl" id="cta-l1">You ship.</span><span class="cl" id="cta-l2"><i>Pulse watches.</i></span></div>
+        <div id="cta-row"><div id="cta-btn"><div id="cta-glow"></div>Start free</div></div>
+      </div>
+
+      <!-- the carried full stop (hook → reveal) -->
+      <div id="carry" class="clip" data-start="0" data-duration="3.7" data-track-index="5">
+        <div id="carrydot"><div id="cd-ring"></div></div>
+      </div>
+
+      <!-- film finish: fixed-seed grain + vignette -->
+      <div id="fx" class="clip" data-start="0" data-duration="12" data-track-index="6">
+        <svg id="grain" data-layout-allow-occlusion data-layout-ignore viewBox="0 0 1080 1080"><filter id="gn"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1080" filter="url(#gn)"/></svg>
+        <div id="vig"></div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var R = document.getElementById("root");
+        var $ = function (id) { return document.getElementById(id); };
+        // geometry of an element in composition pixels (robust to any preview scaling)
+        function box(el) {
+          var r = el.getBoundingClientRect(), rr = R.getBoundingClientRect(), k = 1080 / rr.width;
+          var l = (r.left - rr.left) * k, t = (r.top - rr.top) * k, w = r.width * k, h = r.height * k;
+          return { l: l, t: t, w: w, h: h, x: l + w / 2, y: t + h / 2 };
+        }
+        var DEG = 180 / Math.PI;
+
+        function build() {
+          var tl = gsap.timeline({ paused: true });
+          var panel = $("panel"), PAN = 714, PL = 320, PT = 160, PS = 720;
+
+          // ---- static layout that depends on the loaded fonts ----
+          var pname = $("pname");
+          var nameW = pname.offsetWidth, nameH = pname.offsetHeight;
+          pname.style.left = ((PAN - nameW) / 2) + "px";
+
+          // hook full stop: the carried dot starts exactly on it
+          var ph = box($("dotph"));
+          var cd = $("carrydot");
+          cd.style.left = ph.x + "px";
+          cd.style.top = ph.y + "px";
+
+          // coral iris origin: Checkout row centre, as % of the (untransformed) panel
+          var pr0 = box(panel), co0 = box($("co-row"));
+          var irisX = ((co0.x - pr0.l) / pr0.w * 100).toFixed(2), irisY = ((co0.y - pr0.t) / pr0.h * 100).toFixed(2);
+
+          // ---- final proof state: measure the row, the button, the table cell ----
+          gsap.set("#table", { rotationY: 18, transformPerspective: 1200 });
+          gsap.set(panel, { rotationY: -8, transformPerspective: 1600 });
+          var co = box($("co-row")), rb = box($("rollback")), tc = box($("tb-co"));
+
+          // ---- reveal state: the panel fills the frame at inset 40 ----
+          var S = 1000 / PS, RX = 540 - (PL + PS / 2), RY = 540 - (PT + PS / 2);
+          var REVEAL = { x: RX, y: RY, scale: S, rotationY: 0, transformPerspective: 1600 };
+          gsap.set(panel, REVEAL);
+          var mk = box($("pmark")), nm = box(pname);
+          var mdot = { x: mk.l + mk.w * 53 / 64, y: mk.t + mk.h * 30 / 64 };
+
+          // thread: row's left edge → table cell's value
+          var x1 = co.l + 10, y1 = co.y, x2 = tc.l + tc.w - 4, y2 = tc.y;
+          var thread = $("thread");
+          thread.setAttribute("d", "M" + x1 + " " + y1 + " C " + (x1 - 60) + " " + y1 + ", " + (x2 + 70) + " " + y2 + ", " + x2 + " " + y2);
+          var TL = thread.getTotalLength();
+          thread.setAttribute("stroke-dasharray", TL + " " + (TL + 30));
+          ["thread-dot", "thread-halo"].forEach(function (id) { $(id).setAttribute("cx", x2); $(id).setAttribute("cy", y2); });
+
+          // follow-spot for the spot cue: apex above-left, axis through the Checkout row
+          var ax = co.x - 150, ay = -60, dist = Math.hypot(co.x - ax, co.y - ay), FH = dist / 0.85;
+          var fs = $("fspot");
+          fs.style.left = (ax - 410) + "px"; fs.style.top = ay + "px";
+          fs.style.width = "820px"; fs.style.height = FH + "px";
+          fs.firstElementChild.style.clipPath = "polygon(42.7% 0, 57.3% 0, 100% 100%, 0 100%)";
+          gsap.set(fs, { rotation: -Math.atan2(co.x - ax, co.y - ay) * DEG, transformOrigin: "50% 0%" });
+
+          // ripple sits on the pressed button
+          var rp = $("ripple");
+          rp.style.left = rb.l + "px"; rp.style.top = rb.t + "px"; rp.style.width = rb.w + "px"; rp.style.height = rb.h + "px";
+
+          var line = $("mk-line"), LL = line.getTotalLength();
+          line.setAttribute("stroke-dasharray", LL + " " + (LL + 20));
+
+          // =====================================================================
+          // 1 · HOOK 0–3 s  (frame 0 is the poster: spot on, both lines lit)
+          // =====================================================================
+          var drift = [
+            { id: "#hc1", s0: .8, s1: .84, r: 0, dx: -26, dy: -14 },
+            { id: "#hc2", s0: .8, s1: .84, r: 0, dx: 24, dy: -12 },
+            { id: "#hc3", s0: .62, s1: .64, r: 0, dx: 0, dy: -10 },
+            { id: "#hc4", s0: 1.3, s1: 1.42, r: -6, dx: -46, dy: 26 },
+            { id: "#hc5", s0: 1.3, s1: 1.42, r: 5, dx: 46, dy: 28 }
+          ];
+          drift.forEach(function (c) {
+            tl.fromTo(c.id, { x: 0, y: 0, scale: c.s0, rotation: c.r }, { x: c.dx, y: c.dy, scale: c.s1, rotation: c.r, duration: 2.5, ease: "sine.inOut" }, 0);
+          });
+          // the drop registers: one ring off the coral full stop
+          tl.fromTo("#cd-ring", { scale: 1, opacity: .9 }, { scale: 3.4, opacity: 0, duration: .95, ease: "power2.out", immediateRender: false }, 1.05);
+          // house dims, the words go dark one by one, the full stop survives
+          tl.to(".hc", { opacity: 0, duration: .6, ease: "power1.in", stagger: .05 }, 1.85);
+          tl.to("#hook-h .hw", { opacity: 0, filter: "blur(6px)", duration: .45, ease: "power2.in", stagger: .06 }, 1.9);
+          tl.to("#house", { opacity: .32, duration: .7, ease: "sine.inOut" }, 2.0);
+          tl.to("#pool-w", { opacity: 0, duration: .5, ease: "sine.inOut" }, 2.0);
+          // the cone narrows and follows the dot to where the mark will be
+          tl.to("#cone", { scaleX: .3, rotation: -Math.atan2(mdot.x - 540, mdot.y + 40) * DEG, duration: .72, ease: "power3.inOut" }, 2.25);
+          tl.to("#carrydot", { x: mdot.x - ph.x, duration: .68, ease: "power3.inOut" }, 2.28);
+          tl.to("#carrydot", { y: mdot.y - ph.y, duration: .68, ease: "power2.inOut" }, 2.28);
+
+          // =====================================================================
+          // 2 · REVEAL 3–4.5 s  (object carry → mark; glow ignition; light sweep)
+          // =====================================================================
+          tl.fromTo("#mk-sq", { scale: 0 }, { scale: 1, duration: .55, ease: "power3.out" }, 3.0);
+          tl.fromTo(line, { strokeDashoffset: LL + 8 }, { strokeDashoffset: 0, duration: .5, ease: "power2.inOut" }, 3.18);
+          tl.to("#carrydot", { opacity: 0, duration: .25, ease: "power1.in" }, 3.42);
+          tl.to("#spot", { opacity: 0, duration: .4, ease: "power1.in" }, 3.0);
+          tl.to("#house", { opacity: 0, duration: .6, ease: "sine.inOut" }, 3.1);
+          // glow ignition: four layers, inside → out, in one beat
+          [[".pan-bg", ".pan-glow"], "#gl-rg", "#gl-bs", "#gl-bl"].forEach(function (sel, i) {
+            tl.fromTo(sel, { opacity: 0, scale: .96 }, { opacity: [1, 1, .9, .75][i], scale: 1, duration: [.26, .38, .38, .38][i], ease: "power2.out" }, 3.02 + i * .12);
+          });
+          // slow conic rotation = the agent is working (about 360° per 16 s)
+          tl.fromTo(".spin", { rotation: 0 }, { rotation: 140, duration: 6.2, ease: "none" }, 3.05);
+          // diagonal light sweep uncovers the name
+          var SW0 = -520, SW1 = 1460, SWD = .75, TAN = Math.tan(18 / DEG);
+          var swLeftAt = function (x) { return x - 95 + (nm.y - 540) * TAN; };
+          tl.fromTo("#sweep", { x: SW0, rotation: 18 }, { x: SW1, rotation: 18, duration: SWD, ease: "none" }, 3.48);
+          var t1 = (swLeftAt(nm.l) - SW0) / (SW1 - SW0) * SWD, t2 = (swLeftAt(nm.l + nm.w) - SW0) / (SW1 - SW0) * SWD;
+          tl.fromTo(pname, { clipPath: "inset(-20% 100% -20% 0%)" }, { clipPath: "inset(-20% 0% -20% 0%)", duration: t2 - t1, ease: "none" }, 3.52 + t1);
+
+          // =====================================================================
+          // 3 · PROOF · scan 4.5–6.1 s  (dolly-out: the frame becomes the panel)
+          // =====================================================================
+          tl.fromTo(panel, Object.assign({}, REVEAL), { x: 0, y: 0, scale: 1, rotationY: -8, duration: .85, ease: "power3.inOut" }, 4.45);
+          tl.to("#pmark", { x: 36 - 297, y: 34 - 238, scale: 52 / 120, duration: .7, ease: "power2.inOut" }, 4.6);
+          tl.to(pname, { x: 104 - (PAN - nameW) / 2, y: (60 - nameH * (32 / 72) / 2) - 390, scale: 32 / 72, duration: .7, ease: "power2.inOut" }, 4.66);
+          tl.to(".pan-glow", { opacity: .4, duration: .6, ease: "sine.inOut" }, 4.6);
+          tl.fromTo("#table", { x: -70, rotationY: 18, transformPerspective: 1200, opacity: 0 }, { x: 0, opacity: .85, duration: .8, ease: "power2.out" }, 4.7);
+          tl.fromTo("#table", { filter: "blur(0.5px)" }, { filter: "blur(3.5px)", duration: .6, ease: "power2.inOut", immediateRender: false }, 5.25);
+          tl.fromTo("#fgcard", { y: 100, opacity: 0, rotation: -7, scale: 1.3 }, { y: 0, opacity: .8, rotation: -7, scale: 1.3, duration: 1, ease: "sine.out" }, 4.75);
+          tl.fromTo("#hdiv", { scaleX: 0 }, { scaleX: 1, duration: .5, ease: "power2.out" }, 5.1);
+          tl.fromTo("#hwatch", { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: .45, ease: "power2.out" }, 5.15);
+          tl.fromTo("#live-ring", { scale: 1, opacity: .8 }, { scale: 2.6, opacity: 0, duration: .9, ease: "power1.out", repeat: 3, immediateRender: false }, 5.3);
+          tl.fromTo(".rowi", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .42, ease: "power2.out", stagger: .07 }, 5.12);
+          gsap.utils.toArray(".rowi.ok").forEach(function (r, i) {
+            var t = 5.45 + i * .15;
+            tl.to(r.querySelector(".pend"), { opacity: 0, duration: .12, ease: "none" }, t);
+            tl.fromTo(r.querySelector(".ck"), { opacity: 0, scale: .5 }, { opacity: 1, scale: 1, duration: .3, ease: "power2.out" }, t + .04);
+            tl.fromTo(r.querySelector(".flash"), { opacity: 0 }, { opacity: 1, duration: .12, ease: "sine.out", yoyo: true, repeat: 1 }, t);
+          });
+          tl.fromTo("#co-pend", { opacity: .35 }, { opacity: 1, duration: .2, ease: "sine.inOut", yoyo: true, repeat: 2 }, 5.45);
+
+          // =====================================================================
+          // 3 · PROOF · catch 6.1–9 s  (the spot cue: the new component)
+          // =====================================================================
+          var CUE = 6.1;
+          // house dims to a third
+          tl.to(".rowi.ok", { opacity: .3, duration: .5, ease: "power2.inOut" }, CUE);
+          tl.to(["#pmark", "#pname", "#hwatch", "#hdiv"], { opacity: .45, duration: .5, ease: "power2.inOut" }, CUE);
+          tl.to("#table", { opacity: .55, filter: "blur(4.5px)", duration: .6, ease: "power2.inOut" }, CUE);
+          tl.to("#fgcard", { opacity: .35, duration: .6, ease: "power2.inOut" }, CUE);
+          tl.to("#house", { opacity: .35, duration: .6, ease: "power2.inOut" }, CUE);
+          // the follow-spot clicks on with a flicker-settle and pins the row
+          tl.to("#fspot", { keyframes: [{ opacity: 1, duration: .067, ease: "none" }, { opacity: .3, duration: .06, ease: "none" }, { opacity: 1, duration: .07, ease: "none" }, { opacity: .65, duration: .08, ease: "none" }, { opacity: 1, duration: .12, ease: "none" }] }, CUE + .08);
+          tl.fromTo("#co-pool", { opacity: 0 }, { opacity: 1, duration: .3, ease: "sine.out" }, CUE + .1);
+          // coral iris opens from the Checkout row out to the edge glow
+          tl.fromTo(".cw", { clipPath: "circle(0% at " + irisX + "% " + irisY + "%)" }, { clipPath: "circle(82% at " + irisX + "% " + irisY + "%)", duration: .75, ease: "power2.in" }, CUE + .1);
+          tl.to("#co-pend", { opacity: 0, duration: .1, ease: "none" }, CUE + .02);
+          tl.fromTo("#co-bg", { opacity: 0 }, { opacity: 1, duration: .35, ease: "sine.out" }, CUE + .12);
+          tl.to("#co-label", { color: "#FFC4BD", duration: .3, ease: "sine.out" }, CUE + .12);
+          tl.fromTo("#co-num", { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: .3, ease: "power2.out" }, CUE + .1);
+          var cnt = { v: 0 }, coN = $("co-n");
+          tl.fromTo(cnt, { v: 0 }, { v: 18, duration: .6, ease: "power2.out", onUpdate: function () { coN.textContent = "−" + Math.max(1, Math.round(cnt.v)) + "%"; } }, CUE + .14);
+          tl.fromTo("#co-sub", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: .5, ease: "steps(32)" }, CUE + .62);
+          // a light thread finds the same cell on the team board
+          tl.fromTo(thread, { strokeDashoffset: TL + 12 }, { strokeDashoffset: 0, duration: .4, ease: "power2.inOut" }, CUE + .85);
+          tl.fromTo("#thread-dot", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: "power2.out", transformOrigin: "50% 50%" }, CUE + 1.18);
+          tl.fromTo("#thread-halo", { scale: .4, opacity: 0 }, { scale: 1, opacity: .3, duration: .35, ease: "power2.out", transformOrigin: "50% 50%" }, CUE + 1.18);
+          tl.fromTo("#tb-hl", { opacity: 0 }, { opacity: 1, duration: .3, ease: "sine.out" }, CUE + 1.1);
+          // the decision appears; a human takes it
+          tl.fromTo("#btns", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .45, ease: "power2.out" }, CUE + .75);
+          tl.fromTo("#rb-glow", { opacity: 0 }, { opacity: 1, duration: .5, ease: "sine.inOut" }, CUE + 1.0);
+          tl.fromTo("#cursor", { x: 1130, y: 1090 }, { x: rb.x + 6, y: rb.y + 4, duration: .72, ease: "power3.inOut" }, CUE + .82);
+          var PRESS = CUE + 1.62;
+          tl.to("#rollback", { scale: .94, duration: .09, ease: "power2.in" }, PRESS);
+          tl.to("#rollback", { scale: 1, duration: .28, ease: "power2.out" }, PRESS + .09);
+          tl.to("#cursor-in", { scale: .86, duration: .09, ease: "power2.in" }, PRESS);
+          tl.to("#cursor-in", { scale: 1, duration: .25, ease: "power2.out" }, PRESS + .09);
+          tl.fromTo("#ripple", { scale: 1, opacity: .85 }, { scale: 1.4, opacity: 0, duration: .6, ease: "power2.out", immediateRender: false }, PRESS + .02);
+          // the cue releases: house up, spot out, glow back to teal
+          var REL = PRESS + .16;
+          tl.to("#rb-l1", { opacity: 0, y: -10, duration: .15, ease: "power2.in" }, REL);
+          tl.fromTo("#rb-l2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .3, ease: "power2.out" }, REL + .15);
+          tl.fromTo("#rb-done", { opacity: 0 }, { opacity: 1, duration: .35, ease: "sine.inOut" }, REL + .02);
+          tl.to("#rb-glow", { opacity: 0, duration: .35, ease: "sine.inOut" }, REL + .02);
+          tl.to("#fspot", { opacity: 0, duration: .4, ease: "power2.in" }, REL + .07);
+          tl.to("#co-pool", { opacity: 0, duration: .4, ease: "sine.inOut" }, REL + .07);
+          tl.to(".cw", { opacity: 0, duration: .6, ease: "sine.inOut" }, REL + .12);
+          tl.to(".rowi.ok", { opacity: 1, duration: .5, ease: "power2.inOut" }, REL + .12);
+          tl.to(["#pmark", "#pname", "#hwatch", "#hdiv"], { opacity: 1, duration: .5, ease: "power2.inOut" }, REL + .12);
+          tl.to("#table", { opacity: .85, filter: "blur(3.5px)", duration: .5, ease: "power2.inOut" }, REL + .12);
+          tl.to("#fgcard", { opacity: .8, duration: .5, ease: "power2.inOut" }, REL + .12);
+          tl.to("#house", { opacity: 0, duration: .5, ease: "power2.inOut" }, REL + .12);
+          tl.to("#co-bg", { opacity: 0, duration: .4, ease: "sine.inOut" }, REL + .12);
+          tl.to("#co-label", { color: "#EAF1F6", duration: .4, ease: "sine.inOut" }, REL + .12);
+          tl.to("#co-num", { opacity: 0, x: -8, duration: .25, ease: "power2.in" }, REL + .14);
+          tl.fromTo("#co-done", { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: .35, ease: "power2.out" }, REL + .27);
+          tl.to([thread, "#thread-dot", "#thread-halo", "#tb-hl"], { opacity: 0, duration: .4, ease: "sine.inOut" }, REL + .12);
+          tl.to("#cursor", { opacity: 0, duration: .35, ease: "sine.in" }, REL + .4);
+
+          // =====================================================================
+          // 4 · CTA 9–12 s  (house lights cut, the spot clicks on)
+          // =====================================================================
+          tl.to("#main-wrap", { opacity: 0, scale: .965, filter: "blur(4px)", duration: .38, ease: "power2.in" }, 8.95);
+          tl.to("#house", { opacity: .55, duration: .35, ease: "power2.in" }, 8.95);
+          tl.set("#cone", { scaleX: 1, rotation: 0 }, 9.35);
+          tl.set("#pool-w", { opacity: .75 }, 9.35);
+          tl.to("#spot", { keyframes: [{ opacity: 1, duration: .067, ease: "none" }, { opacity: .35, duration: .06, ease: "none" }, { opacity: 1, duration: .07, ease: "none" }, { opacity: .7, duration: .08, ease: "none" }, { opacity: 1, duration: .12, ease: "none" }] }, 9.6);
+          tl.to("#house", { opacity: .18, duration: .4, ease: "sine.out" }, 9.62);
+          tl.fromTo("#cta-lock", { opacity: 0, y: 16, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: .8, ease: "expo.out" }, 9.74);
+          tl.fromTo("#cta-l1", { opacity: 0, y: 26, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: .9, ease: "expo.out" }, 9.96);
+          tl.fromTo("#cta-l2", { opacity: 0, y: 26, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: .9, ease: "expo.out" }, 10.18);
+          tl.fromTo("#cta-btn", { opacity: 0, scale: .9, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: .7, ease: "expo.out" }, 10.45);
+          tl.fromTo("#cta-glow", { opacity: 0 }, { opacity: 1, duration: .7, ease: "sine.out" }, 10.5);
+          tl.fromTo("#pool-c", { opacity: 0, scaleX: .45 }, { opacity: 1, scaleX: 1, duration: .75, ease: "power2.out" }, 10.45);
+          tl.to("#pool-w", { opacity: .3, duration: .6, ease: "sine.inOut" }, 10.5);
+          // everything has settled by 11.2 s; the last 0.8 s is held still
+
+          window.__timelines["main"] = tl;
+        }
+
+        Promise.all([
+          document.fonts.load('400 118px "Instrument Serif"'),
+          document.fonts.load('italic 400 118px "Instrument Serif"'),
+          document.fonts.load('800 72px "Manrope"'),
+          document.fonts.load('600 30px "Manrope"'),
+          document.fonts.load('400 21px "JetBrains Mono"'),
+          document.fonts.load('600 26px "JetBrains Mono"')
+        ]).then(function () { return document.fonts.ready; }).then(build);
+      })();
+    </script>
+  </body>
+</html>

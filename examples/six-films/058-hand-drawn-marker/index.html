@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1080" />
+<title>Acme Pulse · Hand-Drawn Marker</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+<style>
+@font-face{font-family:"Manrope";font-weight:200 800;font-display:block;src:url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:block;src:url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:block;src:url("assets/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:600;font-display:block;src:url("assets/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2")}
+
+:root{
+  --ink:#0E1726; --muted:#5A6475; --paper:#FBF7EE; --rubbed:#FEFCF7;
+  --marker:#E8453A; --coral:#FF5A4E; --amber:#F4B740;
+  --teal:#0FA3A3; --teal-ink:#0B8C8C; --teal-deep:#0B6E6E; --graphite:#7F8898;
+  --serif:"Instrument Serif",Georgia,serif; --sans:"Manrope",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#FBF7EE}
+#root{position:relative;width:100%;height:100%;overflow:hidden;color:var(--ink);font-family:var(--sans)}
+.full{position:absolute;left:0;top:0;width:1080px;height:1080px}
+svg.full{overflow:visible}
+/* dotted notebook paper: 30 px grid */
+.dots{background-color:var(--paper);background-image:radial-gradient(rgba(14,23,38,.17) 1.8px,transparent 2.3px);background-size:30px 30px;background-position:15px 15px}
+
+/* ---------- page 1 : hook + reveal ---------- */
+#page1{z-index:10;perspective:3000px;perspective-origin:50% 50%}
+#leaf{transform-origin:0% 50%;backface-visibility:hidden;overflow:hidden}
+#hookHead{position:absolute;left:80px;top:92px;font:400 112px/1.05 var(--serif);letter-spacing:-.01em;white-space:nowrap}
+#punch{position:absolute;left:80px;top:790px;font:400 96px/1.1 var(--serif);white-space:nowrap;clip-path:inset(-20% 100% -20% 0%)}
+#punch i{color:var(--marker)}
+.pencil{fill:none;stroke:var(--graphite);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.bars{fill:none;stroke:var(--graphite);stroke-width:6;stroke-linecap:butt;opacity:.45}
+.mk{fill:none;stroke:var(--marker);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;opacity:.93}
+.hl{fill:none;stroke:var(--amber);stroke-linecap:butt;opacity:.42}
+#rub{fill:none;stroke:var(--rubbed);stroke-width:440;stroke-linecap:round;stroke-linejoin:round}
+.guide{fill:none;stroke:#9AA3AE;stroke-width:1.6;stroke-linecap:round}
+#lockup1{position:absolute;left:0;top:470px;width:1080px;height:136px;display:flex;justify-content:center;align-items:center;gap:30px}
+#m1{display:block;width:136px;height:136px;opacity:0}
+#wm1{font:800 104px/1 var(--sans);letter-spacing:-.03em;white-space:nowrap;clip-path:inset(-20% 100% -20% 0%)}
+#eraser{position:absolute;left:0;top:0;width:150px;height:400px;margin-left:-75px;margin-top:-200px;border-radius:26px;
+  background:linear-gradient(90deg,#E99890 0%,#F4ADA5 22%,#F6B4AC 70%,#E48E86 100%);
+  box-shadow:0 22px 40px rgba(14,23,38,.22),inset 0 0 0 2px rgba(120,40,34,.12)}
+#eraser .sleeve{position:absolute;left:-4px;right:-4px;top:150px;height:170px;border-radius:6px;
+  background:linear-gradient(90deg,#0B8C8C 0%,#0FA3A3 30%,#12B0AF 70%,#0B8C8C 100%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
+#eraser .sleeve i{position:absolute;left:0;right:0;top:34px;height:10px;background:rgba(255,255,255,.85)}
+#eraser .sleeve b{position:absolute;left:0;right:0;bottom:34px;height:4px;background:rgba(255,255,255,.6)}
+#shade{background:linear-gradient(270deg,rgba(14,23,38,.55) 0%,rgba(14,23,38,.08) 55%,rgba(14,23,38,0) 100%);opacity:0}
+
+/* ---------- page 2 : proof + CTA ---------- */
+#bg2{z-index:1}
+#proof{z-index:2}
+#cam{transform-origin:580px 486px}
+#pHead{position:absolute;left:80px;top:84px;font:400 60px/1.1 var(--serif);white-space:nowrap;clip-path:inset(-20% 100% -20% 0%)}
+#pHead i{color:var(--teal-ink)}
+#wire{clip-path:inset(0px 0px 0px 20px)}
+.wire{fill:none;stroke:#8E97A6;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+#cardWrap{position:absolute;left:20px;top:140px;width:740px;height:796px;clip-path:inset(0px 740px 0px 0px)}
+.card{position:absolute;left:60px;top:60px;width:620px;height:676px;background:#fff;border-radius:24px;overflow:hidden;
+  box-shadow:0 18px 40px rgba(14,23,38,.10),0 0 0 1.5px rgba(14,23,38,.08)}
+.hdr{height:86px;display:flex;align-items:center;gap:14px;padding:0 30px;border-bottom:1.5px solid #EFEDE6;font:800 26px var(--sans);white-space:nowrap}
+.hdr img{width:42px;height:42px;display:block}
+.hdr span{font:400 19px var(--mono);color:var(--muted)}
+.row{position:relative;display:grid;grid-template-columns:1fr 150px 60px;align-items:center;height:80px;padding:0 30px;border-bottom:1.5px solid #EFEDE6;font:600 27px var(--sans);white-space:nowrap}
+.row .lb{position:relative}
+.row .v{position:relative;height:40px;overflow:hidden;font:600 25px var(--mono)}
+.row .v span{position:absolute;right:0;top:0;line-height:40px;display:block}
+#rowHi{position:absolute;left:0;top:0;width:620px;height:80px;background:#FFF1EE;opacity:0}
+#vNew{color:var(--coral);opacity:0}
+.chart{position:relative;height:170px;border-bottom:1.5px solid #EFEDE6}
+.chart .cap{position:absolute;left:30px;top:14px;font:400 16px var(--mono);color:var(--muted);white-space:nowrap}
+.chart .tl{position:absolute;top:146px;font:400 16px var(--mono);color:var(--muted);white-space:nowrap}
+#dipLine{position:absolute;left:389px;top:40px;width:0;height:104px;border-left:2px dashed rgba(255,90,78,.55);opacity:0}
+#dipLab{position:absolute;left:360px;top:146px;width:60px;text-align:center;font:600 16px var(--mono);color:var(--coral);opacity:0}
+.btn{position:absolute;top:602px;height:56px;border-radius:14px;font:700 26px var(--sans);white-space:nowrap}
+#rb{left:30px;width:210px}
+#rbIn{position:absolute;left:0;top:0;width:210px;height:56px;border-radius:14px;overflow:hidden;background:var(--coral);transform-origin:50% 50%}
+#rbTeal{position:absolute;left:0;top:0;width:210px;height:56px;background:var(--teal-deep);opacity:0}
+#rbRip{position:absolute;left:55px;top:-22px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.55);opacity:0}
+.lbl{position:absolute;left:0;top:0;width:210px;height:56px;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff}
+#lblB{opacity:0}
+#ack{left:252px;width:200px;border:2px solid #E1DED5;display:flex;align-items:center;justify-content:center;color:var(--ink)}
+#seam{position:absolute;left:0;top:176px;width:4px;height:724px;border-radius:2px;background:linear-gradient(180deg,rgba(14,23,38,0),rgba(14,23,38,.75) 12%,rgba(14,23,38,.75) 88%,rgba(14,23,38,0));
+  box-shadow:0 0 14px rgba(15,163,163,.55);opacity:0}
+.tick{fill:none;stroke:var(--teal-ink);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.seis{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+#note{position:absolute;left:772px;top:318px;font:italic 400 48px/1.1 var(--serif);color:var(--marker);white-space:nowrap;clip-path:inset(-20% 100% -20% 0%)}
+#stickyShadow{position:absolute;left:800px;top:578px;width:230px;height:170px;background:rgba(14,23,38,.2);filter:blur(12px);opacity:0}
+#sticky{position:absolute;left:792px;top:560px;width:238px;background:#FFE3C8;padding:24px 26px 22px;opacity:0;
+  box-shadow:0 2px 3px rgba(14,23,38,.06)}
+#sticky .tape{position:absolute;left:59px;top:-18px;width:120px;height:36px;background:rgba(207,241,238,.85);border-radius:2px}
+#sticky .say{font:italic 400 42px/1.14 var(--serif);padding-bottom:4px}
+#sticky .who{font:400 19px/1.2 var(--mono);color:#7A5A3A;margin-top:14px}
+#cursor{position:absolute;left:0;top:0;width:34px;height:48px;margin-left:-2px;margin-top:-2px;opacity:0}
+
+#carry{z-index:3}
+#cta{z-index:4}
+#ctaLock{position:absolute;left:0;top:300px;width:1080px;height:112px;display:flex;justify-content:center;align-items:center;gap:26px;opacity:0}
+#ctaLock svg{width:112px;height:112px;display:block}
+#ctaLock span{font:800 92px/1 var(--sans);letter-spacing:-.03em;white-space:nowrap}
+#ctaHead{position:absolute;left:0;top:468px;width:1080px;text-align:center;font:400 94px/1.1 var(--serif);white-space:nowrap;clip-path:inset(-20% 100% -20% 0%)}
+#ctaHead i{color:var(--teal-ink)}
+#ctaBtnRow{position:absolute;left:0;top:690px;width:1080px;display:flex;justify-content:center}
+#ctaBtn{display:block;font:700 36px/1 var(--sans);color:#fff;background:var(--coral);border-radius:100px;padding:26px 64px;white-space:nowrap;
+  box-shadow:0 16px 36px rgba(255,90,78,.3);opacity:0}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1080">
+
+  <!-- ================= PAGE 1 : hook (0–2.6 s) + eraser + reveal (2.6–4.2 s), then the page turns ================= -->
+  <div id="page1" class="clip full" data-start="0" data-duration="4.85" data-track-index="4">
+    <div id="leaf" class="full dots">
+      <div id="hookHead" data-layout-allow-overflow>38 dashboards.</div>
+      <svg id="sketch" class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+        <path id="skFrame" class="pencil" d=""/>
+        <path id="skBars" class="bars" d=""/>
+      </svg>
+      <svg id="hlSvg" class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+        <path id="hlA" class="hl" d="M0 0" stroke-width="38" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="hlB" class="hl" d="M0 0" stroke-width="22" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+      </svg>
+      <div id="punch">One <i>missed</i> drop.</div>
+      <svg id="marks" class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+        <defs>
+          <filter id="boilA" filterUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1080">
+            <feTurbulence id="turbA" type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="1" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="3.6" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="rubEdge" filterUnits="userSpaceOnUse" x="-400" y="-400" width="1880" height="1880">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="4" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+        <g id="strikes" filter="url(#boilA)">
+          <path id="loopArrow" class="mk" d="M752 706 C 912 740, 1054 676, 1046 500 C 1042 380, 1026 314, 976 310" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+          <path id="loopHead" class="mk" d="M1000 290 L 973 310 L 999 332" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+          <path id="messRing" class="mk" d="M0 0" stroke-width="5" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        </g>
+      </svg>
+      <svg id="clean" class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+        <path id="rub" filter="url(#rubEdge)" d="M-260 150 L1340 300 L-260 560 L1340 760 L-260 1010" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <g id="crumbs"></g>
+      </svg>
+      <svg id="guides" class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+        <path id="gTop" class="guide" d="M96 471 Q 540 467, 986 472" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="gBot" class="guide" d="M92 605 Q 520 609, 990 604" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+      </svg>
+      <div id="lockup1">
+        <!-- official Acme mark, inlined so its pulse line can ink itself -->
+        <svg id="m1" viewBox="0 0 64 64" role="img" aria-label="Acme"><rect width="64" height="64" rx="16" fill="#0FA3A3"/><path id="m1line" d="M11 36h10l7-17 8 27 6-16h11" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/><circle id="m1dot" cx="53" cy="30" r="4.2" fill="#FF5A4E"/></svg>
+        <div id="wm1">Acme Pulse</div>
+      </div>
+      <div id="eraser" data-layout-allow-overflow><div class="sleeve"><i></i><b></b></div></div>
+      <div id="shade" class="full"></div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 2 : the next page of the notebook ================= -->
+  <div id="bg2" class="clip full dots" data-start="4.1" data-duration="7.9" data-track-index="0"></div>
+
+  <!-- proof 4.5–9.3 s -->
+  <div id="proof" class="clip full" data-start="4.1" data-duration="5.4" data-track-index="1">
+    <div id="cam" class="full">
+      <div id="pHead">Caught <i>before</i> customers noticed.</div>
+      <svg id="wire" class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+        <defs>
+          <filter id="boilW" filterUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1080">
+            <feTurbulence id="turbW" type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="2" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+        <g filter="url(#boilW)">
+          <path id="wF" class="wire" d="M0 0" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+          <path id="wL" class="wire" d="M0 0" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+          <path id="wP" class="wire" d="M0 0" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+          <path id="wC" class="wire" d="M0 0" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+          <path id="wB" class="wire" d="M0 0" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        </g>
+      </svg>
+      <div id="cardWrap">
+        <div class="card">
+          <div class="hdr"><img src="assets/brand/acme-mark.svg" alt="Acme">Acme Pulse <span>· 14 metrics</span></div>
+          <div class="row"><span class="lb">Signups</span><span class="v"><span>+4%</span></span><span></span></div>
+          <div class="row"><span class="lb">Active users</span><span class="v"><span>+1%</span></span><span></span></div>
+          <div class="row"><div id="rowHi"></div><span class="lb">Checkout conversion</span><span class="v"><span id="vOld">±0%</span><span id="vNew">−18%</span></span><span></span></div>
+          <div class="row"><span class="lb">p95 latency</span><span class="v"><span>212 ms</span></span><span></span></div>
+          <div class="chart">
+            <div class="cap">checkout conversion · today</div>
+            <div id="dipLine"></div>
+            <div class="tl" style="left:40px">09:00</div>
+            <div id="dipLab">09:42</div>
+            <div class="tl" style="right:40px">now</div>
+          </div>
+          <div id="rb" class="btn">
+            <div id="rbIn">
+              <div id="rbTeal"></div>
+              <div id="rbRip"></div>
+              <div id="lblA" class="lbl">Roll back</div>
+              <div id="lblB" class="lbl">Rolled back <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 11.5 L8.5 17 L19 5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+          </div>
+          <div id="ack" class="btn">Acknowledge</div>
+        </div>
+      </div>
+      <div id="seam"></div>
+      <svg id="pOver" class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+        <path id="tk1" class="tick" d="M630 326 l 11 13 l 25 -29" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="tk2" class="tick" d="M630 406 l 11 13 l 25 -29" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="tk4" class="tick" d="M630 566 l 11 13 l 25 -29" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="sA" class="seis" stroke="#0B8C8C" d="M0 0" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="sB" class="seis" stroke="#FF5A4E" d="M0 0" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="sC" class="seis" stroke="#0B8C8C" d="M0 0" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="ring1" class="mk" d="M0 0" stroke-width="6" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="ring2" class="mk" d="M0 0" stroke-width="3" style="opacity:.6" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="arrow" class="mk" opacity="0" d="M664 468 C 712 462, 744 430, 760 388" stroke-width="5" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <path id="arrowHead" class="mk" opacity="0" d="M0 0" stroke-width="5" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+        <g id="pen" opacity="0">
+          <g transform="rotate(30)">
+            <path d="M-1.6 -3 L1.6 -3 L6.5 -26 L-6.5 -26 Z" fill="#2B3445"/>
+            <rect x="-7.5" y="-60" width="15" height="36" rx="3" fill="#0FA3A3"/>
+            <rect x="-7.5" y="-128" width="15" height="72" rx="6" fill="#0B6E6E"/>
+            <rect x="-2" y="-120" width="4" height="46" rx="2" fill="rgba(255,255,255,.35)"/>
+          </g>
+        </g>
+      </svg>
+      <div id="note">since 09:42</div>
+      <div id="stickyShadow"></div>
+      <div id="sticky"><div class="tape"></div><div class="say">Roll back? your call.</div><div class="who">— Pulse</div></div>
+      <svg id="cursor" viewBox="0 0 34 48" aria-hidden="true"><path d="M2 2 L2 38 L11 29.5 L17.5 44 L24 41 L17.8 27 L29.5 27 Z" fill="#0E1726" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <!-- the metric line that survives the cut and becomes the underline -->
+  <div id="carry" class="clip full" data-start="8.9" data-duration="3.1" data-track-index="2">
+    <svg class="full" viewBox="0 0 1080 1080" aria-hidden="true">
+      <path id="sS" class="seis" stroke="#0B8C8C" d="M0 0" style="opacity:0"/>
+    </svg>
+  </div>
+
+  <!-- CTA 9.3–12 s -->
+  <div id="cta" class="clip full" data-start="9.3" data-duration="2.7" data-track-index="3">
+    <div id="ctaLock"><svg viewBox="0 0 64 64" role="img" aria-label="Acme"><rect width="64" height="64" rx="16" fill="#0FA3A3"/><path d="M11 36h10l7-17 8 27 6-16h11" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="53" cy="30" r="4.2" fill="#FF5A4E"/></svg><span>Acme Pulse</span></div>
+    <div id="ctaHead">You ship. <i>Pulse watches.</i></div>
+    <div id="ctaBtnRow"><span id="ctaBtn">Start free</span></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const NS = "http://www.w3.org/2000/svg";
+  const $ = (id) => document.getElementById(id);
+  const f1 = (n) => Math.round(n * 10) / 10;
+
+  // ---------- seeded hand-drawing helpers (deterministic, no Math.random) ----------
+  function rng(seed) {
+    let a = seed >>> 0;
+    return function () {
+      a = (a + 0x6d2b79f5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  // a single wobbly stroke with slight overshoot and bow, like a marker or pencil line
+  function rline(x1, y1, x2, y2, r, j, bowK) {
+    j = j == null ? 1.5 : j; bowK = bowK == null ? 0.02 : bowK;
+    const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy) || 1;
+    const ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
+    const s0 = -r() * 3, s1 = r() * 3;
+    const ax = x1 + ux * s0 + (r() - 0.5) * 2 * j, ay = y1 + uy * s0 + (r() - 0.5) * 2 * j;
+    const bx = x2 + ux * s1 + (r() - 0.5) * 2 * j, by = y2 + uy * s1 + (r() - 0.5) * 2 * j;
+    const bow = (r() - 0.5) * 2 * L * bowK, t = 0.35 + r() * 0.3;
+    const cx = ax + (bx - ax) * t + nx * bow, cy = ay + (by - ay) * t + ny * bow;
+    return "M" + f1(ax) + " " + f1(ay) + " Q" + f1(cx) + " " + f1(cy) + " " + f1(bx) + " " + f1(by);
+  }
+  function rrect(x, y, w, h, r, j, twice) {
+    let d = rline(x, y, x + w, y, r, j, 0.01) + rline(x + w, y, x + w, y + h, r, j, 0.015) +
+            rline(x + w, y + h, x, y + h, r, j, 0.01) + rline(x, y + h, x, y, r, j, 0.015);
+    if (twice) d += rline(x + 2, y - 1, x + w - 3, y + 1, r, j * 1.6, 0.012) + rline(x + w + 1, y + 3, x + w - 1, y + h - 2, r, j * 1.6, 0.012);
+    return d;
+  }
+  // Catmull-Rom through points → cubic Béziers
+  function smooth(p) {
+    let d = "M" + f1(p[0][0]) + " " + f1(p[0][1]);
+    for (let i = 0; i < p.length - 1; i++) {
+      const p0 = p[i - 1] || p[i], p1 = p[i], p2 = p[i + 1], p3 = p[i + 2] || p2;
+      d += " C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " +
+           f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]);
+    }
+    return d;
+  }
+  // an overshooting, slightly lumpy ellipse — the marker ring
+  function rellipse(cx, cy, rx, ry, r, o) {
+    const turns = o.turns || 1.1, start = o.start == null ? -2.3 : o.start, wob = o.wob || 0.04,
+          grow = o.grow || 0.06, rot = o.rot || 0, steps = o.steps || 40, drift = o.drift || 0;
+    const n = Math.round(steps * turns), ph = r() * 6.283, cr = Math.cos(rot), sr = Math.sin(rot), pts = [];
+    for (let i = 0; i <= n; i++) {
+      const u = i / n, a = start + u * turns * 6.2832;
+      const k = 1 + wob * Math.sin(a * 2 + ph) + grow * (u - 0.5) + (r() - 0.5) * 0.02;
+      const ex = Math.cos(a) * rx * k, ey = Math.sin(a) * ry * k;
+      pts.push([cx + drift * u * 6 + ex * cr - ey * sr, cy - drift * u * 3 + ex * sr + ey * cr]);
+    }
+    return smooth(pts);
+  }
+  const poly = (p) => "M" + p.map((q) => f1(q[0]) + " " + f1(q[1])).join(" L");
+  const cumLen = (p) => { const c = [0]; for (let i = 1; i < p.length; i++) c.push(c[i - 1] + Math.hypot(p[i][0] - p[i - 1][0], p[i][1] - p[i - 1][1])); return c; };
+
+  // ---------- HOOK: 38 pencil dashboards (built synchronously: frame 0 is the poster) ----------
+  const T = { x0: 80, y0: 272, w: 100, h: 80, px: 112, py: 98 }, MISSED = 21, tiles = [];
+  const SX = T.w / 95, SY = T.h / 72;
+  let dF = "", dB = "";
+  for (let i = 0; i < 38; i++) {
+    const r = rng(101 + i * 7), c = i % 8, rw = Math.floor(i / 8);
+    const x = T.x0 + c * T.px, y = T.y0 + rw * T.py;
+    const X = (v) => x + v * SX, Y = (v) => y + v * SY;
+    tiles.push({ x, y });
+    dF += rrect(x, y, T.w, T.h, r, 1.2, i % 3 === 0);
+    dF += rline(X(9), Y(13), X(30 + r() * 22), Y(13), r, 0.8, 0.03);
+    const type = i === MISSED ? 0 : (i * 5 + rw) % 3;
+    if (type === 0) {
+      const pts = [];
+      for (let k = 0; k < 7; k++) {
+        const px = X(10 + k * 12.5);
+        const py = i === MISSED ? Y(k < 5 ? 34 + (r() - 0.5) * 7 : (k === 5 ? 38 : 64)) : Y(30 + r() * 30);
+        pts.push([px, py]);
+      }
+      dF += smooth(pts);
+    } else if (type === 1) {
+      for (let k = 0; k < 5; k++) { const bx = X(16 + k * 15); dB += rline(bx, Y(63), bx, Y(60 - (10 + r() * 28)), r, 0.5, 0.01); }
+    } else {
+      dF += rellipse(X(30), Y(45), 15 * SX, 15 * SX, r, { turns: 1.08, wob: 0.04, grow: 0.05, steps: 22 });
+      dF += rline(X(56), Y(38), X(84), Y(38), r, 0.7, 0.02) + rline(X(56), Y(50), X(76), Y(50), r, 0.7, 0.02);
+    }
+  }
+  $("skFrame").setAttribute("d", dF);
+  $("skBars").setAttribute("d", dB);
+
+  // 37 marker strikes (the missed tile is skipped)
+  const strikesG = $("strikes"), strikes = [];
+  tiles.forEach((t, i) => {
+    if (i === MISSED) return;
+    const r = rng(907 + i * 13);
+    const d = i % 5 === 3
+      ? rline(t.x - 7, t.y + T.h * 0.52 + (r() - 0.5) * 6, t.x + T.w + 7, t.y + T.h * 0.46 + (r() - 0.5) * 6, r, 1.5, 0.03)
+      : rline(t.x - 5, t.y + T.h + 5, t.x + T.w + 5, t.y - 5, r, 1.8, 0.035);
+    const p = document.createElementNS(NS, "path");
+    p.setAttribute("d", d); p.setAttribute("class", "mk");
+    p.setAttribute("pathLength", "1"); p.setAttribute("stroke-dasharray", "1 2"); p.setAttribute("stroke-dashoffset", "1.02");
+    strikesG.insertBefore(p, $("loopArrow"));
+    strikes.push(p);
+  });
+  const mt = tiles[MISSED];
+  $("messRing").setAttribute("d", rellipse(mt.x + T.w / 2, mt.y + T.h / 2, 86, 62, rng(55), { turns: 2.15, start: -2.6, wob: 0.07, grow: 0.16, rot: -0.1, steps: 44, drift: 1.5 }));
+
+  // eraser crumbs along the scrub path
+  const V = [[-260, 150], [1340, 300], [-260, 560], [1340, 760], [-260, 1010]];
+  const segL = []; let totL = 0;
+  for (let i = 1; i < V.length; i++) { const l = Math.hypot(V[i][0] - V[i - 1][0], V[i][1] - V[i - 1][1]); segL.push(l); totL += l; }
+  function onPath(u) {
+    let s = u * totL;
+    for (let i = 0; i < segL.length; i++) {
+      if (s <= segL[i] || i === segL.length - 1) {
+        const k = s / segL[i], a = V[i], b = V[i + 1];
+        const dx = (b[0] - a[0]) / segL[i], dy = (b[1] - a[1]) / segL[i];
+        return { x: a[0] + (b[0] - a[0]) * k, y: a[1] + (b[1] - a[1]) * k, nx: -dy, ny: dx };
+      }
+      s -= segL[i];
+    }
+  }
+  const crumbG = $("crumbs"), crumbs = [], cr = rng(77);
+  for (let k = 0; k < 40; k++) {
+    const u = (k + 0.5) / 40, p = onPath(u), off = (cr() - 0.5) * 380;
+    const x = p.x + p.nx * off, y = p.y + p.ny * off;
+    if (x < 40 || x > 1040 || y < 40 || y > 1040) { cr(); cr(); continue; }
+    const e = document.createElementNS(NS, "ellipse");
+    e.setAttribute("cx", f1(x)); e.setAttribute("cy", f1(y));
+    e.setAttribute("rx", f1(2.5 + cr() * 4)); e.setAttribute("ry", f1(1.8 + cr() * 2.4));
+    e.setAttribute("fill", k % 3 === 0 ? "#D9CFC1" : "#EBB0A8");
+    e.setAttribute("transform", "rotate(" + ((k * 47) % 180) + " " + f1(x) + " " + f1(y) + ")");
+    e.setAttribute("opacity", "0");
+    crumbG.appendChild(e);
+    crumbs.push({ e, u });
+  }
+
+  // ---------- PROOF: graphite wireframe of the Pulse panel ----------
+  const wr = rng(2231);
+  $("wF").setAttribute("d", rrect(80, 200, 620, 676, wr, 1.6, true));
+  let wl = rline(80, 286, 700, 286, wr, 1.2, 0.006);
+  [366, 446, 526, 606, 786].forEach((y) => { wl += rline(82, y, 698, y, wr, 1.2, 0.006); });
+  $("wL").setAttribute("d", wl);
+  let wp = rrect(110, 223, 40, 40, wr, 1, false) + rline(166, 244, 300, 243, wr, 1, 0.02) + rline(318, 244, 420, 244, wr, 1, 0.02);
+  [[326, 120], [406, 180], [486, 270], [566, 160]].forEach(([y, l]) => { wp += rline(110, y, 110 + l, y, wr, 1, 0.02) + rline(548, y, 606, y, wr, 1, 0.02); });
+  $("wP").setAttribute("d", wp);
+  const sq = []; for (let k = 0; k <= 12; k++) sq.push([120 + k * 45, 690 + Math.sin(k * 1.3) * 16 + (wr() - 0.5) * 8]);
+  $("wC").setAttribute("d", rline(110, 626, 360, 626, wr, 1, 0.02) + smooth(sq));
+  $("wB").setAttribute("d", rrect(110, 802, 210, 56, wr, 1.2, false) + rrect(332, 802, 200, 56, wr, 1.2, false));
+
+  // coral double ring around −18%, arrow to the handwritten note
+  $("ring1").setAttribute("d", rellipse(582, 486, 80, 38, rng(18), { turns: 1.12, start: -2.5, wob: 0.03, grow: 0.08, rot: -0.07, steps: 46 }));
+  $("ring2").setAttribute("d", rellipse(586, 488, 91, 45, rng(42), { turns: 1.0, start: -2.1, wob: 0.04, grow: 0.06, rot: 0.05, steps: 46 }));
+  (function () {
+    const ex = 760, ey = 388, bx = -(760 - 744), by = -(388 - 430), bl = Math.hypot(bx, by), ux = bx / bl, uy = by / bl, L = 22;
+    const arm = (a) => [ex + L * (ux * Math.cos(a) - uy * Math.sin(a)), ey + L * (ux * Math.sin(a) + uy * Math.cos(a))];
+    const a1 = arm(0.5), a2 = arm(-0.5);
+    $("arrowHead").setAttribute("d", "M" + f1(a1[0]) + " " + f1(a1[1]) + " L" + ex + " " + ey + " L" + f1(a2[0]) + " " + f1(a2[1]));
+  })();
+
+  // ---------- NEW COMPONENT: fineliner seismograph (checkout conversion, live) ----------
+  const A = [], B = [], C = [];
+  for (let x = 120; x <= 470; x += 10) A.push([x, 680 + 5 * Math.sin(x * 0.045) + 3 * Math.sin(x * 0.13 + 1)]);
+  const aEnd = A[A.length - 1];
+  B.push(aEnd, [476, 699], [482, 719], [488, 731], [495, 736]);
+  const DROP_I = B.length - 1;
+  for (let x = 503; x <= 575; x += 8) B.push([x, 735 + 2.5 * Math.sin(x * 0.21)]);
+  const bEnd = B[B.length - 1];
+  C.push(bEnd, [583, 729], [591, 715], [599, 701], [607, 691], [615, 685]);
+  for (let x = 624; x <= 660; x += 9) C.push([x, 680 + 4 * Math.sin(x * 0.045) + 2 * Math.sin(x * 0.13 + 1)]);
+  $("sA").setAttribute("d", poly(A));
+  $("sB").setAttribute("d", poly(B));
+  $("sC").setAttribute("d", poly(C));
+  const S = A.concat(B.slice(1), C.slice(1));
+  $("sS").setAttribute("d", poly(S));
+
+  // ---------- timeline (built after fonts, so text can be measured with canvas) ----------
+  const fontsNeeded = ['400 96px "Instrument Serif"', 'italic 400 96px "Instrument Serif"', '800 92px "Manrope"', '600 25px "JetBrains Mono"', '400 16px "JetBrains Mono"'];
+  Promise.all(fontsNeeded.map((f) => document.fonts.load(f))).then(() => document.fonts.ready).then(build);
+
+  function build() {
+    const cv = document.createElement("canvas").getContext("2d");
+    const tw = (font, s) => { cv.font = font; return cv.measureText(s).width; };
+    const baseline = (font, top, lh) => { cv.font = font; const m = cv.measureText("Hxg"); return top + (lh - (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent)) / 2 + m.fontBoundingBoxAscent; };
+
+    // highlighter under "missed"
+    const pR = '400 96px "Instrument Serif"', pI = 'italic 400 96px "Instrument Serif"';
+    const hx0 = 80 + tw(pR, "One "), hx1 = hx0 + tw(pI, "missed"), hb = baseline(pI, 790, 105.6);
+    const hr = rng(9);
+    $("hlA").setAttribute("d", rline(hx0 - 10, hb - 16, hx1 + 12, hb - 20, hr, 1.5, 0.01));
+    $("hlB").setAttribute("d", rline(hx0 - 4, hb - 30, hx1 + 4, hb - 33, hr, 2, 0.02));
+
+    // CTA underline target: the seismograph flattens into it
+    const cR = '400 94px "Instrument Serif"', cI = 'italic 400 94px "Instrument Serif"';
+    const wA = tw(cR, "You ship. "), wPW = tw(cI, "Pulse watches."), left = 540 - (wA + wPW) / 2;
+    const ux0 = left + wA - 6, ux1 = left + wA + wPW + 10, uy = baseline(cI, 468, 103.4) + 17;
+    const TT = S.map((_, i) => { const u = i / (S.length - 1); return [ux0 + (ux1 - ux0) * u, uy + 4.5 * Math.sin(u * 5.4 + 0.5) + 3 * u]; });
+    const underlineD = poly(TT);
+
+    const tl = gsap.timeline({ paused: true });
+    const draw = (el, t, dur, ease) => tl.fromTo(el, { attr: { "stroke-dashoffset": 1.02 } }, { attr: { "stroke-dashoffset": 0 }, duration: dur, ease: ease || "power1.inOut" }, t);
+    const wipe = (el, t, dur, ease) => tl.fromTo(el, { clipPath: "inset(-20% 100% -20% 0%)" }, { clipPath: "inset(-20% -3% -20% 0%)", duration: dur, ease: ease || "none" }, t);
+
+    // ===== HOOK (0 – 2.6) =====
+    // frame 0 holds as the poster; then strikes cascade, accelerating (frustration)
+    strikes.forEach((p, k) => { const u = k / (strikes.length - 1); draw(p, 0.3 + 1.05 * Math.pow(u, 0.62), 0.14 - 0.05 * u); });
+    draw($("loopArrow"), 1.36, 0.34);
+    draw($("loopHead"), 1.7, 0.08, "power2.out");
+    wipe($("punch"), 1.55, 0.6);
+    draw($("hlA"), 1.98, 0.22, "none");
+    draw($("hlB"), 2.06, 0.18, "none");
+    draw($("messRing"), 2.1, 0.46);
+    // line boil: re-seed the displacement every 3 frames for a living marker edge
+    for (let k = 0; k < 32; k++) tl.set($("turbA"), { attr: { seed: 1 + (k % 4) } }, 0.3 + k * 0.1);
+
+    // ===== ERASER (2.62 – 3.5): four zigzag passes, linear =====
+    const E0 = 2.62, ED = 0.88, er = $("eraser"), rot = [8, -8, 8, -8];
+    tl.fromTo($("rub"), { attr: { "stroke-dashoffset": 1.02 } }, { attr: { "stroke-dashoffset": 0 }, duration: ED, ease: "none" }, E0);
+    let et = E0;
+    for (let i = 0; i < 4; i++) {
+      const d = ED * segL[i] / totL;
+      if (i === 0) tl.fromTo(er, { x: V[0][0], y: V[0][1], rotation: rot[0] }, { x: V[1][0], y: V[1][1], rotation: rot[0], duration: d, ease: "none" }, et);
+      else { tl.set(er, { rotation: rot[i] }, et); tl.to(er, { x: V[i + 1][0], y: V[i + 1][1], duration: d, ease: "none" }, et); }
+      et += d;
+    }
+    crumbs.forEach((c) => tl.fromTo(c.e, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.1, ease: "power1.out" }, E0 + ED * c.u + 0.03));
+
+    // ===== REVEAL (3.1 – 4.2): lockup inked over pencil guides, right behind the eraser =====
+    draw($("gTop"), 3.08, 0.3, "power2.out");
+    draw($("gBot"), 3.14, 0.3, "power2.out");
+    tl.fromTo($("m1"), { opacity: 0, scale: 0.72, rotation: -9 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.38, ease: "power3.out" }, 3.14);
+    draw($("m1line"), 3.3, 0.32);
+    tl.fromTo($("m1dot"), { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.22, ease: "back.out(3)" }, 3.58);
+    wipe($("wm1"), 3.26, 0.46);
+    tl.to([$("gTop"), $("gBot")], { opacity: 0, duration: 0.3, ease: "power1.out" }, 3.86);
+
+    // ===== PAPER FOLD (4.2 – 4.78): the page turns onto a fresh page =====
+    tl.fromTo($("leaf"), { rotationY: 0 }, { rotationY: -94, duration: 0.7, ease: "sine.inOut" }, 4.12);
+    tl.fromTo($("shade"), { opacity: 0 }, { opacity: 0.65, duration: 0.7, ease: "sine.inOut" }, 4.12);
+
+    // ===== PROOF A (4.5 – 6.4): pencil → real =====
+    wipe($("pHead"), 4.55, 0.62);
+    for (let k = 0; k < 14; k++) tl.set($("turbW"), { attr: { seed: 2 + (k % 4) } }, 4.6 + k * 0.1);
+    draw($("wF"), 4.6, 0.42);
+    draw($("wL"), 4.74, 0.38);
+    draw($("wP"), 4.84, 0.38);
+    draw($("wC"), 4.94, 0.32);
+    draw($("wB"), 5.0, 0.3);
+    // the seam walks left → right; crisp UI on its left, graphite on its right
+    tl.fromTo($("seam"), { x: 18 }, { x: 758, duration: 0.7, ease: "power1.inOut" }, 5.25);
+    tl.fromTo($("seam"), { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "power1.out" }, 5.25);
+    tl.to($("seam"), { opacity: 0, duration: 0.12, ease: "power1.out" }, 5.88);
+    tl.fromTo($("cardWrap"), { clipPath: "inset(0px 740px 0px 0px)" }, { clipPath: "inset(0px 0px 0px 0px)", duration: 0.7, ease: "power1.inOut" }, 5.25);
+    tl.fromTo($("wire"), { clipPath: "inset(0px 0px 0px 20px)" }, { clipPath: "inset(0px 0px 0px 760px)", duration: 0.7, ease: "power1.inOut" }, 5.25);
+    // healthy rows get neat single-stroke teal ticks
+    draw($("tk1"), 5.95, 0.2); draw($("tk2"), 6.05, 0.2); draw($("tk4"), 6.15, 0.2);
+
+    // Pulse's pen sketches checkout conversion live
+    const pen = $("pen");
+    tl.set(pen, { x: A[0][0], y: A[0][1] }, 0);
+    tl.fromTo(pen, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.15, ease: "power1.out" }, 5.4);
+    function drawPieces(path, pts, pieces) {
+      const c = cumLen(pts), L = c[c.length - 1]; let i0 = 0;
+      pieces.forEach(([t0, t1, i1], k) => {
+        const off = 1 - c[i1] / L, dur = t1 - t0;
+        if (k === 0) tl.fromTo(path, { attr: { "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": off }, duration: dur, ease: "none" }, t0);
+        else tl.to(path, { attr: { "stroke-dashoffset": off }, duration: dur, ease: "none" }, t0);
+        let t = t0; const span = c[i1] - c[i0];
+        for (let j = i0 + 1; j <= i1; j++) { const d = dur * (c[j] - c[j - 1]) / span; tl.to(pen, { x: pts[j][0], y: pts[j][1], duration: d, ease: "none" }, t); t += d; }
+        i0 = i1;
+      });
+    }
+    drawPieces($("sA"), A, [[5.45, 6.25, A.length - 1]]);
+
+    // ===== PROOF B (6.25 – 9.0): the catch, and a human decides =====
+    drawPieces($("sB"), B, [[6.25, 6.42, DROP_I], [6.42, 8.4, B.length - 1]]);
+    tl.fromTo($("dipLine"), { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 6.3);
+    tl.fromTo($("dipLab"), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, 6.32);
+    tl.fromTo($("rowHi"), { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, 6.3);
+    tl.fromTo($("vOld"), { y: 0, opacity: 1 }, { y: -34, opacity: 0, duration: 0.2, ease: "power2.in" }, 6.3);
+    tl.fromTo($("vNew"), { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.26, ease: "power3.out" }, 6.38);
+    // camera leans in to the one number that matters
+    tl.fromTo($("cam"), { scale: 1 }, { scale: 1.06, duration: 0.8, ease: "power2.inOut" }, 6.4);
+    draw($("ring1"), 6.46, 0.34);
+    draw($("ring2"), 6.68, 0.24, "power1.out");
+    tl.set([$("arrow"), $("arrowHead")], { attr: { opacity: 1 } }, 6.92);
+    draw($("arrow"), 6.92, 0.24);
+    draw($("arrowHead"), 7.14, 0.08, "power2.out");
+    wipe($("note"), 7.12, 0.36);
+    // sticky slap: rotate 12 → 5, scale 1.1 → 1, back.out(2), then a 2-frame shadow squash
+    tl.fromTo($("sticky"), { opacity: 0, rotation: 12, scale: 1.1 }, { opacity: 1, rotation: 5, scale: 1, duration: 0.25, ease: "back.out(2)" }, 7.5);
+    tl.fromTo($("stickyShadow"), { opacity: 0, rotation: 5, scaleX: 1.14, scaleY: 0.62 }, { opacity: 1, rotation: 5, scaleX: 1, scaleY: 1, duration: 0.07, ease: "none" }, 7.66);
+    // step back to decide
+    tl.to($("cam"), { scale: 1, duration: 0.6, ease: "power2.inOut" }, 7.45);
+    // the human: cursor glides in on a curve and presses Roll back
+    const cu = $("cursor");
+    tl.fromTo(cu, { x: 1012, opacity: 0 }, { x: 300, opacity: 1, duration: 0.48, ease: "power2.inOut" }, 7.84);
+    tl.fromTo(cu, { y: 1046 }, { y: 849, duration: 0.48, ease: "power1.out" }, 7.84);
+    tl.fromTo(cu, { scale: 1, transformOrigin: "2px 2px" }, { scale: 0.84, duration: 0.07, ease: "power2.in" }, 8.32);
+    tl.to(cu, { scale: 1, duration: 0.16, ease: "power2.out" }, 8.39);
+    tl.fromTo($("rbIn"), { scale: 1 }, { scale: 0.93, duration: 0.07, ease: "power2.in" }, 8.32);
+    tl.to($("rbIn"), { scale: 1, duration: 0.2, ease: "back.out(2.5)" }, 8.39);
+    tl.fromTo($("rbRip"), { scale: 0, opacity: 0.9 }, { scale: 2.4, opacity: 0, duration: 0.4, ease: "power2.out" }, 8.36);
+    tl.fromTo($("rbTeal"), { opacity: 0 }, { opacity: 1, duration: 0.16, ease: "power1.out" }, 8.42);
+    tl.fromTo($("lblA"), { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "power1.out" }, 8.42);
+    tl.fromTo($("lblB"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 8.48);
+    // after the rollback the line climbs back
+    drawPieces($("sC"), C, [[8.45, 8.95, C.length - 1]]);
+    tl.to(pen, { attr: { opacity: 0 }, duration: 0.14, ease: "power1.out" }, 8.94);
+
+    // ===== LINE-TO-HORIZON (8.92 – 9.75): the recovered line becomes the underline =====
+    tl.fromTo($("sS"), { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, 8.92);
+    tl.to($("cam"), { opacity: 0, y: 16, duration: 0.34, ease: "power2.in" }, 9.0);
+    tl.to($("sS"), { attr: { d: underlineD, "stroke-width": 8.5 }, duration: 0.75, ease: "power2.inOut" }, 9.0);
+
+    // ===== CTA (9.45 – 12) =====
+    wipe($("ctaHead"), 9.45, 0.78);
+    tl.fromTo($("ctaLock"), { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 9.98);
+    tl.fromTo($("ctaBtn"), { opacity: 0, y: -40, scale: 1.08 }, { opacity: 1, y: 0, scale: 1, duration: 0.36, ease: "power4.out" }, 10.5);
+    // everything is still from 10.86 s to 12 s
+
+    window.__timelines["main"] = tl;
+  }
+})();
+</script>
+</body>
+</html>

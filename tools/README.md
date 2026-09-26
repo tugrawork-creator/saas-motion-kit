@@ -2,7 +2,9 @@
 
 | Script | What it does |
 |---|---|
-| `variety_audit.py <STORYBOARD.md> [--history f.json] [--append name]` | Flags repetition and tone mismatches in the storyboard ledger, and remembers your previous films |
+| `variety_audit.py <STORYBOARD.md> [--history f.json] [--append name --theme NNN]` | Flags repetition and tone mismatches in the storyboard ledger, and remembers your previous films and their themes |
+| `pick_themes.py --tone <tone> [--audience words] [--effort low\|med\|high] [--history f.json]` | Shortlists gallery themes for a tone and an audience, and skips the themes of your last five films |
+| `history_report.py <history.json> [-o motion-history.html]` | Turns your motion history into a one-page report: what you keep reaching for, and the transitions and themes to try next |
 | `deliver.sh <in> <WxH> [out] [lanczos\|area]` | Downscales a 4K render to its delivery size and loudness-normalises the audio |
 | `loop_check.py <video>` | Compares the first and last frames of a loop (under ~3 means seamless) |
 | `warm_sfx.py <dir>` | Synthesises warm UI sounds in C major: pop, tick, confirm, reveal, error-soft, whoosh-soft |

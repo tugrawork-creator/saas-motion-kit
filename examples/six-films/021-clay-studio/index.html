@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1080" />
+<title>Acme Pulse · Clay Studio</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+<style>
+@font-face{font-family:"Manrope";font-weight:200 800;font-display:block;src:url("assets/fonts/manrope-latin-wght-normal.woff2")format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/instrument-serif-latin-400-normal.woff2")format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:block;src:url("assets/fonts/instrument-serif-latin-400-italic.woff2")format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:600;font-display:block;src:url("assets/fonts/jetbrains-mono-latin-600-normal.woff2")format("woff2")}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#EFE5D3}
+#root{position:relative;width:100%;height:100%;overflow:hidden;font-family:"Manrope",sans-serif;color:#243349}
+.layer{position:absolute;left:0;top:0;width:1080px;height:1080px}
+.abs{position:absolute}
+.fill{position:absolute;inset:0}
+
+/* ---------- the studio: felt table, grain, light ---------- */
+#felt{z-index:0;background:radial-gradient(120% 90% at 30% 15%,#FBF6EC 0%,#EFE5D3 55%,#DFD1BA 100%)}
+#hook{z-index:1} #reveal{z-index:2} #proof{z-index:3} #markL{z-index:4} #cta{z-index:5} #bigpin{z-index:6}
+#grain{z-index:7;mix-blend-mode:multiply;opacity:.42;pointer-events:none}
+.spot{background:radial-gradient(34% 30% at 50% 50%,rgba(255,250,238,.7) 0%,rgba(255,250,238,0) 100%),radial-gradient(80% 75% at 50% 45%,rgba(70,45,20,0) 50%,rgba(70,45,20,.22) 100%)}
+
+/* ---------- clay slab (theme 021 component) ---------- */
+.tile{position:absolute}
+.tilt{position:absolute;inset:0}
+.slab{position:absolute;inset:0;border-radius:42px;background:#FBF7EF;
+  box-shadow:inset 10px 12px 18px rgba(255,255,255,.9),inset -12px -16px 24px rgba(130,100,60,.28),14px 22px 30px rgba(90,60,25,.28),3px 5px 8px rgba(90,60,25,.2)}
+.slab.t{background:#0FA3A3;box-shadow:inset 10px 12px 18px rgba(210,255,250,.45),inset -12px -16px 24px rgba(0,50,50,.45),14px 22px 30px rgba(90,60,25,.3),3px 5px 8px rgba(90,60,25,.2)}
+.slab.d{background:#0B6E6E;box-shadow:inset 10px 12px 18px rgba(170,240,232,.35),inset -12px -16px 24px rgba(0,30,30,.5),14px 22px 30px rgba(90,60,25,.3),3px 5px 8px rgba(90,60,25,.2)}
+.slab.o{background:#FF5A4E;box-shadow:inset 10px 12px 18px rgba(255,215,200,.55),inset -12px -16px 24px rgba(140,20,10,.42),14px 22px 30px rgba(110,40,20,.3),3px 5px 8px rgba(90,60,25,.2)}
+.slab.a{background:#F4B740;box-shadow:inset 10px 12px 18px rgba(255,245,200,.6),inset -12px -16px 24px rgba(130,80,0,.35),14px 22px 30px rgba(90,60,25,.28),3px 5px 8px rgba(90,60,25,.2)}
+.slab.k{background:#243349;box-shadow:inset 10px 12px 18px rgba(255,255,255,.18),inset -12px -16px 24px rgba(0,0,0,.45),14px 22px 30px rgba(90,60,25,.3),3px 5px 8px rgba(90,60,25,.2)}
+.lumpy{border-radius:46% 54% 42% 58% / 26% 30% 34% 28%}
+.coil{position:absolute;left:12%;bottom:14%;width:76%;height:62%}
+.bars{position:absolute;left:30px;right:30px;bottom:30px;height:62%;display:flex;gap:14px;align-items:flex-end}
+.bars i{display:block;flex:1;border-radius:18px;background:#FBF7EF;box-shadow:inset 4px 5px 8px rgba(255,255,255,.9),inset -5px -6px 10px rgba(0,0,0,.22),4px 6px 8px rgba(0,0,0,.18)}
+.slab.a .bars i{background:#FF5A4E;box-shadow:inset 4px 5px 8px rgba(255,220,200,.6),inset -5px -6px 10px rgba(120,20,10,.35),4px 6px 8px rgba(0,0,0,.18)}
+.slab.k .bars i{background:#0FA3A3;box-shadow:inset 4px 5px 8px rgba(210,255,250,.45),inset -5px -6px 10px rgba(0,40,40,.4),4px 6px 8px rgba(0,0,0,.25)}
+.fpTex{position:absolute;width:80px;height:96px}
+
+/* ---------- clay type ---------- */
+.lbl{position:absolute;font:600 22px "JetBrains Mono",monospace;letter-spacing:.1em;color:#6B5A44;white-space:nowrap}
+.lbl.c{color:#FFF6EC}
+.lbl.r{color:#420D08}
+.num{position:absolute;font-weight:800;letter-spacing:-.04em;line-height:1;color:#FFFDF8;white-space:nowrap;
+  text-shadow:-2px -3px 1px rgba(255,255,255,.5),4px 6px 0 rgba(90,20,10,.45),8px 12px 14px rgba(90,20,10,.3)}
+.num.dk{text-shadow:-2px -3px 1px rgba(255,255,255,.35),4px 6px 0 rgba(0,40,40,.55),8px 12px 14px rgba(0,30,30,.35)}
+.val{position:absolute;font-weight:800;font-size:44px;letter-spacing:-.02em;color:#243349;text-shadow:2px 3px 0 rgba(130,100,60,.25)}
+.word{font-weight:800;letter-spacing:-.035em;color:#0B7A7A;line-height:1;white-space:nowrap;
+  text-shadow:-2px -3px 1px rgba(255,255,255,.55),4px 6px 0 #064848,10px 16px 18px rgba(90,60,25,.3)}
+.h{position:absolute;font-family:"Instrument Serif",serif;font-weight:400;line-height:1.02;letter-spacing:-.01em;color:#243349;text-shadow:0 2px 0 rgba(255,255,255,.7)}
+.h em{color:#0B6E6E}
+.ok{position:absolute;width:44px;height:44px;border-radius:50%;background:#1F9D55;box-shadow:inset 3px 4px 6px rgba(255,255,255,.5),inset -4px -5px 8px rgba(0,0,0,.35),3px 5px 6px rgba(0,0,0,.2)}
+.blob{position:absolute;border-radius:50%;background:#0FA3A3;box-shadow:inset 6px 8px 12px rgba(255,255,255,.45),inset -8px -10px 14px rgba(0,0,0,.3),8px 14px 16px rgba(90,60,25,.3)}
+.blob.o{background:#FF5A4E}.blob.a{background:#F4B740}.blob.k{background:#243349}
+
+/* ---------- hook ---------- */
+#hookH{left:70px;top:62px;width:820px;font-size:86px}
+#t8 .slab{border-radius:25%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+#t8 .num{position:static;font-size:170px}
+#t8 .lbl{position:static;font-size:20px}
+
+/* ---------- reveal ---------- */
+.plinth{position:absolute;inset:0;border-radius:50%;background:#FBF7EF;box-shadow:inset 0 14px 24px rgba(255,255,255,.9),inset 0 -20px 30px rgba(130,100,60,.3),0 30px 40px rgba(90,60,25,.3)}
+.sqarc{position:absolute;width:26px;height:96px;border-left:9px solid rgba(36,51,73,.42);border-radius:50%}
+#wmSlot{left:0;top:760px;width:1080px;height:190px;overflow:hidden}
+#wmIn{position:absolute;left:0;top:26px;width:1080px;text-align:center;font-size:132px}
+
+/* ---------- the carried mark ---------- */
+#markbox{position:absolute;left:390px;top:330px;width:300px;height:300px}
+.mk{position:absolute;inset:0}
+.mk img{position:absolute;inset:0;width:100%;height:100%;display:block;filter:drop-shadow(14px 22px 18px rgba(90,60,25,.35))}
+.mklight{position:absolute;inset:0;border-radius:25%;box-shadow:inset 9px 11px 16px rgba(255,255,255,.3),inset -10px -14px 20px rgba(0,40,40,.32)}
+
+/* ---------- proof ---------- */
+#pillT .slab{border-radius:39px}
+#pillT .lbl{left:84px;top:26px}
+.live{position:absolute;right:30px;top:26px;width:26px;height:26px;border-radius:50%;background:#0FA3A3;box-shadow:inset -3px -3px 5px rgba(0,0,0,.3)}
+.ring{position:absolute;right:30px;top:26px;width:26px;height:26px;border-radius:50%;border:5px solid rgba(15,163,163,.55)}
+.calm .lbl{left:26px;top:18px}
+.calm .val{left:26px;top:48px}
+.calm .ok{right:24px;top:34px}
+.bump{position:absolute;border-radius:50%}
+#lump .lbl{left:74px;top:44px}
+#num18{left:44px;top:92px;font-size:200px}
+#lump #since{left:56px;top:328px;font-size:20px}
+.dent{position:absolute;left:506px;top:286px;width:60px;height:50px;border-radius:50%;background:radial-gradient(circle at 60% 65%,rgba(255,255,255,.34),rgba(60,20,0,.34) 72%);box-shadow:inset 5px 6px 8px rgba(90,20,10,.35)}
+#smooth .lbl{left:60px;top:44px}
+#rolled{left:56px;top:96px;font-size:118px;line-height:.98}
+#rolled span{display:block}
+#smooth #byyou{left:60px;top:352px;font-size:20px}
+#okS{right:52px;top:40px}
+#caughtSlot{left:62px;top:626px;width:1000px;height:100px;overflow:hidden}
+#caught{left:8px;top:6px;font-size:76px;white-space:nowrap}
+.face{position:absolute;inset:0;border-radius:64px;display:flex;align-items:center;justify-content:center}
+.face.k{background:#243349}.face.w{background:#FBF7EF}.face.o{background:#FF5A4E;border-radius:70px}
+.face span{position:relative;font-weight:800;font-size:48px;letter-spacing:-.01em;color:#FFFDF8}
+.face.w span{color:#243349}
+.sh{position:absolute;inset:0;border-radius:inherit}
+.shUp.k{box-shadow:inset 10px 12px 18px rgba(255,255,255,.18),inset -12px -16px 24px rgba(0,0,0,.45),14px 22px 30px rgba(90,60,25,.3),3px 5px 8px rgba(90,60,25,.2)}
+.shUp.w{box-shadow:inset 10px 12px 18px rgba(255,255,255,.9),inset -12px -16px 24px rgba(130,100,60,.28),14px 22px 30px rgba(90,60,25,.28),3px 5px 8px rgba(90,60,25,.2)}
+.shUp.o{box-shadow:inset 10px 12px 18px rgba(255,215,200,.55),inset -12px -16px 24px rgba(140,20,10,.42),14px 22px 30px rgba(110,40,20,.3),3px 5px 8px rgba(90,60,25,.2)}
+.shDn{box-shadow:inset -8px -10px 16px rgba(255,255,255,.14),inset 10px 14px 22px rgba(0,0,0,.55),4px 6px 6px rgba(90,60,25,.2)}
+.thumb{position:absolute;left:266px;top:14px;width:80px;height:100px}
+#rbFace{padding-right:60px}
+
+/* the sculpting stick (Pulse's pointer) */
+#stickwrap{left:956px;top:481px;width:40px;height:460px}
+#stickTilt{position:absolute;inset:0;transform:rotate(-36deg);transform-origin:50% 0}
+
+/* the rollback rolling pin (new component) */
+#spin{left:407px;top:110px;width:66px;height:550px}
+.pinH{position:absolute;left:19px;width:28px;border-radius:14px;background:linear-gradient(90deg,#9C6E3C,#D8B07A 45%,#8E6234)}
+.pinB{position:absolute;left:0;width:100%;border-radius:22px;background:linear-gradient(90deg,#A77543 0%,#E9C893 32%,#F6DDB0 42%,#D2A56B 70%,#9A6B3B 100%);box-shadow:10px 16px 22px rgba(90,60,25,.35)}
+.pinB i{position:absolute;top:0;bottom:0;width:2px;background:rgba(120,80,40,.25)}
+.pinH.big{left:53px;width:64px;border-radius:32px;box-shadow:8px 12px 18px rgba(90,60,25,.3)}
+.spec{position:absolute;left:50px;top:24px;bottom:24px;width:14px;border-radius:7px;background:rgba(255,248,230,.55)}
+.smear{position:absolute;inset:0;border-radius:22px;background:linear-gradient(90deg,rgba(255,90,78,0),rgba(255,90,78,.55) 40%,rgba(255,90,78,.2) 80%)}
+
+/* ---------- CTA: a freshly rolled clay sheet ---------- */
+#ctaIn{background:radial-gradient(110% 90% at 25% 20%,#FCF8F0 0%,#F3EADB 60%,#E6D8C1 100%)}
+#ctaIn::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0 64px,rgba(255,255,255,.35) 64px 70px,rgba(130,100,60,.06) 70px 78px,rgba(255,255,255,0) 78px 150px)}
+#lock{left:70px;top:88px;display:flex;align-items:center;gap:30px}
+#lockMark{position:relative;width:150px;height:150px;flex:none}
+#lock .word{font-size:104px}
+#ctaH{left:70px;top:306px;font-size:128px;line-height:1.08}
+#ctaH span{display:block}
+#ctaLbl{left:70px;top:958px}
+
+/* the full-frame pin */
+#bigpinX{position:absolute;left:-85px;top:-120px;width:170px;height:1320px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="fpClip"><ellipse cx="0" cy="0" rx="45" ry="57"/></clipPath>
+    <!-- a real thumbprint: broken concentric ridges -->
+    <symbol id="fp" viewBox="-50 -60 100 120">
+      <g clip-path="url(#fpClip)" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <path d="M-3 4 C-3 -4 5 -4 5 4 C5 12 -5 13 -7 5"/>
+        <ellipse rx="10" ry="13" stroke-dasharray="44 5" transform="rotate(8)"/>
+        <ellipse rx="15" ry="19" stroke-dasharray="60 6 20 5" transform="rotate(-14)"/>
+        <ellipse rx="20" ry="25" stroke-dasharray="80 6" transform="rotate(22)"/>
+        <ellipse rx="25" ry="31" stroke-dasharray="54 5 70 6" transform="rotate(-6)"/>
+        <ellipse rx="30" ry="37" stroke-dasharray="120 7" transform="rotate(40)"/>
+        <ellipse rx="35" ry="43" stroke-dasharray="90 6 60 6" transform="rotate(-30)"/>
+        <ellipse rx="40" ry="49" stroke-dasharray="150 8" transform="rotate(12)"/>
+        <ellipse rx="45" ry="55" stroke-dasharray="110 7 70 7" transform="rotate(-50)"/>
+        <ellipse rx="50" ry="61" stroke-dasharray="200 9" transform="rotate(30)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1080">
+
+  <!-- the felt table everything stands on -->
+  <div id="felt" class="layer clip" data-start="0" data-duration="12" data-track-index="0"></div>
+
+  <!-- 1 · HOOK: dashboard slabs pile up -->
+  <section id="hook" class="layer clip" data-start="0" data-duration="3" data-track-index="1">
+    <h1 id="hookH" class="h">How many dashboards <em>today?</em></h1>
+
+    <div id="t1" class="tile" style="left:70px;top:300px;width:320px;height:215px"><div class="tilt" style="transform:rotate(-8deg)"><div class="slab">
+      <svg class="coil" viewBox="0 0 200 100"><path d="M14 80 L60 50 L100 62 L140 24 L186 34" fill="none" stroke="rgba(70,45,20,.28)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 7)"/><path d="M14 80 L60 50 L100 62 L140 24 L186 34" fill="none" stroke="#0FA3A3" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 80 L60 50 L100 62 L140 24 L186 34" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" transform="translate(-2 -4)"/></svg>
+    </div></div></div>
+
+    <div id="t2" class="tile" style="left:700px;top:290px;width:300px;height:240px"><div class="tilt" style="transform:rotate(6deg)"><div class="slab t">
+      <div class="bars"><i style="height:40%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:90%"></i></div>
+      <svg class="fpTex" style="left:196px;top:18px;color:rgba(0,50,50,.22)"><use href="#fp"/></svg>
+    </div></div></div>
+
+    <div id="t3" class="tile" style="left:80px;top:600px;width:340px;height:225px"><div class="tilt" style="transform:rotate(-4deg)"><div class="slab">
+      <svg class="coil" viewBox="0 0 200 100"><path d="M14 30 L60 42 L100 26 L140 70 L186 84" fill="none" stroke="rgba(70,45,20,.28)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 7)"/><path d="M14 30 L60 42 L100 26 L140 70 L186 84" fill="none" stroke="#FF5A4E" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 30 L60 42 L100 26 L140 70 L186 84" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" transform="translate(-2 -4)"/></svg>
+      <svg class="fpTex" style="left:22px;top:16px;color:rgba(90,60,25,.16)"><use href="#fp"/></svg>
+    </div></div></div>
+
+    <div id="t4" class="tile" style="left:690px;top:585px;width:300px;height:235px"><div class="tilt" style="transform:rotate(5deg)"><div class="slab a">
+      <div class="bars"><i style="height:45%"></i><i style="height:75%"></i><i style="height:60%"></i><i style="height:92%"></i></div>
+    </div></div></div>
+
+    <div id="t5" class="tile" style="left:370px;top:770px;width:330px;height:215px"><div class="tilt" style="transform:rotate(-7deg)"><div class="slab">
+      <svg class="coil" viewBox="0 0 200 100"><path d="M14 60 L60 64 L100 40 L140 50 L186 20" fill="none" stroke="rgba(70,45,20,.28)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 7)"/><path d="M14 60 L60 64 L100 40 L140 50 L186 20" fill="none" stroke="#0FA3A3" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 60 L60 64 L100 40 L140 50 L186 20" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" transform="translate(-2 -4)"/></svg>
+    </div></div></div>
+
+    <div id="t6" class="tile" style="left:40px;top:862px;width:250px;height:170px"><div class="tilt" style="transform:rotate(9deg)"><div class="slab k">
+      <div class="bars" style="left:26px;right:26px;bottom:26px"><i style="height:55%"></i><i style="height:35%"></i><i style="height:80%"></i></div>
+    </div></div></div>
+
+    <div id="t7" class="tile" style="left:800px;top:850px;width:230px;height:170px"><div class="tilt" style="transform:rotate(-6deg)"><div class="slab">
+      <svg class="coil" viewBox="0 0 200 100"><path d="M14 70 L60 40 L100 55 L140 30 L186 45" fill="none" stroke="rgba(70,45,20,.28)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 7)"/><path d="M14 70 L60 40 L100 55 L140 30 L186 45" fill="none" stroke="#243349" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 70 L60 40 L100 55 L140 30 L186 45" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" transform="translate(-2 -4)"/></svg>
+    </div></div></div>
+
+    <div id="t9" class="tile" style="left:236px;top:478px;width:220px;height:150px"><div class="tilt" style="transform:rotate(12deg)"><div class="slab">
+      <div class="bars" style="left:24px;right:24px;bottom:22px;gap:10px"><i style="height:50%;background:#243349"></i><i style="height:80%;background:#243349"></i><i style="height:65%;background:#243349"></i></div>
+    </div></div></div>
+
+    <div id="t10" class="tile" style="left:560px;top:640px;width:210px;height:140px"><div class="tilt" style="transform:rotate(-10deg)"><div class="slab t">
+      <svg class="coil" viewBox="0 0 200 100"><path d="M14 40 L60 70 L100 50 L140 62 L186 22" fill="none" stroke="rgba(0,40,40,.35)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 7)"/><path d="M14 40 L60 70 L100 50 L140 62 L186 22" fill="none" stroke="#FBF7EF" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div></div></div>
+
+    <!-- the coral 38: lands last, gets pressed, and is match-cut into the mark -->
+    <div id="t8" class="tile" style="left:390px;top:330px;width:300px;height:300px"><div class="tilt" style="transform:rotate(-4deg)"><div class="slab o">
+      <div class="num">38</div>
+      <div class="lbl r">DASHBOARDS OPEN</div>
+    </div></div></div>
+  </section>
+
+  <!-- 2 · REVEAL: studio light, plinth, wordmark -->
+  <section id="reveal" class="layer clip" data-start="3" data-duration="1.9" data-track-index="2">
+    <div id="spot" class="fill spot"></div>
+    <div id="plinthW" class="abs" style="left:220px;top:565px;width:640px;height:150px"><div id="plinth" class="plinth"></div></div>
+    <div id="bA" class="abs" style="left:150px;top:250px;width:70px;height:70px"><div class="blob a fill"></div></div>
+    <div id="bT" class="abs" style="left:860px;top:190px;width:90px;height:90px"><div class="blob fill"></div></div>
+    <div id="bO" class="abs" style="left:880px;top:560px;width:52px;height:52px"><div class="blob o fill"></div></div>
+    <div id="bK" class="abs" style="left:176px;top:600px;width:40px;height:40px"><div class="blob k fill"></div></div>
+    <div class="sqarc" style="left:338px;top:500px;transform:rotate(20deg)"></div>
+    <div class="sqarc" style="left:716px;top:500px;transform:rotate(-20deg) scaleX(-1)"></div>
+    <div id="wmSlot" class="abs"><div id="wmIn" class="word">Acme Pulse</div></div>
+  </section>
+
+  <!-- 3 · PROOF: Pulse on duty -->
+  <section id="proof" class="layer clip" data-start="4.3" data-duration="5.4" data-track-index="3">
+    <div id="proofCam" class="fill">
+      <div id="pillT" class="tile" style="left:70px;top:64px;width:600px;height:78px"><div class="slab" id="pillS">
+        <span class="lbl">PULSE · WATCHING 14 METRICS</span><span class="ring"></span><span class="live"></span>
+      </div></div>
+
+      <div id="c1" class="tile calm" style="left:70px;top:180px;width:330px;height:112px"><div class="tilt" style="transform:rotate(1.2deg)"><div class="slab">
+        <span class="lbl">SIGNUPS</span><span class="val">+4.1%</span><span class="ok"></span></div></div></div>
+      <div id="c2" class="tile calm" style="left:70px;top:316px;width:330px;height:112px"><div class="tilt" style="transform:rotate(-1deg)"><div class="slab">
+        <span class="lbl">ACTIVE USERS</span><span class="val">12.4k</span><span class="ok"></span></div></div></div>
+      <div id="c3" class="tile calm" style="left:70px;top:452px;width:330px;height:112px"><div class="tilt" style="transform:rotate(1.5deg)"><div class="slab">
+        <span class="lbl">P95 LATENCY</span><span class="val">212 ms</span><span class="ok"></span></div></div></div>
+
+      <!-- the anomaly: one lumpy coral slab, and the smooth slab it gets rolled back into -->
+      <div id="lumpwrap" class="tile" style="left:440px;top:170px;width:570px;height:430px">
+        <div id="smooth" class="fill"><div class="slab d">
+          <span class="lbl c">CHECKOUT CONVERSION</span>
+          <div id="rolled" class="num dk"><span>Rolled</span><span>back</span></div>
+          <span id="byyou" class="lbl c">by you · 09:51</span>
+          <span id="okS" class="ok"></span>
+        </div></div>
+        <div id="lump" class="fill">
+          <div class="bump slab o" style="left:392px;top:-22px;width:110px;height:80px"></div>
+          <div class="bump slab o" style="left:-20px;top:236px;width:80px;height:104px"></div>
+          <div class="bump slab o" style="left:120px;top:370px;width:120px;height:78px"></div>
+          <div class="slab o lumpy">
+            <span class="lbl r">CHECKOUT CONVERSION</span>
+            <div id="num18" class="num">−18%</div>
+            <span id="since" class="lbl r">since 09:42 · after deploy #2231</span>
+            <div id="dent" class="dent"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="stickwrap" class="abs" data-layout-allow-overflow><div id="stickTilt" data-layout-allow-overflow>
+        <svg width="40" height="460" viewBox="0 0 40 460">
+          <defs><linearGradient id="wood" x1="0" x2="1"><stop offset="0" stop-color="#A87A45"/><stop offset=".42" stop-color="#E6C08C"/><stop offset="1" stop-color="#9C6E3C"/></linearGradient></defs>
+          <path d="M20 0 C24 20 31 52 33 86 L34 440 Q34 458 20 458 Q6 458 6 440 L7 86 C9 52 16 20 20 0 Z" fill="url(#wood)"/>
+          <path d="M14 120 L14 430 M25 150 L25 420" stroke="rgba(110,70,30,.25)" stroke-width="2"/>
+          <ellipse id="tipdab" cx="20" cy="10" rx="6" ry="9" fill="#FF5A4E"/>
+        </svg>
+      </div></div>
+
+      <div id="caughtSlot" class="abs" data-layout-allow-overflow><h2 id="caught" class="h" data-layout-allow-overflow>Pulse caught it. <em>You</em> decide.</h2></div>
+
+      <div id="btnRB" class="tile" data-layout-allow-overflow style="left:70px;top:806px;width:360px;height:128px"><div id="rbFace" class="face k">
+        <div id="rbUp" class="sh shUp k"></div><div id="rbDn" class="sh shDn"></div>
+        <svg id="thumb" class="thumb" style="color:rgba(255,255,255,.3)"><use href="#fp"/></svg>
+        <span>Roll back</span>
+      </div></div>
+      <div id="btnAK" class="tile" data-layout-allow-overflow style="left:470px;top:800px;width:380px;height:128px"><div id="akFace" class="face w">
+        <div class="sh shUp w"></div><span>Acknowledge</span>
+      </div></div>
+
+      <!-- NEW COMPONENT · the rollback rolling pin -->
+      <div id="spin" class="abs">
+        <div class="pinH" style="top:0;height:52px"></div>
+        <div class="pinB" style="top:40px;height:470px"><i style="left:14px"></i><i style="left:44px"></i><div id="smearS" class="smear"></div></div>
+        <div class="pinH" style="top:498px;height:52px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- the Acme mark: born in the match cut, carried into the proof -->
+  <div id="markL" class="layer clip" data-start="3" data-duration="6.7" data-track-index="4">
+    <div id="markCam" class="fill">
+      <div id="markbox"><div id="marktilt" class="mk"><div id="marksq" class="mk"><div id="markboil" class="mk">
+        <img src="assets/brand/acme-mark.svg" alt="Acme" /><div class="mklight"></div>
+      </div></div></div></div>
+    </div>
+  </div>
+
+  <!-- 4 · CTA: rolled out flat by the pin -->
+  <section id="cta" class="layer clip" data-start="9" data-duration="3" data-track-index="5">
+    <div id="ctaIn" class="fill">
+      <div id="lock" class="abs">
+        <div id="lockMark"><div id="lockBoil" class="mk"><img src="assets/brand/acme-mark.svg" alt="Acme" /><div class="mklight"></div></div></div>
+        <span class="word">Acme Pulse</span>
+      </div>
+      <h2 id="ctaH" class="h"><span>You ship.</span><span><em>Pulse watches.</em></span></h2>
+      <div id="cbT" class="abs" style="left:640px;top:780px;width:120px;height:120px"><div class="blob fill"></div></div>
+      <div id="cbA" class="abs" style="left:800px;top:850px;width:70px;height:70px"><div class="blob a fill"></div></div>
+      <div id="cbK" class="abs" style="left:905px;top:760px;width:92px;height:92px"><div class="blob k fill"></div></div>
+      <div id="startW" class="tile" style="left:70px;top:760px;width:420px;height:140px"><div id="startBoil" class="fill"><div class="face o">
+        <div class="sh shUp o"></div>
+        <span style="font-size:56px">Start free</span>
+      </div></div></div>
+      <span id="ctaLbl" class="lbl">14 metrics · watched 24/7</span>
+    </div>
+  </section>
+
+  <!-- the full-frame rolling pin (motif returns, rolling forward) -->
+  <div id="bigpin" class="layer clip" data-start="8.95" data-duration="0.8" data-track-index="6">
+    <div id="bigpinX">
+      <div class="pinH big" style="top:0;height:210px"></div>
+      <div class="pinH big" style="top:1110px;height:210px"></div>
+      <div class="pinB" style="top:180px;height:960px;border-radius:44px"><i style="left:34px"></i><i style="left:92px"></i><i style="left:128px"></i><b class="spec"></b><div id="smearB" class="smear" style="border-radius:44px"></div></div>
+    </div>
+  </div>
+
+  <!-- fingerprint grain over everything -->
+  <svg id="grain" class="layer clip" data-start="0" data-duration="12" data-track-index="7" viewBox="0 0 1080 1080" preserveAspectRatio="none" aria-hidden="true">
+    <filter id="grainF"><feTurbulence type="fractalNoise" baseFrequency=".62" numOctaves="3" seed="4"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .12  0 0 0 .55 0"/></filter>
+    <rect width="1080" height="1080" filter="url(#grainF)"/>
+  </svg>
+</div>
+
+<script>
+(() => {
+  const tl = gsap.timeline({ paused: true });
+  const $ = (s) => document.querySelector(s);
+
+  // ---- stop-motion helpers -------------------------------------------------
+  // "on twos": any ease, quantised to 12 poses per second, like clay shot frame by frame
+  const FPS = 12;
+  const twos = (name, dur, fps = FPS) => {
+    const E = gsap.parseEase(name);
+    const n = Math.max(1, Math.round(dur * fps));
+    return (p) => (p >= 1 ? 1 : E(Math.floor(p * n) / n));
+  };
+  // deterministic hash → the "boil": each pose nudged ±1 px / ±0.6°, like a hand re-touching the clay
+  const hash = (x) => { const s = Math.sin(x * 12.9898 + 78.233) * 43758.5453; return s - Math.floor(s); };
+  const boilEase = (seed, n) => (p) => (p >= 1 ? 0.5 : hash(seed * 7.13 + Math.floor(p * n) * 1.618));
+  function boil(el, seed, t0, t1, amp = 1) {
+    const d = t1 - t0, n = Math.max(1, Math.round(d * FPS));
+    [["x", 1.3], ["y", 1.0], ["rotation", 0.6]].forEach(([prop, a], k) => {
+      tl.fromTo(el, { [prop]: -a * amp }, { [prop]: a * amp, duration: d, ease: boilEase(seed + k * 31, n), immediateRender: false }, t0);
+    });
+  }
+  // squash & stretch landing: fall on twos, contact pose at scaleY .82, elastic settle
+  function plop(el, contact, { fall = 0.3, h, sq = 0.82, dur = 0.5 } = {}) {
+    // fall from fully above the frame (own top + height + shadow room)
+    h = h || parseFloat(el.style.top) + parseFloat(el.style.height) + 140; // inline geometry: clips may be display:none at build time
+    gsap.set(el, { transformOrigin: "50% 100%" });
+    tl.fromTo(el, { y: -h }, { y: 0, duration: fall, ease: twos("power2.in", fall) }, contact - fall);
+    tl.fromTo(el, { scaleY: sq, scaleX: 1 + (1 - sq) * 0.55 }, { scaleY: 1, scaleX: 1, duration: dur, ease: twos("elastic.out(1,.5)", dur), immediateRender: false }, contact);
+  }
+  const slabOf = (id) => $(id + " .slab");
+
+  // ---- 1 · HOOK (0–3) ------------------------------------------------------
+  // poster: headline + three slabs already on the felt, dead still until 0.4 s
+  [["#t1", 1], ["#t2", 2], ["#t3", 3], ["#t4", 4], ["#t5", 5]].forEach(([id, s]) => boil(slabOf(id), s, 0.4, 3));
+  [["#t6", 0.6], ["#t7", 0.95], ["#t9", 1.3], ["#t10", 1.6]].forEach(([id, c], i) => {
+    plop($(id), c);
+    boil(slabOf(id), 6 + i, c + 0.1, 3);
+  });
+  // the coral 38 lands last on the 2.0 s downbeat…
+  plop($("#t8"), 2.0, { fall: 0.34, sq: 0.78, dur: 0.55 });
+  boil(slabOf("#t8"), 9, 2.1, 3, 0.8);
+  // …and a thumb presses it flat: the squash the mark releases after the cut
+  tl.fromTo("#t8", { scaleY: 1, scaleX: 1 }, { scaleY: 0.8, scaleX: 1.12, duration: 0.25, ease: twos("power2.in", 0.25), immediateRender: false }, 2.62);
+
+  // ---- 2 · REVEAL (3–4.5): match cut, same centre / size / tilt ------------
+  gsap.set("#markbox", { transformOrigin: "0% 0%" });
+  tl.set("#markbox", { x: 0, y: 0, scale: 1 }, 0);
+  gsap.set("#marksq", { transformOrigin: "50% 100%" });
+  tl.fromTo("#marktilt", { rotation: -4 }, { rotation: 0, duration: 0.55, ease: twos("power2.inOut", 0.55) }, 4.3);
+  tl.fromTo("#marksq", { scaleY: 0.8, scaleX: 1.12 }, { scaleY: 1, scaleX: 1, duration: 0.6, ease: twos("elastic.out(1,.45)", 0.6) }, 3.0);
+  // squash arcs flash for two poses on contact
+  tl.fromTo("#reveal .sqarc", { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "steps(1)" }, 3.0);
+  // stray clay blobs burst out of the impact (mark centre 540,480)
+  [["#bA", 185, 285, 0], ["#bT", 905, 235, 0.03], ["#bO", 906, 586, 0.05], ["#bK", 196, 620, 0.07]].forEach(([id, cx, cy, d]) => {
+    tl.fromTo(id, { x: 540 - cx, y: 480 - cy, scale: 0.3 }, { x: 0, y: 0, scale: 1, duration: 0.42, ease: twos("power3.out", 0.42) }, 3.0 + d);
+  });
+  // the wordmark presses up out of the felt
+  tl.set("#wmIn", { opacity: 0, y: 170 }, 0);
+  tl.fromTo("#wmIn", { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "steps(1)", immediateRender: false }, 3.36);
+  tl.fromTo("#wmIn", { y: 170 }, { y: 0, duration: 0.45, ease: twos("back.out(1.5)", 0.45), immediateRender: false }, 3.35);
+  boil("#plinth", 11, 3.2, 4.3, 0.7);
+  boil("#markboil", 12, 3.6, 9.6, 0.8);
+  // plinth, word and blobs are squashed back into the table for the carry
+  tl.fromTo(["#plinthW", "#wmSlot", "#bA", "#bT", "#bO", "#bK"], { scaleY: 1, opacity: 1 }, { scaleY: 0.05, opacity: 0, duration: 0.25, ease: twos("power2.in", 0.25), transformOrigin: "50% 100%", immediateRender: false }, 4.3);
+  tl.fromTo("#spot", { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.out" }, 4.3);
+
+  // object carry: the mark hops (crouch first) into the "watching" pill
+  tl.fromTo("#markbox", { x: 0 }, { x: -306, duration: 0.55, ease: twos("power3.inOut", 0.55) }, 4.3);
+  tl.fromTo("#markbox", { y: 0 }, { y: -253, duration: 0.55, ease: twos("back.in(1.4)", 0.55) }, 4.3);
+  tl.fromTo("#markbox", { scale: 1 }, { scale: 0.1733, duration: 0.55, ease: twos("power2.inOut", 0.55) }, 4.3);
+
+  // ---- 3 · PROOF (4.5–6.9) -------------------------------------------------
+  plop($("#pillT"), 4.55, { fall: 0.25, sq: 0.86, dur: 0.45 });
+  boil("#pillS", 13, 4.9, 9, 0.6);
+  tl.fromTo("#pillT .ring", { scale: 0.6, opacity: 0.8 }, { scale: 2, opacity: 0, duration: 1, repeat: 3, ease: twos("power1.out", 1) }, 5.0);
+  ["#c1", "#c2", "#c3"].forEach((id, i) => {
+    tl.fromTo(id, { x: -520 }, { x: 0, duration: 0.45, ease: twos("power3.out", 0.45) }, 4.6 + i * 0.12);
+    boil(slabOf(id), 14 + i, 5.1 + i * 0.12, 9);
+  });
+  // the anomaly thuds in, heavier than the rest
+  plop($("#lumpwrap"), 5.35, { fall: 0.32, sq: 0.76, dur: 0.6 });
+  boil("#lump", 18, 5.5, 8.3, 0.9);
+  tl.fromTo("#since", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "steps(3)" }, 5.7);
+  // the sculpting stick slides in along its own axis and pokes (axis = sin/cos 36°)
+  const ax = 0.5878, ay = 0.809, at = (d) => ({ x: ax * d, y: ay * d });
+  tl.fromTo("#stickwrap", at(560), { ...at(0), duration: 0.3, ease: twos("power3.out", 0.3) }, 5.85);
+  tl.fromTo("#stickwrap", at(0), { ...at(-16), duration: 0.07, ease: "none", immediateRender: false }, 6.15);
+  tl.fromTo("#stickwrap", at(-16), { ...at(40), duration: 0.2, ease: twos("power2.out", 0.2), immediateRender: false }, 6.3);
+  tl.fromTo("#stickwrap", at(40), { ...at(720), duration: 0.3, ease: twos("power2.in", 0.3), immediateRender: false }, 7.0);
+  tl.fromTo("#tipdab", { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "steps(1)" }, 6.2);
+  tl.fromTo("#dent", { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 0.85, duration: 0.25, ease: twos("power2.out", 0.25) }, 6.2);
+  tl.fromTo("#lumpwrap", { x: -9 }, { x: 0, duration: 0.45, ease: twos("elastic.out(1,.4)", 0.45), immediateRender: false }, 6.22);
+
+  // ---- 4 · PROOF: a human decides (6.9–9) ----------------------------------
+  tl.fromTo("#caught", { y: 104 }, { y: 0, duration: 0.5, ease: "power3.out" }, 6.32);
+  plop($("#btnRB"), 6.8, { fall: 0.24, sq: 0.86, dur: 0.45 });
+  plop($("#btnAK"), 6.95, { fall: 0.24, sq: 0.86, dur: 0.45 });
+  // zoom to detail: the camera leans in toward the decision
+  tl.fromTo(["#proofCam", "#markCam"], { scale: 1 }, { scale: 1.04, duration: 2.0, ease: "power1.inOut", transformOrigin: "540px 880px" }, 6.9);
+  // press-in: sink 6 px, shadows flip inward, a thumbprint stays in the clay
+  tl.fromTo("#rbFace", { y: 0 }, { y: 6, duration: 0.12, ease: "power2.out" }, 7.5);
+  tl.fromTo("#rbUp", { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "power2.out" }, 7.5);
+  tl.fromTo("#rbDn", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 7.5);
+  tl.fromTo("#thumb", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "steps(2)" }, 7.52);
+  tl.fromTo("#akFace", { opacity: 1 }, { opacity: 0.55, duration: 0.3, ease: "power1.out" }, 7.62);
+  // NEW COMPONENT: the rollback rolling pin rolls BACK over the lump; behind it the clay is smooth
+  const pinEase = () => twos("power1.inOut", 0.65);
+  tl.fromTo("#spin", { x: 720 }, { x: -40, duration: 0.65, ease: pinEase() }, 7.65);
+  tl.fromTo("#lump", { clipPath: "polygon(-40px -40px, 720px -40px, 720px 500px, -40px 500px)" },
+    { clipPath: "polygon(-40px -40px, -40px -40px, -40px 500px, -40px 500px)", duration: 0.65, ease: pinEase() }, 7.65);
+  tl.fromTo("#smooth", { clipPath: "polygon(720px -40px, 760px -40px, 760px 500px, 720px 500px)" },
+    { clipPath: "polygon(-40px -40px, 760px -40px, 760px 500px, -40px 500px)", duration: 0.65, ease: pinEase() }, 7.65);
+  tl.fromTo("#smearS", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: twos("power1.out", 0.5) }, 7.75);
+  tl.fromTo("#spin", { y: 0 }, { y: -780, duration: 0.18, ease: twos("power2.in", 0.18), immediateRender: false }, 8.3);
+  boil("#smooth .slab", 21, 8.3, 9, 0.7);
+  tl.fromTo("#okS", { scale: 0 }, { scale: 1, duration: 0.35, ease: twos("back.out(2)", 0.35) }, 8.4);
+
+  // ---- 5 · CTA (9–12): the pin comes back full-frame and rolls forward -----
+  const wipe = () => twos("power2.inOut", 0.66, 24);
+  tl.fromTo("#bigpinX", { x: -120 }, { x: 1200, duration: 0.66, ease: wipe() }, 9.0);
+  tl.fromTo("#ctaIn", { clipPath: "polygon(0px 0px, -120px 0px, -120px 1080px, 0px 1080px)" },
+    { clipPath: "polygon(0px 0px, 1200px 0px, 1200px 1080px, 0px 1080px)", duration: 0.66, ease: wipe() }, 9.0);
+  tl.fromTo("#smearB", { opacity: 0.2 }, { opacity: 0.8, duration: 0.66, ease: "none" }, 9.0);
+  boil("#lockBoil", 22, 9.6, 11.2, 0.8);
+  [["#cbT", 9.95], ["#cbA", 10.1], ["#cbK", 10.25]].forEach(([id, c], i) => {
+    plop($(id), c, { fall: 0.25, sq: 0.8, dur: 0.45 });
+    boil(id + " .blob", 23 + i, c + 0.45, 11.2, 0.8);
+  });
+  plop($("#startW"), 10.5, { fall: 0.3, sq: 0.78, dur: 0.5 });
+  boil("#startBoil", 27, 11.0, 11.2, 0.6);
+  // 11.2–12: dead still. every boil tween has ended on its neutral pose.
+
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>

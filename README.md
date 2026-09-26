@@ -6,17 +6,34 @@
 
 This kit trains that creative muscle. It combines a staged process, a component strategy, **100 visual themes**, a **24-transition atlas** and a **variety audit** that catches repetition in your storyboard before you build it.
 
-[Türkçe README →](README.tr.md) · [Theme gallery →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Transition atlas →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Creative muscle →](creative) · [Example →](examples/acme-suite-loop)
+[Türkçe README →](README.tr.md) · [Theme gallery →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Transition atlas →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Creative muscle →](creative) · [Six films →](examples/six-films) · [Example →](examples/acme-suite-loop)
 
 **New: [start from a real prompt](examples/prompts).** The exact prompt behind a finished 35 s mascot promo, plus a fill-in template and what happened at each gate.
 
-## What's new in v1.1: the creative muscle
+## What's new in v1.2: same story, six films
+
+![The same 12-second script told in six themes, all six playing in sync](docs/six-films.gif)
+
+- **[Same story, six films](examples/six-films).** One 12-second Acme Pulse script, six themes from the gallery, and six films that share the story and nothing else. Every storyboard passed the variety audit, and every film invented its own component: a metric stave (⌘K Keyboard Symphony), a rollback rolling pin (Clay Studio), a fineliner seismograph (Hand-Drawn Marker), a spot cue (Dark Keynote), a P1 gamepad (8-Bit Sidekick) and a halftone chart (Pop-Art Ben-Day). The shared [brief](examples/six-films/BRIEF.md) is included, so you can give it to your agent with a seventh theme. Watch the films on the [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2).
+- **`tools/pick_themes.py`** shortlists gallery themes for a tone and an audience, and skips the ones you used in your last five films:
+  ```bash
+  python tools/pick_themes.py --tone playful --audience "developers" --history ~/.motion-ledger.json
+  ```
+- **`tools/history_report.py`** turns your motion history into a one-page report: the transitions, entrances and eases you keep reaching for, and the atlas transitions and themes you have never tried. `variety_audit.py --append` now also takes `--theme NNN`, so the history knows which theme each film used.
+- **A GitHub Action** ([`variety-audit.yml`](.github/workflows/variety-audit.yml)) audits every `STORYBOARD.md` on each push and pull request. A storyboard that repeats itself fails the check.
+- **Template repository.** Click **Use this template** to start your own film repo with the tools, the creative rules and the audit Action already in place.
+- **Before and after, side by side:** the Acme Suite loop's v1 and v2 play next to each other on the [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2).
+
+<details>
+<summary><b>What was new in v1.1: the creative muscle</b></summary>
 
 - **[`creative/`](creative)** is the new heart of the kit: seven questions to ask at every storyboard, a [tone matrix](creative/tone-matrix.md) ("I want to say ___ in a ___ tone") that maps tone to speed, eases, camera, colour, type, transitions and sound, the [variety rules](creative/variety-rules.md), and a [component forge](creative/component-forge.md) for inventing a new component in 15 minutes.
 - **[Transition atlas](https://tugrawork-creator.github.io/saas-motion-kit/transitions/):** 24 *narrative* transitions (match cuts, carries, camera moves, masks, materials, time), each with a live demo, the tone it fits and what not to pair it with.
 - **`tools/variety_audit.py`** reads the storyboard ledger and flags repeated transitions, entrances, eases, directions, uniform shot lengths, missing surprises, accent overuse, tone mismatches and missing new components. With `--history` it remembers your previous films, so you don't repeat your last three.
 - **The Acme example, rebuilt as a lesson.** We ran the audit on our own first draft. It caught **11 repetitions**: the same turntable turn five times, the same title entrance, one ease everywhere, equal shot lengths and no surprise. v2 gives every product its own entrance (letters out of blur, mask wipe, a word carried between shots, drop from above), varies the turns (whip with motion blur, slow sine), uneven shot lengths, and one surprise where Forecast floods teal while the camera dollies in. Before and after are in [`examples/acme-suite-loop`](examples/acme-suite-loop), and the new render is on the [v1.1 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.1).
 - The storyboard template now opens with a **Message & tone** sentence and a one-row-per-shot **ledger**, and the `/saas-motion-video` skill runs a **creative pass** gate before any build.
+
+</details>
 
 ![Six of the 100 themes](docs/assets/readme-hero.jpg)
 
@@ -32,11 +49,13 @@ This kit trains that creative muscle. It combines a staged process, a component 
 | [`playbook/`](playbook) | A 7-stage production playbook with a review gate at each stage |
 | [`components/`](components) | The **clean-or-imaginary** component rule: use the product's real UI when it is clean, otherwise design imaginary UI |
 | [`docs/`](docs) | GitHub Pages: the **100-theme gallery** (4 key frames, component kit, motion notes and references per theme) and the **live transition atlas** |
+| [`examples/six-films/`](examples/six-films) | **Same story, six films:** one 12 s script built in six themes, each with its storyboard, ledger and new component, plus the shared brief |
 | [`examples/acme-suite-loop/`](examples/acme-suite-loop) | A complete HyperFrames project: a silent, seamless 40 s 3D booth loop, with its v1 → v2 variety-audit lesson |
 | [`.claude/skills/saas-motion-video/`](.claude/skills/saas-motion-video) | A Claude Code skill that runs the whole process with you |
 | [`templates/`](templates) | `BRIEF.md`, `STORYBOARD.md` and the theme-sheet template |
 | [`examples/prompts/`](examples/prompts) | Real prompts that produced finished films, each with a fill-in template |
-| [`tools/`](tools) | **Variety audit**, delivery (4K → 1080p/2K), loop-seam check, warm UI SFX synth, gallery builders |
+| [`tools/`](tools) | **Variety audit**, theme picker, history report, delivery (4K → 1080p/2K), loop-seam check, warm UI SFX synth, gallery builders |
+| [`.github/workflows/`](.github/workflows) | The variety audit as a GitHub Action: every storyboard is checked on push and pull request |
 
 ## The process in one picture
 
@@ -82,6 +101,8 @@ Each sheet shows **Hook → Reveal → Proof moment → CTA**. It also lists six
 
 **Requirements:** Node.js 22+, ffmpeg, Claude Code. HyperFrames downloads its own headless Chrome.
 
+Click **Use this template** on GitHub to start your own film repo with the audit Action already wired in, or clone the kit:
+
 ```bash
 # 1. get the kit
 git clone https://github.com/tugrawork-creator/saas-motion-kit && cd saas-motion-kit
@@ -105,7 +126,7 @@ The skill walks you through the seven stages and stops at each gate.
 
 ## Rendered examples
 
-Rendered MP4s are attached to the [Releases](../../releases) page, so the repository stays small.
+Rendered MP4s are attached to the [Releases](../../releases) page, so the repository stays small. The [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2) has the six films, their synced grid and the Acme v1/v2 comparison.
 
 ## Lessons that save hours
 
