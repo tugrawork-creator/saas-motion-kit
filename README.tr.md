@@ -10,6 +10,8 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 
 > **Tek kural: hiçbir video bir öncekinin kopyası gibi hissettirmemeli.** Efektleri, geçişleri ve bileşenleri tekrar etmeyin. Her videoda yeni bir bileşen icat edin. Tek bir efekt seçmeden önce mesajı ve tonu belirleyin.
 
+**Yeni: [gerçek bir prompt ile başlayın](examples/prompts).** Bitmiş, 35 saniyelik maskotlu bir tanıtım videosunu üreten prompt'un kendisi, doldurulabilir şablonu ve her kapıda neler olduğu.
+
 ## v1.1'de neler yeni: yaratıcı kas
 
 - **[`creative/`](creative)** artık kitin kalbi. İçinde her storyboard'da sorulacak 7 soru, "şu mesajı şu tonda vermek istiyorum" diyen [ton matrisi](creative/tone-matrix.md), [tekrar kuralları](creative/variety-rules.md) ve 15 dakikada yeni bileşen icat etmek için [bileşen atölyesi](creative/component-forge.md) var.
@@ -29,6 +31,7 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 | `examples/acme-suite-loop/` | Eksiksiz bir HyperFrames projesi: stant ekranı için sessiz, kesintisiz dönen 40 saniyelik 3D döngü |
 | `.claude/skills/saas-motion-video/` | Bütün süreci sizinle birlikte yürüten Claude Code skill'i |
 | `templates/` | BRIEF, STORYBOARD ve tema sayfası şablonları |
+| `examples/prompts/` | Bitmiş videoları üreten gerçek prompt'lar ve şablonları |
 | `tools/` | Teslim (4K → 1080p/2K), döngü birleşim kontrolü, sıcak arayüz efekt sesi üretici, galeri araçları |
 
 ## Süreç: 7 aşama, 7 kapı

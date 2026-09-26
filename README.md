@@ -8,6 +8,8 @@ This kit trains that creative muscle. It combines a staged process, a component 
 
 [Türkçe README →](README.tr.md) · [Theme gallery →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Transition atlas →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Creative muscle →](creative) · [Example →](examples/acme-suite-loop)
 
+**New: [start from a real prompt](examples/prompts).** The exact prompt behind a finished 35 s mascot promo, plus a fill-in template and what happened at each gate.
+
 ## What's new in v1.1: the creative muscle
 
 - **[`creative/`](creative)** is the new heart of the kit: seven questions to ask at every storyboard, a [tone matrix](creative/tone-matrix.md) ("I want to say ___ in a ___ tone") that maps tone to speed, eases, camera, colour, type, transitions and sound, the [variety rules](creative/variety-rules.md), and a [component forge](creative/component-forge.md) for inventing a new component in 15 minutes.
@@ -33,6 +35,7 @@ This kit trains that creative muscle. It combines a staged process, a component 
 | [`examples/acme-suite-loop/`](examples/acme-suite-loop) | A complete HyperFrames project: a silent, seamless 40 s 3D booth loop, with its v1 → v2 variety-audit lesson |
 | [`.claude/skills/saas-motion-video/`](.claude/skills/saas-motion-video) | A Claude Code skill that runs the whole process with you |
 | [`templates/`](templates) | `BRIEF.md`, `STORYBOARD.md` and the theme-sheet template |
+| [`examples/prompts/`](examples/prompts) | Real prompts that produced finished films, each with a fill-in template |
 | [`tools/`](tools) | **Variety audit**, delivery (4K → 1080p/2K), loop-seam check, warm UI SFX synth, gallery builders |
 
 ## The process in one picture

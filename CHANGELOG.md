@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.1: prompt examples (2026-09-26)
+
+- `examples/prompts/`: the exact prompt behind a finished 35 s mascot product promo (1:1, music + SFX), plus a fill-in template and a gate-by-gate account of what happened.
+
 ## v1.1: the creative muscle (2026-09-26)
 
 The kit's one rule is now explicit: **no two films should feel like the same film.**
