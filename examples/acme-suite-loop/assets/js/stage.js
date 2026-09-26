@@ -5,11 +5,20 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 
 export const LOOP = 40;
-export const INTRO = 4, SLOT = 6, COUNT = 5;            // product k is in front during [INTRO + k*SLOT, INTRO + (k+1)*SLOT)
+export const INTRO = 4, COUNT = 5;
+// product k owns [SLOTS[k], SLOTS[k+1]) — deliberately uneven shot lengths (6.5 / 5 / 5.5 / 8 / 5 s)
+export const SLOTS = [4, 10.5, 15.5, 21, 29, 34];
+// how the turntable arrives at product k: duration + ease differ per cut so no two turns feel the same
+const TURNS = [null, [0.9, "cubic"], [0.45, "expo"], [1.4, "sine"], [0.9, "cubic"]];
 const TAU = Math.PI * 2, STEP = TAU / COUNT;
 
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const ease = (k) => { k = clamp(k); return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };
+const EASES = {
+  cubic: ease,
+  sine: (k) => -(Math.cos(Math.PI * clamp(k)) - 1) / 2,
+  expo: (k) => { k = clamp(k); return k === 0 ? 0 : k === 1 ? 1 : k < 0.5 ? Math.pow(2, 20 * k - 10) / 2 : (2 - Math.pow(2, -20 * k + 10)) / 2; },
+};
 const per = (t, n) => (t * TAU * n) / LOOP;               // n whole cycles per loop → identical at t = 0 and t = LOOP
 
 // ---------- stage ----------
@@ -147,15 +156,30 @@ const CENTER = new THREE.Vector3(3.3, -1.0, -1.6), RADIUS = 2.55;
 // turntable angle: product k faces the camera when angle = -k * STEP
 function angleAt(t) {
   t = ((t % LOOP) + LOOP) % LOOP;
-  const END = INTRO + COUNT * SLOT;                                                               // 34 s
+  const END = SLOTS[COUNT];                                                                      // 34 s
   if (t < INTRO) return STEP / 2 * (1 - ease(t / INTRO));
-  if (t < END) { const k = Math.floor((t - INTRO) / SLOT), u = t - INTRO - k * SLOT; return -(k - 1 + (k === 0 ? 1 : ease(u / 0.9))) * STEP; }
+  if (t < END) {
+    let k = 0; while (k < COUNT - 1 && t >= SLOTS[k + 1]) k++;
+    if (k === 0) return 0;
+    const [d, e] = TURNS[k];
+    return -(k - 1 + EASES[e]((t - SLOTS[k]) / d)) * STEP;
+  }
   // outro: drift from product 4 to half a step past it (≡ +STEP/2 after a full turn) → seamless with t = 0
   return -((COUNT - 1) + 0.5 * ease((t - END) / (LOOP - END))) * STEP;
 }
 
-export function apply(products, table, t) {
+// the one camera move of the film: a dolly toward Forecast (the surprise), then back out
+const CAM_FAR = { p: new THREE.Vector3(0, 1.4, 14), look: new THREE.Vector3(0, -0.2, 0) };
+const CAM_NEAR = { p: new THREE.Vector3(0.9, 1.0, 11.2), look: new THREE.Vector3(1.2, -0.4, -0.6) };
+function cameraAt(camera, t) {
+  const k = EASES.sine((t - 22.4) / 1.6) * (1 - EASES.sine((t - 27.9) / 1.3));
+  camera.position.lerpVectors(CAM_FAR.p, CAM_NEAR.p, k);
+  camera.lookAt(new THREE.Vector3().lerpVectors(CAM_FAR.look, CAM_NEAR.look, k));
+}
+
+export function apply(products, table, t, camera) {
   const a = angleAt(t);
+  if (camera) cameraAt(camera, ((t % LOOP) + LOOP) % LOOP);
   table.rotation.y = a;
   products.forEach((o, k) => {
     const phi = k * STEP + a;                                                                     // 0 → front

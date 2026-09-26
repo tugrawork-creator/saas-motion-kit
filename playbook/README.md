@@ -5,7 +5,7 @@
 | 1 | [Brief](01-brief.md) | one message, format, length, sound | `BRIEF.md` |
 | 2 | [Components](02-components.md) | real UI or imaginary UI | a component inventory, captured tokens |
 | 3 | [Theme](03-theme.md) | one theme out of 2–3 candidates | a theme sheet in your brand |
-| 4 | [Storyboard](04-storyboard.md) | beats, order, on-screen words | `STORYBOARD.md` and a sketch page |
+| 4 | [Storyboard + creative pass](04-storyboard.md) | message & tone, beats, the new component, which repeats are motifs | `STORYBOARD.md` with the ledger, a clean variety audit, a sketch page |
 | 5 | [Build](05-build.md) | the timing notes | the HyperFrames composition and snapshots |
 | 6 | [Sound](06-sound.md) | music, SFX, or deliberate silence | a beat grid and mixed audio |
 | 7 | [Deliver](07-deliver.md) | final approval | 4K render, sized masters, loop check |

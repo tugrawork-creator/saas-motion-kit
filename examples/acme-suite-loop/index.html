@@ -22,72 +22,91 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#F6F5F1}
 .layer{position:absolute;left:0;top:0;width:1920px;height:1080px}
 #bg{background:radial-gradient(90% 80% at 70% 40%,#FFFFFF 0%,#F6F5F1 55%,#E9E6DF 100%)}
 #bg::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(15,163,163,.10) 0 1.6px,transparent 2px) 0 0/30px 30px}
+/* the one colour event of the film: a focal iris flood behind Forecast */
+#flood{background:radial-gradient(70% 70% at 72% 50%,#0FA3A3 0%,#0B6E6E 75%);clip-path:circle(0px at 1450px 560px)}
 #gl{display:block;width:1920px;height:1080px}
-.col{position:absolute;left:150px;top:0;height:1080px;width:900px;display:flex;flex-direction:column;justify-content:center}
-.kick{font:600 22px "JetBrains Mono",monospace;letter-spacing:.2em;color:#0B6E6E;display:flex;align-items:center;gap:16px;margin-bottom:28px}
+/* product columns share one fixed baseline so a word can be carried from one shot to the next */
+.col{position:absolute;left:150px;top:292px;width:900px}
+.hero .col{top:0;height:1080px;display:flex;flex-direction:column;justify-content:center}
+.kick{font:600 22px "JetBrains Mono",monospace;letter-spacing:.2em;color:#0B6E6E;display:flex;align-items:center;gap:16px;margin-bottom:22px;height:30px}
 .kick i{width:48px;height:3px;background:#0FA3A3;border-radius:2px}
 h1,h2{font-family:"Instrument Serif",serif;font-weight:400;line-height:.98;letter-spacing:-.01em}
-h1{font-size:128px} h2{font-size:136px}
+h1{font-size:128px} h2{font-size:136px;height:150px;white-space:nowrap}
 h1 em,h2 em{color:#0B6E6E}
 .ln{display:block;overflow:hidden;padding:6px 0 10px}.ln>span{display:inline-block}
-.desc{margin-top:26px;font-weight:600;font-size:40px;line-height:1.25;color:#33415C;max-width:820px}
-.chips{margin-top:40px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .08em 12px 0;margin-bottom:-12px}.mask>span{display:inline-block}
+.ch{display:inline-block}
+.desc{margin-top:22px;font-weight:600;font-size:40px;line-height:1.25;color:#33415C;max-width:820px}
+.chips{margin-top:36px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .chip{display:inline-flex;align-items:center;gap:16px;background:#fff;border:1px solid rgba(14,23,38,.08);box-shadow:0 2px 4px rgba(14,23,38,.05),0 14px 30px rgba(14,23,38,.07);border-radius:100px;padding:14px 30px 14px 16px;font-weight:700;font-size:30px}
 .chip b{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#0B6E6E;color:#fff;font-size:20px}
+/* Forecast sits on the flood: inverted type */
+#p3 .kick{color:#CFF1EE}#p3 .kick i{background:#CFF1EE}
+#p3 h2{color:#fff}#p3 h2 em{color:#F4B740}
+#p3 .desc{color:#E6FAF8}
+#p3 .chip{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);box-shadow:none;color:#fff}#p3 .chip b{background:#F4B740;color:#0E1726}
+.strike{position:relative;display:inline-block}
+.strike i{position:absolute;left:-4px;right:-4px;top:54%;height:6px;background:#FF5A4E;border-radius:3px;transform-origin:0 50%}
 .cta{display:flex;align-items:center;gap:26px;margin-top:40px}
 .btn{background:#E0443A;color:#fff;font-weight:800;font-size:38px;border-radius:100px;padding:22px 44px;box-shadow:0 16px 34px rgba(224,68,58,.3)}
 .lock{display:flex;align-items:center;gap:26px}
 .lock img{width:112px;height:112px;display:block}
-.lock span{font-weight:800;font-size:92px;letter-spacing:-.02em}
+.lock span{font-weight:800;font-size:92px;letter-spacing:-.02em;display:inline-block}
 </style>
 </head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="40" data-width="1920" data-height="1080">
   <div id="bg" class="layer clip" data-start="0" data-duration="40" data-track-index="0"></div>
-  <div id="stage3d" class="layer clip" data-start="0" data-duration="40" data-track-index="1"><canvas id="gl" width="1920" height="1080"></canvas></div>
+  <div id="flood" class="layer clip" data-start="20.5" data-duration="9" data-track-index="1"></div>
+  <div id="stage3d" class="layer clip" data-start="0" data-duration="40" data-track-index="2"><canvas id="gl" width="1920" height="1080"></canvas></div>
 
-  <div id="hero-a" class="layer clip" data-start="0" data-duration="4.4" data-track-index="2"><div class="col">
+  <div id="hero-a" class="layer clip hero" data-start="0" data-duration="4.4" data-track-index="3"><div class="col">
     <div class="kick"><i></i>ACME SUITE</div>
     <h1><span class="ln"><span>Five tools.</span></span><span class="ln"><span><em>One calm</em> workspace.</span></span></h1>
   </div></div>
 
-  <div id="p0" class="layer clip" data-start="4" data-duration="6.2" data-track-index="3"><div class="col">
+  <!-- 1 · Pulse — letters resolve out of blur -->
+  <div id="p0" class="layer clip" data-start="4" data-duration="6.5" data-track-index="4"><div class="col">
     <div class="kick"><i></i>01 / 05</div>
-    <h2><span class="ln"><span>Acme <em>Pulse</em></span></span></h2>
+    <h2 class="split">Acme <em>Pulse</em></h2>
     <p class="desc">Watches your metrics and flags anomalies before customers do.</p>
     <div class="chips"><span class="chip"><b>✓</b>Anomaly alerts</span><span class="chip"><b>✓</b>38 dashboards, one feed</span><span class="chip"><b>✓</b>You make the call</span></div>
   </div></div>
-  <div id="p1" class="layer clip" data-start="10" data-duration="6.2" data-track-index="4"><div class="col">
+  <!-- 2 · Ledger — title wipes on, promise types out; "Acme" is carried into the next shot -->
+  <div id="p1" class="layer clip" data-start="10.5" data-duration="5" data-track-index="5"><div class="col">
     <div class="kick"><i></i>02 / 05</div>
-    <h2><span class="ln"><span>Acme <em>Ledger</em></span></span></h2>
+    <h2><span class="a">Acme</span> <span class="mask"><span class="b"><em>Ledger</em></span></span></h2>
     <p class="desc">Invoices that reconcile themselves.</p>
     <div class="chips"><span class="chip"><b>✓</b>Auto-matching</span><span class="chip"><b>✓</b>Multi-currency</span><span class="chip"><b>✓</b>Full audit trail</span></div>
   </div></div>
-  <div id="p2" class="layer clip" data-start="16" data-duration="6.2" data-track-index="3"><div class="col">
+  <!-- 3 · Cloud — only the second word flips in (type carry), promise slides from the right -->
+  <div id="p2" class="layer clip" data-start="15.5" data-duration="5.5" data-track-index="4"><div class="col">
     <div class="kick"><i></i>03 / 05</div>
-    <h2><span class="ln"><span>Acme <em>Cloud</em></span></span></h2>
+    <h2><span class="a">Acme</span> <span class="mask"><span class="b"><em>Cloud</em></span></span></h2>
     <p class="desc">Your workspace, synced everywhere.</p>
     <div class="chips"><span class="chip"><b>✓</b>Real-time sync</span><span class="chip"><b>✓</b>Roles &amp; single sign-on</span><span class="chip"><b>✓</b>Works offline</span></div>
   </div></div>
-  <div id="p3" class="layer clip" data-start="22" data-duration="6.2" data-track-index="4"><div class="col">
+  <!-- 4 · Forecast — the surprise: colour flood + camera dolly + a strike-through -->
+  <div id="p3" class="layer clip" data-start="21" data-duration="8" data-track-index="5"><div class="col">
     <div class="kick"><i></i>04 / 05</div>
-    <h2><span class="ln"><span>Acme <em>Forecast</em></span></span></h2>
-    <p class="desc">Plan the quarter in minutes, not weeks.</p>
+    <h2>Acme <em>Forecast</em></h2>
+    <p class="desc">Plan the quarter in minutes,<br>not <span class="strike">weeks<i></i></span>.</p>
     <div class="chips"><span class="chip"><b>✓</b>Scenario compare</span><span class="chip"><b>✓</b>Budget vs. actual</span><span class="chip"><b>✓</b>Share with a link</span></div>
   </div></div>
-  <div id="p4" class="layer clip" data-start="28" data-duration="6.2" data-track-index="3"><div class="col">
+  <!-- 5 · Shield — title drops from above, chips tick on like a checklist -->
+  <div id="p4" class="layer clip" data-start="29" data-duration="5" data-track-index="4"><div class="col">
     <div class="kick"><i></i>05 / 05</div>
     <h2><span class="ln"><span>Acme <em>Shield</em></span></span></h2>
     <p class="desc">Compliance checks you can prove.</p>
     <div class="chips"><span class="chip"><b>✓</b>Policy rules</span><span class="chip"><b>✓</b>Evidence log</span><span class="chip"><b>✓</b>Review queue</span></div>
   </div></div>
 
-  <div id="outro" class="layer clip" data-start="34" data-duration="5.2" data-track-index="5"><div class="col">
+  <div id="outro" class="layer clip hero" data-start="34" data-duration="5.2" data-track-index="6"><div class="col">
     <div class="lock"><img src="assets/acme-mark.svg" alt="Acme"><span>Acme Suite</span></div>
     <div class="cta"><span class="btn">Start free →</span></div>
   </div></div>
 
-  <div id="hero-b" class="layer clip" data-start="38.8" data-duration="1.2" data-track-index="2"><div class="col">
+  <div id="hero-b" class="layer clip hero" data-start="38.8" data-duration="1.2" data-track-index="3"><div class="col">
     <div class="kick"><i></i>ACME SUITE</div>
     <h1><span class="ln"><span>Five tools.</span></span><span class="ln"><span><em>One calm</em> workspace.</span></span></h1>
   </div></div>
@@ -95,25 +114,71 @@ h1 em,h2 em{color:#0B6E6E}
 
 <script>
 (function () {
-  const tl = gsap.timeline({ paused: true });
-  const q = (s, r) => (r || document).querySelectorAll(s);
-
-  // hero: fully visible at t = 0 (loop seam), leaves at 3.7
-  tl.to(q("#hero-a .kick, #hero-a .ln > span"), { yPercent: -110, opacity: 0, duration: 0.5, ease: "power2.in", stagger: 0.05 }, 3.7);
-
-  // products
-  [0, 1, 2, 3, 4].forEach((k) => {
-    const T = 4 + k * 6, r = document.getElementById("p" + k);
-    tl.fromTo(r.querySelector(".kick"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, T + 0.4);
-    tl.fromTo(q(".ln > span", r), { yPercent: 115 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, T + 0.5);
-    tl.fromTo(r.querySelector(".desc"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, T + 0.9);
-    tl.fromTo(q(".chip", r), { opacity: 0, x: -36 }, { opacity: 1, x: 0, duration: 0.5, ease: "back.out(1.6)", stagger: 0.22 }, T + 1.4);
-    tl.to(q(".kick, .ln > span, .desc, .chip", r), { opacity: 0, x: -40, duration: 0.4, ease: "power2.in", stagger: 0.02 }, T + 5.55);
+  // split the Pulse title into letters (build-time, deterministic)
+  document.querySelectorAll("h2.split").forEach((h) => {
+    const walk = (node) => [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) { const f = document.createDocumentFragment(); [...n.textContent].forEach((c) => { const s = document.createElement("span"); s.className = "ch"; s.textContent = c === " " ? " " : c; f.appendChild(s); }); n.replaceWith(f); }
+      else walk(n);
+    });
+    walk(h);
   });
 
-  // outro lockup + CTA
-  tl.fromTo("#outro .lock", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 34.4);
-  tl.fromTo("#outro .btn", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 35.0);
+  const tl = gsap.timeline({ paused: true });
+  const q = (s, r) => (r || document).querySelectorAll(s);
+  const $ = (s) => document.querySelector(s);
+
+  // 0 · hero: fully visible at t = 0 (loop seam), lifts away
+  tl.to(q("#hero-a .kick, #hero-a .ln > span"), { yPercent: -110, opacity: 0, duration: 0.5, ease: "power2.in", stagger: 0.05 }, 3.7);
+
+  // 1 · Pulse (4–10.5): letters resolve from blur, chips slide from the left
+  tl.fromTo("#p0 .kick", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 4.3);
+  tl.fromTo(q("#p0 .ch"), { opacity: 0, y: 24, filter: "blur(14px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: "expo.out", stagger: 0.04 }, 4.4);
+  tl.fromTo("#p0 .desc", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 5.0);
+  tl.fromTo(q("#p0 .chip"), { opacity: 0, x: -36 }, { opacity: 1, x: 0, duration: 0.5, ease: "back.out(1.6)", stagger: 0.2 }, 5.5);
+  tl.to(q("#p0 .kick, #p0 .ch, #p0 .desc, #p0 .chip"), { opacity: 0, x: -40, duration: 0.35, ease: "power2.in", stagger: 0.012 }, 10.05);
+
+  // 2 · Ledger (10.5–15.5): title wipes on, promise types out, chips drop in
+  tl.fromTo("#p1 .kick", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 10.9);
+  tl.fromTo("#p1 h2", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power4.inOut" }, 11.0);
+  tl.fromTo("#p1 .desc", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "steps(34)" }, 11.7);
+  tl.fromTo(q("#p1 .chip"), { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", stagger: 0.18 }, 12.6);
+  // type carry: everything leaves except the word "Acme"
+  tl.to(q("#p1 .kick, #p1 .desc, #p1 .chip"), { opacity: 0, y: 24, duration: 0.35, ease: "power2.in", stagger: 0.03 }, 15.05);
+  tl.to("#p1 .b", { yPercent: -115, duration: 0.35, ease: "power3.in" }, 15.15);
+
+  // 3 · Cloud (15.5–21): only the second word flips in; whip turn blurs the stage
+  tl.fromTo("#p2 .b", { yPercent: 115 }, { yPercent: 0, duration: 0.55, ease: "back.out(1.4)" }, 15.55);
+  tl.fromTo("#p2 .kick", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 15.6);
+  tl.fromTo("#stage3d", { filter: "blur(0px)" }, { filter: "blur(7px)", duration: 0.2, ease: "power2.in" }, 15.5);
+  tl.to("#stage3d", { filter: "blur(0px)", duration: 0.3, ease: "power2.out" }, 15.7);
+  tl.fromTo("#p2 .desc", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 16.0);
+  tl.fromTo(q("#p2 .chip"), { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out", stagger: 0.16, transformOrigin: "0% 50%" }, 16.5);
+  tl.to(q("#p2 .kick, #p2 h2, #p2 .desc, #p2 .chip"), { opacity: 0, scale: 0.94, duration: 0.35, ease: "power2.in", transformOrigin: "0% 50%" }, 20.55);
+
+  // 4 · Forecast (21–29): focal iris flood from the product, camera dolly (in stage.js), strike-through
+  tl.fromTo("#flood", { clipPath: "circle(0px at 1450px 560px)" }, { clipPath: "circle(2300px at 1450px 560px)", duration: 1.0, ease: "power2.inOut" }, 20.9);
+  tl.fromTo("#p3 .kick", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 21.7);
+  tl.fromTo("#p3 h2", { opacity: 0, scale: 1.14 }, { opacity: 1, scale: 1, duration: 0.9, ease: "power3.out", transformOrigin: "0% 60%" }, 21.8);
+  tl.fromTo("#p3 .desc", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "none" }, 22.6);
+  tl.fromTo("#p3 .strike i", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power4.out" }, 23.9);
+  tl.fromTo(q("#p3 .chip"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: "sine.out", stagger: 0.3 }, 24.6);
+  tl.to(q("#p3 .kick, #p3 h2, #p3 .desc, #p3 .chip"), { opacity: 0, duration: 0.4, ease: "power1.in" }, 28.1);
+  tl.to("#flood", { clipPath: "circle(0px at 1450px 560px)", duration: 0.8, ease: "power2.inOut" }, 28.2);
+
+  // 5 · Shield (29–34): title drops from above, chips tick on like a checklist
+  tl.fromTo("#p4 .kick", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 29.4);
+  tl.fromTo("#p4 .ln > span", { yPercent: -115 }, { yPercent: 0, duration: 0.7, ease: "power4.out" }, 29.5);
+  tl.fromTo("#p4 .desc", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "none" }, 30.0);
+  q("#p4 .chip").forEach((c, i) => {
+    tl.fromTo(c.querySelector("b"), { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 30.4 + i * 0.3);
+    tl.fromTo(c, { clipPath: "inset(0% 100% 0% 0% round 100px)" }, { clipPath: "inset(0% 0% 0% 0% round 100px)", duration: 0.45, ease: "power2.inOut" }, 30.4 + i * 0.3);
+  });
+  tl.to(q("#p4 .kick, #p4 .ln > span, #p4 .desc, #p4 .chip"), { opacity: 0, x: -40, duration: 0.35, ease: "power2.in", stagger: 0.02 }, 33.55);
+
+  // outro (34–39.2): the mark spins in on the beat, then the CTA
+  tl.fromTo("#outro .lock img", { opacity: 0, scale: 0.5, rotation: -90 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "expo.out" }, 34.3);
+  tl.fromTo("#outro .lock span", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.7, ease: "power3.inOut" }, 34.6);
+  tl.fromTo("#outro .btn", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" }, 35.3);
   tl.to(q("#outro .lock, #outro .btn"), { opacity: 0, y: -24, duration: 0.45, ease: "power2.in", stagger: 0.06 }, 38.3);
 
   // hero returns and holds, so t = 40 renders exactly like t = 0
@@ -129,7 +194,7 @@ h1 em,h2 em{color:#0B6E6E}
 import * as S from "./assets/js/stage.js";
 const { renderer, scene, camera } = S.createStage(document.getElementById("gl"));
 const { products, table } = S.buildSuite(scene);
-function renderAt(t) { S.apply(products, table, t); renderer.render(scene, camera); }
+function renderAt(t) { S.apply(products, table, t, camera); renderer.render(scene, camera); }
 window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
 window.__hf.buildReady["suite-3d"] = Promise.resolve().then(() => { renderer.compile(scene, camera); renderAt(window.__hfThreeTime || 0); });
 window.addEventListener("hf-seek", (e) => renderAt(e.detail.time));

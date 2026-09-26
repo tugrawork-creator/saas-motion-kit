@@ -4,14 +4,25 @@
 
 Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **100 görsel tema**. Amaç, "bir lansman videosuna ihtiyacımız var" noktasından render alınmış bir MP4'e, sonuç yapay zekâ işi gibi görünmeden ulaşmak.
 
-[English README →](README.md) · [Tema galerisi (100 tema) →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Örnek proje →](examples/acme-suite-loop)
+[English README →](README.md) · [Tema galerisi →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Geçiş atlası →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Yaratıcı kas →](creative) · [Örnek proje →](examples/acme-suite-loop)
 
 > Bu repodaki bütün örneklerde **Acme** adında hayali bir şirket ve onun hayali ürünleri kullanılıyor. Gösterilen tüm rakamlar uydurmadır.
+
+> **Tek kural: hiçbir video bir öncekinin kopyası gibi hissettirmemeli.** Efektleri, geçişleri ve bileşenleri tekrar etmeyin. Her videoda yeni bir bileşen icat edin. Tek bir efekt seçmeden önce mesajı ve tonu belirleyin.
+
+## v1.1'de neler yeni: yaratıcı kas
+
+- **[`creative/`](creative)** artık kitin kalbi. İçinde her storyboard'da sorulacak 7 soru, "şu mesajı şu tonda vermek istiyorum" diyen [ton matrisi](creative/tone-matrix.md), [tekrar kuralları](creative/variety-rules.md) ve 15 dakikada yeni bileşen icat etmek için [bileşen atölyesi](creative/component-forge.md) var.
+- **[Geçiş atlası](https://tugrawork-creator.github.io/saas-motion-kit/transitions/):** 24 anlatımsal geçiş, her biri canlı demolu: match cut, nesne ya da kelime taşıma, kamera hareketleri, maskeler, malzeme ve zaman geçişleri.
+- **`tools/variety_audit.py`:** storyboard defterindeki tekrarları yakalar. Aynı geçiş, giriş, ease ya da yön; eşit çekim süreleri; eksik sürpriz; vurgu renginin aşırı kullanımı; ton uyuşmazlığı ve eksik yeni bileşen. `--history` ile önceki videolarınızı hatırlar.
+- **Acme örneği bir ders olarak yeniden kuruldu.** Aracı kendi ilk taslağımızda çalıştırdık ve **11 tekrar** yakaladı: aynı dönüş 5 kez, aynı başlık girişi, her yerde aynı ease, eşit süreler, hiç sürpriz yok. v2'de her ürünün kendi girişi var (bulanıktan harf harf, maske silme, sahneler arası taşınan kelime, yukarıdan düşme). Dönüşler farklılaştı (hareket bulanıklıklı kamçı, yavaş sinüs), süreler eşit değil. Forecast'te ekranın teal renge boğulduğu, kameranın yaklaştığı bir sürpriz var. Önce/sonra [`examples/acme-suite-loop`](examples/acme-suite-loop) klasöründe, yeni video [v1.1 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.1) sayfasında.
+- Storyboard şablonu artık **"Mesaj ve ton"** cümlesi ve sahne başına bir satırlık **hareket defteri** ile başlıyor. `/saas-motion-video` skill'i de build'den önce bir **yaratıcı kontrol** kapısı çalıştırıyor.
 
 ## İçinde neler var
 
 | Klasör | Açıklama |
 |---|---|
+| `creative/` | **Yaratıcı kas:** 7 soru, ton matrisi, tekrar kuralları, bileşen atölyesi, geçiş atlası |
 | `playbook/` | Her aşamanın sonunda bir karar kapısı olan 7 aşamalı üretim rehberi |
 | `components/` | **Temiz ya da hayali bileşen** kuralı: ürünün arayüzü temizse gerçeğini canlandır, değilse hayali bileşen tasarla |
 | `docs/` | Tema galerisi (GitHub Pages). **100 tema** var; her birinde 4 anahtar kare, bileşen kiti, hareket notları ve referanslar bulunuyor |
@@ -25,7 +36,7 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 1. **Brief:** tek mesaj, format, süre, ses kararı.
 2. **Bileşenler:** ürünün arayüzü temiz mi? Temizse yakala ve canlandır, değilse hayali bileşen tasarla.
 3. **Tema:** galeriden 2–3 tema seçip birini onaylayın.
-4. **Storyboard:** Kanca → Tanıtım → Kanıt anı → Çağrı akışını karelerle kurun.
+4. **Storyboard:** Kanca → Tanıtım → Kanıt anı → Çağrı akışını karelerle kurun. **Yaratıcı kontrol** bu aşamada zorunlu: mesaj ve ton cümlesini yazın, hareket defterini doldurun ve `python tools/variety_audit.py STORYBOARD.md` çalıştırın.
 5. **Build:** HyperFrames kompozisyonu, seek-safe animasyon.
 6. **Ses:** müzik, efekt sesi ya da bilinçli bir sessizlik.
 7. **Teslim:** 4K render, ardından Lanczos ile küçültme; ses normalizasyonu ve döngü kontrolü.

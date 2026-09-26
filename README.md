@@ -2,9 +2,19 @@
 
 **Promo and motion videos for software products, made with [HyperFrames](https://github.com/heygen-com/hyperframes) and Claude Code.**
 
-This kit is a staged process, a component strategy and **100 visual themes**. Together they take you from "we need a launch video" to a rendered MP4 without making it look AI-generated.
+> **The one rule: no two films should feel like the same film.** Don't repeat effects, transitions or components. Invent a new component for every film. Decide the message and the tone before you pick a single effect.
 
-[Türkçe README →](README.tr.md) · [Theme gallery (100 themes) →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Example project →](examples/acme-suite-loop)
+This kit trains that creative muscle. It combines a staged process, a component strategy, **100 visual themes**, a **24-transition atlas** and a **variety audit** that catches repetition in your storyboard before you build it.
+
+[Türkçe README →](README.tr.md) · [Theme gallery →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Transition atlas →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Creative muscle →](creative) · [Example →](examples/acme-suite-loop)
+
+## What's new in v1.1: the creative muscle
+
+- **[`creative/`](creative)** is the new heart of the kit: seven questions to ask at every storyboard, a [tone matrix](creative/tone-matrix.md) ("I want to say ___ in a ___ tone") that maps tone to speed, eases, camera, colour, type, transitions and sound, the [variety rules](creative/variety-rules.md), and a [component forge](creative/component-forge.md) for inventing a new component in 15 minutes.
+- **[Transition atlas](https://tugrawork-creator.github.io/saas-motion-kit/transitions/):** 24 *narrative* transitions (match cuts, carries, camera moves, masks, materials, time), each with a live demo, the tone it fits and what not to pair it with.
+- **`tools/variety_audit.py`** reads the storyboard ledger and flags repeated transitions, entrances, eases, directions, uniform shot lengths, missing surprises, accent overuse, tone mismatches and missing new components. With `--history` it remembers your previous films, so you don't repeat your last three.
+- **The Acme example, rebuilt as a lesson.** We ran the audit on our own first draft. It caught **11 repetitions**: the same turntable turn five times, the same title entrance, one ease everywhere, equal shot lengths and no surprise. v2 gives every product its own entrance (letters out of blur, mask wipe, a word carried between shots, drop from above), varies the turns (whip with motion blur, slow sine), uneven shot lengths, and one surprise where Forecast floods teal while the camera dollies in. Before and after are in [`examples/acme-suite-loop`](examples/acme-suite-loop), and the new render is on the [v1.1 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.1).
+- The storyboard template now opens with a **Message & tone** sentence and a one-row-per-shot **ledger**, and the `/saas-motion-video` skill runs a **creative pass** gate before any build.
 
 ![Six of the 100 themes](docs/assets/readme-hero.jpg)
 
@@ -16,13 +26,14 @@ This kit is a staged process, a component strategy and **100 visual themes**. To
 
 | Path | What it is |
 |---|---|
+| [`creative/`](creative) | **The creative muscle:** the seven questions, tone matrix, variety rules, component forge and transition atlas |
 | [`playbook/`](playbook) | A 7-stage production playbook with a review gate at each stage |
 | [`components/`](components) | The **clean-or-imaginary** component rule: use the product's real UI when it is clean, otherwise design imaginary UI |
-| [`docs/`](docs) | The theme gallery (GitHub Pages). It holds **100 theme sheets**, each with 4 key frames, a component kit, motion notes and references |
-| [`examples/acme-suite-loop/`](examples/acme-suite-loop) | A complete HyperFrames project: a silent, seamless 40 s 3D loop for a booth screen (Three.js and GSAP) |
+| [`docs/`](docs) | GitHub Pages: the **100-theme gallery** (4 key frames, component kit, motion notes and references per theme) and the **live transition atlas** |
+| [`examples/acme-suite-loop/`](examples/acme-suite-loop) | A complete HyperFrames project: a silent, seamless 40 s 3D booth loop, with its v1 → v2 variety-audit lesson |
 | [`.claude/skills/saas-motion-video/`](.claude/skills/saas-motion-video) | A Claude Code skill that runs the whole process with you |
 | [`templates/`](templates) | `BRIEF.md`, `STORYBOARD.md` and the theme-sheet template |
-| [`tools/`](tools) | Delivery (4K → 1080p/2K), loop-seam check, warm UI SFX synth, gallery builders |
+| [`tools/`](tools) | **Variety audit**, delivery (4K → 1080p/2K), loop-seam check, warm UI SFX synth, gallery builders |
 
 ## The process in one picture
 
@@ -32,6 +43,8 @@ This kit is a staged process, a component strategy and **100 visual themes**. To
 ```
 
 Each stage ends with a **human decision**. The agent does the production work; you bring taste at the gates. That split is what makes the result feel made by a person. See [`playbook/`](playbook).
+
+At stage 4 the **creative pass** is mandatory: write the message-and-tone sentence, fill the ledger, run `python tools/variety_audit.py STORYBOARD.md`, then fix the repeats or mark them as deliberate `motif:`s.
 
 ## Clean components, or imaginary ones
 

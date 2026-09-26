@@ -1,0 +1,1330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Transition Atlas — saas-motion-kit</title>
+<meta name="description" content="24 narrative scene transitions for software promo videos made with HyperFrames + Claude Code, each with a live looping demo, when to use it, what to avoid and a seek-safe GSAP recipe.">
+<link rel="icon" href="../assets/brand/acme-mark.svg">
+<link rel="stylesheet" href="../assets/brand/acme.css">
+<style>
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);padding:48px 40px 80px}
+header{max-width:1360px;margin:0 auto 26px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+.back{font:500 13px var(--mono);color:var(--brand-deep);text-decoration:none;display:inline-block;margin-bottom:14px}
+.back:hover{text-decoration:underline}
+.kicker{font:600 12px var(--mono);letter-spacing:.16em;color:var(--brand-deep);text-transform:uppercase}
+h1{font:400 64px/1 var(--serif);letter-spacing:-.01em;margin:10px 0 14px} h1 em{color:var(--brand-deep)}
+.dek{max-width:800px;font-size:17px;line-height:1.55;color:#33415C}
+.dek a{color:var(--brand-deep)}
+.logo{display:flex;align-items:center;gap:10px;font:800 18px var(--sans)} .logo img{width:36px;height:36px}
+.rules{max-width:1360px;margin:0 auto 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;padding:0;counter-reset:r}
+.rules li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px 15px;font-size:14px;line-height:1.5;color:#33415C;counter-increment:r}
+.rules li::before{content:"0" counter(r);display:block;font:600 11px var(--mono);letter-spacing:.14em;color:var(--brand-deep);margin-bottom:6px}
+.rules b{color:var(--ink)}
+.fbar{position:relative;z-index:20;max-width:1360px;margin:0 auto 30px;padding:12px 0;background:rgba(246,245,241,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:10px 20px;align-items:start}
+.frows{display:grid;gap:8px}
+.frow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fbar .fl{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);width:62px}
+.fbar button{font:600 13px var(--sans);border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:100px;padding:7px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.fbar button:hover{border-color:rgba(14,23,38,.3)}
+.fbar button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.fbar button i{font:500 11px var(--mono);font-style:normal;color:var(--muted)}
+.fbar button s{width:8px;height:8px;border-radius:50%;background:var(--fc)}
+.fbar button.on{background:var(--ink);color:#fff;border-color:var(--ink)} .fbar button.on i{color:#9fb0c9}
+.fside{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.fcount{font:500 12px var(--mono);color:var(--muted);white-space:nowrap}
+#pp{font:600 12px var(--mono);letter-spacing:.06em}
+.fam{max-width:1360px;margin:0 auto 46px;scroll-margin-top:110px}
+.fh{display:grid;grid-template-columns:auto auto 1fr;gap:4px 14px;align-items:baseline;padding-top:4px;margin-bottom:16px}
+.fh h2{font:400 38px/1 var(--serif);position:relative;padding-left:20px}
+.fh h2::before{content:"";position:absolute;left:0;top:50%;width:11px;height:11px;margin-top:-4px;border-radius:50%;background:var(--fc)}
+.fn{font:600 12px var(--mono);color:var(--muted);letter-spacing:.1em}
+.fh p{font-size:14.5px;line-height:1.5;color:#33415C;max-width:720px}
+.tgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;--d:4s}
+.scrub{display:flex;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid var(--line);font:600 10px var(--mono);color:var(--muted);letter-spacing:.08em}
+.scrub em{font-style:normal;font-weight:500;text-transform:uppercase;min-width:0;white-space:nowrap}
+.scrub .strk{position:relative;flex:1;height:3px;border-radius:3px;background:#E6E4DE}
+.scrub .strk i{position:absolute;top:-1px;bottom:-1px;left:var(--t0);width:max(4px,calc(var(--t1) - var(--t0)));background:var(--brand);border-radius:3px}
+.scrub .strk b{position:absolute;inset:0;animation:play var(--d) linear infinite}
+.scrub .strk b::after{content:"";position:absolute;left:0;top:50%;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px #fff}
+@keyframes play{from{transform:translateX(0)}to{transform:translateX(100%)}}
+.tcard .meta{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.tcard .tk{display:flex;justify-content:space-between;align-items:center;gap:8px;font:500 11px var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.tcard .fchip{display:inline-flex;align-items:center;gap:6px;margin-right:auto;color:var(--ink)} .tcard .fchip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--fc)}
+.tcard .en{color:var(--ink);letter-spacing:.06em}
+.tcard h3{font:400 27px/1.06 var(--serif)}
+.tcard .tones{display:flex;flex-wrap:wrap;gap:5px} .tcard .tones span{font:500 11px var(--mono);padding:3px 8px;border-radius:100px;background:#F1F0EB;color:#33415C}
+.tcard .what{font-size:14px;line-height:1.5}
+dl{display:grid;gap:9px} dt{font:600 10.5px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--brand-deep)} dt.av{color:#C2362C}
+dd{margin:3px 0 0;font-size:13px;line-height:1.5;color:#33415C}
+details{margin-top:auto;border-top:1px solid var(--line);padding-top:11px}
+summary{font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:500 16px/1 var(--mono);color:var(--brand-deep)} details[open] summary::after{content:"−"}
+summary:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:4px}
+.tcard .rn{margin-top:10px;font-size:13px;line-height:1.5;color:#33415C}
+pre{margin-top:8px;background:var(--ink);color:#D8E2EE;font:400 11px/1.65 var(--mono);padding:11px 12px;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}
+pre .s{color:#7FE0DA} pre .c{color:#8A97AB}
+.tcard .hf{margin-top:9px;font-size:13px;line-height:1.45;color:#33415C} .tcard .hf b{display:block;font:600 10.5px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--ink);margin-bottom:2px}
+.empty{max-width:1360px;margin:0 auto 40px;padding:28px;border:1px dashed rgba(14,23,38,.25);border-radius:14px;text-align:center;color:var(--muted);font-size:15px}
+footer{max-width:1360px;margin:48px auto 0;font-size:13px;color:var(--muted);line-height:1.6} footer a{color:var(--brand-deep)}
+@media(min-width:1100px){.fbar{position:sticky;top:0}}
+@media(max-width:1280px){.tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.rules{grid-template-columns:1fr}}
+@media(max-width:700px){body{padding:24px 16px 56px} header{grid-template-columns:1fr} h1{font-size:44px} .tgrid{grid-template-columns:1fr} .fbar{position:static;grid-template-columns:1fr} .fside{flex-direction:row;align-items:center;justify-content:space-between} .fbar .fl{width:100%} .fh{grid-template-columns:auto 1fr} .fh p{grid-column:1/-1} .fh h2{font-size:32px}}
+
+/* ===== demo stage ===== */
+.stage{position:relative;aspect-ratio:16/9;overflow:hidden;container-type:inline-size;isolation:isolate;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.stage .L{position:absolute;inset:0}
+.stage .x{position:absolute}
+.stage .sf{font-family:var(--serif);font-weight:400;line-height:1;letter-spacing:-.015em;white-space:nowrap}
+.stage .mo{font-family:var(--mono);font-weight:600;font-size:2.5cqw;line-height:1;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.stage::after{content:"";position:absolute;inset:0;z-index:30;pointer-events:none;background:var(--veil,var(--paper));opacity:0;animation:veil var(--d) linear infinite}
+.stage.nv::after{content:none}
+@keyframes veil{0%{opacity:1}3.5%{opacity:0}96.5%{opacity:0}100%{opacity:1}}
+body.paused .stage *,body.paused .stage::after,body.paused .strk b,.tcard.off .stage *,.tcard.off .stage::after,.tcard.off .strk b{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){
+  .stage *,.stage::after,.strk b{animation-play-state:paused!important;animation-delay:var(--freeze,-1.7s)!important}
+  body.play .stage *,body.play .stage::after,body.play .strk b{animation-play-state:running!important}
+  body.play .tcard.off .stage *,body.play .tcard.off .stage::after,body.play .tcard.off .strk b{animation-play-state:paused!important}
+}
+.d01 .a{background:var(--ink);color:#fff;transform-origin:50cqw 25.3cqw;animation:d01a var(--d) linear infinite}
+.d01 .b{background:var(--paper);transform-origin:50cqw 25.3cqw;opacity:0;animation:d01b var(--d) linear infinite}
+.d01 .g{background:currentColor;opacity:.14}
+.d01 .gh{left:0;right:0;top:25.3cqw;height:1px}.d01 .gv{top:0;bottom:0;left:50cqw;width:1px}
+.d01 .tl{left:5cqw;top:5cqw}.d01 .ta{color:#fff;animation:d01o var(--d) linear infinite}.d01 .tb{opacity:0;animation:d01p var(--d) linear infinite}
+.d01 .dot,.d01 .ring,.d01 .rt{left:42.5cqw;top:17.8cqw;width:15cqw;height:15cqw;border-radius:50%}
+.d01 .dot{background:var(--alert);box-shadow:0 0 0 2cqw rgba(255,90,78,.22),0 0 0 4.4cqw rgba(255,90,78,.09)}
+.d01 .ring{background:conic-gradient(var(--brand) 0 88%,var(--brand-soft) 0);-webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 2.5cqw),#000 calc(100% - 2.4cqw));mask:radial-gradient(farthest-side,#0000 calc(100% - 2.5cqw),#000 calc(100% - 2.4cqw))}
+.d01 .rt{display:grid;place-items:center;font-size:5.4cqw}.d01 .rt small{font-size:.5em}
+.d01 .cap{left:0;right:0;top:40cqw;text-align:center}
+.d01 .reg{left:39.6cqw;top:14.9cqw;width:20.8cqw;height:20.8cqw;border:.3cqw dashed var(--brand-deep);border-radius:50%;opacity:0;animation:d01r var(--d) linear infinite}
+@keyframes d01a{0%{transform:scale(1);opacity:1;animation-timing-function:cubic-bezier(.45,0,.8,.55)}39.9%{transform:scale(1.12);opacity:1}40%,100%{transform:scale(1.12);opacity:0}}
+@keyframes d01b{0%,39.9%{opacity:0;transform:scale(1.12)}40%{opacity:1;transform:scale(1.12);animation-timing-function:cubic-bezier(.2,.6,.35,1)}62%,100%{opacity:1;transform:scale(1.2)}}
+@keyframes d01o{0%,39.9%{opacity:.65}40%,100%{opacity:0}}
+@keyframes d01p{0%,39.9%{opacity:0}40%,100%{opacity:.65}}
+@keyframes d01r{0%,39.9%{opacity:0;transform:scale(1.25)}40%{opacity:1;transform:scale(1.25);animation-timing-function:cubic-bezier(.2,.7,.3,1)}50%{opacity:1;transform:scale(1)}62%,100%{opacity:0;transform:scale(1)}}
+.d02 .a{background:var(--ink);color:#fff;animation:d02a var(--d) linear infinite}
+.d02 .b{background:var(--paper);opacity:0;animation:d02b var(--d) linear infinite}
+.d02 .path{left:0;right:0;top:28.1cqw;border-top:.25cqw dashed currentColor;opacity:.18}
+.d02 .tl{left:5cqw;top:5cqw;opacity:.6}
+.d02 .h{left:5cqw;top:40cqw;font-size:8cqw}
+.d02 .b .h{opacity:0;animation:d02l var(--d) linear infinite}
+.d02 .pill{left:0;top:24.6cqw;height:7cqw;width:19cqw;border-radius:3.5cqw;background:var(--brand);color:#fff;font:700 2.9cqw/7cqw var(--sans);text-align:center;box-shadow:0 1cqw 2.4cqw rgba(15,163,163,.35);animation:d02p var(--d) linear infinite}
+.d02 .pill b{font-size:2.6cqw;letter-spacing:0;margin-left:.4cqw}
+.d02 .badge{left:0;top:23.6cqw;width:9cqw;height:9cqw;border-radius:50%;background:var(--brand);color:#fff;padding:1.8cqw;box-shadow:0 1cqw 2.4cqw rgba(15,163,163,.3);animation:d02q var(--d) linear infinite}
+.d02 .badge svg{position:relative;display:block;width:100%;height:100%}
+.d02 .st{right:100%;top:22%;height:56%;width:22cqw;border-radius:9cqw;background:linear-gradient(90deg,rgba(15,163,163,0),rgba(15,163,163,.55));transform-origin:100% 50%}
+.d02 .a .st{animation:d02s var(--d) linear infinite}.d02 .b .st{animation:d02t var(--d) linear infinite}
+@keyframes d02a{0%,39.9%{opacity:1}40%,100%{opacity:0}}
+@keyframes d02b{0%,39.9%{opacity:0}40%,100%{opacity:1}}
+@keyframes d02p{0%,14%{transform:translateX(5cqw);animation-timing-function:cubic-bezier(.5,0,.75,.4)}40%,100%{transform:translateX(44cqw)}}
+@keyframes d02q{0%,40%{transform:translateX(48.5cqw);animation-timing-function:cubic-bezier(.25,.6,.5,1)}56%,100%{transform:translateX(74cqw)}}
+@keyframes d02s{0%,18%{opacity:0;transform:scaleX(.2)}40%,100%{opacity:1;transform:scaleX(1)}}
+@keyframes d02t{0%,40%{opacity:1;transform:scaleX(1)}54%,100%{opacity:0;transform:scaleX(.1)}}
+@keyframes d02l{0%,52%{opacity:0;transform:translateY(1.5cqw)}62%,100%{opacity:1;transform:none}}
+.d03 .a{background:var(--paper);transform-origin:63cqw 30cqw;animation:d03a var(--d) linear infinite}
+.d03 .b{background:var(--brand);color:#fff;opacity:0;animation:d03b var(--d) linear infinite}
+.d03 .h{left:6cqw;top:5cqw;font-size:6cqw}.d03 .tl{left:6cqw;top:12.5cqw;opacity:.55}
+.d03 .base{left:18cqw;right:6cqw;top:46cqw;height:1px;background:rgba(14,23,38,.18)}
+.d03 .br{width:7cqw;background:#D9DDE3;border-radius:.5cqw .5cqw 0 0}
+.d03 .tb{left:58cqw;top:14cqw;height:32cqw;width:10cqw;background:var(--brand);border-radius:0}
+.d03 .ql{top:48.5cqw;font-size:2cqw;opacity:.5}
+.d03 .b .tl{left:7cqw;top:7cqw;opacity:.75}
+.d03 .h2{left:7cqw;top:15cqw;font-size:11cqw;line-height:.95;animation:d03t var(--d) linear infinite}
+.d03 .h2 i{color:var(--brand-soft)}
+.d03 .sub{left:7cqw;top:42cqw;opacity:.8;animation:d03t var(--d) linear infinite}
+@keyframes d03a{0%,25%{transform:scale(1);opacity:1;animation-timing-function:cubic-bezier(.6,0,.9,.45)}44%{transform:scale(16);opacity:1}44.1%,100%{transform:scale(16);opacity:0}}
+@keyframes d03b{0%,44%{opacity:0}44.1%,100%{opacity:1}}
+@keyframes d03t{0%,46%{opacity:0;transform:translateY(3cqw);animation-timing-function:cubic-bezier(.2,.7,.3,1)}58%,100%{opacity:1;transform:none}}
+.d04 .a{background:var(--paper);animation:d04a var(--d) linear infinite}
+.d04 .b{background:var(--ink);color:#fff;opacity:0;transform-origin:30% 50%;animation:d04b var(--d) linear infinite}
+.d04 .tl{left:5cqw;top:5cqw;opacity:.6}
+.d04 .gl{left:6cqw;right:6cqw;height:1px;background:rgba(14,23,38,.08)}
+.d04 .ch{left:6cqw;top:12cqw;width:88cqw;height:30cqw;animation:d04c var(--d) linear infinite}
+.d04 .ch svg{display:block;width:100%;height:100%}
+.d04 .scan{left:0;top:10cqw;height:34cqw;width:.35cqw;background:var(--alert);animation:d04s var(--d) linear infinite}
+.d04 .hold{right:5cqw;top:4.2cqw;display:flex;align-items:center;gap:.5cqw;padding:1cqw 1.6cqw;border-radius:2cqw;background:var(--ink);color:#fff;opacity:0;animation:d04h var(--d) linear infinite}
+.d04 .hold i{width:.7cqw;height:2.2cqw;background:var(--alert);border-radius:.2cqw}.d04 .hold i+i{margin-right:.8cqw}
+.d04 .now{left:6cqw;top:11cqw;font-size:22cqw;color:#fff}.d04 .now i{color:var(--alert);font-style:normal}
+.d04 .b .tl{opacity:.6}.d04 .sub{left:6.6cqw;top:41cqw;color:var(--brand-soft);opacity:.85}
+.d04 .beats{right:4cqw;bottom:4cqw;display:flex;gap:1.3cqw;align-items:center;padding:1.1cqw 1.6cqw;border-radius:3cqw;background:rgba(14,23,38,.82)}
+.d04 .beats i{width:.9cqw;height:.9cqw;border-radius:50%;background:rgba(255,255,255,.35)}
+.d04 .beats i.db{background:var(--alert)}
+.d04 .beats b{position:absolute;left:1.35cqw;top:50%;width:1.6cqw;height:1.6cqw;margin-top:-.8cqw;border-radius:50%;border:.3cqw solid #fff;animation:d04m var(--d) steps(8,end) infinite}
+@keyframes d04a{0%,37.4%{opacity:1;filter:grayscale(0) contrast(1)}37.5%,49.9%{opacity:1;filter:grayscale(1) contrast(1.15)}50%,100%{opacity:0;filter:grayscale(1) contrast(1.15)}}
+@keyframes d04c{0%{clip-path:inset(0 100% 0 0)}37.5%,100%{clip-path:inset(0 30% 0 0)}}
+@keyframes d04s{0%{transform:translateX(6cqw)}37.5%,100%{transform:translateX(67.6cqw)}}
+@keyframes d04h{0%,37.4%{opacity:0}37.5%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes d04b{0%,49.9%{opacity:0;transform:scale(1.14)}50%{opacity:1;transform:scale(1.14);animation-timing-function:cubic-bezier(.16,1,.3,1)}58%,100%{opacity:1;transform:scale(1)}}
+@keyframes d04m{from{transform:translateX(0)}to{transform:translateX(17.6cqw)}}
+.d05 .a{background:var(--paper);animation:d05a var(--d) linear infinite}
+.d05 .b{background:var(--ink);color:#fff;transform:translateX(100cqw);animation:d05b var(--d) linear infinite}
+.d05 .tl{left:6cqw;top:6cqw;opacity:.6}
+.d05 .h{left:6cqw;top:14cqw;font-size:9cqw;line-height:1.02}.d05 .h i{color:var(--alert)}
+.d05 .slotA{left:62cqw;top:19cqw;width:26cqw;height:13cqw;border-radius:2cqw;background:#fff;box-shadow:0 .4cqw 1.6cqw rgba(14,23,38,.06)}
+.d05 .row{left:6cqw;right:6cqw;height:9cqw;border-bottom:1px solid rgba(255,255,255,.12)}
+.d05 .tag{left:2cqw;top:2.4cqw;padding:1cqw 1.4cqw;border-radius:1cqw;font-size:2.1cqw;background:rgba(15,163,163,.22);color:#7FE0DA}
+.d05 .nm{left:26cqw;top:2.6cqw;font:600 3.2cqw/1 var(--sans)}
+.d05 .own{right:2cqw;top:3cqw;font-size:2.1cqw;opacity:0;color:#FF9A91;animation:d05o var(--d) linear infinite}
+.d05 .late{animation:d05o var(--d) linear infinite}
+.d05 .slot{left:2cqw;top:.5cqw;width:20cqw;height:8cqw;border:.3cqw dashed rgba(255,255,255,.4);border-radius:1.4cqw;animation:d05s var(--d) linear infinite}
+.d05 .r2{animation:d05r var(--d) linear infinite}
+.d05 .cx{left:64cqw;top:21.5cqw;animation:d05x var(--d) linear infinite}
+.d05 .cy{animation:d05y var(--d) linear infinite}
+.d05 .chip{width:20cqw;height:8cqw;border-radius:1.4cqw;background:var(--alert);color:#fff;font-size:3.6cqw;letter-spacing:.02em;display:grid;place-items:center;animation:d05c var(--d) linear infinite}
+@keyframes d05a{0%,28%{transform:none;filter:brightness(1);animation-timing-function:cubic-bezier(.65,0,.35,1)}52%,100%{transform:translateX(-40cqw);filter:brightness(.9)}}
+@keyframes d05b{0%,28%{transform:translateX(100cqw);animation-timing-function:cubic-bezier(.65,0,.35,1)}52%,100%{transform:none}}
+@keyframes d05x{0%,28%{transform:none;animation-timing-function:cubic-bezier(.62,0,.35,1)}54%,100%{transform:translateX(-56cqw)}}
+@keyframes d05y{0%,22%{transform:none;animation-timing-function:cubic-bezier(.3,.6,.4,1)}28%{transform:translateY(-1.6cqw) scale(1.1);animation-timing-function:cubic-bezier(.25,.6,.5,1)}41%{transform:translateY(-8cqw) scale(1.14);animation-timing-function:cubic-bezier(.5,0,.75,.4)}54%{transform:translateY(3cqw) scale(.94);animation-timing-function:cubic-bezier(.3,.7,.4,1)}58%{transform:translateY(3cqw) scale(1.03)}61%,100%{transform:translateY(3cqw) scale(1)}}
+@keyframes d05c{0%,22%{box-shadow:0 .4cqw 1cqw rgba(255,90,78,.25)}30%,50%{box-shadow:0 3cqw 4cqw rgba(255,90,78,.35)}58%,100%{box-shadow:0 0 0 0 rgba(255,90,78,0)}}
+@keyframes d05s{0%,53%{opacity:1}58%,100%{opacity:0}}
+@keyframes d05o{0%,55%{opacity:.0}64%,100%{opacity:1}}
+@keyframes d05r{0%,54%{background:rgba(255,90,78,0)}58%{background:rgba(255,90,78,.22)}80%,100%{background:rgba(255,90,78,.08)}}
+.d06{background:var(--paper)}
+.d06 .tl{left:7cqw;top:5cqw;opacity:.55}
+.d06 .rest{left:7cqw;top:14cqw;font-size:10cqw;animation:d06r var(--d) linear infinite}
+.d06 .word{left:7cqw;top:25cqw;font-size:10cqw;color:var(--brand-deep);transform-origin:0 0;animation:d06w var(--d) linear infinite}
+.d06 .cnt{left:28cqw;top:12.4cqw;color:var(--muted);animation:d06i var(--d) linear infinite}
+.d06 .panel{left:7cqw;right:7cqw;top:19cqw;bottom:5cqw;background:#fff;border-radius:1.6cqw;box-shadow:0 .5cqw 2cqw rgba(14,23,38,.07);animation:d06p var(--d) linear infinite}
+.d06 .it{left:10cqw;right:10cqw;height:6.5cqw;border-bottom:1px solid var(--line)}
+.d06 .i3{border:0}
+.d06 .sd{left:0;top:1.7cqw;width:1.6cqw;height:1.6cqw;border-radius:50%;background:var(--brand)}
+.d06 .nm{left:3.6cqw;top:1.2cqw;font:600 2.8cqw/1 var(--sans)}
+.d06 .sp{left:36cqw;top:.6cqw;width:26cqw;height:3.6cqw}
+.d06 .v{right:0;top:1.3cqw;color:var(--brand-deep)}
+.d06 .i1{animation:d06i var(--d) linear infinite}.d06 .i2{animation:d06j var(--d) linear infinite}.d06 .i3{animation:d06k var(--d) linear infinite}
+@keyframes d06r{0%,26%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.5,0,.9,.5)}37%,100%{opacity:0;transform:translateY(-3cqw)}}
+@keyframes d06w{0%,30%{transform:none;animation-timing-function:cubic-bezier(.65,0,.35,1)}52%,100%{transform:translateY(-16.4cqw) scale(.58)}}
+@keyframes d06p{0%,42%{opacity:0;transform:translateY(2.5cqw);animation-timing-function:cubic-bezier(.2,.7,.3,1)}55%,100%{opacity:1;transform:none}}
+@keyframes d06i{0%,47%{opacity:0;transform:translateY(1.6cqw);animation-timing-function:cubic-bezier(.2,.7,.3,1)}58%,100%{opacity:1;transform:none}}
+@keyframes d06j{0%,50%{opacity:0;transform:translateY(1.6cqw);animation-timing-function:cubic-bezier(.2,.7,.3,1)}61%,100%{opacity:1;transform:none}}
+@keyframes d06k{0%,53%{opacity:0;transform:translateY(1.6cqw);animation-timing-function:cubic-bezier(.2,.7,.3,1)}64%,100%{opacity:1;transform:none}}
+.d07{background:#ECEBE6}
+.d07 .win{left:4cqw;top:4cqw;right:4cqw;bottom:4cqw;background:#fff;border-radius:1.4cqw;box-shadow:0 .6cqw 2.4cqw rgba(14,23,38,.1);overflow:hidden}
+.d07 .top{left:0;right:0;top:0;height:4cqw;border-bottom:1px solid var(--line);display:flex;gap:.8cqw;align-items:center;padding-left:1.6cqw}
+.d07 .top i{width:1.1cqw;height:1.1cqw;border-radius:50%;background:#DDE1E6}
+.d07 .side{left:0;top:4cqw;bottom:0;width:15cqw;background:#F6F5F1}
+.d07 .side b{position:absolute;left:2cqw;height:1.4cqw;border-radius:.7cqw;background:#E1E3E6}
+.d07 .ttl{left:19cqw;top:8.2cqw;color:var(--muted)}
+.d07 .sk{left:19cqw;height:2.4cqw;border-radius:.6cqw;background:#EEF0F2}
+.d07 .b{background:var(--brand);color:#fff;clip-path:inset(14cqw 10cqw 22.25cqw 58cqw round 1.3cqw);opacity:0;animation:d07b var(--d) linear infinite}
+.d07 .full{inset:0;animation:d07f var(--d) linear infinite;transform-origin:74cqw 24cqw}
+.d07 .full .tl{left:6cqw;top:6cqw;opacity:.8}
+.d07 .big{left:6cqw;top:12cqw;font-size:15cqw}.d07 .big small{font-size:.5em}
+.d07 .sub{left:6cqw;top:29cqw;opacity:.8;font-size:2.2cqw}
+.d07 .area{left:44cqw;right:0;top:22cqw;bottom:0;width:56cqw;height:34.25cqw}
+.d07 .mini{left:58cqw;top:14cqw;width:32cqw;height:20cqw;animation:d07m var(--d) linear infinite}
+.d07 .mini .mo{left:2.2cqw;top:2.2cqw;font-size:2.1cqw;opacity:.85}
+.d07 .mini .v{left:2.2cqw;top:5.6cqw;font:700 4.6cqw/1 var(--sans);letter-spacing:-.02em}
+.d07 .mini .sp{left:2.2cqw;right:2.2cqw;bottom:2cqw;width:27.6cqw;height:6cqw}
+.d07 .cur{left:0;top:0;width:4.2cqw;height:4.2cqw;transform-origin:4% 6%;animation:d07c var(--d) linear infinite}
+.d07 .cur svg{display:block;width:100%;height:100%;filter:drop-shadow(0 .3cqw .5cqw rgba(0,0,0,.25))}
+.d07 .rip{left:74cqw;top:24cqw;width:8cqw;height:8cqw;margin:-4cqw 0 0 -4cqw;border-radius:50%;border:.4cqw solid #fff;opacity:0;animation:d07r var(--d) linear infinite}
+@keyframes d07c{0%,10%{transform:translate(28cqw,46cqw);opacity:1;animation-timing-function:cubic-bezier(.45,0,.25,1)}28%{transform:translate(73.6cqw,23.6cqw);opacity:1}30%{transform:translate(73.6cqw,23.6cqw) scale(.82);opacity:1}32.5%{transform:translate(73.6cqw,23.6cqw) scale(1);opacity:1}36%{transform:translate(74.6cqw,25cqw);opacity:1}42%,100%{transform:translate(76cqw,27cqw);opacity:0}}
+@keyframes d07r{0%,29.5%{opacity:0;transform:scale(.2)}30%{opacity:.9;transform:scale(.2);animation-timing-function:cubic-bezier(.2,.7,.3,1)}40%,100%{opacity:0;transform:scale(1.4)}}
+@keyframes d07b{0%{opacity:1;clip-path:inset(14cqw 10cqw 22.25cqw 58cqw round 1.3cqw)}32%{opacity:1;clip-path:inset(14cqw 10cqw 22.25cqw 58cqw round 1.3cqw);animation-timing-function:cubic-bezier(.65,0,.35,1)}54%,100%{opacity:1;clip-path:inset(0 0 0 0 round 0)}}
+@keyframes d07f{0%,41%{opacity:0;transform:scale(.92);animation-timing-function:cubic-bezier(.2,.7,.3,1)}56%,100%{opacity:1;transform:none}}
+@keyframes d07m{0%,35%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.4,0,.8,.6)}45%,100%{opacity:0;transform:scale(1.2)}}
+.d08{background:var(--paper)}
+.d08 .sky{background:linear-gradient(#BFEAE6,#F6F5F1 36cqw);opacity:0;animation:d08s var(--d) linear infinite}
+.d08 .ground{top:36cqw;background:linear-gradient(#0B6E6E,#0E1726);opacity:0;animation:d08s var(--d) linear infinite}
+.d08 .gl{left:6cqw;top:10cqw;color:#fff;opacity:.7}
+.d08 .sunbox{left:0;right:0;top:0;height:36cqw;overflow:hidden}
+.d08 .sun{left:64cqw;top:36cqw;width:15cqw;height:15cqw;border-radius:50%;background:radial-gradient(circle at 50% 40%,#FFD27A,var(--amber) 55%,#F08A4B);box-shadow:0 0 6cqw rgba(244,183,64,.55);animation:d08u var(--d) linear infinite}
+.d08 .a{animation:d08a var(--d) linear infinite}
+.d08 .h{left:6cqw;top:4.5cqw;font-size:5.2cqw}.d08 .tl{left:6cqw;top:10.5cqw;opacity:.5;font-size:2.1cqw}
+.d08 .gl2{left:12cqw;right:12cqw;height:1px;background:rgba(14,23,38,.08)}.d08 .base{background:rgba(14,23,38,.2)}
+.d08 .ax{top:42.5cqw;font-size:2cqw;opacity:.5}
+.d08 .tb{left:6cqw;top:17cqw;font-size:8cqw;opacity:0;animation:d08t var(--d) linear infinite}.d08 .tb i{color:var(--brand-deep)}
+.d08 .ln{left:12cqw;top:14cqw;width:76cqw;height:26cqw;animation:d08l var(--d) linear infinite}
+.d08 .ln svg{display:block;width:100%;height:100%;overflow:visible}
+.d08 .ln path{transform-box:fill-box;transform-origin:50% 50%;animation:d08p var(--d) linear infinite}
+.d08 .hz{left:0;right:0;top:35.87cqw;height:.5cqw;margin-top:-.25cqw;background:#0FA3A3;opacity:0;animation:d08h var(--d) linear infinite}
+@keyframes d08p{0%,25%{transform:scaleY(1);animation-timing-function:cubic-bezier(.65,0,.35,1)}42%,100%{transform:scaleY(.01)}}
+@keyframes d08l{0%,34%{transform:none;opacity:1;animation-timing-function:cubic-bezier(.65,0,.35,1)}50%{transform:translateY(9.74cqw) scaleX(1.45);opacity:1}51%,100%{transform:translateY(9.74cqw) scaleX(1.45);opacity:0}}
+@keyframes d08h{0%,49.9%{opacity:0}50%,100%{opacity:1}}
+@keyframes d08a{0%,25%{opacity:1}36%,100%{opacity:0}}
+@keyframes d08s{0%,42%{opacity:0;animation-timing-function:ease-out}56%,100%{opacity:1}}
+@keyframes d08u{0%,44%{opacity:0;transform:none}46%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.2,.6,.3,1)}68%,100%{opacity:1;transform:translateY(-11cqw)}}
+@keyframes d08t{0%,54%{opacity:0;transform:translateY(1.5cqw);animation-timing-function:cubic-bezier(.2,.7,.3,1)}64%,100%{opacity:1;transform:none}}
+.d09 .b{background:var(--ink);opacity:0;animation:d09b var(--d) linear infinite}
+.d09 .bb{background:var(--ink);color:#fff;overflow:hidden}
+.d09 .bb .glow{left:40cqw;top:-20cqw;width:80cqw;height:70cqw;border-radius:50%;background:radial-gradient(closest-side,rgba(15,163,163,.45),rgba(15,163,163,0))}
+.d09 .bb .tl{left:7cqw;top:6cqw;opacity:.6}
+.d09 .bb .h{left:7cqw;top:13cqw;font-size:10cqw;line-height:.98}.d09 .bb .h i{color:#5FD3CB}
+.d09 .bb .sub{left:7cqw;top:40cqw;color:var(--brand-soft);opacity:.8}
+.d09 .bb .cv{left:60cqw;top:14cqw;width:33cqw;height:22cqw}
+.d09 .a{background:var(--paper);transform-origin:75cqw 27.5cqw;animation:d09a var(--d) linear infinite}
+.d09 .h0{left:5cqw;top:4.2cqw;font-size:5cqw}.d09 .dt{right:5cqw;top:6cqw;opacity:.5;font-size:2.1cqw}
+.d09 .card{background:#fff;border-radius:1.2cqw;box-shadow:0 .4cqw 1.6cqw rgba(14,23,38,.07)}
+.d09 .lb{left:2cqw;top:2cqw;font-size:2cqw;color:var(--muted)}
+.d09 .c1{left:5cqw;top:13cqw;width:48cqw;height:38cqw}
+.d09 .bar{bottom:3cqw;width:4.5cqw;background:var(--brand-soft);border-radius:.4cqw .4cqw 0 0}.d09 .bar:nth-of-type(6){background:var(--brand)}
+.d09 .c2{left:57cqw;top:13cqw;width:26cqw;height:25cqw}
+.d09 .win{left:3cqw;top:9cqw;width:20cqw;height:11.25cqw;border-radius:.6cqw;overflow:hidden;container-type:inline-size;animation:d09w var(--d) linear infinite}
+.d09 .cap{left:3cqw;top:21.6cqw;font-size:1.7cqw;color:var(--muted)}
+.d09 .c3{left:85cqw;top:13cqw;width:10cqw;height:25cqw}.d09 .c4{left:57cqw;top:41cqw;width:38cqw;height:10cqw}
+.d09 .n{left:2cqw;bottom:2cqw;font:700 5cqw/1 var(--mono);letter-spacing:-.04em}.d09 .n small{font-size:.45em;margin-left:.3cqw}
+.d09 .c3 .n{color:var(--alert)}.d09 .c4 .n{left:auto;right:2.4cqw;bottom:2.4cqw;font-size:4.4cqw}
+@keyframes d09a{0%,25%{transform:scale(1);opacity:1;animation-timing-function:cubic-bezier(.7,0,.3,1)}50%{transform:scale(5);opacity:1}50.1%,100%{transform:scale(5);opacity:0}}
+@keyframes d09w{0%,30%{border-radius:.6cqw}46%,100%{border-radius:0}}
+@keyframes d09b{0%,50%{opacity:0}50.1%,100%{opacity:1}}
+.d10 .st{left:0;top:0;height:100%;width:206cqw;animation:d10s var(--d) linear infinite}
+.d10 .bl{filter:url(#fx-whip);opacity:0;animation:d10s var(--d) linear infinite,d10o var(--d) linear infinite}
+.d10 .pa{left:0;top:0;width:100cqw;height:100%;background:var(--paper)}
+.d10 .pb{left:100cqw;top:0;width:106cqw;height:100%;background:var(--ink);color:#fff}
+.d10 .tl{left:6cqw;top:6cqw;opacity:.6}
+.d10 .h{left:6cqw;top:14cqw;font-size:10cqw;line-height:.98}.d10 .pa .h i{color:var(--brand-deep)}.d10 .pb .h i{color:var(--alert)}
+.d10 .k{border-radius:1.2cqw}
+.d10 .k1{left:62cqw;top:10cqw;width:10cqw;height:36cqw;background:var(--brand)}
+.d10 .k2{left:75cqw;top:18cqw;width:10cqw;height:28cqw;background:var(--brand-soft)}
+.d10 .k3{left:88cqw;top:26cqw;width:6cqw;height:20cqw;background:var(--ink)}
+.d10 .k4{left:62cqw;top:12cqw;width:30cqw;height:8cqw;background:rgba(255,255,255,.1)}
+.d10 .k5{left:62cqw;top:23cqw;width:30cqw;height:8cqw;background:rgba(255,90,78,.25);box-shadow:inset .6cqw 0 0 var(--alert)}
+.d10 .dt{left:86cqw;top:38cqw;width:6cqw;height:6cqw;border-radius:50%;background:var(--alert)}
+@keyframes d10s{0%,30%{transform:none;animation-timing-function:cubic-bezier(.8,0,.25,1)}42%{transform:translateX(-103cqw);animation-timing-function:cubic-bezier(.3,0,.3,1)}50%,100%{transform:translateX(-100cqw)}}
+@keyframes d10o{0%,32%{opacity:0}35.5%,39%{opacity:1}43%,100%{opacity:0}}
+.d11{background:#E6E4DE}
+.d11 .grid{transform-origin:50% 50%;animation:d11g var(--d) linear infinite}
+.d11 .tile{width:30cqw;height:16.875cqw;border-radius:.8cqw;overflow:hidden;container-type:inline-size;background:#fff}
+.d11 .tile .x{position:absolute}
+.d11 .tw{left:8cqw;top:12cqw;font-size:22cqw}
+.d11 .tlab{left:8cqw;top:9cqw;font-size:6.5cqw;opacity:.6}
+.d11 .sk{left:8cqw;height:5cqw;border-radius:2.5cqw;background:#ECEEF1}
+.d11 .t-mrr{background:var(--brand);color:#fff}.d11 .t-mrr .sp{left:8cqw;right:8cqw;bottom:10cqw;width:84cqw;height:28cqw}
+.d11 .t-bars{background:#FCEBC6}.d11 .tb{bottom:0;width:12cqw;background:var(--amber);border-radius:1.5cqw 1.5cqw 0 0}
+.d11 .t-ring{background:var(--brand-soft)}.d11 .rg{left:56cqw;top:10cqw;width:36cqw;height:36cqw;border-radius:50%;border:7cqw solid var(--brand);border-right-color:rgba(15,163,163,.25)}
+.d11 .hero{background:var(--ink);color:#fff;animation:d11h var(--d) linear infinite}
+.d11 .hglow{left:40cqw;top:-30cqw;width:90cqw;height:80cqw;border-radius:50%;background:radial-gradient(closest-side,rgba(15,163,163,.35),rgba(15,163,163,0))}
+.d11 .hero .tlab{left:7cqw;top:7cqw}
+.d11 .hero .tw{left:7cqw;top:15cqw;font-size:16cqw}
+.d11 .hs{left:7cqw;top:36cqw;font-size:5cqw;color:var(--brand-soft)}
+.d11 .hl{left:56cqw;top:14cqw;width:37cqw;height:26cqw}
+.d11 .rw{left:8cqw;right:20cqw;height:6cqw;border-radius:3cqw;background:#ECEEF1}.d11 .rd{right:8cqw;top:28cqw;width:6cqw;height:6cqw;border-radius:50%;background:var(--alert)}
+.d11 .t-ops{background:var(--ink);color:#fff}.d11 .t-ops .tw{top:8cqw}
+.d11 .tn{left:8cqw;top:22cqw;font:700 20cqw/1 var(--mono);letter-spacing:-.05em;color:var(--brand-deep)}
+.d11 .t-alert{background:#FFE3DE}.d11 .ad{left:12cqw;top:18cqw;width:16cqw;height:16cqw;border-radius:50%;background:var(--alert);box-shadow:0 0 0 4cqw rgba(255,90,78,.2)}
+@keyframes d11g{0%,28%{transform:scale(3.3333);animation-timing-function:cubic-bezier(.65,0,.35,1)}60%,100%{transform:scale(1)}}
+@keyframes d11h{0%,30%{border-radius:0;box-shadow:inset 0 0 0 0 rgba(15,163,163,0)}55%{border-radius:.8cqw;box-shadow:inset 0 0 0 0 rgba(15,163,163,0)}62%,100%{border-radius:.8cqw;box-shadow:inset 0 0 0 .5cqw var(--brand)}}
+.d12{background:var(--paper)}
+.d12 .bg{left:0;top:0;width:130cqw;height:100%;animation:d12a var(--d) linear infinite}
+.d12 .c1{left:4cqw;top:-10cqw;width:44cqw;height:44cqw;border-radius:50%;background:var(--brand-soft)}
+.d12 .c2{left:84cqw;top:18cqw;width:34cqw;height:34cqw;border-radius:50%;background:#FCE9C2}
+.d12 .hill{left:-10cqw;top:40cqw;width:90cqw;height:40cqw;border-radius:50%;background:#E4EFEC}.d12 .h2{left:62cqw;top:43cqw;width:80cqw;background:#EAE6DA}
+.d12 .mid{left:0;top:0;width:200cqw;height:100%;animation:d12b var(--d) linear infinite}
+.d12 .cd{top:11cqw;width:56cqw;height:32cqw;background:#fff;border-radius:1.6cqw;box-shadow:0 1cqw 3cqw rgba(14,23,38,.1)}
+.d12 .cd .mo{left:4cqw;top:4cqw;color:var(--muted)}
+.d12 .cd .sf{left:4cqw;top:10cqw;font-size:12cqw}
+.d12 .pr{left:4cqw;right:4cqw;bottom:4.5cqw;height:1.4cqw;border-radius:1cqw;background:#ECEEF1;overflow:hidden}.d12 .pr b{position:absolute;left:0;top:0;bottom:0;background:var(--brand);border-radius:1cqw}
+.d12 .ok{right:4cqw;top:4cqw;width:6cqw;height:6cqw;border-radius:50%;background:var(--brand);color:#fff;padding:1.2cqw}.d12 .ok svg{display:block;width:100%;height:100%}
+.d12 .fg{left:0;top:0;width:240cqw;height:100%;animation:d12c var(--d) linear infinite}
+.d12 .fd{width:8cqw;height:8cqw;border-radius:50%;box-shadow:0 1.4cqw 2.4cqw rgba(14,23,38,.2)}
+.d12 .fc{padding:1.4cqw 2cqw;border-radius:2cqw;background:var(--ink);color:#fff;font-size:3cqw;box-shadow:0 1.4cqw 2.4cqw rgba(14,23,38,.25)}
+.d12 .fr{width:11cqw;height:11cqw;border-radius:50%;border:1.3cqw solid var(--brand-deep)}
+.d12 .legend{right:3cqw;bottom:2.6cqw;display:flex;gap:1.6cqw;font-size:1.8cqw;color:var(--muted);opacity:.8}
+@keyframes d12a{0%,28%{transform:none;animation-timing-function:cubic-bezier(.65,0,.35,1)}56%,100%{transform:translateX(-30cqw)}}
+@keyframes d12b{0%,28%{transform:none;animation-timing-function:cubic-bezier(.65,0,.35,1)}56%,100%{transform:translateX(-100cqw)}}
+@keyframes d12c{0%,28%{transform:none;animation-timing-function:cubic-bezier(.65,0,.35,1)}56%,100%{transform:translateX(-140cqw)}}
+.d13 .a{background:var(--ink);color:#fff}
+.d13 .wm{left:0;right:0;top:33cqw;text-align:center;font:800 5.6cqw/1 var(--sans);letter-spacing:-.03em;animation:d13w var(--d) linear infinite}
+.d13 .tag{left:0;right:0;top:41cqw;text-align:center;opacity:.55;animation:d13w var(--d) linear infinite}
+.d13 .b{background:var(--paper);clip-path:inset(15.5cqw 43.5cqw 27.75cqw 43.5cqw round 3.25cqw);animation:d13b var(--d) linear infinite}
+.d13 .bi{transform-origin:50cqw 22cqw;animation:d13i var(--d) linear infinite}
+.d13 .tl{left:6cqw;top:5cqw;color:var(--muted)}
+.d13 .h{left:6cqw;top:9.5cqw;font-size:5cqw}.d13 .h i{color:var(--brand-deep)}
+.d13 .card{background:#fff;border-radius:1.4cqw;box-shadow:0 .4cqw 1.8cqw rgba(14,23,38,.08)}
+.d13 .card>.mo{left:2cqw;top:2cqw;font-size:2cqw;color:var(--muted)}
+.d13 .cl{left:6cqw;top:18cqw;width:28cqw;height:30cqw}.d13 .sp{left:2cqw;right:2cqw;bottom:3cqw;width:24cqw;height:12cqw}
+.d13 .cm{left:37cqw;top:12cqw;width:26cqw;height:36cqw;background:var(--brand-soft)}
+.d13 .rg{left:5.5cqw;top:5cqw;width:15cqw;height:15cqw;border-radius:50%;border:2.2cqw solid var(--brand)}
+.d13 .rnum{left:0;right:0;top:25cqw;text-align:center;font-size:3.4cqw;color:var(--brand-deep)}
+.d13 .cr{left:66cqw;top:18cqw;width:28cqw;height:30cqw}.d13 .n{left:2cqw;bottom:3cqw;font:700 6cqw/1 var(--mono);letter-spacing:-.04em}.d13 .n small{font-size:.45em}
+.d13 .mk{left:43.5cqw;top:15.5cqw;width:13cqw;height:13cqw}
+.d13 .fill{inset:0;border-radius:3.25cqw;background:var(--brand);animation:d13f var(--d) linear infinite}
+.d13 .line{inset:0;animation:d13l var(--d) linear infinite}.d13 .line svg{display:block;width:100%;height:100%}
+@keyframes d13w{0%,24%{opacity:1;transform:none;animation-timing-function:cubic-bezier(.5,0,.9,.5)}32%,100%{opacity:0;transform:translateY(1.5cqw)}}
+@keyframes d13f{0%,30%{opacity:1}36%,100%{opacity:0}}
+@keyframes d13b{0%,36%{clip-path:inset(15.5cqw 43.5cqw 27.75cqw 43.5cqw round 3.25cqw);animation-timing-function:cubic-bezier(.65,0,.35,1)}58%,100%{clip-path:inset(0 0 0 0 round 0)}}
+@keyframes d13i{0%,36%{transform:scale(1.12);animation-timing-function:cubic-bezier(.3,0,.2,1)}62%,100%{transform:none}}
+@keyframes d13l{0%,36%{transform:none;opacity:1;animation-timing-function:cubic-bezier(.5,0,.8,.6)}46%,100%{transform:scale(3.2);opacity:0}}
+.d14{isolation:isolate}
+.d14 .b{background:linear-gradient(115deg,#9BEAE3 0%,#22BDB5 42%,#0FA3A3 68%,#0B6E6E);color:#fff;overflow:hidden;animation:d14b var(--d) linear infinite}
+.d14 .sun{left:46cqw;top:2cqw;width:30cqw;height:30cqw;border-radius:50%;background:radial-gradient(circle at 40% 40%,#FF8A7E,var(--alert))}
+.d14 .band{left:-10cqw;top:15cqw;width:130cqw;height:7cqw;background:var(--amber);transform:rotate(-10deg)}.d14 .b2{top:24.5cqw;height:2.6cqw;background:#fff}
+.d14 .h{left:6cqw;top:37cqw;font-size:9cqw;text-shadow:0 .3cqw 2cqw rgba(11,110,110,.45)}.d14 .h i{color:#FFE0A3}
+.d14 .sub{left:6.4cqw;top:48cqw;opacity:.8}
+.d14 .a{background:var(--paper);animation:d14a var(--d) linear infinite}
+.d14 .tl{left:6cqw;top:7cqw;color:var(--muted)}
+.d14 .ah{left:6cqw;top:17cqw;font-size:10cqw}.d14 .ah i{color:var(--brand-deep)}
+.d14 .kn{background:#0E1726;mix-blend-mode:multiply;display:grid;place-items:center;opacity:0;animation:d14k var(--d) linear infinite}
+.d14 .w{display:flex;font:800 29cqw/1 var(--sans);letter-spacing:-.03em;color:#fff;margin-top:1cqw}
+.d14 .w span{display:block;transform-origin:50% 55%;animation:d14c var(--d) linear infinite}
+.d14 .w span:nth-child(2){animation-delay:.04s}.d14 .w span:nth-child(3){animation-delay:.08s}.d14 .w span:nth-child(4){animation-delay:.12s}
+@keyframes d14a{0%,27.9%{opacity:1}28%,100%{opacity:0}}
+@keyframes d14k{0%,23%{opacity:0;transform:scale(1.3);background-color:#0E1726;animation-timing-function:cubic-bezier(.2,.8,.2,1)}28%{opacity:1;transform:none;background-color:#0E1726}46%{opacity:1;transform:none;background-color:#0E1726;animation-timing-function:cubic-bezier(.6,0,.9,.5)}58%{opacity:1;transform:scale(1.4);background-color:#fff}60%,100%{opacity:0;transform:scale(1.4);background-color:#fff}}
+@keyframes d14c{0%,44%{transform:none;animation-timing-function:cubic-bezier(.7,0,.85,.3)}58%,100%{transform:scale(5)}}
+@keyframes d14b{0%,44%{transform:scale(1.12);animation-timing-function:cubic-bezier(.3,0,.2,1)}66%,100%{transform:none}}
+.d15 .a{background:var(--paper);transform-origin:72cqw 34cqw;animation:d15a var(--d) linear infinite}
+.d15 .h{left:5cqw;top:4.5cqw;font-size:4.6cqw}.d15 .tl{left:5cqw;top:10.4cqw;font-size:2cqw;color:var(--muted)}
+.d15 .gl{left:5cqw;right:5cqw;height:1px;background:rgba(14,23,38,.07)}
+.d15 .ch{left:0;top:0;width:100cqw;height:56.25cqw}
+.d15 .subj{left:70.6cqw;top:32.6cqw;width:2.8cqw;height:2.8cqw;border-radius:50%;background:var(--alert);box-shadow:0 0 0 .6cqw #fff}
+.d15 .sl{left:74.5cqw;top:37cqw;color:var(--alert);font-size:2.2cqw}
+.d15 .rng{left:72cqw;top:34cqw;width:10cqw;height:10cqw;margin:-5cqw 0 0 -5cqw;border-radius:50%;border:.35cqw solid var(--alert);opacity:0}
+.d15 .r1{animation:d15r var(--d) linear infinite}.d15 .r2{animation:d15s var(--d) linear infinite}
+.d15 .b{background:var(--ink);color:#fff;clip-path:circle(0 at 72% 60.4%);animation:d15b var(--d) linear infinite}
+.d15 .bi{transform-origin:72cqw 34cqw;animation:d15i var(--d) linear infinite}
+.d15 .big{left:62cqw;top:24cqw;width:20cqw;height:20cqw;border-radius:50%;background:radial-gradient(circle,var(--alert) 0 22%,rgba(255,90,78,.25) 23% 45%,rgba(255,90,78,.08) 46% 70%,rgba(255,90,78,0) 71%)}
+.d15 .tl2{left:6cqw;top:7cqw;opacity:.6}
+.d15 .num{left:5.4cqw;top:12cqw;font:700 15cqw/1 var(--mono);letter-spacing:-.06em;color:var(--alert)}.d15 .num small{font-size:.45em}
+.d15 .why{left:6cqw;top:36cqw;display:flex;align-items:center;gap:2cqw}
+.d15 .why .mo{opacity:.75}.d15 .why b{font:700 2.6cqw/1 var(--sans);padding:1.3cqw 2cqw;border-radius:1cqw;background:var(--brand);color:#fff}
+@keyframes d15r{0%,16%{opacity:0;transform:scale(.3)}17%{opacity:1;transform:scale(.3);animation-timing-function:cubic-bezier(.2,.7,.3,1)}30%,100%{opacity:0;transform:scale(2.4)}}
+@keyframes d15s{0%,23%{opacity:0;transform:scale(.3)}24%{opacity:1;transform:scale(.3);animation-timing-function:cubic-bezier(.2,.7,.3,1)}37%,100%{opacity:0;transform:scale(2.4)}}
+@keyframes d15a{0%,34%{transform:scale(1);animation-timing-function:cubic-bezier(.55,0,.8,.5)}56%,100%{transform:scale(1.25)}}
+@keyframes d15b{0%,34%{clip-path:circle(0 at 72% 60.4%);animation-timing-function:cubic-bezier(.55,0,.75,.6)}56%,100%{clip-path:circle(105% at 72% 60.4%)}}
+@keyframes d15i{0%,34%{transform:scale(1.3);animation-timing-function:cubic-bezier(.3,.3,.2,1)}62%,100%{transform:none}}
+.d16 .a{background:var(--paper);animation:d16a var(--d) linear infinite}
+.d16 .tl{left:6cqw;top:7cqw;color:var(--muted)}
+.d16 .h{left:6cqw;top:15cqw;font-size:11cqw;line-height:.98}.d16 .h i{color:var(--brand-deep)}
+.d16 .dt{left:80cqw;top:20cqw;width:10cqw;height:10cqw;border-radius:50%;background:var(--alert)}
+.d16 .bb{background:var(--ink);color:#fff;transform:translateX(100%)}
+.d16 .bb::before{content:"";position:absolute;left:0;top:0;bottom:0;width:.8cqw;background:var(--brand)}
+.d16 .rw{left:0;right:0;height:18.75cqw;border-bottom:1px solid rgba(255,255,255,.1)}
+.d16 .n{left:6cqw;top:8cqw;color:var(--brand)}
+.d16 .t{left:14cqw;top:5cqw;font-size:9cqw}
+.d16 .d{right:6cqw;top:8.2cqw;font-size:2.1cqw;opacity:.6}
+.d16 .s1{clip-path:inset(0 0 66.667% 0);animation:d16x var(--d) linear infinite}
+.d16 .s2{clip-path:inset(33.333% 0 33.333% 0);animation:d16y var(--d) linear infinite}
+.d16 .s3{clip-path:inset(66.667% 0 0 0);animation:d16z var(--d) linear infinite}
+@keyframes d16a{0%,30%{transform:none;filter:brightness(1);animation-timing-function:cubic-bezier(.5,0,.9,.5)}56%,100%{transform:translateX(-12cqw);filter:brightness(.8)}}
+@keyframes d16x{0%,30%{transform:translateX(100%);animation-timing-function:cubic-bezier(.16,1,.3,1)}42%,100%{transform:none}}
+@keyframes d16y{0%,32%{transform:translateX(100%);animation-timing-function:cubic-bezier(.16,1,.3,1)}49%,100%{transform:none}}
+@keyframes d16z{0%,34%{transform:translateX(100%);animation-timing-function:cubic-bezier(.16,1,.3,1)}58%,100%{transform:none}}
+.d17 .b{background:var(--brand-soft)}
+.d17 .b .tl{left:8cqw;top:9cqw;color:var(--brand-deep)}
+.d17 .b .h{left:8cqw;top:16cqw;font-size:11cqw;line-height:.98}.d17 .b .h i{color:var(--brand-deep)}
+.d17 .ck{left:72cqw;top:16cqw;width:16cqw;height:16cqw;border-radius:50%;background:var(--brand);color:#fff;padding:3.4cqw}.d17 .ck svg{display:block;width:100%;height:100%}
+.d17 .sheet{perspective:150cqw;perspective-origin:50% 40%;animation:d17s var(--d) linear infinite}
+.d17 .bot{left:0;top:28.125cqw;width:100cqw;height:28.125cqw;overflow:hidden}
+.d17 .top{left:0;top:0;width:100cqw;height:28.125cqw;transform-origin:50% 100%;animation:d17t var(--d) linear infinite}
+.d17 .face{inset:0;overflow:hidden}
+.d17 .front{animation:d17u var(--d) linear infinite}
+.d17 .bk{background:#EFECE4;opacity:0;animation:d17v var(--d) linear infinite}.d17 .ghost{opacity:.07}
+.d17 .pg{left:0;top:0;width:100cqw;height:56.25cqw}
+.d17 .doc{inset:0;background:#FBFAF6}
+.d17 .doc .tl{left:8cqw;top:5cqw;color:var(--muted);font-size:2.1cqw}
+.d17 .doc .h{left:8cqw;top:9cqw;font-size:7.5cqw}
+.d17 .ln{left:8cqw;height:1.2cqw;border-radius:.6cqw;background:#E4E6EA}
+.d17 .br{top:auto;bottom:10cqw;width:6cqw;background:var(--brand);border-radius:.5cqw .5cqw 0 0}
+.d17 .sh{inset:0;pointer-events:none;opacity:0}
+.d17 .front .sh{background:linear-gradient(rgba(14,23,38,.05),rgba(14,23,38,.4));animation:d17f var(--d) linear infinite}
+.d17 .bk .sh{background:linear-gradient(rgba(14,23,38,.05),rgba(14,23,38,.35));animation:d17k var(--d) linear infinite}
+.d17 .bot .sh{background:linear-gradient(rgba(14,23,38,.35),rgba(14,23,38,0) 60%);animation:d17b var(--d) linear infinite}
+@keyframes d17u{0%,36.4%{opacity:1}36.5%,100%{opacity:0}}
+@keyframes d17v{0%,36.4%{opacity:0}36.5%,100%{opacity:1}}
+@keyframes d17t{0%,25%{transform:rotateX(0deg);animation-timing-function:cubic-bezier(.55,0,.45,1)}48%,100%{transform:rotateX(-180deg)}}
+@keyframes d17s{0%,49%{transform:none;animation-timing-function:cubic-bezier(.55,0,.9,.45)}62%,100%{transform:translateY(64cqw) rotate(-6deg)}}
+@keyframes d17f{0%,25%{opacity:0}36.5%,100%{opacity:1}}
+@keyframes d17k{0%,36.5%{opacity:1}48%,100%{opacity:.15}}
+@keyframes d17b{0%,26%{opacity:0}37%{opacity:1}48%,100%{opacity:.5}}
+.d18 .a{background:var(--paper)}
+.d18 .rule{left:0;right:0;height:1px;background:rgba(14,23,38,.05)}
+.d18 .tl{left:6cqw;top:7cqw;color:var(--muted)}
+.d18 .h{left:6cqw;top:15cqw;font-size:14cqw}
+.d18 .sig{left:6cqw;top:42cqw;width:40cqw;height:.3cqw;background:var(--ink);opacity:.5}
+.d18 .a .sh{left:6cqw;top:44.5cqw;font-size:2cqw;color:var(--muted)}
+.d18 .drop{left:36.8cqw;top:28.8cqw;width:2.4cqw;height:2.4cqw;border-radius:50% 50% 50% 50%;background:var(--ink);opacity:0;animation:d18d var(--d) linear infinite}
+.d18 .ink{left:-8cqw;top:-8cqw;width:116cqw;height:72.25cqw;filter:url(#fx-ink)}
+.d18 .bl{border-radius:50%;background:var(--ink);transform:scale(0);animation-duration:var(--d);animation-timing-function:linear;animation-iteration-count:infinite}
+.d18 .b{color:#fff;animation:d18w var(--d) linear infinite}
+.d18 .b .tl{color:#9FB0C9}
+.d18 .b .h i{color:var(--brand)}
+.d18 .seal{left:74cqw;top:15cqw;width:14cqw;height:14cqw;border-radius:50%;border:.5cqw solid var(--brand);box-shadow:inset 0 0 0 1.4cqw var(--ink),inset 0 0 0 3cqw rgba(15,163,163,.35)}
+@keyframes d18d{0%,21%{opacity:0;transform:translateY(-30cqw) scaleY(1.6)}22%{opacity:1;transform:translateY(-30cqw) scaleY(1.6);animation-timing-function:cubic-bezier(.5,0,1,.6)}27%{opacity:1;transform:translateY(0) scaleY(1.2)}27.1%,100%{opacity:0;transform:none}}
+@keyframes d18w{0%,56%{opacity:0;background:rgba(14,23,38,0);transform:translateY(2cqw);animation-timing-function:cubic-bezier(.2,.7,.3,1)}66%{opacity:1;background:rgba(14,23,38,1);transform:none}100%{opacity:1;background:rgba(14,23,38,1);transform:none}}
+@keyframes d18b0{0%,27%{transform:scale(0)}27.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}31%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}60%,100%{transform:scale(20)}}
+@keyframes d18b1{0%,31%{transform:scale(0)}31.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}35%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}58%,100%{transform:scale(7)}}
+@keyframes d18b2{0%,32%{transform:scale(0)}32.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}36%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}56%,100%{transform:scale(6)}}
+@keyframes d18b3{0%,34%{transform:scale(0)}34.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}38%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}58%,100%{transform:scale(8)}}
+@keyframes d18b4{0%,36%{transform:scale(0)}36.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}40%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}56%,100%{transform:scale(6)}}
+@keyframes d18b5{0%,37%{transform:scale(0)}37.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}41%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}60%,100%{transform:scale(9)}}
+@keyframes d18b6{0%,40%{transform:scale(0)}40.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}44%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}60%,100%{transform:scale(10)}}
+@keyframes d18b7{0%,40%{transform:scale(0)}40.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}44%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}60%,100%{transform:scale(10)}}
+@keyframes d18b8{0%,33%{transform:scale(0)}33.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}37%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}55%,100%{transform:scale(6)}}
+@keyframes d18b9{0%,35%{transform:scale(0)}35.1%{transform:scale(.35);animation-timing-function:cubic-bezier(.2,.7,.4,1)}39%{transform:scale(1.4);animation-timing-function:cubic-bezier(.55,0,.8,.5)}57%,100%{transform:scale(7)}}
+.d19 .a{background:var(--paper)}
+.d19 .tl{left:6cqw;top:6cqw;color:var(--muted)}
+.d19 .h{left:6cqw;top:12cqw;font-size:10cqw}
+.d19 .br{bottom:6cqw;width:5.6cqw;background:#C9D1DA;border-radius:.4cqw .4cqw 0 0}
+.d19 .q{background:var(--ink);color:#fff;-webkit-mask-size:2.4cqw 2.4cqw;mask-size:2.4cqw 2.4cqw;clip-path:inset(0 100% 0 0)}
+.d19 .q .tl,.d19 .qf .tl{color:#9FB0C9}.d19 .q .h i,.d19 .qf .h i{color:var(--brand)}.d19 .q .br,.d19 .qf .br{background:var(--brand)}
+.d19 .qf{background:var(--ink);color:#fff;opacity:0;z-index:2;animation:d19f var(--d) linear infinite}
+.d19 .q0{-webkit-mask-image:conic-gradient(from 270deg,#000 0 25%,#0000 0);mask-image:conic-gradient(from 270deg,#000 0 25%,#0000 0);animation:d19a var(--d) linear infinite}
+.d19 .q1{-webkit-mask-image:conic-gradient(from 90deg,#000 0 25%,#0000 0);mask-image:conic-gradient(from 90deg,#000 0 25%,#0000 0);animation:d19b var(--d) linear infinite}
+.d19 .q2{-webkit-mask-image:conic-gradient(from 0deg,#000 0 25%,#0000 0);mask-image:conic-gradient(from 0deg,#000 0 25%,#0000 0);animation:d19c var(--d) linear infinite}
+.d19 .q3{-webkit-mask-image:conic-gradient(from 180deg,#000 0 25%,#0000 0);mask-image:conic-gradient(from 180deg,#000 0 25%,#0000 0);animation:d19e var(--d) linear infinite}
+.d19 .sb{left:0;top:0;width:16cqw;height:100%;-webkit-mask-image:linear-gradient(90deg,#000,#0000);mask-image:linear-gradient(90deg,#000,#0000);opacity:0;animation:d19s var(--d) linear infinite}
+.d19 .sb i{position:absolute;left:0;height:3.515cqw}
+@keyframes d19a{0%,28%{clip-path:inset(0 100% 0 0)}52%,100%{clip-path:inset(0 0 0 0)}}
+@keyframes d19b{0%,32%{clip-path:inset(0 100% 0 0)}56%,100%{clip-path:inset(0 0 0 0)}}
+@keyframes d19c{0%,36%{clip-path:inset(0 100% 0 0)}60%,100%{clip-path:inset(0 0 0 0)}}
+@keyframes d19e{0%,40%{clip-path:inset(0 100% 0 0)}64%,100%{clip-path:inset(0 0 0 0)}}
+@keyframes d19f{0%,63.9%{opacity:0}64%,100%{opacity:1}}
+@keyframes d19s{0%,27.9%{opacity:0;transform:translateX(0)}28%{opacity:1;transform:translateX(0)}52%{opacity:1;transform:translateX(100cqw)}52.1%,100%{opacity:0;transform:translateX(100cqw)}}
+.d20 .a{background:var(--paper) repeating-linear-gradient(90deg,rgba(14,23,38,.07) 0 1px,rgba(14,23,38,0) 1px 6cqw)}
+.d20 .tl{left:6cqw;top:7cqw;color:var(--muted)}
+.d20 .h{left:6cqw;top:15cqw;font-size:13cqw}
+.d20 .c{left:8cqw;top:36cqw;width:10cqw;height:10cqw;border-radius:50%;background:var(--alert)}
+.d20 .bx{width:8cqw;height:12cqw;border-radius:.8cqw .8cqw 0 0;background:#C9D1DA}
+.d20 .a .bx{bottom:auto}
+.d20 .b{background:var(--ink) repeating-linear-gradient(90deg,rgba(15,163,163,.16) 0 1px,rgba(15,163,163,0) 1px 6cqw);color:#fff;clip-path:polygon(-40cqw 0,-17cqw 0,-27cqw 100%,-40cqw 100%);animation:d20b var(--d) linear infinite}
+.d20 .b .tl{color:#9FB0C9}.d20 .b .h i{color:var(--brand)}.d20 .b .bx{background:var(--brand)}
+.d20 .glow{left:44cqw;top:-18cqw;width:60cqw;height:60cqw;border-radius:50%;background:radial-gradient(closest-side,rgba(15,163,163,.5),rgba(15,163,163,0))}
+.d20 .pane{left:0;top:-10cqw;width:22cqw;height:76.25cqw;border-left:1px solid rgba(255,255,255,.9);border-right:1px solid rgba(255,255,255,.55);background:linear-gradient(90deg,rgba(255,255,255,.34),rgba(255,255,255,.08) 28%,rgba(255,255,255,.03) 62%,rgba(255,255,255,.26));-webkit-backdrop-filter:blur(1.3cqw) saturate(1.6) brightness(1.08);backdrop-filter:blur(1.3cqw) saturate(1.6) brightness(1.08);box-shadow:-.6cqw 0 0 rgba(15,163,163,.18),.6cqw 0 0 rgba(255,90,78,.16),0 0 4cqw rgba(14,23,38,.18);transform:translateX(-33cqw) skewX(-10deg);animation:d20p var(--d) linear infinite}
+@keyframes d20p{0%,26%{transform:translateX(-33cqw) skewX(-10deg);animation-timing-function:cubic-bezier(.45,0,.3,1)}62%,100%{transform:translateX(111cqw) skewX(-10deg)}}
+@keyframes d20b{0%,26%{clip-path:polygon(-40cqw 0,-17cqw 0,-27cqw 100%,-40cqw 100%);animation-timing-function:cubic-bezier(.45,0,.3,1)}62%,100%{clip-path:polygon(-40cqw 0,127cqw 0,117cqw 100%,-40cqw 100%)}}
+.d21{background:var(--paper)}
+.d21 .a{animation:d21a var(--d) linear infinite}
+.d21 .h{left:6cqw;top:5cqw;font-size:5cqw}
+.d21 .gl{left:6cqw;right:6cqw;height:1px;background:rgba(14,23,38,.07)}
+.d21 .ghost{left:0;top:0;width:100cqw;height:56.25cqw;opacity:0;animation:d21g var(--d) linear infinite}
+.d21 .lnw{inset:0;animation:d21l var(--d) linear infinite}.d21 .lnw svg{display:block;width:100%;height:100%}
+.d21 .ph{left:0;top:14cqw;width:.3cqw;height:34cqw;background:var(--ink);opacity:.35;animation:d21p var(--d) linear infinite}
+.d21 .clk{right:5cqw;top:4cqw;width:17cqw;height:5cqw;overflow:hidden;border-radius:1cqw;background:var(--ink)}
+.d21 .strip{left:0;top:0;width:100%;animation:d21c var(--d) linear infinite}
+.d21 .strip span{display:block;height:5cqw;font:600 3cqw/5cqw var(--mono);color:#fff;text-align:center;letter-spacing:.04em}
+.d21 .tag{right:5cqw;top:11cqw;display:flex;align-items:center;gap:.5cqw;padding:.9cqw 1.4cqw;border-radius:1.6cqw;font-size:2cqw;background:#fff;box-shadow:0 .3cqw 1cqw rgba(14,23,38,.12);opacity:0}
+.d21 .pz{animation:d21z var(--d) linear infinite}.d21 .rw{animation:d21w var(--d) linear infinite}
+.d21 .pz i{width:.6cqw;height:2cqw;background:var(--ink);border-radius:.2cqw}.d21 .pz i+i{margin-right:.8cqw}
+.d21 .rw b{width:1.8cqw;height:2.2cqw;background:var(--alert);clip-path:polygon(100% 0,0 50%,100% 100%);margin-right:-.6cqw}.d21 .rw b+b{margin-right:.9cqw}
+.d21 .vhs{background:repeating-linear-gradient(0deg,rgba(14,23,38,0) 0 .9cqw,rgba(14,23,38,.07) .9cqw 1.3cqw);opacity:0;animation:d21v var(--d) linear infinite;pointer-events:none}
+.d21 .tb{left:0;right:0;top:0;height:3cqw;background:rgba(255,255,255,.7);filter:blur(.4cqw);animation:d21t var(--d) linear infinite}.d21 .t2{height:1.4cqw;animation-delay:-.13s}
+.d21 .mk{left:36cqw;top:10cqw;height:38cqw;border-left:.35cqw dashed var(--alert);transform-origin:50% 100%;transform:scaleY(0);animation:d21m var(--d) linear infinite}
+.d21 .note{left:38.5cqw;top:9cqw;padding:1.4cqw 1.8cqw;border-radius:1.2cqw;background:#fff;box-shadow:0 .6cqw 2cqw rgba(14,23,38,.12);opacity:0;transform-origin:0 0;animation:d21n var(--d) linear infinite}
+.d21 .note .mo{color:var(--alert);font-size:2.1cqw}.d21 .note .t{font:600 2.8cqw/1.2 var(--sans);margin-top:.8cqw}
+@keyframes d21l{0%{clip-path:inset(0 94% 0 0)}25%,33%{clip-path:inset(0 6% 0 0);animation-timing-function:cubic-bezier(.5,0,.85,.5)}50%,100%{clip-path:inset(0 64% 0 0)}}
+@keyframes d21p{0%{transform:translateX(6cqw)}25%,33%{transform:translateX(94cqw);animation-timing-function:cubic-bezier(.5,0,.85,.5)}50%,100%{transform:translateX(36cqw)}}
+@keyframes d21c{0%{transform:translateY(0);animation-timing-function:steps(4,end)}25%,33%{transform:translateY(-20cqw);animation-timing-function:steps(3,end)}50%,100%{transform:translateY(-5cqw)}}
+@keyframes d21a{0%,24.9%{filter:grayscale(0);transform:none}25%,32.9%{filter:grayscale(1);transform:none}33%{filter:grayscale(1);transform:translateX(.4cqw)}37%{transform:translateX(-.5cqw)}41%{transform:translateX(.6cqw)}45%{transform:translateX(-.4cqw)}49.9%{filter:grayscale(1);transform:translateX(.3cqw)}50%,100%{filter:grayscale(0);transform:none}}
+@keyframes d21z{0%,24.9%{opacity:0}25%,32.9%{opacity:1}33%,100%{opacity:0}}
+@keyframes d21w{0%,32.9%{opacity:0}33%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes d21v{0%,32.9%{opacity:0}33%,49.9%{opacity:1}50%,100%{opacity:0}}
+@keyframes d21t{0%{transform:translateY(0)}100%{transform:translateY(560cqw)}}
+@keyframes d21g{0%,50%{opacity:0}58%,100%{opacity:.25}}
+@keyframes d21m{0%,50%{transform:scaleY(0);animation-timing-function:cubic-bezier(.2,.7,.3,1)}56%,100%{transform:none}}
+@keyframes d21n{0%,52%{opacity:0;transform:scale(.85);animation-timing-function:cubic-bezier(.2,.9,.3,1.2)}60%,100%{opacity:1;transform:none}}
+.d22{background:var(--ink)}
+.d22 .road{left:0;top:0;width:700cqw;height:56.25cqw;background:linear-gradient(90deg,#0E1726 0 150cqw,#16384A 300cqw,#BFE3DF 470cqw,#F6F5F1 560cqw);animation:d22m var(--d) linear infinite}
+.d22 .blr{left:0;top:0;width:700cqw;height:56.25cqw;filter:url(#fx-ramp);opacity:0;animation:d22m var(--d) linear infinite,d22o var(--d) linear infinite}
+.d22 .blr .road{animation:none}
+.d22 .ru{left:0;right:0;bottom:6cqw;height:3cqw;background:repeating-linear-gradient(90deg,rgba(130,145,160,.8) 0 .3cqw,rgba(130,145,160,0) .3cqw 5cqw)}
+.d22 .mn{bottom:1.8cqw;font-size:2cqw;color:rgba(130,145,160,1)}
+.d22 .ms{padding:1.4cqw 2cqw;border-radius:1.2cqw;background:rgba(255,255,255,.12);color:#fff;font-size:2.2cqw}
+.d22 .ms .mo{font-size:2.2cqw}
+.d22 .ca{left:7cqw;top:10cqw;color:#fff}.d22 .ca .mo{opacity:.6}.d22 .ca .sf{position:absolute;top:5cqw;font-size:16cqw}.d22 .ca .sf i{color:var(--brand)}
+.d22 .cb{left:606cqw;top:10cqw;color:var(--ink)}.d22 .cb .mo{color:var(--muted)}.d22 .cb .sf{position:absolute;top:5cqw;font-size:16cqw}.d22 .cb .sf i{color:var(--alert)}
+.d22 .pin{left:640cqw;bottom:6cqw;width:3cqw;height:3cqw;margin-left:-1.5cqw;border-radius:50%;background:var(--alert);box-shadow:0 0 0 1cqw rgba(255,90,78,.25)}
+.d22 .spd{right:4cqw;top:4cqw;width:12cqw;height:5cqw;overflow:hidden;border-radius:2.5cqw;background:rgba(255,255,255,.92);box-shadow:0 .3cqw 1.2cqw rgba(14,23,38,.2)}
+.d22 .ss{left:0;top:0;width:100%;animation:d22s var(--d) linear infinite}
+.d22 .ss span{display:block;height:5cqw;font:600 2.6cqw/5cqw var(--mono);text-align:center;color:var(--ink)}
+@keyframes d22m{0%{transform:none}30%{transform:translateX(-10cqw);animation-timing-function:cubic-bezier(.85,0,.15,1)}62%,100%{transform:translateX(-600cqw)}}
+@keyframes d22o{0%,38%{opacity:0}42%,50%{opacity:1}55%,100%{opacity:0}}
+@keyframes d22s{0%,35.9%{transform:none}36%,54.9%{transform:translateY(-5cqw)}55%,100%{transform:translateY(-10cqw)}}
+.d23{background:var(--paper)}
+.d23 .nt{background:var(--ink);opacity:0;animation:d23n var(--d) linear infinite}
+.d23 .clock{left:9cqw;top:8cqw;width:32cqw;height:32cqw;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 .7cqw var(--ink),0 1cqw 3cqw rgba(14,23,38,.12)}
+.d23 .tix{inset:2cqw;border-radius:50%;background:repeating-conic-gradient(from -1deg,var(--ink) 0 2deg,rgba(0,0,0,0) 2deg 30deg);-webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 2cqw),#000 calc(100% - 1.9cqw));mask:radial-gradient(farthest-side,#0000 calc(100% - 2cqw),#000 calc(100% - 1.9cqw))}
+.d23 .hh,.d23 .mh{left:50%;bottom:50%;transform-origin:50% 100%;border-radius:1cqw}
+.d23 .hh{width:1.4cqw;height:8cqw;margin-left:-.7cqw;background:var(--ink);transform:rotate(270deg);animation:d23h var(--d) linear infinite}
+.d23 .mh{width:.8cqw;height:12cqw;margin-left:-.4cqw;background:var(--brand);animation:d23m var(--d) linear infinite}
+.d23 .hub{left:50%;top:50%;width:2.4cqw;height:2.4cqw;margin:-1.2cqw 0 0 -1.2cqw;border-radius:50%;background:var(--alert)}
+.d23 .cal{left:52cqw;top:8cqw;width:38cqw;height:32cqw;border-radius:1.6cqw;background:#fff;overflow:hidden;box-shadow:0 1cqw 3cqw rgba(14,23,38,.12)}
+.d23 .band{left:0;right:0;top:0;height:5cqw;background:var(--alert);color:#fff;font-size:2.1cqw;line-height:5cqw;padding-left:2.4cqw}
+.d23 .win{left:2.4cqw;top:6.5cqw;width:20cqw;height:10cqw;overflow:hidden}
+.d23 .ds{left:0;top:0;animation:d23d var(--d) linear infinite}
+.d23 .ds span{display:block;height:10cqw;font:400 9.4cqw/10cqw var(--serif);text-transform:capitalize}
+.d23 .flap{left:0;right:0;top:0;height:5cqw;background:linear-gradient(rgba(14,23,38,.25),rgba(14,23,38,0));opacity:0;animation:d23f var(--d) linear infinite}
+.d23 .bar{bottom:2.4cqw;width:4.6cqw;border-radius:.5cqw .5cqw 0 0;background:var(--brand);transform-origin:50% 100%;transform:scaleY(.08)}
+.d23 .b0{transform:none;background:var(--brand-deep)}
+.d23 .b1{animation:d23b1 var(--d) linear infinite}.d23 .b2{animation:d23b2 var(--d) linear infinite}.d23 .b3{animation:d23b3 var(--d) linear infinite}.d23 .b4{animation:d23b4 var(--d) linear infinite}
+.d23 .la,.d23 .lb{left:9cqw;top:46cqw}
+.d23 .la{animation:d23x var(--d) linear infinite}.d23 .lb{opacity:0;color:var(--brand-deep);animation:d23y var(--d) linear infinite}
+@keyframes d23h{0%,28%{transform:rotate(270deg);animation-timing-function:cubic-bezier(.6,0,.4,1)}58%,100%{transform:rotate(1250deg)}}
+@keyframes d23m{0%,28%{transform:rotate(0deg);animation-timing-function:cubic-bezier(.6,0,.4,1)}58%,100%{transform:rotate(4560deg)}}
+@keyframes d23d{0%,28%{transform:none;animation-timing-function:steps(4,end)}58%,100%{transform:translateY(-40cqw)}}
+@keyframes d23f{0%,35.4%{opacity:0}35.5%{opacity:1}37%{opacity:0}42.9%{opacity:0}43%{opacity:1}44.5%{opacity:0}50.4%{opacity:0}50.5%{opacity:1}52%{opacity:0}57.9%{opacity:0}58%{opacity:1}59.5%,100%{opacity:0}}
+@keyframes d23b1{0%,35.4%{transform:scaleY(.08)}35.5%,100%{transform:none}}
+@keyframes d23b2{0%,42.9%{transform:scaleY(.08)}43%,100%{transform:none}}
+@keyframes d23b3{0%,50.4%{transform:scaleY(.08)}50.5%,100%{transform:none}}
+@keyframes d23b4{0%,57.9%{transform:scaleY(.08)}58%,100%{transform:none}}
+@keyframes d23n{0%,28%{opacity:0}32%{opacity:.1}35.5%{opacity:0}39.5%{opacity:.1}43%{opacity:0}47%{opacity:.1}50.5%{opacity:0}54.5%{opacity:.1}58%,100%{opacity:0}}
+@keyframes d23x{0%,27%{opacity:1}31%,100%{opacity:0}}
+@keyframes d23y{0%,58%{opacity:0;transform:translateY(1cqw);animation-timing-function:cubic-bezier(.2,.7,.3,1)}66%,100%{opacity:1;transform:none}}
+.d24{background:var(--paper)}
+.d24 .ls{left:0;top:0;width:100cqw;height:168.75cqw;animation:d24s var(--d) linear infinite}
+.d24 .p{left:0;width:100cqw;height:56.25cqw}
+.d24 .pw{background:var(--paper)}.d24 .pc{background:var(--ink);color:#fff}
+.d24 .mk{left:44cqw;top:10cqw;width:12cqw;height:12cqw}
+.d24 .w{left:0;right:0;top:27cqw;text-align:center;font-size:13cqw}.d24 .pw .w i{color:var(--brand-deep)}.d24 .pc .w i{color:var(--alert)}
+.d24 .dt{left:44cqw;top:10cqw;width:12cqw;height:12cqw;border-radius:50%;background:var(--alert);box-shadow:0 0 0 2cqw rgba(255,90,78,.2)}
+.d24 .orb{left:50cqw;top:28.125cqw;width:46cqw;height:46cqw;margin:-23cqw 0 0 -23cqw;border-radius:50%;border:1px dashed rgba(130,145,160,.55);animation:d24o var(--d) linear infinite}
+.d24 .orb i{position:absolute;left:50%;top:-1.2cqw;width:2.4cqw;height:2.4cqw;margin-left:-1.2cqw;border-radius:50%;background:var(--brand)}
+.d24 .seam{left:0;right:0;bottom:3.4cqw;text-align:center;color:var(--brand-deep);opacity:0;animation:d24t var(--d) linear infinite}
+@keyframes d24s{0%,20%{transform:none;animation-timing-function:cubic-bezier(.65,0,.35,1)}38%,62%{transform:translateY(-56.25cqw);animation-timing-function:cubic-bezier(.65,0,.35,1)}80%,100%{transform:translateY(-112.5cqw)}}
+@keyframes d24o{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes d24t{0%,82%{opacity:0}86%,94%{opacity:1}99%,100%{opacity:0}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="fx-whip" x="-15%" y="0" width="130%" height="100%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="16 0"/></filter>
+  <filter id="fx-ramp" x="-5%" y="0" width="110%" height="100%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="26 0"/></filter>
+  <filter id="fx-ink" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="n"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+    <feDisplacementMap in="b" in2="n" scale="18" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feColorMatrix in="d" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10"/>
+  </filter>
+</svg>
+<header>
+  <div>
+    <a class="back" href="../">← 100 theme gallery</a>
+    <div class="kicker">saas-motion-kit · transition atlas</div>
+    <h1>24 transitions that <em>tell</em> the story</h1>
+    <p class="dek">The stock set (crossfade, push, zoom-through, circle iris, blinds) already lives in <a href="https://github.com/heygen-com/hyperframes">HyperFrames</a>, and a good film repeats two or three of those as its rhythm. This atlas holds the other kind: <b>narrative transitions</b> that carry meaning from one scene into the next. Each card loops a live demo on the fictional <b>Acme</b> brand and says when to reach for it, what to avoid and how to build it seek-safe in GSAP.</p>
+  </div>
+  <div class="logo"><img src="../assets/brand/acme-mark.svg" alt="">Acme <span style="font-weight:500;color:var(--muted)">(fictional)</span></div>
+</header>
+<ol class="rules">
+  <li><b>Keep a quiet base.</b> Plain hard cuts can carry the in-between beats. Log them as <code>motif:cut</code> in the ledger so the audit knows they are deliberate, and never let a flashy transition become the default.</li>
+  <li><b>Spend narrative ones where the story turns.</b> The hook, the reveal, the proof moment, the CTA. Pick the one whose meaning matches the message of that cut.</li>
+  <li><b>Never twice.</b> Use each atlas transition once per film, and don't put two from the same family back to back. Match the tone words to your brief.</li>
+</ol>
+<nav class="fbar" aria-label="Filter transitions">
+  <div class="frows">
+    <div class="frow" role="group" aria-label="Family"><span class="fl">Family</span><button type="button" class="on" data-f="all">All <i>24</i></button><button type="button" data-f="cut" style="--fc:var(--ink)"><s></s>Cut <i>4</i></button><button type="button" data-f="carry" style="--fc:var(--brand)"><s></s>Carry <i>4</i></button><button type="button" data-f="camera" style="--fc:var(--amber)"><s></s>Camera <i>4</i></button><button type="button" data-f="mask" style="--fc:var(--alert)"><s></s>Mask <i>4</i></button><button type="button" data-f="material" style="--fc:var(--muted)"><s></s>Material <i>4</i></button><button type="button" data-f="time" style="--fc:var(--ok)"><s></s>Time <i>4</i></button></div>
+    <div class="frow" role="group" aria-label="Tone"><span class="fl">Tone</span><button type="button" class="on" data-t="any">Any</button><button type="button" data-t="calm">calm <i>7</i></button><button type="button" data-t="trustworthy">trustworthy <i>6</i></button><button type="button" data-t="urgent">urgent <i>5</i></button><button type="button" data-t="playful">playful <i>7</i></button><button type="button" data-t="premium">premium <i>11</i></button><button type="button" data-t="technical">technical <i>7</i></button><button type="button" data-t="warm">warm <i>7</i></button><button type="button" data-t="bold">bold <i>10</i></button><button type="button" data-t="mysterious">mysterious <i>4</i></button><button type="button" data-t="celebratory">celebratory <i>4</i></button><button type="button" data-t="nostalgic">nostalgic <i>4</i></button></div>
+  </div>
+  <div class="fside"><span class="fcount" id="count" aria-live="polite">24 of 24 shown</span><button type="button" id="pp" aria-pressed="false">❚❚ Pause demos</button></div>
+</nav>
+<main>
+<section class="fam" data-fam="cut" style="--fc:var(--ink)">
+  <div class="fh"><h2>Cut</h2><span class="fn">04</span><p>The edit does the work. No overlap and no wipe: the match between the last frame of A and the first frame of B carries the meaning.</p></div>
+  <div class="tgrid">
+<article class="tcard" id="t01" data-fam="cut" data-tones="premium calm trustworthy" style="--t0:40%;--t1:40.6%;--freeze:-1.75s;--veil:var(--ink)">
+  <div class="stage d01" role="img" aria-label="Looping demo of Match Cut: Shape: A hard cut between two circles with the same centre and diameter, so the eye reads one shape turning into another.">
+<div class="L a">
+  <i class="x g gh"></i><i class="x g gv"></i>
+  <div class="x dot"></div>
+  <div class="x mo cap">−18% conversion</div>
+</div>
+<div class="L b">
+  <i class="x g gh"></i><i class="x g gv"></i>
+  <div class="x ring"></div><div class="x rt sf"><span>98<small>%</small></span></div>
+  <div class="x mo cap">recovered in 4 min</div>
+</div>
+<div class="x reg"></div>
+<div class="x mo tl ta">checkout · live</div><div class="x mo tl tb">checkout · fixed</div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>cut</em></div>
+  <div class="meta">
+    <div class="tk"><span>T01</span><span class="fchip" style="--fc:var(--ink)">cut</span><span class="en" title="energy 1 of 3">energy ●○○</span></div>
+    <h3>Match Cut: Shape</h3>
+    <div class="tones"><span>premium</span><span>calm</span><span>trustworthy</span></div>
+    <p class="what">A hard cut between two circles with the same centre and diameter, so the eye reads one shape turning into another.</p>
+    <dl><dt>Use when</dt><dd>Reframing a problem as its answer: the coral alert dot becomes the teal status ring. Best on the hook-to-reveal cut, where the viewer should feel &#x27;same thing, new meaning&#x27;.</dd><dt class="av">Avoid</dt><dd>A near-miss in position or size reads as a mistake, so lock both shapes to one centre. Use it once per film; a second shape match turns a clever beat into a gimmick.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Lock both circles to one centre and diameter in the 1920×1080 frame, then let the push-in run through the cut.</p>
+      <pre>tl.fromTo(<span class="s">'#a'</span>,{scale:1},{scale:1.12,duration:1.4,ease:<span class="s">'power2.in'</span>,transformOrigin:<span class="s">'50% 45%'</span>},T-1.4); tl.set(<span class="s">'#a'</span>,{opacity:0},T); tl.set(<span class="s">'#b'</span>,{opacity:1},T);
+tl.fromTo(<span class="s">'#b'</span>,{scale:1.12},{scale:1.2,duration:0.7,ease:<span class="s">'power3.out'</span>,transformOrigin:<span class="s">'50% 45%'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>custom (hard cut); css-other morph circle is the nearest built-in</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t02" data-fam="cut" data-tones="bold playful premium" style="--t0:40%;--t1:40.6%;--freeze:-1.5s;--veil:var(--ink)">
+  <div class="stage d02" role="img" aria-label="Looping demo of Match Cut: Motion: An object moving across scene A is cut mid-movement, and a different object in scene B carries on along the same path at the same speed.">
+<div class="L a">
+  <i class="x path"></i>
+  <div class="x mo tl">build 2231</div>
+  <div class="x sf h">Ready.</div>
+  <div class="x mv pill"><i class="x st"></i>Deploy <b class="mo">→</b></div>
+</div>
+<div class="L b">
+  <i class="x path"></i>
+  <div class="x mo tl">production · 17:40</div>
+  <div class="x sf h">Shipped.</div>
+  <div class="x mv badge"><i class="x st"></i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+</div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>cut</em></div>
+  <div class="meta">
+    <div class="tk"><span>T02</span><span class="fchip" style="--fc:var(--ink)">cut</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Match Cut: Motion</h3>
+    <div class="tones"><span>bold</span><span>playful</span><span>premium</span></div>
+    <p class="what">An object moving across scene A is cut mid-movement, and a different object in scene B carries on along the same path at the same speed.</p>
+    <dl><dt>Use when</dt><dd>Handing momentum from cause to effect: a &#x27;Deploy&#x27; pill slides right and a &#x27;Shipped&#x27; badge lands where it was heading. Good for workflow steps that should feel like one gesture.</dd><dt class="av">Avoid</dt><dd>Direction, screen position and speed must match on the cut frame or the eye jumps. Don&#x27;t cut on a still object, and don&#x27;t follow it with a whip pan: two directional handoffs in a row blur together.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Cut on the fastest frame; both objects share one motion path and velocity at T.</p>
+      <pre>tl.fromTo(<span class="s">'#a .pill'</span>,{x:-520},{x:120,duration:1,ease:<span class="s">'power2.in'</span>},T-1); tl.set(<span class="s">'#a'</span>,{opacity:0},T); tl.set(<span class="s">'#b'</span>,{opacity:1},T);
+tl.fromTo(<span class="s">'#b .badge'</span>,{x:120},{x:560,duration:0.6,ease:<span class="s">'power2.out'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>custom (hard cut); css-blur directional blur can soften the seam</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t03" data-fam="cut" data-tones="bold premium warm" style="--t0:25%;--t1:44%;--freeze:-1.55s">
+  <div class="stage d03" role="img" aria-label="Looping demo of Graphic Match: Color: The camera pushes into a flat field of colour in scene A until it fills the frame, then cuts to scene B, which uses that colour as its background.">
+<div class="L a">
+  <div class="x sf h">Revenue</div><div class="x mo tl">by quarter</div>
+  <i class="x base"></i><i class="x br" style="left:22cqw;top:36cqw;height:10cqw"></i><span class="x mo ql" style="left:22cqw">Q1</span><i class="x br" style="left:31cqw;top:31cqw;height:15cqw"></i><span class="x mo ql" style="left:31cqw">Q2</span><i class="x br" style="left:40cqw;top:34cqw;height:12cqw"></i><span class="x mo ql" style="left:40cqw">Q3</span><i class="x br" style="left:49cqw;top:27cqw;height:19cqw"></i><span class="x mo ql" style="left:49cqw">Q4</span>
+  <i class="x br tb"></i><span class="x mo ql" style="left:59.5cqw;color:var(--brand-deep)">Q5</span>
+</div>
+<div class="L b">
+  <div class="x mo tl">acme pulse · q5 review</div>
+  <div class="x sf h2">Growth,<br><i>owned.</i></div>
+  <div class="x mo sub">+41% · every metric watched</div>
+</div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>push → cut</em></div>
+  <div class="meta">
+    <div class="tk"><span>T03</span><span class="fchip" style="--fc:var(--ink)">cut</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Graphic Match: Color</h3>
+    <div class="tones"><span>bold</span><span>premium</span><span>warm</span></div>
+    <p class="what">The camera pushes into a flat field of colour in scene A until it fills the frame, then cuts to scene B, which uses that colour as its background.</p>
+    <dl><dt>Use when</dt><dd>Going from a detail to a chapter card or brand moment: the teal bar in a chart becomes the teal of the next scene, so the colour carries the idea (&#x27;growth&#x27;) across.</dd><dt class="av">Avoid</dt><dd>Needs a flat, clean colour area; gradients, photos and textures break the match. Pointless between two scenes that already share a background.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Scale A from the centre of the colour area until it covers the frame, then cut.</p>
+      <pre>tl.fromTo(<span class="s">'#a'</span>,{scale:1},{scale:16,duration:0.8,ease:<span class="s">'power3.in'</span>,transformOrigin:<span class="s">'63% 53%'</span>},T-0.8); tl.set(<span class="s">'#a'</span>,{opacity:0},T); tl.set(<span class="s">'#b'</span>,{opacity:1},T);
+tl.fromTo(<span class="s">'#b .title'</span>,{y:40,opacity:0},{y:0,opacity:1,duration:0.5,ease:<span class="s">'power3.out'</span>},T+0.1);</pre>
+      <p class="hf"><b>HyperFrames</b>css-other (morph circle), closest; here the colour comes from a push-in, not a circle</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t04" data-fam="cut" data-tones="urgent bold celebratory" style="--t0:37.5%;--t1:50%;--freeze:-1.8s">
+  <div class="stage d04" role="img" aria-label="Looping demo of Beat Cut with Hold-frame: Scene A freezes for one beat, drained of colour, then a hard cut lands exactly on the downbeat into a punched-in scene B.">
+<div class="L a">
+  <div class="x mo tl">live · signups</div>
+  <i class="x gl" style="top:18cqw"></i><i class="x gl" style="top:30cqw"></i><i class="x gl" style="top:42cqw"></i>
+  <div class="x ch"><svg viewBox="0 0 100 40" preserveAspectRatio="none"><polyline points="0,34 10,30 20,32 30,24 40,27 50,18 60,21 70,12 80,15 90,8 100,10" fill="none" stroke="#0FA3A3" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg></div>
+  <i class="x scan"></i>
+  <div class="x mo hold"><i></i><i></i>hold</div>
+</div>
+<div class="L b">
+  <div class="x mo tl">anomaly caught · 09:42</div>
+  <div class="x sf now">Now<i>.</i></div>
+  <div class="x mo sub">roll back in one click</div>
+</div>
+<div class="x beats"><i class="db"></i><i></i><i></i><i></i><i class="db"></i><i></i><i></i><i></i><b></b></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>hold → cut</em></div>
+  <div class="meta">
+    <div class="tk"><span>T04</span><span class="fchip" style="--fc:var(--ink)">cut</span><span class="en" title="energy 3 of 3">energy ●●●</span></div>
+    <h3>Beat Cut with Hold-frame</h3>
+    <div class="tones"><span>urgent</span><span>bold</span><span>celebratory</span></div>
+    <p class="what">Scene A freezes for one beat, drained of colour, then a hard cut lands exactly on the downbeat into a punched-in scene B.</p>
+    <dl><dt>Use when</dt><dd>The &#x27;wait for it&#x27; before a reveal or a drop: the freeze tells the viewer to look, the downbeat cut delivers the answer. Built for music-led promos and launch reels.</dd><dt class="av">Avoid</dt><dd>Only on a real downbeat; off the grid it reads as a glitch. One hold per section at most, and never on a frame the viewer still needs to read.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Snap T to the beat grid (hyperframes beats). The freeze is simply no tweens on #a between T-0.5 and T.</p>
+      <pre>tl.fromTo(<span class="s">'#a'</span>,{filter:<span class="s">'saturate(1)'</span>},{filter:<span class="s">'saturate(0.2) contrast(1.1)'</span>,duration:0.08,ease:<span class="s">'none'</span>},T-0.5); tl.set(<span class="s">'#a'</span>,{opacity:0},T); tl.set(<span class="s">'#b'</span>,{opacity:1},T);
+tl.fromTo(<span class="s">'#b'</span>,{scale:1.1},{scale:1,duration:0.35,ease:<span class="s">'expo.out'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>custom (hard cut on the beat grid)</p>
+    </details>
+  </div>
+</article>
+  </div>
+</section>
+<section class="fam" data-fam="carry" style="--fc:var(--brand)">
+  <div class="fh"><h2>Carry</h2><span class="fn">04</span><p>Something survives the change. An object, a word, a cursor or a line walks from one scene into the next and becomes part of it.</p></div>
+  <div class="tgrid">
+<article class="tcard" id="t05" data-fam="carry" data-tones="playful trustworthy warm" style="--t0:22%;--t1:60%;--freeze:-1.62s">
+  <div class="stage d05" role="img" aria-label="Looping demo of Object Carry: One element lifts out of scene A, flies across the change and docks into its slot in scene B, becoming part of the new layout.">
+<div class="L a">
+  <div class="x mo tl">09:42 · alert</div>
+  <div class="x sf h">Checkout<br><i>dipped.</i></div>
+  <i class="x slotA"></i>
+</div>
+<div class="L b">
+  <div class="x mo tl">incidents · today</div>
+  <div class="x row" style="top:13cqw"><span class="x mo tag ok">resolved</span><span class="x nm">p95 latency</span></div>
+  <div class="x row r2" style="top:24cqw"><i class="x slot"></i><span class="x nm late">checkout conversion</span><span class="x mo own">owner · you</span></div>
+  <div class="x row" style="top:35cqw"><span class="x mo tag ok">ok</span><span class="x nm">signups</span></div>
+</div>
+<div class="x cx"><div class="cy"><div class="chip mo">−18%</div></div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>carry</em></div>
+  <div class="meta">
+    <div class="tk"><span>T05</span><span class="fchip" style="--fc:var(--brand)">carry</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Object Carry</h3>
+    <div class="tones"><span>playful</span><span>trustworthy</span><span>warm</span></div>
+    <p class="what">One element lifts out of scene A, flies across the change and docks into its slot in scene B, becoming part of the new layout.</p>
+    <dl><dt>Use when</dt><dd>Showing one item moving through a system: an alert becomes a ticket, a file becomes a row, a card lands on a board. The viewer follows the object, so the scene change feels earned.</dd><dt class="av">Avoid</dt><dd>The object needs an obvious destination in B. One carried object per transition, and not on the next cut too: carry after carry starts to feel like a screensaver.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Render the carried element once, above both scenes, and tween it between two measured rects.</p>
+      <pre>tl.fromTo(<span class="s">'#chip'</span>,{x:0,y:0,scale:1},{x:-880,y:120,scale:0.92,duration:0.9,ease:<span class="s">'power3.inOut'</span>},T);
+tl.fromTo(<span class="s">'#a'</span>,{x:0,opacity:1},{x:-240,opacity:0,duration:0.6,ease:<span class="s">'power2.in'</span>},T); tl.fromTo(<span class="s">'#b'</span>,{x:320,opacity:0},{x:0,opacity:1,duration:0.7,ease:<span class="s">'power3.out'</span>},T+0.2);</pre>
+      <p class="hf"><b>HyperFrames</b>shared-element (Tier-A, worker-authored)</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t06" data-fam="carry" data-tones="calm premium trustworthy" style="--t0:26%;--t1:62%;--freeze:-1.75s">
+  <div class="stage d06" role="img" aria-label="Looping demo of Type Carry: One word of the headline stays on screen while the rest leaves, then scene B builds its layout around that word.">
+<div class="L a">
+  <div class="x mo tl">acme pulse</div>
+  <div class="x sf rest">Every metric,</div>
+</div>
+<div class="L b">
+  <div class="x mo cnt">14 of 14 metrics</div>
+  <div class="x panel"></div><div class="x it i1" style="top:22.5cqw"><i class="x sd"></i><span class="x nm">checkout</span><svg class="x sp" viewBox="0 0 60 12" preserveAspectRatio="none"><polyline points="0,8 10,7 20,9 30,5 40,6 50,3 60,4" fill="none" stroke="#0FA3A3" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><span class="x mo v">ok</span></div><div class="x it i2" style="top:31cqw"><i class="x sd"></i><span class="x nm">signups</span><svg class="x sp" viewBox="0 0 60 12" preserveAspectRatio="none"><polyline points="0,9 10,8 20,6 30,7 40,4 50,5 60,2" fill="none" stroke="#0FA3A3" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><span class="x mo v">ok</span></div><div class="x it i3" style="top:39.5cqw"><i class="x sd"></i><span class="x nm">p95 latency</span><svg class="x sp" viewBox="0 0 60 12" preserveAspectRatio="none"><polyline points="0,5 10,6 20,5 30,7 40,6 50,6 60,5" fill="none" stroke="#0FA3A3" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><span class="x mo v">ok</span></div>
+</div>
+<div class="x sf word"><i>watched.</i></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>carry</em></div>
+  <div class="meta">
+    <div class="tk"><span>T06</span><span class="fchip" style="--fc:var(--brand)">carry</span><span class="en" title="energy 1 of 3">energy ●○○</span></div>
+    <h3>Type Carry</h3>
+    <div class="tones"><span>calm</span><span>premium</span><span>trustworthy</span></div>
+    <p class="what">One word of the headline stays on screen while the rest leaves, then scene B builds its layout around that word.</p>
+    <dl><dt>Use when</dt><dd>When the next scene proves one word of the claim: &#x27;watched&#x27; becomes the title of the monitoring panel, &#x27;owned&#x27; becomes the owner column. A calm bridge from headline to proof.</dd><dt class="av">Avoid</dt><dd>The word must mean the same thing in both scenes. Don&#x27;t carry filler words, don&#x27;t swap the font mid-flight, and don&#x27;t carry type twice in a row.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Split the headline into word spans; the kept word is its own layer above both scenes.</p>
+      <pre>tl.fromTo(<span class="s">'#a .rest'</span>,{y:0,opacity:1},{y:-30,opacity:0,duration:0.4,ease:<span class="s">'power2.in'</span>,stagger:0.05},T);
+tl.fromTo(<span class="s">'#word'</span>,{x:0,y:0,scale:1},{x:0,y:-300,scale:0.55,duration:0.8,ease:<span class="s">'power3.inOut'</span>,transformOrigin:<span class="s">'0% 0%'</span>},T+0.1); tl.fromTo(<span class="s">'#b .item'</span>,{y:24,opacity:0},{y:0,opacity:1,duration:0.5,ease:<span class="s">'power3.out'</span>,stagger:0.06},T+0.5);</pre>
+      <p class="hf"><b>HyperFrames</b>shared-element (Tier-A, worker-authored)</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t07" data-fam="carry" data-tones="technical trustworthy calm" style="--t0:10%;--t1:56%;--freeze:-1.72s">
+  <div class="stage d07" role="img" aria-label="Looping demo of Cursor Carry: A cursor clicks a card and the clicked card grows into the next full scene, like a container transform.">
+<div class="L a">
+  <div class="x win">
+    <div class="x top"><i></i><i></i><i></i></div>
+    <div class="x side"><b style="top:3cqw;width:9cqw"></b><b style="top:7cqw;width:7cqw"></b><b style="top:11cqw;width:8cqw"></b><b style="top:15cqw;width:6cqw"></b></div>
+    <div class="x mo ttl">reports</div>
+    <b class="x sk" style="top:15cqw;width:26cqw"></b><b class="x sk" style="top:20.5cqw;width:22cqw"></b><b class="x sk" style="top:26cqw;width:24cqw"></b><b class="x sk" style="top:31.5cqw;width:18cqw"></b>
+  </div>
+</div>
+<div class="L b">
+  <div class="x full">
+    <div class="x mo tl">weekly report</div>
+    <div class="x sf big">+12.4<small>%</small></div>
+    <div class="x mo sub">checkout conversion · week 21</div>
+    <svg class="x area" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M0 34 L12 30 L24 32 L36 24 L48 26 L60 17 L72 19 L84 10 L100 6 L100 40 L0 40Z" fill="rgba(255,255,255,.16)"/><polyline points="0,34 12,30 24,32 36,24 48,26 60,17 72,19 84,10 100,6" fill="none" stroke="#fff" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg>
+  </div>
+  <div class="x mini"><div class="x mo">weekly report</div><div class="x v">+12.4%</div><svg class="x sp" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,26 12,22 24,24 36,17 48,19 60,11 72,13 84,6 100,3" fill="none" stroke="#fff" stroke-width="2" vector-effect="non-scaling-stroke"/></svg></div>
+</div>
+<div class="x rip"></div>
+<div class="x cur"><svg viewBox="0 0 24 24"><path d="M4 2.5 L4 19 L8.6 14.8 L11.6 21.2 L14.4 19.9 L11.5 13.6 L17.8 13.4 Z" fill="#0E1726" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>click → open</em></div>
+  <div class="meta">
+    <div class="tk"><span>T07</span><span class="fchip" style="--fc:var(--brand)">carry</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Cursor Carry</h3>
+    <div class="tones"><span>technical</span><span>trustworthy</span><span>calm</span></div>
+    <p class="what">A cursor clicks a card and the clicked card grows into the next full scene, like a container transform.</p>
+    <dl><dt>Use when</dt><dd>Product demos and walkthroughs: &#x27;click here and this opens&#x27;. Cause and effect are on screen, so it suits navigation and drilling into detail.</dd><dt class="av">Avoid</dt><dd>The clicked element must be what the next scene is about. Keep the cursor slow and deliberate; don&#x27;t click into a screen with no clear target, or three times in one demo.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Clip scene B to the clicked card&#x27;s rect, then open the clip to the full frame.</p>
+      <pre>tl.fromTo(<span class="s">'#cursor'</span>,{x:-800,y:420},{x:0,y:0,duration:0.7,ease:<span class="s">'power2.inOut'</span>},T-0.9); tl.fromTo(<span class="s">'#cursor'</span>,{scale:1},{scale:0.85,duration:0.08,ease:<span class="s">'power1.inOut'</span>,yoyo:true,repeat:1},T-0.16);
+tl.fromTo(<span class="s">'#b'</span>,{clipPath:<span class="s">'inset(25% 10% 40% 58% round 24px)'</span>},{clipPath:<span class="s">'inset(0% 0% 0% 0% round 0px)'</span>,duration:0.8,ease:<span class="s">'power3.inOut'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>shared-element (Tier-A); rules card-morph-anchor + cursor-click-ripple</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t08" data-fam="carry" data-tones="calm warm premium" style="--t0:25%;--t1:62%;--freeze:-1.8s">
+  <div class="stage d08" role="img" aria-label="Looping demo of Line-to-Horizon: A chart line flattens and stretches across the full width, and becomes the horizon or divider of the next scene.">
+<div class="L sky"></div><div class="L ground"><div class="x mo gl">weekly active · steady at 12.4k</div></div>
+<div class="x sunbox"><div class="x sun"></div></div>
+<div class="L a">
+  <div class="x sf h">Weekly active</div><div class="x mo tl">last 12 weeks</div>
+  <i class="x gl2" style="top:14cqw"></i><i class="x gl2" style="top:27cqw"></i><i class="x gl2 base" style="top:40cqw"></i>
+  <span class="x mo ax" style="left:12cqw">w1</span><span class="x mo ax" style="left:50cqw">w6</span><span class="x mo ax" style="left:84cqw">w12</span>
+</div>
+<div class="x sf tb">Steady <i>ground.</i></div>
+<div class="x ln"><svg viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M0 44 L25 38 L50 41 L75 26 L100 31 L125 18 L150 22 L175 12 L200 16" fill="none" stroke="#0FA3A3" stroke-width="2.6" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></div>
+<i class="x hz"></i>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>carry</em></div>
+  <div class="meta">
+    <div class="tk"><span>T08</span><span class="fchip" style="--fc:var(--brand)">carry</span><span class="en" title="energy 1 of 3">energy ●○○</span></div>
+    <h3>Line-to-Horizon</h3>
+    <div class="tones"><span>calm</span><span>warm</span><span>premium</span></div>
+    <p class="what">A chart line flattens and stretches across the full width, and becomes the horizon or divider of the next scene.</p>
+    <dl><dt>Use when</dt><dd>Going from data to meaning: &#x27;the numbers settled&#x27; becomes a calm landscape, a roadmap or a section divider. Good for the exhale after a proof moment.</dd><dt class="av">Avoid</dt><dd>Needs one clean line, not a busy multi-series chart, and a scene B with a strong horizontal. Don&#x27;t reuse it for the outro.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Keep the stroke constant (vector-effect: non-scaling-stroke) while you squash the line.</p>
+      <pre>tl.fromTo(<span class="s">'#line path'</span>,{scaleY:1},{scaleY:0.01,duration:0.7,ease:<span class="s">'power3.inOut'</span>,transformOrigin:<span class="s">'50% 50%'</span>},T); tl.fromTo(<span class="s">'#line'</span>,{scaleX:1,y:0},{scaleX:1.4,y:150,duration:0.6,ease:<span class="s">'power3.inOut'</span>},T+0.4);
+tl.fromTo(<span class="s">'#b .sky'</span>,{opacity:0},{opacity:1,duration:0.6,ease:<span class="s">'sine.out'</span>},T+0.7); tl.fromTo(<span class="s">'#b .sun'</span>,{y:120},{y:0,duration:0.9,ease:<span class="s">'power2.out'</span>},T+0.8);</pre>
+      <p class="hf"><b>HyperFrames</b>custom</p>
+    </details>
+  </div>
+</article>
+  </div>
+</section>
+<section class="fam" data-fam="camera" style="--fc:var(--amber)">
+  <div class="fh"><h2>Camera</h2><span class="fn">04</span><p>Move the lens, not the layers. Push through, whip, pull back or slide in depth, so the viewer travels between scenes.</p></div>
+  <div class="tgrid">
+<article class="tcard" id="t09" data-fam="camera" data-tones="bold technical mysterious" style="--t0:25%;--t1:50%;--freeze:-1.65s">
+  <div class="stage d09" role="img" aria-label="Looping demo of Push-Through: The camera flies into a window inside scene A (a card preview, a screen) and comes out the other side in scene B.">
+<div class="L b"><div class="L bb"><i class="x glow"></i><div class="x mo tl">report · checkout</div><div class="x sf h">Checkout,<br><i>fixed.</i></div><div class="x mo sub">+18% conversion since 17:40</div><svg class="x cv" viewBox="0 0 100 50" preserveAspectRatio="none"><polyline points="0,40 14,38 28,42 42,34 56,36 70,20 84,16 100,8" fill="none" stroke="#0FA3A3" stroke-width="3" vector-effect="non-scaling-stroke"/></svg></div></div>
+<div class="L a">
+  <div class="x sf h0">Overview</div><div class="x mo dt">mon 09:00</div>
+  <div class="x card c1"><div class="x mo lb">signups</div><i class="x bar" style="left:3.0cqw;height:8cqw"></i><i class="x bar" style="left:9.5cqw;height:12cqw"></i><i class="x bar" style="left:16.0cqw;height:10cqw"></i><i class="x bar" style="left:22.5cqw;height:16cqw"></i><i class="x bar" style="left:29.0cqw;height:13cqw"></i><i class="x bar" style="left:35.5cqw;height:20cqw"></i></div>
+  <div class="x card c2"><div class="x mo lb">open report ↗</div><div class="x win"><div class="L bb"><i class="x glow"></i><div class="x mo tl">report · checkout</div><div class="x sf h">Checkout,<br><i>fixed.</i></div><div class="x mo sub">+18% conversion since 17:40</div><svg class="x cv" viewBox="0 0 100 50" preserveAspectRatio="none"><polyline points="0,40 14,38 28,42 42,34 56,36 70,20 84,16 100,8" fill="none" stroke="#0FA3A3" stroke-width="3" vector-effect="non-scaling-stroke"/></svg></div></div><div class="x mo cap">checkout.fix</div></div>
+  <div class="x card c3"><div class="x mo lb">alerts</div><div class="x n">3</div></div>
+  <div class="x card c4"><div class="x mo lb">p95</div><div class="x n">212<small>ms</small></div></div>
+</div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>push</em></div>
+  <div class="meta">
+    <div class="tk"><span>T09</span><span class="fchip" style="--fc:var(--amber)">camera</span><span class="en" title="energy 3 of 3">energy ●●●</span></div>
+    <h3>Push-Through</h3>
+    <div class="tones"><span>bold</span><span>technical</span><span>mysterious</span></div>
+    <p class="what">The camera flies into a window inside scene A (a card preview, a screen) and comes out the other side in scene B.</p>
+    <dl><dt>Use when</dt><dd>Going deeper: from the dashboard into one report, from the overview into the product. Works as a hero reveal because it feels like entering the product.</dd><dt class="av">Avoid</dt><dd>The window must hold a true miniature of B, or the landing jumps. It is high energy: once per film, and not straight after a zoom or dolly.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Nest a mini copy of B in the window, scale A until the window exactly fills the frame, then swap.</p>
+      <pre>tl.fromTo(<span class="s">'#a'</span>,{scale:1},{scale:5,duration:0.9,ease:<span class="s">'power4.inOut'</span>,transformOrigin:<span class="s">'1440px 528px'</span>},T); <span class="c">// origin = s·(window top-left)/(s−1)</span>
+tl.set(<span class="s">'#a'</span>,{opacity:0},T+0.9); tl.set(<span class="s">'#b'</span>,{opacity:1},T+0.9);</pre>
+      <p class="hf"><b>HyperFrames</b>css-scale (zoom through), aimed at a UI window</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t10" data-fam="camera" data-tones="urgent playful bold" style="--t0:30%;--t1:50%;--freeze:-1.48s">
+  <div class="stage d10" role="img" aria-label="Looping demo of Whip Pan with Motion Blur: The camera whips sideways so fast that scene A smears into a horizontal blur and scene B snaps sharp beside it.">
+<div class="x st"><div class="x pa"><div class="x mo tl">sales · 09:41</div><div class="x sf h">A deal<br><i>closes.</i></div><i class="x k k1"></i><i class="x k k2"></i><i class="x k k3"></i></div>
+<div class="x pb"><div class="x mo tl">support · 09:41</div><div class="x sf h">A ticket<br><i>opens.</i></div><i class="x k k4"></i><i class="x k k5"></i><i class="x dt"></i></div></div>
+<div class="x st bl"><div class="x pa"><div class="x mo tl">sales · 09:41</div><div class="x sf h">A deal<br><i>closes.</i></div><i class="x k k1"></i><i class="x k k2"></i><i class="x k k3"></i></div>
+<div class="x pb"><div class="x mo tl">support · 09:41</div><div class="x sf h">A ticket<br><i>opens.</i></div><i class="x k k4"></i><i class="x k k5"></i><i class="x dt"></i></div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>whip</em></div>
+  <div class="meta">
+    <div class="tk"><span>T10</span><span class="fchip" style="--fc:var(--amber)">camera</span><span class="en" title="energy 3 of 3">energy ●●●</span></div>
+    <h3>Whip Pan with Motion Blur</h3>
+    <div class="tones"><span>urgent</span><span>playful</span><span>bold</span></div>
+    <p class="what">The camera whips sideways so fast that scene A smears into a horizontal blur and scene B snaps sharp beside it.</p>
+    <dl><dt>Use when</dt><dd>Two things happening at once (&#x27;meanwhile, in support…&#x27;) or a quick before/after. Adds energy without changing the subject.</dd><dt class="av">Avoid</dt><dd>Twice per film at most, and never back and forth in a row. Only a horizontal blur sells it; a plain gaussian blur reads as a focus problem.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Put A and B on one wide strip and fade in a directionally blurred copy at peak speed.</p>
+      <pre>tl.fromTo(<span class="s">'#strip'</span>,{x:0},{x:-1920,duration:0.45,ease:<span class="s">'expo.inOut'</span>},T);
+tl.fromTo(<span class="s">'#strip-blur'</span>,{opacity:0},{opacity:1,duration:0.18,ease:<span class="s">'power2.in'</span>,yoyo:true,repeat:1},T+0.05); <span class="c">// copy uses an SVG feGaussianBlur stdDeviation=<span class="s">'40 0'</span></span></pre>
+      <p class="hf"><b>HyperFrames</b>shader: whip pan · css-blur (directional blur)</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t11" data-fam="camera" data-tones="premium trustworthy celebratory" style="--t0:28%;--t1:60%;--freeze:-1.72s;--veil:var(--ink)">
+  <div class="stage d11" role="img" aria-label="Looping demo of Dolly-Out Reveal: The camera pulls back from scene A until it becomes one tile in a grid of other scenes.">
+<div class="L grid"><div class="x tile t-bill" style="left:3cqw;top:0.8125cqw"><div class="x sf tw">Billing</div><b class="x sk" style="top:40cqw;width:60cqw"></b><b class="x sk" style="top:50cqw;width:44cqw"></b></div><div class="x tile t-mrr" style="left:35cqw;top:0.8125cqw"><div class="x mo tlab">mrr</div><svg class="x sp" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,26 20,22 40,24 60,12 80,14 100,4" fill="none" stroke="#fff" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg></div><div class="x tile t-bars" style="left:67cqw;top:0.8125cqw"><i class="x tb" style="left:8cqw;height:18cqw"></i><i class="x tb" style="left:25cqw;height:28cqw"></i><i class="x tb" style="left:42cqw;height:22cqw"></i><i class="x tb" style="left:59cqw;height:36cqw"></i><i class="x tb" style="left:76cqw;height:30cqw"></i></div><div class="x tile t-ring" style="left:3cqw;top:19.6875cqw"><div class="x rg"></div><div class="x mo tlab">uptime</div></div><div class="x tile hero" style="left:35cqw;top:19.6875cqw"><i class="x hglow"></i><div class="x mo tlab">checkout</div><div class="x sf tw">Checkout</div><div class="x mo hs">−18% → +2%</div><svg class="x hl" viewBox="0 0 100 40" preserveAspectRatio="none"><polyline points="0,10 18,12 34,30 50,32 66,22 82,14 100,8" fill="none" stroke="#0FA3A3" stroke-width="3" vector-effect="non-scaling-stroke"/></svg></div><div class="x tile t-rows" style="left:67cqw;top:19.6875cqw"><b class="x rw" style="top:14cqw"></b><b class="x rw" style="top:28cqw"></b><b class="x rw" style="top:42cqw"></b><i class="x rd"></i></div><div class="x tile t-ops" style="left:3cqw;top:38.5625cqw"><div class="x sf tw">Ops</div><div class="x mo tlab" style="top:auto;bottom:10cqw">on call · 2</div></div><div class="x tile t-num" style="left:35cqw;top:38.5625cqw"><div class="x mo tlab">watched</div><div class="x tn">14/14</div></div><div class="x tile t-alert" style="left:67cqw;top:38.5625cqw"><i class="x ad"></i><div class="x mo tlab" style="left:34cqw;top:22cqw;color:#C2362C">2 alerts</div></div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>dolly</em></div>
+  <div class="meta">
+    <div class="tk"><span>T11</span><span class="fchip" style="--fc:var(--amber)">camera</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Dolly-Out Reveal</h3>
+    <div class="tones"><span>premium</span><span>trustworthy</span><span>celebratory</span></div>
+    <p class="what">The camera pulls back from scene A until it becomes one tile in a grid of other scenes.</p>
+    <dl><dt>Use when</dt><dd>Revealing scale or context: &#x27;this is one of 40 workflows&#x27;, &#x27;every team gets this view&#x27;. A strong move from one feature to the whole platform.</dd><dt class="av">Avoid</dt><dd>The other tiles must be real, readable product surfaces, not filler. Don&#x27;t follow it with a push into a different tile; it reads as indecision.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Build the grid at its final size with A inside the target tile, and start it scaled so that tile fills the frame.</p>
+      <pre>tl.fromTo(<span class="s">'#grid'</span>,{scale:3.333},{scale:1,duration:1.2,ease:<span class="s">'power3.inOut'</span>,transformOrigin:<span class="s">'50% 50%'</span>},T);
+tl.fromTo(<span class="s">'#grid .hero'</span>,{borderRadius:0},{borderRadius:16,duration:1.2,ease:<span class="s">'power3.inOut'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>css-scale (zoom out), inverted into a grid</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t12" data-fam="camera" data-tones="warm playful calm" style="--t0:28%;--t1:56%;--freeze:-1.68s">
+  <div class="stage d12" role="img" aria-label="Looping demo of Parallax Slide: A slide from A to B on three layers at three speeds: the backdrop drifts, the main card slides, the foreground details rush past.">
+<div class="x bg"><i class="x c1"></i><i class="x c2"></i><i class="x hill"></i><i class="x hill h2"></i></div>
+<div class="x mid">
+  <div class="x cd" style="left:22cqw"><div class="x mo">step 01</div><div class="x sf">Plan.</div><i class="x pr"><b style="width:32%"></b></i></div>
+  <div class="x cd" style="left:122cqw"><div class="x mo">step 02</div><div class="x sf">Ship.</div><i class="x pr"><b style="width:100%"></b></i><span class="x ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+</div>
+<div class="x fg">
+  <i class="x fd" style="left:9cqw;top:39cqw;background:var(--alert)"></i><span class="x mo fc" style="left:72cqw;top:6cqw">q3</span><i class="x fr" style="left:84cqw;top:38cqw"></i>
+  <i class="x fd" style="left:150cqw;top:41cqw;background:var(--amber)"></i><span class="x mo fc" style="left:212cqw;top:7cqw">v2.4</span><i class="x fr" style="left:225cqw;top:36cqw"></i>
+</div>
+<div class="x mo legend"><span>bg ×0.3</span><span>card ×1</span><span>fg ×1.4</span></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>parallax</em></div>
+  <div class="meta">
+    <div class="tk"><span>T12</span><span class="fchip" style="--fc:var(--amber)">camera</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Parallax Slide</h3>
+    <div class="tones"><span>warm</span><span>playful</span><span>calm</span></div>
+    <p class="what">A slide from A to B on three layers at three speeds: the backdrop drifts, the main card slides, the foreground details rush past.</p>
+    <dl><dt>Use when</dt><dd>Stepping through a sequence (plan, build, ship) when a plain push feels flat. The depth turns a sideways move into travel through a space.</dd><dt class="av">Avoid</dt><dd>Three layers with clear ratios (about 0.3×, 1×, 1.4×) and no more. Not for dense data scenes: text moving at different speeds is hard to read.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">One ease, three distances.</p>
+      <pre>tl.fromTo(<span class="s">'#bg'</span>,{x:0},{x:-580,duration:1,ease:<span class="s">'power3.inOut'</span>},T); tl.fromTo(<span class="s">'#mid'</span>,{x:0},{x:-1920,duration:1,ease:<span class="s">'power3.inOut'</span>},T);
+tl.fromTo(<span class="s">'#fg'</span>,{x:0},{x:-2690,duration:1,ease:<span class="s">'power3.inOut'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>css-push (push slide), split into three depth layers</p>
+    </details>
+  </div>
+</article>
+  </div>
+</section>
+<section class="fam" data-fam="mask" style="--fc:var(--alert)">
+  <div class="fh"><h2>Mask</h2><span class="fn">04</span><p>One scene opens a window onto the next. The window&#x27;s shape is the message: the logo, a word, the subject, a strip.</p></div>
+  <div class="tgrid">
+<article class="tcard" id="t13" data-fam="mask" data-tones="premium bold celebratory" style="--t0:26%;--t1:60%;--freeze:-1.74s;--veil:var(--ink)">
+  <div class="stage d13" role="img" aria-label="Looping demo of Product-Shape Mask: Scene B shows through the brand mark (or a key UI shape), and the shape grows until B fills the frame.">
+<div class="L a">
+  <div class="x wm">Acme Pulse</div>
+  <div class="x mo tag">watch every metric</div>
+</div>
+<div class="L b">
+  <div class="L bi">
+    <div class="x mo tl">acme pulse · today</div>
+    <div class="x sf h">All metrics <i>healthy.</i></div>
+    <div class="x card cl"><div class="x mo">checkout</div><svg class="x sp" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,24 20,20 40,22 60,12 80,14 100,6" fill="none" stroke="#0FA3A3" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg></div>
+    <div class="x card cm"><div class="x rg"></div><div class="x mo rnum">14/14</div></div>
+    <div class="x card cr"><div class="x mo">p95</div><div class="x n">212<small>ms</small></div></div>
+  </div>
+</div>
+<div class="x mk"><i class="x fill"></i><div class="x line"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M11 36h10l7-17 8 27 6-16h11" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="53" cy="30" r="4.2" fill="#FF5A4E"/></svg></div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>mask</em></div>
+  <div class="meta">
+    <div class="tk"><span>T13</span><span class="fchip" style="--fc:var(--alert)">mask</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Product-Shape Mask</h3>
+    <div class="tones"><span>premium</span><span>bold</span><span>celebratory</span></div>
+    <p class="what">Scene B shows through the brand mark (or a key UI shape), and the shape grows until B fills the frame.</p>
+    <dl><dt>Use when</dt><dd>Brand-to-product moments: the logo opens onto the product, the app icon opens onto the app. Also a strong first cut after a cold open.</dd><dt class="av">Avoid</dt><dd>The shape must be recognisable when small, so use simple marks and UI shapes. Once per film, and not in the same film as a text mask.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Animate clip-path inset() with the mark&#x27;s corner radius from its rect to the full frame.</p>
+      <pre>tl.fromTo(<span class="s">'#mark .fill'</span>,{opacity:1},{opacity:0,duration:0.25,ease:<span class="s">'power1.out'</span>},T);
+tl.fromTo(<span class="s">'#b'</span>,{clipPath:<span class="s">'inset(28% 43.5% 49% 43.5% round 62px)'</span>},{clipPath:<span class="s">'inset(0% 0% 0% 0% round 0px)'</span>,duration:0.9,ease:<span class="s">'power3.inOut'</span>},T+0.25); tl.fromTo(<span class="s">'#mark .line'</span>,{scale:1,opacity:1},{scale:6,opacity:0,duration:0.7,ease:<span class="s">'power2.in'</span>},T+0.25);</pre>
+      <p class="hf"><b>HyperFrames</b>css-radial (circle / diamond iris) with a custom clip shape; shader: sdf-iris</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t14" data-fam="mask" data-tones="bold premium mysterious" style="--t0:24%;--t1:62%;--freeze:-1.45s">
+  <div class="stage d14" role="img" aria-label="Looping demo of Text Mask: A huge word fills the frame with scene B showing through its letters; then the letters open up and B takes over.">
+<div class="L b">
+  <i class="x sun"></i><i class="x band"></i><i class="x band b2"></i>
+  <div class="x sf h">v2 is <i>live.</i></div><div class="x mo sub">acme pulse · 17:00</div>
+</div>
+<div class="L a"><div class="x mo tl">release 2.0</div><div class="x sf ah">Friday, <i>17:00.</i></div></div>
+<div class="L kn"><div class="w"><span>L</span><span>I</span><span>V</span><span>E</span></div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>mask</em></div>
+  <div class="meta">
+    <div class="tk"><span>T14</span><span class="fchip" style="--fc:var(--alert)">mask</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Text Mask</h3>
+    <div class="tones"><span>bold</span><span>premium</span><span>mysterious</span></div>
+    <p class="what">A huge word fills the frame with scene B showing through its letters; then the letters open up and B takes over.</p>
+    <dl><dt>Use when</dt><dd>Title moments and chapter openers where one word is the message (&#x27;LIVE&#x27;, &#x27;NOW&#x27;, the product name). The classic name reveal for a launch film.</dd><dt class="av">Avoid</dt><dd>Needs heavy type and a visually rich scene B, or the letters look empty. Short words only (3–5 letters); never twice per film.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Knockout layer: ink background, white type, mix-blend-mode: multiply over B (isolate the parent).</p>
+      <pre>tl.fromTo(<span class="s">'#knock'</span>,{scale:1.2,opacity:0},{scale:1,opacity:1,duration:0.3,ease:<span class="s">'power3.out'</span>},T);
+tl.fromTo(<span class="s">'#knock .ch'</span>,{scale:1},{scale:5,duration:0.7,ease:<span class="s">'power4.in'</span>,stagger:0.04},T+0.7); tl.fromTo(<span class="s">'#knock'</span>,{backgroundColor:<span class="s">'#0E1726'</span>},{backgroundColor:<span class="s">'#FFFFFF'</span>,duration:0.5,ease:<span class="s">'power2.in'</span>},T+0.85);</pre>
+      <p class="hf"><b>HyperFrames</b>custom (mix-blend knockout)</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t15" data-fam="mask" data-tones="technical urgent mysterious" style="--t0:16%;--t1:56%;--freeze:-1.8s">
+  <div class="stage d15" role="img" aria-label="Looping demo of Focal Iris: An iris opens from the subject (the anomaly, the button, the face) rather than the frame centre, and scene B grows out of that point.">
+<div class="L a">
+  <div class="x sf h">Checkout conversion</div><div class="x mo tl">today · 5-min buckets</div>
+  <i class="x gl" style="top:18cqw"></i><i class="x gl" style="top:30cqw"></i><i class="x gl" style="top:42cqw"></i>
+  <svg class="x ch" viewBox="0 0 100 56.25" preserveAspectRatio="none"><polyline points="5,24 12,22 19,25 26,21 33,23 40,20 47,22 54,19 61,21 67,20 72,34" fill="none" stroke="#5A6475" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/><polyline points="72,34 78,31 84,33 90,32 95,33" fill="none" stroke="#FF5A4E" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+  <i class="x subj"></i><div class="x mo sl">09:42</div>
+</div>
+<i class="x rng r1"></i><i class="x rng r2"></i>
+<div class="L b"><div class="L bi">
+  <i class="x big"></i>
+  <div class="x mo tl2">checkout · since 09:42</div>
+  <div class="x num">−18<small>%</small></div>
+  <div class="x why"><span class="mo">after deploy #2231</span><b>Roll back</b></div>
+</div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>iris</em></div>
+  <div class="meta">
+    <div class="tk"><span>T15</span><span class="fchip" style="--fc:var(--alert)">mask</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Focal Iris</h3>
+    <div class="tones"><span>technical</span><span>urgent</span><span>mysterious</span></div>
+    <p class="what">An iris opens from the subject (the anomaly, the button, the face) rather than the frame centre, and scene B grows out of that point.</p>
+    <dl><dt>Use when</dt><dd>Drilling into a detail: &#x27;look here, and this is what it means&#x27;. Where the iris starts tells the viewer what caused the next scene.</dd><dt class="av">Avoid</dt><dd>Make the subject obvious first (pulse or ring it). Don&#x27;t open from the centre (that&#x27;s the stock iris) or on a busy frame with two possible subjects.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Use the subject&#x27;s centre as the origin of the ring, the clip and the lean-in.</p>
+      <pre>tl.fromTo(<span class="s">'#a .ring'</span>,{scale:0.5,opacity:0},{scale:1,opacity:1,duration:0.4,ease:<span class="s">'back.out(2)'</span>},T-0.5);
+tl.fromTo(<span class="s">'#b'</span>,{clipPath:<span class="s">'circle(0% at 72% 34%)'</span>},{clipPath:<span class="s">'circle(105% at 72% 34%)'</span>,duration:0.8,ease:<span class="s">'power3.in'</span>},T); tl.fromTo(<span class="s">'#a'</span>,{scale:1},{scale:1.2,duration:0.8,ease:<span class="s">'power3.in'</span>,transformOrigin:<span class="s">'72% 34%'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>css-radial (circle iris) with the origin moved to the subject</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t16" data-fam="mask" data-tones="bold technical urgent" style="--t0:30%;--t1:58%;--freeze:-1.62s">
+  <div class="stage d16" role="img" aria-label="Looping demo of Split Stack: The frame splits into three horizontal strips and scene B slides in strip by strip, each at its own speed.">
+<div class="L a"><div class="x mo tl">release notes · v2</div><div class="x sf h">Three things<br><i>changed.</i></div><i class="x dt"></i></div>
+<div class="L bb s1"><div class="x rw" style="top:0"><span class="x mo n">01</span><span class="x sf t">Alerts</span><span class="x mo d">routed to an owner</span></div>
+<div class="x rw" style="top:18.75cqw"><span class="x mo n">02</span><span class="x sf t">Owners</span><span class="x mo d">one per metric</span></div>
+<div class="x rw" style="top:37.5cqw"><span class="x mo n">03</span><span class="x sf t">Rollbacks</span><span class="x mo d">one click, audited</span></div></div><div class="L bb s2"><div class="x rw" style="top:0"><span class="x mo n">01</span><span class="x sf t">Alerts</span><span class="x mo d">routed to an owner</span></div>
+<div class="x rw" style="top:18.75cqw"><span class="x mo n">02</span><span class="x sf t">Owners</span><span class="x mo d">one per metric</span></div>
+<div class="x rw" style="top:37.5cqw"><span class="x mo n">03</span><span class="x sf t">Rollbacks</span><span class="x mo d">one click, audited</span></div></div><div class="L bb s3"><div class="x rw" style="top:0"><span class="x mo n">01</span><span class="x sf t">Alerts</span><span class="x mo d">routed to an owner</span></div>
+<div class="x rw" style="top:18.75cqw"><span class="x mo n">02</span><span class="x sf t">Owners</span><span class="x mo d">one per metric</span></div>
+<div class="x rw" style="top:37.5cqw"><span class="x mo n">03</span><span class="x sf t">Rollbacks</span><span class="x mo d">one click, audited</span></div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>3 strips</em></div>
+  <div class="meta">
+    <div class="tk"><span>T16</span><span class="fchip" style="--fc:var(--alert)">mask</span><span class="en" title="energy 3 of 3">energy ●●●</span></div>
+    <h3>Split Stack</h3>
+    <div class="tones"><span>bold</span><span>technical</span><span>urgent</span></div>
+    <p class="what">The frame splits into three horizontal strips and scene B slides in strip by strip, each at its own speed.</p>
+    <dl><dt>Use when</dt><dd>Topic changes and list beats (&#x27;three things changed&#x27;): the strips feel editorial and structured. Also good in a fast feature montage.</dd><dt class="av">Avoid</dt><dd>Line the strips up with B&#x27;s layout so no headline is cut in half at rest. Too busy for calm films; don&#x27;t pair it with other stripe or blind effects.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Three copies of B clipped to thirds, same ease, rising durations.</p>
+      <pre>[<span class="s">'#b1'</span>,<span class="s">'#b2'</span>,<span class="s">'#b3'</span>].forEach((s,i)=&gt;tl.fromTo(s,{xPercent:100},{xPercent:0,duration:0.5+i*0.2,ease:<span class="s">'power4.out'</span>},T+i*0.06));
+tl.fromTo(<span class="s">'#a'</span>,{xPercent:0,filter:<span class="s">'brightness(1)'</span>},{xPercent:-12,filter:<span class="s">'brightness(0.85)'</span>,duration:0.9,ease:<span class="s">'power2.in'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>css-cover (staggered blocks / blinds), reduced to three strips</p>
+    </details>
+  </div>
+</article>
+  </div>
+</section>
+<section class="fam" data-fam="material" style="--fc:var(--muted)">
+  <div class="fh"><h2>Material</h2><span class="fn">04</span><p>The frame is made of something. Paper folds, ink bleeds, pixels sort and glass bends: a tactile handoff.</p></div>
+  <div class="tgrid">
+<article class="tcard" id="t17" data-fam="material" data-tones="warm playful nostalgic" style="--t0:25%;--t1:62%;--freeze:-1.5s">
+  <div class="stage d17" role="img" aria-label="Looping demo of Paper Fold: Scene A folds in half like a sheet of paper, and the folded sheet drops away to show scene B underneath.">
+<div class="L b"><div class="x mo tl">v2 plan · 17:40</div><div class="x sf h">Proposal,<br><i>sent.</i></div><i class="x ck"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>
+<div class="L pp"><div class="L sheet">
+  <div class="x bot"><div class="x pg" style="top:-28.125cqw"><div class="x doc"><div class="x mo tl">draft · 12 pages</div><div class="x sf h">Q3 report</div>
+<b class="x ln" style="top:19cqw;width:62cqw"></b><b class="x ln" style="top:22.5cqw;width:70cqw"></b><b class="x ln" style="top:26cqw;width:48cqw"></b>
+<i class="x br" style="left:8cqw;height:9cqw"></i><i class="x br" style="left:17cqw;height:13cqw"></i><i class="x br" style="left:26cqw;height:11cqw"></i><i class="x br" style="left:35cqw;height:17cqw"></i>
+<b class="x ln" style="top:36cqw;left:52cqw;width:38cqw"></b><b class="x ln" style="top:39.5cqw;left:52cqw;width:30cqw"></b><b class="x ln" style="top:43cqw;left:52cqw;width:34cqw"></b></div></div><i class="x sh"></i></div>
+  <div class="x top">
+    <div class="x face front"><div class="x pg"><div class="x doc"><div class="x mo tl">draft · 12 pages</div><div class="x sf h">Q3 report</div>
+<b class="x ln" style="top:19cqw;width:62cqw"></b><b class="x ln" style="top:22.5cqw;width:70cqw"></b><b class="x ln" style="top:26cqw;width:48cqw"></b>
+<i class="x br" style="left:8cqw;height:9cqw"></i><i class="x br" style="left:17cqw;height:13cqw"></i><i class="x br" style="left:26cqw;height:11cqw"></i><i class="x br" style="left:35cqw;height:17cqw"></i>
+<b class="x ln" style="top:36cqw;left:52cqw;width:38cqw"></b><b class="x ln" style="top:39.5cqw;left:52cqw;width:30cqw"></b><b class="x ln" style="top:43cqw;left:52cqw;width:34cqw"></b></div></div><i class="x sh"></i></div>
+    <div class="x face bk"><div class="x pg ghost"><div class="x doc"><div class="x mo tl">draft · 12 pages</div><div class="x sf h">Q3 report</div>
+<b class="x ln" style="top:19cqw;width:62cqw"></b><b class="x ln" style="top:22.5cqw;width:70cqw"></b><b class="x ln" style="top:26cqw;width:48cqw"></b>
+<i class="x br" style="left:8cqw;height:9cqw"></i><i class="x br" style="left:17cqw;height:13cqw"></i><i class="x br" style="left:26cqw;height:11cqw"></i><i class="x br" style="left:35cqw;height:17cqw"></i>
+<b class="x ln" style="top:36cqw;left:52cqw;width:38cqw"></b><b class="x ln" style="top:39.5cqw;left:52cqw;width:30cqw"></b><b class="x ln" style="top:43cqw;left:52cqw;width:34cqw"></b></div></div><i class="x sh"></i></div>
+  </div>
+</div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>fold</em></div>
+  <div class="meta">
+    <div class="tk"><span>T17</span><span class="fchip" style="--fc:var(--muted)">material</span><span class="en" title="energy 1 of 3">energy ●○○</span></div>
+    <h3>Paper Fold</h3>
+    <div class="tones"><span>warm</span><span>playful</span><span>nostalgic</span></div>
+    <p class="what">Scene A folds in half like a sheet of paper, and the folded sheet drops away to show scene B underneath.</p>
+    <dl><dt>Use when</dt><dd>Closing one chapter and opening the next: a report folded into a proposal, a draft put away. Friendly and analogue, good for onboarding and small-team stories.</dd><dt class="av">Avoid</dt><dd>Needs a perspective parent, and the front and back faces must swap at exactly 90° or the fold flickers. Too slow for launch energy; never fold twice in a film.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Split A into halves; hinge the top half on its bottom edge (parent: perspective 1600px) and swap its front/back faces at 90°.</p>
+      <pre>tl.fromTo(<span class="s">'#a-top'</span>,{rotationX:0},{rotationX:-180,duration:0.9,ease:<span class="s">'power2.inOut'</span>,transformOrigin:<span class="s">'50% 100%'</span>},T); tl.set(<span class="s">'#a-top .front'</span>,{opacity:0},T+0.45); tl.set(<span class="s">'#a-top .back'</span>,{opacity:1},T+0.45);
+tl.fromTo(<span class="s">'#a-sheet'</span>,{y:0,rotation:0},{y:1300,rotation:-6,duration:0.5,ease:<span class="s">'power3.in'</span>},T+0.9);</pre>
+      <p class="hf"><b>HyperFrames</b>css-3d (3D card flip), closest</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t18" data-fam="material" data-tones="mysterious premium warm" style="--t0:22%;--t1:62%;--freeze:-1.8s">
+  <div class="stage d18" role="img" aria-label="Looping demo of Ink Bleed: A drop of ink lands on scene A and spreads with a rough, organic edge until the frame is ink, and scene B surfaces from it.">
+<div class="L a"><i class="x rule" style="top:14cqw"></i><i class="x rule" style="top:21cqw"></i><div class="x mo tl">contract · v0.9</div><div class="x sf h">Draft.</div><i class="x sig"></i><div class="x mo sh">sign here</div></div>
+<i class="x drop"></i>
+<div class="x ink"><i class="x bl" style="left:42.0cqw;top:34.0cqw;width:8cqw;height:8cqw;animation-name:d18b0"></i><i class="x bl" style="left:55.5cqw;top:27.5cqw;width:5cqw;height:5cqw;animation-name:d18b1"></i><i class="x bl" style="left:33.0cqw;top:47.0cqw;width:4cqw;height:4cqw;animation-name:d18b2"></i><i class="x bl" style="left:63.75cqw;top:45.75cqw;width:4.5cqw;height:4.5cqw;animation-name:d18b3"></i><i class="x bl" style="left:28.5cqw;top:26.5cqw;width:3cqw;height:3cqw;animation-name:d18b4"></i><i class="x bl" style="left:78.25cqw;top:22.25cqw;width:3.5cqw;height:3.5cqw;animation-name:d18b5"></i><i class="x bl" style="left:90.5cqw;top:50.5cqw;width:3cqw;height:3cqw;animation-name:d18b6"></i><i class="x bl" style="left:16.5cqw;top:56.5cqw;width:3cqw;height:3cqw;animation-name:d18b7"></i><i class="x bl" style="left:51.8cqw;top:56.8cqw;width:2.4cqw;height:2.4cqw;animation-name:d18b8"></i><i class="x bl" style="left:71.0cqw;top:36.0cqw;width:2cqw;height:2cqw;animation-name:d18b9"></i></div>
+<div class="L b"><div class="x mo tl">v1.0 · approved 17:40</div><div class="x sf h">Signed<i>.</i></div><i class="x seal"></i></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>bleed</em></div>
+  <div class="meta">
+    <div class="tk"><span>T18</span><span class="fchip" style="--fc:var(--muted)">material</span><span class="en" title="energy 1 of 3">energy ●○○</span></div>
+    <h3>Ink Bleed</h3>
+    <div class="tones"><span>mysterious</span><span>premium</span><span>warm</span></div>
+    <p class="what">A drop of ink lands on scene A and spreads with a rough, organic edge until the frame is ink, and scene B surfaces from it.</p>
+    <dl><dt>Use when</dt><dd>Moments of commitment and craft: signing, approving, publishing. Feels handmade, a welcome contrast in a very digital film.</dd><dt class="av">Avoid</dt><dd>Needs a slow, calm track; fast ink looks like a paint splash. One ink colour only, and not in the same film as glitch or dither.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Grow blobs inside a layer with a goo filter (feDisplacementMap + feGaussianBlur + alpha threshold).</p>
+      <pre>tl.fromTo(<span class="s">'#ink .blob'</span>,{scale:0},{scale:1,duration:1.2,ease:<span class="s">'power2.in'</span>,stagger:0.08},T);
+tl.fromTo(<span class="s">'#b .title'</span>,{opacity:0,y:20},{opacity:1,y:0,duration:0.6,ease:<span class="s">'power3.out'</span>},T+1.1);</pre>
+      <p class="hf"><b>HyperFrames</b>shader: domain warp / cross-warp morph, closest</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t19" data-fam="material" data-tones="technical nostalgic bold" style="--t0:28%;--t1:64%;--freeze:-1.7s">
+  <div class="stage d19" role="img" aria-label="Looping demo of Dither / Pixel Sort: Scene B replaces A through an ordered dither: a wave of chunky pixels sweeps across, led by a band of sorted colour streaks.">
+<div class="L a"><div class="x mo tl">raw events · 2,418/s</div><div class="x sf h">Unsorted.</div><i class="x br" style="left:6.0cqw;height:7cqw"></i><i class="x br" style="left:13.4cqw;height:22cqw"></i><i class="x br" style="left:20.8cqw;height:9cqw"></i><i class="x br" style="left:28.200000000000003cqw;height:22cqw"></i><i class="x br" style="left:35.6cqw;height:12cqw"></i><i class="x br" style="left:43.0cqw;height:18cqw"></i><i class="x br" style="left:50.400000000000006cqw;height:17cqw"></i><i class="x br" style="left:57.800000000000004cqw;height:22cqw"></i><i class="x br" style="left:65.2cqw;height:15cqw"></i><i class="x br" style="left:72.60000000000001cqw;height:10cqw"></i><i class="x br" style="left:80.0cqw;height:14cqw"></i><i class="x br" style="left:87.4cqw;height:9cqw"></i></div>
+<div class="L q q0"><div class="x mo tl">sorted · p95 first</div><div class="x sf h">Sorted<i>.</i></div><i class="x br" style="left:6.0cqw;height:7cqw;opacity:0.45"></i><i class="x br" style="left:13.4cqw;height:9cqw;opacity:0.50"></i><i class="x br" style="left:20.8cqw;height:9cqw;opacity:0.55"></i><i class="x br" style="left:28.200000000000003cqw;height:10cqw;opacity:0.60"></i><i class="x br" style="left:35.6cqw;height:12cqw;opacity:0.65"></i><i class="x br" style="left:43.0cqw;height:14cqw;opacity:0.70"></i><i class="x br" style="left:50.400000000000006cqw;height:15cqw;opacity:0.75"></i><i class="x br" style="left:57.800000000000004cqw;height:17cqw;opacity:0.80"></i><i class="x br" style="left:65.2cqw;height:18cqw;opacity:0.85"></i><i class="x br" style="left:72.60000000000001cqw;height:22cqw;opacity:0.90"></i><i class="x br" style="left:80.0cqw;height:22cqw;opacity:0.95"></i><i class="x br" style="left:87.4cqw;height:22cqw;opacity:1.00"></i></div><div class="L qf"><div class="x mo tl">sorted · p95 first</div><div class="x sf h">Sorted<i>.</i></div><i class="x br" style="left:6.0cqw;height:7cqw;opacity:0.45"></i><i class="x br" style="left:13.4cqw;height:9cqw;opacity:0.50"></i><i class="x br" style="left:20.8cqw;height:9cqw;opacity:0.55"></i><i class="x br" style="left:28.200000000000003cqw;height:10cqw;opacity:0.60"></i><i class="x br" style="left:35.6cqw;height:12cqw;opacity:0.65"></i><i class="x br" style="left:43.0cqw;height:14cqw;opacity:0.70"></i><i class="x br" style="left:50.400000000000006cqw;height:15cqw;opacity:0.75"></i><i class="x br" style="left:57.800000000000004cqw;height:17cqw;opacity:0.80"></i><i class="x br" style="left:65.2cqw;height:18cqw;opacity:0.85"></i><i class="x br" style="left:72.60000000000001cqw;height:22cqw;opacity:0.90"></i><i class="x br" style="left:80.0cqw;height:22cqw;opacity:0.95"></i><i class="x br" style="left:87.4cqw;height:22cqw;opacity:1.00"></i></div><div class="L q q1"><div class="x mo tl">sorted · p95 first</div><div class="x sf h">Sorted<i>.</i></div><i class="x br" style="left:6.0cqw;height:7cqw;opacity:0.45"></i><i class="x br" style="left:13.4cqw;height:9cqw;opacity:0.50"></i><i class="x br" style="left:20.8cqw;height:9cqw;opacity:0.55"></i><i class="x br" style="left:28.200000000000003cqw;height:10cqw;opacity:0.60"></i><i class="x br" style="left:35.6cqw;height:12cqw;opacity:0.65"></i><i class="x br" style="left:43.0cqw;height:14cqw;opacity:0.70"></i><i class="x br" style="left:50.400000000000006cqw;height:15cqw;opacity:0.75"></i><i class="x br" style="left:57.800000000000004cqw;height:17cqw;opacity:0.80"></i><i class="x br" style="left:65.2cqw;height:18cqw;opacity:0.85"></i><i class="x br" style="left:72.60000000000001cqw;height:22cqw;opacity:0.90"></i><i class="x br" style="left:80.0cqw;height:22cqw;opacity:0.95"></i><i class="x br" style="left:87.4cqw;height:22cqw;opacity:1.00"></i></div><div class="L q q2"><div class="x mo tl">sorted · p95 first</div><div class="x sf h">Sorted<i>.</i></div><i class="x br" style="left:6.0cqw;height:7cqw;opacity:0.45"></i><i class="x br" style="left:13.4cqw;height:9cqw;opacity:0.50"></i><i class="x br" style="left:20.8cqw;height:9cqw;opacity:0.55"></i><i class="x br" style="left:28.200000000000003cqw;height:10cqw;opacity:0.60"></i><i class="x br" style="left:35.6cqw;height:12cqw;opacity:0.65"></i><i class="x br" style="left:43.0cqw;height:14cqw;opacity:0.70"></i><i class="x br" style="left:50.400000000000006cqw;height:15cqw;opacity:0.75"></i><i class="x br" style="left:57.800000000000004cqw;height:17cqw;opacity:0.80"></i><i class="x br" style="left:65.2cqw;height:18cqw;opacity:0.85"></i><i class="x br" style="left:72.60000000000001cqw;height:22cqw;opacity:0.90"></i><i class="x br" style="left:80.0cqw;height:22cqw;opacity:0.95"></i><i class="x br" style="left:87.4cqw;height:22cqw;opacity:1.00"></i></div><div class="L q q3"><div class="x mo tl">sorted · p95 first</div><div class="x sf h">Sorted<i>.</i></div><i class="x br" style="left:6.0cqw;height:7cqw;opacity:0.45"></i><i class="x br" style="left:13.4cqw;height:9cqw;opacity:0.50"></i><i class="x br" style="left:20.8cqw;height:9cqw;opacity:0.55"></i><i class="x br" style="left:28.200000000000003cqw;height:10cqw;opacity:0.60"></i><i class="x br" style="left:35.6cqw;height:12cqw;opacity:0.65"></i><i class="x br" style="left:43.0cqw;height:14cqw;opacity:0.70"></i><i class="x br" style="left:50.400000000000006cqw;height:15cqw;opacity:0.75"></i><i class="x br" style="left:57.800000000000004cqw;height:17cqw;opacity:0.80"></i><i class="x br" style="left:65.2cqw;height:18cqw;opacity:0.85"></i><i class="x br" style="left:72.60000000000001cqw;height:22cqw;opacity:0.90"></i><i class="x br" style="left:80.0cqw;height:22cqw;opacity:0.95"></i><i class="x br" style="left:87.4cqw;height:22cqw;opacity:1.00"></i></div>
+<div class="x sb"><i style="top:0.000cqw;width:63%;background:linear-gradient(90deg,#0E1726,#F4B740 60%,rgba(0,0,0,0))"></i><i style="top:3.515cqw;width:64%;background:linear-gradient(90deg,#0FA3A3,#F4B740 60%,rgba(0,0,0,0))"></i><i style="top:7.030cqw;width:69%;background:linear-gradient(90deg,#0FA3A3,#CFF1EE 60%,rgba(0,0,0,0))"></i><i style="top:10.545cqw;width:55%;background:linear-gradient(90deg,#0FA3A3,#FF5A4E 60%,rgba(0,0,0,0))"></i><i style="top:14.060cqw;width:44%;background:linear-gradient(90deg,#CFF1EE,#0E1726 60%,rgba(0,0,0,0))"></i><i style="top:17.575cqw;width:79%;background:linear-gradient(90deg,#0B6E6E,#0FA3A3 60%,rgba(0,0,0,0))"></i><i style="top:21.090cqw;width:42%;background:linear-gradient(90deg,#0E1726,#0FA3A3 60%,rgba(0,0,0,0))"></i><i style="top:24.605cqw;width:42%;background:linear-gradient(90deg,#CFF1EE,#0B6E6E 60%,rgba(0,0,0,0))"></i><i style="top:28.120cqw;width:84%;background:linear-gradient(90deg,#0E1726,#0E1726 60%,rgba(0,0,0,0))"></i><i style="top:31.635cqw;width:68%;background:linear-gradient(90deg,#CFF1EE,#CFF1EE 60%,rgba(0,0,0,0))"></i><i style="top:35.150cqw;width:50%;background:linear-gradient(90deg,#0B6E6E,#0E1726 60%,rgba(0,0,0,0))"></i><i style="top:38.665cqw;width:59%;background:linear-gradient(90deg,#CFF1EE,#CFF1EE 60%,rgba(0,0,0,0))"></i><i style="top:42.180cqw;width:43%;background:linear-gradient(90deg,#FF5A4E,#0E1726 60%,rgba(0,0,0,0))"></i><i style="top:45.695cqw;width:54%;background:linear-gradient(90deg,#FF5A4E,#FF5A4E 60%,rgba(0,0,0,0))"></i><i style="top:49.210cqw;width:93%;background:linear-gradient(90deg,#0FA3A3,#CFF1EE 60%,rgba(0,0,0,0))"></i><i style="top:52.725cqw;width:88%;background:linear-gradient(90deg,#0FA3A3,#0E1726 60%,rgba(0,0,0,0))"></i></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>dither</em></div>
+  <div class="meta">
+    <div class="tk"><span>T19</span><span class="fchip" style="--fc:var(--muted)">material</span><span class="en" title="energy 3 of 3">energy ●●●</span></div>
+    <h3>Dither / Pixel Sort</h3>
+    <div class="tones"><span>technical</span><span>nostalgic</span><span>bold</span></div>
+    <p class="what">Scene B replaces A through an ordered dither: a wave of chunky pixels sweeps across, led by a band of sorted colour streaks.</p>
+    <dl><dt>Use when</dt><dd>Tech moments: data being processed, an AI &#x27;thinking&#x27;, a system rebuilding. A retro-digital accent that suits developer tools.</dd><dt class="av">Avoid</dt><dd>Chunky pixels only; fine dither vanishes in video compression. Once per film, and never over small text that must stay readable.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Four copies of B, each masked to one cell of a 2×2 Bayer pattern, wiped in with a lag.</p>
+      <pre>[0,1,2,3].forEach(i=&gt;tl.fromTo(<span class="s">'#b'</span>+i,{clipPath:<span class="s">'inset(0% 100% 0% 0%)'</span>},{clipPath:<span class="s">'inset(0% 0% 0% 0%)'</span>,duration:0.9,ease:<span class="s">'none'</span>},T+i*0.12));
+tl.fromTo(<span class="s">'#sort-band'</span>,{x:-200},{x:1920,duration:0.9,ease:<span class="s">'none'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>css-grid (grid dissolve), closest; shader: glitch</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t20" data-fam="material" data-tones="premium calm technical" style="--t0:26%;--t1:62%;--freeze:-1.75s">
+  <div class="stage d20" role="img" aria-label="Looping demo of Glass Refraction Wipe: A pane of frosted glass slides across the frame; behind it scene A turns into scene B, softened and bent as it passes.">
+<div class="L a"><div class="x mo tl">plan · basic</div><div class="x sf h">Before.</div><i class="x c"></i><i class="x bx" style="left:62cqw;top:34cqw"></i><i class="x bx" style="left:74cqw;top:28cqw;height:18cqw"></i><i class="x bx" style="left:86cqw;top:38cqw;height:8cqw"></i></div>
+<div class="L b"><i class="x glow"></i><div class="x mo tl">plan · pro</div><div class="x sf h">After<i>.</i></div><i class="x bx" style="left:62cqw;top:22cqw;height:24cqw"></i><i class="x bx" style="left:74cqw;top:14cqw;height:32cqw"></i><i class="x bx" style="left:86cqw;top:18cqw;height:28cqw"></i></div>
+<div class="x pane"></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>glass</em></div>
+  <div class="meta">
+    <div class="tk"><span>T20</span><span class="fchip" style="--fc:var(--muted)">material</span><span class="en" title="energy 1 of 3">energy ●○○</span></div>
+    <h3>Glass Refraction Wipe</h3>
+    <div class="tones"><span>premium</span><span>calm</span><span>technical</span></div>
+    <p class="what">A pane of frosted glass slides across the frame; behind it scene A turns into scene B, softened and bent as it passes.</p>
+    <dl><dt>Use when</dt><dd>Premium, calm reveals: a new plan, a redesigned screen, a before/after told with restraint.</dd><dt class="av">Avoid</dt><dd>backdrop-filter is heavy to render, so keep the pane narrow and the move short. It doesn&#x27;t read on flat, empty scenes; don&#x27;t combine it with other blur transitions.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Drive the pane and the reveal edge with the same ease so the edge always sits inside the glass.</p>
+      <pre>tl.fromTo(<span class="s">'#pane'</span>,{x:-640},{x:2120,duration:1.4,ease:<span class="s">'power2.inOut'</span>},T); <span class="c">// pane: backdrop-filter blur(6px) saturate(1.5)</span>
+tl.fromTo(<span class="s">'#b'</span>,{clipPath:<span class="s">'inset(0% 100% 0% 0%)'</span>},{clipPath:<span class="s">'inset(0% 0% 0% 0%)'</span>,duration:1.4,ease:<span class="s">'power2.inOut'</span>},T);</pre>
+      <p class="hf"><b>HyperFrames</b>custom; shader: chromatic split for the fringe</p>
+    </details>
+  </div>
+</article>
+  </div>
+</section>
+<section class="fam" data-fam="time" style="--fc:var(--ok)">
+  <div class="fh"><h2>Time</h2><span class="fn">04</span><p>Bend the clock. Freeze, rewind, ramp or tick through time, so the transition itself says &#x27;earlier&#x27;, &#x27;later&#x27; or &#x27;again&#x27;.</p></div>
+  <div class="tgrid">
+<article class="tcard" id="t21" data-fam="time" data-tones="nostalgic playful technical" style="--t0:25%;--t1:50%;--freeze:-1.7s">
+  <div class="stage d21" role="img" aria-label="Looping demo of Freeze &amp; Rewind Scrub: Scene A freezes, then scrubs backwards at speed, the clock rolling back, until it lands on the earlier moment that becomes scene B.">
+<div class="L a">
+  <div class="x sf h">Checkout, today</div>
+  <i class="x gl" style="top:20cqw"></i><i class="x gl" style="top:32cqw"></i><i class="x gl" style="top:44cqw"></i>
+  <svg class="x ghost" viewBox="0 0 100 56.25" preserveAspectRatio="none"><polyline points="6,26 14,24 22,27 30,23 36,24 40,38 48,40 56,37 66,40 76,36 86,39 94,37" fill="none" stroke="#0E1726" stroke-width="1.6" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/></svg>
+  <div class="x lnw"><svg viewBox="0 0 100 56.25" preserveAspectRatio="none"><polyline points="6,26 14,24 22,27 30,23 36,24 40,38 48,40 56,37 66,40 76,36 86,39 94,37" fill="none" stroke="#0FA3A3" stroke-width="2.6" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg></div>
+  <i class="x ph"></i>
+</div>
+<div class="x clk"><div class="x strip"><span>06:00</span><span>09:42</span><span>12:30</span><span>15:10</span><span>17:40</span></div></div>
+<div class="x mo tag pz"><i></i><i></i>paused</div>
+<div class="x mo tag rw"><b></b><b></b>rewind</div>
+<div class="L vhs"><i class="x tb"></i><i class="x tb t2"></i></div>
+<i class="x mk"></i>
+<div class="x note"><div class="mo">09:42 · deploy #2231</div><div class="t">checkout starts to drop</div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>freeze · rewind</em></div>
+  <div class="meta">
+    <div class="tk"><span>T21</span><span class="fchip" style="--fc:var(--ok)">time</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Freeze &amp; Rewind Scrub</h3>
+    <div class="tones"><span>nostalgic</span><span>playful</span><span>technical</span></div>
+    <p class="what">Scene A freezes, then scrubs backwards at speed, the clock rolling back, until it lands on the earlier moment that becomes scene B.</p>
+    <dl><dt>Use when</dt><dd>Root-cause stories (&#x27;let&#x27;s go back to 09:42&#x27;), flashbacks and &#x27;how did we get here&#x27; openers.</dd><dt class="av">Avoid</dt><dd>The rewind has to reverse motion the viewer just saw, or it looks like a random glitch. Once per film; skip the VHS noise for a premium brand.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Reverse A&#x27;s own tween with a second fromTo, step the clock back, then land on B.</p>
+      <pre>tl.fromTo(<span class="s">'#line'</span>,{clipPath:<span class="s">'inset(0% 0% 0% 0%)'</span>},{clipPath:<span class="s">'inset(0% 62% 0% 0%)'</span>,duration:0.7,ease:<span class="s">'power2.in'</span>},T);
+tl.fromTo(<span class="s">'#clock'</span>,{yPercent:-80},{yPercent:0,duration:0.7,ease:<span class="s">'steps(4)'</span>},T); tl.fromTo(<span class="s">'#b .marker'</span>,{scale:0},{scale:1,duration:0.4,ease:<span class="s">'back.out(2)'</span>},T+0.7);</pre>
+      <p class="hf"><b>HyperFrames</b>css-distortion (VHS tape) for the rewind texture</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t22" data-fam="time" data-tones="urgent bold celebratory" style="--t0:30%;--t1:62%;--freeze:-1.62s;--veil:var(--ink)">
+  <div class="stage d22" role="img" aria-label="Looping demo of Speed Ramp: Motion slows almost to a stop, rockets into a streaking blur through the change, then eases back to normal speed in scene B.">
+<div class="x road"><i class="x ru"></i><span class="x mo mn" style="left:8cqw">mar</span><span class="x mo mn" style="left:108cqw">apr</span><span class="x mo mn" style="left:208cqw">may</span><span class="x mo mn" style="left:308cqw">jun</span><span class="x mo mn" style="left:408cqw">jul</span><span class="x mo mn" style="left:508cqw">aug</span><span class="x mo mn" style="left:608cqw">sep</span><div class="x ms" style="left:130cqw;top:16cqw"><span class="mo">beta</span></div><div class="x ms" style="left:205cqw;top:26cqw"><span class="mo">pricing</span></div><div class="x ms" style="left:290cqw;top:12cqw"><span class="mo">docs</span></div><div class="x ms" style="left:370cqw;top:30cqw"><span class="mo">security review</span></div><div class="x ms" style="left:455cqw;top:18cqw"><span class="mo">launch plan</span></div><div class="x ms" style="left:530cqw;top:24cqw"><span class="mo">press</span></div>
+<div class="x ca"><div class="x mo">mar 04 · kickoff</div><div class="x sf">Plan<i>.</i></div></div>
+<div class="x cb"><div class="x mo">sep 12 · general availability</div><div class="x sf">Launch<i>.</i></div></div><i class="x pin"></i></div><div class="x blr"><div class="x road"><i class="x ru"></i><span class="x mo mn" style="left:8cqw">mar</span><span class="x mo mn" style="left:108cqw">apr</span><span class="x mo mn" style="left:208cqw">may</span><span class="x mo mn" style="left:308cqw">jun</span><span class="x mo mn" style="left:408cqw">jul</span><span class="x mo mn" style="left:508cqw">aug</span><span class="x mo mn" style="left:608cqw">sep</span><div class="x ms" style="left:130cqw;top:16cqw"><span class="mo">beta</span></div><div class="x ms" style="left:205cqw;top:26cqw"><span class="mo">pricing</span></div><div class="x ms" style="left:290cqw;top:12cqw"><span class="mo">docs</span></div><div class="x ms" style="left:370cqw;top:30cqw"><span class="mo">security review</span></div><div class="x ms" style="left:455cqw;top:18cqw"><span class="mo">launch plan</span></div><div class="x ms" style="left:530cqw;top:24cqw"><span class="mo">press</span></div>
+<div class="x ca"><div class="x mo">mar 04 · kickoff</div><div class="x sf">Plan<i>.</i></div></div>
+<div class="x cb"><div class="x mo">sep 12 · general availability</div><div class="x sf">Launch<i>.</i></div></div><i class="x pin"></i></div></div>
+<div class="x spd"><div class="x ss"><span>0.25×</span><span>12×</span><span>1×</span></div></div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>ramp</em></div>
+  <div class="meta">
+    <div class="tk"><span>T22</span><span class="fchip" style="--fc:var(--ok)">time</span><span class="en" title="energy 3 of 3">energy ●●●</span></div>
+    <h3>Speed Ramp</h3>
+    <div class="tones"><span>urgent</span><span>bold</span><span>celebratory</span></div>
+    <p class="what">Motion slows almost to a stop, rockets into a streaking blur through the change, then eases back to normal speed in scene B.</p>
+    <dl><dt>Use when</dt><dd>Covering distance or time in one breath: &#x27;from plan to launch&#x27;, flying along a roadmap, the drop in the music.</dd><dt class="av">Avoid</dt><dd>Needs continuous motion on both sides to ramp. One or two per film, on the biggest musical moments, and not next to a whip pan.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">One long track, three chained fromTo tweens: slow, expo in, expo out.</p>
+      <pre>tl.fromTo(<span class="s">'#track'</span>,{x:0},{x:-240,duration:1.2,ease:<span class="s">'none'</span>},T-1.2); tl.fromTo(<span class="s">'#track'</span>,{x:-240},{x:-10800,duration:0.65,ease:<span class="s">'expo.in'</span>,immediateRender:false},T);
+tl.fromTo(<span class="s">'#track'</span>,{x:-10800},{x:-11500,duration:0.55,ease:<span class="s">'expo.out'</span>,immediateRender:false},T+0.65); <span class="c">// plus a blurred copy at the peak</span></pre>
+      <p class="hf"><b>HyperFrames</b>css-blur (blur through / directional blur) at the peak</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t23" data-fam="time" data-tones="trustworthy warm nostalgic" style="--t0:28%;--t1:58%;--freeze:-1.82s">
+  <div class="stage d23" role="img" aria-label="Looping demo of Time-lapse Tick: A clock or calendar ticks through hours or days at speed while the content grows with it, and the ticking stops on scene B.">
+<div class="L nt"></div>
+<div class="x clock"><i class="x tix"></i><i class="x hh"></i><i class="x mh"></i><i class="x hub"></i></div>
+<div class="x cal"><div class="x band mo">week 21</div><div class="x win"><div class="x ds"><span>mon</span><span>tue</span><span>wed</span><span>thu</span><span>fri</span></div><i class="x flap"></i></div><i class="x bar b0" style="left:3.0cqw;height:5cqw"></i><i class="x bar b1" style="left:9.6cqw;height:8cqw"></i><i class="x bar b2" style="left:16.2cqw;height:7cqw"></i><i class="x bar b3" style="left:22.799999999999997cqw;height:11cqw"></i><i class="x bar b4" style="left:29.4cqw;height:13cqw"></i></div>
+<div class="x mo la">mon 09:00 · 1 of 5 shipped</div><div class="x mo lb">fri 17:40 · 5 of 5 shipped</div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>B</span><em>time-lapse</em></div>
+  <div class="meta">
+    <div class="tk"><span>T23</span><span class="fchip" style="--fc:var(--ok)">time</span><span class="en" title="energy 2 of 3">energy ●●○</span></div>
+    <h3>Time-lapse Tick</h3>
+    <div class="tones"><span>trustworthy</span><span>warm</span><span>nostalgic</span></div>
+    <p class="what">A clock or calendar ticks through hours or days at speed while the content grows with it, and the ticking stops on scene B.</p>
+    <dl><dt>Use when</dt><dd>Results over time: &#x27;a week later&#x27;, &#x27;by Friday&#x27;, a sprint in five seconds. Time itself becomes the proof.</dd><dt class="av">Avoid</dt><dd>The content must change as time passes, not just the clock. It implies waiting, so not for instant results; don&#x27;t pair it with a speed ramp.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Step the calendar and the bars with steps(), spin the hand smoothly over the same window.</p>
+      <pre>tl.fromTo(<span class="s">'#hand'</span>,{rotation:0},{rotation:1440,duration:1.2,ease:<span class="s">'power2.inOut'</span>},T);
+tl.fromTo(<span class="s">'#days'</span>,{yPercent:0},{yPercent:-80,duration:1.2,ease:<span class="s">'steps(4)'</span>},T); tl.fromTo(<span class="s">'#bars .bar'</span>,{scaleY:0},{scaleY:1,duration:0.01,ease:<span class="s">'none'</span>,stagger:0.3},T+0.3);</pre>
+      <p class="hf"><b>HyperFrames</b>css-mechanical (clock wipe), closest</p>
+    </details>
+  </div>
+</article>
+<article class="tcard" id="t24" data-fam="time" data-tones="calm premium playful" style="--t0:62%;--t1:80%;--freeze:-2.9s;--d:4.8s">
+  <div class="stage d24 nv" role="img" aria-label="Looping demo of Loop Seam: The film&#x27;s last move lands exactly on its first frame, so the loop plays forever without a visible seam.">
+<div class="x ls"><div class="x p pw" style="top:0cqw"><img class="x mk" src="../assets/brand/acme-mark.svg" alt=""><div class="x sf w">Watch<i>.</i></div></div><div class="x p pc" style="top:56.25cqw"><i class="x dt"></i><div class="x sf w">Catch<i>.</i></div></div><div class="x p pw" style="top:112.5cqw"><img class="x mk" src="../assets/brand/acme-mark.svg" alt=""><div class="x sf w">Watch<i>.</i></div></div></div>
+<div class="x orb"><i></i></div>
+<div class="x mo seam">↻ last frame = first frame</div>
+  </div>
+  <div class="scrub" aria-hidden="true"><span>A</span><div class="strk"><i></i><b></b></div><span>A</span><em>loop</em></div>
+  <div class="meta">
+    <div class="tk"><span>T24</span><span class="fchip" style="--fc:var(--ok)">time</span><span class="en" title="energy 1 of 3">energy ●○○</span></div>
+    <h3>Loop Seam</h3>
+    <div class="tones"><span>calm</span><span>premium</span><span>playful</span></div>
+    <p class="what">The film&#x27;s last move lands exactly on its first frame, so the loop plays forever without a visible seam.</p>
+    <dl><dt>Use when</dt><dd>Booth screens, social loops, website hero videos and GIFs: anything that plays on repeat, often without sound.</dd><dt class="av">Avoid</dt><dd>Every property must match at the seam: position, colour, grain, even a particle&#x27;s phase. Don&#x27;t hide a bad seam with a fade; it shows on every loop.</dd></dl>
+    <details><summary>Recipe · HyperFrames</summary>
+      <p class="rn">Author the end as the start: the last tween&#x27;s &#x27;to&#x27; is the first frame&#x27;s &#x27;from&#x27;.</p>
+      <pre>tl.fromTo(<span class="s">'#strip'</span>,{yPercent:0},{yPercent:-33.333,duration:0.8,ease:<span class="s">'power3.inOut'</span>},1); tl.fromTo(<span class="s">'#strip'</span>,{yPercent:-33.333},{yPercent:-66.667,duration:0.8,ease:<span class="s">'power3.inOut'</span>,immediateRender:false},2.6);
+tl.fromTo(<span class="s">'#orbit'</span>,{rotation:0},{rotation:360,duration:DUR,ease:<span class="s">'none'</span>},0); <span class="c">// then: python tools/loop_check.py render.mp4</span></pre>
+      <p class="hf"><b>HyperFrames</b>custom; verify with tools/loop_check.py</p>
+    </details>
+  </div>
+</article>
+  </div>
+</section>
+<p class="empty" id="empty" hidden>No transition in this family has that tone. Pick another tone, or set the family to All.</p>
+</main>
+<footer>Acme is a fictional brand and every number in the demos is invented. Every demo is pure CSS: one keyframe loop per layer, no libraries. The data lives in <a href="data.json">data.json</a>; <code>python tools/build_transitions.py</code> turns it into <code>creative/transition-atlas.md</code>. Fonts: Manrope, Instrument Serif and JetBrains Mono (SIL OFL 1.1).</footer>
+<script>
+(() => {
+  const fb = [...document.querySelectorAll("[data-f]")], tb = [...document.querySelectorAll("[data-t]")];
+  const cards = [...document.querySelectorAll(".tcard")], secs = [...document.querySelectorAll(".fam")];
+  const count = document.getElementById("count"), empty = document.getElementById("empty"), pp = document.getElementById("pp");
+  let fam = "all", tone = "any";
+  const apply = () => {
+    let n = 0;
+    cards.forEach(c => {
+      const ok = (fam === "all" || c.dataset.fam === fam) && (tone === "any" || c.dataset.tones.split(" ").includes(tone));
+      c.hidden = !ok; if (ok) n++;
+    });
+    secs.forEach(s => s.hidden = !s.querySelector(".tcard:not([hidden])"));
+    count.textContent = n + " of " + cards.length + " shown";
+    empty.hidden = n > 0;
+  };
+  fb.forEach(b => b.onclick = () => { fam = b.dataset.f; fb.forEach(x => x.classList.toggle("on", x === b)); apply(); });
+  tb.forEach(b => b.onclick = () => { tone = b.dataset.t; tb.forEach(x => x.classList.toggle("on", x === b)); apply(); });
+  const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let paused = rm;
+  const setP = () => {
+    document.body.classList.toggle("paused", paused);
+    document.body.classList.toggle("play", !paused);
+    pp.textContent = paused ? "▶ Play demos" : "❚❚ Pause demos";
+    pp.setAttribute("aria-pressed", String(paused));
+  };
+  pp.onclick = () => { paused = !paused; setP(); };
+  setP();
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(en => en.target.classList.toggle("off", !en.isIntersecting)), {rootMargin: "200px 0px"});
+    cards.forEach(c => io.observe(c));
+  }
+})();
+</script>
+</body>
+</html>
