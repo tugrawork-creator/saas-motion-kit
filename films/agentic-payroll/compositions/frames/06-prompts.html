@@ -29,11 +29,12 @@
         tl.fromTo(".prompts-scrim", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 0);
         lines.forEach((q, i) => {
           const el = "#prompts-p" + i;
-          tl.fromTo(el + " b", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, q.at[0] - T0 - 0.12);
+          // each line starts only after the previous one has cleared, so two lines never share the slot
+          tl.fromTo(el + " b", { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, q.at[0] - T0 - 0.02);
           gsap.utils.toArray(el + " .c").forEach((c, k) => tl.set(c, { opacity: 1 }, q.at[k] - T0));
           // the report prompt holds while its answer unfolds; the quick ones clear on the beat
-          const out = i === 0 ? S.quick[0].at[0] - T0 - 0.3 : i < lines.length - 1 ? q.end - T0 + 0.12 : 8.9;
-          tl.to(el, { y: -16, opacity: 0, duration: 0.22, ease: "power2.in" }, out);
+          const out = i === 0 ? S.quick[0].at[0] - T0 - 0.3 : i < lines.length - 1 ? q.end - T0 + 0.02 : 8.9;
+          tl.to(el, { y: -16, opacity: 0, duration: i === 0 ? 0.22 : 0.15, ease: "power2.in" }, out);
         });
         tl.to(".prompts-scrim", { opacity: 0, duration: 0.3, ease: "none" }, 8.95);
         window.__timelines["prompts"] = tl;

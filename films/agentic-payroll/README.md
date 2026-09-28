@@ -2,7 +2,13 @@
 
 58 sn, 16:9. Kompozisyon 1920×1080, master 3840×2160 (`--resolution landscape-4k`). Brief: [`BRIEF.md`](BRIEF.md) · plan: [`STORYBOARD.md`](STORYBOARD.md).
 
-**Durum:** film [HyperFrames](https://github.com/tugrawork-creator/hyperframes) ile kuruldu: repodaki `/hyperframes` → `/general-video` akışı, `hyperframes init` iskeleti, repo sözleşmesine göre alt kompozisyonlar. `hyperframes lint` temiz (7 dosya, 0 hata, 0 uyarı). Seçilen yön **A + D hook**. Ses henüz yok; kitin 6. aşaması.
+**Durum:** film [HyperFrames](https://github.com/tugrawork-creator/hyperframes) ile kuruldu: repodaki `/hyperframes` → `/general-video` akışı, `hyperframes init` iskeleti, repo sözleşmesine göre alt kompozisyonlar. Seçilen yön **A + D hook**. Ses henüz yok; kitin 6. aşaması.
+
+| Kontrol | Sonuç |
+|---|---|
+| `hyperframes lint` | 7 dosya · 0 hata · 0 uyarı |
+| `hyperframes check` | geçti · runtime 0 hata · layout 0 hata · WCAG kontrast 75/75 |
+| Kalan uyarılar | yalnızca yazılımsal WebGL'in "GPU stall due to ReadPixels" performans notu (GPU'lu makinede çıkmaz) |
 
 ![Filmden kareler](preview/keyframes.jpg)
 

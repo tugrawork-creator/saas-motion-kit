@@ -45,8 +45,10 @@
     </script>
     <script type="module">
       import { createWorld } from "./assets/js/world.js";
+      // render-time overrides land on window.__hfVariables before any page script runs (hyperframes render --variables);
+      // the runtime helper merges them with the declared defaults when it is available
       const hf = window.__hyperframes;
-      const vars = (hf && typeof hf.getVariables === "function" && hf.getVariables()) || {};
+      const vars = Object.assign({}, window.__hfVariables || {}, (hf && typeof hf.getVariables === "function" && hf.getVariables()) || {});
       const sample = "AaİıĞğŞşÇçÖöÜü₺%0123456789…·";
       const ready = Promise.all([400, 500, 600, 650, 700, 800].map((w) => document.fonts.load(w + " 40px Inter", sample)))
         .then(() => createWorld(document.getElementById("gl"), { glScale: Number(vars.glScale) || 1 }))
