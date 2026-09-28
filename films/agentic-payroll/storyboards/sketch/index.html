@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic Payroll · 5 storyboard</title>
+<style>
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-ext-wght-normal.woff2") format("woff2"); font-weight: 100 900;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+:root {
+  --bg: #0A0E1A; --panel: #111827; --panel2: #151D30; --line: rgba(169,198,255,.16); --line2: rgba(169,198,255,.28);
+  --text: #E5E7EB; --text2: #B8C0D0; --muted: #8C97AD; --blue: #1C5FD4; --blue-l: #4F86F0; --blue-xl: #A9C6FF;
+  --orange: #E8500A; --green: #10B981; --red: #EF4444;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: var(--blue-xl); }
+.wrap { max-width: 1800px; margin: 0 auto; padding: 32px 36px 80px; }
+header.top { display: grid; gap: 10px; margin-bottom: 28px; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--blue-xl); }
+h1 { margin: 0; font-size: 44px; line-height: 1.1; letter-spacing: -0.025em; font-weight: 800; }
+.lead { margin: 0; max-width: 1050px; font-size: 18px; color: var(--text2); }
+.notes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.note { font-size: 13px; font-weight: 600; color: var(--text2); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+
+/* overview */
+.overview { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 26px; margin-bottom: 36px; }
+.overview h2, .board h2 { margin: 0; font-size: 26px; letter-spacing: -0.015em; }
+.ov-grid { display: grid; gap: 14px; margin-top: 18px; }
+.ov-row { display: grid; grid-template-columns: 250px repeat(3, 1fr); gap: 12px; align-items: center; }
+.ov-name { display: flex; gap: 12px; align-items: center; }
+.ov-name b { display: block; font-size: 20px; letter-spacing: -0.01em; }
+.ov-name span { display: block; font-size: 13px; color: var(--muted); line-height: 1.35; }
+.badge { flex: none; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-weight: 800; font-size: 22px; color: #F3F6FB; background: linear-gradient(180deg, #2A6CE0, #1C5FD4); box-shadow: 0 0 22px rgba(28,95,212,.45); }
+.ov-img { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16 / 9; background: #070A12; }
+.ov-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ov-img i { position: absolute; left: 8px; top: 8px; font-style: normal; font-size: 12px; font-weight: 700; color: var(--text); background: rgba(10,14,26,.78); border: 1px solid var(--line2); border-radius: 999px; padding: 3px 9px; }
+.ov-head { display: grid; grid-template-columns: 250px repeat(3, 1fr); gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--muted); }
+
+/* comparison */
+.compare { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 14.5px; }
+.compare th, .compare td { text-align: left; vertical-align: top; padding: 11px 12px; border-top: 1px solid var(--line); }
+.compare th { font-size: 12px; letter-spacing: .08em; color: var(--muted); font-weight: 700; border-top: 0; }
+.compare td:first-child { font-weight: 700; white-space: nowrap; }
+.tablewrap { overflow-x: auto; }
+
+/* boards */
+.board { background: var(--panel); border: 1px solid var(--line); border-radius: 24px; padding: 28px; margin-bottom: 36px; }
+.b-head { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.b-head .badge { width: 58px; height: 58px; font-size: 28px; border-radius: 16px; }
+.b-title { flex: 1 1 420px; }
+.b-title h2 { font-size: 34px; }
+.b-title p { margin: 2px 0 0; color: var(--text2); font-size: 17px; }
+.audit { font-size: 13px; font-weight: 700; color: #C9F5E4; background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.45); border-radius: 999px; padding: 8px 14px; white-space: nowrap; }
+.b-top { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 22px; margin-top: 20px; }
+.hero { border-radius: 16px; overflow: hidden; border: 1px solid var(--line2); position: relative; background: #070A12; aspect-ratio: 16 / 9; }
+.hero img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hero figcaption { position: absolute; left: 14px; top: 14px; font-size: 13px; font-weight: 700; color: var(--text); background: rgba(10,14,26,.8); border: 1px solid var(--line2); border-radius: 999px; padding: 5px 12px; }
+.facts { display: grid; gap: 12px; align-content: start; }
+.fact { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.fact b { display: block; font-size: 12px; letter-spacing: .08em; color: var(--blue-xl); margin-bottom: 3px; }
+.fact p { margin: 0; font-size: 15px; color: var(--text); line-height: 1.45; }
+.fact.new { border-color: rgba(232,80,10,.5); background: linear-gradient(180deg, rgba(232,80,10,.10), rgba(232,80,10,.03)); }
+.fact.new b { color: #FFB38A; }
+.refs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 6px; }
+.ref { font-size: 12px; color: var(--text2); }
+.ref img { display: block; width: 100%; aspect-ratio: 840 / 151; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); margin-bottom: 3px; }
+.frames { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 22px; }
+.fr { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+.fr img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--line); }
+.fr .t { padding: 10px 12px 0; font-size: 14px; font-weight: 700; display: flex; justify-content: space-between; gap: 8px; }
+.fr .t span { color: var(--muted); font-weight: 600; white-space: nowrap; }
+.fr p { margin: 4px 12px 0; font-size: 13.5px; line-height: 1.45; color: var(--text2); }
+.fr .cam { margin: 8px 12px 12px; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.fr .cam em { font-style: normal; color: var(--blue-xl); }
+.fr.proof { border-color: rgba(232,80,10,.5); }
+.fr.legend { justify-content: center; padding: 16px; gap: 8px; font-size: 13px; color: var(--text2); }
+.fr.legend b { color: var(--text); font-size: 14px; }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+footer { color: var(--muted); font-size: 13px; margin-top: 10px; }
+
+@media (max-width: 1200px) {
+  .b-top { grid-template-columns: 1fr; }
+  .frames { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ov-row, .ov-head { grid-template-columns: 1fr 1fr 1fr; }
+  .ov-name { grid-column: 1 / -1; }
+  .ov-head span:first-child { display: none; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 18px 16px 60px; }
+  h1 { font-size: 30px; }
+  .lead { font-size: 16px; }
+  .board, .overview { padding: 16px; border-radius: 18px; }
+  .b-title h2 { font-size: 26px; }
+  .frames { grid-template-columns: 1fr; }
+  .ov-row, .ov-head { grid-template-columns: 1fr; }
+  .ov-head { display: none; }
+  .refs { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">AGENTIC PAYROLL · STORYBOARD AŞAMASI (4/7)</div>
+    <h1>Aynı hikâye, beş farklı 3D dünya</h1>
+    <p class="lead">Senaryo, metinler, marka renkleri ve kurallar beş yönde de aynı: hook %45 → soru → düşünme → bulgular → puantaj → rapor → CTA, 58 sn, tek plan hissi. Değişen dünya, malzeme, kamera dili ve her yönün kendine ait yeni bileşeni. Beşi de kitin tekrar denetiminden temiz geçti ve iki yön arasında ortak tek bir geçiş, giriş ya da yeni bileşen yok.</p>
+    <div class="notes">
+      <span class="note">Kareler eskizdir, final render değildir</span>
+      <span class="note">Logolar yer tutucudur: orijinal PNG'ler gelince yerleşir</span>
+      <span class="note">Ekrandaki isim ve rakamlar temsilidir</span>
+      <span class="note">"%45" için belgelenmiş kaynak gerekiyor</span>
+    </div>
+  </header>
+
+  <section class="overview" data-board="overview" id="overview"></section>
+  <div id="boards"></div>
+  <footer>Kaynaklar: films/agentic-payroll/BRIEF.md · storyboards/*/STORYBOARD.md · kareler sketch/frames.html ile üretildi (render.cjs).</footer>
+</div>
+
+<script>
+const SCENES = [
+  ["Hook: %45", "0–6 sn"], ["Soru sor", "6–14 sn"], ["Düşünüyor", "14–20 sn"], ["Bulgular", "20–28 sn"],
+  ["Puantajı tamamla", "28–38 sn"], ["Rapor üret", "38–50 sn"], ["Kapanış ve CTA", "50–58 sn"],
+];
+const THEMES = { "061": "Dark Keynote", "052": "Depth / 3D", "093": "One-Take Oner", "100": "Rack Focus", "057": "Isometric World", "027": "Tilt-Shift Diorama", "070": "Hex Tile Cartogram", "099": "Overhead Desk", "035": "Point Cloud", "010": "Powers-of-Ten Zoom", "036": "Sonar Sweep", "063": "Isotype Unit Chart", "008": "Calendar Timeline Scrub", "097": "Speed Ramp", "039": "Long-Exposure Light Trails", "051": "Clean Product Film", "024": "Glass Loupe", "021": "Clay Studio" };
+const V = [
+  { id: "A", name: "Cam Stüdyo", line: "Karanlık stüdyoda yüzen buzlu cam arayüzler. Brief'teki yönün olgunlaşmış hâli.",
+    audit: "12 geçiş · 6 aile", world: "Kalınlığı, bevel'i ve mavi kenar ışığı olan cam paneller; yansıtan zemin, nokta ızgarası, odak dışı parçacıklar.",
+    camera: "Tek plan: orbit → %'den dalış → dolly → camdan içeri → geri çekilme. Hız yalnızca hook'ta ve raporlarda.",
+    core: "Nefes alan mavi küre ve ışık halkası. Üst barda küçük doğar, düşünürken büyür, sonunda logo olur.",
+    newc: ["Onay tepsisi", "Kadrajın alt kenarında, izleyiciye en yakın yerde duran cam tepsi. Kartlar süzülüp üstüne yerleşir; tepsi hiçbir şeyi kendisi göndermez, bekler. \"Kontrol uzmanda\" yazıyla değil konumla anlatılır."],
+    tone: "bold → premium → technical → trustworthy → calm → bold → warm", refs: ["061", "052", "093", "100"],
+    cap: [
+      ["Tek ışık huzmesi; cam %45'in içi mavi ışıkla dolar, arkada kapanış günleri akordeon gibi sıkışır.", "20° orbit → %'den dalış", "rack focus → push-through"],
+      ["Halkanın içinde cam sohbet penceresi yoğunlaşır. Gönder'de 0,3 sn tam duruş, turuncu dalga camın içinde yayılır.", "yavaş dolly-in, tıkta duruş", "cursor carry → glass refraction wipe"],
+      ["Kamera camdan içeri geçer; çekirdek genişler, çalışanlar, puantaj satırları ve mevzuat belgeleri yörüngede döner.", "içeri geçiş + orbit", "object carry"],
+      ["Bulgular katman katman cam kartlar olarak yükselir ve alt kenardaki onay tepsisine süzülür.", "%10 geri çekilme", "focal iris"],
+      ["Cam .xlsx kalıbı pencereye bırakılır, noktalar yeşile döner; geri çekilince PDKS nesnelerinden ışık akar.", "crane-down → dolly-out", "dolly-out reveal → line-to-horizon"],
+      ["Yeşil çizgi grafiğin tabanı olur; rapor pencereden 3D alana açılır, üç hızlı prompt ritimle çıktı verir.", "truck + hızlanan pan", "speed ramp → orbit reveal"],
+      ["Her şey çekirdekte toplanır, çekirdek logoya dönüşür; slogan, Datassist satırı, turuncu CTA.", "yavaş push-in, son 1 sn sabit", "implode carry → match morph"],
+    ] },
+  { id: "B", name: "Şirket Maketi", line: "Bütün şirket, karanlık bir mimar masasında akrilik bir maket. Katlar departman, pencereler çalışan.",
+    audit: "12 geçiş · 4 aile", world: "Buzlu akrilikten İstanbul kulesi, Ankara binası, Çanakkale kampüsü; ışıklı sokak çizgileri, tilt-shift odak, müze ışığı.",
+    camera: "Crane-up/down, tilt-shift odak kaydırma, makro, 90° tepeden plan. Kesme yok; odak bandı kesmenin yerini alır.",
+    core: "Maketin üstünde asılı lamba-küre. Işık düzlemiyle binaları kat kat tarar.",
+    newc: ["Pencere puantajı", "Organizasyon şemasının bina hâli: 312 pencere = 312 çalışan. Puantajı eksik çalışanın penceresi yanmaz, üstünde kırmızı nokta durur. Veri gelince pencereler tek tek yanar."],
+    tone: "bold → premium → calm → technical → trustworthy → calm → bold → warm", refs: ["057", "027", "070", "099"],
+    cap: [
+      ["%45, masadaki kaidede akrilik plakalardan kat kat yükselen bir heykel; gün karoları kayıp sıkışır.", "crane-up, tilt-shift", "tilt-shift rack → crane down"],
+      ["Ön planda cam tablet, arkada flu maket. Gönder'le turuncu halka masada yayılıp binalara çarpar.", "alçak açı, 35 mm", "ripple handoff"],
+      ["Maketin üstündeki lamba büyür; ışık düzlemi binaları kat kat tarar, pencereler taranırken titrer.", "45° crane-up, orbit", "scan-plane wipe"],
+      ["Eksik puantaj karanlık pencerede kırmızı nokta; iğneler yükselir, bulgu kartları pencerelerden açılır.", "kuleye yavaş push", "pin-rise carry"],
+      [".xlsx levhası kuleye kayar, pencereler yanar; binaların girişindeki PDKS terminallerinden sokaklar boyunca ışık akar.", "makro → orbit-rise", "orbit-rise reveal → floor-lift carry"],
+      ["Ürün geliştirme katı binadan çıkar, pencereleri 3D bar grafiğe dizilir; her prompt bir binayı rapora çevirir.", "parallax kayış", "parallax slide → overhead dolly rise"],
+      ["Tepeden plan: pencereler söner, lamba logoyu masaya düşürür; kapanış mimari pafta künyesi düzeninde.", "90° plan, sabit", "iris close → graphic match: color"],
+    ] },
+  { id: "C", name: "Nokta Evreni", line: "Datassist nokta ızgarası 3D bir evrene dönüşür. Her nokta bir çalışan kaydı.",
+    audit: "12 geçiş · 6 aile", world: "Işık noktalarından bir kozmos; cam yalnızca sohbet penceresinde ve kartlarda. Yakın noktalar bokeh diski olur.",
+    camera: "Ölçek yolculuğu: tek bir noktanın içine dalış, galaksi ölçeğine çıkış; yörünge ve vuruşta donmalar.",
+    core: "Noktaların yıldızı. Düşünürken üç yörüngeyi (çalışanlar, puantaj, mevzuat) çevresinde döndürür.",
+    newc: ["Nokta sayımı", "Markanın nokta ızgarası canlı bir sayım olur: 312 nokta = 312 çalışan. Sonar geçtikçe her nokta bir an parlayıp cevap verir; cevap vermeyen nokta kırmızı kalır ve iki kez nabız atar."],
+    tone: "mysterious → premium → calm → technical → trustworthy → calm → bold → warm", refs: ["035", "010", "036", "063"],
+    cap: [
+      ["Marka ızgarası havalanıp 3D bir %45'e toplanır; arkada ay ızgaraları sıkışır.", "30° orbit", "orbit swirl"],
+      ["Kamera tek bir noktanın içine dalar: noktanın içinde cam sohbet penceresi. Gönder turuncu nokta halkaları yayar.", "logaritmik zoom", "powers-of-ten zoom → dot-pulse handoff"],
+      ["312 nokta çekirdek-yıldızın çevresinde üç yörüngeye dizilir; sonar halkası tarar.", "geri çekilme, orbit", "dither / pixel sort → sonar iris"],
+      ["Yörünge bir an donar; cevap vermeyen nokta kırmızı kalır, yukarı süzülüp cam karta açılır.", "kıvılcımlara push-in", "ember carry"],
+      [".xlsx hücreleri noktalara ayrışıp akar; zoom-out ile pencere PDKS takımyıldızlarının ortasında bir yıldız olur.", "logaritmik zoom-out", "zoom-out constellation → morph match"],
+      ["Noktalar 3D nokta-sütunlara istiflenir; her vuruşta 2 kare donup yeni grafiğe akar.", "push-in + vuruşta pan", "beat-freeze morph → orbit ring"],
+      ["Bütün noktalar yıldıza akar, logo belirir; ardından sakin marka ızgarası. Tek turuncu nokta CTA olur.", "yavaş push-in", "collapse carry → grid dissolve"],
+    ] },
+  { id: "D", name: "Kapanış Tüneli", line: "Ay sonu, içinden geçilen bir mekân: gün çerçevelerinden bir tünel. Tünel kısalır.",
+    audit: "12 geçiş · 6 aile", world: "Büyük gün numaralı buzlu cam çerçeveler, zeminde uzun pozlama ışık izleri; sonunda ferah bir oda.",
+    camera: "İleri yolculuk ve hız rampaları, 180° dönüş, tünelin dışına çıkış, galeri boyunca yanal kayış.",
+    core: "Tünelin sonundaki ışık halkası. Düşünürken gün çerçevelerini saat kadranı gibi çevresinde döndürür.",
+    newc: ["Teleskop takvim", "Kapanış dönemi iç içe geçebilen çerçevelerden oluşur. Beklemeler kalktıkça çerçeveler teleskop gibi birbirine kayar ve tünel gözle görülür biçimde kısalır; her geçişte camda bir ışık tıkısı."],
+    tone: "bold → premium → calm → technical → trustworthy → calm → bold → warm", refs: ["093", "008", "097", "039"],
+    cap: [
+      ["Cam gün çerçevelerinden bir tünelde hızlı uçuş; ışık izleri sonda %45'i yazar, tünel teleskop gibi kısalır.", "fly-through → yavaşlama", "ramp-down landing → portal push-through"],
+      ["Tünelin sonunda cam bir monolit: sohbet terminali. Gönder'le turuncu ışık tünel boyunca geri koşar.", "sabit → yavaş 180°", "keystroke handoff → turntable 180"],
+      ["Gün çerçeveleri çekirdek-halkanın çevresinde saat kadranı olur; tarama ışığı akrep gibi ilerler.", "geri çekilme, 30° tepeden", "clock-sweep wipe"],
+      ["Taramanın durduğu günlerde kartlar çerçevelerden kameraya doğru çıkar; eksik gün kırmızı.", "işaretli günlere push-in", "day-return carry"],
+      [".xlsx levhası kırmızı günlere oturur, çerçeveler pist ışıkları gibi yeşile döner; dışarıdan PDKS istasyonları tüneli besler.", "takip → dolly-out", "dolly-out exit → glass unfold"],
+      ["Tünel duvarları galeri koridoruna açılır; raporlar çerçevelerden dışarı açılır, kamera hızlanarak kayar.", "yanal truck + rampa", "lateral speed ramp → corridor dolly-back"],
+      ["Bütün koridor teleskop gibi tek halkaya kapanır; halka logoya dönüşür.", "yavaş push, son 1 sn sabit", "telescope collapse → ring-to-logo match"],
+    ] },
+  { id: "E", name: "Seramik Atölye", line: "Mat lacivert seramik dünya, ürün fotoğrafı ışığı. Işık saçan tek şey AI: bir cam inci.",
+    audit: "12 geçiş · 5 aile", world: "Yuvarlak kenarlı, yumuşak gölgeli seramik nesneler; turuncu sırlı fiziksel tuşlar; masaya gömülü ışık kanalları.",
+    camera: "Hareket kontrollü kızak, aşırı makro, dönen tabla, tepeden flat-lay.",
+    core: "Parlak cam inci. Oluktan yuvarlanıp tablete yerleşir, düşünürken kalkıp büyür, sonunda logonun ışığı olur.",
+    newc: ["Puantaj taşları", "Her çalışanın ayı seramik bir tepside gün yuvaları. Eksik günler boş yuva olarak görünür (Ahmet Yılmaz: 9, 10, 11). Veri gelince taşlar yuvalara \"tık\" diye oturur; eksik yazıyla değil boşlukla anlatılır."],
+    tone: "premium → warm → calm → bold → technical → trustworthy → calm → bold → warm", refs: ["051", "024", "099", "021"],
+    cap: [
+      ["Mat seramik %45'in oluklarına mavi ışık erimiş cam gibi akar; seramik gün karoları istiflenir.", "kızak, 100 mm makro", "slider dolly"],
+      ["İnci oluktan yuvarlanıp tabletin başlığına oturur; turuncu sırlı seramik tuş 4 mm iner, \"tık\".", "3/4 sabit → aşırı makro", "pearl-roll carry → macro rack"],
+      ["İnci kalkıp büyür; seramik parçalar dönen bir tabla üzerinde yörüngeye girer.", "geri çekilme, 30° tepeden", "seam-light wipe → turntable stop"],
+      ["Tepside gün yuvaları: Ahmet'in satırında üç boş yuva. Seramik bulgu kartları yükselir.", "tabla durur, yavaş push", "socket iris"],
+      ["Seramik .xlsx blok taşlara ayrılır, taşlar boş yuvalara oturur; PDKS minyatürlerinden ışık kanalları akar.", "tepeden makro → zoom-out", "overhead zoom-out → channel-light carry"],
+      ["Masadan seramik sütunlar ve kazınmış ₺ plakası yükselir; her vuruşta yeni bir seramik heykel.", "kızakla push, hızlanır", "slider speed ramp → overhead orbit"],
+      ["Parçalar masaya gömülür; inci ışığını logoya verir. CTA, turuncu sırlı fiziksel bir tuş.", "tepeden, sabit", "pearl-gather carry → inlay match"],
+    ] },
+];
+const COMPARE = [
+  ["A · Cam Stüdyo", "Brief'e en sadık yön; Apple, Linear ve Stripe hissi; arayüz en okunaklı hâlinde.", "En \"beklenen\" yön. Ayırt edici olması ışık ve cam işçiliğinin kusursuz olmasına bağlı.", "Orta", "LinkedIn, web hero, satış sunumu"],
+  ["B · Şirket Maketi", "İstanbul, Ankara ve Çanakkale gerçekten yer olur. İK direktörüne \"bütün şirket tek bakışta\" duygusu verir.", "Küçük detaylar telefonda kaybolabilir; sohbet penceresi ikinci plana düşebilir.", "Yüksek", "Stant ekranı, web hero"],
+  ["C · Nokta Evreni", "Marka motifi hikâyenin maddesi olur; en \"teknoloji öncüsü\" görünüm.", "Parçacık klişesine kaymamak için her dönüşüm okunur bir şekle varmalı.", "Yüksek", "Stant ekranı, YouTube, web hero"],
+  ["D · Kapanış Tüneli", "\"Kapanışı hızlandırır\" vaadini mimari olarak gösterir; en sinematik yön.", "Hız fazla açılırsa sakin ton bozulur. %45 için kaynak şart.", "Orta", "LinkedIn, etkinlik, YouTube"],
+  ["E · Seramik Atölye", "En dokunsal ve farklı yön; \"tık\" sesiyle kurulan tatmin; soğuk \"AI\" klişesinden en uzak.", "Brief'teki \"buzlu cam\" dilinden en uzak yön. Seramik kötü ışıkta sıkıcı durabilir.", "Orta-yüksek", "LinkedIn, satış sunumu"],
+];
+const img = (id) => `frames/${id}.jpg`;
+const thumb = (n) => `../../../../docs/themes/thumbs/${n}.jpg`;
+
+document.getElementById("overview").innerHTML = `
+  <h2>Bir bakışta: hook, kanıt anı ve rapor</h2>
+  <div class="ov-grid">
+    <div class="ov-head"><span></span><span>1 · HOOK</span><span>4 · BULGULAR (KANIT ANI)</span><span>6 · RAPOR</span></div>
+    ${V.map((v) => `<div class="ov-row">
+      <div class="ov-name"><div class="badge">${v.id}</div><div><b>${v.name}</b><span>${v.line}</span></div></div>
+      ${[1, 4, 6].map((s) => `<div class="ov-img"><img src="${img(v.id + s)}" alt="${v.name}, sahne ${s}"><i>${v.id}${s}</i></div>`).join("")}
+    </div>`).join("")}
+  </div>
+  <div class="tablewrap"><table class="compare">
+    <thead><tr><th>YÖN</th><th>GÜÇLÜ YANI</th><th>RİSKİ</th><th>EFOR</th><th>EN İYİ KANAL</th></tr></thead>
+    <tbody>${COMPARE.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody>
+  </table></div>`;
+
+document.getElementById("boards").innerHTML = V.map((v) => `
+  <section class="board" data-board="${v.id}" id="yon-${v.id}">
+    <div class="b-head">
+      <div class="badge">${v.id}</div>
+      <div class="b-title"><h2>${v.name}</h2><p>${v.line}</p></div>
+      <div class="audit">✓ Tekrar denetimi temiz · ${v.audit}</div>
+    </div>
+    <div class="b-top">
+      <figure class="hero" style="margin:0"><img src="${img(v.id + 4)}" alt="${v.name}, kanıt anı"><figcaption>Kanıt anı · 4 · Bulgular</figcaption></figure>
+      <div class="facts">
+        <div class="fact"><b>DÜNYA VE MALZEME</b><p>${v.world}</p></div>
+        <div class="fact"><b>KAMERA DİLİ</b><p>${v.camera}</p></div>
+        <div class="fact"><b>AI ÇEKİRDEĞİ</b><p>${v.core}</p></div>
+        <div class="fact new"><b>YENİ BİLEŞEN · ${v.newc[0].toLocaleUpperCase("tr")}</b><p>${v.newc[1]}</p></div>
+        <div class="fact"><b>TON YAYI</b><p>${v.tone}</p>
+          <div class="refs">${v.refs.map((n) => `<div class="ref"><img src="${thumb(n)}" alt="">${n} ${THEMES[n]}</div>`).join("")}</div></div>
+      </div>
+    </div>
+    <div class="frames">
+      ${v.cap.map((c, i) => `<div class="fr${i === 3 ? " proof" : ""}">
+        <img src="${img(v.id + (i + 1))}" alt="${v.name}, sahne ${i + 1}">
+        <div class="t">${i + 1} · ${SCENES[i][0]}<span>${SCENES[i][1]}</span></div>
+        <p>${c[0]}</p>
+        <div class="cam"><em>Kamera:</em> ${c[1]} · <em>Geçiş:</em> ${c[2]}</div>
+      </div>`).join("")}
+      <div class="fr legend">
+        <b>Renk olayları</b>
+        <div><span class="sw" style="background:#1C5FD4"></span>Mavi: ışık ve AI, filmin tamamı</div>
+        <div><span class="sw" style="background:#E8500A"></span>Turuncu: yalnızca gönder ve CTA</div>
+        <div><span class="sw" style="background:#EF4444"></span>Kırmızı: yalnızca eksik kayıt</div>
+        <div><span class="sw" style="background:#10B981"></span>Yeşil: tamamlandı, uzman onayına hazır</div>
+      </div>
+    </div>
+  </section>`).join("");
+</script>
+</body>
+</html>
