@@ -35,10 +35,11 @@
         const tl = gsap.timeline({ paused: true });
         tl.fromTo("#close-aplogo", { y: 210, scale: 0.86, opacity: 0, filter: "blur(12px)" }, { y: 210, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.9, ease: "power2.out" }, 2.35);
         tl.to("#close-aplogo", { y: 0, scale: 0.92, duration: 0.95, ease: "sine.inOut" }, 3.6);
-        tl.fromTo("#close-slogan", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 3.95);
-        tl.fromTo("#close-ds", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, 4.45);
-        tl.fromTo("#close-btn", { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 4.9);
-        tl.fromTo("#close-url", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 5.15);
+        // the slogan waits until the rising logo has cleared its line (animation-map: no overlap)
+        tl.fromTo("#close-slogan", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 4.3);
+        tl.fromTo("#close-ds", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, 4.75);
+        tl.fromTo("#close-btn", { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 5.15);
+        tl.fromTo("#close-url", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 5.35);
         window.__timelines["close"] = tl;
       })();
     </script>
