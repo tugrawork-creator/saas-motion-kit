@@ -1,3 +1,12 @@
+---
+format: 1920x1080
+duration: 58s
+message: "Agentic Payroll eksikleri ve raporları saniyeler içinde önünüze getirir; son karar sizde."
+arc: Hook → Soru → Düşünme → Bulgular → Tamamlama → Rapor → Kapanış/CTA
+audience: bordro uzmanları, bordro ve İK yöneticileri
+mode: autonomous
+---
+
 # Storyboard — Agentic Payroll · Seçilen yön: A + D hook
 
 Tema referansı: 061 Dark Keynote + 052 Depth / 3D + 093 One-Take Oner + 008 Calendar Timeline Scrub · Format: 3840×2160 (16:9 master) · Süre: 58 sn · Ses: müzik + UI sesleri
@@ -49,27 +58,102 @@ Tema referansı: 061 Dark Keynote + 052 Depth / 3D + 093 One-Take Oner + 008 Cal
 
 ## Kareler
 
-### Kare 1 · Hook: %45 (0–6 sn)
-- **Ana görsel:** Kapanış dönemi, buzlu cam gün çerçevelerinden oluşan bir tünel; her çerçevede ince, büyük bir gün numarası. Zeminde uzun pozlama mavi ışık izleri. Tünelin sonunda kalın cam bir "%45", içi aşağıdan yukarı mavi ışıkla dolar.
-- **Yeni bileşen: Teleskop takvim.** Çerçeveler teleskop gibi birbirinin içine kayar ve tünel gözle görülür biçimde kısalır; her geçişte çerçeve kenarında 2 karelik ışık tıkısı ve cam tınısı.
-- **Ekrandaki metin:** "Bordro dönem kapanışınızı %45 hızlandıracak" → "Agentic Payroll ile tanıştınız mı?"
-- **Kamera:** Hızlı fly-through, rakamın önünde yavaşlama, %'nin alt halkasından dalış.
+HyperFrames'in plan biçimi (`/hyperframes` → `storyboard-format.md`): her kare bir `## Frame N` bloğu. Tek plan hissi için 3D dünya tek bir katmandır (`assets/js/world.js`, `hf-seek` ile zamandan çizilir); `src`, o karenin HTML yazı katmanıdır. Yazı katmanı olmayan kareler (2 ve 4) tamamen 3D dünyada yaşar, bu yüzden `src` kök kompozisyonu gösterir. Hareket adları repodaki dizinlerden: `hyperframes-animation` → `blueprints-index.md`, `rules-index.md`.
 
-### Kare 2 · Soru sor (6–14 sn)
-- Halkanın içinde cam sohbet penceresi yoğunlaşır (Agentic Payroll + "AI Destekli" + nefes alan çekirdek). Prompt: "Eylül ayı döneminde eksik puantaj bilgisi var mı?" Gönder'de 0,3 sn tam duruş, buton içeri gömülür, turuncu dalga camın kalınlığı içinde yayılır.
+## Frame 1 — Hook: %45 (0–6 sn)
 
-### Kare 3 · Düşünüyor (14–20 sn)
-- Kamera cam yüzeyden içeri geçer. Çekirdek genişler; çalışan kartları, puantaj satırları ve mevzuat belgeleri üç eğik yörüngede döner, tarama ışığı geçer. Durum etiketleri sırayla; ilerleme çubuğu yok.
+- status: animated
+- src: compositions/frames/01-hook.html
+- duration: 6s
+- poster: 2.2
+- transition_in: fade-from-navy
+- scene: Cam gün çerçevelerinden tünel; ekim günleri teleskop gibi iç içe geçer; cam "%45" mavi ışıkla dolar
+- shots: 1–2
+- blueprint: camera-journey (B · imleçsiz uçuş) + dataviz-countup (soğuk açılışta tek istatistik)
+- rules: 3d-camera-flight (yumuşak iniş), motion-blur-streak (zemindeki ışık izleri), ambient-glow-bloom, kinetic-type-beats (başlık yerinde değişir)
 
-### Kare 4 · Bulgular, kanıt anı (20–28 sn)
-- Üç cam bulgu kartı katman katman yükselir; yalnızca eksik kayıt kırmızı noktalı. Kartlar kadrajın alt kenarındaki cam **onay tepsisine** ("Onayınıza hazır") süzülür. Tepsi hiçbir şeyi kendisi göndermez; kontrol uzmandadır.
+Kamera eylül günlerinden (EYL 22–30) hızla uçar, rakamın önünde yumuşakça iner. Rakamın arkasında ekim günleri (EKİ 1–9) uzayıp gider: bitmeyen kapanış. **Yeni bileşen, teleskop takvim:** 3,1 sn'den itibaren ekim çerçeveleri en yakından başlayarak birbirinin içine kayar, tünel kısalır; her kilitlenmede kenarda iki karelik ışık tıkısı. Cam "%45" aşağıdan yukarı mavi ışıkla dolar. Metin 1: "Bordro dönem kapanışınızı %45 hızlandıracak" → metin 2: "Agentic Payroll ile tanıştınız mı?". Kamera %'nin alt halkasına dalar; halkanın içi ışıkla dolar (portal).
 
-### Kare 5 · Puantajı tamamla (28–38 sn)
-- 5A: "Çalışanların puantaj bilgilerini gir." Cam bir .xlsx kalıbı pencereye bırakılır (Excel logosu yok), satırlar kartlara akar, kırmızı noktalar yeşile döner.
-- 5B: Geri çekilme; genel PDKS ikonları cam nesneler olarak belirir, ışık hatları pencereye akar. "Zengin PDKS entegrasyonlarımızla puantaj bilgileriniz otomatik gelsin." → yeşil hap.
+## Frame 2 — Soru sor (6–14 sn)
 
-### Kare 6 · Rapor üret (38–50 sn)
-- Yeşil çizgi grafiğin taban çizgisi olur. "Çanakkale ofisindeki ürün geliştirme ekibinin aylık maaş raporunu hazırla." Yanıt pencereden dışarı, 3D alana açılır: ışıkla dolu cam sütunlar, ₺ özet tablo, departman kartı. Ardından üç hızlı prompt, sonda galeri; galeri teleskopla tek halkaya kapanır.
+- status: animated
+- src: index.html
+- duration: 8s
+- poster: 9.5
+- transition_in: portal-push-through
+- scene: Halkadan çıkınca cam sohbet penceresi ışık zerreciklerinden yoğunlaşır; soru yazılır, gönder'de tam duruş ve turuncu dalga
+- shots: 3–4
+- blueprint: prompt-type-submit-generate
+- rules: discrete-text-sequence (insan ritminde yazma), context-sensitive-cursor, press-release-spring (6 px gömülme, zıplama yok), cursor-click-ripple (turuncu dalga)
 
-### Kare 7 · Kapanış ve CTA (50–58 sn)
-- Halka çekirdeğe, çekirdek Agentic Payroll logosuna (PNG) dönüşür. "Bordronun kontrolü sizde, hız Agentic Payroll'da." · Datassist logosu (beyaz PNG) + "Tek yerden, tüm dünyada yapay zekâ destekli bordro ve İK çözümleri" · turuncu "Ücretsiz Demo Talep Edin →" + datassist.com.tr. Son 1 sn sabit.
+Portal halkası kameranın arkasında kalır; pencere zerreciklerden yoğunlaşır, üst barda küçük çekirdek nefes alır. AI karşılar: "Eylül dönemi açık. Size nasıl yardımcı olabilirim?" Soru yazılır: "Eylül ayı döneminde eksik puantaj bilgisi var mı?" İmleç gönder'e taşınır (cursor carry). **Sürpriz:** 11,5 sn'de kamera 0,3 sn tamamen durur; buton içeri gömülür ve filmin ilk turuncusu olur; turuncu dalga camın içinde halka halka yayılır. Kamera camın boş üst kısmına dalar (glass-refraction-wipe).
+
+## Frame 3 — Düşünüyor (14–20 sn)
+
+- status: animated
+- src: compositions/frames/03-think.html
+- duration: 6s
+- poster: 2.0
+- transition_in: glass-refraction-wipe
+- scene: Camın arkasında AI çekirdeği büyür; çalışan kartları, puantaj satırları, mevzuat belgeleri üç eğik yörüngede; tarama halkaları geçer
+- shots: 5
+- blueprint: agent-progress-theater
+- rules: orbit-3d-entry (yörüngeye giriş), ambient-glow-bloom (çekirdek), discrete-text-sequence (durum etiketleri)
+
+Çekirdek düşünürken büyür. Nesneler uzaktan yörüngeye girer; çekirdekten çıkan tarama halkaları geçtiği her şeyi aydınlatır. Durum etiketleri sırayla: "312 çalışan taranıyor…" → "Puantaj kayıtları kontrol ediliyor…" → "Eylül mevzuat değişiklikleri eşleştiriliyor…". İlerleme çubuğu yok. Kamera saat yönünün tersine yavaşça döner. Sonda "Ahmet Yılmaz" kartı yörüngeden kopar ve ilk bulguya taşınır (object carry).
+
+## Frame 4 — Bulgular, kanıt anı (20–28 sn)
+
+- status: animated
+- src: index.html
+- duration: 8s
+- poster: 23.5
+- transition_in: object-carry
+- scene: Üç cam bulgu kartı yükselir, çekirdekten ışık iplikleri iner; kartlar tek tek cam onay tepsisine süzülür; iris kırmızı noktaya kapanır
+- shots: 6
+- blueprint: agent-progress-theater (makbuz kartları) + grid-card-assemble
+- rules: svg-path-draw (ışık iplikleri), depth-of-field-blur (odak irisi), ambient-glow-bloom
+
+Kırmızı nokta yalnızca eksik kayıtta. **Yeni bileşen, onay tepsisi:** "Onayınıza hazır · Karar uzmanda" yazan alçak cam tepsi; kartlar sırayla içine yatar, sayaç 1-2-3 olur. Tepsi hiçbir şeyi kendisi göndermez. Geçiş: focal iris kırmızı noktaya kapanır (çözüm sebebin olduğu yerde başlar), yazma kutusunda açılır.
+
+## Frame 5 — Puantajı tamamla (28–38 sn)
+
+- status: animated
+- src: compositions/frames/05-pdks.html
+- duration: 10s
+- poster: 1.6
+- transition_in: focal-iris
+- scene: 5A · dışarıdan ağır bir cam .xlsx kalıbı girer, satırlar listeye akar, noktalar yeşile döner · 5B · genel PDKS cihazları halka olur, yeşil ışık hatları pencereye akar
+- shots: 7–8
+- blueprint: camera-journey (A · eylem → sonuç) + constellation-hub (5B)
+- rules: cursor-drag (sürükle-bırak yayı, zıplamasız oturma), control-target-sync (satır → nokta), svg-path-draw (veri hatları)
+
+**Sürpriz (28,5 sn):** kadraja dışarıdan tek ağır, fiziksel nesne girer: cam bir .xlsx kalıbı (Excel logosu yok, genel tablo ikonu). Dosya çipi yazma kutusuna düşer, komut yazılır: "Çalışanların puantaj bilgilerini gir." Işık satırları listeye akar; üç kırmızı nokta tek tek yeşile döner. 5B: kamera geri çekilir; genel PDKS cihazları (parmak izi, kartlı geçiş, yüz tanıma, turnike, mobil, vardiya) cam karolar olarak belirir, veri paketleri hatlardan pencereye akar. "Zengin PDKS entegrasyonlarımızla puantaj bilgileriniz otomatik gelsin." → yeşil hap "Puantaj tamamlandı · Bordro uzmanı onayına hazır". Hap bir çizgiye kapanır ve zemine iner (line-to-horizon).
+
+## Frame 6 — Rapor üret (38–50 sn)
+
+- status: animated
+- src: compositions/frames/06-prompts.html
+- duration: 12s
+- poster: 4.5
+- transition_in: line-to-horizon
+- scene: Yeşil çizgi grafiğin taban çizgisi olur; yanıt pencereden 3D alana açılır; tempo ikiye katlanır, üç hızlı rapor; galeri teleskopla tek halkaya kapanır
+- shots: 9–11
+- blueprint: prompt-type-submit-generate (tam döngü) + dataviz-countup + grid-card-assemble (galeri)
+- rules: stat-bars-and-fills (ışıkla dolan cam sütunlar), counting-dynamic-scale (₺ değerleri), nudge-curve (hızlanan pan'ler), kinetic-type-beats (ritimli promptlar)
+
+"Çanakkale ofisindeki ürün geliştirme ekibinin aylık maaş raporunu hazırla." Pencere sola kayar; ışıkla dolan cam sütunlar yeşil taban çizgisinde yükselir, ₺ değerleri sayar, özet tablo ve departman kartı açılır. **Sürpriz (43 sn):** tempo ikiye katlanır; üç prompt ritimle yazılır, her biri kendi çıktısını yerinde üretir: fazla mesai maliyeti, 6 aylık SGK prim karşılaştırması, kıdem tazminatı yükümlülüğü. Raporlar galeri gibi dizilir, sonra hook'taki takvim gibi iç içe geçer ve tek bir halka kalır (telescope-collapse carry). Rakamlar temsilidir.
+
+## Frame 7 — Kapanış ve CTA (50–58 sn)
+
+- status: animated
+- src: compositions/frames/07-close.html
+- duration: 8s
+- poster: 6.5
+- transition_in: telescope-collapse-carry
+- scene: Halka çekirdeğe kapanır, çekirdek bir ışık noktasına dönüşür ve yerini logoya bırakır; slogan, Datassist logosu, turuncu CTA, datassist.com.tr
+- shots: 12–13
+- blueprint: logo-assemble-lockup + cta-morph-press
+- rules: ambient-glow-bloom, titlecard-reveal (tek hareketli kilitlenme)
+
+Halka çekirdeğe, çekirdek Agentic Payroll logosuna dönüşür (match-morph). Kilitlenme yükselir: "Bordronun kontrolü sizde, hız Agentic Payroll'da." · Datassist logosu (beyaz PNG) + "Tek yerden, tüm dünyada yapay zekâ destekli bordro ve İK çözümleri" · turuncu "Ücretsiz Demo Talep Edin" + datassist.com.tr. Son 1 sn sabit. Logo yuvaları orijinal PNG'ler gelene kadar kesikli çerçeve; logolar asla yeniden çizilmez.

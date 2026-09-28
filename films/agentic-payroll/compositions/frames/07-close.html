@@ -1,0 +1,46 @@
+<template id="close-template">
+  <div data-composition-id="close" data-width="1920" data-height="1080" data-duration="7.6">
+    <!-- logo slots wait for the original PNGs (assets/brand/); logos are never redrawn -->
+    <div id="close-aplogo" class="close-slot"><span>Agentic Payroll logosu · orijinal PNG</span></div>
+    <h2 id="close-slogan">Bordronun kontrolü sizde, hız Agentic Payroll’da.</h2>
+    <div id="close-ds">
+      <div class="close-slot"><span>Datassist logosu · beyaz PNG</span></div>
+      <p>Tek yerden, tüm dünyada yapay zekâ destekli bordro ve İK çözümleri</p>
+    </div>
+    <div id="close-cta">
+      <span id="close-btn">Ücretsiz Demo Talep Edin<svg viewBox="0 0 40 24" aria-hidden="true"><path d="M2 12h33M24 3l11 9-11 9" /></svg></span>
+      <span id="close-url">datassist.com.tr</span>
+    </div>
+
+    <style>
+      [data-composition-id="close"] { position: absolute; inset: 0; font-family: "Inter", sans-serif; color: #e5e7eb; }
+      [data-composition-id="close"] .close-slot { border: 3px dashed rgba(169, 198, 255, 0.55); border-radius: 22px; display: flex; align-items: center; justify-content: center; }
+      [data-composition-id="close"] .close-slot span { font-size: 24px; font-weight: 600; color: #a3b3d6; letter-spacing: 0.01em; }
+      [data-composition-id="close"] #close-aplogo { position: absolute; left: 680px; top: 255px; width: 560px; height: 150px; }
+      [data-composition-id="close"] #close-slogan { position: absolute; left: 160px; right: 160px; top: 450px; text-align: center; font-size: 60px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+      [data-composition-id="close"] #close-ds { position: absolute; left: 0; right: 0; top: 572px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+      [data-composition-id="close"] #close-ds .close-slot { width: 300px; height: 68px; }
+      [data-composition-id="close"] #close-ds .close-slot span { font-size: 20px; }
+      [data-composition-id="close"] #close-ds p { font-size: 30px; font-weight: 500; color: #d1d5db; }
+      [data-composition-id="close"] #close-cta { position: absolute; left: 0; right: 0; top: 790px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+      [data-composition-id="close"] #close-btn { display: inline-block; background: #e8500a; color: #fff7f2; font-size: 36px; font-weight: 800; padding: 24px 52px; border-radius: 48px; box-shadow: 0 18px 44px rgba(232, 80, 10, 0.35); }
+      [data-composition-id="close"] #close-btn svg { width: 40px; height: 24px; margin-left: 18px; vertical-align: -1px; fill: none; stroke: #fff7f2; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+      [data-composition-id="close"] #close-url { display: inline-block; font-size: 30px; font-weight: 600; color: #d1d5db; letter-spacing: 0.01em; }
+    </style>
+
+    <script>
+      (function () {
+        // Frame 7 · the core becomes the logo (match-morph), then the lockup rises (logo-assemble-lockup, cta).
+        // Local time: this slot starts at 50.4 s of the film. The last second holds still.
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#close-aplogo", { y: 210, scale: 0.86, opacity: 0, filter: "blur(12px)" }, { y: 210, scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.9, ease: "power2.out" }, 2.35);
+        tl.to("#close-aplogo", { y: 0, scale: 0.92, duration: 0.95, ease: "sine.inOut" }, 3.6);
+        tl.fromTo("#close-slogan", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 3.95);
+        tl.fromTo("#close-ds", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, 4.45);
+        tl.fromTo("#close-btn", { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 4.9);
+        tl.fromTo("#close-url", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 5.15);
+        window.__timelines["close"] = tl;
+      })();
+    </script>
+  </div>
+</template>

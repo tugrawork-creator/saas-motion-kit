@@ -1,0 +1,36 @@
+<template id="think-template">
+  <div data-composition-id="think" data-width="1920" data-height="1080" data-duration="5.7">
+    <div class="think-scrim"></div>
+    <div id="think-status">
+      <i id="think-pulse"></i>
+      <div id="think-s1" class="think-phr">312 çalışan taranıyor…</div>
+      <div id="think-s2" class="think-phr">Puantaj kayıtları kontrol ediliyor…</div>
+      <div id="think-s3" class="think-phr">Eylül mevzuat değişiklikleri eşleştiriliyor…</div>
+    </div>
+
+    <style>
+      [data-composition-id="think"] { position: absolute; inset: 0; font-family: "Inter", sans-serif; color: #e5e7eb; }
+      [data-composition-id="think"] .think-scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 320px; background: radial-gradient(70% 100% at 22% 100%, rgba(6, 9, 20, 0.85), rgba(6, 9, 20, 0)); }
+      [data-composition-id="think"] #think-status { position: absolute; left: 140px; bottom: 104px; width: 1300px; height: 64px; }
+      [data-composition-id="think"] #think-pulse { position: absolute; left: 0; top: 16px; width: 32px; height: 32px; border-radius: 50%; display: block; background: radial-gradient(circle at 38% 34%, #eaf1ff, #a9c6ff 22%, #2f6bdb 58%, #0e2f6e); box-shadow: 0 0 26px rgba(79, 134, 240, 0.9); }
+      [data-composition-id="think"] .think-phr { position: absolute; left: 56px; top: 0; line-height: 64px; font-size: 44px; font-weight: 600; white-space: nowrap; text-shadow: 0 2px 18px rgba(5, 8, 18, 0.8); }
+    </style>
+
+    <script>
+      (function () {
+        // Frame 3 · status theatre (agent-progress-theater): one phrase at a time, wiped on, lifted off. No progress bar.
+        // Local time: this slot starts at 14.3 s of the film.
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#think-status", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, 0.05);
+        ["#think-s1", "#think-s2", "#think-s3"].forEach((id, i) => {
+          const t0 = 0.15 + i * 1.8;
+          tl.fromTo(id, { clipPath: "inset(0% 100% 0% 0%)", y: 0, opacity: 1 }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.55, ease: "power2.out" }, t0);
+          if (i < 2) tl.to(id, { y: -14, opacity: 0, duration: 0.3, ease: "power2.in" }, t0 + 1.55);
+        });
+        tl.fromTo("#think-pulse", { scale: 0.82, opacity: 0.7 }, { scale: 1.15, opacity: 1, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: 11 }, 0.1);
+        tl.to("#think-status", { opacity: 0, duration: 0.3, ease: "power2.in" }, 5.35);
+        window.__timelines["think"] = tl;
+      })();
+    </script>
+  </div>
+</template>

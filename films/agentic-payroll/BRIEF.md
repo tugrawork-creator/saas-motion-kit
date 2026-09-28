@@ -1,10 +1,19 @@
 ---
 workflow: general-video        # URL yakalama yok: sohbet arayüzü brief'e göre tasarlanacak (hayali bileşen)
+flow: automation               # HyperFrames brief sözleşmesi: yön seçildi, "bu repoya göre yap" → ajan yürütür
+storyboard: no                 # plan kitin 4. aşamasında onaylandı (A + D hook); taslak turu tekrarlanmaz
+message: "Agentic Payroll eksikleri ve raporları saniyeler içinde önünüze getirir; son karar sizde."
+destination: web-hero, LinkedIn, etkinlik ekranı
+aspect: 1920x1080              # kompozisyon boyutu; 4K master: render --resolution landscape-4k
+language: tr
+audience: bordro uzmanları, bordro ve İK yöneticileri
+length: 58s
+angle: tek plan 3D cam stüdyo (A · Cam Stüdyo + D · Kapanış Tüneli hook'u)
 format: 3840x2160              # master 16:9 · 1920x1080, 1080x1350, 1080x1080, 1080x1920 aynı sahnelerden
 duration: 58s
 audio: music                   # müzik + UI sesleri · seslendirme opsiyonel (yalnızca hook ve kapanış)
 loop: false                    # stant ekranı için ayrıca döngü kesimi yapılabilir
-theme: "Aday yönler A–E, bkz. storyboards/"
+theme: "A + D hook (seçildi), bkz. STORYBOARD.md ve storyboards/"
 ---
 
 # Agentic Payroll — "Sağ kol" tanıtım filmi

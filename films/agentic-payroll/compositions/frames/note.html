@@ -1,0 +1,21 @@
+<template id="note-template">
+  <div data-composition-id="note" data-width="1920" data-height="1080" data-duration="43.6">
+    <p id="note-text">Görseldeki veriler temsilidir.</p>
+
+    <style>
+      [data-composition-id="note"] { position: absolute; inset: 0; font-family: "Inter", sans-serif; }
+      [data-composition-id="note"] #note-text { position: absolute; right: 64px; bottom: 44px; font-size: 20px; font-weight: 500; color: #a3aec6; text-shadow: 0 1px 10px rgba(5, 8, 18, 0.9); }
+    </style>
+
+    <script>
+      (function () {
+        // The representative-data note, while product UI is on screen (brief, optional corner note).
+        // Local time: this slot starts at 6.2 s of the film.
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#note-text", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 0.1);
+        tl.to("#note-text", { opacity: 0, duration: 0.4, ease: "none" }, 43.1);
+        window.__timelines["note"] = tl;
+      })();
+    </script>
+  </div>
+</template>

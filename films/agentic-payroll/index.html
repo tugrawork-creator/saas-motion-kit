@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="tr" data-composition-variables='[{"id":"glScale","type":"number","label":"3D render scale (1 = full, 0.5 = draft)","default":1}]'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Agentic Payroll · Sağ kol</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/js/schedule.js"></script>
+    <script type="importmap">
+      { "imports": { "three": "./assets/vendor/three/three.module.js", "three/addons/": "./assets/vendor/three/addons/" } }
+    </script>
+    <style>
+      /* Inter (SIL OFL 1.1), latin + latin-ext bundled locally so ç ğ ı İ ö ş ü and ₺ render everywhere */
+      @font-face { font-family: "Inter"; font-weight: 100 900; font-display: block; src: url("assets/fonts/inter-latin-wght-normal.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: "Inter"; font-weight: 100 900; font-display: block; src: url("assets/fonts/inter-latin-ext-wght-normal.woff2") format("woff2");
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0a0e1a; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Inter", sans-serif; }
+      /* the one-take 3D world: not a clip. It lives for the whole film and draws itself from hf-seek */
+      #world { position: absolute; inset: 0; }
+      #gl { display: block; width: 1920px; height: 1080px; }
+      /* overlay slots stretch over the world */
+      [data-composition-id="main"] > div[data-composition-src] { position: absolute; inset: 0; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="58" data-width="1920" data-height="1080">
+      <div id="world"><canvas id="gl"></canvas></div>
+
+      <!-- The HTML layers of each frame (STORYBOARD.md → Frame N · src). Frames 2 and 4 live entirely in the 3D world. -->
+      <div id="el-hook" data-composition-id="hook" data-composition-src="compositions/frames/01-hook.html" data-start="0.3" data-duration="5.55" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-think" data-composition-id="think" data-composition-src="compositions/frames/03-think.html" data-start="14.3" data-duration="5.7" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-pdks" data-composition-id="pdks" data-composition-src="compositions/frames/05-pdks.html" data-start="33.5" data-duration="4.95" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-prompts" data-composition-id="prompts" data-composition-src="compositions/frames/06-prompts.html" data-start="38.3" data-duration="9.3" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-close" data-composition-id="close" data-composition-src="compositions/frames/07-close.html" data-start="50.4" data-duration="7.6" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div id="el-note" data-composition-id="note" data-composition-src="compositions/frames/note.html" data-start="6.2" data-duration="43.6" data-track-index="2" data-width="1920" data-height="1080"></div>
+    </div>
+
+    <script>
+      // Root timeline: the scenes animate inside their own sub-compositions; the 3D world follows hf-seek.
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+    <script type="module">
+      import { createWorld } from "./assets/js/world.js";
+      const hf = window.__hyperframes;
+      const vars = (hf && typeof hf.getVariables === "function" && hf.getVariables()) || {};
+      const sample = "AaİıĞğŞşÇçÖöÜü₺%0123456789…·";
+      const ready = Promise.all([400, 500, 600, 650, 700, 800].map((w) => document.fonts.load(w + " 40px Inter", sample)))
+        .then(() => createWorld(document.getElementById("gl"), { glScale: Number(vars.glScale) || 1 }))
+        .then((world) => {
+          window.addEventListener("hf-seek", (e) => world.renderAt(e.detail.time));
+          world.renderAt(window.__hfThreeTime || 0);
+        });
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+      window.__hf.buildReady["agentic-world"] = ready;
+    </script>
+  </body>
+</html>

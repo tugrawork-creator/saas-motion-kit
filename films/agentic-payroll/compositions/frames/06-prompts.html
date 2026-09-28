@@ -1,0 +1,43 @@
+<template id="prompts-template">
+  <div data-composition-id="prompts" data-width="1920" data-height="1080" data-duration="9.3">
+    <div class="prompts-scrim"></div>
+    <div id="prompts-p0" class="prompts-line"></div>
+    <div id="prompts-p1" class="prompts-line"></div>
+    <div id="prompts-p2" class="prompts-line"></div>
+    <div id="prompts-p3" class="prompts-line"></div>
+
+    <style>
+      [data-composition-id="prompts"] { position: absolute; inset: 0; font-family: "Inter", sans-serif; color: #e5e7eb; }
+      [data-composition-id="prompts"] .prompts-scrim { position: absolute; left: 0; right: 0; top: 0; height: 300px; background: radial-gradient(70% 100% at 30% 0%, rgba(6, 9, 20, 0.85), rgba(6, 9, 20, 0)); }
+      [data-composition-id="prompts"] .prompts-line { position: absolute; left: 140px; top: 96px; font-size: 50px; font-weight: 650; white-space: nowrap; text-shadow: 0 2px 18px rgba(5, 8, 18, 0.8); }
+      [data-composition-id="prompts"] .prompts-line b { color: #7fa6f5; font-weight: 700; margin-right: 22px; display: inline-block; }
+      [data-composition-id="prompts"] .prompts-line .c { opacity: 0; }
+    </style>
+
+    <script>
+      (function () {
+        // Frame 6 · the report prompt, then the quick reports (the tempo doubles). Every prompt types itself on the
+        // same baked schedule the 3D chat window uses (assets/js/schedule.js), then clears for the next.
+        // Local time: this slot starts at 38.3 s of the film.
+        const T0 = 38.3, S = window.APSchedule;
+        const lines = [S.prompts.report].concat(S.quick);
+        lines.forEach((q, i) => {
+          const el = document.getElementById("prompts-p" + i);
+          el.innerHTML = "<b>›</b>" + Array.from(q.text).map((c) => '<span class="c">' + (c === " " ? "&nbsp;" : c) + "</span>").join("");
+        });
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(".prompts-scrim", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 0);
+        lines.forEach((q, i) => {
+          const el = "#prompts-p" + i;
+          tl.fromTo(el + " b", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, q.at[0] - T0 - 0.12);
+          gsap.utils.toArray(el + " .c").forEach((c, k) => tl.set(c, { opacity: 1 }, q.at[k] - T0));
+          // the report prompt holds while its answer unfolds; the quick ones clear on the beat
+          const out = i === 0 ? S.quick[0].at[0] - T0 - 0.3 : i < lines.length - 1 ? q.end - T0 + 0.12 : 8.9;
+          tl.to(el, { y: -16, opacity: 0, duration: 0.22, ease: "power2.in" }, out);
+        });
+        tl.to(".prompts-scrim", { opacity: 0, duration: 0.3, ease: "none" }, 8.95);
+        window.__timelines["prompts"] = tl;
+      })();
+    </script>
+  </div>
+</template>

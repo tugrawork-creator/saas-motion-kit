@@ -1,0 +1,28 @@
+<template id="hook-template">
+  <div data-composition-id="hook" data-width="1920" data-height="1080" data-duration="5.55">
+    <div class="hook-scrim"></div>
+    <h1 id="hook-l1" class="hook-line"><span class="w">Bordro</span> <span class="w">dönem</span> <span class="w">kapanışınızı</span> <span class="w em">%45</span> <span class="w">hızlandıracak</span></h1>
+    <h1 id="hook-l2" class="hook-line"><span class="w em">Agentic</span> <span class="w em">Payroll</span> <span class="w">ile</span> <span class="w">tanıştınız</span> <span class="w">mı?</span></h1>
+
+    <style>
+      [data-composition-id="hook"] { position: absolute; inset: 0; font-family: "Inter", sans-serif; color: #e5e7eb; }
+      [data-composition-id="hook"] .hook-scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 330px; background: radial-gradient(62% 100% at 50% 100%, rgba(6, 9, 20, 0.82), rgba(6, 9, 20, 0)); }
+      [data-composition-id="hook"] .hook-line { position: absolute; left: 140px; right: 140px; bottom: 104px; text-align: center; font-size: 60px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.12; text-shadow: 0 2px 22px rgba(5, 8, 18, 0.75); }
+      [data-composition-id="hook"] .w { display: inline-block; }
+      [data-composition-id="hook"] .em { color: #b9cffb; }
+    </style>
+
+    <script>
+      (function () {
+        // Frame 1 · the line rises out of the light as the numeral fills, then swaps in place (kinetic-type-beats).
+        // Local time: this slot starts at 0.3 s of the film.
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo("#hook-l1 .w", { y: 34, opacity: 0, filter: "blur(10px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out", stagger: 0.07 }, 0.15);
+        tl.to("#hook-l1", { y: -18, opacity: 0, duration: 0.3, ease: "power2.in" }, 2.62);
+        tl.fromTo("#hook-l2 .w", { y: -26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.08 }, 3.05);
+        tl.to("#hook-l2", { scale: 1.06, opacity: 0, duration: 0.35, ease: "power2.in" }, 5.15);
+        window.__timelines["hook"] = tl;
+      })();
+    </script>
+  </div>
+</template>
