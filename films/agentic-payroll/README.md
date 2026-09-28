@@ -9,6 +9,9 @@
 | `hyperframes lint` | 7 dosya · 0 hata · 0 uyarı |
 | `hyperframes check` | geçti · runtime 0 hata · layout 0 hata · WCAG kontrast 75/75 |
 | Kalan uyarılar | yalnızca yazılımsal WebGL'in "GPU stall due to ReadPixels" performans notu (GPU'lu makinede çıkmaz) |
+| Taslak render | 58,0 sn · 1920×1080 · 30 fps · 1740 kare · H.264 · 3D katman yarım çözünürlükte · GPU'suz bulut ortamında 15 dk |
+
+Render dosyaları repoya girmez (`renders/`, kitin kuralı: videolar GitHub Releases'e). Aşağıdaki kareler taslak render'dan, sahne ortalarından alındı (`tools/contact.py`).
 
 ![Filmden kareler](preview/keyframes.jpg)
 
