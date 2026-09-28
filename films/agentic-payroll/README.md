@@ -2,7 +2,13 @@
 
 58 sn, 16:9 master (3840×2160) ve ondan türeyen 4:5, 1:1 ve 9:16 kesimler. Brief: [`BRIEF.md`](BRIEF.md).
 
-**Durum: aşama 4/7, storyboard.** Beş alternatif 3D yön hazır ve seçim bekliyor.
+**Durum:** yön seçildi (**A + D hook**: Cam Stüdyo dünyası, Kapanış Tüneli hook'u) → [`STORYBOARD.md`](STORYBOARD.md). Üç styleframe hazır ve onay bekliyor → [`styleframes/`](styleframes).
+
+| SF1 · Hook | SF2 · Kanıt anı | SF3 · Rapor |
+|---|---|---|
+| ![SF1](styleframes/out/sf1-1920.jpg) | ![SF2](styleframes/out/sf2-1920.jpg) | ![SF3](styleframes/out/sf3-1920.jpg) |
+
+Aşağıda seçim öncesinde hazırlanan beş alternatif yön duruyor.
 
 ![Beş yön bir arada: hook, kanıt anı ve rapor kareleri](storyboards/sketch/boards/overview.jpg)
 
@@ -24,6 +30,8 @@ Karşılaştırma tablosu (güçlü yan, risk, efor, kanal) ve bütün kareler: 
 
 ```
 BRIEF.md                         aşama 1: brief ve açık maddeler
+STORYBOARD.md                    seçilen yön (A + D hook): defter, yedi soru, kareler
+styleframes/                     SF1–SF3, gerçek 3D (three.js) · 4K + önizleme
 assets/brand/                    orijinal logo PNG'leri buraya (henüz yok)
 storyboards/<yön>/STORYBOARD.md  mesaj ve ton, defter (ledger), yedi soru, kareler
 storyboards/sketch/
@@ -49,7 +57,8 @@ python build_single.py /tmp/agentic-payroll-storyboards.html   # paylaşım içi
 
 ## Sonraki adımlar
 
-1. **Yön seçimi** (ya da iki yönün karışımı). Seçilen yön dışındaki storyboard'lar ders olarak kalabilir ya da silinebilir.
-2. **Açık maddeler** (`BRIEF.md`): "%45" için kaynak, logo dosyaları, müzik lisansı, seslendirme kararı.
-3. **Styleframe'ler**: seçilen yönde 3 kare, gerçek 3D ışık ve malzemeyle.
-4. **Build**: HyperFrames kompozisyonu (Three.js sahnesi + GSAP zaman çizelgesi), `lint`, `snapshot`, `check`.
+1. ~~Yön seçimi~~ → A + D hook.
+2. ~~Styleframe'ler~~ → SF1–SF3 hazır, **onay bekliyor**.
+3. **Açık maddeler** (`BRIEF.md`): "%45" için kaynak, logo dosyaları, müzik lisansı, seslendirme kararı.
+4. **Animatik**: storyboard zamanlamasıyla, geçici sesli, düşük çözünürlüklü tam akış.
+5. **Build**: HyperFrames kompozisyonu (styleframe sahneleri + GSAP zaman çizelgesi), `lint`, `snapshot`, `check`.

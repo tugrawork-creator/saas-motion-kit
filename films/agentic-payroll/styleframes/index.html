@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Agentic Payroll · styleframes</title>
+<style>
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-ext-wght-normal.woff2") format("woff2"); font-weight: 100 900;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+html, body { margin: 0; background: #0A0E1A; overflow: hidden; }
+#stage { position: relative; width: 100vw; height: 100vh; }
+canvas { display: block; }
+.ov { position: absolute; left: 0; right: 0; text-align: center; color: #E5E7EB; font-family: "Inter", sans-serif; font-weight: 600; letter-spacing: -0.01em; text-shadow: 0 2px 18px rgba(5,8,18,.7); }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script type="importmap">{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }</script>
+<script type="module" src="./sf.js"></script>
+</body>
+</html>
