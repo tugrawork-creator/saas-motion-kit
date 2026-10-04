@@ -4,13 +4,22 @@
 
 > **The one rule: no two films should feel like the same film.** Don't repeat effects, transitions or components. Invent a new component for every film. Decide the message and the tone before you pick a single effect.
 
-This kit trains that creative muscle. It combines a staged process, a component strategy, **100 visual themes**, a **24-transition atlas** and a **variety audit** that catches repetition in your storyboard before you build it.
+This kit trains that creative muscle. It combines a staged process, a component strategy, **101 visual themes**, a **24-transition atlas** and a **variety audit** that catches repetition in your storyboard before you build it.
 
 [Türkçe README →](README.tr.md) · [Theme gallery →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Transition atlas →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Creative muscle →](creative) · [Six films →](examples/six-films) · [Example →](examples/acme-suite-loop)
 
 **New: [start from a real prompt](examples/prompts).** The exact prompt behind a finished 35 s mascot promo, plus a fill-in template and what happened at each gate.
 
-## What's new in v1.2: same story, six films
+## What's new in v1.3: hardware ads, for software
+
+![Apple TV, now in Türkiye: four key frames from the unofficial spec film](docs/spec-apple-tv-tr.jpg)
+
+- **A new theme family: hardware-ad grammar.** It takes the minimal hardware ad (the kind Apple made famous) and translates it into films for software. The first theme is **[101 Noise Cancelling](https://tugrawork-creator.github.io/saas-motion-kit/themes/101-noise-cancelling.html)**: 38 dashboards hum as hairline waveforms, the product opens a quiet zone, and exactly one signal breaks the silence. The film hangs on one sound-design hit, a cut to true silence on the drop.
+- **[A spec film about a real launch](examples/spec-apple-tv-tr).** Apple TV opened officially in Türkiye in September 2026. We told that launch in 101's grammar, redesigned for the living room: 24 s, 16:9, Turkish copy, a score synthesised by a script (no music licence) and a new component, the *play line*. It is an unofficial concept, labelled on every frame and not affiliated with Apple. It is the only example in the repo that names a real product, and it states only the facts sourced in its [brief](examples/spec-apple-tv-tr/BRIEF.md). Watch it on the [v1.3 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.3).
+- **Smaller fixes:** the gallery counts its own themes instead of hardcoding 100, and `tools/make_thumbs.py --only 101` renders just the thumbnails you changed.
+
+<details>
+<summary><b>What was new in v1.2: same story, six films</b></summary>
 
 ![The same 12-second script told in six themes, all six playing in sync](docs/six-films.gif)
 
@@ -24,6 +33,8 @@ This kit trains that creative muscle. It combines a staged process, a component 
 - **Template repository.** Click **Use this template** to start your own film repo with the tools, the creative rules and the audit Action already in place.
 - **Before and after, side by side:** the Acme Suite loop's v1 and v2 play next to each other on the [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2).
 
+</details>
+
 <details>
 <summary><b>What was new in v1.1: the creative muscle</b></summary>
 
@@ -35,9 +46,9 @@ This kit trains that creative muscle. It combines a staged process, a component 
 
 </details>
 
-![Six of the 100 themes](docs/assets/readme-hero.jpg)
+![Six of the gallery themes](docs/assets/readme-hero.jpg)
 
-> Every example in this repo uses **Acme**, a fictional company, and its fictional products. All numbers are invented.
+> Every example in this repo uses **Acme**, a fictional company, and its fictional products, and all Acme numbers are invented. The one exception is the clearly labelled [spec film](examples/spec-apple-tv-tr), which states only sourced facts about a real launch.
 
 ---
 
@@ -48,8 +59,9 @@ This kit trains that creative muscle. It combines a staged process, a component 
 | [`creative/`](creative) | **The creative muscle:** the seven questions, tone matrix, variety rules, component forge and transition atlas |
 | [`playbook/`](playbook) | A 7-stage production playbook with a review gate at each stage |
 | [`components/`](components) | The **clean-or-imaginary** component rule: use the product's real UI when it is clean, otherwise design imaginary UI |
-| [`docs/`](docs) | GitHub Pages: the **100-theme gallery** (4 key frames, component kit, motion notes and references per theme) and the **live transition atlas** |
+| [`docs/`](docs) | GitHub Pages: the **101-theme gallery** (4 key frames, component kit, motion notes and references per theme) and the **live transition atlas** |
 | [`examples/six-films/`](examples/six-films) | **Same story, six films:** one 12 s script built in six themes, each with its storyboard, ledger and new component, plus the shared brief |
+| [`examples/spec-apple-tv-tr/`](examples/spec-apple-tv-tr) | **Spec film:** Apple TV's launch in Türkiye told in theme 101's grammar, 16:9, with a synthesised score (unofficial concept, labelled on every frame) |
 | [`examples/acme-suite-loop/`](examples/acme-suite-loop) | A complete HyperFrames project: a silent, seamless 40 s 3D booth loop, with its v1 → v2 variety-audit lesson |
 | [`.claude/skills/saas-motion-video/`](.claude/skills/saas-motion-video) | A Claude Code skill that runs the whole process with you |
 | [`templates/`](templates) | `BRIEF.md`, `STORYBOARD.md` and the theme-sheet template |
@@ -78,9 +90,9 @@ Promo videos for software live or die on the UI you show. The rule:
 
 Details, a decision checklist and examples: [`components/`](components).
 
-## 100 themes, one story
+## 101 themes, one story
 
-The same 45-second story about the fictional **Acme Pulse**, an AI that watches product metrics and flags anomalies, is drawn in 100 different visual languages across 10 families:
+The same 45-second story about the fictional **Acme Pulse**, an AI that watches product metrics and flags anomalies, is drawn in 101 different visual languages across 11 families:
 
 | Family | Themes |
 |---|---|
@@ -94,6 +106,7 @@ The same 45-second story about the fictional **Acme Pulse**, an AI that watches 
 | Characters & mascots | 073–082 |
 | Art movements & eras | 083–092 |
 | Camera & edit grammar | 093–100 |
+| Hardware-ad grammar (new) | 101 |
 
 Each sheet shows **Hook → Reveal → Proof moment → CTA**. It also lists six components, three motion techniques with timings, the risk to watch for, how to adapt the theme to your own product, and references. Open the [gallery](https://tugrawork-creator.github.io/saas-motion-kit/), pick two or three themes, and put them in your brief.
 
@@ -146,3 +159,4 @@ Rendered MP4s are attached to the [Releases](../../releases) page, so the reposi
 - [HyperFrames](https://github.com/heygen-com/hyperframes) is by HeyGen. Install its skills with `npx skills add heygen-com/hyperframes`.
 - If you generate music locally with Meta's MusicGen, note that its weights are **CC-BY-NC 4.0 (non-commercial)**. Use licensed music for commercial work.
 - Acme, Acme Pulse and Acme Suite are fictional. Any resemblance to real products is coincidental.
+- Apple TV, iCloud+, iPhone, iPad, Mac and Apple TV 4K are trademarks of Apple Inc. The [spec film](examples/spec-apple-tv-tr) is an unofficial concept and is not affiliated with or endorsed by Apple.

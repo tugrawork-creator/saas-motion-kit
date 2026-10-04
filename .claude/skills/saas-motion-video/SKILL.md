@@ -1,6 +1,6 @@
 ---
 name: saas-motion-video
-description: Make a promo / motion video for a software product with HyperFrames, using the saas-motion-kit 7-stage process (brief → components → theme → storyboard → build → sound → deliver), the clean-or-imaginary component rule, the creative muscle (tone matrix, variety rules, component forge, transition atlas, variety audit) and the 100-theme gallery in docs/. Use when someone asks for a launch video, product promo, booth loop, feature reveal or social motion piece for an app, SaaS or developer tool.
+description: Make a promo / motion video for a software product with HyperFrames, using the saas-motion-kit 7-stage process (brief → components → theme → storyboard → build → sound → deliver), the clean-or-imaginary component rule, the creative muscle (tone matrix, variety rules, component forge, transition atlas, variety audit) and the 101-theme gallery in docs/. Use when someone asks for a launch video, product promo, booth loop, feature reveal or social motion piece for an app, SaaS or developer tool.
 ---
 
 # saas-motion-video

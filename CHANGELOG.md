@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.3: hardware ads, for software (2026-10-04)
+
+**Added**
+- A new gallery family, **hardware-ad grammar**: minimal hardware product ads translated into films for software. Its first theme is `101 Noise Cancelling` (`docs/themes/101-noise-cancelling.html`, `data/101.json`, `thumbs/101.jpg`). 38 dashboards hum as hairline waveforms, the product opens a quiet zone, and one signal breaks a cut to true silence.
+- `examples/spec-apple-tv-tr/`: an unofficial spec film about Apple TV's official launch in Türkiye (September 2026), told in 101's grammar and redesigned for the living room. It runs 24 s at 16:9 with Turkish copy and a new component, the play line. Its brief lists every stated fact with sources. The film carries a "KONSEPT · RESMÎ DEĞİL" tag on every frame and a full disclaimer on the end card, and it uses no Apple logos, typefaces or show artwork. The render is on the v1.3 release.
+- `examples/spec-apple-tv-tr/score.py`: a seeded numpy score (noise build, a hard cut to digital silence, calm notes, silence again at the end) that needs no samples and no music licence.
+- `docs/spec-apple-tv-tr.jpg`: four key frames for the README.
+
+**Changed**
+- `tools/build_gallery.py`: the new family has its own filter, and the page title and headline count the themes instead of hardcoding 100.
+- `tools/make_thumbs.py`: `--only NNN` renders just the listed thumbnails.
+- `docs/themes/_template.html`: the back link no longer hardcodes the theme count.
+- The READMEs lead with v1.3 and fold the v1.2 notes underneath. They also note that the spec film is the only example that names a real product.
+
 ## v1.2: same story, six films (2026-09-26)
 
 **Added**

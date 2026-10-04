@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Apple TV · Artık Türkiye'de (resmî olmayan konsept)</title>
+    <!-- Unofficial spec film. Not affiliated with Apple Inc. No Apple logos, typefaces or show artwork are used. -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      /* Fonts: SIL OFL 1.1, see assets/fonts/OFL.txt. The latin-ext files carry ş, ğ and İ. */
+      @font-face { font-family: "Manrope"; font-weight: 200 800; font-display: block; src: url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215; }
+      @font-face { font-family: "Manrope"; font-weight: 200 800; font-display: block; src: url("assets/fonts/manrope-latin-ext-wght-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1EFF, U+20A0-20C0, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: block; src: url("assets/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2190-21FF, U+2212; }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: block; src: url("assets/fonts/jetbrains-mono-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02FF, U+1E00-1EFF, U+20A0-20C0; }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 600; font-display: block; src: url("assets/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2190-21FF, U+2212; }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 600; font-display: block; src: url("assets/fonts/jetbrains-mono-latin-ext-600-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02FF, U+1E00-1EFF, U+20A0-20C0; }
+
+      :root {
+        --ink: #060607; --white: #F4F5F8; --grey: #9A9CA5; --line: rgba(255,255,255,.10);
+        --ice: #9AD7FF; --lav: #C3B6FF;
+        --sans: "Manrope", sans-serif; --mono: "JetBrains Mono", monospace;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #060607; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: var(--sans); color: var(--white); }
+      .clip { position: absolute; inset: 0; }
+      .h { position: absolute; left: 0; right: 0; text-align: center; font-weight: 800; letter-spacing: -.035em; line-height: 1.02; }
+      .h .ln { display: block; }
+      .w { display: inline-block; }
+      .mute { color: var(--grey); }
+      .mask { display: inline-block; overflow: hidden; vertical-align: top; }
+      .mask .grad { display: inline-block; }
+      .grad { background: linear-gradient(95deg, #C6EAFF 0%, var(--ice) 38%, var(--lav) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; padding: 0 .04em .08em; }
+
+      /* ---------- ground ---------- */
+      #ground { position: absolute; inset: 0; background: radial-gradient(75% 70% at 50% 46%, #17181E 0%, #0C0C10 52%, #050506 100%); }
+
+      /* ---------- hook: the endless rows ---------- */
+      #tiles { position: absolute; left: -320px; top: -120px; width: 2560px; height: 1320px; }
+      .row { position: absolute; left: 0; display: flex; gap: 22px; }
+      .tile { position: relative; flex: none; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,.5); }
+      .tile b, .tile i { position: absolute; left: 18px; border-radius: 6px; }
+      .tile b { bottom: 38px; height: 13px; background: rgba(255,255,255,.62); }
+      .tile i { bottom: 20px; height: 9px; background: rgba(255,255,255,.34); }
+      .tile .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(255,255,255,.16); }
+      .tile .prog u { position: absolute; left: 0; top: 0; bottom: 0; background: rgba(255,255,255,.75); }
+      #timer { position: absolute; left: 96px; bottom: 84px; }
+      #timer .k { font: 400 18px var(--mono); letter-spacing: .22em; color: var(--grey); }
+      #timer .v { font: 600 64px var(--mono); letter-spacing: .02em; color: var(--white); margin-top: 6px; }
+      #hook-h { top: 140px; font-size: 132px; line-height: 1.12; text-shadow: 0 6px 40px rgba(0,0,0,.6); }
+
+      /* ---------- noise field + silent line ---------- */
+      #wsvg, #lsvg, #rings { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+      #lgrp { filter: drop-shadow(0 0 7px rgba(154,215,255,.75)); }
+
+      /* ---------- hero screen ---------- */
+      #screen { position: absolute; left: 720px; top: 465px; width: 480px; height: 270px; border-radius: 24px; background: #0B0D13; border: 1.5px solid rgba(255,255,255,.16); box-shadow: 0 50px 120px rgba(0,0,0,.7), 0 0 140px rgba(154,215,255,.16); overflow: hidden; }
+      #scr-on { position: absolute; inset: 0; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); background: radial-gradient(120% 90% at 50% 125%, rgba(154,215,255,.7) 0%, rgba(154,215,255,0) 62%), linear-gradient(180deg, #141824 0%, #0A0B10 100%); }
+      #scr-scene { position: absolute; inset: 0; background: linear-gradient(180deg, #1C2544 0%, #463D69 40%, #D38E79 70%, #2B1E2C 100%); }
+      #sun { position: absolute; left: 280px; top: 128px; width: 76px; height: 76px; border-radius: 50%; background: radial-gradient(circle, #FFE7C9 0%, #FFB48C 42%, rgba(255,180,140,0) 72%); }
+      #hills { position: absolute; left: 0; bottom: 0; width: 480px; height: 120px; }
+      #scr-sub { position: absolute; left: 0; right: 0; bottom: 20px; text-align: center; font: 600 17px var(--sans); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.85), 0 0 10px rgba(0,0,0,.6); }
+      #sheen { position: absolute; top: -30%; bottom: -30%; left: 0; width: 34%; background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.24) 50%, rgba(255,255,255,0) 100%); }
+
+      #r-h { top: 140px; font-size: 104px; }
+      #r-wm { top: 784px; font-size: 92px; }
+      #r-tl { top: 896px; font-size: 64px; }
+
+      /* ---------- proof: switches, plan, devices ---------- */
+      #p1-h, #p2-h { top: 118px; font-size: 86px; }
+      .card { position: absolute; width: 600px; border-radius: 30px; background: rgba(21,23,30,.95); border: 1.5px solid var(--line); box-shadow: 0 40px 90px rgba(0,0,0,.5); }
+      #sw { left: 1180px; top: 430px; padding: 22px 34px; }
+      .sw-row { display: flex; align-items: center; justify-content: space-between; height: 92px; }
+      .sw-row + .sw-row { border-top: 1px solid var(--line); }
+      .sw-lab { font: 600 30px var(--sans); color: var(--grey); }
+      .seg { position: relative; display: flex; padding: 6px; border-radius: 100px; background: rgba(255,255,255,.08); }
+      .seg span { position: relative; z-index: 1; width: 150px; text-align: center; padding: 13px 0; font: 700 24px var(--sans); color: var(--grey); white-space: nowrap; }
+      .seg .pill, .pillx { position: absolute; left: 6px; top: 6px; bottom: 6px; width: 150px; border-radius: 100px; background: var(--white); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+      .seg span.on { color: var(--ink); }
+
+      #plan { padding: 26px 34px 18px; }
+      #plan .top { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+      #plan .name { font: 800 48px var(--sans); letter-spacing: -.02em; }
+      #plan .kind { font: 400 18px var(--mono); letter-spacing: .2em; color: var(--grey); }
+      .pl-row { display: flex; align-items: center; justify-content: space-between; height: 92px; font: 600 30px var(--sans); }
+      .pl-row + .pl-row { border-top: 1px solid var(--line); }
+      .pl-row .ok { font: 600 26px var(--mono); color: var(--ice); }
+      #hirow { margin: 0 -18px; padding: 0 12px 0 18px; border-radius: 20px; border-top-color: transparent; }
+      .dpill { width: 150px; text-align: center; padding: 13px 0; border-radius: 100px; background: var(--white); color: var(--ink); font: 700 24px var(--sans); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+      #mpill { position: absolute; display: grid; place-items: center; font: 700 24px var(--sans); color: var(--ink); }
+      #mpill span { grid-area: 1 / 1; }
+
+      #p3-h { top: 130px; font-size: 104px; }
+      .dev { position: absolute; background: #0D0F15; border: 1.5px solid rgba(255,255,255,.2); box-shadow: 0 30px 60px rgba(0,0,0,.55); }
+      .dev .scr { position: absolute; inset: 7px; border-radius: inherit; background: #07080B; overflow: hidden; }
+      .dev .glow { position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 125%, rgba(154,215,255,.7) 0%, rgba(154,215,255,0) 64%), linear-gradient(180deg, #171C2A 0%, #0B0D13 100%); }
+      .base { position: absolute; background: #1A1D26; border: 1.5px solid rgba(255,255,255,.14); }
+      .dl { position: absolute; top: 790px; font: 400 24px var(--mono); letter-spacing: .04em; color: var(--grey); white-space: nowrap; }
+      #sweep { position: absolute; top: 0; bottom: 0; left: 0; width: 300px; background: linear-gradient(90deg, rgba(154,215,255,0) 0%, rgba(154,215,255,.09) 50%, rgba(154,215,255,0) 100%); }
+
+      /* ---------- CTA ---------- */
+      #c-wm { top: 470px; font-size: 150px; }
+      #c-tl { top: 650px; font-size: 76px; }
+      #c-rc { position: absolute; left: 0; right: 0; top: 792px; text-align: center; font: 400 24px var(--mono); letter-spacing: .06em; color: var(--grey); }
+      #c-dis { position: absolute; left: 0; right: 0; bottom: 54px; text-align: center; font: 400 17px var(--mono); letter-spacing: .03em; color: rgba(244,245,248,.5); }
+
+      /* ---------- finish ---------- */
+      #vig { position: absolute; inset: 0; background: radial-gradient(85% 80% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%); }
+      #grain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .05; mix-blend-mode: overlay; }
+      #tagpill { position: absolute; top: 42px; right: 54px; padding: 9px 16px; border-radius: 100px; background: rgba(0,0,0,.42); border: 1px solid rgba(255,255,255,.12); font: 600 16px var(--mono); letter-spacing: .2em; color: rgba(244,245,248,.62); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24" data-width="1920" data-height="1080">
+
+      <div id="bg" class="clip" data-start="0" data-duration="24" data-track-index="0">
+        <div id="ground"></div>
+      </div>
+
+      <!-- hook: endless rows of untitled poster tiles (no real titles or artwork) -->
+      <div id="hook" class="clip" data-start="0" data-duration="6.7" data-track-index="1">
+        <div id="tiles" data-layout-ignore data-layout-allow-overflow></div>
+      </div>
+
+      <!-- the noise field, with the quiet zone cut out of it -->
+      <div id="waves" class="clip" data-start="0" data-duration="9.6" data-track-index="2">
+        <svg id="wsvg" viewBox="0 0 1920 1080" data-layout-ignore>
+          <defs>
+            <radialGradient id="qzg"><stop offset=".68" stop-color="#000" /><stop offset="1" stop-color="#000" stop-opacity="0" /></radialGradient>
+            <mask id="qzm" maskUnits="userSpaceOnUse" x="-200" y="-200" width="2320" height="1480">
+              <rect x="-200" y="-200" width="2320" height="1480" fill="#fff" />
+              <circle id="qz-hole" cx="960" cy="600" r="0" fill="url(#qzg)" />
+            </mask>
+          </defs>
+          <g mask="url(#qzm)"><g id="noise" fill="none" stroke="#F4F5F8" stroke-linecap="round" stroke-linejoin="round"></g></g>
+        </svg>
+      </div>
+
+      <!-- six generic screens on one line (no device renders) -->
+      <div id="devices" class="clip" data-start="14.9" data-duration="4.3" data-track-index="3">
+        <div id="devwrap" class="clip" data-layout-ignore></div>
+        <div id="sweep" data-layout-ignore></div>
+      </div>
+
+      <!-- the silent line: the motif, and in the CTA the play line -->
+      <div id="sline" class="clip" data-start="5" data-duration="19" data-track-index="4">
+        <svg id="lsvg" viewBox="0 0 1920 1080" data-layout-ignore>
+          <defs><clipPath id="lclip" clipPathUnits="userSpaceOnUse"><circle id="lc" cx="960" cy="600" r="0" /></clipPath></defs>
+          <g id="lgrp" clip-path="url(#lclip)" stroke="#9AD7FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line id="lL" x1="-40" y1="600" x2="960" y2="600" />
+            <line id="lR" x1="960" y1="600" x2="1960" y2="600" />
+            <polygon id="pg" points="890,600 1050,600 890,600" fill="#9AD7FF" fill-opacity="0" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- reveal + proof 1–2 -->
+      <div id="stage" class="clip" data-start="5" data-duration="10.5" data-track-index="5">
+        <div id="cam" class="clip">
+          <svg id="rings" viewBox="0 0 1920 1080" data-layout-ignore>
+            <g fill="none" stroke="#9AD7FF" stroke-width="2">
+              <circle class="ring" cx="960" cy="600" r="170" /><circle class="ring" cx="960" cy="600" r="170" />
+              <circle class="ring" cx="960" cy="600" r="170" /><circle class="ring" cx="960" cy="600" r="170" />
+            </g>
+          </svg>
+          <div id="screen" data-layout-ignore>
+            <div id="scr-on"></div>
+            <div id="scr-scene">
+              <div id="sun"></div>
+              <svg id="hills" viewBox="0 0 480 120" preserveAspectRatio="none"><path d="M0 70 C70 40 120 52 180 62 S300 34 360 50 S440 60 480 44 V120 H0Z" fill="#3A2738" /><path d="M0 92 C90 70 150 96 240 84 S380 66 480 80 V120 H0Z" fill="#1C1420" /></svg>
+              <div id="scr-sub">Sessizliği duyuyor musun?</div>
+            </div>
+            <div id="sheen"></div>
+          </div>
+          <div id="r-h" class="h">Gürültüyü kapat.</div>
+          <div id="r-wm" class="h">Apple TV</div>
+          <div id="r-tl" class="h"><span class="mask"><span class="grad" data-layout-allow-overflow>Artık Türkiye'de.</span></span></div>
+        </div>
+
+        <div id="p1-h" class="h">Türkçe dublaj <span class="mute">ve altyazı.</span></div>
+        <div id="sw" class="card">
+          <div class="sw-row"><span class="sw-lab">Ses</span><div class="seg"><i class="pill" id="pill1"></i><span id="s1a" class="on">Orijinal</span><span id="s1b">Türkçe</span></div></div>
+          <div class="sw-row"><span class="sw-lab">Altyazı</span><div class="seg"><i class="pill" id="pill2"></i><span id="s2a" class="on">Kapalı</span><span id="s2b">Türkçe</span></div></div>
+        </div>
+
+        <div id="p2-h" class="h">iCloud+ <span class="mute">aboneliğine dahil.</span></div>
+        <div id="plan" class="card">
+          <div class="top"><span class="name">iCloud+</span><span class="kind">ABONELİK</span></div>
+          <div class="pl-row"><span>iCloud depolama</span><span class="ok">✓</span></div>
+          <div class="pl-row" id="hirow"><span>Apple TV</span><span class="dpill" id="dahil">dahil</span></div>
+        </div>
+        <div id="mpill" data-layout-ignore><i class="pillx" style="left:0;top:0;bottom:0;width:100%"></i><span id="mp-a" style="position:relative">Türkçe</span><span id="mp-b" style="position:relative">dahil</span></div>
+      </div>
+
+      <div id="hook-text" class="clip" data-start="0" data-duration="6.7" data-track-index="6">
+        <div id="hook-h" class="h"><span class="ln"><span class="w">Bu</span> <span class="w">akşam</span></span><span class="ln mute"><span class="w">ne</span> <span class="w">izlesem?</span></span></div>
+        <div id="timer"><div class="k">KAYDIRMA SÜRESİ</div><div class="v" id="tval">41:57</div></div>
+      </div>
+
+      <div id="proof3" class="clip" data-start="14.9" data-duration="4.3" data-track-index="7">
+        <div id="p3-h" class="h">Her ekranda.</div>
+      </div>
+
+      <div id="cta" class="clip" data-start="18.4" data-duration="5.6" data-track-index="8">
+        <div id="c-wm" class="h">Apple TV</div>
+        <div id="c-tl" class="h"><span class="grad">Artık Türkiye'de.</span></div>
+        <div id="c-rc">iCloud+ ile dahil · Türkçe dublaj ve altyazı</div>
+        <div id="c-dis">Resmî olmayan konsept çalışma · Apple Inc. ile bağlantılı değildir · Apple TV, Apple Inc.'in ticari markasıdır.</div>
+      </div>
+
+      <div id="fx" class="clip" data-start="0" data-duration="24" data-track-index="9">
+        <div id="vig"></div>
+        <svg id="grain" viewBox="0 0 1920 1080" data-layout-ignore data-layout-allow-occlusion><filter id="gn"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="11" stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter><rect width="1920" height="1080" filter="url(#gn)" /></svg>
+      </div>
+
+      <div id="tag" class="clip" data-start="0" data-duration="24" data-track-index="10">
+        <div id="tagpill">KONSEPT · RESMÎ DEĞİL</div>
+      </div>
+
+      <audio id="score" src="assets/audio/score.wav" data-start="0" data-duration="24" data-track-index="11" data-volume="1"></audio>
+    </div>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+
+        // deterministic PRNG: the same tiles and waves on every render
+        function prng(seed) {
+          return function () {
+            seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+            var t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+          };
+        }
+        var NS = "http://www.w3.org/2000/svg";
+        var AXIS = 600;
+        // must match DEVICE_X in score.py (the plucks land when the sweep reaches each screen)
+        var DEVICES = [
+          { cx: 130, kind: "phone", label: "iPhone" },
+          { cx: 369, kind: "tablet", label: "iPad" },
+          { cx: 748, kind: "laptop", label: "Mac" },
+          { cx: 1067, kind: "box", label: "Apple TV 4K" },
+          { cx: 1396, kind: "tv", label: "akıllı TV" },
+          { cx: 1755, kind: "pad", label: "konsol" }
+        ];
+        function wakeAt(cx) { return 15.5 + 2.1 * (cx + 300) / 2500; }
+
+        function buildTiles() {
+          var r = prng(42), host = document.getElementById("tiles"), rows = [], flick = [];
+          var spec = [
+            { y: 30, w: 384, h: 216, n: 11, from: 0, to: -1500, op: .82 },
+            { y: 300, w: 196, h: 294, n: 20, from: -1400, to: 0, op: .7 },
+            { y: 650, w: 384, h: 216, n: 11, from: -200, to: -1900, op: .82 },
+            { y: 920, w: 196, h: 294, n: 20, from: -1500, to: -100, op: .7 }
+          ];
+          spec.forEach(function (s, ri) {
+            var row = document.createElement("div");
+            row.className = "row"; row.style.top = s.y + "px"; row.style.opacity = s.op;
+            for (var i = 0; i < s.n; i++) {
+              var t = document.createElement("div"), h1 = Math.floor(r() * 360), h2 = h1 + 30 + Math.floor(r() * 60);
+              t.className = "tile";
+              t.style.width = s.w + "px"; t.style.height = s.h + "px";
+              t.style.background = "linear-gradient(" + Math.floor(r() * 360) + "deg, hsl(" + h1 + " " + (25 + r() * 30) + "% " + (15 + r() * 18) + "%), hsl(" + h2 + " " + (25 + r() * 30) + "% " + (28 + r() * 16) + "%))";
+              t.innerHTML = '<b style="width:' + (40 + r() * 30) + '%"></b><i style="width:' + (22 + r() * 22) + '%"></i>';
+              if (s.w > 300 && r() < .35) t.innerHTML += '<div class="prog"><u style="width:' + (20 + r() * 60) + '%"></u></div>';
+              row.appendChild(t);
+              if (s.w > 300 && r() < .22) flick.push(t);
+            }
+            host.appendChild(row);
+            rows.push({ el: row, from: s.from, to: s.to });
+          });
+          return { rows: rows, flick: flick, r: r };
+        }
+
+        function buildWaves() {
+          var r = prng(7), g = document.getElementById("noise");
+          for (var k = 0; k < 34; k++) {
+            var big = r() < .3, amp = big ? 140 + r() * 70 : 40 + r() * 100, comps = [], nc = r() < .5 ? 2 : 3, norm = 0;
+            for (var c = 0; c < nc; c++) { var w = .4 + r() * .6; norm += w; comps.push([w, 1.2 + r() * 6.8, r() * Math.PI * 2]); }
+            var gm = .3 + r() * .8, gp = r() * Math.PI * 2, d = "";
+            for (var x = -40; x <= 1960; x += 16) {
+              var u = x / 1920, s = 0;
+              comps.forEach(function (cp) { s += cp[0] * Math.sin(2 * Math.PI * cp[1] * u + cp[2]); });
+              var env = .35 + .65 * Math.pow(Math.sin(Math.PI * Math.min(1, Math.max(0, u))), .8);
+              var y = AXIS - amp * env * (s / norm) * (.72 + .28 * Math.sin(2 * Math.PI * gm * u + gp));
+              d += (x === -40 ? "M" : "L") + x + " " + y.toFixed(1);
+            }
+            var p = document.createElementNS(NS, "path");
+            p.setAttribute("d", d);
+            p.setAttribute("stroke-width", (1.4 + r() * 1.2).toFixed(1));
+            p.setAttribute("stroke-opacity", (.10 + r() * .2).toFixed(2));
+            p.setAttribute("vector-effect", "non-scaling-stroke");
+            g.appendChild(p);
+          }
+        }
+
+        function buildDevices() {
+          var host = document.getElementById("devwrap"), out = [];
+          function el(cls, css, parent) { var e = document.createElement("div"); e.className = cls; e.style.cssText = css; (parent || host).appendChild(e); return e; }
+          DEVICES.forEach(function (d) {
+            var body, cx = d.cx;
+            if (d.kind === "phone") body = el("dev", "left:" + (cx - 60) + "px;top:480px;width:120px;height:240px;border-radius:26px");
+            if (d.kind === "tablet") body = el("dev", "left:" + (cx - 125) + "px;top:510px;width:250px;height:180px;border-radius:18px");
+            if (d.kind === "laptop") { body = el("dev", "left:" + (cx - 170) + "px;top:483px;width:340px;height:214px;border-radius:12px 12px 4px 4px"); el("base", "left:" + (cx - 200) + "px;top:697px;width:400px;height:16px;border-radius:3px 3px 10px 10px"); }
+            if (d.kind === "box") body = el("dev", "left:" + (cx - 65) + "px;top:535px;width:130px;height:130px;border-radius:26px");
+            if (d.kind === "tv") { body = el("dev", "left:" + (cx - 210) + "px;top:480px;width:420px;height:240px;border-radius:10px"); el("base", "left:" + (cx - 40) + "px;top:724px;width:80px;height:10px;border-radius:5px"); }
+            if (d.kind === "pad") body = el("dev", "left:" + (cx - 95) + "px;top:541px;width:190px;height:118px;border-radius:59px");
+            var scr = el("scr", d.kind === "box" ? "inset:46px;border-radius:50%" : "", body);
+            var glow = el("glow", "opacity:0", scr);
+            if (d.kind === "pad") {
+              var key = "position:absolute;background:rgba(255,255,255,.3);";
+              el("", key + "left:30px;top:53px;width:36px;height:12px;border-radius:3px", body);
+              el("", key + "left:42px;top:41px;width:12px;height:36px;border-radius:3px", body);
+              el("", key + "right:30px;top:40px;width:15px;height:15px;border-radius:50%", body);
+              el("", key + "right:52px;top:62px;width:15px;height:15px;border-radius:50%", body);
+            }
+            var lab = el("dl", "", host); lab.textContent = d.label;
+            lab.style.left = (cx - lab.offsetWidth / 2) + "px";
+            out.push({ body: body, glow: glow, at: wakeAt(cx) });
+          });
+          return out;
+        }
+
+        function build() {
+          var tl = gsap.timeline({ paused: true });
+          var T = buildTiles(); buildWaves(); var DEV = buildDevices();
+
+          // place the plan card so its "dahil" pill sits exactly where the subtitle "Türkçe" pill was (match cut)
+          var root = document.getElementById("root").getBoundingClientRect();
+          var target = document.getElementById("s2b").getBoundingClientRect();
+          var plan = document.getElementById("plan");
+          plan.style.left = "0px"; plan.style.top = "0px";
+          var dp = document.getElementById("dahil").getBoundingClientRect(), pr = plan.getBoundingClientRect();
+          plan.style.left = (target.left - root.left - (dp.left - pr.left)) + "px";
+          plan.style.top = (target.top - root.top - (dp.top - pr.top)) + "px";
+          var mp = document.getElementById("mpill");
+          mp.style.cssText += ";left:" + (target.left - root.left) + "px;top:" + (target.top - root.top) + "px;width:" + target.width + "px;height:" + target.height + "px";
+          var pillOrigin = (dp.left - pr.left + dp.width / 2) + "px " + (dp.top - pr.top + dp.height / 2) + "px";
+
+          // ======================= 1 · HOOK 0–5 s: the endless scroll =======================
+          gsap.set("#tiles", { transformPerspective: 1600, rotationX: 14, rotation: -6 });
+          T.rows.forEach(function (row) { tl.fromTo(row.el, { x: row.from }, { x: row.to, duration: 5, ease: "power2.in" }, 0); });
+          tl.fromTo("#tiles", { scale: 1 }, { scale: 1.2, duration: 5, ease: "power1.in" }, 0);
+          T.flick.forEach(function (tile, i) {
+            var at = .35 + (i * 0.37) % 4.3;
+            tl.to(tile, { filter: "brightness(2.1)", duration: .1, ease: "none" }, at);
+            tl.to(tile, { filter: "brightness(1)", duration: .35, ease: "sine.out" }, at + .1);
+          });
+          var clock = { s: 41 * 60 + 57 };
+          tl.to(clock, { s: 42 * 60 + 44, duration: 5, ease: "power2.in", onUpdate: function () {
+            var s = Math.floor(clock.s);
+            document.getElementById("tval").textContent = Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+          } }, 0);
+          tl.fromTo("#timer", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6, ease: "power2.out" }, .3);
+
+          // 2 · the noise field swells over the dimmed rows; the question sets word by word
+          tl.to("#tiles", { opacity: .32, filter: "blur(3px)", duration: 1, ease: "expo.out" }, 2);
+          gsap.set("#noise", { svgOrigin: "960 600" });
+          tl.set("#noise", { opacity: 0, scaleY: .12, x: -50 }, 0);
+          tl.to("#noise", { x: 30, duration: 5, ease: "none" }, 0);
+          tl.to("#noise", { opacity: 1, scaleY: 1, duration: 2.4, ease: "expo.out" }, 2);
+          tl.to("#noise", { scaleY: 1.18, duration: .6, ease: "power2.in" }, 4.4);
+          document.querySelectorAll("#hook-h .w").forEach(function (w, i) {
+            tl.fromTo(w, { opacity: 0, y: 40, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: .7, ease: "expo.out" }, [2.15, 2.45, 2.85, 3.15][i]);
+          });
+          // 5.0–5.8: nothing moves. The score is digital silence here.
+
+          // ======================= 2 · REVEAL 5.8–9.5 s: the quiet zone =======================
+          tl.to("#tiles", { opacity: 0, duration: .8, ease: "sine.inOut" }, 5.8);
+          tl.to("#hook-h", { opacity: 0, y: -20, filter: "blur(10px)", duration: .35, ease: "power2.in" }, 5.8);
+          tl.to("#timer", { opacity: 0, duration: .3, ease: "power2.in" }, 5.8);
+          tl.fromTo("#screen", { opacity: 0, scale: .94 }, { opacity: 1, scale: 1, duration: .9, ease: "sine.inOut" }, 5.8);
+          tl.fromTo("#scr-on", { opacity: 0 }, { opacity: 1, duration: .9, ease: "sine.inOut" }, 5.95);
+          gsap.set("#scr-scene", { opacity: 0 }); gsap.set("#scr-sub", { opacity: 0 });
+          gsap.set("#sheen", { skewX: -14 });
+          tl.fromTo("#sheen", { xPercent: -140 }, { xPercent: 320, duration: 1, ease: "sine.inOut" }, 6.1);
+          tl.fromTo("#qz-hole", { attr: { r: 0 } }, { attr: { r: 560 }, duration: .9, ease: "expo.out" }, 5.85);
+          tl.to("#qz-hole", { attr: { r: 1300 }, duration: 2.6, ease: "sine.in" }, 6.75);
+          tl.fromTo("#lc", { attr: { r: 0 } }, { attr: { r: 520 }, duration: .9, ease: "expo.out" }, 5.85);
+          tl.to("#lc", { attr: { r: 2400 }, duration: 2.6, ease: "sine.in" }, 6.75);
+          tl.to("#noise", { scaleY: .35, duration: 1.6, ease: "sine.inOut" }, 5.85);
+          tl.to("#noise", { opacity: 0, duration: .8, ease: "sine.inOut" }, 8.6);
+          gsap.set(".ring", { svgOrigin: "960 600", opacity: 0 });
+          document.querySelectorAll(".ring").forEach(function (ring, i) {
+            tl.fromTo(ring, { scale: .55, opacity: .5 }, { scale: 2.2, opacity: 0, duration: 1.67, ease: "sine.out" }, 5.9 + i * .833);
+          });
+          tl.fromTo("#cam", { scale: 1 }, { scale: 1.035, duration: 3.7, ease: "sine.inOut" }, 5.8);
+          tl.fromTo("#r-h", { opacity: 0, y: 34, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "expo.out" }, 6.6);
+          tl.fromTo("#r-wm", { clipPath: "inset(0% 50% 0% 50%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power3.inOut" }, 7.6);
+          tl.fromTo("#r-tl .grad", { yPercent: 110 }, { yPercent: 0, duration: .9, ease: "expo.out" }, 8.4);
+
+          // ======================= 3 · PROOF 9.5–18.5 s =======================
+          // object carry: the same screen moves left, grows and starts playing
+          tl.to(["#r-h", "#r-wm", "#r-tl"], { opacity: 0, y: -16, duration: .35, ease: "power2.in" }, 9.35);
+          tl.to("#cam", { scale: 1, duration: .8, ease: "power3.inOut" }, 9.5);
+          tl.to("#screen", { x: -310, scale: 1.7, duration: .85, ease: "power3.inOut" }, 9.5);
+          tl.to("#lgrp", { opacity: .28, duration: .6, ease: "sine.inOut" }, 9.5);
+          tl.fromTo("#p1-h", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: .8, ease: "power3.out" }, 9.75);
+          tl.fromTo("#sw", { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: .8, ease: "power3.out" }, 9.95);
+          tl.to("#scr-scene", { opacity: 1, duration: .8, ease: "sine.inOut" }, 9.9);
+          tl.fromTo("#sun", { y: 14 }, { y: -6, duration: 5.5, ease: "none" }, 9.9);
+          [["#pill1", "#s1a", "#s1b", 10.45], ["#pill2", "#s2a", "#s2b", 10.95]].forEach(function (p) {
+            tl.to(p[0], { x: 150, duration: .45, ease: "sine.inOut" }, p[3]);
+            tl.to(p[1], { color: "#9A9CA5", duration: .3, ease: "sine.inOut" }, p[3] + .05);
+            tl.to(p[2], { color: "#060607", duration: .3, ease: "sine.inOut" }, p[3] + .15);
+          });
+          tl.to("#scr-sub", { opacity: 1, duration: .4, ease: "power2.out" }, 11.3);
+          tl.fromTo("#scr-sub", { y: 6 }, { y: 0, duration: .4, ease: "power2.out" }, 11.3);
+
+          // match cut: the selected "Türkçe" pill becomes the plan's "dahil" pill, in place
+          gsap.set(["#plan", "#mpill", "#p2-h"], { opacity: 0 });
+          gsap.set("#mp-b", { opacity: 0 });
+          tl.to("#p1-h", { opacity: 0, y: -20, duration: .3, ease: "power2.in" }, 12.35);
+          tl.set("#mpill", { opacity: 1 }, 12.5);
+          tl.set("#sw", { opacity: 0 }, 12.5);
+          tl.to("#mp-a", { opacity: 0, duration: .25, ease: "sine.inOut" }, 12.6);
+          tl.to("#mp-b", { opacity: 1, duration: .25, ease: "sine.inOut" }, 12.72);
+          tl.fromTo("#plan", { opacity: 0, scale: .3, transformOrigin: pillOrigin }, { opacity: 1, scale: 1, duration: .6, ease: "power2.out" }, 12.5);
+          tl.set("#mpill", { opacity: 0 }, 13.15);
+          tl.fromTo("#p2-h", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .7, ease: "power2.out" }, 12.75);
+          tl.to("#screen", { opacity: .35, filter: "blur(3px)", duration: .6, ease: "power2.out" }, 12.5);
+          tl.to("#dahil", { scale: 1.08, duration: .16, ease: "power2.out" }, 13.3);
+          tl.to("#dahil", { scale: 1, duration: .3, ease: "sine.inOut" }, 13.46);
+          tl.fromTo("#hirow", { backgroundColor: "rgba(154,215,255,0)" }, { backgroundColor: "rgba(154,215,255,0.1)", duration: .5, ease: "sine.inOut" }, 13.3);
+
+          // whip pan to the screens; the line stays put while the world moves
+          tl.to("#stage", { x: -1920, filter: "blur(22px)", duration: .38, ease: "power2.in" }, 14.85);
+          tl.fromTo("#devwrap", { x: 1920, filter: "blur(22px)" }, { x: 40, filter: "blur(0px)", duration: .4, ease: "power2.out" }, 15.1);
+          tl.to("#devwrap", { x: -40, duration: 3, ease: "none" }, 15.5);
+          tl.to("#lgrp", { opacity: 1, duration: .5, ease: "sine.inOut" }, 15.2);
+          tl.fromTo("#p3-h", { opacity: 0, scale: 1.04, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "sine.out" }, 15.35);
+          tl.fromTo("#sweep", { x: -300 }, { x: 2200, duration: 2.1, ease: "none" }, 15.5);
+          DEV.forEach(function (d) {
+            tl.to(d.glow, { opacity: 1, duration: .45, ease: "sine.out" }, d.at);
+            tl.to(d.body, { borderColor: "rgba(154,215,255,.55)", duration: .45, ease: "sine.out" }, d.at);
+          });
+
+          // ======================= 4 · CTA 18.5–24 s: the play line =======================
+          tl.to("#devwrap", { opacity: 0, duration: .45, ease: "power2.in" }, 18.45);
+          tl.to("#p3-h", { opacity: 0, y: -20, duration: .4, ease: "power2.in" }, 18.45);
+          tl.to("#lgrp", { y: -270, duration: .8, ease: "expo.inOut" }, 18.6);
+          tl.to("#lL", { attr: { x2: 890 }, duration: .5, ease: "expo.inOut" }, 19.3);
+          tl.to("#lR", { attr: { x1: 1050 }, duration: .5, ease: "expo.inOut" }, 19.3);
+          var tri = { h: 0 };
+          tl.to(tri, { h: 78, duration: .7, ease: "expo.inOut", onUpdate: function () {
+            document.getElementById("pg").setAttribute("points", "890," + (600 - tri.h).toFixed(2) + " 1050,600 890," + (600 + tri.h).toFixed(2));
+          } }, 19.55);
+          tl.to("#pg", { attr: { "fill-opacity": .14 }, duration: .6, ease: "sine.inOut" }, 20.2);
+          tl.fromTo("#c-wm", { opacity: 0, scale: .92 }, { opacity: 1, scale: 1, duration: 1.2, ease: "expo.out" }, 19.5);
+          tl.fromTo("#c-tl", { opacity: 0, filter: "blur(16px)" }, { opacity: 1, filter: "blur(0px)", duration: 1, ease: "sine.out" }, 20.1);
+          tl.fromTo("#c-rc", { opacity: 0 }, { opacity: 1, duration: .6, ease: "sine.inOut" }, 20.8);
+          tl.fromTo("#c-dis", { opacity: 0 }, { opacity: 1, duration: .6, ease: "sine.inOut" }, 21.2);
+          // everything has settled by 22.0 s; the last second is silent and still
+
+          window.__timelines["main"] = tl;
+        }
+
+        var sample = "Bu akşam ne izlesem? Gürültüyü kapat. Artık Türkiye'de. İ ş ğ ı";
+        Promise.all([
+          document.fonts.load('800 132px "Manrope"', sample),
+          document.fonts.load('700 24px "Manrope"', sample),
+          document.fonts.load('600 30px "Manrope"', sample),
+          document.fonts.load('400 21px "JetBrains Mono"', "KAYDIRMA SÜRESİ ABONELİK akıllı Resmî"),
+          document.fonts.load('600 64px "JetBrains Mono"', "41:57 KONSEPT · RESMÎ DEĞİL")
+        ]).then(function () { return document.fonts.ready; }).then(build);
+      })();
+    </script>
+  </body>
+</html>

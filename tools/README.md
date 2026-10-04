@@ -10,6 +10,6 @@
 | `warm_sfx.py <dir>` | Synthesises warm UI sounds in C major: pop, tick, confirm, reveal, error-soft, whoosh-soft |
 | `build_gallery.py` | Rebuilds `docs/index.html` from `docs/themes/data/*.json` |
 | `build_transitions.py` | Validates `docs/transitions/data.json` and regenerates `creative/transition-atlas.md` |
-| `make_thumbs.py --chrome <path>` | Renders the gallery thumbnails (serve `docs/` on :8766 first) |
+| `make_thumbs.py --chrome <path> [--only NNN …]` | Renders the gallery thumbnails, or just the listed ones (serve `docs/` on :8766 first) |
 
 Python tools need `numpy`, `pillow` and `soundfile` (`pip install numpy pillow soundfile`). The shell tools need `ffmpeg` and `ffprobe` on your PATH.

@@ -2,17 +2,26 @@
 
 **Yazılım ürünleri için tanıtım ve motion videolarını [HyperFrames](https://github.com/heygen-com/hyperframes) ve Claude Code ile üretme kiti.**
 
-Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **100 görsel tema**. Amaç, "bir lansman videosuna ihtiyacımız var" noktasından render alınmış bir MP4'e, sonuç yapay zekâ işi gibi görünmeden ulaşmak.
+Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **101 görsel tema**. Amaç, "bir lansman videosuna ihtiyacımız var" noktasından render alınmış bir MP4'e, sonuç yapay zekâ işi gibi görünmeden ulaşmak.
 
 [English README →](README.md) · [Tema galerisi →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Geçiş atlası →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Yaratıcı kas →](creative) · [Altı film →](examples/six-films) · [Örnek proje →](examples/acme-suite-loop)
 
-> Bu repodaki bütün örneklerde **Acme** adında hayali bir şirket ve onun hayali ürünleri kullanılıyor. Gösterilen tüm rakamlar uydurmadır.
+> Bu repodaki bütün örneklerde **Acme** adında hayali bir şirket ve onun hayali ürünleri kullanılıyor; Acme ile ilgili tüm rakamlar uydurmadır. Tek istisna, açıkça etiketlenmiş [spec film](examples/spec-apple-tv-tr): gerçek bir lansmanı anlatıyor ve yalnızca kaynağı belli bilgileri söylüyor.
 
 > **Tek kural: hiçbir video bir öncekinin kopyası gibi hissettirmemeli.** Efektleri, geçişleri ve bileşenleri tekrar etmeyin. Her videoda yeni bir bileşen icat edin. Tek bir efekt seçmeden önce mesajı ve tonu belirleyin.
 
 **Yeni: [gerçek bir prompt ile başlayın](examples/prompts).** Bitmiş, 35 saniyelik maskotlu bir tanıtım videosunu üreten prompt'un kendisi, doldurulabilir şablonu ve her kapıda neler olduğu.
 
-## v1.2'de neler yeni: aynı hikâye, altı film
+## v1.3'te neler yeni: donanım reklamları, yazılım için
+
+![Apple TV artık Türkiye'de: resmî olmayan konsept filmden dört anahtar kare](docs/spec-apple-tv-tr.jpg)
+
+- **Yeni tema ailesi: donanım reklamı dili (hardware-ad grammar).** Apple'ın ünlendirdiği sade donanım reklamlarının dilini yazılım filmlerine çeviriyor. İlk tema **[101 Noise Cancelling](https://tugrawork-creator.github.io/saas-motion-kit/themes/101-noise-cancelling.html)**: 38 dashboard ince dalga çizgileri hâlinde uğulduyor, ürün çevresinde sessiz bir alan açıyor ve sessizliği yalnızca tek bir sinyal bozuyor. Film tek bir ses tasarımı anına dayanıyor: drop'ta tam sessizliğe kesme.
+- **[Gerçek bir lansman üzerine spec film](examples/spec-apple-tv-tr).** Apple TV, Eylül 2026'da Türkiye'de resmî olarak açıldı. Bu lansmanı 101'in diliyle, oturma odasına göre yeniden tasarlayarak anlattık: 24 sn, 16:9, Türkçe metinler, bir scriptle sentezlenen müzik (lisans gerekmiyor) ve yeni bir bileşen, *play çizgisi*. Resmî olmayan bir konsept çalışma; her karede etiketli ve Apple ile bağlantılı değil. Repoda gerçek bir ürünün adını taşıyan tek örnek bu ve yalnızca [brief](examples/spec-apple-tv-tr/BRIEF.md)'inde kaynağı verilen bilgileri söylüyor. Film [v1.3 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.3) sayfasında.
+- **Küçük düzeltmeler:** galeri artık tema sayısını "100" diye sabit yazmıyor, kendisi sayıyor. `tools/make_thumbs.py --only 101` de yalnızca değiştirdiğiniz temanın küçük resmini üretiyor.
+
+<details>
+<summary><b>v1.2'de neler yeniydi: aynı hikâye, altı film</b></summary>
 
 ![Aynı 12 saniyelik senaryo altı temada, altısı birlikte oynuyor](docs/six-films.gif)
 
@@ -25,6 +34,8 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 - **GitHub Action** ([`variety-audit.yml`](.github/workflows/variety-audit.yml)) her push ve pull request'te bütün `STORYBOARD.md` dosyalarını denetler. Kendini tekrar eden bir storyboard kontrolden geçemez.
 - **Şablon repo.** GitHub'da **Use this template** ile araçları, yaratıcı kuralları ve denetim Action'ı hazır kendi video reponuzu başlatabilirsiniz.
 - **Önce ve sonra, yan yana:** Acme Suite döngüsünün v1 ve v2 hâlleri [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2) sayfasında yan yana oynuyor.
+
+</details>
 
 <details>
 <summary><b>v1.1'de neler yeniydi: yaratıcı kas</b></summary>
@@ -44,8 +55,9 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 | `creative/` | **Yaratıcı kas:** 7 soru, ton matrisi, tekrar kuralları, bileşen atölyesi, geçiş atlası |
 | `playbook/` | Her aşamanın sonunda bir karar kapısı olan 7 aşamalı üretim rehberi |
 | `components/` | **Temiz ya da hayali bileşen** kuralı: ürünün arayüzü temizse gerçeğini canlandır, değilse hayali bileşen tasarla |
-| `docs/` | Tema galerisi (GitHub Pages). **100 tema** var; her birinde 4 anahtar kare, bileşen kiti, hareket notları ve referanslar bulunuyor |
+| `docs/` | Tema galerisi (GitHub Pages). **101 tema** var; her birinde 4 anahtar kare, bileşen kiti, hareket notları ve referanslar bulunuyor |
 | `examples/six-films/` | **Aynı hikâye, altı film:** tek bir 12 sn'lik senaryonun altı temadaki hâli; her birinin storyboard'u, hareket defteri ve yeni bileşeni, ayrıca ortak brief |
+| `examples/spec-apple-tv-tr/` | **Spec film:** Apple TV'nin Türkiye lansmanı, 101 temasının diliyle; 16:9, sentezlenmiş müzik (resmî olmayan konsept, her karede etiketli) |
 | `examples/acme-suite-loop/` | Eksiksiz bir HyperFrames projesi: stant ekranı için sessiz, kesintisiz dönen 40 saniyelik 3D döngü |
 | `.claude/skills/saas-motion-video/` | Bütün süreci sizinle birlikte yürüten Claude Code skill'i |
 | `templates/` | BRIEF, STORYBOARD ve tema sayfası şablonları |
@@ -71,9 +83,9 @@ Her aşama bir **insan kararıyla** biter. Üretimi ajan yapar, zevk kararların
 - **Temiz değilse** (eski ekranlar, kalabalık yönetim panelleri, henüz tasarlanmamış ürün): **hayali bileşenler** tasarlayın. Bunlar ürünün gerçekten ne yaptığını anlatan, sadeleştirilmiş arayüz parçalarıdır.
 - **Asla** olmayan bir özelliği, sahte rakamı ya da uydurma müşteriyi göstermeyin.
 
-## 100 tema, tek hikâye
+## 101 tema, tek hikâye
 
-Aynı 45 saniyelik hikâye 10 ailede 100 farklı görsel dille çizildi. Hikâye hayali **Acme Pulse** ürünü üzerine: metrikleri arka planda izleyen, anomaliyi müşteri fark etmeden yakalayan ve kararı insana bırakan bir yapay zekâ. Galeriden beğendiğiniz temaları seçip numaralarını brief'inize yazmanız yeterli.
+Aynı 45 saniyelik hikâye 11 ailede 101 farklı görsel dille çizildi. Hikâye hayali **Acme Pulse** ürünü üzerine: metrikleri arka planda izleyen, anomaliyi müşteri fark etmeden yakalayan ve kararı insana bırakan bir yapay zekâ. Galeriden beğendiğiniz temaları seçip numaralarını brief'inize yazmanız yeterli.
 
 ## Hızlı başlangıç
 
@@ -103,4 +115,4 @@ Ardından repo kökünde Claude Code'u açın ve şunu yazın:
 
 ## Lisans
 
-Kod ve dokümanlar MIT lisanslıdır; fontlar SIL OFL 1.1 ile dağıtılır. Acme ve ürünleri hayalidir.
+Kod ve dokümanlar MIT lisanslıdır; fontlar SIL OFL 1.1 ile dağıtılır. Acme ve ürünleri hayalidir. Apple TV, iCloud+, iPhone, iPad, Mac ve Apple TV 4K, Apple Inc.'in ticari markalarıdır; [spec film](examples/spec-apple-tv-tr) resmî olmayan bir konsept çalışmadır ve Apple ile bağlantılı ya da Apple tarafından onaylı değildir.
