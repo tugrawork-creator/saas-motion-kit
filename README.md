@@ -15,6 +15,7 @@ This kit trains that creative muscle. It combines a staged process, a component 
 ![Theme 101 Noise Cancelling: hook, reveal, proof and CTA](docs/theme-101.jpg)
 
 - **A new theme family: hardware-ad grammar.** It takes the minimal hardware ad (the kind Apple made famous) and translates it into films for software. The first theme is **[101 Noise Cancelling](https://tugrawork-creator.github.io/saas-motion-kit/themes/101-noise-cancelling.html)**: 38 dashboards hum as hairline waveforms, the product opens a quiet zone, and exactly one signal breaks the silence. The film hangs on one sound-design hit, a cut to true silence on the drop.
+- **[The human layer](creative/human-layer.md): people in the film, without leaving the triangle.** Generated, fictional people now appear in films, but every shot with a person still has a 3D move and a product beat. The kit has five formats (over-the-shoulder dive, portal cards, hand to interface, diorama presenter, metric on the face), truth rules (generated people are actors, never customers or testimonials), and a fal pipeline: a Nano Banana 2 cast card, Seedance 2.0 and Kling O3 clips, and Bria mattes. The pilot is **[Over-the-Shoulder Dive](examples/human-layer-ots)**: the real Pulse UI is pinned onto a generated plate's green screen frame by frame, the camera dives into a 3D three-step tutorial, a real finger taps Roll back, and we pull back to the face. Two new tools: `tools/fal_shots.py` runs a film's `shots.json` on fal, and `tools/screen_track.py` tracks a green screen for UI replacement. Footage stays out of git, and `placeholders.py` lets the cut preview without it.
 - **Smaller fixes:** the gallery counts its own themes instead of hardcoding 100, and `tools/make_thumbs.py --only 101` renders just the thumbnails you changed.
 
 <details>
@@ -55,11 +56,12 @@ This kit trains that creative muscle. It combines a staged process, a component 
 
 | Path | What it is |
 |---|---|
-| [`creative/`](creative) | **The creative muscle:** the seven questions, tone matrix, variety rules, component forge and transition atlas |
+| [`creative/`](creative) | **The creative muscle:** the seven questions, tone matrix, variety rules, component forge, transition atlas and the [human layer](creative/human-layer.md) |
 | [`playbook/`](playbook) | A 7-stage production playbook with a review gate at each stage |
 | [`components/`](components) | The **clean-or-imaginary** component rule: use the product's real UI when it is clean, otherwise design imaginary UI |
 | [`docs/`](docs) | GitHub Pages: the **101-theme gallery** (4 key frames, component kit, motion notes and references per theme) and the **live transition atlas** |
 | [`examples/six-films/`](examples/six-films) | **Same story, six films:** one 12 s script built in six themes, each with its storyboard, ledger and new component, plus the shared brief |
+| [`examples/human-layer-ots/`](examples/human-layer-ots) | **Human layer pilot:** a fictional on-call engineer, the real UI tracked onto their laptop, a dive into a 3D tutorial; the fal shot list and stand-in plates |
 | [`examples/acme-suite-loop/`](examples/acme-suite-loop) | A complete HyperFrames project: a silent, seamless 40 s 3D booth loop, with its v1 → v2 variety-audit lesson |
 | [`.claude/skills/saas-motion-video/`](.claude/skills/saas-motion-video) | A Claude Code skill that runs the whole process with you |
 | [`templates/`](templates) | `BRIEF.md`, `STORYBOARD.md` and the theme-sheet template |

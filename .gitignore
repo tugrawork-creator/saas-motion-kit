@@ -9,3 +9,7 @@ node_modules/
 __pycache__/
 .DS_Store
 Thumbs.db
+
+# generated footage (fal output or placeholders.py) stays local
+**/assets/footage/*
+!**/assets/footage/README.md

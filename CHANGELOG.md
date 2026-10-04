@@ -5,6 +5,11 @@
 **Added**
 - A new gallery family, **hardware-ad grammar**: minimal hardware product ads translated into films for software. Its first theme is `101 Noise Cancelling` (`docs/themes/101-noise-cancelling.html`, `data/101.json`, `thumbs/101.jpg`). 38 dashboards hum as hairline waveforms, the product opens a quiet zone, and one signal breaks a cut to true silence.
 - `docs/theme-101.jpg`: theme 101's four key frames for the README.
+- `creative/human-layer.md`: the human layer. Every shot with a fictional, generated person also has a 3D move and a product beat. It covers five formats, truth rules (actors, never customers or testimonials; an AI credit on the end card), the fal pipeline and compositing rules.
+- `examples/human-layer-ots/`: the pilot, Over-the-Shoulder Dive (27 s, 16:9). It includes a fal `shots.json`, `CAST.md`, `placeholders.py` stand-in plates and a composition that pins the real Pulse UI onto the plate's screen with a per-frame homography.
+- `tools/fal_shots.py`: runs a shot list on fal's queue API, chaining outputs, caching results and downloading media. It uses only the standard library.
+- `tools/screen_track.py`: tracks a green screen frame by frame (tested at 1.3 px mean error) and writes its corners for HyperFrames.
+- `.gitignore`: `assets/footage/` stays local.
 
 **Changed**
 - `tools/build_gallery.py`: the new family has its own filter, and the page title and headline count the themes instead of hardcoding 100.
