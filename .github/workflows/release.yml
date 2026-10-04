@@ -1,0 +1,32 @@
+name: release
+
+# Publish a GitHub release from a notes file in the repo: .github/releases/<tag>.md
+# Run it from the Actions tab (Run workflow) with the tag and the title.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to create on the selected branch, e.g. v1.3"
+        required: true
+      title:
+        description: "Release title"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          TITLE: ${{ inputs.title }}
+        run: |
+          [[ "$TAG" =~ ^v[0-9]+(\.[0-9]+)*$ ]] || { echo "tag must look like v1.3"; exit 1; }
+          notes=".github/releases/${TAG}.md"
+          test -f "$notes" || { echo "missing $notes"; exit 1; }
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "$TITLE" --notes-file "$notes"
