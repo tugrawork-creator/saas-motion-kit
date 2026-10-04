@@ -12,10 +12,9 @@ This kit trains that creative muscle. It combines a staged process, a component 
 
 ## What's new in v1.3: hardware ads, for software
 
-![Apple TV, now in Türkiye: four key frames from the unofficial spec film](docs/spec-apple-tv-tr.jpg)
+![Theme 101 Noise Cancelling: hook, reveal, proof and CTA](docs/theme-101.jpg)
 
 - **A new theme family: hardware-ad grammar.** It takes the minimal hardware ad (the kind Apple made famous) and translates it into films for software. The first theme is **[101 Noise Cancelling](https://tugrawork-creator.github.io/saas-motion-kit/themes/101-noise-cancelling.html)**: 38 dashboards hum as hairline waveforms, the product opens a quiet zone, and exactly one signal breaks the silence. The film hangs on one sound-design hit, a cut to true silence on the drop.
-- **[A spec film about a real launch](examples/spec-apple-tv-tr).** Apple TV opened officially in Türkiye in September 2026. We told that launch in 101's grammar, redesigned for the living room: 24 s, 16:9, Turkish copy, a score synthesised by a script (no music licence) and a new component, the *play line*. It is an unofficial concept, labelled on every frame and not affiliated with Apple. It is the only example in the repo that names a real product, and it states only the facts sourced in its [brief](examples/spec-apple-tv-tr/BRIEF.md). Watch it on the [v1.3 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.3).
 - **Smaller fixes:** the gallery counts its own themes instead of hardcoding 100, and `tools/make_thumbs.py --only 101` renders just the thumbnails you changed.
 
 <details>
@@ -48,7 +47,7 @@ This kit trains that creative muscle. It combines a staged process, a component 
 
 ![Six of the gallery themes](docs/assets/readme-hero.jpg)
 
-> Every example in this repo uses **Acme**, a fictional company, and its fictional products, and all Acme numbers are invented. The one exception is the clearly labelled [spec film](examples/spec-apple-tv-tr), which states only sourced facts about a real launch.
+> Every example in this repo uses **Acme**, a fictional company, and its fictional products. All numbers are invented.
 
 ---
 
@@ -61,7 +60,6 @@ This kit trains that creative muscle. It combines a staged process, a component 
 | [`components/`](components) | The **clean-or-imaginary** component rule: use the product's real UI when it is clean, otherwise design imaginary UI |
 | [`docs/`](docs) | GitHub Pages: the **101-theme gallery** (4 key frames, component kit, motion notes and references per theme) and the **live transition atlas** |
 | [`examples/six-films/`](examples/six-films) | **Same story, six films:** one 12 s script built in six themes, each with its storyboard, ledger and new component, plus the shared brief |
-| [`examples/spec-apple-tv-tr/`](examples/spec-apple-tv-tr) | **Spec film:** Apple TV's launch in Türkiye told in theme 101's grammar, 16:9, with a synthesised score (unofficial concept, labelled on every frame) |
 | [`examples/acme-suite-loop/`](examples/acme-suite-loop) | A complete HyperFrames project: a silent, seamless 40 s 3D booth loop, with its v1 → v2 variety-audit lesson |
 | [`.claude/skills/saas-motion-video/`](.claude/skills/saas-motion-video) | A Claude Code skill that runs the whole process with you |
 | [`templates/`](templates) | `BRIEF.md`, `STORYBOARD.md` and the theme-sheet template |
@@ -159,4 +157,3 @@ Rendered MP4s are attached to the [Releases](../../releases) page, so the reposi
 - [HyperFrames](https://github.com/heygen-com/hyperframes) is by HeyGen. Install its skills with `npx skills add heygen-com/hyperframes`.
 - If you generate music locally with Meta's MusicGen, note that its weights are **CC-BY-NC 4.0 (non-commercial)**. Use licensed music for commercial work.
 - Acme, Acme Pulse and Acme Suite are fictional. Any resemblance to real products is coincidental.
-- Apple TV, iCloud+, iPhone, iPad, Mac and Apple TV 4K are trademarks of Apple Inc. The [spec film](examples/spec-apple-tv-tr) is an unofficial concept and is not affiliated with or endorsed by Apple.
