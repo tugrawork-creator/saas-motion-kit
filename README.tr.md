@@ -2,7 +2,7 @@
 
 **Yazılım ürünleri için tanıtım ve motion videolarını [HyperFrames](https://github.com/heygen-com/hyperframes) ve Claude Code ile üretme kiti.**
 
-Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **100 görsel tema**. Amaç, "bir lansman videosuna ihtiyacımız var" noktasından render alınmış bir MP4'e, sonuç yapay zekâ işi gibi görünmeden ulaşmak.
+Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **101 görsel tema**. Amaç, "bir lansman videosuna ihtiyacımız var" noktasından render alınmış bir MP4'e, sonuç yapay zekâ işi gibi görünmeden ulaşmak.
 
 [English README →](README.md) · [Tema galerisi →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Geçiş atlası →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Yaratıcı kas →](creative) · [Altı film →](examples/six-films) · [Örnek proje →](examples/acme-suite-loop)
 
@@ -12,7 +12,16 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 
 **Yeni: [gerçek bir prompt ile başlayın](examples/prompts).** Bitmiş, 35 saniyelik maskotlu bir tanıtım videosunu üreten prompt'un kendisi, doldurulabilir şablonu ve her kapıda neler olduğu.
 
-## v1.2'de neler yeni: aynı hikâye, altı film
+## v1.3'te neler yeni: donanım reklamları, yazılım için
+
+![101 Noise Cancelling teması: hook, reveal, kanıt ve CTA kareleri](docs/theme-101.jpg)
+
+- **Yeni tema ailesi: donanım reklamı dili (hardware-ad grammar).** Apple'ın ünlendirdiği sade donanım reklamlarının dilini yazılım filmlerine çeviriyor. İlk tema **[101 Noise Cancelling](https://tugrawork-creator.github.io/saas-motion-kit/themes/101-noise-cancelling.html)**: 38 dashboard ince dalga çizgileri hâlinde uğulduyor, ürün çevresinde sessiz bir alan açıyor ve sessizliği yalnızca tek bir sinyal bozuyor. Film tek bir ses tasarımı anına dayanıyor: drop'ta tam sessizliğe kesme.
+- **[İnsan katmanı](creative/human-layer.md): üçgenden çıkmadan filmde insan.** Üretilmiş, kurgusal insanlar artık filmlere girebiliyor. Ama insan olan her çekim yine bir 3D hareket ve bir ürün adımı taşıyor. Beş format var: omuz üstü dalış, portal kartlar, elden arayüze, diorama sunucu, gözdeki metrik. Doğruluk kuralı da şu: üretilmiş insanlar oyuncudur, asla müşteri ya da referans değildir. Üretim fal hattıyla yapılıyor: Nano Banana 2 ile karakter kartı, Seedance 2.0 ve Kling O3 ile klipler, Bria ile matte. Pilot film **[Omuz Üstü Dalış](examples/human-layer-ots)**: gerçek Pulse arayüzü üretilmiş plate'in yeşil ekranına kare kare oturtuluyor, kamera ekrana dalıp 3D, üç adımlı bir tutorial'a giriyor, gerçek bir parmak Roll back'e basıyor ve yüze geri dönülüyor. İki yeni araç geldi: `tools/fal_shots.py` bir filmin `shots.json`'unu fal'da çalıştırıyor, `tools/screen_track.py` arayüz değiştirme için yeşil ekranı takip ediyor. Görüntüler git'e girmiyor; `placeholders.py` sayesinde kurgu görüntüsüz de izlenebiliyor.
+- **Küçük düzeltmeler:** galeri artık tema sayısını "100" diye sabit yazmıyor, kendisi sayıyor. `tools/make_thumbs.py --only 101` de yalnızca değiştirdiğiniz temanın küçük resmini üretiyor.
+
+<details>
+<summary><b>v1.2'de neler yeniydi: aynı hikâye, altı film</b></summary>
 
 ![Aynı 12 saniyelik senaryo altı temada, altısı birlikte oynuyor](docs/six-films.gif)
 
@@ -25,6 +34,8 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 - **GitHub Action** ([`variety-audit.yml`](.github/workflows/variety-audit.yml)) her push ve pull request'te bütün `STORYBOARD.md` dosyalarını denetler. Kendini tekrar eden bir storyboard kontrolden geçemez.
 - **Şablon repo.** GitHub'da **Use this template** ile araçları, yaratıcı kuralları ve denetim Action'ı hazır kendi video reponuzu başlatabilirsiniz.
 - **Önce ve sonra, yan yana:** Acme Suite döngüsünün v1 ve v2 hâlleri [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2) sayfasında yan yana oynuyor.
+
+</details>
 
 <details>
 <summary><b>v1.1'de neler yeniydi: yaratıcı kas</b></summary>
@@ -41,16 +52,17 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 
 | Klasör | Açıklama |
 |---|---|
-| `creative/` | **Yaratıcı kas:** 7 soru, ton matrisi, tekrar kuralları, bileşen atölyesi, geçiş atlası |
+| `creative/` | **Yaratıcı kas:** 7 soru, ton matrisi, tekrar kuralları, bileşen atölyesi, geçiş atlası ve insan katmanı |
+| `examples/human-layer-ots/` | **İnsan katmanı pilotu:** kurgusal nöbetçi mühendis, laptop ekranına takip edilen gerçek arayüz, 3D tutorial'a dalış; fal shot listesi ve yer tutucu plate'ler |
 | `playbook/` | Her aşamanın sonunda bir karar kapısı olan 7 aşamalı üretim rehberi |
 | `components/` | **Temiz ya da hayali bileşen** kuralı: ürünün arayüzü temizse gerçeğini canlandır, değilse hayali bileşen tasarla |
-| `docs/` | Tema galerisi (GitHub Pages). **100 tema** var; her birinde 4 anahtar kare, bileşen kiti, hareket notları ve referanslar bulunuyor |
+| `docs/` | Tema galerisi (GitHub Pages). **101 tema** var; her birinde 4 anahtar kare, bileşen kiti, hareket notları ve referanslar bulunuyor |
 | `examples/six-films/` | **Aynı hikâye, altı film:** tek bir 12 sn'lik senaryonun altı temadaki hâli; her birinin storyboard'u, hareket defteri ve yeni bileşeni, ayrıca ortak brief |
 | `examples/acme-suite-loop/` | Eksiksiz bir HyperFrames projesi: stant ekranı için sessiz, kesintisiz dönen 40 saniyelik 3D döngü |
 | `.claude/skills/saas-motion-video/` | Bütün süreci sizinle birlikte yürüten Claude Code skill'i |
 | `templates/` | BRIEF, STORYBOARD ve tema sayfası şablonları |
 | `examples/prompts/` | Bitmiş videoları üreten gerçek prompt'lar ve şablonları |
-| `tools/` | **Tekrar denetimi**, tema seçici, geçmiş raporu, teslim (4K → 1080p/2K), döngü birleşim kontrolü, sıcak arayüz efekt sesi üretici, galeri araçları |
+| `tools/` | **Tekrar denetimi**, fal shot listesi çalıştırıcı, yeşil ekran takibi, tema seçici, geçmiş raporu, teslim (4K → 1080p/2K), döngü birleşim kontrolü, sıcak arayüz efekt sesi üretici, galeri araçları |
 | `.github/workflows/` | GitHub Action olarak tekrar denetimi: her push ve pull request'te bütün storyboard'lar kontrol edilir |
 
 ## Süreç: 7 aşama, 7 kapı
@@ -71,9 +83,9 @@ Her aşama bir **insan kararıyla** biter. Üretimi ajan yapar, zevk kararların
 - **Temiz değilse** (eski ekranlar, kalabalık yönetim panelleri, henüz tasarlanmamış ürün): **hayali bileşenler** tasarlayın. Bunlar ürünün gerçekten ne yaptığını anlatan, sadeleştirilmiş arayüz parçalarıdır.
 - **Asla** olmayan bir özelliği, sahte rakamı ya da uydurma müşteriyi göstermeyin.
 
-## 100 tema, tek hikâye
+## 101 tema, tek hikâye
 
-Aynı 45 saniyelik hikâye 10 ailede 100 farklı görsel dille çizildi. Hikâye hayali **Acme Pulse** ürünü üzerine: metrikleri arka planda izleyen, anomaliyi müşteri fark etmeden yakalayan ve kararı insana bırakan bir yapay zekâ. Galeriden beğendiğiniz temaları seçip numaralarını brief'inize yazmanız yeterli.
+Aynı 45 saniyelik hikâye 11 ailede 101 farklı görsel dille çizildi. Hikâye hayali **Acme Pulse** ürünü üzerine: metrikleri arka planda izleyen, anomaliyi müşteri fark etmeden yakalayan ve kararı insana bırakan bir yapay zekâ. Galeriden beğendiğiniz temaları seçip numaralarını brief'inize yazmanız yeterli.
 
 ## Hızlı başlangıç
 

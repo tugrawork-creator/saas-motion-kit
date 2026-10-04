@@ -9,7 +9,7 @@ CATS = [
     ("product-ui", "Product UI as the stage"), ("type", "Typography & graphic systems"), ("material", "Material & 3D"),
     ("light", "Light, optics & texture"), ("metaphor", "Metaphor concepts"), ("signature", "Signature directions"),
     ("data", "Data storytelling"), ("character", "Characters & mascots"), ("era", "Art movements & eras"),
-    ("camera", "Camera & edit grammar"),
+    ("camera", "Camera & edit grammar"), ("hardware-ad", "Hardware-ad grammar"),
 ]
 CAT_NAME = dict(CATS)
 dots = lambda n: "●" * int(n) + "○" * (3 - int(n))
@@ -38,8 +38,8 @@ page = f"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>100 Motion Themes — saas-motion-kit</title>
-<meta name="description" content="100 storyboard themes for software promo videos made with HyperFrames + Claude Code, all shown on the same fictional product.">
+<title>{len(themes)} Motion Themes — saas-motion-kit</title>
+<meta name="description" content="{len(themes)} storyboard themes for software promo videos made with HyperFrames + Claude Code, all shown on the same fictional product.">
 <link rel="icon" href="assets/brand/acme-mark.svg">
 <link rel="stylesheet" href="assets/brand/acme.css">
 <style>
@@ -72,7 +72,7 @@ footer{{max-width:1360px;margin:48px auto 0;font-size:13px;color:var(--muted);li
 <header>
   <div>
     <div class="kicker">saas-motion-kit · theme gallery</div>
-    <h1>100 ways to tell <em>one</em> product story</h1>
+    <h1>{len(themes)} ways to tell <em>one</em> product story</h1>
     <p class="dek">Every sheet below tells the same 45-second story about the same fictional product, <b>Acme Pulse</b>, in a different visual theme. Each one has four key frames, a six-part component kit, three motion techniques and notes on how to adapt it to your own product. Pick one and hand it to Claude Code with <a href="https://github.com/heygen-com/hyperframes">HyperFrames</a>. <a href="transitions/">Transition atlas →</a></p>
   </div>
   <div class="logo"><img src="assets/brand/acme-mark.svg" alt="">Acme <span style="font-weight:500;color:var(--muted)">(fictional)</span></div>

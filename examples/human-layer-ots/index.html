@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Acme Pulse · Over-the-Shoulder Dive (human layer)</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <!-- screen corners for the over-the-shoulder plate, written by tools/screen_track.py -->
+    <script src="assets/footage/s01-screen.js"></script>
+    <style>
+      /* Fonts: SIL OFL 1.1, see assets/fonts/OFL.txt */
+      @font-face { font-family: "Manrope"; font-weight: 200 800; font-display: block; src: url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: block; src: url("assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: block; src: url("assets/fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: block; src: url("assets/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 600; font-display: block; src: url("assets/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2"); }
+      :root {
+        --ink: #0E1726; --muted: #5A6475; --paper: #F6F5F1; --line: rgba(14,23,38,.1);
+        --teal: #0FA3A3; --teal-deep: #0B6E6E; --teal-soft: #CFF1EE; --coral: #FF5A4E; --ok: #1F9D55;
+        --sans: "Manrope", sans-serif; --serif: "Instrument Serif", serif; --mono: "JetBrains Mono", monospace;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: var(--sans); color: var(--ink); background: #000; }
+      .clip { position: absolute; inset: 0; }
+      .plate { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .serif { font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; line-height: 1.04; }
+      .serif i { color: var(--teal-deep); }
+
+      /* ---------- the Pulse app (used on the laptop screen and full frame) ---------- */
+      .app { position: absolute; width: 1280px; height: 800px; background: #FBFBF8; overflow: hidden; }
+      .bar { height: 76px; display: flex; align-items: center; gap: 16px; padding: 0 32px; border-bottom: 1px solid var(--line); background: #fff; }
+      .bar img { width: 40px; height: 40px; }
+      .bar b { font: 800 26px var(--sans); }
+      .bar span { font: 400 20px var(--mono); color: var(--muted); }
+      .live { margin-left: auto; font: 600 20px var(--mono); color: var(--teal-deep); display: flex; align-items: center; gap: 10px; }
+      .live:before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 6px rgba(15,163,163,.18); }
+      .tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 26px 32px; }
+      .tab { height: 150px; border-radius: 16px; background: #fff; border: 1px solid var(--line); padding: 16px 18px; font: 600 19px var(--sans); color: var(--muted); position: relative; }
+      .tab svg { position: absolute; left: 18px; right: 18px; bottom: 18px; width: calc(100% - 36px); height: 60px; }
+      .tab.hot { border-color: rgba(255,90,78,.5); background: #FFF6F4; color: var(--coral); }
+      .toast { position: absolute; right: 28px; width: 420px; padding: 16px 20px; border-radius: 16px; background: var(--ink); color: #fff; font: 600 20px var(--sans); box-shadow: 0 16px 40px rgba(14,23,38,.3); }
+      .toast small { display: block; font: 400 16px var(--mono); color: #9FB0C6; margin-top: 4px; }
+
+      /* ---------- tutorial world ---------- */
+      #world { background: radial-gradient(90% 80% at 50% 40%, #FFFFFF 0%, #F4F3EF 60%, #E8E7E2 100%); }
+      #steps { position: absolute; left: 96px; top: 70px; display: flex; gap: 12px; }
+      .chip { font: 600 20px var(--mono); padding: 10px 18px; border-radius: 100px; border: 1.5px solid var(--line); color: var(--muted); background: #fff; }
+      .chip.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+      .stephead { position: absolute; left: 96px; top: 140px; font-size: 92px; }
+      #stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; perspective: 2200px; perspective-origin: 60% 45%; }
+      #win { position: absolute; left: 760px; top: 270px; width: 1000px; height: 640px; transform-style: preserve-3d; }
+      .layer { position: absolute; inset: 0; border-radius: 26px; }
+      #l-base { background: #fff; border: 1px solid var(--line); box-shadow: 0 40px 90px rgba(14,23,38,.16); overflow: hidden; }
+      #l-pulse { background: rgba(15,163,163,.08); border: 2px solid rgba(15,163,163,.55); opacity: 0; overflow: hidden; }
+      #scan { position: absolute; left: 0; right: 0; height: 90px; top: 0; background: linear-gradient(180deg, rgba(15,163,163,0), rgba(15,163,163,.28), rgba(15,163,163,0)); }
+      #l-alert { border: 2px dashed rgba(255,90,78,.6); opacity: 0; }
+      .row { display: grid; grid-template-columns: 320px 1fr 190px; align-items: center; gap: 20px; height: 82px; padding: 0 30px; border-bottom: 1px solid rgba(14,23,38,.06); }
+      .row .n { font: 600 26px var(--sans); }
+      .row .v { font: 600 24px var(--mono); text-align: right; color: var(--ok); white-space: nowrap; }
+      .row svg { width: 100%; height: 40px; }
+      #hot { position: relative; }
+      #hotbg { position: absolute; inset: 0; background: #FFF4F2; border-left: 6px solid var(--coral); opacity: 0; }
+      #hot .n, #hot .v, #hot svg { position: relative; }
+      #ctx { position: absolute; left: 30px; right: 30px; top: 552px; display: flex; align-items: center; gap: 16px; opacity: 0; }
+      #ctx .why { font: 400 22px var(--mono); color: #6B4A45; margin-right: auto; }
+      .btn { position: relative; font: 700 24px var(--sans); border-radius: 100px; padding: 15px 30px; border: 2px solid rgba(14,23,38,.15); background: #fff; }
+      .btn.p { background: var(--coral); border-color: var(--coral); color: #fff; }
+      #ripple { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px; border-radius: 50%; border: 4px solid #fff; opacity: 0; }
+      .callout { position: absolute; font: 600 22px var(--mono); color: var(--ink); white-space: nowrap; opacity: 0; }
+      .callout:before { content: ""; display: inline-block; width: 70px; height: 2px; background: var(--ink); vertical-align: middle; margin-right: 12px; }
+      .src { position: absolute; width: 150px; height: 150px; border-radius: 34px; background: #fff; border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(14,23,38,.12); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font: 600 19px var(--sans); color: var(--muted); }
+      .src i { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; font: 700 26px var(--mono); font-style: normal; color: #fff; }
+
+      /* ---------- people ---------- */
+      .cap { position: absolute; left: 96px; bottom: 90px; color: #fff; text-shadow: 0 2px 24px rgba(0,0,0,.6); }
+      .who { font: 600 22px var(--mono); letter-spacing: .1em; color: rgba(255,255,255,.85); }
+      #face-cap { font-size: 84px; }
+
+      /* ---------- CTA ---------- */
+      #cta { background: radial-gradient(90% 80% at 50% 45%, #FFFFFF 0%, #F4F3EF 65%, #E6E5E0 100%); }
+      #lock { position: absolute; left: 0; right: 0; top: 300px; display: flex; justify-content: center; align-items: center; gap: 26px; }
+      #lock img { width: 128px; height: 128px; }
+      #lock b { font: 800 104px var(--sans); letter-spacing: -.03em; }
+      #tag { position: absolute; left: 0; right: 0; top: 480px; text-align: center; font-size: 100px; }
+      #start { position: absolute; left: 50%; top: 680px; transform: translateX(-50%); font: 700 36px var(--sans); color: #fff; background: var(--coral); border-radius: 100px; padding: 24px 60px; box-shadow: 0 18px 40px rgba(255,90,78,.35); white-space: nowrap; }
+      #credit { position: absolute; left: 0; right: 0; bottom: 46px; text-align: center; font: 400 19px var(--mono); color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="27" data-width="1920" data-height="1080">
+
+      <!-- S01 · over the shoulder: real plate, the laptop screen replaced by the Pulse app -->
+      <video id="v01" class="clip plate" src="assets/footage/s01-ots.mp4" muted playsinline data-start="0" data-duration="5.4" data-track-index="0"></video>
+      <div id="s01" class="clip" data-start="0" data-duration="5.4" data-track-index="1">
+        <div id="ots" class="clip" data-layout-ignore>
+          <div class="app" id="scr" data-layout-ignore>
+            <div class="bar"><img src="assets/brand/acme-mark.svg" alt="" /><b>Dashboards</b><span>· 38 tabs open</span></div>
+            <div class="tabs" id="chaos"></div>
+            <div class="toast" style="top:300px">p95 latency 212 ms<small>alert · muted</small></div>
+            <div class="toast" style="top:410px">Error rate 0.4 %<small>anyone looking?</small></div>
+            <div class="toast" style="top:520px">Signups · no data<small>since 22:10</small></div>
+          </div>
+        </div>
+        <div class="cap"><div class="who" id="who">DENIZ · ON CALL · 23:40</div></div>
+      </div>
+
+      <!-- the tutorial, inside the screen -->
+      <div id="world" class="clip" data-start="5" data-duration="11.4" data-track-index="2">
+        <div id="steps"><span class="chip" id="c1">1 · Connect</span><span class="chip" id="c2">2 · Watch</span><span class="chip" id="c3">3 · Decide</span></div>
+        <div class="stephead serif" id="h1">Connect your <i>metrics.</i></div>
+        <div class="stephead serif" id="h2">Pulse <i>watches</i> every minute.</div>
+        <div class="stephead serif" id="h3">You <i>decide.</i></div>
+        <div id="stage" data-layout-ignore>
+          <div id="win">
+            <div class="layer" id="l-base">
+              <div class="bar"><img src="assets/brand/acme-mark.svg" alt="" /><b>Acme Pulse</b><span>· watching 14 metrics</span><em class="live">live</em></div>
+              <div id="rows"></div>
+              <div id="ctx"><span class="why">since 09:42 · after deploy #2231</span><span class="btn p" id="rb">Roll back<i id="ripple"></i></span><span class="btn">Acknowledge</span></div>
+            </div>
+            <div class="layer" id="l-pulse"><div id="scan"></div></div>
+            <div class="layer" id="l-alert"></div>
+          </div>
+          <div class="callout" id="k1" style="left:520px;top:860px">your metrics</div>
+          <div class="callout" id="k2" style="left:440px;top:660px">Pulse · checks every minute</div>
+          <div class="callout" id="k3" style="left:380px;top:470px">only what needs you</div>
+          <div id="srcs"></div>
+        </div>
+      </div>
+
+      <!-- S02 · the human decision: a real finger taps, and the UI answers -->
+      <video id="v02" data-layout-allow-occlusion class="clip plate" src="assets/footage/s02-tap.mp4" muted playsinline data-media-start="1.5" data-start="13.4" data-duration="1.3" data-track-index="3"></video>
+
+      <!-- S03 · pull back to the person -->
+      <video id="v03" class="clip plate" src="assets/footage/s03-face.mp4" muted playsinline data-start="15.9" data-duration="6" data-track-index="5"></video>
+      <div id="s03" class="clip" data-start="15.9" data-duration="6" data-track-index="6">
+        <div class="cap"><div class="serif" id="face-cap">Caught <i style="color:#9FE3DD">before</i> customers noticed.</div></div>
+      </div>
+
+      <div id="cta" class="clip" data-start="21.6" data-duration="5.4" data-track-index="7">
+        <div id="lock"><img src="assets/brand/acme-mark.svg" alt="Acme" /><b>Acme Pulse</b></div>
+        <div id="tag" class="serif">You ship. <i>Pulse watches.</i></div>
+        <div id="start">Start free</div>
+        <div id="credit">The people in this film are AI-generated characters. Acme is fictional.</div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var SCREEN = window.S01_SCREEN || { w: 1920, h: 1080, fps: 30, frames: [[1000, 302, 1628, 346, 1610, 720, 990, 690]] };
+        var SW = 1280, SH = 800, OVER = 1.03; // the app is pinned 3 % larger than the green area to cover the matte edge
+
+        function spark(points, color, w) { return '<svg viewBox="0 0 200 40" preserveAspectRatio="none"><polyline points="' + points + '" fill="none" stroke="' + color + '" stroke-width="' + (w || 3) + '" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>'; }
+        var CALM = "2,24 30,22 55,26 80,20 110,22 140,18 170,20 198,16", DROP = "2,10 30,11 60,9 90,10 115,12 135,30 160,32 198,33", BACK = "2,10 30,11 60,9 90,10 115,12 135,30 150,22 170,14 198,11";
+
+        // homography: the app rectangle onto the tracked screen quad, as a CSS matrix3d
+        function matrix3d(q) {
+          var src = [[0, 0], [SW, 0], [SW, SH], [0, SH]], A = [], B = [];
+          for (var i = 0; i < 4; i++) {
+            var x = src[i][0], y = src[i][1], u = q[2 * i], v = q[2 * i + 1];
+            A.push([x, y, 1, 0, 0, 0, -u * x, -u * y]); B.push(u);
+            A.push([0, 0, 0, x, y, 1, -v * x, -v * y]); B.push(v);
+          }
+          for (var c = 0; c < 8; c++) { // Gaussian elimination
+            var p = c; for (var r = c + 1; r < 8; r++) if (Math.abs(A[r][c]) > Math.abs(A[p][c])) p = r;
+            var t = A[c]; A[c] = A[p]; A[p] = t; t = B[c]; B[c] = B[p]; B[p] = t;
+            for (r = 0; r < 8; r++) if (r !== c) { var f = A[r][c] / A[c][c]; for (var k = c; k < 8; k++) A[r][k] -= f * A[c][k]; B[r] -= f * B[c]; }
+          }
+          var h = B.map(function (b, i) { return b / A[i][i]; });
+          return "matrix3d(" + [h[0], h[3], 0, h[6], h[1], h[4], 0, h[7], 0, 0, 1, 0, h[2], h[5], 0, 1].join(",") + ")";
+        }
+        function quadAt(t) {
+          var f = SCREEN.frames[Math.min(SCREEN.frames.length - 1, Math.max(0, Math.floor(t * SCREEN.fps)))], s = 1920 / SCREEN.w;
+          var cx = (f[0] + f[2] + f[4] + f[6]) / 4, cy = (f[1] + f[3] + f[5] + f[7]) / 4, q = [];
+          for (var i = 0; i < 8; i += 2) { q.push((cx + (f[i] - cx) * OVER) * s, (cy + (f[i + 1] - cy) * OVER) * s); }
+          return q;
+        }
+
+        function build() {
+          var tl = gsap.timeline({ paused: true });
+
+          // ---- the laptop screen: 38 tabs of noise ----
+          var chaos = document.getElementById("chaos"), names = ["Checkout", "Signups", "p95", "Errors", "Billing", "Search", "Mobile", "Queue"];
+          names.forEach(function (n, i) { var d = document.createElement("div"); d.className = "tab" + (i === 3 || i === 5 ? " hot" : ""); d.innerHTML = n + spark(i % 2 ? CALM : "2,30 40,8 80,26 120,6 160,30 198,12", i === 3 || i === 5 ? "#FF5A4E" : "#9AA3B2", 2.5); chaos.appendChild(d); });
+          var scr = document.getElementById("scr"); scr.style.transformOrigin = "0 0";
+          var pin = { t: 0 };
+          tl.to(pin, { t: 5.4, duration: 5.4, ease: "none", onUpdate: function () { scr.style.transform = matrix3d(quadAt(pin.t)); } }, 0);
+          scr.style.transform = matrix3d(quadAt(0));
+          tl.fromTo("#who", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .7, ease: "power2.out" }, .5);
+          document.querySelectorAll(".toast").forEach(function (e, i) { tl.fromTo(e, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: .4, ease: "power3.out" }, 1.2 + i * .6); });
+
+          // ---- push-through: dive into the screen ----
+          var q = quadAt(4.0), cx = (q[0] + q[2] + q[4] + q[6]) / 4, cy = (q[1] + q[3] + q[5] + q[7]) / 4, qw = (q[2] - q[0] + q[4] - q[6]) / 2;
+          gsap.set(["#ots", "#v01"], { transformOrigin: cx + "px " + cy + "px" });
+          tl.to(["#ots", "#v01"], { scale: 1920 / qw * 1.15, x: 960 - cx, y: 540 - cy, duration: 1.3, ease: "expo.in" }, 4.0);
+          tl.to("#who", { opacity: 0, duration: .3 }, 4.0);
+          tl.fromTo("#world", { opacity: 0 }, { opacity: 1, duration: .3, ease: "none" }, 5.0);
+
+          // ---- the window and its rows ----
+          var rows = document.getElementById("rows"), data = [["Signups", "✓", CALM], ["Active users", "✓", CALM], ["p95 latency", "212 ms", CALM], ["Checkout conversion", "−18%", DROP], ["Error rate", "0.4 %", CALM], ["Events / sec", "✓", CALM]];
+          data.forEach(function (d, i) {
+            var r = document.createElement("div"); r.className = "row"; if (i === 3) r.id = "hot";
+            r.innerHTML = (i === 3 ? '<span id="hotbg"></span>' : "") + '<span class="n">' + d[0] + '</span>' + spark(i === 3 ? CALM : d[2], "#0FA3A3") + '<span class="v">' + (i === 3 ? "✓" : d[1]) + "</span>";
+            rows.appendChild(r);
+          });
+          var rowEls = rows.querySelectorAll(".row");
+          gsap.set("#win", { rotationX: 14, rotationY: -20, z: -120 });
+          tl.set("#win", { opacity: 0, y: 80, scale: 1 }, 0);
+
+          // step 1 · connect: six sources fly into the window
+          tl.to("#c1", { backgroundColor: "#0E1726", color: "#fff", borderColor: "#0E1726", duration: .2 }, 5.3);
+          tl.fromTo("#h1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .7, ease: "power3.out" }, 5.4);
+          tl.to("#win", { opacity: 1, y: 0, duration: .9, ease: "power3.out" }, 5.4);
+          var srcs = document.getElementById("srcs"), SRC = [["Checkout", "#FF8A3D", "$"], ["Signups", "#5E5CE6", "+"], ["API", "#0FA3A3", "{}"], ["Billing", "#30A46C", "€"], ["Mobile", "#E5484D", "▢"], ["Search", "#3E63DD", "⌕"]];
+          SRC.forEach(function (s, i) {
+            var e = document.createElement("div"); e.className = "src"; e.style.left = (110 + (i % 3) * 190) + "px"; e.style.top = (420 + Math.floor(i / 3) * 190) + "px";
+            e.innerHTML = '<i style="background:' + s[1] + '">' + s[2] + "</i>" + s[0]; srcs.appendChild(e);
+            tl.fromTo(e, { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .4, ease: "power3.out" }, 5.7 + i * .1);
+            tl.to(e, { x: 760 - e.offsetLeft, y: 360 + i * 82 - e.offsetTop, scale: .3, opacity: 0, duration: .55, ease: "power2.in" }, 6.7 + i * .16);
+            tl.fromTo(rowEls[i], { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .35, ease: "power2.out" }, 7.15 + i * .16);
+          });
+
+          // step 2 · watch: exploded view, the Pulse layer scans, then everything settles
+          tl.to("#h1", { opacity: 0, y: -20, duration: .3 }, 8.1);
+          tl.to("#c1", { backgroundColor: "#fff", color: "#5A6475", borderColor: "rgba(14,23,38,.1)", duration: .2 }, 8.1);
+          tl.to("#c2", { backgroundColor: "#0E1726", color: "#fff", borderColor: "#0E1726", duration: .2 }, 8.15);
+          tl.fromTo("#h2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .7, ease: "power3.out" }, 8.25);
+          tl.to("#win", { rotationX: 52, rotationY: -28, z: -260, y: 60, duration: 1, ease: "power3.inOut" }, 8.2);
+          tl.to("#l-pulse", { opacity: 1, z: 150, duration: .9, ease: "power3.inOut" }, 8.3);
+          tl.to("#l-alert", { opacity: 1, z: 300, duration: .9, ease: "power3.inOut" }, 8.4);
+          ["#k1", "#k2", "#k3"].forEach(function (k, i) { tl.fromTo(k, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: .4, ease: "power2.out" }, 9.0 + i * .2); });
+          tl.fromTo("#scan", { y: -90 }, { y: 640, duration: 1.1, ease: "none" }, 9.2);
+          tl.to(["#k1", "#k2", "#k3"], { opacity: 0, duration: .3 }, 10.6);
+          tl.to("#l-pulse", { opacity: 0, z: 0, duration: .7, ease: "power3.inOut" }, 10.6);
+          tl.to("#l-alert", { opacity: 0, z: 0, duration: .7, ease: "power3.inOut" }, 10.6);
+          tl.to("#win", { rotationX: 0, rotationY: 0, z: 0, y: 20, x: -40, duration: 1, ease: "power3.inOut" }, 10.6);
+
+          // step 3 · decide: the checkout row turns coral and asks for a human
+          tl.to("#h2", { opacity: 0, y: -20, duration: .3 }, 11.1);
+          tl.to("#c2", { backgroundColor: "#fff", color: "#5A6475", borderColor: "rgba(14,23,38,.1)", duration: .2 }, 11.1);
+          tl.to("#c3", { backgroundColor: "#0E1726", color: "#fff", borderColor: "#0E1726", duration: .2 }, 11.15);
+          tl.fromTo("#h3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .7, ease: "power3.out" }, 11.25);
+          var hot = document.getElementById("hot");
+          tl.to("#hotbg", { opacity: 1, duration: .3, ease: "power2.out" }, 11.5);
+          var hotSpark = { k: 0 };
+          tl.to(hotSpark, { k: 1, duration: .5, ease: "power2.out", onUpdate: function () {
+            hot.querySelector("polyline").setAttribute("points", hotSpark.k < .5 ? CALM : DROP);
+            hot.querySelector("polyline").setAttribute("stroke", hotSpark.k < .5 ? "#0FA3A3" : "#FF5A4E");
+            var v = hot.querySelector(".v"); v.textContent = hotSpark.k < .5 ? "✓" : "−18%"; v.style.color = hotSpark.k < .5 ? "#1F9D55" : "#FF5A4E";
+          } }, 11.5);
+          tl.fromTo("#ctx", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .5, ease: "power3.out" }, 11.9);
+          tl.to("#win", { scale: 1.06, duration: 1.4, ease: "sine.inOut" }, 12.0);
+
+          // 13.4 s: match cut to the real finger; 14.7 s: the click lands in the UI
+          tl.fromTo("#ripple", { opacity: .9, scale: .4 }, { opacity: 0, scale: 4, duration: .6, ease: "power2.out" }, 14.7);
+          tl.fromTo("#rb", { scale: .94 }, { scale: 1, duration: .3, ease: "power2.out" }, 14.7);
+          var fix = { k: 0 };
+          tl.to(fix, { k: 1, duration: .4, ease: "none", onUpdate: function () {
+            if (fix.k < .5) return;
+            hot.querySelector("polyline").setAttribute("points", BACK); hot.querySelector("polyline").setAttribute("stroke", "#0FA3A3");
+            var v = hot.querySelector(".v"); v.textContent = "↺ fixed"; v.style.color = "#0B6E6E";
+          } }, 14.9);
+          tl.to("#hotbg", { opacity: 0, duration: .5 }, 15.0);
+          tl.to("#ctx", { opacity: 0, duration: .3 }, 15.0);
+
+          // dolly-out to the person
+          tl.to("#win", { scale: .7, opacity: 0, duration: .8, ease: "power2.in" }, 15.5);
+          tl.to("#world", { opacity: 0, duration: .5, ease: "none" }, 15.9);
+          tl.fromTo("#v03", { scale: 1.12 }, { scale: 1, duration: 2.4, ease: "power2.out" }, 15.9);
+          tl.fromTo("#face-cap", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .8, ease: "power3.out" }, 17.4);
+          tl.to("#face-cap", { opacity: 0, duration: .4 }, 21.0);
+
+          // CTA
+          tl.fromTo("#cta", { opacity: 0 }, { opacity: 1, duration: .5, ease: "none" }, 21.6);
+          tl.fromTo("#lock", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .8, ease: "expo.out" }, 21.9);
+          tl.fromTo("#tag", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .8, ease: "expo.out" }, 22.4);
+          tl.fromTo("#start", { opacity: 0, scale: .9 }, { opacity: 1, scale: 1, duration: .6, ease: "expo.out" }, 23.0);
+          tl.fromTo("#credit", { opacity: 0 }, { opacity: 1, duration: .6, ease: "sine.inOut" }, 23.4);
+
+          window.__timelines["main"] = tl;
+        }
+
+        Promise.all([
+          document.fonts.load('400 92px "Instrument Serif"'), document.fonts.load('italic 400 92px "Instrument Serif"'),
+          document.fonts.load('800 26px "Manrope"'), document.fonts.load('600 22px "JetBrains Mono"'), document.fonts.load('400 20px "JetBrains Mono"')
+        ]).then(function () { return document.fonts.ready; }).then(build);
+      })();
+    </script>
+  </body>
+</html>

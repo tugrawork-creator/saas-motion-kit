@@ -60,3 +60,7 @@ Mark motifs in the ledger (`motif:` prefix) and the audit won't flag them.
 - [variety-rules.md](variety-rules.md): the anti-repetition rules the audit enforces, and the ones only a human can
 - [transition-atlas.md](transition-atlas.md): 24 narrative transitions (the [live demos](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) loop in the browser)
 - [component-forge.md](component-forge.md): how to invent a new, truthful component in 15 minutes
+
+## People in the film
+
+When a film needs a person, read [the human layer](human-layer.md). Every shot with a person still has a 3D move and a product beat, and generated people are actors, never customers.

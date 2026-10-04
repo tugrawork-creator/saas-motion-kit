@@ -1,0 +1,13 @@
+{
+  "name": "human-layer-ots",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "placeholders": "python placeholders.py",
+    "shots": "python ../../tools/fal_shots.py shots.json",
+    "track": "python ../../tools/screen_track.py assets/footage/s01-ots.mp4 assets/footage/s01-screen.js --var S01_SCREEN",
+    "dev": "npx --yes hyperframes@0.8.78 preview",
+    "check": "npx --yes hyperframes@0.8.78 check",
+    "render": "npx --yes hyperframes@0.8.78 render"
+  }
+}

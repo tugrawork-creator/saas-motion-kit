@@ -4,13 +4,22 @@
 
 > **The one rule: no two films should feel like the same film.** Don't repeat effects, transitions or components. Invent a new component for every film. Decide the message and the tone before you pick a single effect.
 
-This kit trains that creative muscle. It combines a staged process, a component strategy, **100 visual themes**, a **24-transition atlas** and a **variety audit** that catches repetition in your storyboard before you build it.
+This kit trains that creative muscle. It combines a staged process, a component strategy, **101 visual themes**, a **24-transition atlas** and a **variety audit** that catches repetition in your storyboard before you build it.
 
 [Türkçe README →](README.tr.md) · [Theme gallery →](https://tugrawork-creator.github.io/saas-motion-kit/) · [Transition atlas →](https://tugrawork-creator.github.io/saas-motion-kit/transitions/) · [Creative muscle →](creative) · [Six films →](examples/six-films) · [Example →](examples/acme-suite-loop)
 
 **New: [start from a real prompt](examples/prompts).** The exact prompt behind a finished 35 s mascot promo, plus a fill-in template and what happened at each gate.
 
-## What's new in v1.2: same story, six films
+## What's new in v1.3: hardware ads, for software
+
+![Theme 101 Noise Cancelling: hook, reveal, proof and CTA](docs/theme-101.jpg)
+
+- **A new theme family: hardware-ad grammar.** It takes the minimal hardware ad (the kind Apple made famous) and translates it into films for software. The first theme is **[101 Noise Cancelling](https://tugrawork-creator.github.io/saas-motion-kit/themes/101-noise-cancelling.html)**: 38 dashboards hum as hairline waveforms, the product opens a quiet zone, and exactly one signal breaks the silence. The film hangs on one sound-design hit, a cut to true silence on the drop.
+- **[The human layer](creative/human-layer.md): people in the film, without leaving the triangle.** Generated, fictional people now appear in films, but every shot with a person still has a 3D move and a product beat. The kit has five formats (over-the-shoulder dive, portal cards, hand to interface, diorama presenter, metric on the face), truth rules (generated people are actors, never customers or testimonials), and a fal pipeline: a Nano Banana 2 cast card, Seedance 2.0 and Kling O3 clips, and Bria mattes. The pilot is **[Over-the-Shoulder Dive](examples/human-layer-ots)**: the real Pulse UI is pinned onto a generated plate's green screen frame by frame, the camera dives into a 3D three-step tutorial, a real finger taps Roll back, and we pull back to the face. Two new tools: `tools/fal_shots.py` runs a film's `shots.json` on fal, and `tools/screen_track.py` tracks a green screen for UI replacement. Footage stays out of git, and `placeholders.py` lets the cut preview without it.
+- **Smaller fixes:** the gallery counts its own themes instead of hardcoding 100, and `tools/make_thumbs.py --only 101` renders just the thumbnails you changed.
+
+<details>
+<summary><b>What was new in v1.2: same story, six films</b></summary>
 
 ![The same 12-second script told in six themes, all six playing in sync](docs/six-films.gif)
 
@@ -24,6 +33,8 @@ This kit trains that creative muscle. It combines a staged process, a component 
 - **Template repository.** Click **Use this template** to start your own film repo with the tools, the creative rules and the audit Action already in place.
 - **Before and after, side by side:** the Acme Suite loop's v1 and v2 play next to each other on the [v1.2 release](https://github.com/tugrawork-creator/saas-motion-kit/releases/tag/v1.2).
 
+</details>
+
 <details>
 <summary><b>What was new in v1.1: the creative muscle</b></summary>
 
@@ -35,7 +46,7 @@ This kit trains that creative muscle. It combines a staged process, a component 
 
 </details>
 
-![Six of the 100 themes](docs/assets/readme-hero.jpg)
+![Six of the gallery themes](docs/assets/readme-hero.jpg)
 
 > Every example in this repo uses **Acme**, a fictional company, and its fictional products. All numbers are invented.
 
@@ -45,11 +56,12 @@ This kit trains that creative muscle. It combines a staged process, a component 
 
 | Path | What it is |
 |---|---|
-| [`creative/`](creative) | **The creative muscle:** the seven questions, tone matrix, variety rules, component forge and transition atlas |
+| [`creative/`](creative) | **The creative muscle:** the seven questions, tone matrix, variety rules, component forge, transition atlas and the [human layer](creative/human-layer.md) |
 | [`playbook/`](playbook) | A 7-stage production playbook with a review gate at each stage |
 | [`components/`](components) | The **clean-or-imaginary** component rule: use the product's real UI when it is clean, otherwise design imaginary UI |
-| [`docs/`](docs) | GitHub Pages: the **100-theme gallery** (4 key frames, component kit, motion notes and references per theme) and the **live transition atlas** |
+| [`docs/`](docs) | GitHub Pages: the **101-theme gallery** (4 key frames, component kit, motion notes and references per theme) and the **live transition atlas** |
 | [`examples/six-films/`](examples/six-films) | **Same story, six films:** one 12 s script built in six themes, each with its storyboard, ledger and new component, plus the shared brief |
+| [`examples/human-layer-ots/`](examples/human-layer-ots) | **Human layer pilot:** a fictional on-call engineer, the real UI tracked onto their laptop, a dive into a 3D tutorial; the fal shot list and stand-in plates |
 | [`examples/acme-suite-loop/`](examples/acme-suite-loop) | A complete HyperFrames project: a silent, seamless 40 s 3D booth loop, with its v1 → v2 variety-audit lesson |
 | [`.claude/skills/saas-motion-video/`](.claude/skills/saas-motion-video) | A Claude Code skill that runs the whole process with you |
 | [`templates/`](templates) | `BRIEF.md`, `STORYBOARD.md` and the theme-sheet template |
@@ -78,9 +90,9 @@ Promo videos for software live or die on the UI you show. The rule:
 
 Details, a decision checklist and examples: [`components/`](components).
 
-## 100 themes, one story
+## 101 themes, one story
 
-The same 45-second story about the fictional **Acme Pulse**, an AI that watches product metrics and flags anomalies, is drawn in 100 different visual languages across 10 families:
+The same 45-second story about the fictional **Acme Pulse**, an AI that watches product metrics and flags anomalies, is drawn in 101 different visual languages across 11 families:
 
 | Family | Themes |
 |---|---|
@@ -94,6 +106,7 @@ The same 45-second story about the fictional **Acme Pulse**, an AI that watches 
 | Characters & mascots | 073–082 |
 | Art movements & eras | 083–092 |
 | Camera & edit grammar | 093–100 |
+| Hardware-ad grammar (new) | 101 |
 
 Each sheet shows **Hook → Reveal → Proof moment → CTA**. It also lists six components, three motion techniques with timings, the risk to watch for, how to adapt the theme to your own product, and references. Open the [gallery](https://tugrawork-creator.github.io/saas-motion-kit/), pick two or three themes, and put them in your brief.
 

@@ -1,0 +1,111 @@
+{
+  "film": "Acme Pulse · Over-the-Shoulder Dive",
+  "out_dir": "assets/footage",
+  "checked": "Endpoints and parameter names checked on fal.ai on 2026-10-04. Schemas change: run with --dry-run and compare with each endpoint's API page before spending credits.",
+  "steps": [
+    {
+      "id": "cast",
+      "endpoint": "fal-ai/nano-banana-2",
+      "note": "The character card every other shot is built from. See CAST.md.",
+      "input": {
+        "prompt": "Character reference sheet of one fictional person named Deniz, early 30s, software engineer from Istanbul, short dark wavy hair, round tortoiseshell glasses, olive overshirt over a grey t-shirt, silver watch on the left wrist. Four views in one image: front, three-quarter, back of the head and shoulders, and a close-up of the face. Neutral light grey studio background, soft even light, photorealistic, natural skin texture, no text, no logos.",
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "num_images": 1
+      },
+      "out": "cast.png"
+    },
+    {
+      "id": "s01-still",
+      "endpoint": "fal-ai/nano-banana-2/edit",
+      "note": "First frame of S01. The screen must be flat #00FF00 so tools/screen_track.py can find it.",
+      "input": {
+        "prompt": "Over-the-shoulder shot from behind and slightly left of the same person from the reference sheet, sitting at a wooden home desk at night. An open laptop on the right third of the frame; the laptop screen is completely flat solid pure green #00FF00, no reflections, no interface, no glare. Warm desk lamp on the left, dark room, a phone face down on the desk. 35mm lens, shallow depth of field, cinematic, photorealistic, static camera.",
+        "image_urls": ["@cast"],
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "num_images": 1
+      },
+      "out": "s01-start.png"
+    },
+    {
+      "id": "s01",
+      "endpoint": "bytedance/seedance-2.0/image-to-video",
+      "note": "S01 plate, 6 s. Locked-off camera, so the screen track only follows small drift.",
+      "input": {
+        "prompt": "Static locked-off camera on a tripod, no camera movement, no zoom. The person leans slightly toward the laptop and rubs their eyes with one hand; the phone on the desk buzzes and lights up. The laptop screen stays completely flat solid pure green for the whole shot. Quiet room tone.",
+        "image_url": "@s01-still",
+        "resolution": "1080p",
+        "duration": "6",
+        "aspect_ratio": "16:9",
+        "generate_audio": true
+      },
+      "out": "s01-ots.mp4"
+    },
+    {
+      "id": "s02-start",
+      "endpoint": "fal-ai/nano-banana-2/edit",
+      "note": "First frame of the S02 insert.",
+      "input": {
+        "prompt": "Macro close-up of the same person's right hand, index finger hovering two centimetres above a laptop trackpad, cool screen glow on the hand, dark room, shallow depth of field, photorealistic, the silver watch visible on the left wrist at the frame edge.",
+        "image_urls": ["@cast"],
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "num_images": 1
+      },
+      "out": "s02-start.png"
+    },
+    {
+      "id": "s02-end",
+      "endpoint": "fal-ai/nano-banana-2/edit",
+      "note": "Last frame of S02: same framing, finger pressing.",
+      "input": {
+        "prompt": "The same shot, unchanged framing and light, but the index finger now presses down firmly on the trackpad.",
+        "image_urls": ["@cast", "@s02-start"],
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "num_images": 1
+      },
+      "out": "s02-end.png"
+    },
+    {
+      "id": "s02",
+      "endpoint": "fal-ai/kling-video/o3/pro/image-to-video",
+      "note": "S02 insert. Start and end frames pin the exact moment of the tap, so the cut to the UI ripple lands on it.",
+      "input": {
+        "prompt": "Static camera. The finger moves down and taps the trackpad once, decisively, then rests.",
+        "image_url": "@s02-start",
+        "end_image_url": "@s02-end",
+        "duration": "3"
+      },
+      "out": "s02-tap.mp4"
+    },
+    {
+      "id": "s03-still",
+      "endpoint": "fal-ai/nano-banana-2/edit",
+      "note": "First frame of S03.",
+      "input": {
+        "prompt": "Front close-up of the same person at the desk at night, face lit from below by the cool glow of a laptop screen just out of frame, warm lamp rim light from the left, tired eyes, 50mm lens, cinematic, photorealistic, static camera.",
+        "image_urls": ["@cast"],
+        "aspect_ratio": "16:9",
+        "resolution": "2K",
+        "num_images": 1
+      },
+      "out": "s03-start.png"
+    },
+    {
+      "id": "s03",
+      "endpoint": "bytedance/seedance-2.0/image-to-video",
+      "note": "S03, 6 s: relief, then the laptop lid closes and the screen light leaves the face.",
+      "input": {
+        "prompt": "Static camera. The person exhales with relief, shoulders drop, a small private smile; then they slowly close the laptop lid and the cool screen light fades from the face until only the warm lamp remains.",
+        "image_url": "@s03-still",
+        "resolution": "1080p",
+        "duration": "6",
+        "aspect_ratio": "16:9",
+        "generate_audio": true
+      },
+      "out": "s03-face.mp4"
+    }
+  ]
+}
