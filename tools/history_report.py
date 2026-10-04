@@ -31,7 +31,9 @@ def main():
     en = Counter(slug(x) for f in films for x in f.get("entrances", []))
     ea = Counter(x for f in films for x in f.get("eases", []))
     comps = [(f["name"], c) for f in films for c in f.get("new_components", [])]
-    used_themes = {str(t).zfill(3) for f in films for t in f.get("themes", [])}
+    for f in films:  # hand-edited histories may hold theme ids as numbers
+        f["themes"] = [str(t).zfill(3) for t in f.get("themes", [])]
+    used_themes = {t for f in films for t in f["themes"]}
     atlas_unused = [t for t in atlas if slug(t["name"]) not in tr]
     fam_used = Counter(t["family"] for t in atlas if slug(t["name"]) in tr)
     fams = ["cut", "carry", "camera", "mask", "material", "time"]

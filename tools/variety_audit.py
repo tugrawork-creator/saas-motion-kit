@@ -7,7 +7,9 @@ Usage:
 
 Reads the first markdown table in the file that has a `transition_out` column (see templates/STORYBOARD.md)
 and checks the rules in creative/variety-rules.md and creative/tone-matrix.md. Values prefixed with
-`motif:` are deliberate repeats and are not flagged. Exit code 1 when there are warnings, so it can gate CI.
+`motif:` are deliberate repeats and are not flagged. A `ref:<id>` anywhere in the storyboard must be
+credited in a REFERENCES.md next to it, with a creator and a link (creative/references.md).
+Exit code 1 when there are warnings, so it can gate CI.
 """
 import argparse, datetime, json, os, re, sys
 from collections import Counter
@@ -57,13 +59,13 @@ def secs(s):
     s = s.strip()
     if not s:
         return None
-    if ":" in s:
-        m, x = s.split(":", 1)
-        return int(m) * 60 + float(x)
     try:
+        if ":" in s:
+            m, x = s.split(":", 1)
+            return int(m) * 60 + float(x)
         return float(s)
     except ValueError:
-        return None
+        return None  # an unreadable time counts as missing, never as a crash
 
 
 def parse(path):
@@ -91,6 +93,39 @@ def parse(path):
     if header is None:
         sys.exit("No ledger table with a `transition_out` column found. See templates/STORYBOARD.md.")
     return rows, accent
+
+
+def check_references(path):
+    """Every ref:<id> used in a storyboard needs a credited row in REFERENCES.md next to it."""
+    used = sorted(set(re.findall(r"\bref:([A-Za-z0-9_-]+)", open(path, encoding="utf-8").read())))
+    if not used:
+        return []
+    ref_path = os.path.join(os.path.dirname(os.path.abspath(path)), "REFERENCES.md")
+    if not os.path.exists(ref_path):
+        return [f"the ledger borrows from {', '.join('ref:' + u for u in used)} but there is no REFERENCES.md next to it; credit the creators (templates/REFERENCES.md)"]
+    table, header = {}, None
+    for ln in open(ref_path, encoding="utf-8").read().splitlines():
+        if not ln.strip().startswith("|"):
+            header = None if not table else header
+            continue
+        cells = [c.strip() for c in ln.strip().strip("|").split("|")]
+        if header is None and "creator" in [c.lower() for c in cells]:
+            header = [c.lower() for c in cells]
+            continue
+        if header and not set(ln.replace("|", "").strip()) <= set("-: "):
+            row = dict(zip(header, cells))
+            table[row.get("id", "").strip("`")] = row
+    out = []
+    for u in used:
+        row = table.get(u)
+        if row is None:
+            out.append(f"ref:{u} is not in REFERENCES.md; add the creator and a link")
+            continue
+        for field in ("creator", "url"):
+            v = row.get(field, "")
+            if not v or v.upper().startswith("TODO") or v.startswith("<"):
+                out.append(f"ref:{u} has no {field} in REFERENCES.md; every reference is credited by name and link")
+    return out
 
 
 def audit(rows, accent, history, atlas):
@@ -222,6 +257,7 @@ def main():
     if hist_path:
         history = json.load(open(hist_path, encoding="utf-8")) if os.path.exists(hist_path) else {"films": []}
     warn, info, summary = audit(rows, accent, history, load_atlas())
+    warn += check_references(a.storyboard)
     print(f"variety audit · {a.storyboard} · {len(rows)} shots")
     for m in info:
         print("  [info]", m)

@@ -1,4 +1,4 @@
-"""Suggest themes from the 100-theme gallery for a tone and an audience, skipping what you used recently.
+"""Suggest themes from the theme gallery for a tone and an audience, skipping what you used recently.
 
 Usage:
   python tools/pick_themes.py --tone playful --audience "developers b2b"

@@ -12,6 +12,7 @@ Theme: <NNN name> · Format: <WxH> · Length: <s> · Sound: <music / sfx / none>
 
 One row per shot. Fill it **before** building, then run `python tools/variety_audit.py STORYBOARD.md`.
 Use `motif:` for a deliberate repeat, and `surprise:` in *notes* for the pattern-breaking moment.
+When a shot borrows from a reference video, write `ref:<id>` in its notes and credit it in `REFERENCES.md` ([creative/references.md](../creative/references.md)).
 Transition names come from the [transition atlas](../creative/transition-atlas.md) or HyperFrames (`crossfade`, `push-slide`, `circle-iris`…).
 List palette colours lead-first, joined with `+`.
 
