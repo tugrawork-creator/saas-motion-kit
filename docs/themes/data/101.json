@@ -1,0 +1,80 @@
+{
+ "id": "101",
+ "slug": "noise-cancelling",
+ "name": "Noise Cancelling",
+ "category": "hardware-ad",
+ "summary": "The headphone ad, retold for software: 38 dashboards hum as hairline waveforms, Pulse opens a quiet zone and lets exactly one signal through.",
+ "look": "A pearl-white studio seamless, hairline grey waveforms, the Acme mark lit like a product object, tight bold sans headlines in two tones with one teal-gradient phrase, an iOS-style listening-mode switch, and coral only for the signal that breaks the silence.",
+ "components": [
+  {
+   "name": "Noise field",
+   "role": "34 hairline waveforms (1.4–2.6 px, 12–34 % ink) on one axis, one per dashboard, with a few pill tags naming the loudest channels"
+  },
+  {
+   "name": "Quiet zone",
+   "role": "a circle around the mark where every wave runs flat; a radial mask fades the noise out as it crosses the edge"
+  },
+  {
+   "name": "Hero object",
+   "role": "the Acme mark lit like hardware: layered drop shadow, a top-left specular sheen and three hairline anti-noise rings"
+  },
+  {
+   "name": "Listening-mode switch",
+   "role": "iOS-style segmented control (Off · Cancel noise · Adaptive) on a frosted track; its white pill is the only thing that moves in the proof’s first bar"
+  },
+  {
+   "name": "Level meter",
+   "role": "20 rounded segments counted in alerts, not decibels: they climb into amber and coral in the hook and drain to zero on the drop"
+  },
+  {
+   "name": "Break-through line",
+   "role": "the one metric that crosses the silence: a coral step at 09:42 with a soft glow, a −18% value and a banner with Roll back / Acknowledge"
+  }
+ ],
+ "motion": [
+  {
+   "name": "Quiet-zone wipe",
+   "how": "noise layer under an inverted circle mask, flat copy (scaleY .02) under a circle clip; both share one radius that grows 0→230 px from the mark on the drop, expo.out 0.9 s, so the waves flatten exactly as the edge passes them"
+  },
+  {
+   "name": "Anti-noise rings",
+   "how": "three hairline teal rings scale .4→1.6 and fade .45→0 over 1.6 s (sine.out), one per beat (0.5 s at 120 BPM), with a fixed repeat count so the section ends on a whole cycle"
+  },
+  {
+   "name": "Silence hit",
+   "how": "at 0:08 the mix hard-cuts to 0.6 s of true silence and the frame holds; the mark lands on one soft marimba C5. In the proof everything stays ducked −18 dB and only the break-through line makes a sound (a filtered snare on the bar-9 downbeat)"
+  }
+ ],
+ "story": "Hook: 38 dashboards hum as overlapping waveforms, the level meter climbs into the red and the two-tone question sets word by word. Reveal: the music cuts to silence, the Acme mark lands, a quiet zone opens around it and every wave inside goes flat: “You ship. Pulse watches.” Proof: the listening-mode switch slides to Adaptive; thirteen metrics lie flat while Checkout conversion −18% (since 09:42, after deploy #2231) breaks through in coral, and a human taps Roll back. CTA: one silent line runs into the mark and becomes its pulse; “Every metric. Every minute.” and a coral Start free.",
+ "adapt": "Name your product’s noise (tickets, pings, build logs, unread threads) and draw each source as one wave with a small tag. Your product is the object that opens the quiet zone, and the single signal it lets through is the moment it earns attention. If your product has real filter or focus settings, give the listening-mode switch their names.",
+ "references": [
+  {
+   "url": "https://support.apple.com/en-us/108918",
+   "note": "Noise Cancellation, Transparency and Off: the listening-mode switch this film borrows",
+   "verified": true
+  },
+  {
+   "url": "https://support.apple.com/en-us/104979",
+   "note": "Adaptive Audio: one mode that cancels noise but lets what matters through",
+   "verified": true
+  },
+  {
+   "url": "https://en.wikipedia.org/wiki/Active_noise_control",
+   "note": "anti-noise: the same wave in antiphase sums to silence (destructive interference)",
+   "verified": true
+  }
+ ],
+ "fit": {
+  "readability": 3,
+  "trust": 3,
+  "effort": "med",
+  "risk": "Wave fields drift into screensaver décor: the cancellation must read in one glance (noise outside, one flat line inside), and the silence hit only lands if the mix truly drops to zero, with no reverb tail or ambience bed."
+ },
+ "best_for": [
+  "monitoring & alerting",
+  "notification-heavy tools",
+  "focus & productivity apps",
+  "calm premium launch"
+ ],
+ "file": "themes/101-noise-cancelling.html"
+}
