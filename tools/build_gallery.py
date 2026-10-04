@@ -1,4 +1,4 @@
-"""Build docs/index.html (the 100-theme gallery) from docs/themes/data/*.json.
+"""Build docs/index.html (the theme gallery) from docs/themes/data/*.json.
 
 Usage: python tools/build_gallery.py
 """

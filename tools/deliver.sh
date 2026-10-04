@@ -4,6 +4,7 @@
 # filter: lanczos (default, for vector/3D) · area (pixel art: exact 2x box filter keeps pixels crisp)
 # Audio, if present, is loudness-normalised for social (-14 LUFS, -1.5 dBTP).
 set -euo pipefail
+[ $# -ge 1 ] || { echo "usage: tools/deliver.sh <in.mp4> [WxH] [out.mp4] [lanczos|area]" >&2; exit 2; }
 in="$1"; size="${2:-1920x1080}"; out="${3:-${in%.*}-${size}.mp4}"; filter="${4:-lanczos}"
 w="${size%x*}"; h="${size#*x}"
 if ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 "$in" | grep -q .; then

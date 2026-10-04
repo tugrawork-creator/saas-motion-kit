@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.4: learn from real films, credit the people who made them (2026-10-04)
+
+**Added**
+- `creative/references.md`: how to study real reference videos. Credit every one by name and link, borrow grammar (rhythm, structure, transition types, camera ideas), never assets (footage, music, characters, logos, copy), and keep their work off the repo.
+- `templates/REFERENCES.md`: one row per reference (id, creator, title, link, what was borrowed, what wasn't), plus a credit line for the post.
+- `tools/breakdown.py`: finds a reference's hard cuts and measures its rhythm (cuts per 10 s, shot lengths, the first 3 s). It writes a contact sheet and a draft ledger with a credit header into the git-ignored `.references/`. The default threshold of 0.1 found every hard cut in the kit's own films with no false ones.
+
+**Changed**
+- `tools/variety_audit.py`: every `ref:<id>` in a storyboard needs a row in `REFERENCES.md` next to it, with a creator and a link, or the audit (and CI) fails.
+- The `/saas-motion-video` skill asks for reference videos at the brief. The storyboard template, creative/README and tools/README explain `ref:`.
+
+**Fixed**
+- The 100 theme sheets no longer say "all 100 themes", and two tool docstrings no longer say "100-theme gallery".
+- `tools/history_report.py` crashed when a history file held theme ids as numbers.
+- `tools/variety_audit.py` crashed on an unreadable time such as `1:xx`. It now treats it as missing.
+- `tools/loop_check.py` and `tools/deliver.sh` print their usage when called without arguments, instead of a traceback.
+
 ## v1.3: hardware ads, for software (2026-10-04)
 
 **Added**

@@ -13,3 +13,6 @@ Thumbs.db
 # generated footage (fal output or placeholders.py) stays local
 **/assets/footage/*
 !**/assets/footage/README.md
+
+# reference-video breakdowns: other people's work stays on your machine
+.references/

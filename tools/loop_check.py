@@ -8,6 +8,8 @@ import subprocess, sys, tempfile, os
 import numpy as np
 from PIL import Image
 
+if len(sys.argv) != 2:
+    sys.exit(__doc__)
 src = sys.argv[1]
 dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", src]).decode().strip())
 fps_s = subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v", "-show_entries", "stream=r_frame_rate", "-of", "csv=p=0", src]).decode().strip()

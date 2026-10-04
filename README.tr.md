@@ -12,13 +12,23 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 
 **Yeni: [gerçek bir prompt ile başlayın](examples/prompts).** Bitmiş, 35 saniyelik maskotlu bir tanıtım videosunu üreten prompt'un kendisi, doldurulabilir şablonu ve her kapıda neler olduğu.
 
-## v1.3'te neler yeni: donanım reklamları, yazılım için
+## v1.4'te neler yeni: gerçek filmlerden öğren, yapanları an
+
+- **[Referanslar](creative/references.md).** Sevdiğin gerçek videoları referans olarak getirebilirsin: herkesin paylaştığı lansman filmi, üç kez izlediğin reklam. Onlardan açıkça öğren. **Kural: her referans adı ve linkiyle anılır ve yalnızca dil ödünç alınır** (ritim, yapı, geçiş türü, kamera fikri). Görüntü, müzik, karakter, logo ya da metin asla alınmaz.
+- **`tools/breakdown.py`** bir referansı çekimlerine ayırıyor. Sert kesimleri buluyor, ritmi ölçüyor (10 saniyedeki kesim sayısı, çekim süreleri, ilk 3 saniyenin hızı), her çekimden bir kareyle bir kontak sayfası hazırlıyor ve storyboard formatında taslak bir ledger yazıyor. Her analiz bir kredi başlığıyla açılıyor. Çıktı git'e girmeyen `.references/` klasörüne yazılıyor; başkasının emeği repona düşmüyor.
+- **Unutulamayan kredi.** Bir referanstan ödünç alan çekimin notuna `ref:01` yaz ve referansı storyboard'un yanındaki [`REFERENCES.md`](templates/REFERENCES.md)'ye ekle. `variety_audit.py` ve GitHub Action, yaratıcısı ve linki olmayan bir `ref:` gördüğünde artık hata veriyor. `/saas-motion-video` skill'i de brief aşamasında referans videoları soruyor.
+- **Düzeltmeler:** tema sayfaları artık "all 100 themes" demiyor. `history_report.py` sayı olarak yazılmış tema numaralarını kabul ediyor, `variety_audit.py` okunamayan bir süreyi çökmeden bildiriyor, `loop_check.py` ve `deliver.sh` hata yerine kullanım bilgisini gösteriyor.
+
+<details>
+<summary><b>v1.3'te neler yeniydi: donanım reklamları, yazılım için</b></summary>
 
 ![101 Noise Cancelling teması: hook, reveal, kanıt ve CTA kareleri](docs/theme-101.jpg)
 
 - **Yeni tema ailesi: donanım reklamı dili (hardware-ad grammar).** Apple'ın ünlendirdiği sade donanım reklamlarının dilini yazılım filmlerine çeviriyor. İlk tema **[101 Noise Cancelling](https://tugrawork-creator.github.io/saas-motion-kit/themes/101-noise-cancelling.html)**: 38 dashboard ince dalga çizgileri hâlinde uğulduyor, ürün çevresinde sessiz bir alan açıyor ve sessizliği yalnızca tek bir sinyal bozuyor. Film tek bir ses tasarımı anına dayanıyor: drop'ta tam sessizliğe kesme.
 - **[İnsan katmanı](creative/human-layer.md): üçgenden çıkmadan filmde insan.** Üretilmiş, kurgusal insanlar artık filmlere girebiliyor. Ama insan olan her çekim yine bir 3D hareket ve bir ürün adımı taşıyor. Beş format var: omuz üstü dalış, portal kartlar, elden arayüze, diorama sunucu, gözdeki metrik. Doğruluk kuralı da şu: üretilmiş insanlar oyuncudur, asla müşteri ya da referans değildir. Üretim fal hattıyla yapılıyor: Nano Banana 2 ile karakter kartı, Seedance 2.0 ve Kling O3 ile klipler, Bria ile matte. Pilot film **[Omuz Üstü Dalış](examples/human-layer-ots)**: gerçek Pulse arayüzü üretilmiş plate'in yeşil ekranına kare kare oturtuluyor, kamera ekrana dalıp 3D, üç adımlı bir tutorial'a giriyor, gerçek bir parmak Roll back'e basıyor ve yüze geri dönülüyor. İki yeni araç geldi: `tools/fal_shots.py` bir filmin `shots.json`'unu fal'da çalıştırıyor, `tools/screen_track.py` arayüz değiştirme için yeşil ekranı takip ediyor. Görüntüler git'e girmiyor; `placeholders.py` sayesinde kurgu görüntüsüz de izlenebiliyor.
 - **Küçük düzeltmeler:** galeri artık tema sayısını "100" diye sabit yazmıyor, kendisi sayıyor. `tools/make_thumbs.py --only 101` de yalnızca değiştirdiğiniz temanın küçük resmini üretiyor.
+
+</details>
 
 <details>
 <summary><b>v1.2'de neler yeniydi: aynı hikâye, altı film</b></summary>
@@ -52,7 +62,7 @@ Kit üç şeyden oluşuyor: aşamalı bir süreç, bir bileşen stratejisi ve **
 
 | Klasör | Açıklama |
 |---|---|
-| `creative/` | **Yaratıcı kas:** 7 soru, ton matrisi, tekrar kuralları, bileşen atölyesi, geçiş atlası ve insan katmanı |
+| `creative/` | **Yaratıcı kas:** 7 soru, ton matrisi, tekrar kuralları, bileşen atölyesi, geçiş atlası, insan katmanı ve referanslar |
 | `examples/human-layer-ots/` | **İnsan katmanı pilotu:** kurgusal nöbetçi mühendis, laptop ekranına takip edilen gerçek arayüz, 3D tutorial'a dalış; fal shot listesi ve yer tutucu plate'ler |
 | `playbook/` | Her aşamanın sonunda bir karar kapısı olan 7 aşamalı üretim rehberi |
 | `components/` | **Temiz ya da hayali bileşen** kuralı: ürünün arayüzü temizse gerçeğini canlandır, değilse hayali bileşen tasarla |

@@ -64,3 +64,7 @@ Mark motifs in the ledger (`motif:` prefix) and the audit won't flag them.
 ## People in the film
 
 When a film needs a person, read [the human layer](human-layer.md). Every shot with a person still has a 3D move and a product beat, and generated people are actors, never customers.
+
+## Learning from other people's films
+
+Study real videos you love with [references](references.md): measure them with `tools/breakdown.py`, borrow the grammar, never the assets, and credit the creators by name and link (`REFERENCES.md`, enforced by the audit).
