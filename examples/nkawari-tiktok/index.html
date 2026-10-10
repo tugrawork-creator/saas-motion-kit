@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>N'Ka Wari · Dites-le, c'est noté</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Clash Display";src:url("assets/fonts/ClashDisplay-Semibold.woff2") format("woff2");font-weight:600}
+@font-face{font-family:"Clash Display";src:url("assets/fonts/ClashDisplay-Bold.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"Work Sans";src:url("assets/fonts/WorkSans-Regular.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"Work Sans";src:url("assets/fonts/WorkSans-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"Work Sans";src:url("assets/fonts/WorkSans-SemiBold.woff2") format("woff2");font-weight:600}
+:root{
+  --creme:#FAF7EC;--creme-2:#F1ECDB;--encre:#1C1E12;--texte-2:#5F6152;--bord:#D7D3BE;
+  --olive:#5E6B2E;--olive-fonce:#3F4A18;--lime:#C3D94F;--lime-pale:#E6EEBC;--depense:#C0562F;--tile:#FFFDF6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--creme)}
+#root{position:relative;width:100%;height:100%;overflow:hidden;background:var(--creme);color:var(--encre);font-family:"Work Sans",sans-serif}
+.clip{position:absolute;inset:0;overflow:hidden}
+.full{position:absolute;inset:0}
+
+/* ---- the shell: 6×10 bento, never changes (x60 y150 880×1370, gap 16, r16) ---- */
+.g{position:absolute;left:60px;top:150px;width:880px;height:1370px;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(10,1fr);gap:16px}
+.t{background:var(--tile);border-radius:16px;padding:28px 30px;position:relative;overflow:hidden;
+   box-shadow:0 1px 2px rgba(28,30,18,.06),0 10px 30px -14px rgba(28,30,18,.22)}
+.lb{font:600 20px/1 "Work Sans";letter-spacing:.1em;color:var(--texte-2)}
+.h{font:700 92px/1.02 "Clash Display";letter-spacing:-.02em;word-spacing:.14em}
+.ln{display:block;overflow:hidden;padding-bottom:6px}
+.ln > span{display:block}
+.nm{font:600 38px/1.1 "Work Sans"}
+.cat{font:400 24px/1.3 "Work Sans";color:var(--texte-2);margin-top:6px}
+.amt{margin-left:auto;font:600 50px/1 "Clash Display";color:var(--depense);white-space:nowrap;word-spacing:.06em}
+.row{display:flex;align-items:center;gap:22px;height:100%}
+.chip{width:84px;height:84px;border-radius:22px;background:var(--creme-2);display:grid;place-items:center;font-size:44px;flex:none}
+.q{font:700 120px/1 "Clash Display";color:#969385}
+.inner{width:100%;height:100%}
+.mic{width:110px;height:110px;border-radius:50%;background:var(--olive);display:grid;place-items:center;position:relative}
+.ring{position:absolute;inset:-22px;border-radius:50%;border:10px solid var(--lime)}
+.ink{background:var(--encre);color:#ECEADC}
+.ink .lb{color:#A8AA96}
+.rr{display:flex;justify-content:space-between;font:500 34px/1 "Work Sans";padding:24px 0;border-bottom:1.5px solid rgba(236,234,220,.12);letter-spacing:.02em}
+.big{font:700 170px/1 "Clash Display";letter-spacing:-.02em;word-spacing:.06em;white-space:nowrap}
+.btn{display:flex;align-items:center;justify-content:center;border-radius:22px;height:100%;font:600 34px "Work Sans";background:var(--olive);color:var(--creme);position:relative}
+.pill{display:inline-flex;align-items:center;font:600 38px "Work Sans";padding:22px 34px;border-radius:999px;background:var(--lime-pale);color:var(--olive-fonce)}
+
+/* ---- shot-specific ---- */
+#s4-sent{font:500 92px/1.24 "Work Sans";letter-spacing:-.01em;color:#969485}
+#s4-sent .w{display:inline-block;border-radius:12px;padding:0 8px;margin:0 -2px}
+.wave{display:flex;gap:12px;align-items:center;height:140px}
+.wave i{display:block;width:14px;height:120px;border-radius:7px;background:var(--olive)}
+.strip{position:absolute;height:280px;background:var(--tile);display:flex;align-items:center;font:600 96px/1 "Work Sans";white-space:nowrap;box-shadow:0 22px 44px -20px rgba(28,30,18,.4)}
+.perf{position:absolute;top:18px;bottom:18px;width:8px;display:flex;flex-direction:column;justify-content:space-between}
+.perf i{display:block;width:8px;height:8px;border-radius:50%;background:var(--texte-2)}
+.dash{background:transparent !important;box-shadow:none !important;border:4px dashed #B9B7AB}
+.cell{position:absolute;background:var(--creme-2)}
+</style>
+</head>
+<body>
+<div data-hf-id="hf-zshp" id="root" data-composition-id="main" data-start="0" data-duration="45" data-width="1080" data-height="1920">
+
+  <!-- ===== sound: original score (sound/score.py), music + SFX stems ===== -->
+  <audio id="music" src="assets/audio/music.m4a" data-start="0" data-duration="45" data-track-index="20" data-volume="1"></audio>
+  <audio id="sfx" src="assets/audio/sfx.m4a" data-start="0" data-duration="45" data-track-index="21" data-volume="1"></audio>
+
+  <!-- ===== ground: crème + clouds, whole film ===== -->
+  <div data-hf-id="hf-cmyc" id="bg" class="clip" data-start="0" data-duration="45" data-track-index="0">
+    <div data-hf-id="hf-qh9l" class="full" style="background:var(--creme)"></div>
+    <div data-hf-id="hf-9yg7" id="bg-c1" style="position:absolute;left:520px;top:-200px;width:760px;height:640px;border-radius:50%;filter:blur(90px);opacity:.85;background:var(--lime-pale)"></div>
+    <div data-hf-id="hf-unr3" id="bg-c2" style="position:absolute;left:-280px;top:1150px;width:760px;height:640px;border-radius:50%;filter:blur(90px);opacity:.8;background:#F3DCCB"></div>
+  </div>
+
+  <!-- ===== S1+S2 · hook: « Je note ça plus tard. » (0:00–0:08) ===== -->
+  <div data-hf-id="hf-aefx" id="s1" class="clip" data-start="0" data-duration="8" data-track-index="1">
+    <div data-hf-id="hf-nv9h" class="g" id="s1-g">
+      <div data-hf-id="hf-a81r" class="t s1-tile" id="s1-anchor" style="grid-area:1/1/4/7;display:flex;align-items:flex-end">
+        <div data-hf-id="hf-kj5c" class="h"><span data-hf-id="hf-smev" class="ln"><span data-hf-id="hf-evsv" id="s1-l1">Je note ça</span></span><span data-hf-id="hf-oupj" class="ln"><span data-hf-id="hf-s6e8" id="s1-l2">plus tard.</span></span></div>
+      </div>
+      <div data-hf-id="hf-t9hm" class="t s1-tile" id="s1-taxi" style="grid-area:4/1/6/4"><div data-hf-id="hf-kykk" class="inner s1-c"><div data-hf-id="hf-7lxb" class="nm">🚕 Taxi</div><div data-hf-id="hf-40rz" class="q" style="margin-top:34px">?</div></div></div>
+      <div data-hf-id="hf-50n4" class="t s1-tile" id="s1-pain" style="grid-area:4/4/6/7"><div data-hf-id="hf-wdh8" class="inner s1-c"><div data-hf-id="hf-gbrp" class="nm">🥖 Pain</div><div data-hf-id="hf-ibrj" class="q" style="margin-top:34px">?</div></div></div>
+      <div data-hf-id="hf-ce5i" class="t s1-tile" id="s1-credit" style="grid-area:6/1/8/3"><div data-hf-id="hf-v6k5" class="inner s1-c"><div data-hf-id="hf-sdd6" class="nm">📱 Crédit</div><div data-hf-id="hf-hxgi" class="q" style="margin-top:34px">?</div></div></div>
+      <div data-hf-id="hf-72xu" class="t s1-tile" id="s1-tontine" style="grid-area:6/3/8/7"><div data-hf-id="hf-vkv6" class="inner s1-c"><div data-hf-id="hf-nizp" class="nm">🤝 Tontine</div><div data-hf-id="hf-hj5h" class="q" style="margin-top:34px">?</div></div></div>
+      <div data-hf-id="hf-mr95" class="t s1-tile" id="s1-marche" style="grid-area:8/1/11/7"><div data-hf-id="hf-xkeb" class="inner s1-c"><div data-hf-id="hf-3m8n" class="nm">🧺 Marché</div><div data-hf-id="hf-jfba" class="q" style="margin-top:60px">?</div></div></div>
+    </div>
+  </div>
+
+  <!-- ===== S3 · reveal on the drop (0:08–0:10) ===== -->
+  <div data-hf-id="hf-ggdj" id="s3" class="clip" data-start="8" data-duration="2.3" data-track-index="2" style="z-index:3">
+    <div data-hf-id="hf-sgx3" id="s3-flood" class="full" style="background:linear-gradient(150deg,#41501A,#6E8034)"></div>
+    <img data-hf-id="hf-8o9f" id="s3-mark" src="assets/brand/nkawari-mark.svg" alt="N'Ka Wari" style="position:absolute;left:260px;top:595px;width:480px;height:480px">
+    <div data-hf-id="hf-jc93" id="s3-micwrap" style="position:absolute;left:445px;top:1135px;width:110px;height:110px">
+      <div data-hf-id="hf-eehv" class="mic" id="s3-mic"><div data-hf-id="hf-ppm1" class="ring" id="s3-ring"></div><svg data-hf-id="hf-k5fe" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FAF7EC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-6g2q" x="9" y="3" width="6" height="11" rx="3" /><path data-hf-id="hf-342a" d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg></div>
+    </div>
+    <div data-hf-id="hf-bead" style="position:absolute;left:60px;width:880px;top:1310px;text-align:center" class="h">
+      <span data-hf-id="hf-ogei" class="ln"><span data-hf-id="hf-sfvy" id="s3-l1" style="color:var(--creme)">Dites votre</span></span><span data-hf-id="hf-o23h" class="ln"><span data-hf-id="hf-zzyw" id="s3-l2" style="color:var(--creme)">dépense.</span></span>
+    </div>
+  </div>
+
+  <!-- ===== S4 · dictée (0:10–0:16), opened through the mark's shape ===== -->
+  <div data-hf-id="hf-9ceu" id="s4" class="clip" data-start="9.6" data-duration="6.4" data-track-index="3" style="z-index:4">
+    <div data-hf-id="hf-lsrh" class="full" style="background:var(--creme)"></div>
+    <div data-hf-id="hf-xi2k" class="g" id="s4-g">
+      <div data-hf-id="hf-sr8i" class="t" style="grid-area:1/1/11/7;display:flex;flex-direction:column;justify-content:space-between;padding:56px 50px">
+        <div data-hf-id="hf-ol52" style="display:flex;align-items:center;gap:34px">
+          <div data-hf-id="hf-sjhg" class="mic" id="s4-mic"><div data-hf-id="hf-8upk" class="ring" id="s4-ring"></div><svg data-hf-id="hf-dan2" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FAF7EC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-hm86" x="9" y="3" width="6" height="11" rx="3" /><path data-hf-id="hf-71xy" d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg></div>
+          <div data-hf-id="hf-46ba" class="lb" style="font-size:24px">DICTEZ VOTRE DÉPENSE</div>
+        </div>
+        <p data-hf-id="hf-79ne" id="s4-sent">« <span data-hf-id="hf-hzam" class="w">deux</span> <span data-hf-id="hf-tihx" class="w">mille</span> <span data-hf-id="hf-99nn" class="w">de</span> <span data-hf-id="hf-zfhg" class="w">taxi</span> <span data-hf-id="hf-ityk" class="w">ce</span> <span data-hf-id="hf-ghtx" class="w">matin</span> <span data-hf-id="hf-9r1m" class="w" id="s4-et">et</span> <span data-hf-id="hf-yecp" class="w">cinq</span> <span data-hf-id="hf-9agp" class="w">mille</span> <span data-hf-id="hf-242r" class="w">de</span> <span data-hf-id="hf-enbu" class="w">courses</span> »</p>
+        <div data-hf-id="hf-aiqy" class="wave" id="s4-wave"><i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i><i data-hf-id="hf-ylp6"></i><i data-hf-id="hf-0l8b"></i><i data-hf-id="hf-0zjc"></i><i data-hf-id="hf-zsm9"></i><i data-hf-id="hf-06xa"></i><i data-hf-id="hf-26gf"></i><i data-hf-id="hf-2krg"></i><i data-hf-id="hf-oz7w"></i><i data-hf-id="hf-okwv"></i><i data-hf-id="hf-o6lu"></i><i data-hf-id="hf-jqbp"></i><i data-hf-id="hf-qkg0"></i><i data-hf-id="hf-q64z"></i><i data-hf-id="hf-prty"></i><i data-hf-id="hf-pdix"></i><i data-hf-id="hf-hqsk"></i><i data-hf-id="hf-hchj"></i><i data-hf-id="hf-8d0n"></i><i data-hf-id="hf-8rbo"></i><i data-hf-id="hf-7kel"></i><i data-hf-id="hf-7ypm"></i><i data-hf-id="hf-9y8r"></i><i data-hf-id="hf-acjs"></i><i data-hf-id="hf-95mp"></i><i data-hf-id="hf-9jxq"></i><i data-hf-id="hf-bjgv"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S5 · new component: Phrase perforée (0:16–0:18) ===== -->
+  <div data-hf-id="hf-g9bc" id="s5" class="clip" data-start="16" data-duration="3.2" data-track-index="4" style="z-index:5">
+    <div data-hf-id="hf-qmv9" class="full" id="s5-ground" style="background:var(--creme)"></div>
+    <div data-hf-id="hf-rlyh" class="g" id="s5-slots">
+      <div data-hf-id="hf-jn21" class="t dash" id="s5-slot1" style="grid-area:4/1/6/7"></div>
+      <div data-hf-id="hf-v7ua" class="t dash" id="s5-slot2" style="grid-area:6/1/8/7"></div>
+    </div>
+    <div data-hf-id="hf-9thp" id="s5-left" class="strip" style="left:-1000px;top:250px;width:1450px;justify-content:flex-end;padding-right:30px;border-radius:0 6px 6px 0">deux mille de taxi ce matin</div>
+    <div data-hf-id="hf-gk5d" id="s5-et" class="strip" style="left:450px;top:250px;width:120px;justify-content:center;color:var(--depense)">et</div>
+    <div data-hf-id="hf-4jo5" id="s5-right" class="strip" style="left:570px;top:250px;width:1100px;padding-left:30px;border-radius:6px 0 0 6px">cinq mille de courses</div>
+    <div data-hf-id="hf-r1c8" class="perf" id="s5-perf-a" style="left:446px;top:274px;height:232px;bottom:auto"><i data-hf-id="hf-bxrw"></i><i data-hf-id="hf-7lcu"></i><i data-hf-id="hf-771t"></i><i data-hf-id="hf-8dyw"></i><i data-hf-id="hf-7znv"></i><i data-hf-id="hf-604q"></i></div>
+    <div data-hf-id="hf-49ji" class="perf" id="s5-perf-b" style="left:566px;top:274px;height:232px;bottom:auto"><i data-hf-id="hf-5ltp"></i><i data-hf-id="hf-6sqs"></i><i data-hf-id="hf-6efr"></i><i data-hf-id="hf-art2"></i><i data-hf-id="hf-adi1"></i><i data-hf-id="hf-otn5"></i></div>
+  </div>
+
+  <!-- ===== S6 · two rows + « Elle est déjà notée. » (0:18–0:22) ===== -->
+  <div data-hf-id="hf-tpe7" id="s6" class="clip" data-start="17.7" data-duration="4.45" data-track-index="5" style="z-index:4">
+    <div data-hf-id="hf-d9qq" class="g" id="s6-g">
+      <div data-hf-id="hf-tc7s" class="t" id="s6-head" style="grid-area:1/1/4/7;display:flex;align-items:flex-end">
+        <div data-hf-id="hf-3gso" class="h"><span data-hf-id="hf-qu8o" class="ln"><span data-hf-id="hf-zijp" id="s6-l1">Elle est</span></span><span data-hf-id="hf-qfxn" class="ln"><span data-hf-id="hf-jq9s" id="s6-l2">déjà notée.</span></span></div>
+      </div>
+      <div data-hf-id="hf-7hk9" class="t" id="s6-r1" style="grid-area:4/1/6/7;padding:0 34px"><div data-hf-id="hf-thy4" class="row"><div data-hf-id="hf-4i6s" class="chip">🚕</div><div data-hf-id="hf-yeow"><div data-hf-id="hf-fbff" class="nm">Taxi</div><div data-hf-id="hf-pxnl" class="cat">Transport</div></div><div data-hf-id="hf-4p20" class="amt" id="s6-a1">−2 000 F</div></div></div>
+      <div data-hf-id="hf-wsgs" class="t" id="s6-r2" style="grid-area:6/1/8/7;padding:0 34px"><div data-hf-id="hf-lt04" class="row"><div data-hf-id="hf-m87y" class="chip">🧺</div><div data-hf-id="hf-y7yw"><div data-hf-id="hf-59rv" class="nm">Courses au marché</div><div data-hf-id="hf-jr9t" class="cat">Alimentation</div></div><div data-hf-id="hf-9meq" class="amt" id="s6-a2">−5 000 F</div></div><div data-hf-id="hf-utsz" id="s6-r2-inset" class="full" style="border-radius:16px;box-shadow:inset 0 0 0 4px var(--depense)"></div></div>
+      <div data-hf-id="hf-evas" class="t" id="s6-k1" style="grid-area:8/1/11/4;display:flex;flex-direction:column;justify-content:space-between"><div data-hf-id="hf-ride" class="lb">DITE</div><div data-hf-id="hf-1cgp" style="font:700 104px/1 'Clash Display';word-spacing:.14em">1 phrase</div></div>
+      <div data-hf-id="hf-16sn" class="t" id="s6-k2" style="grid-area:8/4/11/7;display:flex;flex-direction:column;justify-content:space-between"><div data-hf-id="hf-qnni" class="lb">NOTÉES</div><div data-hf-id="hf-q9ux" style="font:700 104px/1 'Clash Display';color:var(--depense);word-spacing:.14em">2 lignes</div></div>
+    </div>
+  </div>
+
+  <!-- ===== S7 · dolly-out: the whole notebook (0:22–0:24) ===== -->
+  <div data-hf-id="hf-e0o4" id="s7" class="clip" data-start="22" data-duration="2.6" data-track-index="6" style="z-index:5">
+    <div data-hf-id="hf-mzok" class="full" style="background:var(--creme)"></div>
+    <div data-hf-id="hf-lae7" class="g" id="s7-g">
+      <div data-hf-id="hf-tdhx" class="t" id="s7-solde" style="grid-area:1/1/4/7;background:linear-gradient(135deg,#41501A,#6E8034);color:var(--creme);display:flex;flex-direction:column;justify-content:space-between">
+        <div data-hf-id="hf-go88" class="lb" style="color:var(--lime-pale)">SOLDE TOTAL</div>
+        <div data-hf-id="hf-kn4h" style="font:700 120px/1 'Clash Display';word-spacing:.06em">203 000 FCFA</div>
+      </div>
+      <div data-hf-id="hf-3m0j" class="t" style="grid-area:4/1/5/7;padding:0 30px"><div data-hf-id="hf-km31" class="row"><div data-hf-id="hf-7rd5" class="chip" style="width:70px;height:70px;font-size:36px">🚕</div><div data-hf-id="hf-chg3" class="nm" style="font-size:34px">Taxi</div><div data-hf-id="hf-xdb9" class="amt" style="font-size:42px">−2 000 F</div></div></div>
+      <div data-hf-id="hf-atbp" class="t" style="grid-area:5/1/6/7;padding:0 30px"><div data-hf-id="hf-l0e2" class="row"><div data-hf-id="hf-zjkb" class="chip" style="width:70px;height:70px;font-size:36px">🧺</div><div data-hf-id="hf-89ur" class="nm" style="font-size:34px">Courses au marché</div><div data-hf-id="hf-58rs" class="amt" style="font-size:42px">−5 000 F</div></div></div>
+      <div data-hf-id="hf-2qx5" class="t" id="s7-donut" style="grid-area:6/1/10/7;display:flex;align-items:center;justify-content:center;gap:50px">
+        <svg data-hf-id="hf-rh22" viewBox="0 0 100 100" width="440" height="440">
+          <g data-hf-id="hf-0cta" fill="none" stroke-width="13" transform="rotate(-90 50 50)">
+            <circle data-hf-id="hf-17qq" class="arc" cx="50" cy="50" r="38" stroke="#3E6B4E" stroke-dasharray="64 175" stroke-dashoffset="0" />
+            <circle data-hf-id="hf-bfyb" class="arc" cx="50" cy="50" r="38" stroke="#B5394A" stroke-dasharray="57 182" stroke-dashoffset="-65" />
+            <circle data-hf-id="hf-driz" class="arc" cx="50" cy="50" r="38" stroke="#8A6534" stroke-dasharray="48 191" stroke-dashoffset="-123" />
+            <circle data-hf-id="hf-k5ib" class="arc" cx="50" cy="50" r="38" stroke="#2F6E6A" stroke-dasharray="29 210" stroke-dashoffset="-172" />
+            <circle data-hf-id="hf-ijiv" class="arc" cx="50" cy="50" r="38" stroke="#6B5BA0" stroke-dasharray="19 220" stroke-dashoffset="-202" />
+            <circle data-hf-id="hf-20lk" class="arc" cx="50" cy="50" r="38" stroke="#C3D94F" stroke-dasharray="12 227" stroke-dashoffset="-222" />
+          </g>
+          <text data-hf-id="hf-rj5u" x="50" y="46" text-anchor="middle" font-size="7" fill="#5F6152" font-family="Work Sans">Total</text>
+          <text data-hf-id="hf-f6x2" x="50" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#1C1E12" font-family="Clash Display">92k</text>
+        </svg>
+      </div>
+      <div data-hf-id="hf-ho7r" class="t" id="s7-trio" style="grid-area:10/1/11/7;padding:16px;display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;background:var(--creme-2)">
+        <div data-hf-id="hf-j975" class="btn" id="s7-rec"><div data-hf-id="hf-vm28" class="ring" id="s7-rec-ring" style="inset:-8px;border-radius:28px;border-width:6px"></div><svg data-hf-id="hf-rb7i" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FAF7EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-yst8" d="M6 2h12v20l-3-2-3 2-3-2-3 2z" /><path data-hf-id="hf-h147" d="M9 7h6M9 11h6M9 15h4" /></svg></div>
+        <div data-hf-id="hf-spj4" class="btn"><svg data-hf-id="hf-x4nq" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FAF7EC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-i0j7" x="9" y="3" width="6" height="11" rx="3" /><path data-hf-id="hf-7g8z" d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg></div>
+        <div data-hf-id="hf-aqyn" class="btn">+ Ajouter</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S8 · le reçu (0:24–0:30), focal iris from the receipt button ===== -->
+  <div data-hf-id="hf-iyji" id="s8" class="clip" data-start="23.8" data-duration="6.4" data-track-index="7" style="z-index:6">
+    <div data-hf-id="hf-mldj" class="full" style="background:var(--creme)"></div>
+    <div data-hf-id="hf-hqj4" class="g" id="s8-g">
+      <div data-hf-id="hf-ipd5" class="t ink" id="s8-ink" style="grid-area:1/1/7/7;padding:48px 48px">
+        <div data-hf-id="hf-1q7v" class="lb">REÇU</div>
+        <div data-hf-id="hf-prnl" style="margin-top:26px">
+          <div data-hf-id="hf-h42s" class="rr s8-line"><span data-hf-id="hf-uwvq">DOLIPRANE 1000MG</span><span data-hf-id="hf-03ow">3 200</span></div>
+          <div data-hf-id="hf-a9p8" class="rr s8-line"><span data-hf-id="hf-fu7y">SMECTA 30 SACHETS</span><span data-hf-id="hf-fsmv">4 800</span></div>
+          <div data-hf-id="hf-92s5" class="rr s8-line"><span data-hf-id="hf-xkku">COMPRESSES STÉRILES</span><span data-hf-id="hf-cfx4">4 500</span></div>
+          <div data-hf-id="hf-mm69" class="rr s8-line" id="s8-net"><span data-hf-id="hf-nltx">NET À PAYER</span><span data-hf-id="hf-xydp">12 500</span></div>
+          <div data-hf-id="hf-1gfk" class="rr s8-line s8-dim"><span data-hf-id="hf-d55m">ESPÈCES</span><span data-hf-id="hf-iuij">20 000</span></div>
+          <div data-hf-id="hf-0yk0" class="rr s8-line s8-dim" style="border:0"><span data-hf-id="hf-ewkh">RENDU</span><span data-hf-id="hf-c04x">7 500</span></div>
+        </div>
+        <div data-hf-id="hf-mabc" id="s8-scan" style="position:absolute;top:0;bottom:0;left:0;width:170px;background:linear-gradient(90deg,rgba(195,217,79,0),rgba(195,217,79,.5),rgba(195,217,79,0));mix-blend-mode:screen"></div>
+      </div>
+      <div data-hf-id="hf-y2v8" class="t" id="s8-num" style="grid-area:7/1/11/7;display:flex;flex-direction:column;justify-content:space-between">
+        <div data-hf-id="hf-ygh1" style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div data-hf-id="hf-ezj1" class="lb">RETENU</div>
+          <div data-hf-id="hf-i2sd" id="s8-photo" style="width:120px;height:160px;border-radius:10px;background:#E4E0D0;display:grid;place-items:center;position:relative">
+            <svg data-hf-id="hf-jo3p" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#8C8A78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-6gyc" d="M6 2h12v20l-3-2-3 2-3-2-3 2z" /><path data-hf-id="hf-rfk7" d="M9 7h6M9 11h6M9 15h4" /></svg>
+          </div>
+        </div>
+        <div data-hf-id="hf-x11t">
+          <div data-hf-id="hf-zqsc" class="big"><span data-hf-id="hf-5xl1" id="s8-count">12 500</span> F</div>
+          <div data-hf-id="hf-jjwo" class="cat" style="font-size:32px;margin-top:14px"><span data-hf-id="hf-o5oy" id="s8-sub">Santé · 3 articles</span> <span data-hf-id="hf-teb0" id="s8-del" style="color:var(--olive);font-weight:600">· photo effacée</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== S9 · sans réseau (0:30–0:34) ===== -->
+  <div data-hf-id="hf-dmfp" id="s9" class="clip" data-start="29.9" data-duration="4.45" data-track-index="8" style="z-index:7">
+    <div data-hf-id="hf-nzyb" class="full" style="background:#E8E6DE"></div>
+    <div data-hf-id="hf-g9r4" class="g" id="s9-g" style="filter:grayscale(1)">
+      <div data-hf-id="hf-m292" class="t" id="s9-head" style="grid-area:1/1/4/7;display:flex;justify-content:space-between;align-items:flex-end;background:#F2F0E8">
+        <div data-hf-id="hf-t4tl" class="h" style="color:#55574C"><span data-hf-id="hf-q1mm" class="ln"><span data-hf-id="hf-pf38" id="s9-l1">Sans réseau</span></span><span data-hf-id="hf-pnbl" class="ln"><span data-hf-id="hf-f0r6" id="s9-l2">aussi.</span></span></div>
+        <svg data-hf-id="hf-5yim" id="s9-wifi" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="#8C8A78" stroke-width="2.2" stroke-linecap="round" style="margin-bottom:10px"><path data-hf-id="hf-kljf" d="M2 8.8a15 15 0 0 1 20 0" /><path data-hf-id="hf-611w" d="M5 12.6a10 10 0 0 1 14 0" /><path data-hf-id="hf-04j0" d="M8.5 16.4a5 5 0 0 1 7 0" /><circle data-hf-id="hf-ms9y" cx="12" cy="20" r="1.2" fill="#8C8A78" /><path data-hf-id="hf-bbjx" id="s9-strike" d="M3 3l18 18" stroke="#8C8A78" /></svg>
+      </div>
+      <div data-hf-id="hf-4n4p" class="t dash s9-q" style="grid-area:4/1/5/7;padding:0 30px"><div data-hf-id="hf-mzx7" class="row"><div data-hf-id="hf-jqk6" class="nm" style="font-size:34px;color:#6B6D60">🍵 Thé</div><div data-hf-id="hf-1buf" class="cat" style="margin:0 0 0 auto;font-size:26px">en attente</div></div></div>
+      <div data-hf-id="hf-7bif" class="t dash s9-q" style="grid-area:5/1/6/7;padding:0 30px"><div data-hf-id="hf-ne88" class="row"><div data-hf-id="hf-rv54" class="nm" style="font-size:34px;color:#6B6D60">⛽ Essence moto</div><div data-hf-id="hf-gh87" class="cat" style="margin:0 0 0 auto;font-size:26px">en attente</div></div></div>
+      <div data-hf-id="hf-xk8p" class="t dash s9-q" style="grid-area:6/1/7/7;padding:0 30px"><div data-hf-id="hf-m7b5" class="row"><div data-hf-id="hf-wjlu" class="nm" style="font-size:34px;color:#6B6D60">💧 Sachet d'eau</div><div data-hf-id="hf-g2x6" class="cat" style="margin:0 0 0 auto;font-size:26px">en attente</div></div></div>
+    </div>
+    <div data-hf-id="hf-sqo3" id="s9-micwrap" style="position:absolute;left:425px;top:1180px;width:150px;height:150px">
+      <div data-hf-id="hf-59ft" class="mic" id="s9-mic" style="width:150px;height:150px"><div data-hf-id="hf-3uzz" class="ring" id="s9-ring"></div><svg data-hf-id="hf-38ci" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#FAF7EC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect data-hf-id="hf-ieu8" x="9" y="3" width="6" height="11" rx="3" /><path data-hf-id="hf-7uk0" d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg></div>
+    </div>
+    <div data-hf-id="hf-rbug" id="s9-colour" class="full" style="background:var(--creme)"></div>
+  </div>
+
+  <!-- ===== dither seam (S8 → S9): chunky pixel cells ===== -->
+  <div data-hf-id="hf-iluz" id="dither" class="clip" data-start="29.4" data-duration="1.1" data-track-index="9" style="z-index:8"></div>
+
+  <!-- ===== S10 · vos comptes, vos noms (0:34–0:38) ===== -->
+  <div data-hf-id="hf-x25e" id="s10" class="clip" data-start="33.9" data-duration="4.3" data-track-index="10" style="z-index:8">
+    <div data-hf-id="hf-xz77" class="g" id="s10-g">
+      <div data-hf-id="hf-v2fc" class="t s10-tile" id="s10-sent" style="grid-area:1/1/3/7;display:flex;align-items:center;gap:24px">
+        <svg data-hf-id="hf-yqu7" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#5E6B2E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-2q26" d="M20 6 9 17l-5-5" /></svg>
+        <div data-hf-id="hf-5i8k" class="nm" style="font-size:50px">3 envoyées</div>
+      </div>
+      <div data-hf-id="hf-axfq" class="t s10-tile s10-acc" style="grid-area:3/1/6/4;display:flex;flex-direction:column;justify-content:space-between"><div data-hf-id="hf-o59m" class="lb">COMPTE</div><div data-hf-id="hf-2ovp" class="nm" style="font-size:54px">Orange<br data-hf-id="hf-x5px">Money</div></div>
+      <div data-hf-id="hf-abeg" class="t s10-tile s10-acc" style="grid-area:3/4/6/7;display:flex;flex-direction:column;justify-content:space-between"><div data-hf-id="hf-o3u6" class="lb">COMPTE</div><div data-hf-id="hf-9ysg" class="nm" style="font-size:54px">Wave</div></div>
+      <div data-hf-id="hf-4fn4" class="t s10-tile s10-acc" style="grid-area:6/1/9/4;display:flex;flex-direction:column;justify-content:space-between"><div data-hf-id="hf-oi57" class="lb">COMPTE</div><div data-hf-id="hf-bmnm" class="nm" style="font-size:54px">Espèces</div></div>
+      <div data-hf-id="hf-aa3q" class="t s10-tile s10-acc" style="grid-area:6/4/9/7;display:flex;flex-direction:column;justify-content:space-between"><div data-hf-id="hf-owg8" class="lb">COMPTE</div><div data-hf-id="hf-1itk" class="nm" style="font-size:54px">Compte<br data-hf-id="hf-rsrt">bancaire</div></div>
+      <div data-hf-id="hf-1dt7" class="t s10-tile" id="s10-names" style="grid-area:9/1/11/7;display:flex;align-items:center;background:var(--lime-pale)"><div data-hf-id="hf-upzp" class="h" style="font-size:76px;color:var(--olive-fonce)">Vos comptes, vos noms.</div></div>
+    </div>
+  </div>
+
+  <!-- ===== S11 · CTA (0:38–0:45) ===== -->
+  <div data-hf-id="hf-d7l3" id="s11" class="clip" data-start="38" data-duration="7" data-track-index="11" style="z-index:9">
+    <div data-hf-id="hf-y8r9" id="s11-flood" class="full" style="background:linear-gradient(160deg,#41501A,#6E8034)"></div>
+    <div data-hf-id="hf-0hzc" id="s11-cam" class="full">
+      <div data-hf-id="hf-wupl" id="s11-lock" style="position:absolute;left:60px;top:250px;display:flex;align-items:center;gap:30px">
+        <img data-hf-id="hf-i9qv" src="assets/brand/nkawari-mark.svg" alt="" style="width:150px;height:150px">
+        <div data-hf-id="hf-cnga" style="font:700 84px 'Clash Display';word-spacing:.14em;color:var(--creme)">N'Ka Wari</div>
+      </div>
+      <div data-hf-id="hf-duc5" style="position:absolute;left:60px;top:500px;width:880px;font:700 150px/1 'Clash Display';letter-spacing:-.02em;word-spacing:.14em;color:var(--creme)">
+        <span data-hf-id="hf-sfgs" class="ln"><span data-hf-id="hf-iadc" id="s11-l1">Dites-le.</span></span><span data-hf-id="hf-s15r" class="ln"><span data-hf-id="hf-xtcc" id="s11-l2" style="color:var(--lime)">C'est noté.</span></span>
+      </div>
+      <div data-hf-id="hf-thgp" style="position:absolute;left:60px;top:880px;display:flex;flex-direction:column;gap:22px;align-items:flex-start">
+        <span data-hf-id="hf-p7kv" class="pill" id="s11-p1">Gratuit pour compter</span>
+        <span data-hf-id="hf-5ez0" class="pill" id="s11-p2">14 jours, sans carte</span>
+      </div>
+      <div data-hf-id="hf-mbh7" id="s11-cta" style="position:absolute;left:60px;top:1200px;width:820px;height:140px;border-radius:999px;background:var(--lime);display:flex;align-items:center;justify-content:center;gap:24px;font:600 46px 'Work Sans';color:#22280A">
+        <div data-hf-id="hf-eby2" id="s11-ring" style="position:absolute;inset:-16px;border-radius:999px;border:8px solid var(--lime-pale)"></div>
+        <svg data-hf-id="hf-wpq7" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22280A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path data-hf-id="hf-aa6r" d="M12 3v12M7 10l5 5 5-5M5 20h14" /></svg>
+        Télécharger pour Android
+      </div>
+      <div data-hf-id="hf-7o1b" id="s11-url" style="position:absolute;left:60px;top:1395px;font:500 40px 'Work Sans';color:var(--lime-pale)">nkawari.marakadev.online</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  const tl = gsap.timeline({ paused: true });
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+
+  // seeded PRNG (mulberry32): deterministic "random"
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const fmt = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+  // grid geometry (shell is identical in every shot)
+  const GX = 60, GY = 150, CX = 500, CY = 835; // safe-area centre
+  function centreOf(el) { return { x: GX + el.offsetLeft + el.offsetWidth / 2, y: GY + el.offsetTop + el.offsetHeight / 2, w: el.offsetWidth, h: el.offsetHeight }; }
+  function collapse(tiles, at, dur, size) {
+    tiles.forEach((el) => {
+      const c = centreOf(el);
+      tl.fromTo(el, { x: 0, y: 0, scaleX: 1, scaleY: 1 },
+        { x: CX - c.x, y: CY - c.y, scaleX: size / c.w, scaleY: size / c.h, duration: dur, ease: "expo.in" }, at);
+    });
+  }
+
+  // ambient: clouds drift over the whole film
+  tl.fromTo("#bg-c1", { x: 0, y: 0 }, { x: -120, y: 80, duration: 45, ease: "none" }, 0);
+  tl.fromTo("#bg-c2", { x: 0, y: 0 }, { x: 140, y: -60, duration: 45, ease: "none" }, 0);
+
+  /* ---------- S1 · hook cascade (0–4) : big tiles on beats, small on off-beats ---------- */
+  const s1Order = [["#s1-anchor", 0.0], ["#s1-marche", 0.5], ["#s1-tontine", 1.0], ["#s1-taxi", 1.25], ["#s1-pain", 1.5], ["#s1-credit", 1.75]];
+  s1Order.forEach(([sel, t]) => tl.fromTo(sel, { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" }, t));
+  tl.fromTo("#s1-l1", { yPercent: 105 }, { yPercent: 0, duration: 0.55, ease: "power2.out" }, 0.15);
+  tl.fromTo("#s1-l2", { yPercent: 105 }, { yPercent: 0, duration: 0.55, ease: "power2.out" }, 1.0);
+  // micro-motion: each « ? » nods once per bar (one bar = 2 s)
+  $$("#s1 .q").forEach((q, i) => {
+    [2.0, 3.0].forEach((b) => {
+      const t = b + i * 0.25;
+      tl.fromTo(q, { rotation: 0 }, { rotation: -10, duration: 0.18, ease: "power2.out", immediateRender: b === 2 }, t);
+      tl.to(q, { rotation: 0, duration: 0.3, ease: "power2.inOut" }, t + 0.18);
+    });
+  });
+
+  /* ---------- S2 · « plus tard » = jamais (4–8) ---------- */
+  tl.fromTo("#s1-g", { scale: 1 }, { scale: 1.035, duration: 3.0, ease: "sine.inOut", transformOrigin: "50% 40%" }, 4.0);
+  ["#s1-taxi", "#s1-pain", "#s1-credit", "#s1-tontine", "#s1-marche"].forEach((sel, i) => {
+    tl.fromTo(sel + " .s1-c", { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0.06, y: -14, filter: "blur(14px)", duration: 0.7, ease: "sine.inOut" }, 4.25 + i * 0.5);
+  });
+  tl.fromTo("#s1-l1", { opacity: 1, filter: "blur(0px)" }, { opacity: 0.08, filter: "blur(12px)", duration: 0.6, ease: "sine.inOut", immediateRender: false }, 6.4);
+  // 7.0–7.5 : freeze (nothing moves) — the hold-frame before the drop
+  tl.to("#s1-l2", { opacity: 0, duration: 0.3, ease: "power1.in" }, 7.5);
+  tl.to("#s1 .s1-c", { opacity: 0, duration: 0.2, ease: "power1.in" }, 7.5);
+  collapse($$("#s1 .s1-tile"), 7.5, 0.5, 480);
+
+  /* ---------- S3 · reveal on the drop (8–10) ---------- */
+  tl.fromTo("#s3-flood", { clipPath: "inset(595px 340px 845px 260px round 120px)" }, { clipPath: "inset(0px 0px 0px 0px round 0px)", duration: 0.45, ease: "expo.out" }, 8.0);
+  tl.fromTo("#s3-mark", { scale: 1.12 }, { scale: 1, duration: 0.5, ease: "power4.out" }, 8.0);
+  tl.fromTo("#s3-micwrap", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, 8.2);
+  tl.fromTo("#s3-mic", { scale: 1 }, { scale: 0.88, duration: 0.1, ease: "power2.in" }, 8.5);   // the press
+  tl.to("#s3-mic", { scale: 1, duration: 0.3, ease: "power2.out" }, 8.6);
+  tl.fromTo("#s3-ring", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" }, 8.55);
+  tl.fromTo("#s3-l1", { yPercent: 105 }, { yPercent: 0, duration: 0.5, ease: "power4.out" }, 8.5);
+  tl.fromTo("#s3-l2", { yPercent: 105 }, { yPercent: 0, duration: 0.5, ease: "power4.out" }, 8.75);
+
+  /* ---------- S3→S4 · product-shape mask: the icon opens onto the app (9.6–10.2) ---------- */
+  tl.fromTo("#s4", { clipPath: "inset(595px 340px 845px 260px round 120px)" }, { clipPath: "inset(0px 0px 0px 0px round 0px)", duration: 0.6, ease: "expo.inOut" }, 9.6);
+  tl.fromTo("#s4-g", { scale: 0.55, opacity: 0.4 }, { scale: 1, opacity: 1, duration: 0.6, ease: "expo.inOut", transformOrigin: "50% 50%" }, 9.6);
+
+  /* ---------- S4 · dictée (10–16): two words per beat, lime on the word being heard ---------- */
+  const words = $$("#s4-sent .w");
+  words.forEach((w, i) => {
+    const t = 10.5 + i * 0.25;
+    tl.fromTo(w, { backgroundColor: "rgba(195,217,79,0)", color: "#969485" }, { backgroundColor: "rgba(195,217,79,1)", color: "#1C1E12", duration: 0.08, ease: "none" }, t);
+    if (w.id !== "s4-et") tl.to(w, { backgroundColor: "rgba(195,217,79,0)", duration: 0.35, ease: "power1.out" }, t + 0.28);
+  });
+  tl.to("#s4-et", { backgroundColor: "rgba(195,217,79,0)", duration: 0.35, ease: "power1.out" }, 12.28);
+  // the waveform listens: seeded heights per 8th note while speaking, then rests
+  const bars = $$("#s4-wave i"), R = rng(7);
+  bars.forEach((b) => tl.fromTo(b, { scaleY: 0.15 }, { scaleY: 0.15, duration: 0.01 }, 9.6));
+  for (let k = 0; k < 14; k++) {
+    const t = 10.4 + k * 0.25;
+    bars.forEach((b, j) => tl.to(b, { scaleY: 0.2 + 0.8 * R() * (0.6 + 0.4 * Math.sin(j * 0.5 + k)), duration: 0.22, ease: "sine.inOut" }, t));
+  }
+  bars.forEach((b) => tl.to(b, { scaleY: 0.12, duration: 0.4, ease: "power2.out" }, 13.95));
+  tl.fromTo("#s4-ring", { scale: 1, opacity: 0.9 }, { scale: 1.25, opacity: 0, duration: 0.9, ease: "power2.out" }, 10.4);
+  tl.fromTo("#s4-ring", { scale: 1, opacity: 0.9 }, { scale: 1.25, opacity: 0, duration: 0.9, ease: "power2.out", immediateRender: false }, 11.4);
+  tl.fromTo("#s4-ring", { scale: 1, opacity: 0.9 }, { scale: 1.25, opacity: 0, duration: 0.9, ease: "power2.out", immediateRender: false }, 12.4);
+  // « et » is the hinge: it turns terracotta and swells on beat 1 of bar 8
+  tl.fromTo("#s4-et", { color: "#1C1E12", scale: 1 }, { color: "#C0562F", scale: 1.22, duration: 0.35, ease: "power3.out", immediateRender: false }, 14.5);
+  tl.to("#s4-et", { scale: 1.12, duration: 0.6, ease: "sine.inOut" }, 14.85);
+
+  /* ---------- S5 · Phrase perforée (16–18): stitch, tension, tear, fall ---------- */
+  tl.fromTo(["#s5-left", "#s5-et", "#s5-right"], { scale: 1.06 }, { scale: 1, duration: 0.4, ease: "power3.out", transformOrigin: "50% 50%" }, 16.0); // punch-in settle
+  ["#s5-perf-a", "#s5-perf-b"].forEach((p) => {
+    tl.fromTo(p + " i", { scale: 0 }, { scale: 1, duration: 0.06, ease: "steps(1)", stagger: 0.075 }, 16.05);
+  });
+  tl.fromTo(["#s5-left", "#s5-right"], { rotation: 0 }, { rotation: 0.8, duration: 0.05, ease: "steps(1)" }, 16.55);   // two-frame tension wobble
+  tl.to(["#s5-left", "#s5-right"], { rotation: -0.8, duration: 0.05, ease: "steps(1)" }, 16.62);
+  tl.to(["#s5-left", "#s5-right"], { rotation: 0, duration: 0.05, ease: "steps(1)" }, 16.69);
+  tl.to(["#s5-perf-a", "#s5-perf-b"], { opacity: 0, duration: 0.05 }, 16.75);
+  tl.to("#s5-left", { x: -26, rotation: -4, duration: 0.25, ease: "power3.out", transformOrigin: "100% 50%" }, 16.75);
+  tl.to("#s5-right", { x: 26, rotation: 3, duration: 0.25, ease: "power3.out", transformOrigin: "0% 50%" }, 16.75);
+  tl.to("#s5-et", { y: 260, rotation: 24, opacity: 0, duration: 0.6, ease: "power3.in" }, 16.8);
+  // the halves fall to where their rows will be (object carry into S6)
+  tl.to("#s5-left", { x: 300, y: 306, rotation: 0, scale: 0.9, duration: 1.0, ease: "power3.in" }, 17.0);       // lands 18.0 on Taxi
+  tl.to("#s5-right", { x: -470, y: 584, rotation: 0, scale: 0.9, duration: 0.8, ease: "power3.in" }, 18.2);     // lands 19.0 on Courses
+  tl.fromTo(["#s5-slot1", "#s5-slot2"], { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out", stagger: 0.15 }, 16.2);
+  tl.to("#s5-ground", { opacity: 0, duration: 0.3, ease: "power1.out" }, 17.7);
+  tl.to("#s5-slot1", { opacity: 0, duration: 0.1 }, 18.0);
+  tl.to("#s5-slot2", { opacity: 0, duration: 0.1 }, 19.0);
+  tl.to("#s5-left", { opacity: 0, duration: 0.08 }, 18.0);
+  tl.to("#s5-right", { opacity: 0, duration: 0.08 }, 19.0);
+
+  /* ---------- S6 · rows slam + « Elle est déjà notée. » (18–22) ---------- */
+  tl.fromTo(["#s6-head", "#s6-k1", "#s6-k2"], { opacity: 0 }, { opacity: 0, duration: 0.01 }, 17.7);
+  tl.fromTo("#s6-r1", { scale: 1.12, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power4.out" }, 18.0);
+  tl.fromTo("#s6-r2", { scale: 1.12, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power4.out" }, 19.0);
+  tl.fromTo("#s6-r2-inset", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, 19.0);
+  tl.fromTo("#s6-r1", { y: 0 }, { y: -8, duration: 0.15, ease: "power2.out", immediateRender: false }, 19.05);                      // the nudge
+  tl.to("#s6-r1", { y: 0, duration: 0.4, ease: "power2.inOut" }, 19.2);
+  tl.fromTo("#s6-a1", { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 18.15);
+  tl.fromTo("#s6-a2", { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, 19.15);
+  tl.to("#s6-head", { opacity: 1, duration: 0.2 }, 19.5);
+  tl.fromTo("#s6-l1", { yPercent: 105 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 19.5);
+  tl.fromTo("#s6-l2", { yPercent: 105 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 20.0);
+  tl.fromTo("#s6-k1", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 20.5);
+  tl.fromTo("#s6-k2", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 21.0);
+
+  /* ---------- S7 · dolly-out to the whole notebook (22–24) ---------- */
+  tl.fromTo("#s7", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 22.0);
+  tl.fromTo("#s7-g", { scale: 2.06 }, { scale: 1, duration: 1.2, ease: "power2.inOut", transformOrigin: "50% 49%" }, 22.0);
+  $$("#s7 .arc").forEach((a, i) => {
+    const len = parseFloat(a.getAttribute("stroke-dasharray"));
+    const off = parseFloat(a.getAttribute("stroke-dashoffset"));
+    tl.fromTo(a, { attr: { "stroke-dasharray": "0 239" } }, { attr: { "stroke-dasharray": len + " " + (239 - len) }, duration: 0.35, ease: "power2.out" }, 22.7 + i * 0.12);
+  });
+  tl.fromTo("#s7-trio", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 23.0);
+  // make the subject obvious before the iris: the receipt button rings
+  tl.fromTo("#s7-rec-ring", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" }, 23.4);
+  tl.fromTo("#s7-rec", { scale: 1 }, { scale: 0.9, duration: 0.08, ease: "power2.in" }, 23.7);
+
+  /* ---------- S7→S8 · focal iris from the receipt button (23.8–24.5) ---------- */
+  tl.fromTo("#s8", { clipPath: "circle(0px at 178px 1458px)" }, { clipPath: "circle(2300px at 178px 1458px)", duration: 0.7, ease: "expo.out" }, 23.8);
+
+  /* ---------- S8 · le reçu (24–30) ---------- */
+  tl.fromTo("#s8-g", { scale: 1 }, { scale: 1.04, duration: 6, ease: "none", transformOrigin: "50% 40%" }, 24.0);
+  tl.fromTo("#s8 .s8-line", { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out", stagger: 0.12 }, 24.3);
+  tl.fromTo("#s8-scan", { x: -200 }, { x: 900, duration: 1.5, ease: "power1.inOut" }, 25.5);
+  tl.fromTo("#s8-net", { color: "#ECEADC" }, { color: "#C3D94F", duration: 0.2, ease: "none" }, 26.0);
+  tl.fromTo("#s8 .s8-dim", { opacity: 1 }, { opacity: 0.35, duration: 0.3, ease: "power1.out", immediateRender: false }, 26.5);
+  tl.fromTo("#s8-num", { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power4.out" }, 26.5);
+  const cnt = { v: 0 };
+  tl.fromTo(cnt, { v: 0 }, { v: 12500, duration: 1.0, ease: "power2.out", onUpdate: () => { $("#s8-count").textContent = fmt(Math.round(cnt.v / 100) * 100); } }, 26.6);
+  tl.fromTo("#s8-sub", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 27.6);
+  tl.fromTo("#s8-photo", { opacity: 1, filter: "blur(0px)", scale: 1 }, { opacity: 0, filter: "blur(16px)", scale: 0.85, duration: 0.7, ease: "sine.in" }, 28.5);
+  tl.fromTo("#s8-del", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 29.0);
+
+  /* ---------- S8→S9 · dither / pixel sort: the signal breaks (29.4–30.4) ---------- */
+  const dither = $("#dither"), DR = rng(31), cells = [];
+  const CS = 120;
+  for (let y = 0; y < 1920; y += CS) for (let x = 0; x < 1080; x += CS) {
+    const c = document.createElement("div"); c.className = "cell";
+    c.style.left = x + "px"; c.style.top = y + "px"; c.style.width = CS + "px"; c.style.height = CS + "px";
+    c.style.background = DR() < 0.5 ? "#E8E6DE" : "#DAD7CB";
+    dither.appendChild(c); cells.push([c, DR()]);
+  }
+  cells.forEach(([c, r]) => {
+    tl.fromTo(c, { opacity: 0 }, { opacity: 1, duration: 0.04, ease: "steps(1)" }, 29.45 + r * 0.45);
+    tl.to(c, { opacity: 0, duration: 0.04, ease: "steps(1)" }, 30.0 + DR() * 0.4);
+  });
+
+  /* ---------- S9 · sans réseau (30–34) ---------- */
+  tl.fromTo("#s9-colour", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 29.9);
+  tl.fromTo("#s9-l1", { yPercent: 105 }, { yPercent: 0, duration: 0.5, ease: "power1.inOut" }, 30.25);
+  tl.fromTo("#s9-l2", { yPercent: 105 }, { yPercent: 0, duration: 0.5, ease: "power1.inOut" }, 30.5);
+  tl.fromTo("#s9-micwrap", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" }, 30.2);
+  $$("#s9 .s9-q").forEach((q, i) => {
+    const t = 30.75 + i * 0.75;
+    tl.fromTo("#s9-mic", { scale: 1 }, { scale: 0.9, duration: 0.08, ease: "power2.in", immediateRender: i === 0 }, t - 0.1);
+    tl.to("#s9-mic", { scale: 1, duration: 0.25, ease: "power2.out" }, t - 0.02);
+    tl.fromTo("#s9-ring", { scale: 1, opacity: 1 }, { scale: 1.3, opacity: 0, duration: 0.6, ease: "power1.out", immediateRender: i === 0 }, t - 0.05);
+    const top = q.offsetTop + GY;
+    tl.fromTo(q, { y: 1180 - top, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: "power1.inOut" }, t);
+  });
+  tl.set("#s9-ring", { scale: 1, opacity: 1 }, 33.0);
+  // signal returns on the bar
+  tl.fromTo("#s9-strike", { opacity: 1 }, { opacity: 0, duration: 0.05, ease: "steps(1)" }, 33.5);
+  tl.fromTo("#s9-wifi", { scale: 1 }, { scale: 1.15, duration: 0.2, ease: "power2.out" }, 33.5);
+  tl.to("#s9-wifi", { scale: 1, duration: 0.3, ease: "power2.inOut" }, 33.7);
+  tl.fromTo("#s9-g", { filter: "grayscale(1)" }, { filter: "grayscale(0)", duration: 0.3, ease: "power1.out" }, 33.7);
+
+  /* ---------- S9→S10 · speed ramp: the queue rushes out as colour floods back ---------- */
+  tl.to("#s9 .s9-q", { y: "-=1500", filter: "blur(10px)", duration: 0.45, ease: "expo.in", stagger: 0.05 }, 33.75);
+  tl.to(["#s9-head", "#s9-micwrap"], { y: -1600, duration: 0.45, ease: "expo.in" }, 33.85);
+  tl.to("#s9-colour", { opacity: 1, duration: 0.25, ease: "power1.in" }, 34.0);
+
+  /* ---------- S10 · vos comptes, vos noms (34–38) ---------- */
+  tl.fromTo("#s10-g", { x: 0 }, { x: -18, duration: 4, ease: "none" }, 34.0);
+  tl.fromTo("#s10-sent", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 34.25);
+  $$("#s10 .s10-acc").forEach((a, i) => tl.fromTo(a, { x: 140, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 34.75 + i * 0.5));
+  tl.fromTo("#s10-names", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 36.75);
+  // second grid collapse: slower and bigger than the first
+  tl.to("#s10 .s10-tile > *", { opacity: 0, duration: 0.35, ease: "power1.in" }, 37.2);
+  collapse($$("#s10 .s10-tile"), 37.2, 0.8, 640);
+
+  /* ---------- S11 · CTA (38–45) ---------- */
+  tl.fromTo("#s11-flood", { clipPath: "inset(515px 220px 765px 180px round 160px)" }, { clipPath: "inset(0px 0px 0px 0px round 0px)", duration: 0.6, ease: "expo.out" }, 38.0);
+  tl.fromTo("#s11-cam", { scale: 1 }, { scale: 1.04, duration: 7, ease: "none", transformOrigin: "40% 40%" }, 38.0);
+  tl.fromTo("#s11-lock", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out", transformOrigin: "0% 50%" }, 38.4);
+  tl.fromTo("#s11-l1", { yPercent: 105 }, { yPercent: 0, duration: 0.6, ease: "expo.out" }, 38.8);
+  tl.fromTo("#s11-l2", { yPercent: 105 }, { yPercent: 0, duration: 0.6, ease: "expo.out" }, 39.3);
+  tl.fromTo("#s11-p1", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 40.0);
+  tl.fromTo("#s11-p2", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 40.5);
+  tl.fromTo("#s11-cta", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 41.0);
+  tl.fromTo("#s11-url", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 41.5);
+  [41.5, 42.5, 43.5].forEach((t, i) => tl.fromTo("#s11-ring", { scale: 1, opacity: 0.9 }, { scale: 1.12, opacity: 0, duration: 0.9, ease: "power1.out", immediateRender: i === 0 }, t));
+
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>

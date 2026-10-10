@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <linearGradient id="fondOlive" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#41501A"></stop>
+            <stop offset="1" stop-color="#6E8034"></stop>
+          </linearGradient>
+        </defs>
+        <rect width="120" height="120" rx="30" fill="url(#fondOlive)"></rect>
+        <g fill="#FAF7EC">
+          <path d="M22 30h15v60H22z"></path>
+          <path d="M63 30h15v60H63z"></path>
+          <path d="M22 30h18l38 60H60z"></path>
+        </g>
+        <circle cx="90" cy="36" r="8" fill="#C3D94F"></circle>
+      </svg>

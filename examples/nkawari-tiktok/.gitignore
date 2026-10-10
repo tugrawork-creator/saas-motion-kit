@@ -1,0 +1,6 @@
+.venv/
+# raw site capture: regenerate with `npx hyperframes capture https://nkawari.marakadev.online/ -o capture`
+capture/
+# Clash Display is under the ITF Free Font License (no redistribution); see assets/fonts/LICENSES.md
+assets/fonts/ClashDisplay-*.woff2
+.thumbnails/
