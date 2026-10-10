@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sketch sheet · N'Ka Wari</title>
+<style>
+@font-face{font-family:"Clash Display";src:url(../assets/fonts/ClashDisplay-Semibold.woff2) format("woff2");font-weight:600}
+@font-face{font-family:"Clash Display";src:url(../assets/fonts/ClashDisplay-Bold.woff2) format("woff2");font-weight:700}
+@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Regular.woff2) format("woff2");font-weight:400}
+@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Medium.woff2) format("woff2");font-weight:500}
+@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-SemiBold.woff2) format("woff2");font-weight:600}
+:root{--creme:#FAF7EC;--creme-2:#F1ECDB;--encre:#1C1E12;--texte-2:#5F6152;--bord:#D7D3BE;--olive:#5E6B2E;--olive-fonce:#3F4A18;--lime:#C3D94F;--lime-pale:#E6EEBC;--depense:#C0562F;--tile:#FFFDF6}
+*{box-sizing:border-box;margin:0}
+body{background:#E9E5D6;font-family:"Work Sans",sans-serif;color:var(--encre);padding:36px 40px;width:1880px}
+h1{font:700 40px "Clash Display";letter-spacing:-.01em;word-spacing:.14em}
+.sub{color:var(--texte-2);font-size:17px;margin:6px 0 26px}
+.sheet{display:grid;grid-template-columns:repeat(6,270px);gap:34px 30px}
+.cell{display:flex;flex-direction:column;gap:8px}
+.vp{width:270px;height:480px;overflow:hidden;border-radius:12px;box-shadow:0 2px 10px rgba(28,30,18,.18);position:relative}
+.cap{font:600 14px "Work Sans";display:flex;justify-content:space-between}
+.cap span{color:var(--texte-2);font-weight:500}
+.why{font-size:13px;line-height:1.4;color:var(--texte-2)}
+/* the real 1080×1920 frame, scaled ×0.25 */
+.f{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:scale(.25);transform-origin:0 0;background:var(--creme);overflow:hidden}
+.cl{position:absolute;border-radius:50%;filter:blur(90px);opacity:.85}
+.g{position:absolute;left:60px;top:150px;width:880px;height:1370px;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(10,1fr);gap:16px}
+.t{background:var(--tile);border-radius:16px;padding:28px 30px;position:relative;overflow:hidden;box-shadow:0 1px 2px rgba(28,30,18,.06),0 10px 30px -14px rgba(28,30,18,.22)}
+.lb{font:600 20px/1 "Work Sans";letter-spacing:.1em;color:var(--texte-2)}
+.h{font:700 92px/1.02 "Clash Display";letter-spacing:-.02em;word-spacing:.14em}
+.q{font:700 120px/1 "Clash Display";color:var(--bord)}
+.nm{font:600 38px/1.1 "Work Sans"}
+.cat{font:400 24px/1.3 "Work Sans";color:var(--texte-2);margin-top:6px}
+.amt{margin-left:auto;font:600 50px/1 "Clash Display";color:var(--depense);white-space:nowrap;word-spacing:.06em}
+.row{display:flex;align-items:center;gap:22px;height:100%}
+.chip{width:84px;height:84px;border-radius:22px;background:var(--creme-2);display:grid;place-items:center;font-size:44px;flex:none}
+.sent{font:500 70px/1.22 "Work Sans";color:#C9C6B3}
+.sent b{font-weight:600;color:var(--encre)}
+.sent mark{background:var(--lime);color:var(--encre);font-weight:600;border-radius:10px;padding:0 10px}
+.mic{width:110px;height:110px;border-radius:50%;background:var(--olive);display:grid;place-items:center;box-shadow:0 0 0 20px rgba(195,217,79,.5)}
+.ink{background:var(--encre);color:#ECEADC}.ink .lb{color:#A8AA96}
+.rr{display:flex;justify-content:space-between;font:500 30px/1 "Work Sans";padding:20px 0;border-bottom:1.5px solid rgba(236,234,220,.12)}
+.rr.hit{color:var(--lime);font-weight:600}.rr.dim{color:#6f725f}
+.scan{position:absolute;top:0;bottom:0;width:150px;background:linear-gradient(90deg,transparent,rgba(195,217,79,.45),transparent);mix-blend-mode:screen}
+.big{font:700 150px/1 "Clash Display";letter-spacing:-.02em;word-spacing:.06em;white-space:nowrap}
+.btn{display:flex;align-items:center;justify-content:center;border-radius:22px;height:100%;font:600 34px "Work Sans";background:var(--olive);color:var(--creme)}
+.pill{display:inline-flex;align-items:center;font:600 34px "Work Sans";padding:20px 30px;border-radius:999px;background:var(--lime-pale);color:var(--olive-fonce)}
+.ghost{opacity:.18;filter:blur(6px)}
+</style>
+</head>
+<body>
+<h1>N'Ka Wari · « Dites-le, c'est noté » — sketch sheet</h1>
+<p class="sub">Theme 055 Bento Grid (adapted) · 1080×1920 · 45 s · 120 BPM · one still per ledger shot · read it with the sound off</p>
+<div class="sheet">
+
+<!-- 1 -->
+<div class="cell"><div class="vp"><div class="f">
+  <div class="g">
+    <div class="t" style="grid-area:1/1/4/7;display:flex;align-items:flex-end"><div class="h">Je note ça<br>plus tard.</div></div>
+    <div class="t" style="grid-area:4/1/6/4"><div class="nm">🚕 Taxi</div><div class="q" style="margin-top:30px">?</div></div>
+    <div class="t" style="grid-area:4/4/6/7"><div class="nm">🥖 Pain</div><div class="q" style="margin-top:30px">?</div></div>
+    <div class="t" style="grid-area:6/1/8/3"><div class="nm">📱 Crédit</div><div class="q" style="margin-top:30px">?</div></div>
+    <div class="t" style="grid-area:6/3/8/7"><div class="nm">🤝 Tontine</div><div class="q" style="margin-top:30px">?</div></div>
+    <div class="t" style="grid-area:8/1/11/7"><div class="nm">🧺 Marché</div><div class="q" style="margin-top:40px">?</div></div>
+  </div>
+</div></div><div class="cap">1 · Hook<span>0:00 · 4.0 s</span></div><div class="why">The everyday spends, amounts unknown. Tiles cascade in on the beat.</div></div>
+
+<!-- 2 -->
+<div class="cell"><div class="vp"><div class="f">
+  <div class="g">
+    <div class="t" style="grid-area:1/1/4/7;display:flex;align-items:flex-end"><div class="h"><span class="ghost">Je note ça</span><br>plus tard.</div></div>
+    <div class="t" style="grid-area:4/1/6/4"><div class="nm ghost">🚕 Taxi</div></div>
+    <div class="t" style="grid-area:4/4/6/7"></div>
+    <div class="t" style="grid-area:6/1/8/3"><div class="nm ghost">📱 Crédit</div></div>
+    <div class="t" style="grid-area:6/3/8/7"></div>
+    <div class="t" style="grid-area:8/1/11/7"><div class="nm ghost">🧺 Marché</div></div>
+  </div>
+  <div style="position:absolute;right:150px;top:1560px;font:600 30px 'Work Sans';color:var(--depense)">❚❚ silence</div>
+</div></div><div class="cap">2 · « plus tard » = jamais<span>0:04 · 4.0 s</span></div><div class="why">The words evaporate tile by tile. Freeze + one beat of silence. <b>Surprise.</b></div></div>
+
+<!-- 3 -->
+<div class="cell"><div class="vp"><div class="f" style="background:linear-gradient(135deg,#41501A,#6E8034)">
+  <img src="../assets/brand/nkawari-mark.svg" style="position:absolute;left:300px;top:560px;width:480px;height:480px;filter:drop-shadow(0 30px 60px rgba(0,0,0,.35))">
+  <div class="mic" style="position:absolute;left:485px;top:1150px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FAF7EC" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+  <div style="position:absolute;left:60px;right:140px;top:1340px;text-align:center;font:700 84px/1.05 'Clash Display';word-spacing:.14em;color:var(--creme)">Dites votre<br>dépense.</div>
+</div></div><div class="cap">3 · Reveal (drop)<span>0:08 · 2.0 s</span></div><div class="why">The grid collapses into the official mark. The olive flood is colour event 1.</div></div>
+
+<!-- 4 -->
+<div class="cell"><div class="vp"><div class="f">
+  <div class="cl" style="left:520px;top:-180px;width:720px;height:600px;background:var(--lime-pale)"></div>
+  <div class="g">
+    <div class="t" style="grid-area:1/1/11/7;display:flex;flex-direction:column;justify-content:space-between;padding:50px 44px">
+      <div style="display:flex;align-items:center;gap:30px"><div class="mic"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#FAF7EC" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div><div class="lb">DICTEZ VOTRE DÉPENSE</div></div>
+      <p class="sent" style="font-size:96px">« <b>deux mille de</b> <mark>taxi</mark> ce matin et cinq mille de courses »</p>
+      <div style="display:flex;gap:10px;align-items:center;height:80px"><i style="width:12px;height:30px;background:var(--olive);border-radius:6px"></i><i style="width:12px;height:60px;background:var(--olive);border-radius:6px"></i><i style="width:12px;height:80px;background:var(--olive);border-radius:6px"></i><i style="width:12px;height:44px;background:var(--olive);border-radius:6px"></i><i style="width:12px;height:70px;background:var(--olive);border-radius:6px"></i><i style="width:12px;height:36px;background:var(--olive);border-radius:6px"></i><i style="width:12px;height:56px;background:var(--olive);border-radius:6px"></i></div>
+    </div>
+  </div>
+</div></div><div class="cap">4 · Dictée<span>0:10 · 6.0 s</span></div><div class="why">The real sentence, one word per 8th note. Lime marks the word being heard.</div></div>
+
+<!-- 5 -->
+<div class="cell"><div class="vp"><div class="f">
+  <div style="position:absolute;left:-40px;top:700px;width:640px;height:230px;background:#FFFDF6;border-radius:8px 0 0 8px;transform:rotate(-4deg) translateY(30px);box-shadow:0 20px 40px -18px rgba(28,30,18,.35);display:flex;align-items:center;padding-left:90px;font:600 60px 'Work Sans'">…mille de taxi ce matin</div>
+  <div style="position:absolute;left:620px;top:700px;width:560px;height:230px;background:#FFFDF6;border-radius:0 8px 8px 0;transform:rotate(3deg) translateY(70px);box-shadow:0 20px 40px -18px rgba(28,30,18,.35);display:flex;align-items:center;padding-left:40px;font:600 60px 'Work Sans'">cinq mille de…</div>
+  <div style="position:absolute;left:588px;top:640px;font:700 70px 'Clash Display';color:var(--depense)">et</div>
+  <div style="position:absolute;left:606px;top:740px;height:260px;border-left:6px dotted var(--texte-2)"></div>
+  <div style="position:absolute;left:60px;top:1150px;font:600 22px 'Work Sans';letter-spacing:.1em;color:var(--texte-2)">NEW COMPONENT · PHRASE PERFORÉE</div>
+</div></div><div class="cap">5 · La phrase se déchire<span>0:16 · 2.0 s</span></div><div class="why">The sentence becomes a ticket strip and tears at « et ». One sentence, two expenses.</div></div>
+
+<!-- 6 -->
+<div class="cell"><div class="vp"><div class="f">
+  <div class="cl" style="left:-260px;top:1150px;width:720px;height:600px;background:#F3DCCB"></div>
+  <div class="g">
+    <div class="t" style="grid-area:1/1/4/7;display:flex;align-items:flex-end"><div class="h">Elle est<br>déjà notée.</div></div>
+    <div class="t" style="grid-area:4/1/6/7;padding:0 34px"><div class="row"><div class="chip">🚕</div><div><div class="nm">Taxi</div><div class="cat">Transport</div></div><div class="amt">−2 000 F</div></div></div>
+    <div class="t" style="grid-area:6/1/8/7;padding:0 34px;box-shadow:inset 0 0 0 4px var(--depense),0 18px 40px -12px rgba(192,86,47,.35);transform:translateY(8px)"><div class="row"><div class="chip">🧺</div><div><div class="nm">Courses au marché</div><div class="cat">Alimentation</div></div><div class="amt">−5 000 F</div></div></div>
+  </div>
+</div></div><div class="cap">6 · Deux lignes<span>0:18 · 4.0 s</span></div><div class="why">The halves land as real rows. The second slams in with the terracotta inset.</div></div>
+
+<!-- 7 -->
+<div class="cell"><div class="vp"><div class="f">
+  <div class="g">
+    <div class="t" style="grid-area:1/1/4/7;background:linear-gradient(135deg,#41501A,#6E8034);color:var(--creme)"><div class="lb" style="color:var(--lime-pale)">SOLDE TOTAL</div><div style="font:700 110px/1 'Clash Display';margin-top:60px;word-spacing:.06em">203 000 FCFA</div></div>
+    <div class="t" style="grid-area:4/1/5/7;padding:0 30px"><div class="row"><div class="chip" style="width:64px;height:64px;font-size:32px">🚕</div><div class="nm" style="font-size:30px">Taxi</div><div class="amt" style="font-size:40px">−2 000 F</div></div></div>
+    <div class="t" style="grid-area:5/1/6/7;padding:0 30px"><div class="row"><div class="chip" style="width:64px;height:64px;font-size:32px">🧺</div><div class="nm" style="font-size:30px">Courses au marché</div><div class="amt" style="font-size:40px">−5 000 F</div></div></div>
+    <div class="t" style="grid-area:6/1/10/7;display:grid;place-items:center"><svg viewBox="0 0 100 100" width="440" height="440"><g fill="none" stroke-width="13" transform="rotate(-90 50 50)"><circle cx="50" cy="50" r="38" stroke="#3E6B4E" stroke-dasharray="64 175"/><circle cx="50" cy="50" r="38" stroke="#B5394A" stroke-dasharray="57 182" stroke-dashoffset="-65"/><circle cx="50" cy="50" r="38" stroke="#8A6534" stroke-dasharray="48 191" stroke-dashoffset="-123"/><circle cx="50" cy="50" r="38" stroke="#2F6E6A" stroke-dasharray="29 210" stroke-dashoffset="-172"/><circle cx="50" cy="50" r="38" stroke="#6B5BA0" stroke-dasharray="19 220" stroke-dashoffset="-202"/><circle cx="50" cy="50" r="38" stroke="#C3D94F" stroke-dasharray="12 227" stroke-dashoffset="-222"/></g><text x="50" y="47" text-anchor="middle" font-size="7" fill="#5F6152" font-family="Work Sans">Total</text><text x="50" y="60" text-anchor="middle" font-size="14" font-weight="700" fill="#1C1E12" font-family="Clash Display">92k</text></svg></div>
+    <div class="t" style="grid-area:10/1/11/7;padding:16px;display:grid;grid-template-columns:1fr 1fr 2fr;gap:16px;background:var(--creme-2)"><div class="btn">🧾</div><div class="btn" style="box-shadow:0 0 0 6px var(--lime)">🎙</div><div class="btn">+ Ajouter</div></div>
+  </div>
+</div></div><div class="cap">7 · Tout le carnet<span>0:22 · 2.0 s</span></div><div class="why">Dolly-out from two rows to the whole app. <b>Surprise:</b> a jump in scale.</div></div>
+
+<!-- 8 -->
+<div class="cell"><div class="vp"><div class="f">
+  <div class="g">
+    <div class="t ink" style="grid-area:1/1/7/7;padding:44px 44px">
+      <div class="lb">REÇU</div>
+      <div style="margin-top:24px">
+        <div class="rr"><span>DOLIPRANE 1000MG</span><span>3 200</span></div>
+        <div class="rr"><span>SMECTA 30 SACHETS</span><span>4 800</span></div>
+        <div class="rr"><span>COMPRESSES STÉRILES</span><span>4 500</span></div>
+        <div class="rr hit"><span>NET À PAYER</span><span>12 500</span></div>
+        <div class="rr dim"><span>ESPÈCES</span><span>20 000</span></div>
+        <div class="rr dim" style="border:0"><span>RENDU</span><span>7 500</span></div>
+      </div>
+      <div class="scan" style="left:520px"></div>
+    </div>
+    <div class="t" style="grid-area:7/1/10/7;display:flex;flex-direction:column;justify-content:space-between"><div class="lb">RETENU</div><div><div class="big">12 500 F</div><div class="cat" style="font-size:30px">Santé · 3 articles · photo effacée</div></div></div>
+  </div>
+</div></div><div class="cap">8 · Le reçu<span>0:24 · 6.0 s</span></div><div class="why">An iris from the receipt button. The scan keeps the true total, not the 20 000.</div></div>
+
+<!-- 9 -->
+<div class="cell"><div class="vp"><div class="f" style="background:#E8E6DE">
+  <div class="g" style="filter:grayscale(1)">
+    <div class="t" style="grid-area:1/1/4/7;display:flex;align-items:flex-end;background:#F2F0E8"><div class="h" style="color:#55574c">Sans réseau<br>aussi.</div></div>
+    <div class="t" style="grid-area:4/1/5/7;padding:0 30px;background:transparent;box-shadow:none;border:4px dashed #b9b7ab"><div class="row"><div class="nm" style="font-size:30px;color:#6b6d60">🍵 Thé</div><div class="cat" style="margin:0 0 0 auto">en attente</div></div></div>
+    <div class="t" style="grid-area:5/1/6/7;padding:0 30px;background:transparent;box-shadow:none;border:4px dashed #b9b7ab"><div class="row"><div class="nm" style="font-size:30px;color:#6b6d60">⛽ Essence moto</div><div class="cat" style="margin:0 0 0 auto">en attente</div></div></div>
+    <div class="t" style="grid-area:6/1/7/7;padding:0 30px;background:transparent;box-shadow:none;border:4px dashed #b9b7ab"><div class="row"><div class="nm" style="font-size:30px;color:#6b6d60">💧 Sachet d'eau</div><div class="cat" style="margin:0 0 0 auto">en attente</div></div></div>
+  </div>
+  <div class="mic" style="position:absolute;left:430px;top:1150px;width:150px;height:150px"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#FAF7EC" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+</div></div><div class="cap">9 · Sans réseau<span>0:30 · 4.0 s</span></div><div class="why"><b>Surprise:</b> colour and music drain away. Entries wait, and the mic still works.</div></div>
+
+<!-- 10 -->
+<div class="cell"><div class="vp"><div class="f">
+  <div class="cl" style="left:520px;top:-180px;width:720px;height:600px;background:var(--lime-pale)"></div>
+  <div class="g">
+    <div class="t" style="grid-area:1/1/3/7;display:flex;align-items:center;gap:20px"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#5E6B2E" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><div class="nm" style="font-size:44px">3 envoyées</div></div>
+    <div class="t" style="grid-area:3/1/6/4;display:flex;align-items:flex-end"><div class="nm" style="font-size:46px">Orange<br>Money</div></div>
+    <div class="t" style="grid-area:3/4/6/7;display:flex;align-items:flex-end"><div class="nm" style="font-size:46px">Wave</div></div>
+    <div class="t" style="grid-area:6/1/9/4;display:flex;align-items:flex-end"><div class="nm" style="font-size:46px">Espèces</div></div>
+    <div class="t" style="grid-area:6/4/9/7;display:flex;align-items:flex-end"><div class="nm" style="font-size:46px">Compte<br>bancaire</div></div>
+  </div>
+</div></div><div class="cap">10 · Vos comptes, vos noms<span>0:34 · 4.0 s</span></div><div class="why">The signal is back and the queue ramps out. Four account names, one per beat, text only.</div></div>
+
+<!-- 11 -->
+<div class="cell"><div class="vp"><div class="f" style="background:linear-gradient(160deg,#41501A,#6E8034)">
+  <div style="position:absolute;left:60px;top:300px;display:flex;align-items:center;gap:30px"><img src="../assets/brand/nkawari-mark.svg" style="width:150px;height:150px"><div style="font:700 80px 'Clash Display';word-spacing:.14em;color:var(--creme)">N'Ka Wari</div></div>
+  <div style="position:absolute;left:60px;top:560px;font:700 128px/1 'Clash Display';color:var(--creme);letter-spacing:-.02em;word-spacing:.14em">Dites-le.<br><span style="color:var(--lime)">C'est noté.</span></div>
+  <div style="position:absolute;left:60px;top:900px;display:flex;flex-direction:column;gap:20px;align-items:flex-start"><span class="pill">Gratuit pour compter</span><span class="pill">14 jours, sans carte</span></div>
+  <div style="position:absolute;left:60px;top:1200px;width:820px;height:130px;border-radius:999px;background:var(--lime);display:flex;align-items:center;justify-content:center;gap:24px;font:600 44px 'Work Sans';color:#22280A;box-shadow:0 0 0 18px rgba(195,217,79,.3)">🎙 Télécharger pour Android</div>
+  <div style="position:absolute;left:60px;top:1380px;font:500 36px 'Work Sans';color:var(--lime-pale)">nkawari.marakadev.online</div>
+</div></div><div class="cap">11 · CTA<span>0:38 · 7.0 s</span></div><div class="why">The second grid collapse, into the lockup. The mic ring is now the button.</div></div>
+
+</div>
+</body>
+</html>
